@@ -136,13 +136,13 @@ export const t: Copy = {
   docs: {
     title: "Installation and access",
     subtitle:
-      "From the shop PC to the customer's phone — every path, step by step.",
+      "From the shop PC to the phone — simple, even if you're not technical.",
     sections: [
       {
-        heading: "Up and running in minutes",
+        heading: "Install (once, ~10 minutes)",
         paragraphs: [
-          "On Windows, download the ZIP installer, extract and run INSTALAR.bat — it installs Docker if missing, generates passwords and starts everything by itself. Daily use: INICIAR.bat / PARAR.bat.",
-          "On Linux/Mac or from source, four commands are enough:",
+          "On Windows it's a double click: download the ZIP installer, extract and run INSTALAR.bat — it installs Docker if missing, generates the passwords and starts everything by itself. Daily use: INICIAR.bat / PARAR.bat.",
+          "On Linux, Mac or from source, four commands are enough:",
         ],
         code: "git clone https://github.com/braindeadpt/OficinaOS.git\ncd OficinaOS && cp .env.example .env\ndocker compose up -d\ndocker compose exec app bun run db:seed",
         links: [
@@ -151,48 +151,45 @@ export const t: Copy = {
         ],
       },
       {
-        heading: "In the shop — local network",
+        heading: "In the shop — phones, tablets and PCs",
         paragraphs: [
-          "One PC runs the server and database; every other device opens the app in a browser — nothing to install:",
-          "Always use the same address configured as APP_URL in the .env file. Works without internet for daily use.",
+          "Any device on the shop's Wi-Fi opens the app in a browser — nothing to install. Just type the address the setup gives you and log in:",
+          "Works without internet for daily use. Bookmark the address — it never changes.",
         ],
-        code: "http://192.168.1.33:4000   # the server PC's IP",
+        code: "http://192.168.1.33:4000   # the server PC's address",
         links: [],
       },
       {
-        heading: "Phone and tablet — home screen icon (PWA)",
+        heading: "Icon on the phone's home screen",
         paragraphs: [
-          "OficinaOS is a PWA: it gets its own icon and opens full-screen, with no browser bar.",
+          "To open with one tap, like a normal app — takes 10 seconds:",
         ],
         list: [
-          "iPhone/iPad: Safari → Share → “Add to Home Screen” — standalone app, even over LAN HTTP",
-          "Android in the shop: Chrome menu ⋮ → “Add to Home Screen” (shortcut)",
-          "Android over HTTPS (tunnel): Chrome offers “Install app” — a real native-style install",
-          "Optional: native Android APK via Capacitor (camera integration in job cards) — see docs/mobile-access.md",
+          "iPhone/iPad: Safari → Share button → “Add to Home Screen”",
+          "Android: Chrome → ⋮ menu → “Add to Home Screen”",
+          "With remote access on, Android may even offer “Install app” — a real install",
         ],
-        links: [{ label: "Full mobile guide", href: DOCS_MOBILE_URL }],
+        links: [{ label: "Mobile guide", href: DOCS_MOBILE_URL }],
       },
       {
-        heading: "Remote access — Cloudflare Tunnel",
+        heading: "Outside the shop — remote access",
         paragraphs: [
-          "With the shop PC on, a free Cloudflare Tunnel exposes the app over HTTPS — no router port-forwarding, no public IP needed, works behind CGNAT.",
-          "It gives staff remote access and enables public customer links: tracking, quote approval, pre-check requests and warranty QR codes.",
+          "With the shop PC on, a free Cloudflare Tunnel gives the shop its own https:// address — no router changes, works with any ISP, even the ones blocking ports (CGNAT).",
+          "It lets staff check the app from anywhere and makes customer links — tracking, quotes, warranty QR — open everywhere.",
         ],
         list: [
-          "Cloudflare Zero Trust → Networks → Tunnels → create a tunnel and copy the token",
-          "Public hostname (e.g. oficina.yourdomain.com) → service http://app:4000",
-          "In .env: TUNNEL_TOKEN=<token> and add the hostname to EXTRA_TRUSTED_ORIGINS",
-          "docker compose --profile tunnel up -d (or COMPOSE_PROFILES=tunnel on installed deployments)",
-          "Settings → Shop → Tracking base URL → the public hostname",
+          "Create a free Cloudflare account + a domain (~$10/year)",
+          "In the Zero Trust dashboard: create the tunnel and copy the token",
+          "Two lines in the .env file and restart the app",
+          "In the app: Settings → Shop → Tracking base URL → the public address",
         ],
-        code: "TUNNEL_TOKEN=eyJh…\nEXTRA_TRUSTED_ORIGINS=https://oficina.yourdomain.com",
-        links: [{ label: "Full remote access guide", href: DOCS_REMOTE_URL }],
+        links: [{ label: "Step-by-step guide", href: DOCS_REMOTE_URL }],
       },
       {
         heading: "Private by default",
         paragraphs: [
-          "The tunnel is optional: the app stays 100% functional on the local network without internet. Customer data stays in the shop — Cloudflare only carries encrypted traffic while the tunnel is on.",
-          "For an extra barrier before the login page, Cloudflare Access (free) can require email + code — while keeping public paths (/tracking, /pre-check) open to customers.",
+          "The tunnel is optional: the app keeps working 100% on the local network even without internet. Customer data stays in the shop — Cloudflare only carries encrypted traffic while the tunnel is on.",
+          "Anyone wanting an extra barrier can enable Cloudflare Access (free): email + code before the login, while customer-facing public pages stay open.",
         ],
         links: [],
       },

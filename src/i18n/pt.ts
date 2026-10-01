@@ -143,13 +143,13 @@ export const t = {
   docs: {
     title: "Instalação e acesso",
     subtitle:
-      "Do PC da loja ao telemóvel do cliente — todos os caminhos, passo a passo.",
-    sections: <DocsSection[]>[
+      "Do PC da loja ao telemóvel — simples, mesmo sem perceber de tecnologia.",
+    sections: [
       {
-        heading: "Instalação em minutos",
+        heading: "Instalar (uma vez, ~10 minutos)",
         paragraphs: [
-          "No Windows, descarregue o instalador ZIP, extraia e execute INSTALAR.bat — instala o Docker se faltar, gera as palavras-passe e arranca tudo sozinho. Uso diário: INICIAR.bat / PARAR.bat.",
-          "Em Linux/Mac ou por código-fonte, quatro comandos chegam:",
+          "No Windows é duplo clique: descarregue o instalador ZIP, extraia e execute INSTALAR.bat — instala o Docker se faltar, gera as palavras-passe e arranca tudo sozinho. No dia a dia usa INICIAR.bat / PARAR.bat.",
+          "Em Linux, Mac ou pelo código-fonte, quatro comandos chegam:",
         ],
         code: "git clone https://github.com/braindeadpt/OficinaOS.git\ncd OficinaOS && cp .env.example .env\ndocker compose up -d\ndocker compose exec app bun run db:seed",
         links: [
@@ -158,55 +158,47 @@ export const t = {
         ],
       },
       {
-        heading: "Na loja — rede local",
+        heading: "Na loja — telemóveis, tablets e PCs",
         paragraphs: [
-          "Um PC corre o servidor e a base de dados; todos os outros dispositivos abrem a app no browser, sem instalar nada:",
-          "Use sempre o mesmo endereço que está em APP_URL no ficheiro .env. Funciona sem internet para o uso do dia a dia.",
+          "Qualquer aparelho ligado à Wi-Fi da loja abre a app no browser — sem instalar nada. Basta escrever o endereço que a instalação dá e fazer login:",
+          "Funciona sem internet para o uso do dia a dia. Guarde o endereço nos favoritos — é sempre o mesmo.",
         ],
-        code: "http://192.168.1.33:4000   # o IP do PC-servidor",
+        code: "http://192.168.1.33:4000   # o endereço do PC-servidor",
         links: [],
       },
       {
-        heading: "Telemóvel e tablet — ícone no ecrã (PWA)",
+        heading: "Ícone no ecrã do telemóvel",
         paragraphs: [
-          "O OficinaOS é uma PWA: pode ficar com ícone próprio e abrir em ecrã cheio, sem barra do browser.",
+          "Para abrir com um toque, como uma app normal — demora 10 segundos:",
         ],
         list: [
-          "iPhone/iPad: Safari → Partilhar → «Adicionar ao ecrã principal» — fica uma app standalone, mesmo em HTTP na rede da loja",
-          "Android na loja: menu ⋮ do Chrome → «Adicionar ao ecrã principal» (atalho)",
-          "Android com acesso HTTPS (túnel): o Chrome oferece «Instalar aplicação» — instalação nativa real",
-          "Opcional: APK Android nativo via Capacitor (câmara integrada nas fichas) — ver docs/mobile-access.md",
+          "iPhone/iPad: Safari → botão Partilhar → «Adicionar ao ecrã principal»",
+          "Android: Chrome → menu ⋮ → «Adicionar ao ecrã principal»",
+          "Com acesso remoto ligado, o Android chega a oferecer «Instalar aplicação» — instalação real",
+        ],
+        links: [{ label: "Guia para telemóveis", href: DOCS_MOBILE_URL }],
+      },
+      {
+        heading: "Fora da loja — acesso remoto",
+        paragraphs: [
+          "Com o PC da loja ligado, um Cloudflare Tunnel gratuito dá à loja um endereço https:// próprio — sem mexer no router, funciona com qualquer operadora, mesmo as que bloqueiam portas (CGNAT).",
+          "Serve para a equipa consultar a app fora da loja e para os links dos clientes — tracking, orçamentos, QR de garantia — abrirem em qualquer lado.",
+        ],
+        list: [
+          "Criar conta grátis na Cloudflare + um domínio (~10 €/ano)",
+          "No painel Zero Trust: criar o túnel e copiar o token",
+          "Duas linhas no ficheiro .env e reiniciar a app",
+          "Na app: Definições → Loja → URL base de tracking → o endereço público",
         ],
         links: [
-          {
-            label: "Guia móvel completo",
-            href: DOCS_MOBILE_URL,
-          },
+          { label: "Guia passo a passo", href: DOCS_REMOTE_URL },
         ],
       },
       {
-        heading: "Acesso remoto — Cloudflare Tunnel",
+        heading: "Privado por defeito",
         paragraphs: [
-          "Com o PC da loja ligado, um Cloudflare Tunnel gratuito expõe a app em HTTPS — sem abrir portas no router, sem IP público, funciona mesmo com CGNAT.",
-          "Dá acesso remoto à equipa e activa os links públicos dos clientes: tracking, aprovação de orçamentos, pedido de avaliação e QR de garantia.",
-        ],
-        list: [
-          "Cloudflare Zero Trust → Networks → Tunnels → criar túnel e copiar o token",
-          "Hostname público (ex.: oficina.oseudominio.pt) → serviço http://app:4000",
-          "No .env: TUNNEL_TOKEN=<token> e adicionar o hostname a EXTRA_TRUSTED_ORIGINS",
-          "docker compose --profile tunnel up -d (ou COMPOSE_PROFILES=tunnel nas instalações)",
-          "Definições → Loja → URL base de tracking → o hostname público",
-        ],
-        code: "TUNNEL_TOKEN=eyJh…\nEXTRA_TRUSTED_ORIGINS=https://oficina.oseudominio.pt",
-        links: [
-          { label: "Guia completo de acesso remoto", href: DOCS_REMOTE_URL },
-        ],
-      },
-      {
-        heading: "Privacidade por defeito",
-        paragraphs: [
-          "O túnel é opcional: a app continua 100% funcional na rede local sem internet. Os dados dos clientes ficam na loja — a Cloudflare apenas transporta tráfego encriptado quando o túnel está ligado.",
-          "Para uma barreira extra à frente do login, o Cloudflare Access (grátis) permite exigir email + código — mantendo os caminhos públicos (/tracking, /pre-check) abertos aos clientes.",
+          "O túnel é opcional: a app funciona a 100% na rede local mesmo sem internet. Os dados dos clientes ficam na loja — a Cloudflare apenas transporta o tráfego encriptado quando o túnel está ligado.",
+          "Quem quiser uma barreira extra pode ativar o Cloudflare Access (grátis): email + código antes do login, mantendo as páginas públicas dos clientes abertas.",
         ],
         links: [],
       },

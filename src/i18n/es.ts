@@ -136,13 +136,13 @@ export const t: Copy = {
   docs: {
     title: "Instalación y acceso",
     subtitle:
-      "Del PC de la tienda al móvil del cliente — todos los caminos, paso a paso.",
+      "Del PC de la tienda al móvil — simple, aunque no seas técnico.",
     sections: [
       {
-        heading: "Instalación en minutos",
+        heading: "Instalar (una vez, ~10 minutos)",
         paragraphs: [
-          "En Windows, descarga el instalador ZIP, extráelo y ejecuta INSTALAR.bat — instala Docker si falta, genera las contraseñas y arranca todo solo. Uso diario: INICIAR.bat / PARAR.bat.",
-          "En Linux/Mac o desde el código fuente, bastan cuatro comandos:",
+          "En Windows es doble clic: descarga el instalador ZIP, extráelo y ejecuta INSTALAR.bat — instala Docker si falta, genera las contraseñas y arranca todo solo. En el día a día usa INICIAR.bat / PARAR.bat.",
+          "En Linux, Mac o desde el código fuente, bastan cuatro comandos:",
         ],
         code: "git clone https://github.com/braindeadpt/OficinaOS.git\ncd OficinaOS && cp .env.example .env\ndocker compose up -d\ndocker compose exec app bun run db:seed",
         links: [
@@ -151,50 +151,47 @@ export const t: Copy = {
         ],
       },
       {
-        heading: "En la tienda — red local",
+        heading: "En la tienda — móviles, tablets y PCs",
         paragraphs: [
-          "Un PC ejecuta el servidor y la base de datos; los demás dispositivos abren la app en el navegador, sin instalar nada:",
-          "Usa siempre la misma dirección configurada como APP_URL en el archivo .env. Funciona sin internet para el uso diario.",
+          "Cualquier aparato conectado al Wi-Fi de la tienda abre la app en el navegador — sin instalar nada. Solo hay que escribir la dirección que da la instalación e iniciar sesión:",
+          "Funciona sin internet para el uso diario. Guarda la dirección en favoritos — siempre es la misma.",
         ],
-        code: "http://192.168.1.33:4000   # la IP del PC servidor",
+        code: "http://192.168.1.33:4000   # la dirección del PC servidor",
         links: [],
       },
       {
-        heading: "Móvil y tablet — icono en pantalla (PWA)",
+        heading: "Icono en la pantalla del móvil",
         paragraphs: [
-          "OficinaOS es una PWA: puede tener icono propio y abrirse a pantalla completa, sin barra del navegador.",
+          "Para abrir con un toque, como una app normal — tarda 10 segundos:",
         ],
         list: [
-          "iPhone/iPad: Safari → Compartir → «Añadir a pantalla de inicio» — app independiente, incluso en HTTP en la red local",
-          "Android en la tienda: menú ⋮ de Chrome → «Añadir a pantalla de inicio» (acceso directo)",
-          "Android con HTTPS (túnel): Chrome ofrece «Instalar aplicación» — instalación real",
-          "Opcional: APK Android nativo vía Capacitor (cámara integrada en las fichas) — ver docs/mobile-access.md",
+          "iPhone/iPad: Safari → botón Compartir → «Añadir a pantalla de inicio»",
+          "Android: Chrome → menú ⋮ → «Añadir a pantalla de inicio»",
+          "Con acceso remoto activo, Android puede llegar a ofrecer «Instalar aplicación» — instalación real",
         ],
-        links: [{ label: "Guía móvil completa", href: DOCS_MOBILE_URL }],
+        links: [{ label: "Guía para móviles", href: DOCS_MOBILE_URL }],
       },
       {
-        heading: "Acceso remoto — Cloudflare Tunnel",
+        heading: "Fuera de la tienda — acceso remoto",
         paragraphs: [
-          "Con el PC de la tienda encendido, un Cloudflare Tunnel gratuito expone la app en HTTPS — sin abrir puertos en el router, sin IP pública, funciona incluso con CGNAT.",
-          "Da acceso remoto al equipo y activa los enlaces públicos de los clientes: seguimiento, aprobación de presupuestos, solicitud de evaluación y QR de garantía.",
+          "Con el PC de la tienda encendido, un Cloudflare Tunnel gratuito da a la tienda una dirección https:// propia — sin tocar el router, funciona con cualquier operadora, incluso las que bloquean puertos (CGNAT).",
+          "Sirve para que el equipo consulte la app fuera de la tienda y para que los enlaces de los clientes — seguimiento, presupuestos, QR de garantía — abran en cualquier parte.",
         ],
         list: [
-          "Cloudflare Zero Trust → Networks → Tunnels → crear túnel y copiar el token",
-          "Hostname público (ej.: oficina.tudominio.com) → servicio http://app:4000",
-          "En .env: TUNNEL_TOKEN=<token> y añadir el hostname a EXTRA_TRUSTED_ORIGINS",
-          "docker compose --profile tunnel up -d (o COMPOSE_PROFILES=tunnel en instalaciones)",
-          "Ajustes → Tienda → URL base de seguimiento → el hostname público",
+          "Crear cuenta gratis en Cloudflare + un dominio (~10 €/año)",
+          "En el panel Zero Trust: crear el túnel y copiar el token",
+          "Dos líneas en el archivo .env y reiniciar la app",
+          "En la app: Ajustes → Tienda → URL base de seguimiento → la dirección pública",
         ],
-        code: "TUNNEL_TOKEN=eyJh…\nEXTRA_TRUSTED_ORIGINS=https://oficina.tudominio.com",
         links: [
-          { label: "Guía completa de acceso remoto", href: DOCS_REMOTE_URL },
+          { label: "Guía paso a paso", href: DOCS_REMOTE_URL },
         ],
       },
       {
         heading: "Privado por defecto",
         paragraphs: [
-          "El túnel es opcional: la app sigue funcionando al 100% en la red local sin internet. Los datos de los clientes se quedan en la tienda — Cloudflare solo transporta tráfico cifrado mientras el túnel está activo.",
-          "Para una barrera extra antes del login, Cloudflare Access (gratis) puede exigir email + código — manteniendo las rutas públicas (/tracking, /pre-check) abiertas a los clientes.",
+          "El túnel es opcional: la app funciona al 100% en la red local incluso sin internet. Los datos de los clientes se quedan en la tienda — Cloudflare solo transporta el tráfico cifrado mientras el túnel está activo.",
+          "Quien quiera una barrera extra puede activar Cloudflare Access (gratis): email + código antes del login, manteniendo abiertas las páginas públicas de los clientes.",
         ],
         links: [],
       },
