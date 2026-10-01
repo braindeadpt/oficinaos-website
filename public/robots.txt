@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://braindeadpt.github.io/oficinaos-website/sitemap-index.xml
+Sitemap: https://oficinaos.app/sitemap-index.xml
