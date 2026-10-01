@@ -69,8 +69,7 @@ export const t = {
   },
   screenshots: {
     title: "Veja em ação",
-    subtitle:
-      "Capturas de ecrã reais em breve — enquanto isso, clone o repositório e veja ao vivo.",
+    subtitle: "Capturas de ecrã reais da app a correr numa oficina.",
     items: ["Painel de reparações", "Detalhe da reparação", "Página do cliente"],
     comingSoon: "Captura em breve",
   },
@@ -98,7 +97,10 @@ export const t = {
       subtitle: "Receba novidades quando os módulos Pro forem lançados.",
       placeholder: "voce@sualoja.pt",
       button: "Notificar-me",
+      buttonGithub: "Seguir no GitHub",
       note: "Formulário estático — sem conta. Só enviamos novidades sobre os módulos Pro.",
+      noteGithub:
+        "Segue o repositório no GitHub — os lançamentos dos módulos Pro são anunciados em releases.",
     },
   },
   install: {

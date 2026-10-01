@@ -71,8 +71,7 @@ export const t: Copy = {
   },
   screenshots: {
     title: "See it in action",
-    subtitle:
-      "Real screenshots coming soon — meanwhile, clone the repo and see it live.",
+    subtitle: "Real screenshots from the app running in a shop.",
     items: ["Jobs board", "Job detail", "Customer tracking"],
     comingSoon: "Screenshot coming soon",
   },
@@ -100,7 +99,10 @@ export const t: Copy = {
       subtitle: "Get notified when the Pro modules launch.",
       placeholder: "you@yourshop.com",
       button: "Notify me",
+      buttonGithub: "Follow on GitHub",
       note: "Static form — no account needed. We only email about Pro launches.",
+      noteGithub:
+        "Follow the repo on GitHub — Pro module launches are announced as releases.",
     },
   },
   install: {

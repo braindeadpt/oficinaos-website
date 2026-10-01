@@ -1,5 +1,6 @@
 ---
 import type { Copy } from "../i18n/pt";
+import { REPO_URL } from "../i18n/utils";
 import Icon from "./Icon.astro";
 
 interface Props {
@@ -10,7 +11,13 @@ const { t } = Astro.props;
 // Static waitlist form: create a free form at https://formspree.io and put
 // your form ID below — or swap `action` for `mailto:you@example.com` for a
 // zero-service fallback.
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+// Static waitlist: create a free form at https://formspree.io and put your
+// form ID below. While unset, the section falls back to a GitHub CTA —
+// watching the repo genuinely notifies followers of releases.
+const FORMSPREE_ID = "";
+const FORMSPREE_ENDPOINT = FORMSPREE_ID
+  ? `https://formspree.io/f/${FORMSPREE_ID}`
+  : "";
 
 const icons = ["message", "activity", "badge"] as const;
 ---
@@ -48,29 +55,44 @@ const icons = ["message", "activity", "badge"] as const;
     >
       <h3 class="text-xl font-semibold text-white">{t.pro.waitlist.title}</h3>
       <p class="mt-2 text-sm text-zinc-400">{t.pro.waitlist.subtitle}</p>
-      <form
-        action={FORMSPREE_ENDPOINT}
-        method="POST"
-        class="mx-auto mt-6 flex max-w-md flex-col gap-3 sm:flex-row"
-      >
-        <input type="hidden" name="_language" value={Astro.currentLocale} />
-        <label class="sr-only" for="waitlist-email">Email</label>
-        <input
-          id="waitlist-email"
-          type="email"
-          name="email"
-          required
-          placeholder={t.pro.waitlist.placeholder}
-          class="w-full flex-1 rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-sm text-white placeholder-zinc-500 outline-none transition focus:border-teal-500"
-        />
-        <button
-          type="submit"
-          class="rounded-xl bg-teal-500 px-6 py-3 text-sm font-semibold text-zinc-950 transition hover:bg-teal-400"
-        >
-          {t.pro.waitlist.button}
-        </button>
-      </form>
-      <p class="mt-4 text-xs text-zinc-500">{t.pro.waitlist.note}</p>
+      {
+        FORMSPREE_ENDPOINT ? (
+          <form
+            action={FORMSPREE_ENDPOINT}
+            method="POST"
+            class="mx-auto mt-6 flex max-w-md flex-col gap-3 sm:flex-row"
+          >
+            <input type="hidden" name="_language" value={Astro.currentLocale} />
+            <label class="sr-only" for="waitlist-email">Email</label>
+            <input
+              id="waitlist-email"
+              type="email"
+              name="email"
+              required
+              placeholder={t.pro.waitlist.placeholder}
+              class="w-full flex-1 rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-sm text-white placeholder-zinc-500 outline-none transition focus:border-teal-500"
+            />
+            <button
+              type="submit"
+              class="rounded-xl bg-teal-500 px-6 py-3 text-sm font-semibold text-zinc-950 transition hover:bg-teal-400"
+            >
+              {t.pro.waitlist.button}
+            </button>
+          </form>
+        ) : (
+          <a
+            href={REPO_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mx-auto mt-6 inline-flex items-center gap-2 rounded-xl bg-teal-500 px-6 py-3 text-sm font-semibold text-zinc-950 transition hover:bg-teal-400"
+          >
+            {t.pro.waitlist.buttonGithub}
+          </a>
+        )
+      }
+      <p class="mt-4 text-xs text-zinc-500">
+        {FORMSPREE_ENDPOINT ? t.pro.waitlist.note : t.pro.waitlist.noteGithub}
+      </p>
     </div>
   </div>
 </section>

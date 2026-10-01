@@ -71,8 +71,7 @@ export const t: Copy = {
   },
   screenshots: {
     title: "Míralo en acción",
-    subtitle:
-      "Capturas reales próximamente — mientras tanto, clona el repositorio y velo en vivo.",
+    subtitle: "Capturas reales de la app funcionando en un taller.",
     items: ["Panel de reparaciones", "Detalle del trabajo", "Página del cliente"],
     comingSoon: "Captura próximamente",
   },
@@ -100,7 +99,10 @@ export const t: Copy = {
       subtitle: "Te avisamos cuando se lancen los módulos Pro.",
       placeholder: "tu@tutaller.es",
       button: "Avísame",
+      buttonGithub: "Seguir en GitHub",
       note: "Formulario estático — sin cuenta. Solo escribimos sobre los lanzamientos Pro.",
+      noteGithub:
+        "Sigue el repositorio en GitHub — los lanzamientos de módulos Pro se anuncian en releases.",
     },
   },
   install: {
