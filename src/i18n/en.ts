@@ -112,6 +112,46 @@ export const t: Copy = {
         "Follow the repo on GitHub — Pro module launches are announced as releases.",
     },
   },
+  privacy: {
+    badge: "GDPR",
+    title: "Your data stays in the shop.",
+    subtitle:
+      "OficinaOS runs on a PC inside the shop — no servers of ours, no account of ours, no telemetry.",
+    cards: [
+      {
+        title: "Everything local by default",
+        desc: "Customers, repairs, stock and till live on the shop's PC. Since we never touch the data, no processor agreement (Art. 28) with us is even needed.",
+      },
+      {
+        title: "No international transfers",
+        desc: "By default nothing leaves the shop — unlike cloud systems, no customer data sits on third-party servers.",
+      },
+      {
+        title: "Optional extras, declared",
+        desc: "WhatsApp, remote access and AI are opt-in — documented item by item, ready for your records of processing (Art. 30).",
+      },
+    ],
+    tableTitle: "When you switch an optional module on, this is all that leaves:",
+    table: [
+      {
+        name: "WhatsApp notifications",
+        to: "Meta",
+        what: "Customer phone number + repair status",
+      },
+      {
+        name: "Remote access & customer links",
+        to: "Cloudflare",
+        what: "The pages' traffic in transit",
+      },
+      {
+        name: "AI analyst",
+        to: "Whichever provider you configure",
+        what: "The questions you ask the AI",
+      },
+    ],
+    tableNote:
+      "See the full detail — including what never leaves — in the repository.",
+  },
   install: {
     title: "Running in minutes",
     subtitle:

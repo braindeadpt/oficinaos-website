@@ -112,6 +112,46 @@ export const t: Copy = {
         "Sigue el repositorio en GitHub — los lanzamientos de módulos Pro se anuncian en releases.",
     },
   },
+  privacy: {
+    badge: "RGPD",
+    title: "Los datos se quedan en la tienda.",
+    subtitle:
+      "OficinaOS se ejecuta en un PC dentro de la tienda — no hay servidores nuestros, ni cuenta nuestra, ni telemetría.",
+    cards: [
+      {
+        title: "Todo local por defecto",
+        desc: "Clientes, reparaciones, stock y caja viven en el PC de la tienda. Como nunca tocamos los datos, ni siquiera hace falta un acuerdo de encargo de tratamiento (art. 28) con nosotros.",
+      },
+      {
+        title: "Sin transferencias internacionales",
+        desc: "Por defecto nada sale de la tienda — a diferencia de los sistemas en la nube, no hay datos de clientes en servidores de terceros.",
+      },
+      {
+        title: "Extras opcionales y declarados",
+        desc: "WhatsApp, acceso remoto e IA son opt-in — documentados ítem a ítem, listos para el registro de actividades de tratamiento (art. 30).",
+      },
+    ],
+    tableTitle: "Cuando activas un módulo opcional, esto es todo lo que sale:",
+    table: [
+      {
+        name: "Notificaciones WhatsApp",
+        to: "Meta",
+        what: "Nº de teléfono del cliente + estado de la reparación",
+      },
+      {
+        name: "Acceso remoto y enlaces al cliente",
+        to: "Cloudflare",
+        what: "El tráfico de las páginas en tránsito",
+      },
+      {
+        name: "Analista IA",
+        to: "El proveedor que configures",
+        what: "Las preguntas que hagas a la IA",
+      },
+    ],
+    tableNote:
+      "Ver el detalle completo — incluido lo que nunca sale — en el repositorio.",
+  },
   install: {
     title: "En marcha en minutos",
     subtitle:

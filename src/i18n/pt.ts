@@ -1,14 +1,20 @@
 import {
+  BACKUP_DOCS_URL,
   DOCS_MOBILE_URL,
   DOCS_REMOTE_URL,
   INSTALL_URL,
+  INSTALL_ZIP_URL,
+  PORTABLE_DOCS_URL,
+  PORTABLE_ZIP_URL,
   RELEASES_URL,
+  REPO_URL,
 } from "./utils";
 
 type DocsSection = {
   heading: string;
   paragraphs: string[];
   list?: string[];
+  table?: { head: string[]; rows: string[][] };
   code?: string;
   links?: { label: string; href: string }[];
 };
@@ -119,6 +125,46 @@ export const t = {
         "Segue o repositório no GitHub — os lançamentos dos módulos Pro são anunciados em releases.",
     },
   },
+  privacy: {
+    badge: "RGPD",
+    title: "Os dados ficam na loja.",
+    subtitle:
+      "O OficinaOS corre num PC dentro da loja — não há servidores nossos, nem conta nossa, nem telemetria.",
+    cards: [
+      {
+        title: "Tudo local por defeito",
+        desc: "Clientes, reparações, stock e caixa vivem no PC da loja. Como nunca tocamos nos dados, nem sequer é preciso um acordo de subcontratação (Art. 28) connosco.",
+      },
+      {
+        title: "Sem transferências internacionais",
+        desc: "Por defeito nada sai da loja — ao contrário de sistemas na cloud, não há dados de clientes em servidores de terceiros.",
+      },
+      {
+        title: "Extras opcionais e declarados",
+        desc: "WhatsApp, acesso remoto e IA são opt-in — e documentados item a item, prontos para o registo de tratamento (Art. 30).",
+      },
+    ],
+    tableTitle: "Quando liga um módulo opcional, é só isto que sai:",
+    table: [
+      {
+        name: "Notificações WhatsApp",
+        to: "Meta",
+        what: "Nº de telefone do cliente + estado da reparação",
+      },
+      {
+        name: "Acesso remoto e links ao cliente",
+        to: "Cloudflare",
+        what: "O tráfego das páginas em trânsito",
+      },
+      {
+        name: "Analista IA",
+        to: "O fornecedor que configurar",
+        what: "As perguntas que fizer à IA",
+      },
+    ],
+    tableNote:
+      "Ver o detalhe completo no repositório — incluindo o que nunca sai.",
+  },
   install: {
     title: "A funcionar em minutos",
     subtitle:
@@ -141,21 +187,105 @@ export const t = {
     releasesLink: "Instalador para Windows (Releases)",
   },
   docs: {
-    title: "Instalação e acesso",
+    title: "Guia completo",
     subtitle:
-      "Do PC da loja ao telemóvel — simples, mesmo sem perceber de tecnologia.",
+      "Instalação, dia a dia, backups e resolução de problemas — explicado passo a passo, sem precisar de perceber de tecnologia.",
     sections: [
       {
-        heading: "Instalar (uma vez, ~10 minutos)",
+        heading: "Duas formas de instalar",
         paragraphs: [
-          "No Windows é duplo clique: descarregue o instalador ZIP, extraia e execute INSTALAR.bat — instala o Docker se faltar, gera as palavras-passe e arranca tudo sozinho. No dia a dia usa INICIAR.bat / PARAR.bat.",
-          "Em Linux, Mac ou pelo código-fonte, quatro comandos chegam:",
+          "O OficinaOS é sempre o mesmo programa — a diferença está em como é arrancado no PC da loja. O instalador escolhe o caminho certo sozinho, mas convém perceber os dois:",
+          "Docker é a forma normal e recomendada: um programa gratuito que embala a app e a base de dados em «contentores» isolados. Precisa de uma funcionalidade do processador chamada virtualização — a maioria dos PCs a tem, mas alguns trazem-na desligada na BIOS ou não a suportam.",
+          "O modo portátil existe para esses PCs: traz tudo embutido num pacote único (a app, a base de dados PostgreSQL e o runtime), sem Docker, sem virtualização e sem serviços Windows.",
+        ],
+        table: {
+          head: ["", "Docker (recomendado)", "Portátil (fallback)"],
+          rows: [
+            ["Quando usar", "Sempre que possível", "PCs sem virtualização (VT-x/SVM)"],
+            ["Requisitos", "Docker Desktop + virtualização na BIOS", "Qualquer Windows 10/11 64-bit"],
+            ["Download", "~1 GB (Docker + app)", "~540 MB (tudo embutido)"],
+            ["Arranque com o PC", "Automático", "Automático (opcional, perguntado na 1ª execução)"],
+            ["Se a app crashar", "Reinicia sozinha", "Reinicia sozinha (wrapper)"],
+            ["Backups", "Diários, automáticos (a cada 24h)", "A cada arranque + BACKUP.bat manual"],
+            ["Backups fora do PC", "Suportado (rclone → S3/B2/GCS)", "Manual — copiar a pasta de backups"],
+            ["Atualizações", "Só descarrega o que mudou; automático opcional", "Descarrega o pacote inteiro; sempre manual"],
+            ["Acesso remoto (HTTPS)", "Cloudflare Tunnel incluído", "Cloudflare Tunnel instalado à parte"],
+          ],
+        },
+        links: [
+          { label: "Guia de instalação", href: INSTALL_URL },
+          { label: "Documentação do modo portátil", href: PORTABLE_DOCS_URL },
+        ],
+      },
+      {
+        heading: "Instalação normal — Docker (uma vez, ~10 minutos)",
+        paragraphs: [
+          "Descarregue o instalador ZIP, extraia para uma pasta (ex.: C:\\OficinaOS) e faça duplo clique em INSTALAR.bat. Se o Windows Defender SmartScreen avisar: «Mais informações» → «Executar mesmo assim».",
+          "O instalador faz tudo sozinho: verifica se o PC consegue correr Docker, instala o Docker Desktop se faltar, gera as palavras-passe e segredos, descarrega a app e arranca. Se pedir para reiniciar, reinicie e corra INSTALAR.bat outra vez.",
+          "No fim o browser abre em http://localhost:4000. Primeiro login: utilizador admin, palavra-passe braindead — a app obriga a mudar ambos.",
+          "Em Linux ou Mac não há instalador automático — usa-se Docker manualmente:",
         ],
         code: "git clone https://github.com/braindeadpt/OficinaOS.git\ncd OficinaOS && cp .env.example .env\ndocker compose up -d\ndocker compose exec app bun run db:seed",
         links: [
           { label: "Guia de instalação completo", href: INSTALL_URL },
-          { label: "Instalador para Windows", href: RELEASES_URL },
+          { label: "Descarregar instalador (oficinaos-install.zip)", href: INSTALL_ZIP_URL },
         ],
+      },
+      {
+        heading: "Erro «virtualization support not detected»",
+        paragraphs: [
+          "Se o PC não consegue correr Docker, o instalador deteta isso antes de tentar e apresenta duas opções:",
+        ],
+        list: [
+          "Ativar na BIOS — reiniciar, premir F2/F10/DEL/ESC no arranque, procurar «Intel VT-x», «Virtualization Technology» ou «SVM Mode», ativar e gravar (F10). Depois o caminho Docker normal funciona.",
+          "Instalação portátil — o instalador descarrega oficinaos-portable.zip (~540 MB) e arranca sem Docker: a mesma app, a mesma base de dados, as mesmas funcionalidades.",
+        ],
+        links: [
+          { label: "Descarregar pacote portátil", href: PORTABLE_ZIP_URL },
+          { label: "Como o portátil funciona por dentro", href: PORTABLE_DOCS_URL },
+        ],
+      },
+      {
+        heading: "Dia a dia — ligar, desligar, ficheiros",
+        paragraphs: [
+          "Depois de instalado, o dia a dia resume-se a duplo clique num ficheiro. Os nomes são iguais nos dois modos — só muda a pasta onde estão:",
+        ],
+        table: {
+          head: ["Ficheiro", "Para quê"],
+          rows: [
+            ["INICIAR.bat", "Ligar o OficinaOS — abre o browser no fim"],
+            ["PARAR.bat", "Desligar — os dados ficam guardados"],
+            ["ATUALIZAR.bat", "Atualizar para a versão mais recente"],
+            ["BACKUP.bat", "(só portátil) Backup manual da base de dados"],
+            ["RESTAURAR.bat", "(só portátil) Repor a base de dados a partir de um backup"],
+          ],
+        },
+        list: [
+          "Modo Docker: na pasta onde extraiu o instalador.",
+          "Modo portátil: dentro da pasta oficinaos-portable — os dados vivem em data\\, os backups em app\\uploads\\backups.",
+          "Outros dispositivos da loja (tablet, telemóvel, outro PC) não instalam nada — abrem http://<IP-do-PC>:4000 no browser.",
+        ],
+        links: [],
+      },
+      {
+        heading: "Backups e restauro",
+        paragraphs: [
+          "Os backups são ficheiros comprimidos (.sql.gz) com a base de dados inteira. A app mostra o estado do último backup em Definições → Loja → Backups — funciona igual nos dois modos.",
+          "No modo Docker um serviço dedicado faz um backup a cada 24 horas, guarda 14 dias, e opcionalmente copia para armazenamento externo (S3, Backblaze, etc.) e testa o restauro automaticamente.",
+          "No modo portátil o backup corre a cada arranque e com BACKUP.bat. Restaurar é com RESTAURAR.bat (repor um ficheiro de backups). Como não há cópia fora do PC automática, copie a pasta app\\uploads\\backups para um disco externo ou pen — backups no mesmo disco não protegem contra avaria, roubo ou ransomware.",
+        ],
+        links: [
+          { label: "Backups e restore (Docker)", href: BACKUP_DOCS_URL },
+          { label: "Backups no modo portátil", href: PORTABLE_DOCS_URL },
+        ],
+      },
+      {
+        heading: "Atualizações",
+        paragraphs: [
+          "A app avisa no topo quando existe versão nova. Para atualizar, basta duplo clique em ATUALIZAR.bat — faz backup, descarrega a versão nova e reinicia. As migrações da base de dados correm sozinhas.",
+          "Diferença prática: no Docker só se descarrega o que mudou; no portátil descarrega-se o pacote inteiro (~540 MB). No modo Docker pode ainda ativar atualizações 100% automáticas (Watchtower).",
+        ],
+        links: [{ label: "Todas as releases", href: RELEASES_URL }],
       },
       {
         heading: "Na loja — telemóveis, tablets e PCs",
@@ -201,6 +331,41 @@ export const t = {
           "Quem quiser uma barreira extra pode ativar o Cloudflare Access (grátis): email + código antes do login, mantendo as páginas públicas dos clientes abertas.",
         ],
         links: [],
+      },
+      {
+        heading: "Problemas comuns",
+        paragraphs: [
+          "As situações mais frequentes e a resolução de cada uma:",
+        ],
+        table: {
+          head: ["Sintoma", "O que fazer"],
+          rows: [
+            ["SmartScreen avisa ao instalar", "«Mais informações» → «Executar mesmo assim» — é um ficheiro novo sem reputação, não um vírus"],
+            ["«Virtualization support not detected»", "O instalador oferece as duas opções: ativar na BIOS ou usar o modo portátil"],
+            ["O Windows pede para reiniciar durante a instalação", "Reiniciar e correr INSTALAR.bat outra vez — é normal na instalação do Docker"],
+            ["Firewall do Windows pergunta", "Escolher «Permitir» em rede privada"],
+            ["Página em branco / não abre", "Ctrl+F5; confirmar que o endereço é http:// (não https://)"],
+            ["«Invalid username or password»", "O login é por utilizador (admin), não por email"],
+            ["O PC mudou de IP e os outros dispositivos não ligam", "Atualizar APP_URL no .env (Docker) ou apagar .env e correr INSTALAR.bat de novo"],
+            ["Porta 4000 ocupada (portátil)", "Mudar PORT em app\\.env"],
+            ["Postgres não arranca (portátil)", "Ver data\\postgres.log; porta 5433 ocupada → mudar em data\\postgresql.conf e no .env"],
+            ["Desinstalar tudo", "PARAR.bat + apagar a pasta (modo portátil); docker compose down -v + apagar a pasta (Docker). Atenção: apaga a base de dados — fazer backup antes"],
+          ],
+        },
+        links: [{ label: "Troubleshooting completo", href: INSTALL_URL }],
+      },
+      {
+        heading: "Documentação completa",
+        paragraphs: [
+          "Este guia cobre o essencial. O repositório no GitHub tem a documentação técnica completa — instalação detalhada, acesso remoto, telemóveis, backups com cópia externa e o funcionamento interno do pacote portátil:",
+        ],
+        links: [
+          { label: "Guia de instalação (INSTALL.md)", href: INSTALL_URL },
+          { label: "Modo portátil — internals", href: PORTABLE_DOCS_URL },
+          { label: "Acesso remoto (Cloudflare Tunnel)", href: DOCS_REMOTE_URL },
+          { label: "Telemóveis e tablets", href: DOCS_MOBILE_URL },
+          { label: "Repositório no GitHub", href: REPO_URL },
+        ],
       },
     ],
   },
