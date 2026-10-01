@@ -1,0 +1,78 @@
+---
+import type { Copy } from "../i18n/pt";
+import Icon from "./Icon.astro";
+import { INSTALL_URL, RELEASES_URL, REPO_URL } from "../i18n/utils";
+
+interface Props {
+  t: Copy;
+}
+const { t } = Astro.props;
+---
+
+<section id="install" class="mx-auto max-w-6xl px-6 py-24">
+  <div class="grid items-start gap-12 lg:grid-cols-2">
+    <div>
+      <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+        {t.install.title}
+      </h2>
+      <p class="mt-4 text-lg text-zinc-400">{t.install.subtitle}</p>
+      <ol class="mt-10 space-y-6">
+        {
+          t.install.steps.map((s, i) => (
+            <li class="flex gap-4">
+              <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-teal-500/10 text-sm font-semibold text-teal-400">
+                {i + 1}
+              </span>
+              <div>
+                <h3 class="font-semibold text-white">{s.title}</h3>
+                <p class="mt-1 text-sm text-zinc-400">{s.desc}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+      <div class="mt-10 flex flex-wrap gap-x-6 gap-y-2 text-sm">
+        <a
+          href={INSTALL_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 font-medium text-teal-400 transition hover:text-teal-300"
+        >
+          {t.install.guideLink}
+          <Icon name="external" class="h-3.5 w-3.5" />
+        </a>
+        <a
+          href={RELEASES_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 font-medium text-teal-400 transition hover:text-teal-300"
+        >
+          {t.install.releasesLink}
+          <Icon name="external" class="h-3.5 w-3.5" />
+        </a>
+      </div>
+    </div>
+    <div
+      class="overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900"
+    >
+      <div
+        class="flex items-center gap-1.5 border-b border-zinc-800 px-4 py-3"
+      >
+        <span class="h-2.5 w-2.5 rounded-full bg-zinc-700"></span>
+        <span class="h-2.5 w-2.5 rounded-full bg-zinc-700"></span>
+        <span class="h-2.5 w-2.5 rounded-full bg-zinc-700"></span>
+        <span class="ml-3 text-xs text-zinc-500">terminal</span>
+      </div>
+      <pre
+        class="overflow-x-auto p-6 font-mono text-sm leading-relaxed text-zinc-300"><code><span class="text-zinc-600"># {t.install.steps[0].title.toLowerCase()}</span>
+<span class="text-teal-400">$</span> git clone {REPO_URL}.git
+<span class="text-teal-400">$</span> cd OficinaOS
+
+<span class="text-zinc-600"># {t.install.steps[1].title.toLowerCase()}</span>
+<span class="text-teal-400">$</span> docker compose up -d
+
+<span class="text-zinc-600"># {t.install.steps[2].title.toLowerCase()}</span>
+<span class="text-teal-400">$</span> open http://localhost:4000</code></pre>
+    </div>
+  </div>
+</section>

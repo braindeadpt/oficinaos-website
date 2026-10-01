@@ -1,0 +1,66 @@
+---
+import type { Copy } from "../i18n/pt";
+import GithubMark from "./GithubMark.astro";
+import { LOCALE_LABELS, LOCALES, localeUrl, REPO_URL } from "../i18n/utils";
+import type { Locale } from "../i18n/utils";
+
+interface Props {
+  t: Copy;
+  locale: Locale;
+}
+const { t, locale } = Astro.props;
+const logoUrl = `${import.meta.env.BASE_URL}favicon.svg`;
+---
+
+<header
+  class="sticky top-0 z-50 border-b border-zinc-800/60 bg-zinc-950/80 backdrop-blur"
+>
+  <nav
+    class="mx-auto flex h-16 max-w-6xl items-center justify-between px-6"
+  >
+    <a href={localeUrl(locale)} class="flex items-center gap-2.5">
+      <img src={logoUrl} alt="" class="h-8 w-8" />
+      <span class="text-lg font-semibold tracking-tight text-white"
+        >OficinaOS</span
+      >
+    </a>
+    <div class="flex items-center gap-6 text-sm text-zinc-400">
+      <a href="#features" class="hidden transition hover:text-white sm:inline"
+        >{t.nav.features}</a
+      >
+      <a href="#pro" class="hidden transition hover:text-white sm:inline"
+        >{t.nav.pro}</a
+      >
+      <a href="#install" class="hidden transition hover:text-white sm:inline"
+        >{t.nav.install}</a
+      >
+      <div class="flex items-center gap-1 rounded-full border border-zinc-800 p-0.5">
+        {
+          LOCALES.map((l) => (
+            <a
+              href={localeUrl(l)}
+              hreflang={l}
+              class:list={[
+                "rounded-full px-2.5 py-1 text-xs font-medium transition",
+                l === locale
+                  ? "bg-teal-600 text-white"
+                  : "text-zinc-400 hover:text-white",
+              ]}
+            >
+              {LOCALE_LABELS[l]}
+            </a>
+          ))
+        }
+      </div>
+      <a
+        href={REPO_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium text-zinc-950 transition hover:bg-zinc-200"
+      >
+        <GithubMark class="h-4 w-4" />
+        <span class="hidden md:inline">{t.nav.github}</span>
+      </a>
+    </div>
+  </nav>
+</header>

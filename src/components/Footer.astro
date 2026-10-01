@@ -1,0 +1,48 @@
+---
+import type { Copy } from "../i18n/pt";
+import GithubMark from "./GithubMark.astro";
+import { REPO_URL } from "../i18n/utils";
+
+interface Props {
+  t: Copy;
+}
+const { t } = Astro.props;
+const year = new Date().getFullYear();
+const UPSTREAM_URL = "https://github.com/cranknet/reparilo";
+---
+
+<footer class="border-t border-zinc-800/60">
+  <div
+    class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 px-6 py-10 sm:flex-row"
+  >
+    <div class="text-center text-sm text-zinc-500 sm:text-left">
+      <p>
+        © {year} OficinaOS · <a
+          href={`${REPO_URL}/blob/main/LICENSE`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="underline decoration-zinc-700 underline-offset-2 transition hover:text-zinc-300"
+          >{t.footer.license}</a
+        > · {t.footer.rights}
+      </p>
+      <p class="mt-1 text-xs text-zinc-600">
+        {t.footer.fork} — <a
+          href={UPSTREAM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="underline decoration-zinc-700 underline-offset-2 transition hover:text-zinc-400"
+          >github.com/cranknet/reparilo</a
+        >
+      </p>
+    </div>
+    <a
+      href={REPO_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="flex items-center gap-2 text-sm text-zinc-400 transition hover:text-white"
+    >
+      <GithubMark class="h-4 w-4" />
+      braindeadpt/OficinaOS
+    </a>
+  </div>
+</footer>

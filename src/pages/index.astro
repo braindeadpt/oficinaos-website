@@ -1,0 +1,9 @@
+---
+import Landing from "../components/Landing.astro";
+import Base from "../layouts/Base.astro";
+import { lang, locale, ogLocale, t } from "../i18n/pt";
+---
+
+<Base t={t} locale={locale} langAttr={lang} ogLocale={ogLocale}>
+  <Landing t={t} locale={locale} />
+</Base>

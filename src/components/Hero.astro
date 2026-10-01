@@ -1,0 +1,78 @@
+---
+import type { Copy } from "../i18n/pt";
+import Icon from "./Icon.astro";
+import { INSTALL_URL, REPO_URL } from "../i18n/utils";
+
+interface Props {
+  t: Copy;
+}
+const { t } = Astro.props;
+---
+
+<section class="relative overflow-hidden">
+  <div
+    class="pointer-events-none absolute inset-x-0 -top-40 mx-auto h-96 w-[42rem] rounded-full bg-teal-600/20 blur-3xl"
+    aria-hidden="true"
+  >
+  </div>
+  <div class="relative mx-auto max-w-4xl px-6 pt-24 pb-16 text-center">
+    <span
+      class="inline-flex items-center gap-2 rounded-full border border-teal-500/30 bg-teal-500/10 px-4 py-1.5 text-xs font-medium text-teal-300"
+    >
+      <Icon name="shield" class="h-3.5 w-3.5" />
+      {t.hero.badge}
+    </span>
+    <h1
+      class="mt-6 text-4xl font-bold tracking-tight text-white sm:text-6xl"
+    >
+      {t.hero.title}<br />
+      <span class="text-teal-400">{t.hero.titleAccent}</span>
+    </h1>
+    <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-zinc-400">
+      {t.hero.subtitle}
+    </p>
+    <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+      <a
+        href={REPO_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 rounded-xl bg-teal-500 px-6 py-3 font-semibold text-zinc-950 transition hover:bg-teal-400"
+      >
+        {t.hero.ctaPrimary}
+        <Icon name="arrow" class="h-4 w-4" />
+      </a>
+      <a
+        href={INSTALL_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 rounded-xl border border-zinc-700 px-6 py-3 font-semibold text-white transition hover:border-zinc-500 hover:bg-zinc-900"
+      >
+        <Icon name="terminal" class="h-4 w-4" />
+        {t.hero.ctaSecondary}
+      </a>
+    </div>
+    <div
+      class="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-zinc-500"
+    >
+      {
+        t.hero.chips.map((chip) => (
+          <span class="inline-flex items-center gap-1.5">
+            <svg
+              class="h-4 w-4 text-teal-500"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="m5 13 4 4L19 7" />
+            </svg>
+            {chip}
+          </span>
+        ))
+      }
+    </div>
+  </div>
+</section>

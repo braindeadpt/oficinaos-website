@@ -1,0 +1,76 @@
+---
+import type { Copy } from "../i18n/pt";
+import Icon from "./Icon.astro";
+
+interface Props {
+  t: Copy;
+}
+const { t } = Astro.props;
+
+// Static waitlist form: create a free form at https://formspree.io and put
+// your form ID below — or swap `action` for `mailto:you@example.com` for a
+// zero-service fallback.
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+
+const icons = ["message", "activity", "badge"] as const;
+---
+
+<section id="pro" class="border-y border-zinc-800/60 bg-zinc-900/30">
+  <div class="mx-auto max-w-6xl px-6 py-24">
+    <div class="max-w-2xl">
+      <span
+        class="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs font-medium text-amber-300"
+      >
+        {t.pro.badge}
+      </span>
+      <h2
+        class="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl"
+      >
+        {t.pro.title}
+      </h2>
+      <p class="mt-4 text-lg text-zinc-400">{t.pro.subtitle}</p>
+    </div>
+    <div class="mt-12 grid gap-4 md:grid-cols-3">
+      {
+        t.pro.items.map((p, i) => (
+          <div class="rounded-2xl border border-dashed border-zinc-700 bg-zinc-900/30 p-6">
+            <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-amber-500/10 text-amber-400">
+              <Icon name={icons[i]} class="h-5 w-5" />
+            </div>
+            <h3 class="mt-4 font-semibold text-white">{p.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-zinc-400">{p.desc}</p>
+          </div>
+        ))
+      }
+    </div>
+    <div
+      class="mt-12 rounded-2xl border border-zinc-800 bg-zinc-900/60 p-8 text-center"
+    >
+      <h3 class="text-xl font-semibold text-white">{t.pro.waitlist.title}</h3>
+      <p class="mt-2 text-sm text-zinc-400">{t.pro.waitlist.subtitle}</p>
+      <form
+        action={FORMSPREE_ENDPOINT}
+        method="POST"
+        class="mx-auto mt-6 flex max-w-md flex-col gap-3 sm:flex-row"
+      >
+        <input type="hidden" name="_language" value={Astro.currentLocale} />
+        <label class="sr-only" for="waitlist-email">Email</label>
+        <input
+          id="waitlist-email"
+          type="email"
+          name="email"
+          required
+          placeholder={t.pro.waitlist.placeholder}
+          class="w-full flex-1 rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-sm text-white placeholder-zinc-500 outline-none transition focus:border-teal-500"
+        />
+        <button
+          type="submit"
+          class="rounded-xl bg-teal-500 px-6 py-3 text-sm font-semibold text-zinc-950 transition hover:bg-teal-400"
+        >
+          {t.pro.waitlist.button}
+        </button>
+      </form>
+      <p class="mt-4 text-xs text-zinc-500">{t.pro.waitlist.note}</p>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,63 @@
+---
+import "../styles/global.css";
+import type { Copy } from "../i18n/pt";
+import { localeUrl, LOCALES } from "../i18n/utils";
+import type { Locale } from "../i18n/utils";
+
+interface Props {
+  t: Copy;
+  locale: Locale;
+  langAttr: string;
+  ogLocale: string;
+}
+
+const { t, locale, langAttr, ogLocale } = Astro.props;
+
+const localeMap: Record<Locale, string> = {
+  pt: "pt-PT",
+  en: "en",
+  es: "es",
+};
+
+const canonical = new URL(localeUrl(locale), Astro.site);
+const favicon = `${import.meta.env.BASE_URL}favicon.svg`;
+---
+
+<!doctype html>
+<html lang={langAttr} class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{t.meta.title}</title>
+    <meta name="description" content={t.meta.description} />
+    <link rel="icon" type="image/svg+xml" href={favicon} />
+    <link rel="canonical" href={canonical} />
+    {
+      LOCALES.map((l) => (
+        <link
+          rel="alternate"
+          hreflang={localeMap[l]}
+          href={new URL(localeUrl(l), Astro.site)}
+        />
+      ))
+    }
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href={new URL(localeUrl("pt"), Astro.site)}
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={t.meta.title} />
+    <meta property="og:description" content={t.meta.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:site_name" content="OficinaOS" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  <body
+    class="min-h-screen bg-zinc-950 font-sans text-zinc-200 antialiased"
+  >
+    <slot />
+  </body>
+</html>
