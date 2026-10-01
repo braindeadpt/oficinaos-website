@@ -55,7 +55,7 @@ export const t = {
       },
       {
         title: "Interface multilingue",
-        desc: "Disponível em português europeu, inglês e francês.",
+        desc: "Disponível em português europeu, inglês, francês e espanhol.",
       },
       {
         title: "App Android",

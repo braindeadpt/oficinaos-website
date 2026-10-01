@@ -57,7 +57,7 @@ export const t: Copy = {
       },
       {
         title: "Interfaz multiidioma",
-        desc: "Disponible en portugués europeo, inglés y francés.",
+        desc: "Disponible en portugués europeo, inglés, francés y español.",
       },
       {
         title: "App Android",
