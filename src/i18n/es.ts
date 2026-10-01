@@ -1,4 +1,10 @@
 import type { Copy } from "./pt";
+import {
+  DOCS_MOBILE_URL,
+  DOCS_REMOTE_URL,
+  INSTALL_URL,
+  RELEASES_URL,
+} from "./utils";
 
 export const lang = "es";
 export const locale = "es";
@@ -14,6 +20,7 @@ export const t: Copy = {
     features: "Funcionalidades",
     pro: "Módulos Pro",
     install: "Instalar",
+    docs: "Guía",
     github: "GitHub",
   },
   hero: {
@@ -125,6 +132,73 @@ export const t: Copy = {
     ],
     guideLink: "Guía de instalación completa",
     releasesLink: "Instalador para Windows (Releases)",
+  },
+  docs: {
+    title: "Instalación y acceso",
+    subtitle:
+      "Del PC de la tienda al móvil del cliente — todos los caminos, paso a paso.",
+    sections: [
+      {
+        heading: "Instalación en minutos",
+        paragraphs: [
+          "En Windows, descarga el instalador ZIP, extráelo y ejecuta INSTALAR.bat — instala Docker si falta, genera las contraseñas y arranca todo solo. Uso diario: INICIAR.bat / PARAR.bat.",
+          "En Linux/Mac o desde el código fuente, bastan cuatro comandos:",
+        ],
+        code: "git clone https://github.com/braindeadpt/OficinaOS.git\ncd OficinaOS && cp .env.example .env\ndocker compose up -d\ndocker compose exec app bun run db:seed",
+        links: [
+          { label: "Guía de instalación completa", href: INSTALL_URL },
+          { label: "Instalador para Windows", href: RELEASES_URL },
+        ],
+      },
+      {
+        heading: "En la tienda — red local",
+        paragraphs: [
+          "Un PC ejecuta el servidor y la base de datos; los demás dispositivos abren la app en el navegador, sin instalar nada:",
+          "Usa siempre la misma dirección configurada como APP_URL en el archivo .env. Funciona sin internet para el uso diario.",
+        ],
+        code: "http://192.168.1.33:4000   # la IP del PC servidor",
+        links: [],
+      },
+      {
+        heading: "Móvil y tablet — icono en pantalla (PWA)",
+        paragraphs: [
+          "OficinaOS es una PWA: puede tener icono propio y abrirse a pantalla completa, sin barra del navegador.",
+        ],
+        list: [
+          "iPhone/iPad: Safari → Compartir → «Añadir a pantalla de inicio» — app independiente, incluso en HTTP en la red local",
+          "Android en la tienda: menú ⋮ de Chrome → «Añadir a pantalla de inicio» (acceso directo)",
+          "Android con HTTPS (túnel): Chrome ofrece «Instalar aplicación» — instalación real",
+          "Opcional: APK Android nativo vía Capacitor (cámara integrada en las fichas) — ver docs/mobile-access.md",
+        ],
+        links: [{ label: "Guía móvil completa", href: DOCS_MOBILE_URL }],
+      },
+      {
+        heading: "Acceso remoto — Cloudflare Tunnel",
+        paragraphs: [
+          "Con el PC de la tienda encendido, un Cloudflare Tunnel gratuito expone la app en HTTPS — sin abrir puertos en el router, sin IP pública, funciona incluso con CGNAT.",
+          "Da acceso remoto al equipo y activa los enlaces públicos de los clientes: seguimiento, aprobación de presupuestos, solicitud de evaluación y QR de garantía.",
+        ],
+        list: [
+          "Cloudflare Zero Trust → Networks → Tunnels → crear túnel y copiar el token",
+          "Hostname público (ej.: oficina.tudominio.com) → servicio http://app:4000",
+          "En .env: TUNNEL_TOKEN=<token> y añadir el hostname a EXTRA_TRUSTED_ORIGINS",
+          "docker compose --profile tunnel up -d (o COMPOSE_PROFILES=tunnel en instalaciones)",
+          "Ajustes → Tienda → URL base de seguimiento → el hostname público",
+        ],
+        code: "TUNNEL_TOKEN=eyJh…\nEXTRA_TRUSTED_ORIGINS=https://oficina.tudominio.com",
+        links: [
+          { label: "Guía completa de acceso remoto", href: DOCS_REMOTE_URL },
+        ],
+      },
+      {
+        heading: "Privado por defecto",
+        paragraphs: [
+          "El túnel es opcional: la app sigue funcionando al 100% en la red local sin internet. Los datos de los clientes se quedan en la tienda — Cloudflare solo transporta tráfico cifrado mientras el túnel está activo.",
+          "Para una barrera extra antes del login, Cloudflare Access (gratis) puede exigir email + código — manteniendo las rutas públicas (/tracking, /pre-check) abiertas a los clientes.",
+        ],
+        links: [],
+      },
+    ],
   },
   footer: {
     license: "Licencia MIT",

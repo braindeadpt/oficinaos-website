@@ -1,0 +1,65 @@
+---
+import type { Copy } from "../i18n/pt";
+import type { Locale } from "../i18n/utils";
+import Footer from "./Footer.astro";
+import Icon from "./Icon.astro";
+import Nav from "./Nav.astro";
+
+interface Props {
+  t: Copy;
+  locale: Locale;
+}
+const { t, locale } = Astro.props;
+---
+
+<Nav t={t} locale={locale} />
+<main class="mx-auto max-w-3xl px-6 py-16">
+  <h1 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+    {t.docs.title}
+  </h1>
+  <p class="mt-4 text-lg text-zinc-400">{t.docs.subtitle}</p>
+
+  <div class="mt-12 space-y-14">
+    {
+      t.docs.sections.map((s) => (
+        <section>
+          <h2 class="text-xl font-semibold text-white">{s.heading}</h2>
+          {s.paragraphs.map((p) => (
+            <p class="mt-4 leading-relaxed text-zinc-400">{p}</p>
+          ))}
+          {s.list && (
+            <ul class="mt-4 space-y-2.5">
+              {s.list.map((item) => (
+                <li class="flex gap-3 text-sm leading-relaxed text-zinc-400">
+                  <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-500" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+          {s.code && (
+            <pre class="mt-4 overflow-x-auto rounded-xl border border-zinc-800 bg-zinc-900 p-5 font-mono text-sm leading-relaxed text-zinc-300">
+              <code>{s.code}</code>
+            </pre>
+          )}
+          {s.links && s.links.length > 0 && (
+            <div class="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-sm">
+              {s.links.map((l) => (
+                <a
+                  href={l.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1.5 font-medium text-teal-400 transition hover:text-teal-300"
+                >
+                  {l.label}
+                  <Icon name="external" class="h-3.5 w-3.5" />
+                </a>
+              ))}
+            </div>
+          )}
+        </section>
+      ))
+    }
+  </div>
+</main>
+<Footer t={t} />

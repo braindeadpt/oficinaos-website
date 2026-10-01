@@ -1,4 +1,10 @@
 import type { Copy } from "./pt";
+import {
+  DOCS_MOBILE_URL,
+  DOCS_REMOTE_URL,
+  INSTALL_URL,
+  RELEASES_URL,
+} from "./utils";
 
 export const lang = "en";
 export const locale = "en";
@@ -14,6 +20,7 @@ export const t: Copy = {
     features: "Features",
     pro: "Pro modules",
     install: "Install",
+    docs: "Guide",
     github: "GitHub",
   },
   hero: {
@@ -125,6 +132,71 @@ export const t: Copy = {
     ],
     guideLink: "Full installation guide",
     releasesLink: "Windows installer (Releases)",
+  },
+  docs: {
+    title: "Installation and access",
+    subtitle:
+      "From the shop PC to the customer's phone — every path, step by step.",
+    sections: [
+      {
+        heading: "Up and running in minutes",
+        paragraphs: [
+          "On Windows, download the ZIP installer, extract and run INSTALAR.bat — it installs Docker if missing, generates passwords and starts everything by itself. Daily use: INICIAR.bat / PARAR.bat.",
+          "On Linux/Mac or from source, four commands are enough:",
+        ],
+        code: "git clone https://github.com/braindeadpt/OficinaOS.git\ncd OficinaOS && cp .env.example .env\ndocker compose up -d\ndocker compose exec app bun run db:seed",
+        links: [
+          { label: "Full installation guide", href: INSTALL_URL },
+          { label: "Windows installer", href: RELEASES_URL },
+        ],
+      },
+      {
+        heading: "In the shop — local network",
+        paragraphs: [
+          "One PC runs the server and database; every other device opens the app in a browser — nothing to install:",
+          "Always use the same address configured as APP_URL in the .env file. Works without internet for daily use.",
+        ],
+        code: "http://192.168.1.33:4000   # the server PC's IP",
+        links: [],
+      },
+      {
+        heading: "Phone and tablet — home screen icon (PWA)",
+        paragraphs: [
+          "OficinaOS is a PWA: it gets its own icon and opens full-screen, with no browser bar.",
+        ],
+        list: [
+          "iPhone/iPad: Safari → Share → “Add to Home Screen” — standalone app, even over LAN HTTP",
+          "Android in the shop: Chrome menu ⋮ → “Add to Home Screen” (shortcut)",
+          "Android over HTTPS (tunnel): Chrome offers “Install app” — a real native-style install",
+          "Optional: native Android APK via Capacitor (camera integration in job cards) — see docs/mobile-access.md",
+        ],
+        links: [{ label: "Full mobile guide", href: DOCS_MOBILE_URL }],
+      },
+      {
+        heading: "Remote access — Cloudflare Tunnel",
+        paragraphs: [
+          "With the shop PC on, a free Cloudflare Tunnel exposes the app over HTTPS — no router port-forwarding, no public IP needed, works behind CGNAT.",
+          "It gives staff remote access and enables public customer links: tracking, quote approval, pre-check requests and warranty QR codes.",
+        ],
+        list: [
+          "Cloudflare Zero Trust → Networks → Tunnels → create a tunnel and copy the token",
+          "Public hostname (e.g. oficina.yourdomain.com) → service http://app:4000",
+          "In .env: TUNNEL_TOKEN=<token> and add the hostname to EXTRA_TRUSTED_ORIGINS",
+          "docker compose --profile tunnel up -d (or COMPOSE_PROFILES=tunnel on installed deployments)",
+          "Settings → Shop → Tracking base URL → the public hostname",
+        ],
+        code: "TUNNEL_TOKEN=eyJh…\nEXTRA_TRUSTED_ORIGINS=https://oficina.yourdomain.com",
+        links: [{ label: "Full remote access guide", href: DOCS_REMOTE_URL }],
+      },
+      {
+        heading: "Private by default",
+        paragraphs: [
+          "The tunnel is optional: the app stays 100% functional on the local network without internet. Customer data stays in the shop — Cloudflare only carries encrypted traffic while the tunnel is on.",
+          "For an extra barrier before the login page, Cloudflare Access (free) can require email + code — while keeping public paths (/tracking, /pre-check) open to customers.",
+        ],
+        links: [],
+      },
+    ],
   },
   footer: {
     license: "MIT License",

@@ -19,3 +19,5 @@ export function localeUrl(locale: Locale, path = "/"): string {
 export const REPO_URL = "https://github.com/braindeadpt/OficinaOS";
 export const INSTALL_URL = `${REPO_URL}/blob/main/INSTALL.md`;
 export const RELEASES_URL = `${REPO_URL}/releases`;
+export const DOCS_REMOTE_URL = `${REPO_URL}/blob/main/docs/remote-access.md`;
+export const DOCS_MOBILE_URL = `${REPO_URL}/blob/main/docs/mobile-access.md`;

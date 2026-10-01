@@ -1,0 +1,9 @@
+---
+import Docs from "../components/Docs.astro";
+import Base from "../layouts/Base.astro";
+import { lang, locale, ogLocale, t } from "../i18n/pt";
+---
+
+<Base t={t} locale={locale} langAttr={lang} ogLocale={ogLocale}>
+  <Docs t={t} locale={locale} />
+</Base>
