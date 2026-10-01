@@ -1,9 +1,14 @@
 import type { Copy } from "./pt";
 import {
+  BACKUP_DOCS_URL,
   DOCS_MOBILE_URL,
   DOCS_REMOTE_URL,
   INSTALL_URL,
+  INSTALL_ZIP_URL,
+  PORTABLE_DOCS_URL,
+  PORTABLE_ZIP_URL,
   RELEASES_URL,
+  REPO_URL,
 } from "./utils";
 
 export const lang = "es";
@@ -174,21 +179,105 @@ export const t: Copy = {
     releasesLink: "Instalador para Windows (Releases)",
   },
   docs: {
-    title: "Instalación y acceso",
+    title: "Guía completa",
     subtitle:
-      "Del PC de la tienda al móvil — simple, aunque no seas técnico.",
+      "Instalación, uso diario, copias de seguridad y resolución de problemas — paso a paso, sin necesidad de saber de tecnología.",
     sections: [
       {
-        heading: "Instalar (una vez, ~10 minutos)",
+        heading: "Dos formas de instalar",
         paragraphs: [
-          "En Windows es doble clic: descarga el instalador ZIP, extráelo y ejecuta INSTALAR.bat — instala Docker si falta, genera las contraseñas y arranca todo solo. En el día a día usa INICIAR.bat / PARAR.bat.",
-          "En Linux, Mac o desde el código fuente, bastan cuatro comandos:",
+          "OficinaOS es siempre el mismo programa — la diferencia está en cómo se ejecuta en el PC de la tienda. El instalador elige el camino correcto solo, pero conviene entender los dos:",
+          "Docker es la forma normal y recomendada: un programa gratuito que empaqueta la app y la base de datos en «contenedores» aislados. Necesita una función del procesador llamada virtualización — la mayoría de los PCs la tienen, pero algunos la traen desactivada en la BIOS o no la soportan.",
+          "El modo portátil existe para esos PCs: trae todo en un único paquete (la app, la base de datos PostgreSQL y el runtime), sin Docker, sin virtualización y sin servicios de Windows.",
+        ],
+        table: {
+          head: ["", "Docker (recomendado)", "Portátil (alternativa)"],
+          rows: [
+            ["Cuándo usarlo", "Siempre que sea posible", "PCs sin virtualización (VT-x/SVM)"],
+            ["Requisitos", "Docker Desktop + virtualización en BIOS", "Cualquier Windows 10/11 64-bit"],
+            ["Descarga", "~1 GB (Docker + app)", "~540 MB (todo incluido)"],
+            ["Arranque con el PC", "Automático", "Automático (opcional, se pregunta la 1ª vez)"],
+            ["Si la app falla", "Se reinicia sola", "Se reinicia sola (wrapper)"],
+            ["Copias de seguridad", "Diarias, automáticas (cada 24h)", "En cada arranque + BACKUP.bat manual"],
+            ["Copias fuera del PC", "Soportado (rclone → S3/B2/GCS)", "Manual — copiar la carpeta de backups"],
+            ["Actualizaciones", "Solo descarga lo que cambió; automático opcional", "Descarga el paquete entero; siempre manual"],
+            ["Acceso remoto (HTTPS)", "Cloudflare Tunnel incluido", "Cloudflare Tunnel instalado aparte"],
+          ],
+        },
+        links: [
+          { label: "Guía de instalación", href: INSTALL_URL },
+          { label: "Documentación del modo portátil", href: PORTABLE_DOCS_URL },
+        ],
+      },
+      {
+        heading: "Instalación normal — Docker (una vez, ~10 minutos)",
+        paragraphs: [
+          "Descarga el instalador ZIP, extráelo en una carpeta (ej.: C:\\OficinaOS) y haz doble clic en INSTALAR.bat. Si Windows Defender SmartScreen avisa: «Más información» → «Ejecutar de todas formas».",
+          "El instalador lo hace todo: comprueba si el PC puede ejecutar Docker, instala Docker Desktop si falta, genera las contraseñas y secretos, descarga la app y la arranca. Si pide reiniciar, reinicia y ejecuta INSTALAR.bat otra vez.",
+          "Al final el navegador se abre en http://localhost:4000. Primer acceso: usuario admin, contraseña braindead — la app obliga a cambiar ambos.",
+          "En Linux o Mac no hay instalador automático — se usa Docker directamente:",
         ],
         code: "git clone https://github.com/braindeadpt/OficinaOS.git\ncd OficinaOS && cp .env.example .env\ndocker compose up -d\ndocker compose exec app bun run db:seed",
         links: [
           { label: "Guía de instalación completa", href: INSTALL_URL },
-          { label: "Instalador para Windows", href: RELEASES_URL },
+          { label: "Descargar instalador (oficinaos-install.zip)", href: INSTALL_ZIP_URL },
         ],
+      },
+      {
+        heading: "El error «virtualization support not detected»",
+        paragraphs: [
+          "Si el PC no puede ejecutar Docker, el instalador lo detecta antes de intentarlo y ofrece dos opciones:",
+        ],
+        list: [
+          "Activarlo en la BIOS — reiniciar, pulsar F2/F10/DEL/ESC al arrancar, buscar «Intel VT-x», «Virtualization Technology» o «SVM Mode», activar y guardar (F10). Después funciona el camino Docker normal.",
+          "Instalación portátil — el instalador descarga oficinaos-portable.zip (~540 MB) y arranca sin Docker: la misma app, la misma base de datos, las mismas funciones.",
+        ],
+        links: [
+          { label: "Descargar paquete portátil", href: PORTABLE_ZIP_URL },
+          { label: "Cómo funciona el modo portátil por dentro", href: PORTABLE_DOCS_URL },
+        ],
+      },
+      {
+        heading: "Día a día — encender, apagar, archivos",
+        paragraphs: [
+          "Una vez instalado, el día a día es doble clic en un archivo. Los nombres son iguales en los dos modos — solo cambia la carpeta donde están:",
+        ],
+        table: {
+          head: ["Archivo", "Para qué"],
+          rows: [
+            ["INICIAR.bat", "Encender OficinaOS — abre el navegador al final"],
+            ["PARAR.bat", "Apagar — los datos quedan guardados"],
+            ["ATUALIZAR.bat", "Actualizar a la versión más reciente"],
+            ["BACKUP.bat", "(solo portátil) Copia de seguridad manual"],
+            ["RESTAURAR.bat", "(solo portátil) Restaurar la base de datos desde una copia"],
+          ],
+        },
+        list: [
+          "Modo Docker: en la carpeta donde extrajiste el instalador.",
+          "Modo portátil: dentro de la carpeta oficinaos-portable — los datos viven en data\\, las copias en app\\uploads\\backups.",
+          "Otros dispositivos de la tienda (tablet, móvil, otro PC) no instalan nada — abren http://<IP-del-PC>:4000 en el navegador.",
+        ],
+        links: [],
+      },
+      {
+        heading: "Copias de seguridad y restauración",
+        paragraphs: [
+          "Las copias son archivos comprimidos (.sql.gz) con toda la base de datos. La app muestra el estado de la última copia en Ajustes → Tienda → Copias de seguridad — funciona igual en los dos modos.",
+          "En modo Docker un servicio dedicado hace una copia cada 24 horas, guarda 14 días, y opcionalmente copia a almacenamiento externo (S3, Backblaze, etc.) y prueba la restauración automáticamente.",
+          "En modo portátil la copia se hace en cada arranque y con BACKUP.bat. Restaurar se hace con RESTAURAR.bat (elige un archivo de backups). Como no hay copia fuera del PC automática, copia la carpeta app\\uploads\\backups a un disco externo o USB — las copias en el mismo disco no protegen contra avería, robo o ransomware.",
+        ],
+        links: [
+          { label: "Copias y restauración (Docker)", href: BACKUP_DOCS_URL },
+          { label: "Copias en modo portátil", href: PORTABLE_DOCS_URL },
+        ],
+      },
+      {
+        heading: "Actualizaciones",
+        paragraphs: [
+          "La app avisa arriba cuando hay una versión nueva. Para actualizar basta doble clic en ATUALIZAR.bat — hace copia, descarga la versión nueva y reinicia. Las migraciones de la base de datos corren solas.",
+          "Diferencia práctica: en Docker solo se descarga lo que cambió; en portátil se descarga el paquete entero (~540 MB). En Docker puedes activar actualizaciones 100% automáticas (Watchtower).",
+        ],
+        links: [{ label: "Todas las releases", href: RELEASES_URL }],
       },
       {
         heading: "En la tienda — móviles, tablets y PCs",
@@ -234,6 +323,41 @@ export const t: Copy = {
           "Quien quiera una barrera extra puede activar Cloudflare Access (gratis): email + código antes del login, manteniendo abiertas las páginas públicas de los clientes.",
         ],
         links: [],
+      },
+      {
+        heading: "Problemas comunes",
+        paragraphs: [
+          "Las situaciones más frecuentes y cómo resolver cada una:",
+        ],
+        table: {
+          head: ["Síntoma", "Qué hacer"],
+          rows: [
+            ["SmartScreen avisa al instalar", "«Más información» → «Ejecutar de todas formas» — es un archivo nuevo sin reputación, no un virus"],
+            ["«Virtualization support not detected»", "El instalador ofrece las dos opciones: activar en BIOS o usar el modo portátil"],
+            ["Windows pide reiniciar durante la instalación", "Reiniciar y ejecutar INSTALAR.bat otra vez — es normal al instalar Docker"],
+            ["El firewall de Windows pregunta", "Elegir «Permitir» en red privada"],
+            ["Página en blanco / no abre", "Ctrl+F5; comprobar que la dirección es http:// (no https://)"],
+            ["«Invalid username or password»", "El acceso es por usuario (admin), no por email"],
+            ["El PC cambió de IP y los demás dispositivos no conectan", "Actualizar APP_URL en .env (Docker) o borrar .env y ejecutar INSTALAR.bat de nuevo"],
+            ["Puerto 4000 ocupado (portátil)", "Cambiar PORT en app\\.env"],
+            ["Postgres no arranca (portátil)", "Ver data\\postgres.log; puerto 5433 ocupado → cambiarlo en data\\postgresql.conf y en .env"],
+            ["Desinstalar todo", "PARAR.bat + borrar la carpeta (portátil); docker compose down -v + borrar la carpeta (Docker). Ojo: borra la base de datos — hacer copia antes"],
+          ],
+        },
+        links: [{ label: "Resolución de problemas completa", href: INSTALL_URL }],
+      },
+      {
+        heading: "Documentación completa",
+        paragraphs: [
+          "Esta guía cubre lo esencial. El repositorio en GitHub tiene la documentación técnica completa — instalación detallada, acceso remoto, móviles, copias con réplica externa y el funcionamiento interno del paquete portátil:",
+        ],
+        links: [
+          { label: "Guía de instalación (INSTALL.md)", href: INSTALL_URL },
+          { label: "Modo portátil — internals", href: PORTABLE_DOCS_URL },
+          { label: "Acceso remoto (Cloudflare Tunnel)", href: DOCS_REMOTE_URL },
+          { label: "Móviles y tablets", href: DOCS_MOBILE_URL },
+          { label: "Repositorio en GitHub", href: REPO_URL },
+        ],
       },
     ],
   },

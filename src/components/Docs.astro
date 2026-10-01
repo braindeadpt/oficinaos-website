@@ -37,6 +37,32 @@ const { t, locale } = Astro.props;
               ))}
             </ul>
           )}
+          {s.table && (
+            <div class="mt-4 overflow-x-auto rounded-xl border border-zinc-800">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-zinc-800 bg-zinc-900/60">
+                    {s.table.head.map((h) => (
+                      <th class="px-4 py-2.5 text-left font-medium text-zinc-200">
+                        {h}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {s.table.rows.map((row) => (
+                    <tr class="border-b border-zinc-800/60 last:border-0">
+                      {row.map((cell) => (
+                        <td class="px-4 py-2.5 leading-relaxed text-zinc-400">
+                          {cell}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
           {s.code && (
             <pre class="mt-4 overflow-x-auto rounded-xl border border-zinc-800 bg-zinc-900 p-5 font-mono text-sm leading-relaxed text-zinc-300">
               <code>{s.code}</code>
