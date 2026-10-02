@@ -23,6 +23,7 @@ export const t: Copy = {
   },
   nav: {
     features: "Features",
+    diag: "Diagnostics",
     pro: "Pro modules",
     install: "Install",
     docs: "Guide",
@@ -116,6 +117,27 @@ export const t: Copy = {
       noteGithub:
         "Follow the repo on GitHub — Pro module launches are announced as releases.",
     },
+  },
+  diag: {
+    badge: "Free tool",
+    title: "OficinaOS Diag — cable diagnostics",
+    subtitle:
+      "Free Windows app that reads any Android or iPhone over USB: battery health, screen, sensors and storage.",
+    customerTitle: "I'm a customer",
+    customerItems: [
+      "Download, plug in your phone and check battery, screen and sensors — no account, no install.",
+      "Test the screen and touch on the phone itself (colors and touch grid).",
+      "Export the report as HTML/JSON — or send it to your repair shop with the code they gave you.",
+    ],
+    shopTitle: "I run a repair shop",
+    shopItems: [
+      "Customers run the tool at home for free — and send the diagnostic with your shop code.",
+      "The report lands in the app as a pre-check (Requests), ready to convert into a job — Pro module.",
+      "With AI reports, the same diagnostic produces a plain-language summary to hand to the customer.",
+    ],
+    cta: "Download for Windows",
+    repoLink: "Source on GitHub",
+    note: "Windows 10/11 · free · no account. Android via USB debugging; iPhone via \"Trust this computer\".",
   },
   privacy: {
     badge: "GDPR",

@@ -1,6 +1,7 @@
 ---
 import type { Copy } from "../i18n/pt";
 import type { Locale } from "../i18n/utils";
+import Diag from "./Diag.astro";
 import Features from "./Features.astro";
 import Footer from "./Footer.astro";
 import Hero from "./Hero.astro";
@@ -22,6 +23,7 @@ const { t, locale } = Astro.props;
   <Hero t={t} />
   <Features t={t} />
   <Screenshots t={t} />
+  <Diag t={t} />
   <Pro t={t} />
   <Privacy t={t} />
   <Install t={t} />

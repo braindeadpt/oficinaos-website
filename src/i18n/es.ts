@@ -23,6 +23,7 @@ export const t: Copy = {
   },
   nav: {
     features: "Funcionalidades",
+    diag: "Diagnóstico",
     pro: "Módulos Pro",
     install: "Instalar",
     docs: "Guía",
@@ -116,6 +117,27 @@ export const t: Copy = {
       noteGithub:
         "Sigue el repositorio en GitHub — los lanzamientos de módulos Pro se anuncian en releases.",
     },
+  },
+  diag: {
+    badge: "Herramienta gratuita",
+    title: "OficinaOS Diag — diagnóstico por cable",
+    subtitle:
+      "App Windows gratuita que lee cualquier Android o iPhone por USB: salud de batería, pantalla, sensores y almacenamiento.",
+    customerTitle: "Soy cliente",
+    customerItems: [
+      "Descarga, conecta el móvil por cable y ve batería, pantalla y sensores — sin cuenta ni instalación.",
+      "Prueba la pantalla y el táctil en el propio móvil (colores y rejilla).",
+      "Exporta el informe en HTML/JSON — o envíalo a tu taller con el código que te dieron.",
+    ],
+    shopTitle: "Tengo un taller",
+    shopItems: [
+      "El cliente usa la herramienta en casa, gratis — y envía el diagnóstico con el código de tu tienda.",
+      "El informe llega a la app como pre-check (Pedidos), listo para convertir en reparación — módulo Pro.",
+      "Con informes IA, el mismo diagnóstico genera un texto en lenguaje sencillo para el cliente.",
+    ],
+    cta: "Descargar para Windows",
+    repoLink: "Código fuente en GitHub",
+    note: "Windows 10/11 · gratis · sin cuenta. Android vía depuración USB; iPhone vía «Confiar en este ordenador».",
   },
   privacy: {
     badge: "RGPD",
