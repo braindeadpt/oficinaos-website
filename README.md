@@ -4,6 +4,13 @@ Marketing site for **[OficinaOS](https://github.com/braindeadpt/OficinaOS)** —
 
 Static site built with [Astro](https://astro.build) + Tailwind CSS v4.
 
+> **Ecosystem:** this is 1 of 4 repos (shop app `reparilo`, `oficinaos-cloud`,
+> this website, `oficinaos-diag`). The canonical map — data flows, module IDs,
+> where each thing lives — is
+> [`reparilo/docs/ecosystem.md`](https://github.com/braindeadpt/OficinaOS/blob/main/docs/ecosystem.md).
+> **This site is the user-facing documentation** — `/docs` + `/docs/{portal,whatsapp,diag}`
+> in pt/en/es — repo `.md` files are technical reference only.
+
 Locales: `pt` (default, served at `/`), `en` (`/en/`), `es` (`/es/`).
 
 ## Commands
