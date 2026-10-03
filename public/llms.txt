@@ -1,0 +1,42 @@
+# OficinaOS
+
+> Free, MIT-licensed, self-hosted management system for phone repair shops.
+> Runs on a PC inside the shop over the LAN — customer data never leaves by
+> default. Optional paid "Pro" modules (gated server-side via OficinaOS Cloud,
+> no license files) add a public customer portal, a WhatsApp bot, remote
+> diagnostics intake and AI reports. Documentation in Portuguese (default),
+> English and Spanish.
+
+## Documentation
+
+- [Full guide (PT)](https://oficinaos.app/docs/): install (Docker/portable), daily use, backups, remote access, Pro modules, pricing, FAQ
+- [Full guide (EN)](https://oficinaos.app/en/docs/): same guide in English
+- [Full guide (ES)](https://oficinaos.app/es/docs/): same guide in Spanish
+
+## Pro module guides
+
+- [Customer portal (PT)](https://oficinaos.app/docs/portal/): public per-repair link, quote accept/decline, privacy model
+- [Customer portal (EN)](https://oficinaos.app/en/docs/portal/)
+- [Customer portal (ES)](https://oficinaos.app/es/docs/portal/)
+- [WhatsApp bot (PT)](https://oficinaos.app/docs/whatsapp/): commands, Meta requirements, setup, limits
+- [WhatsApp bot (EN)](https://oficinaos.app/en/docs/whatsapp/)
+- [WhatsApp bot (ES)](https://oficinaos.app/es/docs/whatsapp/)
+- [OficinaOS Diag (PT)](https://oficinaos.app/docs/diag/): free Windows USB diagnostic tool — features, requirements, troubleshooting
+- [OficinaOS Diag (EN)](https://oficinaos.app/en/docs/diag/)
+- [OficinaOS Diag (ES)](https://oficinaos.app/es/docs/diag/)
+
+## Customer-facing agent interfaces
+
+- [Customer portal JSON](https://cloud.oficinaos.app/api/portal/): per-repair JSON at `/api/portal/<token>` — the 16-hex token in the tracking URL is the credential; quote replies via POST `…/reply` `{kind:"quote",decision:"approve"|"reject",quoteId}`
+
+## Repositories
+
+- [OficinaOS app](https://github.com/braindeadpt/OficinaOS): the shop app (MIT)
+- [oficinaos-cloud](https://github.com/braindeadpt/oficinaos-cloud): pairing, entitlements, webhook/queue relays
+- [oficinaos-diag](https://github.com/braindeadpt/oficinaos-diag): Windows diagnostic tool (MIT)
+- [oficinaos-website](https://github.com/braindeadpt/oficinaos-website): this site
+- [Ecosystem map](https://github.com/braindeadpt/OficinaOS/blob/main/docs/ecosystem.md): how the 4 repos interconnect
+
+## Optional
+
+- [Privacy policy](https://cloud.oficinaos.app/privacy): what the Cloud relays for Pro modules

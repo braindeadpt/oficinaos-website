@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
 
+# LLM/agent documentation index
+# https://oficinaos.app/llms.txt
+
 Sitemap: https://oficinaos.app/sitemap-index.xml
