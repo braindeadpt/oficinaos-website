@@ -1,0 +1,100 @@
+---
+import type { DocsSection } from "../i18n/pt";
+import { slugify } from "../i18n/utils";
+import Icon from "./Icon.astro";
+
+interface Props {
+  sections: DocsSection[];
+}
+const { sections } = Astro.props;
+---
+
+<div class="space-y-14">
+  {
+    sections.map((s) => (
+      <section id={slugify(s.heading)}>
+        <h2 class="text-xl font-semibold text-white">{s.heading}</h2>
+        {s.paragraphs.map((p) => (
+          <p class="mt-4 leading-relaxed text-zinc-400">{p}</p>
+        ))}
+        {s.list && (
+          <ul class="mt-4 space-y-2.5">
+            {s.list.map((item) => (
+              <li class="flex gap-3 text-sm leading-relaxed text-zinc-400">
+                <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-500" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+        {s.table && (
+          <div class="mt-4 overflow-x-auto rounded-xl border border-zinc-800">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-zinc-800 bg-zinc-900/60">
+                  {s.table.head.map((h) => (
+                    <th class="px-4 py-2.5 text-left font-medium text-zinc-200">
+                      {h}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {s.table.rows.map((row) => (
+                  <tr class="border-b border-zinc-800/60 last:border-0">
+                    {row.map((cell) => (
+                      <td class="px-4 py-2.5 leading-relaxed text-zinc-400">
+                        {cell}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+        {s.code && (
+          <pre class="mt-4 overflow-x-auto rounded-xl border border-zinc-800 bg-zinc-900 p-5 font-mono text-sm leading-relaxed text-zinc-300">
+            <code>{s.code}</code>
+          </pre>
+        )}
+        {s.images && s.images.length > 0 && (
+          <div class="mt-6 grid gap-4 sm:grid-cols-2">
+            {s.images.map((img) => (
+              <figure class="overflow-hidden rounded-xl border border-zinc-800">
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  loading="lazy"
+                  class="w-full"
+                />
+                {img.caption && (
+                  <figcaption class="px-4 py-2.5 text-xs text-zinc-500">
+                    {img.caption}
+                  </figcaption>
+                )}
+              </figure>
+            ))}
+          </div>
+        )}
+        {s.links && s.links.length > 0 && (
+          <div class="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-sm">
+            {s.links.map((l) => (
+              <a
+                href={l.href}
+                target={l.href.startsWith("#") || l.href.startsWith("/") ? undefined : "_blank"}
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1.5 font-medium text-teal-400 transition hover:text-teal-300"
+              >
+                {l.label}
+                {!l.href.startsWith("#") && !l.href.startsWith("/") && (
+                  <Icon name="external" class="h-3.5 w-3.5" />
+                )}
+              </a>
+            ))}
+          </div>
+        )}
+      </section>
+    ))
+  }
+</div>

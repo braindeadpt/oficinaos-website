@@ -1,6 +1,8 @@
 import type { Copy } from "./pt";
 import {
   BACKUP_DOCS_URL,
+  DIAG_REPO_URL,
+  DIAG_ZIP_URL,
   DOCS_MOBILE_URL,
   DOCS_REMOTE_URL,
   INSTALL_URL,
@@ -204,6 +206,8 @@ export const t: Copy = {
     title: "Full guide",
     subtitle:
       "Install, daily use, backups and troubleshooting — step by step, no technical background needed.",
+    toc: "In this guide",
+    backToGuide: "Full guide",
     sections: [
       {
         heading: "What's in the app (free, MIT)",
@@ -211,19 +215,42 @@ export const t: Copy = {
           "Everything a repair shop uses day to day, with no subscription or limits:",
         ],
         table: {
-          head: ["Area", "What's included"],
+          head: ["Menu", "What's included"],
           rows: [
-            ["Repairs", "Job card with unique code, statuses (received → ready → delivered), timeline, internal and customer-visible notes, photos and due date"],
-            ["Quotes", "Versioned quotes sent to the customer, approve/decline responses with receipt, full history"],
-            ["Customers & devices", "Records with repair history, search by name/phone/IMEI, consents"],
-            ["Stock & parts", "Inventory, low-stock alerts, parts linked to repairs"],
-            ["Till", "Payments, cash sessions, movements and closing"],
-            ["Notifications", "WhatsApp/SMS messages to customers from editable templates, with send queue and log"],
+            ["Dashboard", "The day at a glance — open repairs, priorities and alerts (different view for owner, technician and front desk)"],
+            ["Repairs", "Job cards with unique code (REP-…), statuses (intake → done → delivered), timeline, internal and customer-visible notes, photos and due date"],
+            ["Requests", "Intake queue — customer-sent requests and diagnostics, ready to convert into a job"],
+            ["Returns", "Return handling linked to sales and repairs"],
+            ["Customers", "Records with repair history, search by name/phone/IMEI, consents"],
+            ["Parts inventory", "Stock, low-stock alerts, suppliers, parts linked to repairs"],
+            ["Counter POS", "Sell parts and accessories, cash sessions, receipts and payment records"],
+            ["Repair services", "Repair catalog with prices — the shop's price list"],
+            ["Quotes", "Versioned quotes sent to the customer, approve/decline responses with dated record, full history"],
+            ["Notifications", "In-app alerts, editable message templates and WhatsApp/SMS send queue"],
+            ["Reports", "Sales, repairs and margins per period — with an A4 print page"],
+            ["AI analyst", "Questions about the shop's data in plain language"],
             ["Customer tracking", "Public page on the shop's network for customers to follow their repair — free on LAN"],
             ["Users", "Multiple staff members with roles and per-function permissions"],
-            ["Languages", "Portuguese, English and French"],
+            ["Languages", "Portuguese, English, French and Spanish"],
           ],
         },
+        images: [
+          {
+            src: "/screenshots/dashboard.png",
+            alt: "OficinaOS repair dashboard",
+            caption: "The dashboard — the day's repairs at a glance",
+          },
+          {
+            src: "/screenshots/job-detail.png",
+            alt: "Repair job card with statuses, quote and timeline",
+            caption: "The job card — statuses, quote and full timeline",
+          },
+          {
+            src: "/screenshots/tracking.png",
+            alt: "Customer tracking page on a phone",
+            caption: "The tracking page the customer opens on their phone",
+          },
+        ],
         links: [],
       },
       {
@@ -384,13 +411,35 @@ export const t: Copy = {
         links: [],
       },
       {
+        heading: "Pricing",
+        paragraphs: [
+          "The full app is free and open source (MIT) — no limits, no accounts, no trial period. Forever.",
+          "Pro modules are in beta: during this period, pilot shops use them for free while we measure the real value they bring to the counter. When prices are announced they'll be simple monthly subscriptions — no lock-in, no hidden costs.",
+          "* WhatsApp note: replying to customers within the 24-hour window is free. Proactive notifications («it's ready») outside that window need Meta-approved templates, which carry small per-message fees — Meta's cost, not ours.",
+        ],
+        table: {
+          head: ["What", "Status", "Price"],
+          rows: [
+            ["Full app (core)", "Free forever", "€0"],
+            ["OficinaOS Diag (tool)", "Free forever", "€0"],
+            ["Customer portal", "Available (beta)", "TBA — free during beta"],
+            ["WhatsApp bot", "Available (beta)", "TBA — free during beta*"],
+            ["Diagnostics intake", "Available (beta)", "TBA — free during beta"],
+            ["AI reports", "Available (beta)", "TBA — per report"],
+          ],
+        },
+        links: [],
+      },
+      {
         heading: "Customer portal (Pro)",
         paragraphs: [
           "With the module active, every repair gets a «Public link» button on its detail page. Clicking it publishes a redacted snapshot to the Cloud — status, device, quote, due date and timeline — and copies the link.",
           "The link is a per-job secret (a random 16-character code): whoever has it sees the page. Send it to the customer by SMS, WhatsApp or print it on the intake slip. The page updates itself when the status changes in the app.",
           "If a quote is pending, the customer accepts or declines it right on the page — the answer flows into the app through the normal quote flow, with a staff notification.",
         ],
-        links: [],
+        links: [
+          { label: "Detailed portal guide", href: "/en/docs/portal" },
+        ],
       },
       {
         heading: "WhatsApp bot (Pro)",
@@ -409,7 +458,9 @@ export const t: Copy = {
             ["«help», audio or image", "Escalates to staff with an in-app alert"],
           ],
         },
-        links: [],
+        links: [
+          { label: "Detailed bot guide", href: "/en/docs/whatsapp" },
+        ],
       },
       {
         heading: "Customer-sent diagnostics (Pro)",
@@ -417,7 +468,10 @@ export const t: Copy = {
           "The oficinaos-diag tool is free for anyone: the customer downloads it, plugs the phone into a PC and it reads battery, screen, sensors and storage.",
           "With the module active, the shop receives those diagnostics right in the app (intake queue), ready to convert into a repair — the customer only needs the shop's code. The AI reports module turns the technical data into plain-language text to hand to the customer.",
         ],
-        links: [{ label: "About oficinaos-diag", href: REPO_URL }],
+        links: [
+          { label: "Full Diag guide", href: "/en/docs/diag" },
+          { label: "About oficinaos-diag", href: DIAG_REPO_URL },
+        ],
       },
       {
         heading: "Common problems",
@@ -472,6 +526,263 @@ export const t: Copy = {
         ],
       },
     ],
+  },
+  moduleDocs: {
+    portal: {
+      title: "Customer portal",
+      subtitle:
+        "A public link per repair — the customer sees live status and answers quotes without calling the shop.",
+      sections: [
+        {
+          heading: "What the customer sees",
+          paragraphs: [
+            "Publishing a repair creates a public page on OficinaOS Cloud with a redacted summary of the job. The page updates itself whenever the status changes in the app — the customer opens the link on their phone and always sees the latest version.",
+            "What the page shows:",
+          ],
+          list: [
+            "Current repair status in plain language",
+            "Device and expected completion date",
+            "Timeline of events (received, in repair, ready…)",
+            "Pending quote with «Accept» and «Decline» buttons",
+          ],
+          links: [],
+        },
+        {
+          heading: "What never leaves the shop",
+          paragraphs: [
+            "The portal publishes a redacted snapshot — only what the customer needs to see. Never on the portal: internal costs and margins, staff-only notes, other customers' data, team contact details, or history of other repairs.",
+            "The link is a per-repair secret (a random 16-character code): whoever has it sees the page — so send it only to that repair's customer. Removing the link on the job card deletes the public page.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Enabling the module (once)",
+          paragraphs: [
+            "The portal needs OficinaOS Cloud — the service that bridges the shop's app to the internet without exposing the shop PC.",
+          ],
+          list: [
+            "Create an OficinaOS Cloud account (cloud.oficinaos.app) — or get a pairing code from our team",
+            "In the app: Settings → Cloud tab → paste the pairing code → «Connect»",
+            "The portal module is switched on in the Cloud account (during beta, by us); the app syncs by itself",
+            "From then on, every job card gets a «Public link» button",
+          ],
+          links: [],
+        },
+        {
+          heading: "Day to day — publish and share",
+          paragraphs: [
+            "On the job card, the «Public link» button publishes the snapshot and copies the link. Send it to the customer by SMS, WhatsApp or printed on the intake slip — done.",
+            "When the status changes in the app, the next sync (up to ~2 minutes) updates the page. The «Remove public link» button deletes the page when it's no longer needed.",
+            "If a quote is pending, the customer answers on the page itself: «Accept» or «Decline» flows into the app through the normal quote flow — dated record and staff notification, exactly like an answer at the counter.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Honest limits",
+          list: [
+            "Up to ~2 minutes between a status change and the page updating (sync cycle)",
+            "Needs internet at the shop — offline, the page freezes at the last published state",
+            "The link is the only access control: if the customer forwards it, others see that repair (nothing more)",
+            "Without the module, LAN tracking keeps working for free — the portal only adds outside access",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+      ],
+    },
+    whatsapp: {
+      title: "WhatsApp bot",
+      subtitle:
+        "Customers text the shop's WhatsApp and get the real repair status back — including approving quotes with «YES».",
+      sections: [
+        {
+          heading: "What the bot answers",
+          paragraphs: [
+            "The bot identifies the customer by phone number and the repair by context. Every message is independent — no login, no menus:",
+          ],
+          table: {
+            head: ["Customer writes", "Bot replies"],
+            rows: [
+              ["«is it ready?» or any text", "Repair status + expected date"],
+              ["«quote» / «price» / «how much»", "Pending quote amount + how to answer"],
+              ["YES / accept / ok", "Approves the pending quote — same flow as the counter"],
+              ["NO / decline", "Declines the quote"],
+              ["Repair code (REP-…)", "Status of that specific job"],
+              ["«help» / «human», audio or image", "Escalates to staff — with an in-app notification"],
+              ["Number with no record", "Friendly reply with the shop's contacts"],
+            ],
+          },
+          links: [],
+        },
+        {
+          heading: "How it picks the answer",
+          paragraphs: [
+            "The bot finds the customer record by the last 9 digits of the phone number — robust to +351 prefixes, spaces and different formats. With one active repair, context is obvious and it answers directly; with several, it lists the codes for the customer to pick.",
+            "«Active repair» means everything not yet delivered, returned or cancelled — including jobs ready for pickup, which are exactly the ones generating «is it ready?» messages.",
+            "What the bot can't solve escalates to people: «help», «human», audio, images and off-pattern questions create an in-app notification with the customer's text — the team replies manually.",
+          ],
+          links: [],
+        },
+        {
+          heading: "What's needed (Meta)",
+          paragraphs: [
+            "The module uses Meta's official WhatsApp Business Platform — no workarounds, no ban risk for the shop's number. Requirements:",
+          ],
+          list: [
+            "A Meta app (developers.facebook.com) with the WhatsApp product — our OficinaOS app already exists and is published",
+            "The shop's number on WhatsApp Business — coexistence keeps the phone app working while the API connects in parallel",
+            "A permanent system-user token with whatsapp_business_messaging + whatsapp_business_management permissions",
+            "The webhook pointed at OficinaOS Cloud — already configured on our side",
+          ],
+          links: [],
+        },
+        {
+          heading: "Setup in the app (per shop)",
+          paragraphs: [
+            "After Meta onboarding (we assist the first shop), the app-side setup is 4 fields:",
+          ],
+          list: [
+            "Menu → Notifications → Setup → WhatsApp section",
+            "Business ID + Phone Number ID — provided during onboarding",
+            "API Token — the permanent system-user token (the app stores it encrypted)",
+            "Enable — the app registers the phone_number_id with the Cloud by itself and the bot goes live",
+          ],
+          links: [],
+        },
+        {
+          heading: "Honest limits",
+          list: [
+            "Replies can take up to ~2 minutes (sync cycle) — not instant",
+            "Replying to customers is free; starting conversations («your repair is ready») needs Meta-approved templates with per-message fees",
+            "Flood control: max 20 messages/hour per number — spam protection",
+            "Audio and images aren't interpreted — they go to a human",
+            "In test mode only Meta-verified numbers get replies — in production there's no such limit",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+        {
+          heading: "If the bot goes quiet",
+          table: {
+            head: ["Symptom", "What to check"],
+            rows: [
+              ["Customer gets no reply", "Is the Meta token still valid? (temporary tokens expire in 24h — use a system-user token)"],
+              ["Message never reaches the app", "Is the whatsapp-bot module active in the Cloud? Correct phone_number_id in settings?"],
+              ["Bot replies but Meta blocks", "In test mode, is the recipient verified? In production, it's the 24h window"],
+              ["«YES» does nothing", "Is there a sent, pending quote on that job? (the bot only acts on unanswered quotes)"],
+              ["Right quote, wrong reply", "Does the customer record's phone share the same last 9 digits?"],
+            ],
+          },
+          paragraphs: [],
+          links: [],
+        },
+      ],
+    },
+    diag: {
+      title: "OficinaOS Diag",
+      subtitle:
+        "The free Windows tool that reads any Android or iPhone over USB — local scans are always free; send-to-shop and AI reports are Pro modules.",
+      sections: [
+        {
+          heading: "Download and run",
+          paragraphs: [
+            "A portable Windows app with a retro terminal look: download the zip, extract the whole folder (the exe needs the files next to it) and run OficinaDiag.exe. No account, no install, no subscription.",
+            "Windows may show a SmartScreen warning on first run — normal for a new program without a signing certificate: «More info» → «Run anyway».",
+          ],
+          links: [
+            { label: "Download oficinaos-diag (Windows)", href: DIAG_ZIP_URL },
+            { label: "Source code on GitHub", href: DIAG_REPO_URL },
+          ],
+        },
+        {
+          heading: "What the scan reads — free",
+          paragraphs: [
+            "Plug the phone in over USB and the scan runs 100% on the PC — nothing is sent anywhere:",
+          ],
+          table: {
+            head: ["Data", "Android", "iPhone/iPad"],
+            rows: [
+              ["Model, serial number, OS version", "✓", "✓"],
+              ["Battery — level, temperature, cycles", "✓", "✓"],
+              ["Battery — real vs design capacity", "where the manufacturer exposes it", "✓"],
+              ["Storage and RAM", "✓", "✓"],
+              ["Sensors", "✓", "✓"],
+              ["Root / unlocked bootloader", "✓", "—"],
+              ["Activation / carrier status", "—", "✓"],
+            ],
+          },
+          links: [],
+        },
+        {
+          heading: "Screen & touch test on the phone",
+          paragraphs: [
+            "The app serves a test page on the local network: on Android it opens by itself via adb, on iPhone you scan a QR code. The customer runs the color tests and the touch grid on the phone itself.",
+            "Results come back to the PC — dead pixels and dead touch zones are recorded in the report. It's the objective screen test that used to be done «by eye».",
+          ],
+          links: [],
+        },
+        {
+          heading: "Export and history",
+          paragraphs: [
+            "Every scan can be exported as an HTML report (retro look, printable → PDF to hand to the customer) and as raw JSON with all data.",
+            "History stays on the PC (%APPDATA%\\OficinaDiag) — compare a device's battery health over time, useful for warranties and used-device grading.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Requirements per platform",
+          table: {
+            head: ["", "Android", "iPhone/iPad"],
+            rows: [
+              ["On the phone", "Enable «USB debugging» in developer options", "Accept «Trust this computer»"],
+              ["On the PC", "Nothing — adb is bundled", "Apple USB driver (iTunes or «Apple Devices» app)"],
+              ["Extra", "A data cable (not charge-only)", "Close the Windows Photos app before scanning"],
+            ],
+          },
+          paragraphs: [],
+          links: [],
+        },
+        {
+          heading: "Send to shop — diag-intake module",
+          paragraphs: [
+            "The customer runs the scan at home, enters the shop code and the diagnostic travels to OficinaOS Cloud, where the shop's app picks it up. In the shop it appears as a request in the Requests queue — a pre-check ready to convert into a repair.",
+            "Use cases: pre-diagnosis before the customer visits, evaluating used devices for buy/sell, and grading with objective data (battery cycles, screen, sensors).",
+          ],
+          links: [],
+        },
+        {
+          heading: "AI report — ai-reports module",
+          paragraphs: [
+            "With the module active, the raw technical scan data turns into a plain-language report for the customer — «the battery is at 78% of original capacity, replacement recommended».",
+            "Generation runs on OficinaOS Cloud with the server key — nothing runs on the customer's PC and the data isn't used to train models.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Privacy",
+          paragraphs: [
+            "Scans are 100% local by default — nothing leaves the PC unless the user chooses «Send to shop» or «AI report». The destination is always the OficinaOS server, never third parties.",
+            "For troubleshooting, the «Send log» button sends the tail of the diag.log file (app technical lines only) for analysis — also opt-in, nothing automatic.",
+          ],
+          links: [],
+        },
+        {
+          heading: "If the phone isn't detected",
+          table: {
+            head: ["Symptom", "What to check"],
+            rows: [
+              ["Nothing happens when plugging in", "Is it a data cable? (charge-only cables won't work) — try another USB port"],
+              ["Android doesn't show up", "«USB debugging» enabled in developer options? Authorization prompt accepted on the phone?"],
+              ["iPhone doesn't show up", "«Trust this computer» accepted? Apple driver installed (iTunes/Apple Devices)? Photos app closed?"],
+              ["Scan fails halfway", "Keep the phone's screen unlocked and awake during the scan"],
+              ["Persistent issues", "File %APPDATA%\\OficinaDiag\\diag.log — or the «Send log» button in the app"],
+            ],
+          },
+          paragraphs: [],
+          links: [],
+        },
+      ],
+    },
   },
   footer: {
     license: "MIT License",

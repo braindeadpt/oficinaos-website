@@ -28,3 +28,13 @@ export const DOCS_MOBILE_URL = `${REPO_URL}/blob/main/docs/mobile-access.md`;
 
 export const DIAG_REPO_URL = "https://github.com/braindeadpt/oficinaos-diag";
 export const DIAG_ZIP_URL = `${DIAG_REPO_URL}/releases/latest/download/oficinaos-diag-win-x64.zip`;
+
+/** Heading → URL-safe anchor id (strips accents and punctuation). */
+export function slugify(s: string): string {
+  return s
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}

@@ -1,0 +1,34 @@
+---
+import type { Copy, DocPage } from "../i18n/pt";
+import type { Locale } from "../i18n/utils";
+import { localeUrl } from "../i18n/utils";
+import DocSections from "./DocSections.astro";
+import Footer from "./Footer.astro";
+import Nav from "./Nav.astro";
+
+interface Props {
+  t: Copy;
+  locale: Locale;
+  page: DocPage;
+}
+const { t, locale, page } = Astro.props;
+---
+
+<Nav t={t} locale={locale} />
+<main class="mx-auto max-w-3xl px-6 py-16">
+  <a
+    href={localeUrl(locale, "/docs")}
+    class="text-sm font-medium text-zinc-500 transition hover:text-teal-300"
+  >
+    ← {t.docs.backToGuide}
+  </a>
+  <h1 class="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+    {page.title}
+  </h1>
+  <p class="mt-4 text-lg text-zinc-400">{page.subtitle}</p>
+
+  <div class="mt-12">
+    <DocSections sections={page.sections} />
+  </div>
+</main>
+<Footer t={t} />

@@ -1,0 +1,9 @@
+---
+import ModuleDoc from "../../components/ModuleDoc.astro";
+import Base from "../../layouts/Base.astro";
+import { lang, locale, ogLocale, t } from "../../i18n/pt";
+---
+
+<Base t={t} locale={locale} langAttr={lang} ogLocale={ogLocale}>
+  <ModuleDoc t={t} locale={locale} page={t.moduleDocs.portal} />
+</Base>

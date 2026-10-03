@@ -1,5 +1,7 @@
 import {
   BACKUP_DOCS_URL,
+  DIAG_REPO_URL,
+  DIAG_ZIP_URL,
   DOCS_MOBILE_URL,
   DOCS_REMOTE_URL,
   INSTALL_URL,
@@ -10,13 +12,20 @@ import {
   REPO_URL,
 } from "./utils";
 
-type DocsSection = {
+export type DocsSection = {
   heading: string;
   paragraphs: string[];
   list?: string[];
   table?: { head: string[]; rows: string[][] };
   code?: string;
   links?: { label: string; href: string }[];
+  images?: { src: string; alt: string; caption?: string }[];
+};
+
+export type DocPage = {
+  title: string;
+  subtitle: string;
+  sections: DocsSection[];
 };
 
 export const lang = "pt-PT";
@@ -212,6 +221,8 @@ export const t = {
     title: "Guia completo",
     subtitle:
       "Instalação, dia a dia, backups e resolução de problemas — explicado passo a passo, sem precisar de perceber de tecnologia.",
+    toc: "Neste guia",
+    backToGuide: "Guia completo",
     sections: [
       {
         heading: "O que vem na app (grátis, MIT)",
@@ -219,19 +230,42 @@ export const t = {
           "Tudo o que uma oficina usa no dia a dia, sem subscrição nem limites:",
         ],
         table: {
-          head: ["Área", "O que inclui"],
+          head: ["Menu", "O que inclui"],
           rows: [
-            ["Reparações", "Ficha com código único, estados (recebido → pronto → entregue), timeline, notas internas e visíveis ao cliente, fotos e prazo"],
-            ["Orçamentos", "Versões de orçamento com envio ao cliente, resposta aceite/recusada com comprovativo, histórico completo"],
-            ["Clientes e dispositivos", "Fichas com histórico de reparações, pesquisa por nome/telefone/IMEI, consentimentos"],
-            ["Stock e peças", "Inventário, alertas de stock mínimo, peças associadas a reparações"],
-            ["Caixa", "Pagamentos, sessões de caixa, movimentos e fecho"],
-            ["Notificações", "Mensagens WhatsApp/SMS a clientes a partir de modelos editáveis, com fila de envio e registo"],
+            ["Painel", "Resumo do dia — reparações abertas, prioridades e alertas (vista diferente para dono, técnico e balcão)"],
+            ["Reparações", "Fichas com código único (REP-…), estados (receção → pronto → entregue), timeline, notas internas e ao cliente, fotos e prazo"],
+            ["Pedidos", "Fila de entrada — pedidos e diagnósticos enviados por clientes, prontos a converter em reparação"],
+            ["Devoluções", "Gestão de devoluções ligadas a vendas e reparações"],
+            ["Clientes", "Fichas com histórico de reparações, pesquisa por nome/telefone/IMEI, consentimentos"],
+            ["Inventário de peças", "Stock, alertas de mínimos, fornecedores, peças associadas a reparações"],
+            ["POS de balcão", "Venda de peças e acessórios, sessões de caixa, talões e registo de pagamentos"],
+            ["Serviços de reparação", "Catálogo de reparações com preços — a «tabela de preços» da loja"],
+            ["Orçamentos", "Versões enviadas ao cliente, resposta aceite/recusada com registo datado, histórico completo"],
+            ["Notificações", "Alertas na app, modelos de mensagem editáveis e fila de envio WhatsApp/SMS"],
+            ["Relatórios", "Vendas, reparações e margens por período — com página de impressão A4"],
+            ["Analista de IA", "Perguntas sobre os dados da loja em linguagem natural"],
             ["Tracking do cliente", "Página pública na rede da loja para o cliente seguir a reparação — grátis em LAN"],
             ["Utilizadores", "Vários funcionários com perfis e permissões por função"],
-            ["Idiomas", "Português, inglês e francês"],
+            ["Idiomas", "Português, inglês, francês e espanhol"],
           ],
         },
+        images: [
+          {
+            src: "/screenshots/dashboard.png",
+            alt: "Painel de reparações do OficinaOS",
+            caption: "O painel — as reparações do dia de relance",
+          },
+          {
+            src: "/screenshots/job-detail.png",
+            alt: "Ficha de reparação com estados, orçamento e timeline",
+            caption: "A ficha — estados, orçamento e cronologia completa",
+          },
+          {
+            src: "/screenshots/tracking.png",
+            alt: "Página de acompanhamento que o cliente vê no telemóvel",
+            caption: "A página de tracking que o cliente abre no telemóvel",
+          },
+        ],
         links: [],
       },
       {
@@ -394,13 +428,35 @@ export const t = {
         links: [],
       },
       {
+        heading: "Preços",
+        paragraphs: [
+          "A app completa é gratuita e open source (MIT) — sem limites, sem contas, sem período de teste. Para sempre.",
+          "Os módulos Pro estão em beta: durante este período, as lojas piloto usam-nos gratuitamente enquanto medimos o valor real que trazem ao balcão. Quando os preços forem anunciados serão subscrições mensais simples — sem fidelização e sem custos escondidos.",
+          "* Nota WhatsApp: responder a clientes dentro da janela de 24h é grátis. Para notificações proativas («está pronta») fora dessa janela, a Meta cobra pequenos valores por mensagem modelo — custo da Meta, não nosso.",
+        ],
+        table: {
+          head: ["O quê", "Estado", "Preço"],
+          rows: [
+            ["App completa (core)", "Grátis para sempre", "0 €"],
+            ["OficinaOS Diag (ferramenta)", "Grátis para sempre", "0 €"],
+            ["Portal do cliente", "Disponível (beta)", "A anunciar — grátis no beta"],
+            ["Bot de WhatsApp", "Disponível (beta)", "A anunciar — grátis no beta*"],
+            ["Receção de diagnósticos", "Disponível (beta)", "A anunciar — grátis no beta"],
+            ["Relatórios IA", "Disponível (beta)", "A anunciar — por relatório"],
+          ],
+        },
+        links: [],
+      },
+      {
         heading: "Portal do cliente (Pro)",
         paragraphs: [
           "Com o módulo ativo, cada reparação ganha um botão «Public link» na página de detalhe. Ao clicar, a app publica na Cloud um snapshot redigido do trabalho — estado, dispositivo, orçamento, prazo e timeline — e copia o link.",
           "O link é segredo por trabalho (um código aleatório de 16 caracteres): quem o tem vê a página. Envia-se ao cliente por SMS, WhatsApp ou impresso no registo. A página atualiza sozinha quando o estado muda na app.",
           "Se houver um orçamento pendente, o cliente aceita ou recusa diretamente na página — a resposta entra na app pelo fluxo normal de orçamentos, com notificação ao staff.",
         ],
-        links: [],
+        links: [
+          { label: "Guia detalhado do portal", href: "/docs/portal" },
+        ],
       },
       {
         heading: "Bot de WhatsApp (Pro)",
@@ -419,7 +475,9 @@ export const t = {
             ["«ajuda», áudio ou imagem", "Encaminha ao staff com aviso na app"],
           ],
         },
-        links: [],
+        links: [
+          { label: "Guia detalhado do bot", href: "/docs/whatsapp" },
+        ],
       },
       {
         heading: "Diagnósticos enviados por clientes (Pro)",
@@ -427,7 +485,10 @@ export const t = {
           "A ferramenta oficinaos-diag é gratuita para qualquer pessoa: o cliente descarrega, liga o telemóvel ao PC por cabo e o programa lê bateria, ecrã, sensores e armazenamento.",
           "Com o módulo ativo, a loja recebe esses diagnósticos diretamente na app (fila de pedidos), prontos a converter em reparação — o cliente só precisa do código da loja. O módulo de relatórios IA transforma os dados técnicos num texto simples para entregar ao cliente.",
         ],
-        links: [{ label: "Sobre o oficinaos-diag", href: REPO_URL }],
+        links: [
+          { label: "Guia completo do Diag", href: "/docs/diag" },
+          { label: "Sobre o oficinaos-diag", href: DIAG_REPO_URL },
+        ],
       },
       {
         heading: "Problemas comuns",
@@ -484,6 +545,263 @@ export const t = {
         ],
       },
     ],
+  },
+  moduleDocs: {
+    portal: {
+      title: "Portal do cliente",
+      subtitle:
+        "Um link público por reparação — o cliente vê o estado em tempo real e responde a orçamentos sem ligar para a loja.",
+      sections: [
+        {
+          heading: "O que o cliente vê",
+          paragraphs: [
+            "Ao publicar uma reparação, a app cria uma página pública na OficinaOS Cloud com um resumo redigido da ficha. A página atualiza-se sozinha sempre que o estado muda na app — o cliente abre o link no telemóvel e vê sempre a versão mais recente.",
+            "O que a página mostra:",
+          ],
+          list: [
+            "Estado atual da reparação com descrição em linguagem simples",
+            "Equipamento e previsão de conclusão",
+            "Cronologia dos eventos (recebido, em reparação, pronto…)",
+            "Orçamento pendente, com botões «Aceitar» e «Recusar»",
+          ],
+          links: [],
+        },
+        {
+          heading: "O que nunca sai da loja",
+          paragraphs: [
+            "O portal publica um snapshot redigido — só o que o cliente precisa de ver. Nunca aparecem no portal: custos internos e margens, notas internas do staff, dados de outros clientes, contactos da equipa, nem o histórico de outras reparações.",
+            "O link é um segredo por reparação (um código aleatório de 16 caracteres): quem o tem, vê a página — por isso envia-se apenas ao cliente dessa reparação. Remover o link na ficha apaga a página pública.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Ativar o módulo (uma vez)",
+          paragraphs: [
+            "O portal precisa da OficinaOS Cloud — o serviço que faz de ponte entre a app da loja e a internet, sem expor o PC da loja.",
+          ],
+          list: [
+            "Criar conta na OficinaOS Cloud (cloud.oficinaos.app) — ou receber o código de emparelhamento da equipa",
+            "Na app: Definições → separador Cloud → colar o código de emparelhamento → «Ligar»",
+            "O módulo portal é ativado na conta Cloud (no beta, por nós); a app sincroniza sozinha",
+            "A partir daí, cada ficha de reparação passa a ter o botão «Link público»",
+          ],
+          links: [],
+        },
+        {
+          heading: "Dia a dia — publicar e partilhar",
+          paragraphs: [
+            "Na ficha da reparação, o botão «Link público» publica o snapshot e copia o link. Envia-se ao cliente por SMS, WhatsApp ou impresso no registo de entrada — e pronto.",
+            "Quando o estado muda na app, a próxima sincronização (até ~2 minutos) atualiza a página. O botão «Remover link público» apaga a página quando já não for precisa.",
+            "Se houver orçamento pendente, o cliente responde na própria página: «Aceitar» ou «Recusar» entra na app pelo fluxo normal de orçamentos — com registo datado e notificação ao staff, exatamente como uma resposta ao balcão.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Limites honestos",
+          list: [
+            "Até ~2 minutos de atraso entre mudar o estado e a página atualizar (ciclo de sincronização)",
+            "Precisa de internet na loja — sem ligação, a página fica congelada no último estado publicado",
+            "O link é o único controlo de acesso: se o cliente o reencaminhar, outras pessoas veem essa reparação (nada mais)",
+            "Sem o módulo, o tracking na rede local continua a funcionar grátis — o portal só acrescenta o acesso de fora",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+      ],
+    },
+    whatsapp: {
+      title: "Bot de WhatsApp",
+      subtitle:
+        "O cliente escreve para o WhatsApp da loja e recebe o estado real da reparação — incluindo aprovar orçamentos com «SIM».",
+      sections: [
+        {
+          heading: "O que o bot responde",
+          paragraphs: [
+            "O bot identifica o cliente pelo número de telefone e a reparação pelo contexto. Cada mensagem é independente — o cliente não precisa de «iniciar sessão» nem seguir menus:",
+          ],
+          table: {
+            head: ["O cliente escreve", "O bot responde"],
+            rows: [
+              ["«está pronto?» ou qualquer texto", "Estado da reparação + previsão de entrega"],
+              ["«orçamento» / «preço» / «quanto»", "Valor do orçamento pendente + instruções"],
+              ["SIM / aceito / ok", "Aprova o orçamento pendente — mesmo fluxo do balcão"],
+              ["NÃO / recuso", "Recusa o orçamento"],
+              ["Código da reparação (REP-…)", "Estado dessa reparação específica"],
+              ["«ajuda» / «humano», áudio ou imagem", "Encaminha ao staff — com notificação na app"],
+              ["Número sem ficha", "Mensagem simpática com os contactos da loja"],
+            ],
+          },
+          links: [],
+        },
+        {
+          heading: "Como decide a resposta",
+          paragraphs: [
+            "O bot procura a ficha do cliente pelos últimos 9 dígitos do número — robusto a +351, espaços e formatos diferentes. Com uma reparação ativa, o contexto é óbvio e responde diretamente; com várias, lista os códigos para o cliente escolher.",
+            "«Reparação ativa» inclui todas que ainda não foram entregues, devolvidas ou canceladas — incluindo as prontas a levantar, que são exatamente as que geram a pergunta «já está?».",
+            "O que o bot não resolve escala para pessoas: «ajuda», «humano», áudios, imagens e perguntas fora do padrão geram notificação na app com o texto do cliente — a equipa responde manualmente.",
+          ],
+          links: [],
+        },
+        {
+          heading: "O que é preciso (Meta)",
+          paragraphs: [
+            "O módulo usa a WhatsApp Business Platform oficial da Meta — não há gambiarras nem risco de ban do número. Os requisitos:",
+          ],
+          list: [
+            "Uma app Meta (developers.facebook.com) com o produto WhatsApp — a nossa app OficinaOS já existe e está publicada",
+            "O número da loja no WhatsApp Business — a coexistence permite manter a app no telemóvel e ligar a API ao mesmo tempo",
+            "Um token permanente de system user com as permissões whatsapp_business_messaging + whatsapp_business_management",
+            "O webhook apontado à OficinaOS Cloud — já configurado do nosso lado",
+          ],
+          links: [],
+        },
+        {
+          heading: "Configuração na app (por loja)",
+          paragraphs: [
+            "Depois do onboarding Meta (assistido por nós na primeira loja), a configuração na app são 4 campos:",
+          ],
+          list: [
+            "Menu → Notificações → Setup → secção WhatsApp",
+            "Business ID + Phone Number ID — fornecidos no onboarding",
+            "API Token — o token permanente do system user (a app guarda-o encriptado)",
+            "Enabled ligado — a app regista o phone_number_id na Cloud sozinha e o bot fica ativo",
+          ],
+          links: [],
+        },
+        {
+          heading: "Limites honestos",
+          list: [
+            "Respostas podem demorar até ~2 minutos (ciclo de sincronização) — não é instantâneo",
+            "Responder a quem escreve é grátis; iniciar conversas («a tua reparação está pronta») precisa de modelos aprovados na Meta e tem custo por mensagem",
+            "Flood control: máximo 20 mensagens/hora por número — protege contra spam",
+            "Áudios e imagens não são interpretados — vão para humano",
+            "Em modo teste, só os números verificados na Meta recebem respostas — em produção não há esse limite",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+        {
+          heading: "Se o bot ficar calado",
+          table: {
+            head: ["Sintoma", "O que verificar"],
+            rows: [
+              ["Cliente não recebe resposta", "Token Meta ainda válido? (tokens temporários expiram em 24h — usar o de system user)"],
+              ["Mensagem nem chega à app", "Módulo whatsapp-bot ativo na Cloud? phone_number_id correto nas definições?"],
+              ["Bot responde mas Meta bloqueia", "Em modo teste, o destinatário está verificado? Em produção, é a janela de 24h"],
+              ["«SIM» não faz nada", "Há orçamento enviado e pendente nessa ficha? (o bot só age sobre orçamentos por responder)"],
+              ["Orçamento certo, resposta errada", "Telefone da ficha do cliente tem os mesmos últimos 9 dígitos?"],
+            ],
+          },
+          paragraphs: [],
+          links: [],
+        },
+      ],
+    },
+    diag: {
+      title: "OficinaOS Diag",
+      subtitle:
+        "A ferramenta Windows gratuita que lê qualquer Android ou iPhone por cabo — scan local sempre grátis; envio à loja e relatórios IA são módulos Pro.",
+      sections: [
+        {
+          heading: "Descarregar e correr",
+          paragraphs: [
+            "App Windows portátil com visual de terminal retro: descarrega o zip, extrai a pasta inteira (o exe precisa dos ficheiros ao lado) e corre OficinaDiag.exe. Sem conta, sem instalação, sem subscrição.",
+            "O Windows pode mostrar o aviso SmartScreen na primeira execução — é normal para um programa novo sem certificado de assinatura: «Mais informações» → «Executar mesmo assim».",
+          ],
+          links: [
+            { label: "Descarregar oficinaos-diag (Windows)", href: DIAG_ZIP_URL },
+            { label: "Código-fonte no GitHub", href: DIAG_REPO_URL },
+          ],
+        },
+        {
+          heading: "O que o scan lê — grátis",
+          paragraphs: [
+            "Liga o telemóvel por cabo USB e o scan corre 100% no PC — nada é enviado a lado nenhum:",
+          ],
+          table: {
+            head: ["Dados", "Android", "iPhone/iPad"],
+            rows: [
+              ["Modelo, número de série, versão do OS", "✓", "✓"],
+              ["Bateria — nível, temperatura, ciclos", "✓", "✓"],
+              ["Bateria — capacidade real vs design", "onde o fabricante expõe", "✓"],
+              ["Armazenamento e RAM", "✓", "✓"],
+              ["Sensores", "✓", "✓"],
+              ["Root / bootloader desbloqueado", "✓", "—"],
+              ["Estado de ativação / operadora", "—", "✓"],
+            ],
+          },
+          links: [],
+        },
+        {
+          heading: "Teste de ecrã e toque no telemóvel",
+          paragraphs: [
+            "A app serve uma página de teste na rede local: no Android abre sozinha via adb, no iPhone lê-se um QR code. O cliente corre os testes de cores e a grelha de toque no próprio telemóvel.",
+            "Os resultados voltam ao PC — pixeis mortos e zonas de toque mortas ficam registados no relatório. É o teste de ecrã objetivo que antes se fazia «a olho».",
+          ],
+          links: [],
+        },
+        {
+          heading: "Exportar e histórico",
+          paragraphs: [
+            "Cada scan pode ser exportado como relatório HTML (visual retro, imprimível → PDF para entregar ao cliente) e como JSON bruto com todos os dados.",
+            "O histórico fica no PC (%APPDATA%\\OficinaDiag) — dá para comparar a saúde da bateria de um equipamento ao longo do tempo, útil em garantias e usados.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Requisitos por plataforma",
+          table: {
+            head: ["", "Android", "iPhone/iPad"],
+            rows: [
+              ["No telefone", "Ativar «Depuração USB» nas opções de programador", "Aceitar «Confiar neste computador»"],
+              ["No PC", "Nada — o adb vem embutido", "Driver USB da Apple (iTunes ou app «Apple Devices»)"],
+              ["Extra", "Cabo de dados (não só de carga)", "Fechar a app Fotos do Windows antes do scan"],
+            ],
+          },
+          paragraphs: [],
+          links: [],
+        },
+        {
+          heading: "Enviar à loja — módulo diag-intake",
+          paragraphs: [
+            "O cliente corre o scan em casa, mete o código da loja e o diagnóstico viaja para a OficinaOS Cloud, de onde a app da loja o recolhe. Na loja aparece como um pedido na fila de Pedidos — pré-check pronto a converter em reparação.",
+            "Casos de uso: pré-diagnóstico antes de o cliente vir à loja, avaliação de usados para compra/venda, e grading com dados objetivos (ciclos de bateria, ecrã, sensores).",
+          ],
+          links: [],
+        },
+        {
+          heading: "Relatório IA — módulo ai-reports",
+          paragraphs: [
+            "Com o módulo ativo, os dados técnicos brutos do scan transformam-se num relatório em linguagem simples para o cliente — «a bateria está a 78% da capacidade original, recomenda-se substituição».",
+            "A geração corre na OficinaOS Cloud com a chave do servidor — nada corre no PC do cliente e os dados não são usados para treino de modelos.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Privacidade",
+          paragraphs: [
+            "O scan é 100% local por defeito — nada sai do PC sem o utilizador escolher «Enviar à loja» ou «Relatório IA». O destino é sempre o servidor OficinaOS, nunca terceiros.",
+            "Em caso de problemas, o botão «Enviar log» envia a cauda do ficheiro diag.log (só linhas técnicas da app) para análise — também opt-in, nada automático.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Se não detetar o telefone",
+          table: {
+            head: ["Sintoma", "O que verificar"],
+            rows: [
+              ["Nada acontece ao ligar o cabo", "O cabo é de dados? (cabos só de carga não servem) — experimentar outra porta USB"],
+              ["Android não aparece", "«Depuração USB» ativa nas opções de programador? Prompt de autorização aceite no telefone?"],
+              ["iPhone não aparece", "«Confiar neste computador» aceite? Driver Apple instalado (iTunes/Apple Devices)? App Fotos fechada?"],
+              ["Scan falha a meio", "Ecrã do telefone desbloqueado e acordado durante o scan"],
+              ["Dúvidas persistentes", "Ficheiro %APPDATA%\\OficinaDiag\\diag.log — ou botão «Enviar log» na app"],
+            ],
+          },
+          paragraphs: [],
+          links: [],
+        },
+      ],
+    },
   },
   footer: {
     license: "Licença MIT",
