@@ -206,6 +206,27 @@ export const t: Copy = {
       "Install, daily use, backups and troubleshooting — step by step, no technical background needed.",
     sections: [
       {
+        heading: "What's in the app (free, MIT)",
+        paragraphs: [
+          "Everything a repair shop uses day to day, with no subscription or limits:",
+        ],
+        table: {
+          head: ["Area", "What's included"],
+          rows: [
+            ["Repairs", "Job card with unique code, statuses (received → ready → delivered), timeline, internal and customer-visible notes, photos and due date"],
+            ["Quotes", "Versioned quotes sent to the customer, approve/decline responses with receipt, full history"],
+            ["Customers & devices", "Records with repair history, search by name/phone/IMEI, consents"],
+            ["Stock & parts", "Inventory, low-stock alerts, parts linked to repairs"],
+            ["Till", "Payments, cash sessions, movements and closing"],
+            ["Notifications", "WhatsApp/SMS messages to customers from editable templates, with send queue and log"],
+            ["Customer tracking", "Public page on the shop's network for customers to follow their repair — free on LAN"],
+            ["Users", "Multiple staff members with roles and per-function permissions"],
+            ["Languages", "Portuguese, English and French"],
+          ],
+        },
+        links: [],
+      },
+      {
         heading: "Two ways to install",
         paragraphs: [
           "OficinaOS is always the same program — what differs is how it runs on the shop PC. The installer picks the right path automatically, but it helps to understand both:",
@@ -345,6 +366,60 @@ export const t: Copy = {
         links: [],
       },
       {
+        heading: "Pro modules — how it works",
+        paragraphs: [
+          "Pro modules are features that need to reach the internet. The app stays 100% local and free; when a shop wants remote reach, it pairs the app with OficinaOS Cloud — our service that bridges the shop's app to the outside world without exposing the shop's computer.",
+          "The shop creates a Cloud account and pairs the app with a code (once). Each module is switched on server-side — no license files. The app syncs with the Cloud every ~2 minutes to send and receive.",
+          "Without pairing, everything keeps working on the local network — Pro modules simply don't appear.",
+        ],
+        table: {
+          head: ["Module", "What the shop's customer gets"],
+          rows: [
+            ["Customer portal", "Public link with repair status and approve/decline quote buttons — no need to call the shop"],
+            ["WhatsApp bot", "Messages the shop's WhatsApp and gets the repair status automatically; approves quotes with YES/NO"],
+            ["Remote diagnostics", "Runs the phone diagnostic at home (oficinaos-diag, free) and sends it to the shop with a code"],
+            ["AI reports", "Diagnostic report written in plain language, ready to hand to the customer"],
+          ],
+        },
+        links: [],
+      },
+      {
+        heading: "Customer portal (Pro)",
+        paragraphs: [
+          "With the module active, every repair gets a «Public link» button on its detail page. Clicking it publishes a redacted snapshot to the Cloud — status, device, quote, due date and timeline — and copies the link.",
+          "The link is a per-job secret (a random 16-character code): whoever has it sees the page. Send it to the customer by SMS, WhatsApp or print it on the intake slip. The page updates itself when the status changes in the app.",
+          "If a quote is pending, the customer accepts or declines it right on the page — the answer flows into the app through the normal quote flow, with a staff notification.",
+        ],
+        links: [],
+      },
+      {
+        heading: "WhatsApp bot (Pro)",
+        paragraphs: [
+          "The customer texts the shop's WhatsApp number and the bot replies with real job data — nobody picks up the phone. It works on the shop's own number (the WhatsApp Business app on the phone keeps working in parallel).",
+          "Honest notes: replies can take up to ~2 minutes (sync cycle); setup uses Meta's official WhatsApp Business Platform and we assist the first shop's onboarding.",
+        ],
+        table: {
+          head: ["Customer writes", "Bot replies"],
+          rows: [
+            ["«is it ready?» or any text", "Repair status + due date"],
+            ["«quote» / «price»", "Quote amount + how to answer"],
+            ["YES / accept", "Approves the pending quote (same flow as at the counter)"],
+            ["NO / decline", "Declines the quote"],
+            ["Repair code (REP-…)", "Status of that job"],
+            ["«help», audio or image", "Escalates to staff with an in-app alert"],
+          ],
+        },
+        links: [],
+      },
+      {
+        heading: "Customer-sent diagnostics (Pro)",
+        paragraphs: [
+          "The oficinaos-diag tool is free for anyone: the customer downloads it, plugs the phone into a PC and it reads battery, screen, sensors and storage.",
+          "With the module active, the shop receives those diagnostics right in the app (intake queue), ready to convert into a repair — the customer only needs the shop's code. The AI reports module turns the technical data into plain-language text to hand to the customer.",
+        ],
+        links: [{ label: "About oficinaos-diag", href: REPO_URL }],
+      },
+      {
         heading: "Common problems",
         paragraphs: ["The most frequent situations and how to solve each:"],
         table: {
@@ -363,6 +438,25 @@ export const t: Copy = {
           ],
         },
         links: [{ label: "Full troubleshooting", href: INSTALL_URL }],
+      },
+      {
+        heading: "Frequently asked questions",
+        paragraphs: ["The questions we hear most often:"],
+        table: {
+          head: ["Question", "Answer"],
+          rows: [
+            ["Do I need internet?", "Not for daily use — the app runs fully on the shop's network. Only for updates and Pro modules."],
+            ["Does customer data go to a server?", "Not by default. With Pro modules, the Cloud only relays redacted snapshots and messages — no internal costs or private data."],
+            ["Does it work on phones?", "Yes — on the shop's Wi-Fi any device opens it in a browser; outside the shop via remote access (Cloudflare Tunnel)."],
+            ["Does the customer install anything?", "No — the portal opens as a link in their browser; the bot replies on their normal WhatsApp."],
+            ["How much does it cost?", "The full app is free (MIT license). Pro modules are optional subscriptions, in beta."],
+            ["Multiple shops / branches?", "No — OficinaOS is designed for one location per install."],
+            ["What if the PC dies?", "Automatic daily backups; restoring on another PC is copying the backup and rerunning the installer."],
+            ["Mac or Linux?", "Yes, via manual Docker — the automatic installer is Windows-only."],
+            ["Can I import data from another system?", "Customers and catalog via CSV; contact us for assisted migrations."],
+          ],
+        },
+        links: [],
       },
       {
         heading: "Full documentation",

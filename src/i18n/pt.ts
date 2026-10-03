@@ -214,6 +214,27 @@ export const t = {
       "Instalação, dia a dia, backups e resolução de problemas — explicado passo a passo, sem precisar de perceber de tecnologia.",
     sections: [
       {
+        heading: "O que vem na app (grátis, MIT)",
+        paragraphs: [
+          "Tudo o que uma oficina usa no dia a dia, sem subscrição nem limites:",
+        ],
+        table: {
+          head: ["Área", "O que inclui"],
+          rows: [
+            ["Reparações", "Ficha com código único, estados (recebido → pronto → entregue), timeline, notas internas e visíveis ao cliente, fotos e prazo"],
+            ["Orçamentos", "Versões de orçamento com envio ao cliente, resposta aceite/recusada com comprovativo, histórico completo"],
+            ["Clientes e dispositivos", "Fichas com histórico de reparações, pesquisa por nome/telefone/IMEI, consentimentos"],
+            ["Stock e peças", "Inventário, alertas de stock mínimo, peças associadas a reparações"],
+            ["Caixa", "Pagamentos, sessões de caixa, movimentos e fecho"],
+            ["Notificações", "Mensagens WhatsApp/SMS a clientes a partir de modelos editáveis, com fila de envio e registo"],
+            ["Tracking do cliente", "Página pública na rede da loja para o cliente seguir a reparação — grátis em LAN"],
+            ["Utilizadores", "Vários funcionários com perfis e permissões por função"],
+            ["Idiomas", "Português, inglês e francês"],
+          ],
+        },
+        links: [],
+      },
+      {
         heading: "Duas formas de instalar",
         paragraphs: [
           "O OficinaOS é sempre o mesmo programa — a diferença está em como é arrancado no PC da loja. O instalador escolhe o caminho certo sozinho, mas convém perceber os dois:",
@@ -355,6 +376,60 @@ export const t = {
         links: [],
       },
       {
+        heading: "Módulos Pro — como funcionam",
+        paragraphs: [
+          "Os módulos Pro são funcionalidades que precisam de «chegar à internet». A app continua 100% local e gratuita; quando a loja quer alcance remoto, emparelha a app com a OficinaOS Cloud — o nosso serviço que faz de ponte entre a app da loja e o exterior, sem expor o PC da loja.",
+          "A loja cria uma conta na Cloud e emparelha a app com um código (uma vez). Cada módulo é ativado do lado do servidor — sem ficheiros de licença. A app sincroniza com a Cloud a cada ~2 minutos para enviar e receber.",
+          "Sem emparelhamento, tudo continua a funcionar na rede local — os módulos Pro simplesmente não aparecem.",
+        ],
+        table: {
+          head: ["Módulo", "O que o cliente da loja ganha"],
+          rows: [
+            ["Portal do cliente", "Link público com o estado da reparação e botões para aceitar/recusar orçamento — sem ligar à loja"],
+            ["Bot de WhatsApp", "Escreve para o WhatsApp da loja e recebe o estado da reparação automaticamente; aprova orçamentos com SIM/NÃO"],
+            ["Diagnóstico à distância", "Faz o diagnóstico do telemóvel em casa (oficinaos-diag, grátis) e envia à loja com um código"],
+            ["Relatórios IA", "Relatório do diagnóstico escrito em linguagem simples, pronto a entregar"],
+          ],
+        },
+        links: [],
+      },
+      {
+        heading: "Portal do cliente (Pro)",
+        paragraphs: [
+          "Com o módulo ativo, cada reparação ganha um botão «Public link» na página de detalhe. Ao clicar, a app publica na Cloud um snapshot redigido do trabalho — estado, dispositivo, orçamento, prazo e timeline — e copia o link.",
+          "O link é segredo por trabalho (um código aleatório de 16 caracteres): quem o tem vê a página. Envia-se ao cliente por SMS, WhatsApp ou impresso no registo. A página atualiza sozinha quando o estado muda na app.",
+          "Se houver um orçamento pendente, o cliente aceita ou recusa diretamente na página — a resposta entra na app pelo fluxo normal de orçamentos, com notificação ao staff.",
+        ],
+        links: [],
+      },
+      {
+        heading: "Bot de WhatsApp (Pro)",
+        paragraphs: [
+          "O cliente escreve para o número de WhatsApp da loja e o bot responde com dados reais da ficha — sem ninguém pegar no telemóvel. Funciona com o próprio número da loja (o WhatsApp Business do telemóvel continua a funcionar em paralelo).",
+          "Notas honestas: a resposta pode demorar até ~2 minutos (ciclo de sincronização); o setup usa a WhatsApp Business Platform oficial da Meta e é assistido por nós na primeira loja.",
+        ],
+        table: {
+          head: ["O cliente escreve", "O bot responde"],
+          rows: [
+            ["«está pronto?» ou qualquer texto", "Estado da reparação + previsão"],
+            ["«orçamento» / «preço»", "Valor do orçamento + instruções para responder"],
+            ["SIM / aceito", "Aprova o orçamento pendente (mesmo fluxo do balcão)"],
+            ["NÃO / recuso", "Recusa o orçamento"],
+            ["Código da reparação (REP-…)", "Estado desse trabalho"],
+            ["«ajuda», áudio ou imagem", "Encaminha ao staff com aviso na app"],
+          ],
+        },
+        links: [],
+      },
+      {
+        heading: "Diagnósticos enviados por clientes (Pro)",
+        paragraphs: [
+          "A ferramenta oficinaos-diag é gratuita para qualquer pessoa: o cliente descarrega, liga o telemóvel ao PC por cabo e o programa lê bateria, ecrã, sensores e armazenamento.",
+          "Com o módulo ativo, a loja recebe esses diagnósticos diretamente na app (fila de pedidos), prontos a converter em reparação — o cliente só precisa do código da loja. O módulo de relatórios IA transforma os dados técnicos num texto simples para entregar ao cliente.",
+        ],
+        links: [{ label: "Sobre o oficinaos-diag", href: REPO_URL }],
+      },
+      {
         heading: "Problemas comuns",
         paragraphs: [
           "As situações mais frequentes e a resolução de cada uma:",
@@ -375,6 +450,25 @@ export const t = {
           ],
         },
         links: [{ label: "Troubleshooting completo", href: INSTALL_URL }],
+      },
+      {
+        heading: "Perguntas frequentes",
+        paragraphs: ["As dúvidas que ouvimos mais vezes:"],
+        table: {
+          head: ["Pergunta", "Resposta"],
+          rows: [
+            ["Preciso de internet?", "Não para o uso diário — a app corre toda na rede da loja. Só para atualizações e módulos Pro."],
+            ["Os dados dos clientes vão para algum servidor?", "Não por defeito. Com módulos Pro, a Cloud retransmite apenas snapshots redigidos e mensagens — sem custos internos nem dados privados."],
+            ["Funciona no telemóvel?", "Sim — na Wi-Fi da loja qualquer aparelho abre no browser; fora da loja com o acesso remoto (Cloudflare Tunnel)."],
+            ["O cliente tem de instalar alguma coisa?", "Não — o portal abre num link no browser; o bot responde no WhatsApp normal dele."],
+            ["Quanto custa?", "A app completa é gratuita (licença MIT). Os módulos Pro são subscrições opcionais em beta."],
+            ["Várias lojas / filiais?", "Não — o OficinaOS é desenhado para uma localização por instalação."],
+            ["E se o PC avariar?", "Backups diários automáticos; restaurar noutro PC é copiar o backup e correr o instalador."],
+            ["Mac ou Linux?", "Sim, via Docker manual — o instalador automático é só Windows."],
+            ["Dá para importar dados de outro sistema?", "Clientes e catálogo por CSV; contacte-nos para migrações assistidas."],
+          ],
+        },
+        links: [],
       },
       {
         heading: "Documentação completa",
