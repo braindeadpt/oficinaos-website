@@ -228,6 +228,7 @@ export const t: Copy = {
             ["Presupuestos", "Versiones enviadas al cliente, respuesta aceptar/rechazar con registro fechado, historial completo"],
             ["Notificaciones", "Alertas en la app, plantillas de mensaje editables y cola de envío WhatsApp/SMS"],
             ["Informes", "Ventas, reparaciones y márgenes por periodo — con página de impresión A4"],
+            ["Impresión", "Recibos y etiquetas configurables — rollo 58/80 mm, A4, secciones opcionales e impresión directa en térmicas de red"],
             ["Analista de IA", "Preguntas sobre los datos de la tienda en lenguaje natural"],
             ["Seguimiento del cliente", "Página pública en la red de la tienda para seguir la reparación — gratis en LAN"],
             ["Usuarios", "Varios empleados con perfiles y permisos por función"],
@@ -393,6 +394,50 @@ export const t: Copy = {
           "Quien quiera una barrera extra puede activar Cloudflare Access (gratis): email + código antes del login, manteniendo abiertas las páginas públicas de los clientes.",
         ],
         links: [],
+      },
+      {
+        heading: "Impresión — recibos y etiquetas",
+        paragraphs: [
+          "OficinaOS imprime los tres documentos del día a día directamente desde la ficha o la pantalla de venta: el recibo de reparación para el cliente, el ticket de venta del TPV y la etiqueta que se pega en el equipo.",
+          "Todo se configura en Ajustes → Tienda → Impresión — las opciones se aplican a todos los documentos a partir de ese momento:",
+        ],
+        table: {
+          head: ["Opción", "Opciones"],
+          rows: [
+            ["Papel del recibo", "Rollo térmico 58 mm · Rollo térmico 80 mm · Hoja A4 (documento completo, tipo factura)"],
+            ["Secciones del recibo", "Activar/desactivar cada bloque: IMEI, problema reportado, firma del cliente, QR de seguimiento, garantía"],
+            ["Etiqueta del equipo", "40×20 mm · 57×32 mm · 62×29 mm"],
+            ["Método de impresión", "Cuadro de diálogo Imprimir — cualquier impresora instalada — o térmica de red ESC/POS — directo, sin diálogo"],
+          ],
+        },
+      },
+      {
+        heading: "Dos formas de imprimir",
+        paragraphs: [
+          "Cuadro de diálogo Imprimir (predeterminado): el documento se abre en una pestaña nueva y usa el diálogo de impresión del sistema. Funciona con cualquier impresora instalada — USB, red, Bluetooth — e incluso con «Guardar como PDF». Las etiquetas usan siempre esta vía: las etiqueteras hablan otros lenguajes (ZPL/TSPL) y el navegador se ocupa del driver.",
+          "Impresora térmica de red (ESC/POS): la app envía el recibo directamente a la impresora por la red de la tienda — un clic y sale el ticket, sin diálogo. Para térmicas conectadas por cable o Wi-Fi (Epson TM, Star, Xprinter y compatibles ESC/POS). El texto usa la página de códigos CP850 — tildes correctas — y el QR de seguimiento se imprime con comandos nativos de la impresora, sin drivers.",
+        ],
+        list: [
+          "Activar (una vez): Ajustes → Tienda → Impresión → Método «Impresora térmica de red» → indicar IP y puerto (casi siempre 9100) → «Enviar ticket de prueba»",
+          "Encontrar la IP: en la mayoría de las térmicas, encender con el botón FEED pulsado imprime un autotest con la IP; también aparece en la lista de dispositivos del router",
+          "Fijar la IP en el router (reserva DHCP) — si no, la impresora puede cambiar de dirección y dejar de imprimir",
+          "Con el papel A4 configurado o una impresora solo USB, el camino es el cuadro de diálogo — ESC/POS es solo para rollos térmicos en red",
+        ],
+      },
+      {
+        heading: "Impresión — problemas comunes",
+        paragraphs: ["Las situaciones más frecuentes:"],
+        table: {
+          head: ["Síntoma", "Qué hacer"],
+          rows: [
+            ["«No se pudo conectar con la impresora»", "Comprobar que está encendida y en la misma red de la tienda; revisar IP y puerto; repetir el «ticket de prueba»"],
+            ["«No hay ninguna impresora de red configurada»", "Indicar IP + puerto en Ajustes → Tienda → Impresión — o cambiar el método a «Cuadro de diálogo Imprimir»"],
+            ["La impresora cambió de IP", "Crear una reserva DHCP en el router y actualizar la IP en los ajustes"],
+            ["Recibo cortado o márgenes incorrectos", "En el cuadro de diálogo: elegir el papel correcto (58 mm, 80 mm o A4), márgenes «Ninguno» y escala 100%"],
+            ["La pestaña del recibo no se abre", "Permitir ventanas emergentes para la dirección de la app e imprimir de nuevo"],
+            ["Impresora solo USB", "Usar el método «Cuadro de diálogo Imprimir» — ESC/POS necesita una impresora en la red"],
+          ],
+        },
       },
       {
         heading: "Módulos Pro — cómo funcionan",

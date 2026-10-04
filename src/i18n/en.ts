@@ -228,6 +228,7 @@ export const t: Copy = {
             ["Quotes", "Versioned quotes sent to the customer, approve/decline responses with dated record, full history"],
             ["Notifications", "In-app alerts, editable message templates and WhatsApp/SMS send queue"],
             ["Reports", "Sales, repairs and margins per period — with an A4 print page"],
+            ["Printing", "Configurable receipts and labels — 58/80 mm roll, A4, optional sections and direct printing to network thermal printers"],
             ["AI analyst", "Questions about the shop's data in plain language"],
             ["Customer tracking", "Public page on the shop's network for customers to follow their repair — free on LAN"],
             ["Users", "Multiple staff members with roles and per-function permissions"],
@@ -391,6 +392,50 @@ export const t: Copy = {
           "Anyone wanting an extra barrier can enable Cloudflare Access (free): email + code before the login, while customer-facing public pages stay open.",
         ],
         links: [],
+      },
+      {
+        heading: "Printing — receipts and labels",
+        paragraphs: [
+          "OficinaOS prints the three everyday documents straight from the job page or the sale screen: the repair receipt for the customer, the POS sale receipt and the label that goes on the device.",
+          "Everything is configured under Settings → Shop → Printing — the choices apply to every document from then on:",
+        ],
+        table: {
+          head: ["Option", "Choices"],
+          rows: [
+            ["Receipt paper", "58 mm thermal roll · 80 mm thermal roll · A4 sheet (full, invoice-style document)"],
+            ["Receipt sections", "Toggle each block: IMEI, reported problem, customer signature, tracking QR, warranty"],
+            ["Device label", "40×20 mm · 57×32 mm · 62×29 mm"],
+            ["Print method", "Print dialog — any installed printer — or ESC/POS network thermal printer — direct, no dialog"],
+          ],
+        },
+      },
+      {
+        heading: "Two ways to print",
+        paragraphs: [
+          "Print dialog (default): the document opens in a new tab and uses the operating system's print dialog. It works with any installed printer — USB, network, Bluetooth — and even «Save as PDF». Labels always take this path: label printers speak other languages (ZPL/TSPL) and the browser handles the driver.",
+          "Network thermal printer (ESC/POS): the app sends the receipt straight to the printer over the shop network — one click and the ticket comes out, no dialog. For thermal printers connected by cable or Wi-Fi (Epson TM, Star, Xprinter and other ESC/POS-compatible models). Text uses the CP850 code page — correct accents — and the tracking QR is printed with the printer's native commands, no drivers needed.",
+        ],
+        list: [
+          "Enable (once): Settings → Shop → Printing → Method «Network thermal printer» → enter IP and port (almost always 9100) → «Send test ticket»",
+          "Find the IP: on most thermal printers, powering on with the FEED button held prints a self-test with the IP; it also shows in the router's device list",
+          "Reserve the IP on the router (DHCP reservation) — otherwise the printer may change address and stop printing",
+          "With the A4 paper preset or a USB-only printer, the print dialog is the path — ESC/POS is for thermal rolls on the network only",
+        ],
+      },
+      {
+        heading: "Printing — common problems",
+        paragraphs: ["The most frequent situations:"],
+        table: {
+          head: ["Symptom", "What to do"],
+          rows: [
+            ["«Could not reach the printer»", "Check it is powered on and on the shop network; review IP and port; retry «Send test ticket»"],
+            ["«No network printer configured»", "Set IP + port under Settings → Shop → Printing — or switch the method back to «Print dialog»"],
+            ["The printer's IP changed", "Set a DHCP reservation on the router and update the IP in settings"],
+            ["Receipt cut off or wrong margins", "In the print dialog: pick the right paper (58 mm, 80 mm or A4), margins «None», scale 100%"],
+            ["The receipt tab doesn't open", "Allow pop-ups for the app address and print again"],
+            ["USB-only printer", "Use the «Print dialog» method — ESC/POS needs a printer on the network"],
+          ],
+        },
       },
       {
         heading: "Pro modules — how it works",

@@ -243,6 +243,7 @@ export const t = {
             ["Orçamentos", "Versões enviadas ao cliente, resposta aceite/recusada com registo datado, histórico completo"],
             ["Notificações", "Alertas na app, modelos de mensagem editáveis e fila de envio WhatsApp/SMS"],
             ["Relatórios", "Vendas, reparações e margens por período — com página de impressão A4"],
+            ["Impressão", "Talões e etiquetas configuráveis — rolo 58/80 mm, A4, secções opcionais e impressão direta em térmicas de rede"],
             ["Analista de IA", "Perguntas sobre os dados da loja em linguagem natural"],
             ["Tracking do cliente", "Página pública na rede da loja para o cliente seguir a reparação — grátis em LAN"],
             ["Utilizadores", "Vários funcionários com perfis e permissões por função"],
@@ -408,6 +409,50 @@ export const t = {
           "Quem quiser uma barreira extra pode ativar o Cloudflare Access (grátis): email + código antes do login, mantendo as páginas públicas dos clientes abertas.",
         ],
         links: [],
+      },
+      {
+        heading: "Impressão — talões e etiquetas",
+        paragraphs: [
+          "O OficinaOS imprime os três documentos do dia a dia diretamente da ficha ou do ecrã de venda: o talão da reparação para o cliente, o talão de venda do POS e a etiqueta que se cola no equipamento.",
+          "Tudo se configura em Definições → Loja → Impressão — as escolhas aplicam-se a todos os documentos a partir desse momento:",
+        ],
+        table: {
+          head: ["Opção", "Escolhas"],
+          rows: [
+            ["Papel do talão", "Rolo térmico 58 mm · Rolo térmico 80 mm · Folha A4 (documento completo, tipo fatura)"],
+            ["Secções do talão", "Ligar/desligar cada bloco: IMEI, problema reportado, assinatura do cliente, QR de tracking, garantia"],
+            ["Etiqueta do equipamento", "40×20 mm · 57×32 mm · 62×29 mm"],
+            ["Método de impressão", "Caixa de diálogo Imprimir — qualquer impressora instalada — ou térmica de rede ESC/POS — direto, sem diálogo"],
+          ],
+        },
+      },
+      {
+        heading: "Dois métodos de impressão",
+        paragraphs: [
+          "Caixa de diálogo Imprimir (predefinição): o documento abre num separador novo e usa o diálogo de impressão do sistema. Funciona com qualquer impressora instalada — USB, rede, Bluetooth — e até com «Guardar como PDF». As etiquetas seguem sempre este caminho: as etiqueteiras falam outras linguagens (ZPL/TSPL) e o browser trata do driver.",
+          "Impressora térmica de rede (ESC/POS): a app envia o talão diretamente para a impressora pela rede da loja — um clique e sai o talão, sem diálogo. Serve para térmicas ligadas por cabo ou Wi-Fi (Epson TM, Star, Xprinter e compatíveis ESC/POS). O texto usa a página de código CP850 — acentos corretos — e o QR de tracking é impresso pelos comandos nativos da impressora, sem drivers.",
+        ],
+        list: [
+          "Ativar (uma vez): Definições → Loja → Impressão → Método «Impressora térmica de rede» → indicar IP e porta (quase sempre 9100) → «Enviar ticket de teste»",
+          "Descobrir o IP: na maioria das térmicas, ligar com o botão FEED premido imprime um autoteste com o IP; também aparece na lista de dispositivos do router",
+          "Fixar o IP no router (reserva DHCP) — sem isso a impressora pode mudar de endereço e deixar de imprimir",
+          "Com papel A4 configurado ou impressora só USB, o caminho é a caixa de diálogo — ESC/POS é só para rolos térmicos na rede",
+        ],
+      },
+      {
+        heading: "Impressão — problemas comuns",
+        paragraphs: ["As situações mais frequentes:"],
+        table: {
+          head: ["Sintoma", "O que fazer"],
+          rows: [
+            ["«Não foi possível aceder à impressora»", "Confirmar que está ligada e na mesma rede da loja; rever IP e porta; repetir o «ticket de teste»"],
+            ["«Nenhuma impressora de rede configurada»", "Indicar IP + porta em Definições → Loja → Impressão — ou mudar o método para «Caixa de diálogo Imprimir»"],
+            ["A impressora mudou de IP", "Criar uma reserva DHCP no router e atualizar o IP nas definições"],
+            ["Talão cortado ou margens erradas", "Na caixa de diálogo: escolher o papel certo (58 mm, 80 mm ou A4), margens «Nenhuma» e escala 100%"],
+            ["O separador do talão não abre", "Permitir pop-ups para o endereço da app e imprimir outra vez"],
+            ["Impressora só liga por USB", "Usar o método «Caixa de diálogo Imprimir» — ESC/POS precisa de uma impressora na rede"],
+          ],
+        },
       },
       {
         heading: "Módulos Pro — como funcionam",
