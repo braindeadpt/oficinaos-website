@@ -1,6 +1,7 @@
 import {
   BACKUP_DOCS_URL,
   DIAG_REPO_URL,
+  DIAG_STORE_URL,
   DIAG_ZIP_URL,
   DOCS_MOBILE_URL,
   DOCS_REMOTE_URL,
@@ -44,6 +45,7 @@ export const t = {
     pro: "Módulos Pro",
     install: "Instalar",
     docs: "Guia",
+    updates: "Novidades",
     github: "GitHub",
   },
   hero: {
@@ -748,15 +750,24 @@ export const t = {
         "A ferramenta Windows gratuita que lê qualquer Android ou iPhone por cabo — scan local sempre grátis; envio à loja e relatórios IA são módulos Pro.",
       sections: [
         {
-          heading: "Descarregar e correr",
+          heading: "Instalar — Microsoft Store",
           paragraphs: [
-            "App Windows portátil com visual de terminal retro: descarrega o zip, extrai a pasta inteira (o exe precisa dos ficheiros ao lado) e corre OficinaDiag.exe. Sem conta, sem instalação, sem subscrição.",
-            "O Windows pode mostrar o aviso SmartScreen na primeira execução — é normal para um programa novo sem certificado de assinatura: «Mais informações» → «Executar mesmo assim».",
+            "A forma mais simples: instale pela Microsoft Store — um clique, sem aviso SmartScreen e com atualizações automáticas. Grátis.",
+            "Alternativa portátil: descarrega o zip, extrai a pasta inteira (o exe precisa dos ficheiros ao lado) e corre OficinaDiag.exe — o Windows pode mostrar o aviso SmartScreen na primeira execução: «Mais informações» → «Executar mesmo assim».",
           ],
           links: [
-            { label: "Descarregar oficinaos-diag (Windows)", href: DIAG_ZIP_URL },
+            { label: "Microsoft Store", href: DIAG_STORE_URL },
+            { label: "ZIP portátil (GitHub)", href: DIAG_ZIP_URL },
             { label: "Código-fonte no GitHub", href: DIAG_REPO_URL },
           ],
+        },
+        {
+          heading: "Idioma e temas",
+          paragraphs: [
+            "O Diag fala português e inglês — nas Opções (⚙) escolhe-se o idioma, guardado junto ao exe.",
+            "Três temas ao gosto do utilizador: Terminal (o visual retro original), Windows 95 e Moderno. A escolha fica guardada e aplica-se em tempo real.",
+          ],
+          links: [],
         },
         {
           heading: "O que o scan lê — grátis",
@@ -848,10 +859,18 @@ export const t = {
       ],
     },
   },
+  updates: {
+    title: "Novidades",
+    subtitle:
+      "O que mudou no OficinaOS — funcionalidades novas, melhorias e módulos Pro. Atualizado a cada lançamento.",
+    free: "Grátis",
+    pro: "Pro",
+  },
   footer: {
     license: "Licença MIT",
     fork: "Fork de Reparilo",
     rights: "Software livre para oficinas independentes.",
+    contact: "Contacto",
   },
 };
 

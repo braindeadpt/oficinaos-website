@@ -1,0 +1,83 @@
+---
+import { UPDATES, type UpdateTier } from "../data/updates";
+import type { Copy } from "../i18n/pt";
+import type { Locale } from "../i18n/utils";
+import Footer from "./Footer.astro";
+import Nav from "./Nav.astro";
+
+interface Props {
+  t: Copy;
+  locale: Locale;
+}
+const { t, locale } = Astro.props;
+
+const dateLocale = { pt: "pt-PT", en: "en-GB", es: "es-ES" }[locale];
+
+const badgeCls: Record<UpdateTier, string> = {
+  free: "border-teal-500/30 bg-teal-500/10 text-teal-300",
+  pro: "border-amber-500/30 bg-amber-500/10 text-amber-300",
+  diag: "border-sky-500/30 bg-sky-500/10 text-sky-300",
+};
+const badgeLabel: Record<UpdateTier, string> = {
+  free: t.updates.free,
+  pro: t.updates.pro,
+  diag: "Diag",
+};
+
+const grouped = UPDATES.reduce<Map<string, typeof UPDATES>>((acc, u) => {
+  const list = acc.get(u.date) ?? [];
+  list.push(u);
+  return acc.set(u.date, list);
+}, new Map());
+---
+
+<Nav t={t} locale={locale} />
+<main class="mx-auto max-w-3xl px-6 py-16">
+  <h1 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+    {t.updates.title}
+  </h1>
+  <p class="mt-4 text-lg text-zinc-400">{t.updates.subtitle}</p>
+
+  <ol class="mt-12 space-y-10 border-l border-zinc-800 pl-6">
+    {
+      [...grouped].map(([date, items]) => (
+        <li>
+          <time
+            datetime={date}
+            class="relative -left-[31px] rounded-full border border-zinc-800 bg-zinc-950 px-3 py-1 text-xs font-medium text-zinc-400"
+          >
+            {new Date(`${date}T12:00:00`).toLocaleDateString(dateLocale, {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            })}
+          </time>
+          <ul class="mt-4 space-y-4">
+            {items.map((u) => (
+              <li class="rounded-2xl border border-zinc-800 bg-zinc-900/30 p-5">
+                <div class="flex flex-wrap items-center gap-2">
+                  <span
+                    class:list={[
+                      "rounded-full border px-2 py-0.5 text-xs font-semibold",
+                      badgeCls[u.tier],
+                    ]}
+                  >
+                    {badgeLabel[u.tier]}
+                  </span>
+                  <span class="text-xs text-zinc-500">{u.area[locale]}</span>
+                </div>
+                <h2 class="mt-2 font-semibold text-white">
+                  {u.title[locale]}
+                </h2>
+                <p class="mt-1.5 text-sm leading-relaxed text-zinc-400">
+                  {u.desc[locale]}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </li>
+      ))
+    }
+  </ol>
+</main>
+<Footer t={t} />

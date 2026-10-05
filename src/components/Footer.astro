@@ -35,14 +35,22 @@ const UPSTREAM_URL = "https://github.com/cranknet/reparilo";
         >
       </p>
     </div>
-    <a
-      href={REPO_URL}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="flex items-center gap-2 text-sm text-zinc-400 transition hover:text-white"
-    >
-      <GithubMark class="h-4 w-4" />
-      braindeadpt/OficinaOS
-    </a>
+    <div class="flex flex-col items-center gap-2 sm:items-end">
+      <a
+        href={REPO_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center gap-2 text-sm text-zinc-400 transition hover:text-white"
+      >
+        <GithubMark class="h-4 w-4" />
+        braindeadpt/OficinaOS
+      </a>
+      <a
+        href="mailto:oficinaos.app@gmail.com"
+        class="text-xs text-zinc-500 transition hover:text-zinc-300"
+      >
+        {t.footer.contact}: oficinaos.app@gmail.com
+      </a>
+    </div>
   </div>
 </footer>

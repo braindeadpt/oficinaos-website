@@ -50,6 +50,11 @@ const logoUrl = `${import.meta.env.BASE_URL}favicon.svg`;
         class="hidden transition hover:text-white sm:inline"
         >{t.nav.docs}</a
       >
+      <a
+        href={localeUrl(locale, "/updates")}
+        class="hidden transition hover:text-white sm:inline"
+        >{t.nav.updates}</a
+      >
       <div class="flex items-center gap-1 rounded-full border border-zinc-800 p-0.5">
         {
           LOCALES.map((l) => (

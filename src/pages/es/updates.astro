@@ -1,0 +1,9 @@
+---
+import Updates from "../../components/Updates.astro";
+import Base from "../../layouts/Base.astro";
+import { lang, locale, ogLocale, t } from "../../i18n/es";
+---
+
+<Base t={t} locale={locale} langAttr={lang} ogLocale={ogLocale}>
+  <Updates t={t} locale={locale} />
+</Base>

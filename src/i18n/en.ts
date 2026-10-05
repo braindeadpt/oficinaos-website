@@ -2,6 +2,7 @@ import type { Copy } from "./pt";
 import {
   BACKUP_DOCS_URL,
   DIAG_REPO_URL,
+  DIAG_STORE_URL,
   DIAG_ZIP_URL,
   DOCS_MOBILE_URL,
   DOCS_REMOTE_URL,
@@ -29,6 +30,7 @@ export const t: Copy = {
     pro: "Pro modules",
     install: "Install",
     docs: "Guide",
+    updates: "What's new",
     github: "GitHub",
   },
   hero: {
@@ -729,15 +731,24 @@ export const t: Copy = {
         "The free Windows tool that reads any Android or iPhone over USB — local scans are always free; send-to-shop and AI reports are Pro modules.",
       sections: [
         {
-          heading: "Download and run",
+          heading: "Install — Microsoft Store",
           paragraphs: [
-            "A portable Windows app with a retro terminal look: download the zip, extract the whole folder (the exe needs the files next to it) and run OficinaDiag.exe. No account, no install, no subscription.",
-            "Windows may show a SmartScreen warning on first run — normal for a new program without a signing certificate: «More info» → «Run anyway».",
+            "The easiest way: install from the Microsoft Store — one click, no SmartScreen warning, automatic updates. Free.",
+            "Portable alternative: download the zip, extract the whole folder (the exe needs the files next to it) and run OficinaDiag.exe — Windows may show a SmartScreen warning on first run: «More info» → «Run anyway».",
           ],
           links: [
-            { label: "Download oficinaos-diag (Windows)", href: DIAG_ZIP_URL },
+            { label: "Microsoft Store", href: DIAG_STORE_URL },
+            { label: "Portable ZIP (GitHub)", href: DIAG_ZIP_URL },
             { label: "Source code on GitHub", href: DIAG_REPO_URL },
           ],
+        },
+        {
+          heading: "Language and themes",
+          paragraphs: [
+            "Diag speaks Portuguese and English — pick the language in Options (⚙), saved next to the exe.",
+            "Three themes to choose from: Terminal (the original retro look), Windows 95 and Modern. The choice is saved and applies instantly.",
+          ],
+          links: [],
         },
         {
           heading: "What the scan reads — free",
@@ -829,9 +840,17 @@ export const t: Copy = {
       ],
     },
   },
+  updates: {
+    title: "What's new",
+    subtitle:
+      "What's changed in OficinaOS — new features, improvements and Pro modules. Updated with every release.",
+    free: "Free",
+    pro: "Pro",
+  },
   footer: {
     license: "MIT License",
     fork: "Fork of Reparilo",
     rights: "Free software for independent repair shops.",
+    contact: "Contact",
   },
 };

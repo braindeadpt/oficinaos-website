@@ -2,6 +2,7 @@ import type { Copy } from "./pt";
 import {
   BACKUP_DOCS_URL,
   DIAG_REPO_URL,
+  DIAG_STORE_URL,
   DIAG_ZIP_URL,
   DOCS_MOBILE_URL,
   DOCS_REMOTE_URL,
@@ -29,6 +30,7 @@ export const t: Copy = {
     pro: "Módulos Pro",
     install: "Instalar",
     docs: "Guía",
+    updates: "Novedades",
     github: "GitHub",
   },
   hero: {
@@ -733,15 +735,24 @@ export const t: Copy = {
         "La herramienta Windows gratuita que lee cualquier Android o iPhone por cable — el scan local es siempre gratis; el envío a la tienda y los informes IA son módulos Pro.",
       sections: [
         {
-          heading: "Descargar y ejecutar",
+          heading: "Instalar — Microsoft Store",
           paragraphs: [
-            "App Windows portátil con estética de terminal retro: descarga el zip, extrae la carpeta entera (el exe necesita los archivos de al lado) y ejecuta OficinaDiag.exe. Sin cuenta, sin instalación, sin suscripción.",
-            "Windows puede mostrar el aviso SmartScreen en la primera ejecución — es normal en un programa nuevo sin certificado de firma: «Más información» → «Ejecutar de todas formas».",
+            "La forma más sencilla: instala desde la Microsoft Store — un clic, sin aviso SmartScreen y con actualizaciones automáticas. Gratis.",
+            "Alternativa portátil: descarga el zip, extrae la carpeta entera (el exe necesita los archivos de al lado) y ejecuta OficinaDiag.exe — Windows puede mostrar el aviso SmartScreen en la primera ejecución: «Más información» → «Ejecutar de todas formas».",
           ],
           links: [
-            { label: "Descargar oficinaos-diag (Windows)", href: DIAG_ZIP_URL },
+            { label: "Microsoft Store", href: DIAG_STORE_URL },
+            { label: "ZIP portable (GitHub)", href: DIAG_ZIP_URL },
             { label: "Código fuente en GitHub", href: DIAG_REPO_URL },
           ],
+        },
+        {
+          heading: "Idioma y temas",
+          paragraphs: [
+            "Diag habla portugués e inglés — el idioma se elige en Opciones (⚙) y se guarda junto al exe.",
+            "Tres temas a elegir: Terminal (el estilo retro original), Windows 95 y Moderno. La elección se guarda y se aplica al instante.",
+          ],
+          links: [],
         },
         {
           heading: "Lo que lee el scan — gratis",
@@ -833,9 +844,17 @@ export const t: Copy = {
       ],
     },
   },
+  updates: {
+    title: "Novedades",
+    subtitle:
+      "Lo que ha cambiado en OficinaOS — funciones nuevas, mejoras y módulos Pro. Actualizado con cada lanzamiento.",
+    free: "Gratis",
+    pro: "Pro",
+  },
   footer: {
     license: "Licencia MIT",
     fork: "Fork de Reparilo",
     rights: "Software libre para talleres independientes.",
+    contact: "Contacto",
   },
 };

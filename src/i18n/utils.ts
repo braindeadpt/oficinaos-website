@@ -28,6 +28,7 @@ export const DOCS_MOBILE_URL = `${REPO_URL}/blob/main/docs/mobile-access.md`;
 
 export const DIAG_REPO_URL = "https://github.com/braindeadpt/oficinaos-diag";
 export const DIAG_ZIP_URL = `${DIAG_REPO_URL}/releases/latest/download/oficinaos-diag-win-x64.zip`;
+export const DIAG_STORE_URL = "https://apps.microsoft.com/detail/9P2BM91SFKFM";
 
 /** Heading → URL-safe anchor id (strips accents and punctuation). */
 export function slugify(s: string): string {
