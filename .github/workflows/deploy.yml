@@ -22,6 +22,11 @@ jobs:
       - uses: oven-sh/setup-bun@v2
       - run: bun install
       - run: bun run build
+        env:
+          # Beta sign-up form endpoint (e.g. Formspree). Set it under
+          # Settings → Secrets and variables → Actions → Variables.
+          # Empty → the form falls back to a mailto: to the contact email.
+          PUBLIC_BETA_FORM_ENDPOINT: ${{ vars.PUBLIC_BETA_FORM_ENDPOINT }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

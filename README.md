@@ -9,7 +9,7 @@ Static site built with [Astro](https://astro.build) + Tailwind CSS v4.
 > where each thing lives — is
 > [`reparilo/docs/ecosystem.md`](https://github.com/braindeadpt/OficinaOS/blob/main/docs/ecosystem.md).
 > **This site is the user-facing documentation** — `/docs` +
-> `/docs/{portal,whatsapp,sms,diag,invoicing}` in pt/en/es — repo `.md` files
+> `/docs/{portal,whatsapp,sms,diag,invoicing,storefront,market,market-prices,multi-shop,remarketing}` in pt/en/es — repo `.md` files
 > are technical reference only.
 
 Locales: `pt` (default, served at `/`), `en` (`/en/`), `es` (`/es/`).
@@ -29,11 +29,16 @@ Every string lives in `src/i18n/{pt,en,es}.ts`. Pages are thin wrappers that
 pass the copy object into `src/components/*` — edit the i18n files, not the
 markup.
 
-## Waitlist form
+## Pro beta sign-up form
 
-The Pro-modules waitlist can post to [Formspree](https://formspree.io) — set
-`FORMSPREE_ID` in `src/components/Pro.astro`. While empty, the section falls
-back to a GitHub CTA (watching the repo notifies followers of releases).
+The Pro section's beta sign-up form (email, shop name, city, optional phone,
+hidden language) posts to the URL in the build-time env var
+`PUBLIC_BETA_FORM_ENDPOINT` — e.g. a [Formspree](https://formspree.io) form
+URL (`https://formspree.io/f/<id>`) or any endpoint that accepts a urlencoded
+POST. In CI it is read from the repository **variable** of the same name
+(Settings → Secrets and variables → Actions → Variables). While it is unset,
+the form opens the visitor's email client with the fields filled in, addressed
+to the contact email (`CONTACT_EMAIL` in `src/i18n/utils.ts`).
 
 ## Screenshots
 

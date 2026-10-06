@@ -35,9 +35,9 @@ export const ogLocale = "pt_PT";
 
 export const t = {
   meta: {
-    title: "OficinaOS — Gestão de oficina gratuita e self-hosted",
+    title: "OficinaOS — Programa gratuito para lojas de reparação de telemóveis",
     description:
-      "Sistema de gestão gratuito e open source (MIT) para oficinas de reparação de telemóveis. Corre num PC dentro da loja — os dados dos seus clientes nunca saem da sua rede.",
+      "Reparações, orçamentos, stock e caixa num só programa, grátis e no PC da loja. Sem mensalidades e sem os dados dos seus clientes saírem da loja.",
   },
   nav: {
     features: "Funcionalidades",
@@ -47,16 +47,25 @@ export const t = {
     docs: "Guia",
     updates: "Novidades",
     github: "GitHub",
+    githubLabel: "Código-fonte no GitHub",
+    menuLabel: "Navegação principal",
+    openMenu: "Abrir menu",
+    closeMenu: "Fechar menu",
+    download: "Descarregar",
+    language: "Idioma",
   },
   hero: {
-    badge: "Gratuito · MIT · Self-hosted",
-    title: "A sua oficina, organizada.",
-    titleAccent: "Os seus dados, na loja.",
+    badge: "Grátis para sempre · Os dados ficam na sua loja",
+    title: "Menos telefonemas de «já está pronto?».",
+    titleAccent: "A sua loja de reparações, organizada.",
     subtitle:
-      "O OficinaOS é um sistema de gestão gratuito e open source para oficinas de reparação de telemóveis. Corre num computador dentro da loja — reparações, stock, caixa e dados dos clientes nunca saem da vossa rede local.",
-    ctaPrimary: "Ver no GitHub",
-    ctaSecondary: "Guia de instalação",
-    chips: ["Sem subscrições", "Funciona na rede local", "Web + Android"],
+      "Receção, orçamentos, stock e caixa num só programa, instalado no PC da loja. Os clientes podem acompanhar a reparação no telemóvel e a equipa sabe sempre o que há para fazer.",
+    ctaPrimary: "Descarregar para Windows",
+    ctaSecondary: "Ver como funciona",
+    downloadNote: "Grátis · Windows 10/11 · instalação guiada",
+    chips: ["Sem mensalidades", "Funciona sem internet", "No PC, tablet e telemóvel"],
+    techNote: "Para técnicos: código aberto (licença MIT), Linux/macOS com Docker —",
+    techLink: "ver instalação avançada",
   },
   features: {
     title: "Tudo o que uma oficina precisa",
@@ -97,7 +106,7 @@ export const t = {
       },
       {
         title: "Cópias de segurança",
-        desc: "Backups locais da base de dados com um comando — os dados são vossos.",
+        desc: "Cópias de segurança da base de dados no próprio PC — os dados são seus.",
       },
     ],
   },
@@ -108,33 +117,45 @@ export const t = {
     comingSoon: "Captura em breve",
   },
   pro: {
-    badge: "Em desenvolvimento",
+    badge: "Beta — grátis para lojas piloto",
     title: "Módulos Pro",
     subtitle:
-      "Módulos pagos e opcionais, em desenvolvimento ativo. O núcleo continua gratuito e MIT — para sempre.",
-    items: [
-      {
-        title: "Automação de balcão",
-        desc: "Atualizações automáticas por WhatsApp e recibos digitais — menos chamadas de «já está pronto?».",
-      },
-      {
-        title: "Diagnóstico de bancada",
-        desc: "Diagnóstico por cabo ao equipamento, com relatórios assistidos por IA.",
-      },
-      {
-        title: "Certificação de usados",
-        desc: "Ciclos de bateria, estado de bloqueio e grading para compra e venda — certificados A/B/C.",
-      },
+      "Funcionalidades opcionais que precisam de «chegar à internet», através da OficinaOS Cloud. Já estão disponíveis em beta e, durante o beta, as lojas piloto usam-nas gratuitamente. O núcleo continua gratuito e MIT — para sempre.",
+    statusLabel: "Beta",
+    modules: [
+      { title: "Portal do cliente", desc: "Link público por reparação, com estado e resposta a orçamentos.", href: "/docs/portal/" },
+      { title: "Bot de WhatsApp", desc: "O cliente pergunta pelo WhatsApp e recebe o estado real da reparação.", href: "/docs/whatsapp/" },
+      { title: "Canal SMS", desc: "O mesmo assistente por SMS, com um telemóvel Android na loja.", href: "/docs/sms/" },
+      { title: "Receção de diagnósticos", desc: "O cliente faz o diagnóstico em casa com o Diag e envia-o à loja.", href: "/docs/diag/" },
+      { title: "Relatórios IA", desc: "O diagnóstico técnico explicado em linguagem simples.", href: "/docs/diag/" },
+      { title: "Faturação (InvoiceXpress)", desc: "Faturas certificadas a partir da venda ou da reparação — só Portugal.", href: "/docs/invoicing/" },
+      { title: "Montra online", desc: "Página pública com artigos do catálogo; os clientes reservam e o pedido entra na app.", href: "/docs/storefront/" },
+      { title: "Procuro-peça", desc: "Quadro entre lojas OficinaOS para pedir e oferecer peças.", href: "/docs/market/" },
+      { title: "Preços de mercado", desc: "Compare os seus preços com a mediana anónima de outras lojas.", href: "/docs/market-prices/" },
+      { title: "Multi-loja", desc: "Receita e reparações de todas as suas lojas num só painel.", href: "/docs/multi-shop/" },
+      { title: "Remarketing WhatsApp", desc: "Mensagem automática a clientes sem reparações há algum tempo.", href: "/docs/remarketing/" },
     ],
-    waitlist: {
-      title: "Lista de espera",
-      subtitle: "Receba novidades quando os módulos Pro forem lançados.",
-      placeholder: "voce@sualoja.pt",
-      button: "Notificar-me",
-      buttonGithub: "Seguir no GitHub",
-      note: "Formulário estático — sem conta. Só enviamos novidades sobre os módulos Pro.",
-      noteGithub:
-        "Segue o repositório no GitHub — os lançamentos dos módulos Pro são anunciados em releases.",
+    signup: {
+      title: "Quero entrar no beta Pro",
+      subtitle:
+        "Deixe o contacto da loja e falamos consigo para ativar os módulos. Sem compromisso.",
+      email: "Email",
+      emailPlaceholder: "voce@sualoja.pt",
+      shop: "Nome da loja",
+      shopPlaceholder: "ex.: Repara Já",
+      city: "Cidade",
+      cityPlaceholder: "ex.: Braga",
+      phone: "Telefone",
+      phonePlaceholder: "ex.: 912 345 678",
+      optional: "opcional",
+      languageLabel: "Idioma",
+      button: "Pedir acesso ao beta",
+      mailSubject: "Beta OficinaOS Pro — pedido de acesso",
+      note: "Usamos estes dados só para o contactar sobre o beta Pro.",
+      noteMailto:
+        "Ao enviar, abre-se o seu programa de email com os dados preenchidos — basta carregar em Enviar.",
+      cloudText: "Já tem conta na OficinaOS Cloud?",
+      cloudLink: "Entrar em cloud.oficinaos.app",
     },
   },
   diag: {
@@ -162,23 +183,38 @@ export const t = {
     badge: "RGPD",
     title: "Os dados ficam na loja.",
     subtitle:
-      "O OficinaOS corre num PC dentro da loja — não há servidores nossos, nem conta nossa, nem telemetria.",
+      "A app corre num PC dentro da loja e não tem telemetria: por defeito, nenhum dado dos seus clientes sai da loja. Só os módulos opcionais — incluindo a OficinaOS Cloud (Pro) — enviam dados para fora, e cada um está declarado abaixo.",
     cards: [
       {
         title: "Tudo local por defeito",
-        desc: "Clientes, reparações, stock e caixa vivem no PC da loja. Como nunca tocamos nos dados, nem sequer é preciso um acordo de subcontratação (Art. 28) connosco.",
+        desc: "Clientes, reparações, stock e caixa vivem no PC da loja. Sem módulos Pro ligados, não recebemos nenhum dado da loja.",
       },
       {
-        title: "Sem transferências internacionais",
-        desc: "Por defeito nada sai da loja — ao contrário de sistemas na cloud, não há dados de clientes em servidores de terceiros.",
+        title: "A Cloud é opcional",
+        desc: "Os módulos Pro, as contas na OficinaOS Cloud e o envio de logs do Diag usam os nossos servidores. Só são usados se a loja (ou o cliente, no Diag) os ligar.",
       },
       {
-        title: "Extras opcionais e declarados",
-        desc: "WhatsApp, acesso remoto e IA são opt-in — e documentados item a item, prontos para o registo de tratamento (Art. 30).",
+        title: "Extras declarados",
+        desc: "WhatsApp, acesso remoto, IA e Cloud são opt-in — documentados item a item, prontos para o registo de tratamento (Art. 30).",
       },
     ],
-    tableTitle: "Quando liga um módulo opcional, é só isto que sai:",
+    tableTitle: "Quando liga um módulo opcional, é isto que sai:",
     table: [
+      {
+        name: "OficinaOS Cloud (módulos Pro)",
+        to: "Servidores OficinaOS",
+        what: "Conta e emparelhamento; dados de cada módulo ativo — páginas do portal (com nome do cliente), mensagens WhatsApp recebidas, reservas da montra, diagnósticos enviados, totais diários (multi-loja) e preços partilhados",
+      },
+      {
+        name: "Relatórios IA (Pro)",
+        to: "Fornecedor de IA da Cloud",
+        what: "Os dados do diagnóstico e as notas que pedem o relatório",
+      },
+      {
+        name: "Envio de log do Diag",
+        to: "Servidores OficinaOS",
+        what: "Só quando se carrega em «Enviar log»: o fim do ficheiro diag.log",
+      },
       {
         name: "Notificações WhatsApp",
         to: "Meta",
@@ -195,29 +231,42 @@ export const t = {
         what: "As perguntas que fizer à IA",
       },
     ],
+    cloudPrivacyLink: "Política de privacidade da OficinaOS Cloud",
     tableNote:
       "Ver o detalhe completo no repositório — incluindo o que nunca sai.",
   },
   install: {
     title: "A funcionar em minutos",
     subtitle:
-      "Um PC na loja, Docker, um comando. Depois da instalação, funciona offline na rede local.",
+      "Um PC Windows na loja e um instalador. Depois da instalação, funciona offline na rede local.",
     steps: [
       {
-        title: "Obter o código",
-        desc: "Clone o repositório ou descarregue o instalador nas Releases.",
+        title: "Descarregar o instalador",
+        desc: "Descarregue oficinaos-install.zip e extraia-o para uma pasta, por exemplo C:\\OficinaOS.",
       },
       {
-        title: "Arrancar com Docker",
-        desc: "docker compose up -d sobe a app e a base de dados em contentores.",
+        title: "Duplo clique em INSTALAR.bat",
+        desc: "O instalador trata de tudo: instala o Docker se faltar, gera as palavras-passe e arranca a app. Se o PC não suportar Docker, oferece o modo portátil. Se o SmartScreen avisar: «Mais informações» → «Executar mesmo assim».",
       },
       {
         title: "Abrir no browser",
-        desc: "http://localhost:4000 no PC — ou o IP da rede local noutros dispositivos.",
+        desc: "No fim abre-se http://localhost:4000. Nos outros dispositivos da loja, use o IP do PC (ex.: http://192.168.1.33:4000). No dia a dia, basta INICIAR.bat.",
       },
     ],
+    downloadButton: "Descarregar para Windows",
+    portableLink: "Versão portátil (sem Docker)",
+    downloadNote: "Windows 10/11 64-bit · grátis · última versão publicada no GitHub",
+    advanced: {
+      badge: "Avançado",
+      title: "Linux e macOS — Docker manual",
+      desc: "Não há instalador automático para Linux nem macOS. Com o Docker instalado, a app arranca com estes comandos:",
+      commentGet: "obter o código e a configuração",
+      commentStart: "arrancar com docker (o seed só na 1ª vez)",
+      commentOpen: "depois, abrir no browser",
+      note: "Edite o .env antes de arrancar (palavra-passe inicial do admin e APP_URL). Detalhes no guia de instalação.",
+    },
     guideLink: "Guia de instalação completo",
-    releasesLink: "Instalador para Windows (Releases)",
+    releasesLink: "Todas as versões (Releases)",
   },
   docs: {
     title: "Guia completo",
@@ -471,7 +520,12 @@ export const t = {
             ["Canal SMS", "O mesmo assistente por SMS — um telemóvel Android com SIM na loja envia e recebe, sem Meta nem custos por mensagem"],
             ["Diagnóstico à distância", "Faz o diagnóstico do telemóvel em casa (oficinaos-diag, grátis) e envia à loja com um código"],
             ["Relatórios IA", "Relatório do diagnóstico escrito em linguagem simples, pronto a entregar"],
-            ["Faturação certificada", "Fatura ou fatura-recibo legal emitida diretamente da reparação ou venda — via InvoiceXpress, com a conta da própria loja"],
+            ["Faturação certificada", "Fatura ou fatura-recibo legal emitida diretamente da reparação ou venda — via InvoiceXpress, com a conta da própria loja — só Portugal"],
+            ["Montra online", "Página pública com artigos do catálogo da loja; o cliente reserva e a reserva entra na fila de Pedidos"],
+            ["Procuro-peça", "Quadro entre lojas OficinaOS para pedir peças e responder «tenho» — o negócio acerta-se entre lojas"],
+            ["Preços de mercado", "Mediana anónima dos preços de reparações e peças de outras lojas, para comparar com os seus"],
+            ["Multi-loja", "Receita e reparações de todas as lojas do mesmo dono num só painel na OficinaOS Cloud"],
+            ["Remarketing WhatsApp", "Mensagem automática a clientes com consentimento cuja última reparação já foi há algum tempo"],
           ],
         },
         links: [],
@@ -494,6 +548,11 @@ export const t = {
             ["Receção de diagnósticos", "Disponível (beta)", "A anunciar — grátis no beta"],
             ["Relatórios IA", "Disponível (beta)", "A anunciar — por relatório"],
             ["Faturação (InvoiceXpress)", "Disponível (beta)", "A anunciar — grátis no beta. A conta InvoiceXpress é da loja e tem o custo próprio do serviço deles"],
+            ["Montra online (+ personalização)", "Disponível (beta)", "A anunciar — grátis no beta"],
+            ["Procuro-peça", "Disponível (beta)", "A anunciar — grátis no beta"],
+            ["Preços de mercado", "Disponível (beta)", "A anunciar — grátis no beta"],
+            ["Multi-loja", "Disponível (beta)", "A anunciar — grátis no beta"],
+            ["Remarketing WhatsApp", "Disponível (beta)", "A anunciar — grátis no beta. As mensagens modelo têm o custo da Meta*"],
           ],
         },
         links: [],
@@ -554,10 +613,33 @@ export const t = {
       {
         heading: "Faturação certificada (Pro)",
         paragraphs: [
-          "A app emite documentos fiscais legais diretamente da venda ou da reparação — fatura-recibo quando o cliente tem NIF, fatura simplificada quando não tem. A emissão é feita via InvoiceXpress com a conta da própria loja: a chave API fica guardada encriptada no PC da loja e a app fala diretamente com o InvoiceXpress — a OficinaOS Cloud só controla o acesso ao módulo, nunca vê os documentos.",
+          "A app emite documentos fiscais legais diretamente da venda ou da reparação — fatura-recibo quando o cliente tem NIF, fatura simplificada quando não tem. A emissão é feita via InvoiceXpress com a conta da própria loja: a chave API fica guardada encriptada no PC da loja e a app fala diretamente com o InvoiceXpress — a OficinaOS Cloud só controla o acesso ao módulo, nunca vê os documentos. Só para lojas em Portugal.",
         ],
         links: [
           { label: "Guia detalhado da faturação", href: "/docs/invoicing" },
+        ],
+      },
+      {
+        heading: "Montra, procuro-peça, preços, multi-loja e remarketing (Pro)",
+        paragraphs: [
+          "Mais cinco módulos Pro, todos em beta e ativados na conta OficinaOS Cloud. Cada um tem um guia curto:",
+        ],
+        table: {
+          head: ["Módulo", "Para quê"],
+          rows: [
+            ["Montra online", "Página pública com os artigos que escolher do catálogo — o cliente reserva e o pedido aparece em Pedidos"],
+            ["Procuro-peça", "Pedir uma peça às outras lojas OficinaOS ou responder aos pedidos delas"],
+            ["Preços de mercado", "Ver a mediana anónima dos preços de outras lojas ao lado dos seus"],
+            ["Multi-loja", "Painel com a receita e as reparações de todas as suas lojas"],
+            ["Remarketing WhatsApp", "Mensagem automática a clientes que não voltam há algum tempo"],
+          ],
+        },
+        links: [
+          { label: "Guia da montra online", href: "/docs/storefront/" },
+          { label: "Guia do procuro-peça", href: "/docs/market/" },
+          { label: "Guia dos preços de mercado", href: "/docs/market-prices/" },
+          { label: "Guia do multi-loja", href: "/docs/multi-shop/" },
+          { label: "Guia do remarketing", href: "/docs/remarketing/" },
         ],
       },
       {
@@ -589,11 +671,11 @@ export const t = {
           head: ["Pergunta", "Resposta"],
           rows: [
             ["Preciso de internet?", "Não para o uso diário — a app corre toda na rede da loja. Só para atualizações e módulos Pro."],
-            ["Os dados dos clientes vão para algum servidor?", "Não por defeito. Com módulos Pro, a Cloud retransmite apenas snapshots redigidos e mensagens — sem custos internos nem dados privados."],
+            ["Os dados dos clientes vão para algum servidor?", "Não por defeito — a app não tem telemetria. Com módulos Pro, a OficinaOS Cloud recebe só os dados de que cada módulo precisa (por exemplo, páginas do portal, mensagens, reservas e diagnósticos enviados), nunca custos internos nem notas internas. O detalhe está na política de privacidade da Cloud (cloud.oficinaos.app/privacy)."],
             ["Funciona no telemóvel?", "Sim — na Wi-Fi da loja qualquer aparelho abre no browser; fora da loja com o acesso remoto (Cloudflare Tunnel)."],
             ["O cliente tem de instalar alguma coisa?", "Não — o portal abre num link no browser; o bot responde no WhatsApp normal dele."],
             ["Quanto custa?", "A app completa é gratuita (licença MIT). Os módulos Pro são subscrições opcionais em beta."],
-            ["Várias lojas / filiais?", "Não — o OficinaOS é desenhado para uma localização por instalação."],
+            ["Várias lojas / filiais?", "Cada loja tem a sua instalação. Com o módulo Pro Multi-loja, o dono vê a receita e as reparações de todas as lojas num só painel na OficinaOS Cloud."],
             ["E se o PC avariar?", "Backups diários automáticos; restaurar noutro PC é copiar o backup e correr o instalador."],
             ["Mac ou Linux?", "Sim, via Docker manual — o instalador automático é só Windows."],
             ["Dá para importar dados de outro sistema?", "Clientes e catálogo por CSV; contacte-nos para migrações assistidas."],
@@ -742,7 +824,7 @@ export const t = {
           heading: "Limites honestos",
           list: [
             "Respostas podem demorar até ~2 minutos (ciclo de sincronização) — não é instantâneo",
-            "Responder a quem escreve é grátis; iniciar conversas («a tua reparação está pronta») precisa de modelos aprovados na Meta e tem custo por mensagem",
+            "Responder a quem escreve é grátis; iniciar conversas («a sua reparação está pronta») precisa de modelos aprovados na Meta e tem custo por mensagem",
             "Flood control: máximo 20 mensagens/hora por número — protege contra spam",
             "Áudios e imagens não são interpretados — vão para humano",
             "Em modo teste, só os números verificados na Meta recebem respostas — em produção não há esse limite",
@@ -920,14 +1002,14 @@ export const t = {
         {
           heading: "Instalação — passo a passo (~5 minutos)",
           paragraphs: [
-            "1. No telemóvel Android, instala «SMS Gateway for Android» (sms-gate.app) a partir da Play Store ou do site oficial.",
-            "2. Abre a app e ativa o modo «Local Server» (Servidor Local). A app mostra três coisas: o endereço local (ex.: 192.168.1.50:8080), um nome de utilizador e uma palavra-passe.",
-            "3. Confirma que o telemóvel está ligado à mesma rede Wi-Fi do PC onde corre o OficinaOS.",
+            "1. No telemóvel Android, instale «SMS Gateway for Android» (sms-gate.app) a partir da Play Store ou do site oficial.",
+            "2. Abra a app e ative o modo «Local Server» (Servidor Local). A app mostra três coisas: o endereço local (ex.: 192.168.1.50:8080), um nome de utilizador e uma palavra-passe.",
+            "3. Confirme que o telemóvel está ligado à mesma rede Wi-Fi do PC onde corre o OficinaOS.",
             "4. No PC, na app OficinaOS: Menu → Notificações → Canais → secção SMS.",
-            "5. No campo «URL do gateway», escreve http:// seguido do endereço que a app do telemóvel mostra — por exemplo http://192.168.1.50:8080.",
-            "6. Preenche o utilizador e a palavra-passe exatamente como aparecem no telemóvel e guarda.",
-            "7. Carrega «Enviar SMS de teste», mete o teu próprio número e confirma que a mensagem chega.",
-            "8. Por fim, carrega «Registar webhook no telemóvel» — isto diz à app do telemóvel para onde enviar os SMS recebidos dos clientes.",
+            "5. No campo «URL do gateway», escreva http:// seguido do endereço que a app do telemóvel mostra — por exemplo http://192.168.1.50:8080.",
+            "6. Preencha o utilizador e a palavra-passe exatamente como aparecem no telemóvel e guarda.",
+            "7. Carregue em «Enviar SMS de teste», indique o seu próprio número e confirme que a mensagem chega.",
+            "8. Por fim, carregue em «Registar webhook no telemóvel» — isto diz à app do telemóvel para onde enviar os SMS recebidos dos clientes.",
           ],
           links: [
             { label: "SMS Gateway for Android (site oficial)", href: "https://sms-gate.app" },
@@ -936,18 +1018,18 @@ export const t = {
         {
           heading: "O detalhe do webhook — porque não pode ser localhost",
           paragraphs: [
-            "O botão «Registar webhook» ensina a app do telemóvel a reencaminhar os SMS recebidos para o PC da loja. Para isso, a OficinaOS precisa de saber o seu próprio endereço na rede — e descobre-o a partir do endereço que usas no browser.",
-            "Se abrires a app em http://localhost:4000, o webhook fica registado como «localhost» — que para o telemóvel significa ele próprio, não o PC. O registo falha ou fica a apontar para o sítio errado.",
-            "Abre a app pelo endereço de rede do PC (ex.: http://192.168.1.20:4000 — o mesmo que usas noutros dispositivos da loja) antes de carregar «Registar webhook». A app avisa se estiveres em localhost.",
+            "O botão «Registar webhook» ensina a app do telemóvel a reencaminhar os SMS recebidos para o PC da loja. Para isso, a OficinaOS precisa de saber o seu próprio endereço na rede — e descobre-o a partir do endereço que usa no browser.",
+            "Se abrir a app em http://localhost:4000, o webhook fica registado como «localhost» — que para o telemóvel significa ele próprio, não o PC. O registo falha ou fica a apontar para o sítio errado.",
+            "Abra a app pelo endereço de rede do PC (ex.: http://192.168.1.20:4000 — o mesmo que usa noutros dispositivos da loja) antes de carregar em «Registar webhook». A app avisa se estiver em localhost.",
           ],
           links: [],
         },
         {
           heading: "Manter o gateway fiável",
           list: [
-            "Deixa o telemóvel sempre ligado ao carregador — o gateway é ele; desligado, os SMS não saem",
-            "Nas definições do Android, exclui «SMS Gateway» da otimização de bateria (Bateria → Otimização → «Não otimizar») para o Android não o suspender",
-            "No router da loja, reserva o IP do telemóvel (DHCP reservation) — se o IP mudar, a configuração deixa de apontar para o sítio certo",
+            "Deixe o telemóvel sempre ligado ao carregador — o gateway é ele; desligado, os SMS não saem",
+            "Nas definições do Android, exclua «SMS Gateway» da otimização de bateria (Bateria → Otimização → «Não otimizar») para o Android não o suspender",
+            "No router da loja, reserve o IP do telemóvel (reserva DHCP) — se o IP mudar, a configuração deixa de apontar para o sítio certo",
             "Se a loja tiver uma rede Wi-Fi de convidados separada, o telemóvel tem de estar na rede principal — a mesma do PC",
             "Teste rápido de saúde: a app chama GET /health no gateway a cada envio; se falhar, a notificação fica na fila e tenta de novo",
           ],
@@ -981,7 +1063,7 @@ export const t = {
             rows: [
               ["SMS de teste não chega", "URL correto (http:// + IP:porta)? Número de destino com indicativo (ex.: +351…)? Saldo/SMS disponíveis no SIM?"],
               ["«Falha na ligação ao gateway»", "O telemóvel está ligado e na mesma Wi-Fi do PC? O IP não mudou (ver na app do telemóvel)?"],
-              ["Erro de autenticação", "Utilizador e palavra-passe exatamente como na app do telemóvel (são gerados por ela, não escolhes tu)"],
+              ["Erro de autenticação", "Utilizador e palavra-passe exatamente como na app do telemóvel (são gerados por ela, não é o utilizador que os escolhe)"],
               ["Cliente responde e nada acontece", "O webhook está registado? (botão «Registar webhook») — e foi registado com a app aberta pelo IP de rede, não localhost?"],
               ["Funcionava e parou", "Otimização de bateria do Android suspendeu a app? O IP do telemóvel mudou?"],
               ["«Módulo não disponível»", "O entitlement sms está ativo na conta Cloud e a app já sincronizou (até ~2 min)?"],
@@ -993,9 +1075,9 @@ export const t = {
         {
           heading: "Segurança",
           list: [
-            "Nunca exponhas a porta do gateway (ex.: 8080) à internet — é só para a rede interna da loja",
-            "Mantém o telemóvel e o PC na rede de confiança da loja — não na Wi-Fi de clientes/convidados",
-            "Se trocares o telemóvel ou o SIM, repete a configuração e regista o webhook outra vez",
+            "Nunca exponha a porta do gateway (ex.: 8080) à internet — é só para a rede interna da loja",
+            "Mantenha o telemóvel e o PC na rede de confiança da loja — não na Wi-Fi de clientes/convidados",
+            "Se trocar de telemóvel ou de SIM, repita a configuração e registe o webhook outra vez",
           ],
           paragraphs: [],
           links: [],
@@ -1007,6 +1089,13 @@ export const t = {
       subtitle:
         "Faturas e faturas-recibo legais emitidas diretamente da venda ou da reparação — via InvoiceXpress, com a conta e a chave da própria loja.",
       sections: [
+        {
+          heading: "Só para Portugal",
+          paragraphs: [
+            "O módulo emite documentos através do InvoiceXpress, um serviço de faturação certificado para Portugal, e as taxas de IVA disponíveis na app são as de Portugal continental (IVA23, IVA13, IVA6 e IVA0). Lojas noutros países, incluindo Espanha, ainda não podem usar este módulo para faturação legal.",
+          ],
+          links: [],
+        },
         {
           heading: "O que o módulo faz",
           paragraphs: [
@@ -1029,7 +1118,7 @@ export const t = {
           list: [
             "Uma conta InvoiceXpress da loja (o serviço deles tem o custo próprio — independente do OficinaOS)",
             "A chave API da conta — cria-se nas definições do InvoiceXpress",
-            "A taxa de IVA que a loja usa (ex.: IVA 23% — ou a taxa da região)",
+            "A taxa de IVA predefinida da loja — IVA23, IVA13, IVA6 ou IVA0",
             "O módulo invoicing ativo na conta OficinaOS Cloud (no beta, ativamos nós)",
           ],
           paragraphs: [],
@@ -1040,12 +1129,12 @@ export const t = {
         {
           heading: "Configuração — passo a passo (~5 minutos)",
           paragraphs: [
-            "1. No InvoiceXpress, entra na conta da loja e gera uma chave API (nas definições de API da conta).",
-            "2. No OficinaOS: Definições → separador Faturação.",
-            "3. Em «Conta InvoiceXpress» escreve o subdomínio da conta — o que aparece antes de .app.invoicexpress.com.",
-            "4. Cola a chave API e escolhe a taxa de IVA predefinida (ex.: IVA23).",
-            "5. Ativa «Ativar faturação» e guarda.",
-            "6. Testa com uma venda ou reparação de valor simbólico e confirma que o documento aparece no InvoiceXpress.",
+            "1. No InvoiceXpress, entre na conta da loja e gere uma chave API (nas definições de API da conta).",
+            "2. No OficinaOS: Definições → separador Cloud → secção «Faturação (InvoiceXpress)» (aparece com a app emparelhada e o módulo ativo).",
+            "3. Em «Conta InvoiceXpress» escreva o subdomínio da conta — o que aparece antes de .app.invoicexpress.com.",
+            "4. Cole a chave API e escolha a taxa de IVA predefinida (ex.: IVA23).",
+            "5. Ligue «Ativar faturação» e guarde.",
+            "6. Teste com uma venda ou reparação de valor simbólico e confirme que o documento aparece no InvoiceXpress.",
           ],
           links: [],
         },
@@ -1068,8 +1157,241 @@ export const t = {
           heading: "Limites honestos",
           list: [
             "Requer a conta InvoiceXpress da loja — o custo desse serviço é da loja, separado do OficinaOS",
-            "O InvoiceXpress serve Portugal; para outros países o módulo pode não emitir os documentos fiscais corretos",
+            "Só Portugal: o InvoiceXpress e as taxas de IVA disponíveis são portugueses — noutros países o módulo não emite documentos fiscais válidos",
             "Documentos emitidos não são apagados pela app — anulações/credit notes fazem-se no InvoiceXpress",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+      ],
+    },
+    storefront: {
+      title: "Montra online",
+      subtitle:
+        "Uma página pública com artigos do seu catálogo — o cliente vê o preço e reserva, e a reserva entra na app como pedido.",
+      sections: [
+        {
+          heading: "O que o módulo faz",
+          paragraphs: [
+            "A app envia para a OficinaOS Cloud os artigos que marcar como «listados online», e a Cloud mostra-os numa página pública da loja (cloud.oficinaos.app/loja/<endereço>). Cada artigo aparece com nome, categoria e preço; os artigos sem stock deixam de aparecer.",
+            "O cliente escolhe um artigo e reserva-o com o nome, o telefone e uma nota opcional. A reserva chega à app na sincronização seguinte e entra na fila de Pedidos («Reserva loja online: …»), com notificação ao dono e ao balcão. Não há pagamento online: a venda faz-se na loja.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Ativar e publicar",
+          list: [
+            "Emparelhar a app com a OficinaOS Cloud (Definições → separador Cloud) e ter o módulo storefront ativo (no beta, ativamos nós)",
+            "Em Definições → separador Cloud aparece a secção «Loja online»: escolha o endereço da página, uma breve descrição e o email de contacto público",
+            "Ligue «Publicado» e guarde — o link da página aparece no topo da secção",
+            "A morada e o telefone mostrados na página vêm das definições da loja",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+        {
+          heading: "Escolher os artigos",
+          paragraphs: [
+            "No inventário de peças, edite o artigo e ligue «Listar na loja online». O preço mostrado é o preço unitário do catálogo. Quando o stock muda (vendas no POS, peças usadas em reparações, movimentos de stock), a página atualiza-se na sincronização seguinte (até ~2 minutos).",
+          ],
+          links: [],
+        },
+        {
+          heading: "Personalização — módulo storefront-plus",
+          list: [
+            "Cor de destaque da página",
+            "Logótipo da loja (PNG, JPEG ou WebP, até 200 KB)",
+            "Dois layouts: Vitrine (cartões) ou Compacto (lista)",
+          ],
+          paragraphs: [
+            "Sem este módulo, a página usa o aspeto predefinido.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Privacidade — o que sai e o que fica",
+          paragraphs: [
+            "Vão para a Cloud os artigos listados (nome, categoria, preço e se há stock) e os contactos públicos da loja. As reservas — nome, telefone e nota do cliente — são guardadas na Cloud e entregues à app.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Limites honestos",
+          list: [
+            "Até ~2 minutos entre mudar o catálogo e a página atualizar",
+            "Só reservas: sem pagamento nem envio",
+            "Máximo de 500 artigos listados",
+            "A página só mostra se há stock, não a quantidade",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+      ],
+    },
+    market: {
+      title: "Procuro-peça",
+      subtitle:
+        "Um quadro partilhado entre lojas OficinaOS: publique a peça de que precisa ou responda «tenho» aos pedidos de outras lojas.",
+      sections: [
+        {
+          heading: "Como funciona",
+          paragraphs: [
+            "No menu, «Procuro-peça» abre o quadro com os pedidos abertos das outras lojas, e o separador «Os meus pedidos» mostra os seus. As outras lojas veem só o nome da sua loja e o pedido.",
+            "Quem tem a peça carrega em «Tenho» e envia uma resposta com nota, preço e contacto. Só a loja que fez o pedido vê as respostas. O negócio acerta-se diretamente entre lojas, fora do OficinaOS.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Publicar um pedido",
+          list: [
+            "«Novo pedido» → o que procura (ex.: ecrã iPhone 12)",
+            "Tipo de peça e estado (qualquer, nova, OEM/original ou usada)",
+            "Marca, modelo, preço máximo e notas — opcionais",
+            "Quando arranjar a peça, carregue em «Já arranjei»; ou em «Fechar» para retirar o pedido. Um pedido fechado não volta a abrir — publica-se outro",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+        {
+          heading: "O que é preciso",
+          list: [
+            "App emparelhada com a OficinaOS Cloud",
+            "O módulo market ativo na conta (no beta, ativamos nós)",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+        {
+          heading: "Limites honestos",
+          list: [
+            "O quadro mostra os 100 pedidos abertos mais recentes",
+            "Até 30 pedidos e 60 respostas por hora, por loja",
+            "Sem pagamentos nem garantias na plataforma — confirme a peça diretamente com a outra loja",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+      ],
+    },
+    marketPrices: {
+      title: "Preços de mercado",
+      subtitle:
+        "Compare os preços das suas reparações e peças com a mediana anónima de outras lojas OficinaOS.",
+      sections: [
+        {
+          heading: "O que mostra",
+          paragraphs: [
+            "Em «Preços de mercado» (menu), cada linha mostra um artigo com a mediana de mercado, o intervalo (mínimo–máximo) e quantas lojas contribuíram. Quando o nome coincide com um artigo do seu catálogo, aparece também «O seu preço». Pode filtrar por reparações ou peças.",
+            "Um benchmark só aparece quando pelo menos 3 lojas partilham um preço para o mesmo artigo.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Partilhar os seus preços (opcional)",
+          paragraphs: [
+            "Ligar «Partilhar os seus preços anonimamente» envia para a Cloud o nome, a categoria e o preço dos artigos ativos dos seus catálogos de reparações e de peças. Sempre que o catálogo muda, o envio repete-se e substitui o anterior.",
+            "Desligar a partilha apaga da Cloud todos os preços que a loja enviou. Pode ver os benchmarks sem partilhar.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Limites honestos",
+          list: [
+            "Os artigos são comparados pelo nome (sem acentos, maiúsculas ou pontuação) — nomes diferentes para a mesma reparação não se juntam",
+            "Com poucas lojas, os extremos do intervalo são preços reais de lojas concretas (sem indicar quais)",
+            "Precisa da app emparelhada e do módulo market-prices ativo",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+      ],
+    },
+    multiShop: {
+      title: "Multi-loja",
+      subtitle:
+        "Para quem tem mais do que uma loja: a receita e as reparações de todas, lado a lado, no painel da OficinaOS Cloud.",
+      sections: [
+        {
+          heading: "Como funciona",
+          paragraphs: [
+            "Cada loja continua a ter a sua instalação do OficinaOS, com os seus dados no PC da loja. Com o módulo ativo, cada instalação envia à Cloud um resumo diário só com totais, e o dono vê o conjunto ao entrar em cloud.oficinaos.app.",
+            "No beta, as lojas adicionais são associadas à sua conta por nós; depois, cada loja emparelha a sua app com um código gerado no painel.",
+          ],
+          links: [],
+        },
+        {
+          heading: "O que o painel mostra",
+          list: [
+            "Receita dos últimos 7 e 30 dias, somando todas as lojas",
+            "Reparações entregues nos últimos 30 dias e reparações em curso",
+            "Gráfico da receita diária dos últimos 30 dias",
+            "Tabela por loja: receita, reparações, vendas, em curso e última sincronização",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+        {
+          heading: "O que sai da loja",
+          paragraphs: [
+            "Só números, por dia: receita (pagamentos de vendas e reparações), reparações abertas e entregues, número e valor das vendas, reparações em curso e clientes novos. Nunca saem nomes, contactos nem reparações individuais. O envio acontece em cada sincronização (~2 minutos) e recalcula também o dia anterior.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Limites honestos",
+          list: [
+            "«Entregues» conta as reparações com estado Entregue cuja última alteração foi nesse dia — é uma aproximação",
+            "Uma loja com a app desligada não envia dados até voltar a ligar",
+            "O painel está em português",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+      ],
+    },
+    remarketing: {
+      title: "Remarketing WhatsApp",
+      subtitle:
+        "Uma mensagem automática pelo WhatsApp da loja aos clientes cuja última reparação já foi há algum tempo.",
+      sections: [
+        {
+          heading: "Quem recebe",
+          list: [
+            "Clientes que aceitaram mensagens automáticas (consentimento na ficha do cliente)",
+            "Com pelo menos uma reparação entregue, sendo a última há mais do que o número de dias definido (90 por defeito)",
+            "Que não receberam esta mensagem dentro do intervalo mínimo definido (180 dias por defeito)",
+          ],
+          paragraphs: [
+            "A app verifica de hora a hora e envia no máximo 10 mensagens de cada vez.",
+          ],
+          links: [],
+        },
+        {
+          heading: "O que é preciso",
+          list: [
+            "WhatsApp configurado na app (Business ID, Phone Number ID e token) — o mesmo do bot de WhatsApp",
+            "Um modelo de mensagem criado e APROVADO na sua conta Meta Business, no idioma português (pt)",
+            "O módulo remarketing ativo na conta OficinaOS Cloud (no beta, ativamos nós)",
+          ],
+          paragraphs: [],
+          links: [{ label: "Guia do bot de WhatsApp", href: "/docs/whatsapp/" }],
+        },
+        {
+          heading: "Configurar",
+          paragraphs: [
+            "Menu → Notificações → Canais → secção WhatsApp → «Remarketing automático». Defina «Inativo há (dias)», «Repita no máximo a cada (dias)» e o nome do modelo Meta (por defeito oficinaos_remarketing).",
+            "O modelo recebe duas variáveis: {{1}} é o primeiro nome do cliente e {{2}} o nome da loja. Corpo sugerido: «Olá {{1}}! Já passou algum tempo desde a sua última reparação na {{2}}. Se o seu equipamento precisa de atenção, estamos aqui para ajudar.»",
+          ],
+          links: [],
+        },
+        {
+          heading: "Limites honestos",
+          list: [
+            "São mensagens iniciadas pela loja: a Meta cobra cada mensagem modelo — custo da Meta, não nosso",
+            "Só WhatsApp, não SMS",
+            "O modelo é enviado sempre em português (pt)",
+            "Se um envio falhar (por exemplo, modelo não aprovado), esse cliente só volta a ser tentado depois do intervalo mínimo",
+            "A app tem de estar ligada para as verificações correrem",
           ],
           paragraphs: [],
           links: [],
@@ -1086,7 +1408,7 @@ export const t = {
   },
   footer: {
     license: "Licença MIT",
-    fork: "Fork de Reparilo",
+    credits: "Baseado no projeto de código aberto",
     rights: "Software livre para oficinas independentes.",
     contact: "Contacto",
     community: "Comunidade"

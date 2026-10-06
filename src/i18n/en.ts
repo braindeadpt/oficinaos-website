@@ -20,9 +20,9 @@ export const ogLocale = "en_US";
 
 export const t: Copy = {
   meta: {
-    title: "OficinaOS — Free, self-hosted repair shop management",
+    title: "OficinaOS — Free software for phone repair shops",
     description:
-      "Free, open-source (MIT) management system for phone repair shops. Runs on a computer inside your shop — customer data never leaves your network.",
+      "Repairs, quotes, stock and till in one free program that runs on your shop's PC. No monthly fees, and your customers' data never leaves the shop.",
   },
   nav: {
     features: "Features",
@@ -32,16 +32,25 @@ export const t: Copy = {
     docs: "Guide",
     updates: "What's new",
     github: "GitHub",
+    githubLabel: "Source code on GitHub",
+    menuLabel: "Main navigation",
+    openMenu: "Open menu",
+    closeMenu: "Close menu",
+    download: "Download",
+    language: "Language",
   },
   hero: {
-    badge: "Free · MIT · Self-hosted",
-    title: "Your repair shop, managed.",
-    titleAccent: "Your data, in your shop.",
+    badge: "Free forever · Your data stays in your shop",
+    title: "Fewer “is it ready yet?” calls.",
+    titleAccent: "Your repair shop, organised.",
     subtitle:
-      "OficinaOS is a free, open-source management system for phone repair shops. It runs on a computer inside your store — jobs, stock, POS and customer data never leave your local network.",
-    ctaPrimary: "View on GitHub",
-    ctaSecondary: "Install guide",
-    chips: ["No subscriptions", "Runs on your LAN", "Web + Android"],
+      "Check-in, quotes, stock and till in one program, installed on your shop's PC. Customers can follow their repair on their phone and your team always knows what's next.",
+    ctaPrimary: "Download for Windows",
+    ctaSecondary: "See how it works",
+    downloadNote: "Free · Windows 10/11 · guided install",
+    chips: ["No monthly fees", "Works without internet", "On PC, tablet and phone"],
+    techNote: "For technicians: open source (MIT licence), Linux/macOS with Docker —",
+    techLink: "see advanced install",
   },
   features: {
     title: "Everything a repair shop needs",
@@ -93,33 +102,45 @@ export const t: Copy = {
     comingSoon: "Screenshot coming soon",
   },
   pro: {
-    badge: "In development",
+    badge: "Beta — free for pilot shops",
     title: "Pro modules",
     subtitle:
-      "Optional paid modules, in active development. The core stays free and MIT-licensed — forever.",
-    items: [
-      {
-        title: "Counter automation",
-        desc: "Automatic WhatsApp status updates and digital receipts — fewer “is it ready?” calls.",
-      },
-      {
-        title: "Bench diagnostics",
-        desc: "Cable-connected device diagnostics with AI-assisted reports.",
-      },
-      {
-        title: "Used-device certification",
-        desc: "Battery cycles, lock status and grading for buy/sell/trade-in — A/B/C certificates.",
-      },
+      "Optional features that need to “reach the internet”, through OficinaOS Cloud. They are already available in beta, and pilot shops use them for free during the beta. The core stays free and MIT-licensed — forever.",
+    statusLabel: "Beta",
+    modules: [
+      { title: "Customer portal", desc: "A public link per repair, with status and quote replies.", href: "/docs/portal/" },
+      { title: "WhatsApp bot", desc: "Customers ask on WhatsApp and get the repair's real status.", href: "/docs/whatsapp/" },
+      { title: "SMS channel", desc: "The same assistant over SMS, through an Android phone in the shop.", href: "/docs/sms/" },
+      { title: "Diagnostics intake", desc: "Customers run the Diag at home and send the result to the shop.", href: "/docs/diag/" },
+      { title: "AI reports", desc: "The technical diagnostic explained in plain language.", href: "/docs/diag/" },
+      { title: "Invoicing (InvoiceXpress)", desc: "Certified invoices from a sale or repair — Portugal only.", href: "/docs/invoicing/" },
+      { title: "Online storefront", desc: "A public page with catalogue items; customers reserve and the request lands in the app.", href: "/docs/storefront/" },
+      { title: "Parts wanted", desc: "A board between OficinaOS shops to request and offer parts.", href: "/docs/market/" },
+      { title: "Market prices", desc: "Compare your prices with the anonymous median of other shops.", href: "/docs/market-prices/" },
+      { title: "Multi-shop", desc: "Revenue and repairs from all your shops on one dashboard.", href: "/docs/multi-shop/" },
+      { title: "WhatsApp remarketing", desc: "An automatic message to customers who haven't been back in a while.", href: "/docs/remarketing/" },
     ],
-    waitlist: {
-      title: "Join the waitlist",
-      subtitle: "Get notified when the Pro modules launch.",
-      placeholder: "you@yourshop.com",
-      button: "Notify me",
-      buttonGithub: "Follow on GitHub",
-      note: "Static form — no account needed. We only email about Pro launches.",
-      noteGithub:
-        "Follow the repo on GitHub — Pro module launches are announced as releases.",
+    signup: {
+      title: "Join the Pro beta",
+      subtitle:
+        "Leave your shop's details and we'll get in touch to switch the modules on. No commitment.",
+      email: "Email",
+      emailPlaceholder: "you@yourshop.com",
+      shop: "Shop name",
+      shopPlaceholder: "e.g. Fix It Fast",
+      city: "City",
+      cityPlaceholder: "e.g. Porto",
+      phone: "Phone",
+      phonePlaceholder: "e.g. +351 912 345 678",
+      optional: "optional",
+      languageLabel: "Language",
+      button: "Request beta access",
+      mailSubject: "OficinaOS Pro beta — access request",
+      note: "We only use these details to contact you about the Pro beta.",
+      noteMailto:
+        "Submitting opens your email app with the details filled in — just press Send.",
+      cloudText: "Already have an OficinaOS Cloud account?",
+      cloudLink: "Sign in at cloud.oficinaos.app",
     },
   },
   diag: {
@@ -147,23 +168,38 @@ export const t: Copy = {
     badge: "GDPR",
     title: "Your data stays in the shop.",
     subtitle:
-      "OficinaOS runs on a PC inside the shop — no servers of ours, no account of ours, no telemetry.",
+      "The app runs on a PC inside the shop and has no telemetry: by default, none of your customers' data leaves the shop. Only optional modules — including OficinaOS Cloud (Pro) — send data out, and each one is declared below.",
     cards: [
       {
         title: "Everything local by default",
-        desc: "Customers, repairs, stock and till live on the shop's PC. Since we never touch the data, no processor agreement (Art. 28) with us is even needed.",
+        desc: "Customers, repairs, stock and till live on the shop's PC. With no Pro modules switched on, we receive no data from the shop.",
       },
       {
-        title: "No international transfers",
-        desc: "By default nothing leaves the shop — unlike cloud systems, no customer data sits on third-party servers.",
+        title: "The Cloud is optional",
+        desc: "Pro modules, OficinaOS Cloud accounts and Diag log uploads use our servers. They are only used if the shop (or the customer, in the Diag) turns them on.",
       },
       {
-        title: "Optional extras, declared",
-        desc: "WhatsApp, remote access and AI are opt-in — documented item by item, ready for your records of processing (Art. 30).",
+        title: "Declared extras",
+        desc: "WhatsApp, remote access, AI and the Cloud are opt-in — documented item by item, ready for your records of processing (Art. 30).",
       },
     ],
-    tableTitle: "When you switch an optional module on, this is all that leaves:",
+    tableTitle: "When you switch an optional module on, this is what leaves:",
     table: [
+      {
+        name: "OficinaOS Cloud (Pro modules)",
+        to: "OficinaOS servers",
+        what: "Account and pairing; each active module's data — portal pages (with the customer's name), incoming WhatsApp messages, storefront reservations, submitted diagnostics, daily totals (multi-shop) and shared prices",
+      },
+      {
+        name: "AI reports (Pro)",
+        to: "The Cloud's AI provider",
+        what: "The diagnostic data and notes the report is generated from",
+      },
+      {
+        name: "Diag log upload",
+        to: "OficinaOS servers",
+        what: "Only when you press “Send log”: the tail of the diag.log file",
+      },
       {
         name: "WhatsApp notifications",
         to: "Meta",
@@ -180,29 +216,42 @@ export const t: Copy = {
         what: "The questions you ask the AI",
       },
     ],
+    cloudPrivacyLink: "OficinaOS Cloud privacy policy",
     tableNote:
       "See the full detail — including what never leaves — in the repository.",
   },
   install: {
     title: "Running in minutes",
     subtitle:
-      "One PC in the shop, Docker, one command. After install it works offline on your local network.",
+      "One Windows PC in the shop and an installer. After install it works offline on your local network.",
     steps: [
       {
-        title: "Get the code",
-        desc: "Clone the repository or grab the installer from Releases.",
+        title: "Download the installer",
+        desc: "Download oficinaos-install.zip and extract it to a folder, e.g. C:\\OficinaOS.",
       },
       {
-        title: "Start with Docker",
-        desc: "docker compose up -d brings up the app and database in containers.",
+        title: "Double-click INSTALAR.bat",
+        desc: "The installer does everything: installs Docker if missing, generates the passwords and starts the app. If the PC can't run Docker, it offers the portable mode. If SmartScreen warns: “More info” → “Run anyway”.",
       },
       {
         title: "Open in the browser",
-        desc: "http://localhost:4000 on the PC — or its LAN IP from any device.",
+        desc: "At the end http://localhost:4000 opens. On other devices in the shop, use the PC's IP (e.g. http://192.168.1.33:4000). Day to day, just run INICIAR.bat.",
       },
     ],
+    downloadButton: "Download for Windows",
+    portableLink: "Portable version (no Docker)",
+    downloadNote: "Windows 10/11 64-bit · free · latest release on GitHub",
+    advanced: {
+      badge: "Advanced",
+      title: "Linux and macOS — manual Docker",
+      desc: "There's no automatic installer for Linux or macOS. With Docker installed, the app starts with these commands:",
+      commentGet: "get the code and the config",
+      commentStart: "start with docker (seed only the first time)",
+      commentOpen: "then open in the browser",
+      note: "Edit .env before starting (initial admin password and APP_URL). Details in the installation guide.",
+    },
     guideLink: "Full installation guide",
-    releasesLink: "Windows installer (Releases)",
+    releasesLink: "All versions (Releases)",
   },
   docs: {
     title: "Full guide",
@@ -454,7 +503,12 @@ export const t: Copy = {
             ["SMS channel", "The same assistant over SMS — an Android phone with a SIM in the shop sends and receives, no Meta and no per-message fees"],
             ["Remote diagnostics", "Runs the phone diagnostic at home (oficinaos-diag, free) and sends it to the shop with a code"],
             ["AI reports", "Diagnostic report written in plain language, ready to hand to the customer"],
-            ["Certified invoicing", "Legal invoice or invoice-receipt issued straight from the repair or sale — via InvoiceXpress, on the shop's own account"],
+            ["Certified invoicing", "Legal invoice or invoice-receipt issued straight from the repair or sale — via InvoiceXpress, on the shop's own account — Portugal only"],
+            ["Online storefront", "A public page with items from the shop's catalogue; the customer reserves and the reservation lands in the Requests queue"],
+            ["Parts wanted", "A board between OficinaOS shops to request parts and reply “I have it” — the deal is settled between shops"],
+            ["Market prices", "The anonymous median of other shops' repair and part prices, to compare with your own"],
+            ["Multi-shop", "Revenue and repairs from every shop of the same owner on one OficinaOS Cloud dashboard"],
+            ["WhatsApp remarketing", "An automatic message to consenting customers whose last repair was a while ago"],
           ],
         },
         links: [],
@@ -477,6 +531,11 @@ export const t: Copy = {
             ["Diagnostics intake", "Available (beta)", "TBA — free during beta"],
             ["AI reports", "Available (beta)", "TBA — per report"],
             ["Invoicing (InvoiceXpress)", "Available (beta)", "TBA — free during beta. The InvoiceXpress account is the shop's own and carries its own service cost"],
+            ["Online storefront (+ customisation)", "Available (beta)", "TBA — free during beta"],
+            ["Parts wanted", "Available (beta)", "TBA — free during beta"],
+            ["Market prices", "Available (beta)", "TBA — free during beta"],
+            ["Multi-shop", "Available (beta)", "TBA — free during beta"],
+            ["WhatsApp remarketing", "Available (beta)", "TBA — free during beta. Template messages carry Meta's cost*"],
           ],
         },
         links: [],
@@ -537,10 +596,33 @@ export const t: Copy = {
       {
         heading: "Certified invoicing (Pro)",
         paragraphs: [
-          "The app issues legal tax documents straight from the sale or the delivered repair — invoice-receipt when the customer has a tax number, simplified invoice when they don't. Issuing goes through InvoiceXpress on the shop's own account: the API key stays encrypted on the shop PC and the app talks directly to InvoiceXpress — the OficinaOS Cloud only controls module access and never sees the documents.",
+          "The app issues legal tax documents straight from the sale or the delivered repair — invoice-receipt when the customer has a tax number, simplified invoice when they don't. Issuing goes through InvoiceXpress on the shop's own account: the API key stays encrypted on the shop PC and the app talks directly to InvoiceXpress — the OficinaOS Cloud only controls module access and never sees the documents. Portugal only.",
         ],
         links: [
           { label: "Detailed invoicing guide", href: "/en/docs/invoicing" },
+        ],
+      },
+      {
+        heading: "Storefront, parts wanted, prices, multi-shop and remarketing (Pro)",
+        paragraphs: [
+          "Five more Pro modules, all in beta and switched on in the OficinaOS Cloud account. Each has a short guide:",
+        ],
+        table: {
+          head: ["Module", "What for"],
+          rows: [
+            ["Online storefront", "A public page with the catalogue items you choose — customers reserve and the request shows up in Requests"],
+            ["Parts wanted", "Ask other OficinaOS shops for a part, or answer their requests"],
+            ["Market prices", "See the anonymous median of other shops' prices next to yours"],
+            ["Multi-shop", "A dashboard with revenue and repairs from all your shops"],
+            ["WhatsApp remarketing", "An automatic message to customers who haven't been back in a while"],
+          ],
+        },
+        links: [
+          { label: "Online storefront guide", href: "/en/docs/storefront/" },
+          { label: "Parts wanted guide", href: "/en/docs/market/" },
+          { label: "Market prices guide", href: "/en/docs/market-prices/" },
+          { label: "Multi-shop guide", href: "/en/docs/multi-shop/" },
+          { label: "Remarketing guide", href: "/en/docs/remarketing/" },
         ],
       },
       {
@@ -570,11 +652,11 @@ export const t: Copy = {
           head: ["Question", "Answer"],
           rows: [
             ["Do I need internet?", "Not for daily use — the app runs fully on the shop's network. Only for updates and Pro modules."],
-            ["Does customer data go to a server?", "Not by default. With Pro modules, the Cloud only relays redacted snapshots and messages — no internal costs or private data."],
+            ["Does customer data go to a server?", "Not by default — the app has no telemetry. With Pro modules, OficinaOS Cloud receives only the data each module needs (e.g. portal pages, messages, reservations and submitted diagnostics), never internal costs or internal notes. The details are in the Cloud privacy policy (cloud.oficinaos.app/privacy)."],
             ["Does it work on phones?", "Yes — on the shop's Wi-Fi any device opens it in a browser; outside the shop via remote access (Cloudflare Tunnel)."],
             ["Does the customer install anything?", "No — the portal opens as a link in their browser; the bot replies on their normal WhatsApp."],
             ["How much does it cost?", "The full app is free (MIT license). Pro modules are optional subscriptions, in beta."],
-            ["Multiple shops / branches?", "No — OficinaOS is designed for one location per install."],
+            ["Multiple shops / branches?", "Each shop has its own install. With the Multi-shop Pro module, the owner sees revenue and repairs from every shop on one OficinaOS Cloud dashboard."],
             ["What if the PC dies?", "Automatic daily backups; restoring on another PC is copying the backup and rerunning the installer."],
             ["Mac or Linux?", "Yes, via manual Docker — the automatic installer is Windows-only."],
             ["Can I import data from another system?", "Customers and catalog via CSV; contact us for assisted migrations."],
@@ -989,6 +1071,13 @@ export const t: Copy = {
         "Legal invoices and invoice-receipts issued straight from the sale or the repair — via InvoiceXpress, on the shop's own account and API key.",
       sections: [
         {
+          heading: "Portugal only",
+          paragraphs: [
+            "The module issues documents through InvoiceXpress, a certified invoicing service for Portugal, and the VAT rates available in the app are mainland Portugal's (IVA23, IVA13, IVA6 and IVA0). Shops in other countries, including Spain, can't use this module for legal invoicing yet.",
+          ],
+          links: [],
+        },
+        {
           heading: "What the module does",
           paragraphs: [
             "With invoicing active, every POS sale and every delivered repair gets an «Issue document» button. The app sends the data to InvoiceXpress and the tax document comes out numbered and certified — an invoice-receipt when the customer has a tax number, a simplified invoice («final consumer») when they don't.",
@@ -1010,7 +1099,7 @@ export const t: Copy = {
           list: [
             "The shop's own InvoiceXpress account (their service has its own cost — separate from OficinaOS)",
             "The account API key — created in the InvoiceXpress settings",
-            "The VAT rate the shop uses (e.g. IVA 23% — or your region's rate)",
+            "The shop's default VAT rate — IVA23, IVA13, IVA6 or IVA0",
             "The invoicing module active on the OficinaOS Cloud account (during beta, we enable it)",
           ],
           paragraphs: [],
@@ -1022,7 +1111,7 @@ export const t: Copy = {
           heading: "Setup — step by step (~5 minutes)",
           paragraphs: [
             "1. In InvoiceXpress, log into the shop's account and generate an API key (in the account's API settings).",
-            "2. In OficinaOS: Settings → Invoicing tab.",
+            "2. In OficinaOS: Settings → Cloud tab → “Invoicing (InvoiceXpress)” section (shown once the app is paired and the module is active).",
             "3. Under «InvoiceXpress account» type the account subdomain — whatever appears before .app.invoicexpress.com.",
             "4. Paste the API key and pick the default VAT rate (e.g. IVA23).",
             "5. Switch on «Enable invoicing» and save.",
@@ -1049,8 +1138,241 @@ export const t: Copy = {
           heading: "Honest limits",
           list: [
             "Requires the shop's own InvoiceXpress account — that service's cost belongs to the shop, separate from OficinaOS",
-            "InvoiceXpress serves Portugal; for other countries the module may not issue the correct tax documents",
+            "Portugal only: InvoiceXpress and the available VAT rates are Portuguese — in other countries the module does not issue valid tax documents",
             "Issued documents aren't deleted by the app — cancellations/credit notes are done in InvoiceXpress",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+      ],
+    },
+    storefront: {
+      title: "Online storefront",
+      subtitle:
+        "A public page with items from your catalogue — customers see the price and reserve, and the reservation lands in the app as a request.",
+      sections: [
+        {
+          heading: "What the module does",
+          paragraphs: [
+            "The app sends the items you mark as “listed online” to OficinaOS Cloud, which shows them on the shop's public page (cloud.oficinaos.app/loja/<address>). Each item shows its name, category and price; out-of-stock items drop off the page.",
+            "The customer picks an item and reserves it with their name, phone and an optional note. The reservation reaches the app on the next sync and lands in the Requests queue (“Reserva loja online: …”), with a notification to the owner and front desk. There's no online payment: the sale happens in the shop.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Switch it on and publish",
+          list: [
+            "Pair the app with OficinaOS Cloud (Settings → Cloud tab) and have the storefront module active (during the beta, we switch it on)",
+            "Settings → Cloud tab now shows an “Online store” section: choose the page address, a short description and the public contact email",
+            "Turn on “Published” and save — the page link appears at the top of the section",
+            "The address and phone shown on the page come from the shop settings",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+        {
+          heading: "Choosing the items",
+          paragraphs: [
+            "In the parts inventory, edit the item and turn on “List on the online store”. The price shown is the catalogue unit price. When stock changes (POS sales, parts used in repairs, stock movements), the page updates on the next sync (up to ~2 minutes).",
+          ],
+          links: [],
+        },
+        {
+          heading: "Customisation — storefront-plus module",
+          list: [
+            "Page accent colour",
+            "Shop logo (PNG, JPEG or WebP, up to 200 KB)",
+            "Two layouts: Showcase (cards) or Compact (list)",
+          ],
+          paragraphs: [
+            "Without this module, the page uses the default look.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Privacy — what leaves and what stays",
+          paragraphs: [
+            "The Cloud receives the listed items (name, category, price and whether in stock) and the shop's public contacts. Reservations — the customer's name, phone and note — are stored on the Cloud and delivered to the app.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Honest limits",
+          list: [
+            "Up to ~2 minutes between changing the catalogue and the page updating",
+            "Reservations only: no payment or shipping",
+            "Up to 500 listed items",
+            "The page only shows whether an item is in stock, not the quantity",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+      ],
+    },
+    market: {
+      title: "Parts wanted",
+      subtitle:
+        "A shared board between OficinaOS shops: post the part you need, or reply “I have it” to other shops' requests.",
+      sections: [
+        {
+          heading: "How it works",
+          paragraphs: [
+            "In the menu, “Procuro-peça” (parts wanted) opens the board with other shops' open requests, and the “My requests” tab shows yours. Other shops only see your shop's name and the request.",
+            "A shop that has the part presses “I have it” and sends a reply with a note, price and contact. Only the shop that posted the request sees the replies. The deal is settled directly between shops, outside OficinaOS.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Posting a request",
+          list: [
+            "“New request” → what you're looking for (e.g. iPhone 12 screen)",
+            "Part type and condition (any, new, OEM/original or used)",
+            "Brand, model, maximum price and notes — optional",
+            "Once you've found the part, press “Found it”; or “Close” to withdraw the request. A closed request can't be reopened — post a new one",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+        {
+          heading: "What you need",
+          list: [
+            "The app paired with OficinaOS Cloud",
+            "The market module active on the account (during the beta, we switch it on)",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+        {
+          heading: "Honest limits",
+          list: [
+            "The board shows the 100 most recent open requests",
+            "Up to 30 requests and 60 replies per hour, per shop",
+            "No payments or guarantees on the platform — confirm the part directly with the other shop",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+      ],
+    },
+    marketPrices: {
+      title: "Market prices",
+      subtitle:
+        "Compare your repair and part prices with the anonymous median of other OficinaOS shops.",
+      sections: [
+        {
+          heading: "What it shows",
+          paragraphs: [
+            "Under “Market prices” (menu), each row shows an item with the market median, the range (minimum–maximum) and how many shops contributed. When the name matches an item in your catalogue, “Your price” appears too. You can filter by repairs or parts.",
+            "A benchmark only appears once at least 3 shops share a price for the same item.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Sharing your prices (optional)",
+          paragraphs: [
+            "Turning on “Share your prices anonymously” sends the Cloud the name, category and price of the active items in your repair and parts catalogues. Whenever the catalogue changes, it's sent again and replaces the previous copy.",
+            "Turning sharing off deletes every price the shop sent from the Cloud. You can view the benchmarks without sharing.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Honest limits",
+          list: [
+            "Items are matched by name (ignoring accents, case and punctuation) — different names for the same repair aren't grouped",
+            "With few shops, the ends of the range are real prices from specific shops (without saying which)",
+            "Needs the app paired and the market-prices module active",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+      ],
+    },
+    multiShop: {
+      title: "Multi-shop",
+      subtitle:
+        "For owners of more than one shop: revenue and repairs from all of them, side by side, on the OficinaOS Cloud dashboard.",
+      sections: [
+        {
+          heading: "How it works",
+          paragraphs: [
+            "Each shop keeps its own OficinaOS install, with its data on the shop's PC. With the module active, each install sends the Cloud a daily summary of totals only, and the owner sees them together by signing in at cloud.oficinaos.app.",
+            "During the beta, we link additional shops to your account; each shop then pairs its app with a code generated on the dashboard.",
+          ],
+          links: [],
+        },
+        {
+          heading: "What the dashboard shows",
+          list: [
+            "Revenue over the last 7 and 30 days, across all shops",
+            "Repairs delivered in the last 30 days and repairs in progress",
+            "A chart of daily revenue over the last 30 days",
+            "A per-shop table: revenue, repairs, sales, in progress and last sync",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+        {
+          heading: "What leaves the shop",
+          paragraphs: [
+            "Numbers only, per day: revenue (payments for sales and repairs), repairs opened and delivered, number and value of sales, repairs in progress and new customers. Names, contacts and individual repairs never leave. It's sent on every sync (~2 minutes) and also recalculates the previous day.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Honest limits",
+          list: [
+            "“Delivered” counts repairs in Delivered status whose last change was that day — an approximation",
+            "A shop whose app is off sends nothing until it's back on",
+            "The dashboard is in Portuguese",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+      ],
+    },
+    remarketing: {
+      title: "WhatsApp remarketing",
+      subtitle:
+        "An automatic message from the shop's WhatsApp to customers whose last repair was a while ago.",
+      sections: [
+        {
+          heading: "Who receives it",
+          list: [
+            "Customers who agreed to automatic messages (consent on the customer record)",
+            "With at least one delivered repair, the latest more than the set number of days ago (90 by default)",
+            "Who haven't received this message within the set minimum gap (180 days by default)",
+          ],
+          paragraphs: [
+            "The app checks every hour and sends at most 10 messages per run.",
+          ],
+          links: [],
+        },
+        {
+          heading: "What you need",
+          list: [
+            "WhatsApp set up in the app (Business ID, Phone Number ID and token) — the same as the WhatsApp bot",
+            "A message template created and APPROVED in your Meta Business account, in Portuguese (pt)",
+            "The remarketing module active on the OficinaOS Cloud account (during the beta, we switch it on)",
+          ],
+          paragraphs: [],
+          links: [{ label: "WhatsApp bot guide", href: "/en/docs/whatsapp/" }],
+        },
+        {
+          heading: "Setting it up",
+          paragraphs: [
+            "Menu → Notifications → Channels → WhatsApp section → automatic remarketing. Set the idle days, the minimum gap between messages and the Meta template name (oficinaos_remarketing by default).",
+            "The template gets two variables: {{1}} is the customer's first name and {{2}} the shop's name. The app suggests a Portuguese body along the lines of: “Hi {{1}}! It's been a while since your last repair at {{2}}. If your device needs attention, we're here to help.”",
+          ],
+          links: [],
+        },
+        {
+          heading: "Honest limits",
+          list: [
+            "These are shop-initiated messages: Meta charges for each template message — Meta's cost, not ours",
+            "WhatsApp only, not SMS",
+            "The template is always sent in Portuguese (pt)",
+            "If a send fails (e.g. template not approved), that customer is only retried after the minimum gap",
+            "The app must be running for the checks to happen",
           ],
           paragraphs: [],
           links: [],
@@ -1067,7 +1389,7 @@ export const t: Copy = {
   },
   footer: {
     license: "MIT License",
-    fork: "Fork of Reparilo",
+    credits: "Based on the open-source project",
     rights: "Free software for independent repair shops.",
     contact: "Contact",
     community: "Community"

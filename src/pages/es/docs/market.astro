@@ -1,0 +1,9 @@
+---
+import ModuleDoc from "../../../components/ModuleDoc.astro";
+import Base from "../../../layouts/Base.astro";
+import { lang, locale, ogLocale, t } from "../../../i18n/es";
+---
+
+<Base t={t} locale={locale} langAttr={lang} ogLocale={ogLocale} title={t.moduleDocs.market.title + " — OficinaOS"} description={t.moduleDocs.market.subtitle}>
+  <ModuleDoc t={t} locale={locale} page={t.moduleDocs.market} />
+</Base>

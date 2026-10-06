@@ -7,3 +7,14 @@ html {
 ::selection {
   background-color: rgb(13 148 136 / 0.35);
 }
+
+/* Visible keyboard focus everywhere (WCAG 2.4.7). */
+:where(a, button, summary, input, textarea, select):focus-visible {
+  outline: 2px solid #2dd4bf;
+  outline-offset: 2px;
+}
+
+/* In-page anchors land below the sticky header. */
+section[id] {
+  scroll-margin-top: 5rem;
+}
