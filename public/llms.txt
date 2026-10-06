@@ -27,6 +27,9 @@
 - [OficinaOS Diag (PT)](https://oficinaos.app/docs/diag/): free Windows USB diagnostic tool — features, requirements, troubleshooting
 - [OficinaOS Diag (EN)](https://oficinaos.app/en/docs/diag/)
 - [OficinaOS Diag (ES)](https://oficinaos.app/es/docs/diag/)
+- [Certified invoicing (PT)](https://oficinaos.app/docs/invoicing/): InvoiceXpress documents from sales/repairs — setup, VAT handling, privacy
+- [Certified invoicing (EN)](https://oficinaos.app/en/docs/invoicing/)
+- [Certified invoicing (ES)](https://oficinaos.app/es/docs/invoicing/)
 
 ## Customer-facing agent interfaces
 

@@ -454,6 +454,7 @@ export const t: Copy = {
             ["SMS channel", "The same assistant over SMS — an Android phone with a SIM in the shop sends and receives, no Meta and no per-message fees"],
             ["Remote diagnostics", "Runs the phone diagnostic at home (oficinaos-diag, free) and sends it to the shop with a code"],
             ["AI reports", "Diagnostic report written in plain language, ready to hand to the customer"],
+            ["Certified invoicing", "Legal invoice or invoice-receipt issued straight from the repair or sale — via InvoiceXpress, on the shop's own account"],
           ],
         },
         links: [],
@@ -475,6 +476,7 @@ export const t: Copy = {
             ["SMS channel", "Available (beta)", "TBA — free during beta"],
             ["Diagnostics intake", "Available (beta)", "TBA — free during beta"],
             ["AI reports", "Available (beta)", "TBA — per report"],
+            ["Invoicing (InvoiceXpress)", "Available (beta)", "TBA — free during beta. The InvoiceXpress account is the shop's own and carries its own service cost"],
           ],
         },
         links: [],
@@ -530,6 +532,15 @@ export const t: Copy = {
         links: [
           { label: "Full Diag guide", href: "/en/docs/diag" },
           { label: "About oficinaos-diag", href: DIAG_REPO_URL },
+        ],
+      },
+      {
+        heading: "Certified invoicing (Pro)",
+        paragraphs: [
+          "The app issues legal tax documents straight from the sale or the delivered repair — invoice-receipt when the customer has a tax number, simplified invoice when they don't. Issuing goes through InvoiceXpress on the shop's own account: the API key stays encrypted on the shop PC and the app talks directly to InvoiceXpress — the OficinaOS Cloud only controls module access and never sees the documents.",
+        ],
+        links: [
+          { label: "Detailed invoicing guide", href: "/en/docs/invoicing" },
         ],
       },
       {
@@ -966,6 +977,80 @@ export const t: Copy = {
             "Never expose the gateway port (e.g. 8080) to the internet — it's for the shop's internal network only",
             "Keep the phone and PC on the shop's trusted network — not the customer/guest Wi-Fi",
             "If you swap the phone or SIM, redo the configuration and register the webhook again",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+      ],
+    },
+    invoicing: {
+      title: "Certified invoicing",
+      subtitle:
+        "Legal invoices and invoice-receipts issued straight from the sale or the repair — via InvoiceXpress, on the shop's own account and API key.",
+      sections: [
+        {
+          heading: "What the module does",
+          paragraphs: [
+            "With invoicing active, every POS sale and every delivered repair gets an «Issue document» button. The app sends the data to InvoiceXpress and the tax document comes out numbered and certified — an invoice-receipt when the customer has a tax number, a simplified invoice («final consumer») when they don't.",
+            "The document permalink is saved on the record — you can open the official InvoiceXpress PDF from the app and hand it to the customer.",
+          ],
+          table: {
+            head: ["Situation", "Document issued"],
+            rows: [
+              ["Customer with tax number on file", "Invoice-receipt (FR) — full document"],
+              ["Customer without tax number", "Simplified invoice (FS) — «final consumer»"],
+              ["POS sale", "Document listing the sold items"],
+              ["Delivered repair", "Document listing the repair lines and parts"],
+            ],
+          },
+          links: [],
+        },
+        {
+          heading: "What you need",
+          list: [
+            "The shop's own InvoiceXpress account (their service has its own cost — separate from OficinaOS)",
+            "The account API key — created in the InvoiceXpress settings",
+            "The VAT rate the shop uses (e.g. IVA 23% — or your region's rate)",
+            "The invoicing module active on the OficinaOS Cloud account (during beta, we enable it)",
+          ],
+          paragraphs: [],
+          links: [
+            { label: "InvoiceXpress (official site)", href: "https://invoicexpress.com" },
+          ],
+        },
+        {
+          heading: "Setup — step by step (~5 minutes)",
+          paragraphs: [
+            "1. In InvoiceXpress, log into the shop's account and generate an API key (in the account's API settings).",
+            "2. In OficinaOS: Settings → Invoicing tab.",
+            "3. Under «InvoiceXpress account» type the account subdomain — whatever appears before .app.invoicexpress.com.",
+            "4. Paste the API key and pick the default VAT rate (e.g. IVA23).",
+            "5. Switch on «Enable invoicing» and save.",
+            "6. Test with a small sale or repair and confirm the document shows up in InvoiceXpress.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Prices include VAT",
+          paragraphs: [
+            "Shop prices are final (VAT already included). The app computes each line's net amount from the configured rate and sends it to InvoiceXpress — the document total matches what the customer paid.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Privacy — what leaves and what stays",
+          paragraphs: [
+            "The API key is stored encrypted (AES-256) on the shop PC and is never shown again — only replaced. The app talks directly to InvoiceXpress: documents and tax data never pass through the OficinaOS Cloud — the Cloud only confirms the module is active.",
+            "Issuing a document is irreversible (it's a numbered legal document) — the app blocks double-issuing the same sale or repair.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Honest limits",
+          list: [
+            "Requires the shop's own InvoiceXpress account — that service's cost belongs to the shop, separate from OficinaOS",
+            "InvoiceXpress serves Portugal; for other countries the module may not issue the correct tax documents",
+            "Issued documents aren't deleted by the app — cancellations/credit notes are done in InvoiceXpress",
           ],
           paragraphs: [],
           links: [],

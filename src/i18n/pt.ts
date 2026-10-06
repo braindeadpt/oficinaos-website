@@ -471,6 +471,7 @@ export const t = {
             ["Canal SMS", "O mesmo assistente por SMS — um telemóvel Android com SIM na loja envia e recebe, sem Meta nem custos por mensagem"],
             ["Diagnóstico à distância", "Faz o diagnóstico do telemóvel em casa (oficinaos-diag, grátis) e envia à loja com um código"],
             ["Relatórios IA", "Relatório do diagnóstico escrito em linguagem simples, pronto a entregar"],
+            ["Faturação certificada", "Fatura ou fatura-recibo legal emitida diretamente da reparação ou venda — via InvoiceXpress, com a conta da própria loja"],
           ],
         },
         links: [],
@@ -492,6 +493,7 @@ export const t = {
             ["Canal SMS", "Disponível (beta)", "A anunciar — grátis no beta"],
             ["Receção de diagnósticos", "Disponível (beta)", "A anunciar — grátis no beta"],
             ["Relatórios IA", "Disponível (beta)", "A anunciar — por relatório"],
+            ["Faturação (InvoiceXpress)", "Disponível (beta)", "A anunciar — grátis no beta. A conta InvoiceXpress é da loja e tem o custo próprio do serviço deles"],
           ],
         },
         links: [],
@@ -547,6 +549,15 @@ export const t = {
         links: [
           { label: "Guia completo do Diag", href: "/docs/diag" },
           { label: "Sobre o oficinaos-diag", href: DIAG_REPO_URL },
+        ],
+      },
+      {
+        heading: "Faturação certificada (Pro)",
+        paragraphs: [
+          "A app emite documentos fiscais legais diretamente da venda ou da reparação — fatura-recibo quando o cliente tem NIF, fatura simplificada quando não tem. A emissão é feita via InvoiceXpress com a conta da própria loja: a chave API fica guardada encriptada no PC da loja e a app fala diretamente com o InvoiceXpress — a OficinaOS Cloud só controla o acesso ao módulo, nunca vê os documentos.",
+        ],
+        links: [
+          { label: "Guia detalhado da faturação", href: "/docs/invoicing" },
         ],
       },
       {
@@ -985,6 +996,80 @@ export const t = {
             "Nunca exponhas a porta do gateway (ex.: 8080) à internet — é só para a rede interna da loja",
             "Mantém o telemóvel e o PC na rede de confiança da loja — não na Wi-Fi de clientes/convidados",
             "Se trocares o telemóvel ou o SIM, repete a configuração e regista o webhook outra vez",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+      ],
+    },
+    invoicing: {
+      title: "Faturação certificada",
+      subtitle:
+        "Faturas e faturas-recibo legais emitidas diretamente da venda ou da reparação — via InvoiceXpress, com a conta e a chave da própria loja.",
+      sections: [
+        {
+          heading: "O que o módulo faz",
+          paragraphs: [
+            "Com a faturação ativa, cada venda do POS e cada reparação entregue ganham um botão «Emitir documento». A app envia os dados ao InvoiceXpress e o documento fiscal sai numerado e certificado — fatura-recibo quando o cliente tem NIF, fatura simplificada («Consumidor final») quando não tem.",
+            "O permalink do documento fica registado na ficha — dá para abrir o PDF oficial do InvoiceXpress a partir da app e entregar ao cliente.",
+          ],
+          table: {
+            head: ["Situação", "Documento emitido"],
+            rows: [
+              ["Cliente com NIF na ficha", "Fatura-recibo (FR) — documento completo"],
+              ["Cliente sem NIF", "Fatura simplificada (FS) — «Consumidor final»"],
+              ["Venda no POS", "Documento com as linhas dos artigos vendidos"],
+              ["Reparação entregue", "Documento com as reparações e peças da ficha"],
+            ],
+          },
+          links: [],
+        },
+        {
+          heading: "O que é preciso",
+          list: [
+            "Uma conta InvoiceXpress da loja (o serviço deles tem o custo próprio — independente do OficinaOS)",
+            "A chave API da conta — cria-se nas definições do InvoiceXpress",
+            "A taxa de IVA que a loja usa (ex.: IVA 23% — ou a taxa da região)",
+            "O módulo invoicing ativo na conta OficinaOS Cloud (no beta, ativamos nós)",
+          ],
+          paragraphs: [],
+          links: [
+            { label: "InvoiceXpress (site oficial)", href: "https://invoicexpress.com" },
+          ],
+        },
+        {
+          heading: "Configuração — passo a passo (~5 minutos)",
+          paragraphs: [
+            "1. No InvoiceXpress, entra na conta da loja e gera uma chave API (nas definições de API da conta).",
+            "2. No OficinaOS: Definições → separador Faturação.",
+            "3. Em «Conta InvoiceXpress» escreve o subdomínio da conta — o que aparece antes de .app.invoicexpress.com.",
+            "4. Cola a chave API e escolhe a taxa de IVA predefinida (ex.: IVA23).",
+            "5. Ativa «Ativar faturação» e guarda.",
+            "6. Testa com uma venda ou reparação de valor simbólico e confirma que o documento aparece no InvoiceXpress.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Preços com IVA incluído",
+          paragraphs: [
+            "Os preços da loja são finais (IVA já incluído). A app calcula o valor líquido de cada linha a partir da taxa configurada e envia-o ao InvoiceXpress — o total do documento bate certo com o que o cliente pagou.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Privacidade — o que sai e o que fica",
+          paragraphs: [
+            "A chave API fica guardada encriptada (AES-256) no PC da loja e nunca é mostrada novamente — só se substitui. A app fala diretamente com o InvoiceXpress: os documentos e os dados fiscais não passam pela OficinaOS Cloud — a Cloud só confirma que o módulo está ativo.",
+            "Emitir um documento é irreversível (é um documento legal numerado) — a app bloqueia dupla emissão da mesma venda ou reparação.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Limites honestos",
+          list: [
+            "Requer a conta InvoiceXpress da loja — o custo desse serviço é da loja, separado do OficinaOS",
+            "O InvoiceXpress serve Portugal; para outros países o módulo pode não emitir os documentos fiscais corretos",
+            "Documentos emitidos não são apagados pela app — anulações/credit notes fazem-se no InvoiceXpress",
           ],
           paragraphs: [],
           links: [],
