@@ -871,6 +871,7 @@ export const t = {
     fork: "Fork de Reparilo",
     rights: "Software livre para oficinas independentes.",
     contact: "Contacto",
+    community: "Comunidade"
   },
 };
 

@@ -852,5 +852,6 @@ export const t: Copy = {
     fork: "Fork of Reparilo",
     rights: "Free software for independent repair shops.",
     contact: "Contact",
+    community: "Community"
   },
 };
