@@ -15,7 +15,7 @@ const UPSTREAM_URL = "https://github.com/cranknet/reparilo";
   <div
     class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 px-6 py-10 sm:flex-row"
   >
-    <div class="text-center text-sm text-zinc-500 sm:text-left">
+    <div class="text-center text-sm text-zinc-400 sm:text-left">
       <p>
         © {year} OficinaOS · <a
           href={`${REPO_URL}/blob/main/LICENSE`}
@@ -25,13 +25,13 @@ const UPSTREAM_URL = "https://github.com/cranknet/reparilo";
           >{t.footer.license}</a
         > · {t.footer.rights}
       </p>
-      <p class="mt-1 text-xs text-zinc-600">
-        {t.footer.fork} — <a
+      <p class="mt-1 text-xs text-zinc-400">
+        {t.footer.credits}{" "}<a
           href={UPSTREAM_URL}
           target="_blank"
           rel="noopener noreferrer"
-          class="underline decoration-zinc-700 underline-offset-2 transition hover:text-zinc-400"
-          >github.com/cranknet/reparilo</a
+          class="underline decoration-zinc-600 underline-offset-2 transition hover:text-zinc-200"
+          >Reparilo</a
         >
       </p>
     </div>
@@ -49,13 +49,13 @@ const UPSTREAM_URL = "https://github.com/cranknet/reparilo";
         href="https://discord.gg/secdgJYZNn"
         target="_blank"
         rel="noopener noreferrer"
-        class="text-xs text-zinc-500 transition hover:text-zinc-300"
+        class="text-xs text-zinc-400 transition hover:text-zinc-300"
       >
         {t.footer.community}: Discord
       </a>
       <a
         href={`mailto:${CONTACT_EMAIL}`}
-        class="text-xs text-zinc-500 transition hover:text-zinc-300"
+        class="text-xs text-zinc-400 transition hover:text-zinc-300"
       >
         {t.footer.contact}: {CONTACT_EMAIL}
       </a>

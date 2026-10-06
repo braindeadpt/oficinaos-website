@@ -20,9 +20,9 @@ export const ogLocale = "es_ES";
 
 export const t: Copy = {
   meta: {
-    title: "OficinaOS — Gestión de taller gratuita y self-hosted",
+    title: "OficinaOS — Programa gratuito para tiendas de reparación de móviles",
     description:
-      "Sistema de gestión gratuito y open source (MIT) para talleres de reparación de móviles. Funciona en un equipo dentro de tu tienda — los datos de tus clientes nunca salen de tu red.",
+      "Reparaciones, presupuestos, stock y caja en un solo programa, gratis y en el PC de tu tienda. Sin cuotas mensuales y sin que los datos de tus clientes salgan de la tienda.",
   },
   nav: {
     features: "Funcionalidades",
@@ -32,19 +32,25 @@ export const t: Copy = {
     docs: "Guía",
     updates: "Novedades",
     github: "GitHub",
+    githubLabel: "Código fuente en GitHub",
+    menuLabel: "Navegación principal",
+    openMenu: "Abrir menú",
+    closeMenu: "Cerrar menú",
+    download: "Descargar",
+    language: "Idioma",
   },
   hero: {
-    badge: "Gratuito · MIT · Self-hosted",
-    title: "Tu taller, organizado.",
-    titleAccent: "Tus datos, en tu tienda.",
+    badge: "Gratis para siempre · Tus datos se quedan en tu tienda",
+    title: "Menos llamadas de «¿ya está listo?».",
+    titleAccent: "Tu tienda de reparaciones, organizada.",
     subtitle:
-      "OficinaOS es un sistema de gestión gratuito y open source para talleres de reparación de móviles. Funciona en un ordenador dentro de la tienda — reparaciones, stock, caja y datos de clientes nunca salen de tu red local.",
+      "Recepción, presupuestos, stock y caja en un solo programa, instalado en el PC de la tienda. Tus clientes pueden seguir la reparación desde el móvil y tu equipo siempre sabe qué toca hacer.",
     ctaPrimary: "Descargar para Windows",
-    ctaSecondary: "Ver en GitHub",
-    downloadNote: "Gratis · Windows 10/11 · instalador de la última versión",
-    portableLink: "versión portátil (sin Docker)",
-    advancedLink: "Linux / macOS",
-    chips: ["Sin suscripciones", "Funciona en tu red local", "Web + Android"],
+    ctaSecondary: "Ver cómo funciona",
+    downloadNote: "Gratis · Windows 10/11 · instalación guiada",
+    chips: ["Sin cuotas mensuales", "Funciona sin internet", "En PC, tablet y móvil"],
+    techNote: "Para técnicos: código abierto (licencia MIT), Linux/macOS con Docker —",
+    techLink: "ver instalación avanzada",
   },
   features: {
     title: "Todo lo que necesita un taller",
@@ -1387,7 +1393,7 @@ export const t: Copy = {
   },
   footer: {
     license: "Licencia MIT",
-    fork: "Fork de Reparilo",
+    credits: "Basado en el proyecto de código abierto",
     rights: "Software libre para talleres independientes.",
     contact: "Contacto",
     community: "Comunidad"

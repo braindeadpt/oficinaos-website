@@ -20,9 +20,9 @@ export const ogLocale = "en_US";
 
 export const t: Copy = {
   meta: {
-    title: "OficinaOS — Free, self-hosted repair shop management",
+    title: "OficinaOS — Free software for phone repair shops",
     description:
-      "Free, open-source (MIT) management system for phone repair shops. Runs on a computer inside your shop — customer data never leaves your network.",
+      "Repairs, quotes, stock and till in one free program that runs on your shop's PC. No monthly fees, and your customers' data never leaves the shop.",
   },
   nav: {
     features: "Features",
@@ -32,19 +32,25 @@ export const t: Copy = {
     docs: "Guide",
     updates: "What's new",
     github: "GitHub",
+    githubLabel: "Source code on GitHub",
+    menuLabel: "Main navigation",
+    openMenu: "Open menu",
+    closeMenu: "Close menu",
+    download: "Download",
+    language: "Language",
   },
   hero: {
-    badge: "Free · MIT · Self-hosted",
-    title: "Your repair shop, managed.",
-    titleAccent: "Your data, in your shop.",
+    badge: "Free forever · Your data stays in your shop",
+    title: "Fewer “is it ready yet?” calls.",
+    titleAccent: "Your repair shop, organised.",
     subtitle:
-      "OficinaOS is a free, open-source management system for phone repair shops. It runs on a computer inside your store — jobs, stock, POS and customer data never leave your local network.",
+      "Check-in, quotes, stock and till in one program, installed on your shop's PC. Customers can follow their repair on their phone and your team always knows what's next.",
     ctaPrimary: "Download for Windows",
-    ctaSecondary: "View on GitHub",
-    downloadNote: "Free · Windows 10/11 · latest release installer",
-    portableLink: "portable version (no Docker)",
-    advancedLink: "Linux / macOS",
-    chips: ["No subscriptions", "Runs on your LAN", "Web + Android"],
+    ctaSecondary: "See how it works",
+    downloadNote: "Free · Windows 10/11 · guided install",
+    chips: ["No monthly fees", "Works without internet", "On PC, tablet and phone"],
+    techNote: "For technicians: open source (MIT licence), Linux/macOS with Docker —",
+    techLink: "see advanced install",
   },
   features: {
     title: "Everything a repair shop needs",
@@ -1383,7 +1389,7 @@ export const t: Copy = {
   },
   footer: {
     license: "MIT License",
-    fork: "Fork of Reparilo",
+    credits: "Based on the open-source project",
     rights: "Free software for independent repair shops.",
     contact: "Contact",
     community: "Community"

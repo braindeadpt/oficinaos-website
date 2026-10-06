@@ -35,9 +35,9 @@ export const ogLocale = "pt_PT";
 
 export const t = {
   meta: {
-    title: "OficinaOS — Gestão de oficina gratuita e self-hosted",
+    title: "OficinaOS — Programa gratuito para lojas de reparação de telemóveis",
     description:
-      "Sistema de gestão gratuito e open source (MIT) para oficinas de reparação de telemóveis. Corre num PC dentro da loja — os dados dos seus clientes nunca saem da sua rede.",
+      "Reparações, orçamentos, stock e caixa num só programa, grátis e no PC da loja. Sem mensalidades e sem os dados dos seus clientes saírem da loja.",
   },
   nav: {
     features: "Funcionalidades",
@@ -47,19 +47,25 @@ export const t = {
     docs: "Guia",
     updates: "Novidades",
     github: "GitHub",
+    githubLabel: "Código-fonte no GitHub",
+    menuLabel: "Navegação principal",
+    openMenu: "Abrir menu",
+    closeMenu: "Fechar menu",
+    download: "Descarregar",
+    language: "Idioma",
   },
   hero: {
-    badge: "Gratuito · MIT · Self-hosted",
-    title: "A sua oficina, organizada.",
-    titleAccent: "Os seus dados, na loja.",
+    badge: "Grátis para sempre · Os dados ficam na sua loja",
+    title: "Menos telefonemas de «já está pronto?».",
+    titleAccent: "A sua loja de reparações, organizada.",
     subtitle:
-      "O OficinaOS é um sistema de gestão gratuito e open source para oficinas de reparação de telemóveis. Corre num computador dentro da loja — reparações, stock, caixa e dados dos clientes nunca saem da vossa rede local.",
+      "Receção, orçamentos, stock e caixa num só programa, instalado no PC da loja. Os clientes podem acompanhar a reparação no telemóvel e a equipa sabe sempre o que há para fazer.",
     ctaPrimary: "Descarregar para Windows",
-    ctaSecondary: "Ver no GitHub",
-    downloadNote: "Grátis · Windows 10/11 · instalador da última versão",
-    portableLink: "versão portátil (sem Docker)",
-    advancedLink: "Linux / macOS",
-    chips: ["Sem subscrições", "Funciona na rede local", "Web + Android"],
+    ctaSecondary: "Ver como funciona",
+    downloadNote: "Grátis · Windows 10/11 · instalação guiada",
+    chips: ["Sem mensalidades", "Funciona sem internet", "No PC, tablet e telemóvel"],
+    techNote: "Para técnicos: código aberto (licença MIT), Linux/macOS com Docker —",
+    techLink: "ver instalação avançada",
   },
   features: {
     title: "Tudo o que uma oficina precisa",
@@ -100,7 +106,7 @@ export const t = {
       },
       {
         title: "Cópias de segurança",
-        desc: "Backups locais da base de dados com um comando — os dados são vossos.",
+        desc: "Cópias de segurança da base de dados no próprio PC — os dados são seus.",
       },
     ],
   },
@@ -818,7 +824,7 @@ export const t = {
           heading: "Limites honestos",
           list: [
             "Respostas podem demorar até ~2 minutos (ciclo de sincronização) — não é instantâneo",
-            "Responder a quem escreve é grátis; iniciar conversas («a tua reparação está pronta») precisa de modelos aprovados na Meta e tem custo por mensagem",
+            "Responder a quem escreve é grátis; iniciar conversas («a sua reparação está pronta») precisa de modelos aprovados na Meta e tem custo por mensagem",
             "Flood control: máximo 20 mensagens/hora por número — protege contra spam",
             "Áudios e imagens não são interpretados — vão para humano",
             "Em modo teste, só os números verificados na Meta recebem respostas — em produção não há esse limite",
@@ -996,14 +1002,14 @@ export const t = {
         {
           heading: "Instalação — passo a passo (~5 minutos)",
           paragraphs: [
-            "1. No telemóvel Android, instala «SMS Gateway for Android» (sms-gate.app) a partir da Play Store ou do site oficial.",
-            "2. Abre a app e ativa o modo «Local Server» (Servidor Local). A app mostra três coisas: o endereço local (ex.: 192.168.1.50:8080), um nome de utilizador e uma palavra-passe.",
-            "3. Confirma que o telemóvel está ligado à mesma rede Wi-Fi do PC onde corre o OficinaOS.",
+            "1. No telemóvel Android, instale «SMS Gateway for Android» (sms-gate.app) a partir da Play Store ou do site oficial.",
+            "2. Abra a app e ative o modo «Local Server» (Servidor Local). A app mostra três coisas: o endereço local (ex.: 192.168.1.50:8080), um nome de utilizador e uma palavra-passe.",
+            "3. Confirme que o telemóvel está ligado à mesma rede Wi-Fi do PC onde corre o OficinaOS.",
             "4. No PC, na app OficinaOS: Menu → Notificações → Canais → secção SMS.",
-            "5. No campo «URL do gateway», escreve http:// seguido do endereço que a app do telemóvel mostra — por exemplo http://192.168.1.50:8080.",
-            "6. Preenche o utilizador e a palavra-passe exatamente como aparecem no telemóvel e guarda.",
-            "7. Carrega «Enviar SMS de teste», mete o teu próprio número e confirma que a mensagem chega.",
-            "8. Por fim, carrega «Registar webhook no telemóvel» — isto diz à app do telemóvel para onde enviar os SMS recebidos dos clientes.",
+            "5. No campo «URL do gateway», escreva http:// seguido do endereço que a app do telemóvel mostra — por exemplo http://192.168.1.50:8080.",
+            "6. Preencha o utilizador e a palavra-passe exatamente como aparecem no telemóvel e guarda.",
+            "7. Carregue em «Enviar SMS de teste», indique o seu próprio número e confirme que a mensagem chega.",
+            "8. Por fim, carregue em «Registar webhook no telemóvel» — isto diz à app do telemóvel para onde enviar os SMS recebidos dos clientes.",
           ],
           links: [
             { label: "SMS Gateway for Android (site oficial)", href: "https://sms-gate.app" },
@@ -1012,18 +1018,18 @@ export const t = {
         {
           heading: "O detalhe do webhook — porque não pode ser localhost",
           paragraphs: [
-            "O botão «Registar webhook» ensina a app do telemóvel a reencaminhar os SMS recebidos para o PC da loja. Para isso, a OficinaOS precisa de saber o seu próprio endereço na rede — e descobre-o a partir do endereço que usas no browser.",
-            "Se abrires a app em http://localhost:4000, o webhook fica registado como «localhost» — que para o telemóvel significa ele próprio, não o PC. O registo falha ou fica a apontar para o sítio errado.",
-            "Abre a app pelo endereço de rede do PC (ex.: http://192.168.1.20:4000 — o mesmo que usas noutros dispositivos da loja) antes de carregar «Registar webhook». A app avisa se estiveres em localhost.",
+            "O botão «Registar webhook» ensina a app do telemóvel a reencaminhar os SMS recebidos para o PC da loja. Para isso, a OficinaOS precisa de saber o seu próprio endereço na rede — e descobre-o a partir do endereço que usa no browser.",
+            "Se abrir a app em http://localhost:4000, o webhook fica registado como «localhost» — que para o telemóvel significa ele próprio, não o PC. O registo falha ou fica a apontar para o sítio errado.",
+            "Abra a app pelo endereço de rede do PC (ex.: http://192.168.1.20:4000 — o mesmo que usa noutros dispositivos da loja) antes de carregar em «Registar webhook». A app avisa se estiver em localhost.",
           ],
           links: [],
         },
         {
           heading: "Manter o gateway fiável",
           list: [
-            "Deixa o telemóvel sempre ligado ao carregador — o gateway é ele; desligado, os SMS não saem",
-            "Nas definições do Android, exclui «SMS Gateway» da otimização de bateria (Bateria → Otimização → «Não otimizar») para o Android não o suspender",
-            "No router da loja, reserva o IP do telemóvel (DHCP reservation) — se o IP mudar, a configuração deixa de apontar para o sítio certo",
+            "Deixe o telemóvel sempre ligado ao carregador — o gateway é ele; desligado, os SMS não saem",
+            "Nas definições do Android, exclua «SMS Gateway» da otimização de bateria (Bateria → Otimização → «Não otimizar») para o Android não o suspender",
+            "No router da loja, reserve o IP do telemóvel (reserva DHCP) — se o IP mudar, a configuração deixa de apontar para o sítio certo",
             "Se a loja tiver uma rede Wi-Fi de convidados separada, o telemóvel tem de estar na rede principal — a mesma do PC",
             "Teste rápido de saúde: a app chama GET /health no gateway a cada envio; se falhar, a notificação fica na fila e tenta de novo",
           ],
@@ -1057,7 +1063,7 @@ export const t = {
             rows: [
               ["SMS de teste não chega", "URL correto (http:// + IP:porta)? Número de destino com indicativo (ex.: +351…)? Saldo/SMS disponíveis no SIM?"],
               ["«Falha na ligação ao gateway»", "O telemóvel está ligado e na mesma Wi-Fi do PC? O IP não mudou (ver na app do telemóvel)?"],
-              ["Erro de autenticação", "Utilizador e palavra-passe exatamente como na app do telemóvel (são gerados por ela, não escolhes tu)"],
+              ["Erro de autenticação", "Utilizador e palavra-passe exatamente como na app do telemóvel (são gerados por ela, não é o utilizador que os escolhe)"],
               ["Cliente responde e nada acontece", "O webhook está registado? (botão «Registar webhook») — e foi registado com a app aberta pelo IP de rede, não localhost?"],
               ["Funcionava e parou", "Otimização de bateria do Android suspendeu a app? O IP do telemóvel mudou?"],
               ["«Módulo não disponível»", "O entitlement sms está ativo na conta Cloud e a app já sincronizou (até ~2 min)?"],
@@ -1069,9 +1075,9 @@ export const t = {
         {
           heading: "Segurança",
           list: [
-            "Nunca exponhas a porta do gateway (ex.: 8080) à internet — é só para a rede interna da loja",
-            "Mantém o telemóvel e o PC na rede de confiança da loja — não na Wi-Fi de clientes/convidados",
-            "Se trocares o telemóvel ou o SIM, repete a configuração e regista o webhook outra vez",
+            "Nunca exponha a porta do gateway (ex.: 8080) à internet — é só para a rede interna da loja",
+            "Mantenha o telemóvel e o PC na rede de confiança da loja — não na Wi-Fi de clientes/convidados",
+            "Se trocar de telemóvel ou de SIM, repita a configuração e registe o webhook outra vez",
           ],
           paragraphs: [],
           links: [],
@@ -1123,12 +1129,12 @@ export const t = {
         {
           heading: "Configuração — passo a passo (~5 minutos)",
           paragraphs: [
-            "1. No InvoiceXpress, entra na conta da loja e gera uma chave API (nas definições de API da conta).",
+            "1. No InvoiceXpress, entre na conta da loja e gere uma chave API (nas definições de API da conta).",
             "2. No OficinaOS: Definições → separador Cloud → secção «Faturação (InvoiceXpress)» (aparece com a app emparelhada e o módulo ativo).",
-            "3. Em «Conta InvoiceXpress» escreve o subdomínio da conta — o que aparece antes de .app.invoicexpress.com.",
-            "4. Cola a chave API e escolhe a taxa de IVA predefinida (ex.: IVA23).",
-            "5. Ativa «Ativar faturação» e guarda.",
-            "6. Testa com uma venda ou reparação de valor simbólico e confirma que o documento aparece no InvoiceXpress.",
+            "3. Em «Conta InvoiceXpress» escreva o subdomínio da conta — o que aparece antes de .app.invoicexpress.com.",
+            "4. Cole a chave API e escolha a taxa de IVA predefinida (ex.: IVA23).",
+            "5. Ligue «Ativar faturação» e guarde.",
+            "6. Teste com uma venda ou reparação de valor simbólico e confirme que o documento aparece no InvoiceXpress.",
           ],
           links: [],
         },
@@ -1402,7 +1408,7 @@ export const t = {
   },
   footer: {
     license: "Licença MIT",
-    fork: "Fork de Reparilo",
+    credits: "Baseado no projeto de código aberto",
     rights: "Software livre para oficinas independentes.",
     contact: "Contacto",
     community: "Comunidade"

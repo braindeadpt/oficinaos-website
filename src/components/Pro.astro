@@ -32,7 +32,7 @@ const icons = [
   "bell",
 ] as const;
 const inputClass =
-  "w-full rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-sm text-white placeholder-zinc-500 outline-none transition focus:border-teal-500";
+  "w-full rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-sm text-white placeholder-zinc-500 outline-none transition focus:border-teal-500 focus-visible:ring-2 focus-visible:ring-teal-400";
 ---
 
 <section id="pro" class="border-y border-zinc-800/60 bg-zinc-900/30">
@@ -124,18 +124,18 @@ const inputClass =
           >
             {t.pro.signup.button}
           </button>
-          <p class="text-center text-xs text-zinc-500">
+          <p class="text-center text-xs text-zinc-400">
             {FORM_ENDPOINT ? t.pro.signup.note : t.pro.signup.noteMailto}
           </p>
         </div>
       </form>
-      <p class="mt-6 text-center text-xs text-zinc-500">
+      <p class="mt-6 text-center text-xs text-zinc-400">
         {t.pro.signup.cloudText}{" "}
         <a
           href={CLOUD_URL}
           target="_blank"
           rel="noopener noreferrer"
-          class="text-teal-400 underline-offset-2 hover:underline"
+          class="text-teal-300 underline underline-offset-2 hover:text-teal-200"
           >{t.pro.signup.cloudLink}</a
         >
       </p>
