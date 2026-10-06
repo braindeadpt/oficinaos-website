@@ -22,20 +22,20 @@ const icons = [
 
 <section id="features" class="mx-auto max-w-6xl px-6 py-24">
   <div class="max-w-2xl">
-    <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+    <h2 class="text-2xl font-extrabold tracking-tight text-text sm:text-3xl">
       {t.features.title}
     </h2>
-    <p class="mt-4 text-lg text-zinc-400">{t.features.subtitle}</p>
+    <p class="mt-4 text-lg text-text-muted">{t.features.subtitle}</p>
   </div>
   <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
     {
       t.features.items.map((f, i) => (
-        <div class="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6 transition hover:border-teal-500/40 hover:bg-zinc-900">
-          <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-teal-500/10 text-teal-400">
+        <div class="rounded-lg border border-border bg-surface shadow-sm p-6 transition hover:border-border-strong hover:bg-surface-2">
+          <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary-soft text-on-primary-soft">
             <Icon name={icons[i]} class="h-5 w-5" />
           </div>
-          <h3 class="mt-4 font-semibold text-white">{f.title}</h3>
-          <p class="mt-2 text-sm leading-relaxed text-zinc-400">{f.desc}</p>
+          <h3 class="mt-4 text-lg font-bold text-text">{f.title}</h3>
+          <p class="mt-2 text-base text-text-muted">{f.desc}</p>
         </div>
       ))
     }

@@ -14,9 +14,9 @@ const { t, locale } = Astro.props;
 const dateLocale = { pt: "pt-PT", en: "en-GB", es: "es-ES" }[locale];
 
 const badgeCls: Record<UpdateTier, string> = {
-  free: "border-teal-500/30 bg-teal-500/10 text-teal-300",
-  pro: "border-amber-500/30 bg-amber-500/10 text-amber-300",
-  diag: "border-sky-500/30 bg-sky-500/10 text-sky-300",
+  free: "border-primary-soft bg-primary-soft text-on-primary-soft",
+  pro: "border-warning-soft bg-warning-soft text-on-warning-soft",
+  diag: "border-info-soft bg-info-soft text-on-info-soft",
 };
 const badgeLabel: Record<UpdateTier, string> = {
   free: t.updates.free,
@@ -33,18 +33,18 @@ const grouped = UPDATES.reduce<Map<string, typeof UPDATES>>((acc, u) => {
 
 <Nav t={t} locale={locale} />
 <main class="mx-auto max-w-3xl px-6 py-16">
-  <h1 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+  <h1 class="text-2xl font-extrabold tracking-tight text-text sm:text-3xl">
     {t.updates.title}
   </h1>
-  <p class="mt-4 text-lg text-zinc-400">{t.updates.subtitle}</p>
+  <p class="mt-4 text-lg text-text-muted">{t.updates.subtitle}</p>
 
-  <ol class="mt-12 space-y-10 border-l border-zinc-800 pl-6">
+  <ol class="mt-12 space-y-10 border-l border-border pl-6">
     {
       [...grouped].map(([date, items]) => (
         <li>
           <time
             datetime={date}
-            class="relative -left-[31px] rounded-full border border-zinc-800 bg-zinc-950 px-3 py-1 text-xs font-medium text-zinc-400"
+            class="relative -left-[31px] rounded-full border border-border bg-surface px-3 py-1 text-xs font-semibold text-text-muted tabular-nums"
           >
             {new Date(`${date}T12:00:00`).toLocaleDateString(dateLocale, {
               day: "numeric",
@@ -54,7 +54,7 @@ const grouped = UPDATES.reduce<Map<string, typeof UPDATES>>((acc, u) => {
           </time>
           <ul class="mt-4 space-y-4">
             {items.map((u) => (
-              <li class="rounded-2xl border border-zinc-800 bg-zinc-900/30 p-5">
+              <li class="rounded-lg border border-border bg-surface shadow-sm p-5">
                 <div class="flex flex-wrap items-center gap-2">
                   <span
                     class:list={[
@@ -64,12 +64,12 @@ const grouped = UPDATES.reduce<Map<string, typeof UPDATES>>((acc, u) => {
                   >
                     {badgeLabel[u.tier]}
                   </span>
-                  <span class="text-xs text-zinc-400">{u.area[locale]}</span>
+                  <span class="text-xs text-text-muted">{u.area[locale]}</span>
                 </div>
-                <h2 class="mt-2 font-semibold text-white">
+                <h2 class="mt-2 font-semibold text-text">
                   {u.title[locale]}
                 </h2>
-                <p class="mt-1.5 text-sm leading-relaxed text-zinc-400">
+                <p class="mt-1.5 text-base text-text-muted">
                   {u.desc[locale]}
                 </p>
               </li>

@@ -1,20 +1,77 @@
 @import "tailwindcss";
+/* Design system OficinaOS · direção A «Parafuso» (design-system/design-system.md). */
+@import "./design-system/fonts.css";
+@import "./design-system/tokens.css";
+@import "./design-system/tokens.theme.css";
+
+/* Cor do símbolo da marca (quadrado + ranhura): #1D4ED8 no claro, #2F5BEA no escuro (§2.1). */
+:root {
+  --oos-logo-mark: #1d4ed8;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --oos-logo-mark: #2f5bea;
+  }
+}
+:root[data-theme="dark"] {
+  --oos-logo-mark: #2f5bea;
+}
 
 html {
   scroll-behavior: smooth;
+  background-color: var(--oos-color-bg);
+  -webkit-text-size-adjust: 100%;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  font-family: var(--oos-font-ui);
+  font-size: var(--oos-text-md);
+  line-height: var(--oos-leading-md);
+  font-feature-settings: "cv11", "ss01";
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--oos-font-display);
+  letter-spacing: var(--oos-tracking-tight);
+}
+
+code,
+pre,
+kbd {
+  font-family: var(--oos-font-mono);
+  font-variant-ligatures: none;
 }
 
 ::selection {
-  background-color: rgb(13 148 136 / 0.35);
+  background-color: var(--oos-color-selection);
 }
 
-/* Visible keyboard focus everywhere (WCAG 2.4.7). */
+/* Foco visível em tudo o que é interativo (WCAG 2.4.7) — anel do design system (§4). */
 :where(a, button, summary, input, textarea, select):focus-visible {
-  outline: 2px solid #2dd4bf;
+  outline: 2px solid transparent;
   outline-offset: 2px;
+  box-shadow: var(--oos-focus-ring);
+  border-radius: var(--oos-radius-xs);
 }
 
-/* In-page anchors land below the sticky header. */
+/* Âncoras na página ficam abaixo do cabeçalho fixo. */
 section[id] {
   scroll-margin-top: 5rem;
+}
+
+/* Fotografias ligeiramente mais escuras no modo escuro (§5.6). */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .oos-photo {
+    filter: brightness(0.92);
+  }
+}
+:root[data-theme="dark"] .oos-photo {
+  filter: brightness(0.92);
 }
