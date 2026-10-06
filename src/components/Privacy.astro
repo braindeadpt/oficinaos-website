@@ -11,43 +11,43 @@ const { t } = Astro.props;
 const icons = ["shield", "globe", "clipboard"] as const;
 ---
 
-<section id="privacy" class="border-b border-zinc-800/60">
+<section id="privacy" class="border-b border-border">
   <div class="mx-auto max-w-6xl px-6 py-24">
     <div class="max-w-2xl">
       <span
-        class="inline-flex items-center gap-2 rounded-full border border-teal-500/30 bg-teal-500/10 px-3 py-1 text-xs font-medium text-teal-300"
+        class="inline-flex items-center gap-2 rounded-full border border-primary-soft bg-primary-soft px-3 py-1 text-xs font-medium text-on-primary-soft"
       >
         {t.privacy.badge}
       </span>
-      <h2 class="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+      <h2 class="mt-4 text-2xl font-extrabold tracking-tight text-text sm:text-3xl">
         {t.privacy.title}
       </h2>
-      <p class="mt-4 text-lg text-zinc-400">{t.privacy.subtitle}</p>
+      <p class="mt-4 text-lg text-text-muted">{t.privacy.subtitle}</p>
     </div>
     <div class="mt-12 grid gap-4 md:grid-cols-3">
       {
         t.privacy.cards.map((c, i) => (
-          <div class="rounded-2xl border border-zinc-800 bg-zinc-900/30 p-6">
-            <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-teal-500/10 text-teal-400">
+          <div class="rounded-lg border border-border bg-surface shadow-sm p-6">
+            <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary-soft text-on-primary-soft">
               <Icon name={icons[i]} class="h-5 w-5" />
             </div>
-            <h3 class="mt-4 font-semibold text-white">{c.title}</h3>
-            <p class="mt-2 text-sm leading-relaxed text-zinc-400">{c.desc}</p>
+            <h3 class="mt-4 text-lg font-bold text-text">{c.title}</h3>
+            <p class="mt-2 text-base text-text-muted">{c.desc}</p>
           </div>
         ))
       }
     </div>
     <div
-      class="mt-12 rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6 sm:p-8"
+      class="mt-12 rounded-lg border border-border bg-surface shadow-sm p-6 sm:p-8"
     >
-      <h3 class="font-semibold text-white">{t.privacy.tableTitle}</h3>
-      <ul class="mt-4 divide-y divide-zinc-800/70">
+      <h3 class="font-semibold text-text">{t.privacy.tableTitle}</h3>
+      <ul class="mt-4 divide-y divide-border">
         {
           t.privacy.table.map((row) => (
             <li class="flex flex-col gap-1 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
-              <span class="text-sm font-medium text-zinc-200">{row.name}</span>
-              <span class="text-sm text-zinc-400">
-                <span class="text-teal-400">{row.to}</span>
+              <span class="text-sm font-medium text-text">{row.name}</span>
+              <span class="text-sm text-text-muted">
+                <span class="text-link">{row.to}</span>
                 {" — "}
                 {row.what}
               </span>
@@ -55,12 +55,12 @@ const icons = ["shield", "globe", "clipboard"] as const;
           ))
         }
       </ul>
-      <p class="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-xs text-zinc-400">
+      <p class="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-xs text-text-muted">
         <a
           href={CLOUD_PRIVACY_URL}
           target="_blank"
           rel="noopener noreferrer"
-          class="text-teal-300 underline underline-offset-2 hover:text-teal-200"
+          class="text-link underline underline-offset-2 hover:text-primary-hover"
         >
           {t.privacy.cloudPrivacyLink}
         </a>
@@ -68,7 +68,7 @@ const icons = ["shield", "globe", "clipboard"] as const;
           href={`${REPO_URL}/blob/main/docs/privacy-and-data.md`}
           target="_blank"
           rel="noopener noreferrer"
-          class="text-teal-300 underline underline-offset-2 hover:text-teal-200"
+          class="text-link underline underline-offset-2 hover:text-primary-hover"
         >
           {t.privacy.tableNote}
         </a>

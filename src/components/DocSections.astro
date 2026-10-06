@@ -13,27 +13,27 @@ const { sections } = Astro.props;
   {
     sections.map((s) => (
       <section id={slugify(s.heading)}>
-        <h2 class="text-xl font-semibold text-white">{s.heading}</h2>
+        <h2 class="text-xl font-bold text-text">{s.heading}</h2>
         {s.paragraphs.map((p) => (
-          <p class="mt-4 leading-relaxed text-zinc-400">{p}</p>
+          <p class="mt-4 text-md text-text-muted">{p}</p>
         ))}
         {s.list && (
           <ul class="mt-4 space-y-2.5">
             {s.list.map((item) => (
-              <li class="flex gap-3 text-sm leading-relaxed text-zinc-400">
-                <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-500" />
+              <li class="flex gap-3 text-base text-text-muted">
+                <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
                 <span>{item}</span>
               </li>
             ))}
           </ul>
         )}
         {s.table && (
-          <div class="mt-4 overflow-x-auto rounded-xl border border-zinc-800">
+          <div class="mt-4 overflow-x-auto rounded-lg border border-border bg-surface">
             <table class="w-full text-sm">
               <thead>
-                <tr class="border-b border-zinc-800 bg-zinc-900/60">
+                <tr class="border-b border-border bg-surface-2">
                   {s.table.head.map((h) => (
-                    <th class="px-4 py-2.5 text-left font-medium text-zinc-200">
+                    <th class="px-4 py-2.5 text-left text-caption font-semibold uppercase tracking-[0.06em] text-text-muted">
                       {h}
                     </th>
                   ))}
@@ -41,9 +41,9 @@ const { sections } = Astro.props;
               </thead>
               <tbody>
                 {s.table.rows.map((row) => (
-                  <tr class="border-b border-zinc-800/60 last:border-0">
+                  <tr class="border-b border-border last:border-0">
                     {row.map((cell) => (
-                      <td class="px-4 py-2.5 leading-relaxed text-zinc-400">
+                      <td class="px-4 py-2.5 leading-relaxed text-text-muted">
                         {cell}
                       </td>
                     ))}
@@ -54,22 +54,22 @@ const { sections } = Astro.props;
           </div>
         )}
         {s.code && (
-          <pre class="mt-4 overflow-x-auto whitespace-pre-wrap break-words rounded-xl border border-zinc-800 bg-zinc-900 p-4 font-mono text-[13px] leading-relaxed text-zinc-300 sm:p-5 sm:text-sm">
+          <pre class="mt-4 overflow-x-auto whitespace-pre-wrap break-words rounded-lg border border-border bg-surface-2 p-4 font-mono text-[13px] leading-relaxed text-text sm:p-5 sm:text-sm">
             <code>{s.code}</code>
           </pre>
         )}
         {s.images && s.images.length > 0 && (
           <div class="mt-6 grid gap-4 sm:grid-cols-2">
             {s.images.map((img) => (
-              <figure class="overflow-hidden rounded-xl border border-zinc-800">
+              <figure class="overflow-hidden rounded-lg border border-border">
                 <img
                   src={img.src}
                   alt={img.alt}
                   loading="lazy"
-                  class="w-full"
+                  class="oos-photo w-full"
                 />
                 {img.caption && (
-                  <figcaption class="px-4 py-2.5 text-xs text-zinc-400">
+                  <figcaption class="px-4 py-2.5 text-xs text-text-muted">
                     {img.caption}
                   </figcaption>
                 )}
@@ -84,7 +84,7 @@ const { sections } = Astro.props;
                 href={l.href}
                 target={l.href.startsWith("#") || l.href.startsWith("/") ? undefined : "_blank"}
                 rel="noopener noreferrer"
-                class="inline-flex items-center gap-1.5 font-medium text-teal-400 transition hover:text-teal-300"
+                class="inline-flex items-center gap-1.5 font-medium text-link transition hover:text-primary-hover"
               >
                 {l.label}
                 {!l.href.startsWith("#") && !l.href.startsWith("/") && (

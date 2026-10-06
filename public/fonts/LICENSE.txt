@@ -1,0 +1,5 @@
+Fontes alojadas localmente (woff2, subsets latin e latin-ext), todas sob SIL Open Font License 1.1:
+- Inter — https://github.com/rsms/inter
+- Manrope — https://github.com/sharanda/manrope
+- JetBrains Mono — https://github.com/JetBrains/JetBrainsMono
+Obtidas do Fontsource. Texto da licença: https://openfontlicense.org
