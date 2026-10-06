@@ -1,7 +1,7 @@
 ---
 import type { Copy } from "../i18n/pt";
 import Icon from "./Icon.astro";
-import { INSTALL_URL, REPO_URL } from "../i18n/utils";
+import { INSTALL_ZIP_URL, PORTABLE_ZIP_URL, REPO_URL } from "../i18n/utils";
 
 interface Props {
   t: Copy;
@@ -33,24 +33,36 @@ const { t } = Astro.props;
     </p>
     <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
       <a
-        href={REPO_URL}
-        target="_blank"
-        rel="noopener noreferrer"
+        href={INSTALL_ZIP_URL}
         class="inline-flex items-center gap-2 rounded-xl bg-teal-500 px-6 py-3 font-semibold text-zinc-950 transition hover:bg-teal-400"
       >
+        <Icon name="download" class="h-4 w-4" />
         {t.hero.ctaPrimary}
-        <Icon name="arrow" class="h-4 w-4" />
       </a>
       <a
-        href={INSTALL_URL}
+        href={REPO_URL}
         target="_blank"
         rel="noopener noreferrer"
         class="inline-flex items-center gap-2 rounded-xl border border-zinc-700 px-6 py-3 font-semibold text-white transition hover:border-zinc-500 hover:bg-zinc-900"
       >
-        <Icon name="terminal" class="h-4 w-4" />
         {t.hero.ctaSecondary}
+        <Icon name="arrow" class="h-4 w-4" />
       </a>
     </div>
+    <p class="mt-4 text-xs text-zinc-500">
+      {t.hero.downloadNote} ·{" "}
+      <a
+        href={PORTABLE_ZIP_URL}
+        class="text-zinc-400 underline decoration-zinc-700 underline-offset-2 transition hover:text-teal-300"
+        >{t.hero.portableLink}</a
+      >{" "}
+      ·{" "}
+      <a
+        href="#install-advanced"
+        class="text-zinc-400 underline decoration-zinc-700 underline-offset-2 transition hover:text-teal-300"
+        >{t.hero.advancedLink}</a
+      >
+    </p>
     <div
       class="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-zinc-500"
     >

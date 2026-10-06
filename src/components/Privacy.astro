@@ -1,6 +1,6 @@
 ---
 import type { Copy } from "../i18n/pt";
-import { REPO_URL } from "../i18n/utils";
+import { CLOUD_PRIVACY_URL, REPO_URL } from "../i18n/utils";
 import Icon from "./Icon.astro";
 
 interface Props {
@@ -55,7 +55,15 @@ const icons = ["shield", "globe", "clipboard"] as const;
           ))
         }
       </ul>
-      <p class="mt-4 text-xs text-zinc-500">
+      <p class="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-xs text-zinc-500">
+        <a
+          href={CLOUD_PRIVACY_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-teal-400 underline-offset-2 hover:underline"
+        >
+          {t.privacy.cloudPrivacyLink}
+        </a>
         <a
           href={`${REPO_URL}/blob/main/docs/privacy-and-data.md`}
           target="_blank"

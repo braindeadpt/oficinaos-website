@@ -40,6 +40,11 @@ export const BACKUP_DOCS_URL = `${REPO_URL}#backups-e-teste-de-restore-sidecar-d
 export const DOCS_REMOTE_URL = `${REPO_URL}/blob/main/docs/remote-access.md`;
 export const DOCS_MOBILE_URL = `${REPO_URL}/blob/main/docs/mobile-access.md`;
 
+/** Public contact address (also shown in the footer). */
+export const CONTACT_EMAIL = "oficinaos.app@gmail.com";
+export const CLOUD_URL = "https://cloud.oficinaos.app";
+export const CLOUD_PRIVACY_URL = `${CLOUD_URL}/privacy`;
+
 export const DIAG_REPO_URL = "https://github.com/braindeadpt/oficinaos-diag";
 export const DIAG_ZIP_URL = `${DIAG_REPO_URL}/releases/latest/download/oficinaos-diag-win-x64.zip`;
 export const DIAG_STORE_URL = "https://apps.microsoft.com/detail/9P2BM91SFKFM";

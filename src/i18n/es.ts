@@ -39,8 +39,11 @@ export const t: Copy = {
     titleAccent: "Tus datos, en tu tienda.",
     subtitle:
       "OficinaOS es un sistema de gestión gratuito y open source para talleres de reparación de móviles. Funciona en un ordenador dentro de la tienda — reparaciones, stock, caja y datos de clientes nunca salen de tu red local.",
-    ctaPrimary: "Ver en GitHub",
-    ctaSecondary: "Guía de instalación",
+    ctaPrimary: "Descargar para Windows",
+    ctaSecondary: "Ver en GitHub",
+    downloadNote: "Gratis · Windows 10/11 · instalador de la última versión",
+    portableLink: "versión portátil (sin Docker)",
+    advancedLink: "Linux / macOS",
     chips: ["Sin suscripciones", "Funciona en tu red local", "Web + Android"],
   },
   features: {
@@ -93,33 +96,45 @@ export const t: Copy = {
     comingSoon: "Captura próximamente",
   },
   pro: {
-    badge: "En desarrollo",
+    badge: "Beta — gratis para tiendas piloto",
     title: "Módulos Pro",
     subtitle:
-      "Módulos opcionales de pago, en desarrollo activo. El núcleo sigue siendo gratuito y MIT — para siempre.",
-    items: [
-      {
-        title: "Automatización de mostrador",
-        desc: "Actualizaciones automáticas por WhatsApp y recibos digitales — menos llamadas de «¿ya está?».",
-      },
-      {
-        title: "Diagnóstico de banco",
-        desc: "Diagnóstico por cable del dispositivo, con informes asistidos por IA.",
-      },
-      {
-        title: "Certificación de usados",
-        desc: "Ciclos de batería, estado de bloqueo y grading para compra/venta — certificados A/B/C.",
-      },
+      "Funciones opcionales que necesitan «llegar a internet», a través de OficinaOS Cloud. Ya están disponibles en beta y, durante la beta, las tiendas piloto las usan gratis. El núcleo sigue siendo gratuito y MIT — para siempre.",
+    statusLabel: "Beta",
+    modules: [
+      { title: "Portal del cliente", desc: "Enlace público por reparación, con estado y respuesta a presupuestos.", href: "/docs/portal/" },
+      { title: "Bot de WhatsApp", desc: "El cliente pregunta por WhatsApp y recibe el estado real de la reparación.", href: "/docs/whatsapp/" },
+      { title: "Canal SMS", desc: "El mismo asistente por SMS, con un móvil Android en la tienda.", href: "/docs/sms/" },
+      { title: "Recepción de diagnósticos", desc: "El cliente hace el diagnóstico en casa con el Diag y lo envía a la tienda.", href: "/docs/diag/" },
+      { title: "Informes IA", desc: "El diagnóstico técnico explicado en lenguaje sencillo.", href: "/docs/diag/" },
+      { title: "Facturación (InvoiceXpress)", desc: "Facturas certificadas desde la venta o la reparación — solo Portugal.", href: "/docs/invoicing/" },
+      { title: "Escaparate online", desc: "Página pública con artículos del catálogo; los clientes reservan y el pedido entra en la app.", href: "/docs/storefront/" },
+      { title: "Busco pieza", desc: "Tablón entre tiendas OficinaOS para pedir y ofrecer piezas.", href: "/docs/market/" },
+      { title: "Precios de mercado", desc: "Compara tus precios con la mediana anónima de otras tiendas.", href: "/docs/market-prices/" },
+      { title: "Multitienda", desc: "Ingresos y reparaciones de todas tus tiendas en un solo panel.", href: "/docs/multi-shop/" },
+      { title: "Remarketing por WhatsApp", desc: "Mensaje automático a clientes que llevan tiempo sin volver.", href: "/docs/remarketing/" },
     ],
-    waitlist: {
-      title: "Lista de espera",
-      subtitle: "Te avisamos cuando se lancen los módulos Pro.",
-      placeholder: "tu@tutaller.es",
-      button: "Avísame",
-      buttonGithub: "Seguir en GitHub",
-      note: "Formulario estático — sin cuenta. Solo escribimos sobre los lanzamientos Pro.",
-      noteGithub:
-        "Sigue el repositorio en GitHub — los lanzamientos de módulos Pro se anuncian en releases.",
+    signup: {
+      title: "Quiero entrar en la beta Pro",
+      subtitle:
+        "Déjanos los datos de tu tienda y te contactamos para activar los módulos. Sin compromiso.",
+      email: "Email",
+      emailPlaceholder: "tu@tutaller.es",
+      shop: "Nombre de la tienda",
+      shopPlaceholder: "ej.: Repara Ya",
+      city: "Ciudad",
+      cityPlaceholder: "ej.: Vigo",
+      phone: "Teléfono",
+      phonePlaceholder: "ej.: 612 345 678",
+      optional: "opcional",
+      languageLabel: "Idioma",
+      button: "Solicitar acceso a la beta",
+      mailSubject: "Beta OficinaOS Pro — solicitud de acceso",
+      note: "Solo usamos estos datos para contactarte sobre la beta Pro.",
+      noteMailto:
+        "Al enviar se abre tu programa de correo con los datos rellenados — solo tienes que pulsar Enviar.",
+      cloudText: "¿Ya tienes cuenta en OficinaOS Cloud?",
+      cloudLink: "Entrar en cloud.oficinaos.app",
     },
   },
   diag: {
@@ -147,23 +162,38 @@ export const t: Copy = {
     badge: "RGPD",
     title: "Los datos se quedan en la tienda.",
     subtitle:
-      "OficinaOS se ejecuta en un PC dentro de la tienda — no hay servidores nuestros, ni cuenta nuestra, ni telemetría.",
+      "La app se ejecuta en un PC dentro de la tienda y no tiene telemetría: por defecto, ningún dato de tus clientes sale de la tienda. Solo los módulos opcionales — incluida OficinaOS Cloud (Pro) — envían datos fuera, y cada uno está declarado abajo.",
     cards: [
       {
         title: "Todo local por defecto",
-        desc: "Clientes, reparaciones, stock y caja viven en el PC de la tienda. Como nunca tocamos los datos, ni siquiera hace falta un acuerdo de encargo de tratamiento (art. 28) con nosotros.",
+        desc: "Clientes, reparaciones, stock y caja viven en el PC de la tienda. Sin módulos Pro activados, no recibimos ningún dato de la tienda.",
       },
       {
-        title: "Sin transferencias internacionales",
-        desc: "Por defecto nada sale de la tienda — a diferencia de los sistemas en la nube, no hay datos de clientes en servidores de terceros.",
+        title: "La Cloud es opcional",
+        desc: "Los módulos Pro, las cuentas de OficinaOS Cloud y el envío de logs del Diag usan nuestros servidores. Solo se usan si la tienda (o el cliente, en el Diag) los activa.",
       },
       {
-        title: "Extras opcionales y declarados",
-        desc: "WhatsApp, acceso remoto e IA son opt-in — documentados ítem a ítem, listos para el registro de actividades de tratamiento (art. 30).",
+        title: "Extras declarados",
+        desc: "WhatsApp, acceso remoto, IA y Cloud son opt-in — documentados ítem a ítem, listos para el registro de actividades de tratamiento (art. 30).",
       },
     ],
-    tableTitle: "Cuando activas un módulo opcional, esto es todo lo que sale:",
+    tableTitle: "Cuando activas un módulo opcional, esto es lo que sale:",
     table: [
+      {
+        name: "OficinaOS Cloud (módulos Pro)",
+        to: "Servidores de OficinaOS",
+        what: "Cuenta y emparejamiento; datos de cada módulo activo — páginas del portal (con el nombre del cliente), mensajes de WhatsApp recibidos, reservas del escaparate, diagnósticos enviados, totales diarios (multitienda) y precios compartidos",
+      },
+      {
+        name: "Informes IA (Pro)",
+        to: "Proveedor de IA de la Cloud",
+        what: "Los datos del diagnóstico y las notas a partir de los que se genera el informe",
+      },
+      {
+        name: "Envío de log del Diag",
+        to: "Servidores de OficinaOS",
+        what: "Solo al pulsar «Enviar log»: el final del archivo diag.log",
+      },
       {
         name: "Notificaciones WhatsApp",
         to: "Meta",
@@ -180,29 +210,42 @@ export const t: Copy = {
         what: "Las preguntas que hagas a la IA",
       },
     ],
+    cloudPrivacyLink: "Política de privacidad de OficinaOS Cloud",
     tableNote:
       "Ver el detalle completo — incluido lo que nunca sale — en el repositorio.",
   },
   install: {
     title: "En marcha en minutos",
     subtitle:
-      "Un PC en la tienda, Docker, un comando. Tras la instalación, funciona offline en tu red local.",
+      "Un PC con Windows en la tienda y un instalador. Tras la instalación, funciona offline en tu red local.",
     steps: [
       {
-        title: "Obtén el código",
-        desc: "Clona el repositorio o descarga el instalador desde Releases.",
+        title: "Descarga el instalador",
+        desc: "Descarga oficinaos-install.zip y extráelo en una carpeta, por ejemplo C:\\OficinaOS.",
       },
       {
-        title: "Arranca con Docker",
-        desc: "docker compose up -d levanta la app y la base de datos en contenedores.",
+        title: "Doble clic en INSTALAR.bat",
+        desc: "El instalador lo hace todo: instala Docker si falta, genera las contraseñas y arranca la app. Si el PC no admite Docker, ofrece el modo portátil. Si SmartScreen avisa: «Más información» → «Ejecutar de todas formas».",
       },
       {
         title: "Abre en el navegador",
-        desc: "http://localhost:4000 en el PC — o la IP local desde cualquier dispositivo.",
+        desc: "Al final se abre http://localhost:4000. En los demás dispositivos de la tienda, usa la IP del PC (ej.: http://192.168.1.33:4000). En el día a día, basta con INICIAR.bat.",
       },
     ],
+    downloadButton: "Descargar para Windows",
+    portableLink: "Versión portátil (sin Docker)",
+    downloadNote: "Windows 10/11 64-bit · gratis · última versión publicada en GitHub",
+    advanced: {
+      badge: "Avanzado",
+      title: "Linux y macOS — Docker manual",
+      desc: "No hay instalador automático para Linux ni macOS. Con Docker instalado, la app arranca con estos comandos:",
+      commentGet: "obtener el código y la configuración",
+      commentStart: "arrancar con docker (el seed solo la 1.ª vez)",
+      commentOpen: "después, abrir en el navegador",
+      note: "Edita el .env antes de arrancar (contraseña inicial del admin y APP_URL). Detalles en la guía de instalación.",
+    },
     guideLink: "Guía de instalación completa",
-    releasesLink: "Instalador para Windows (Releases)",
+    releasesLink: "Todas las versiones (Releases)",
   },
   docs: {
     title: "Guía completa",
@@ -456,7 +499,12 @@ export const t: Copy = {
             ["Canal SMS", "El mismo asistente por SMS — un móvil Android con SIM en la tienda envía y recibe, sin Meta ni coste por mensaje"],
             ["Diagnóstico a distancia", "Hace el diagnóstico del móvil en casa (oficinaos-diag, gratis) y lo envía a la tienda con un código"],
             ["Informes IA", "Informe del diagnóstico escrito en lenguaje sencillo, listo para entregar"],
-            ["Facturación certificada", "Factura o factura-recibo legal emitida directamente desde la reparación o la venta — vía InvoiceXpress, con la cuenta de la propia tienda"],
+            ["Facturación certificada", "Factura o factura-recibo legal emitida directamente desde la reparación o la venta — vía InvoiceXpress, con la cuenta de la propia tienda — solo Portugal"],
+            ["Escaparate online", "Página pública con artículos del catálogo de la tienda; el cliente reserva y la reserva entra en la cola de Pedidos"],
+            ["Busco pieza", "Tablón entre tiendas OficinaOS para pedir piezas y responder «la tengo» — el trato se cierra entre tiendas"],
+            ["Precios de mercado", "La mediana anónima de los precios de reparaciones y piezas de otras tiendas, para compararla con los tuyos"],
+            ["Multitienda", "Ingresos y reparaciones de todas las tiendas del mismo dueño en un solo panel de OficinaOS Cloud"],
+            ["Remarketing por WhatsApp", "Mensaje automático a clientes con consentimiento cuya última reparación fue hace tiempo"],
           ],
         },
         links: [],
@@ -479,6 +527,11 @@ export const t: Copy = {
             ["Recepción de diagnósticos", "Disponible (beta)", "Por anunciar — gratis en beta"],
             ["Informes IA", "Disponible (beta)", "Por anunciar — por informe"],
             ["Facturación (InvoiceXpress)", "Disponible (beta)", "Por anunciar — gratis en beta. La cuenta de InvoiceXpress es de la tienda y tiene el coste propio del servicio"],
+            ["Escaparate online (+ personalización)", "Disponible (beta)", "Por anunciar — gratis en beta"],
+            ["Busco pieza", "Disponible (beta)", "Por anunciar — gratis en beta"],
+            ["Precios de mercado", "Disponible (beta)", "Por anunciar — gratis en beta"],
+            ["Multitienda", "Disponible (beta)", "Por anunciar — gratis en beta"],
+            ["Remarketing por WhatsApp", "Disponible (beta)", "Por anunciar — gratis en beta. Los mensajes plantilla tienen el coste de Meta*"],
           ],
         },
         links: [],
@@ -526,7 +579,7 @@ export const t: Copy = {
         ],
       },
       {
-        heading: "Diagnósticos enviados por clientes (Pro)",
+        heading: "Diagnósticos remitidos por los clientes (Pro)",
         paragraphs: [
           "La herramienta oficinaos-diag es gratuita para cualquiera: el cliente la descarga, conecta el móvil al PC por cable y el programa lee batería, pantalla, sensores y almacenamiento.",
           "Con el módulo activo, la tienda recibe esos diagnósticos directamente en la app (cola de pedidos), listos para convertir en reparación — el cliente solo necesita el código de la tienda. El módulo de informes IA convierte los datos técnicos en un texto sencillo para entregar al cliente.",
@@ -539,10 +592,33 @@ export const t: Copy = {
       {
         heading: "Facturación certificada (Pro)",
         paragraphs: [
-          "La app emite documentos fiscales legales directamente desde la venta o la reparación — factura-recibo cuando el cliente tiene NIF, factura simplificada cuando no lo tiene. La emisión se hace vía InvoiceXpress con la cuenta de la propia tienda: la clave API queda guardada cifrada en el PC de la tienda y la app habla directamente con InvoiceXpress — la OficinaOS Cloud solo controla el acceso al módulo, nunca ve los documentos.",
+          "La app emite documentos fiscales legales directamente desde la venta o la reparación — factura-recibo cuando el cliente tiene NIF, factura simplificada cuando no lo tiene. La emisión se hace vía InvoiceXpress con la cuenta de la propia tienda: la clave API queda guardada cifrada en el PC de la tienda y la app habla directamente con InvoiceXpress — la OficinaOS Cloud solo controla el acceso al módulo, nunca ve los documentos. Solo para tiendas en Portugal.",
         ],
         links: [
           { label: "Guía detallada de facturación", href: "/es/docs/invoicing" },
+        ],
+      },
+      {
+        heading: "Escaparate, busco pieza, precios, multitienda y remarketing (Pro)",
+        paragraphs: [
+          "Cinco módulos Pro más, todos en beta y activados en la cuenta de OficinaOS Cloud. Cada uno tiene una guía breve:",
+        ],
+        table: {
+          head: ["Módulo", "Para qué"],
+          rows: [
+            ["Escaparate online", "Página pública con los artículos del catálogo que elijas — el cliente reserva y el pedido aparece en Pedidos"],
+            ["Busco pieza", "Pedir una pieza a otras tiendas OficinaOS o responder a sus pedidos"],
+            ["Precios de mercado", "Ver la mediana anónima de los precios de otras tiendas junto a los tuyos"],
+            ["Multitienda", "Panel con los ingresos y las reparaciones de todas tus tiendas"],
+            ["Remarketing por WhatsApp", "Mensaje automático a clientes que llevan tiempo sin volver"],
+          ],
+        },
+        links: [
+          { label: "Guía del escaparate online", href: "/es/docs/storefront/" },
+          { label: "Guía de busco pieza", href: "/es/docs/market/" },
+          { label: "Guía de precios de mercado", href: "/es/docs/market-prices/" },
+          { label: "Guía de multitienda", href: "/es/docs/multi-shop/" },
+          { label: "Guía de remarketing", href: "/es/docs/remarketing/" },
         ],
       },
       {
@@ -574,11 +650,11 @@ export const t: Copy = {
           head: ["Pregunta", "Respuesta"],
           rows: [
             ["¿Necesito internet?", "No para el uso diario — la app corre toda en la red de la tienda. Solo para actualizaciones y módulos Pro."],
-            ["¿Los datos de los clientes van a algún servidor?", "No por defecto. Con módulos Pro, Cloud solo retransmite copias redactadas y mensajes — sin costes internos ni datos privados."],
+            ["¿Los datos de los clientes van a algún servidor?", "No por defecto — la app no tiene telemetría. Con módulos Pro, OficinaOS Cloud recibe solo los datos que necesita cada módulo (por ejemplo, páginas del portal, mensajes, reservas y diagnósticos enviados), nunca costes internos ni notas internas. El detalle está en la política de privacidad de la Cloud (cloud.oficinaos.app/privacy)."],
             ["¿Funciona en el móvil?", "Sí — en el Wi-Fi de la tienda cualquier aparato lo abre en el navegador; fuera de la tienda con el acceso remoto (Cloudflare Tunnel)."],
             ["¿El cliente tiene que instalar algo?", "No — el portal abre como un enlace en su navegador; el bot responde en su WhatsApp normal."],
             ["¿Cuánto cuesta?", "La app completa es gratuita (licencia MIT). Los módulos Pro son suscripciones opcionales, en beta."],
-            ["¿Varias tiendas / sucursales?", "No — OficinaOS está pensado para una ubicación por instalación."],
+            ["¿Varias tiendas / sucursales?", "Cada tienda tiene su propia instalación. Con el módulo Pro Multitienda, el dueño ve los ingresos y las reparaciones de todas las tiendas en un solo panel de OficinaOS Cloud."],
             ["¿Y si el PC se estropea?", "Copias de seguridad diarias automáticas; restaurar en otro PC es copiar la copia y volver a ejecutar el instalador."],
             ["¿Mac o Linux?", "Sí, con Docker manual — el instalador automático es solo Windows."],
             ["¿Puedo importar datos de otro sistema?", "Clientes y catálogo por CSV; contáctanos para migraciones asistidas."],
@@ -758,7 +834,7 @@ export const t: Copy = {
         "La herramienta Windows gratuita que lee cualquier Android o iPhone por cable — el scan local es siempre gratis; el envío a la tienda y los informes IA son módulos Pro.",
       sections: [
         {
-          heading: "Instalar — Microsoft Store",
+          heading: "Instalación — Microsoft Store",
           paragraphs: [
             "La forma más sencilla: instala desde la Microsoft Store — un clic, sin aviso SmartScreen y con actualizaciones automáticas. Gratis.",
             "Alternativa portátil: descarga el zip, extrae la carpeta entera (el exe necesita los archivos de al lado) y ejecuta OficinaDiag.exe — Windows puede mostrar el aviso SmartScreen en la primera ejecución: «Más información» → «Ejecutar de todas formas».",
@@ -790,7 +866,7 @@ export const t: Copy = {
               ["Batería — capacidad real vs diseño", "donde el fabricante la expone", "✓"],
               ["Almacenamiento y RAM", "✓", "✓"],
               ["Sensores", "✓", "✓"],
-              ["Root / bootloader desbloqueado", "✓", "—"],
+              ["Root / gestor de arranque desbloqueado", "✓", "—"],
               ["Estado de activación / operadora", "—", "✓"],
             ],
           },
@@ -990,8 +1066,15 @@ export const t: Copy = {
     invoicing: {
       title: "Facturación certificada",
       subtitle:
-        "Facturas y facturas-recibo legales emitidas directamente desde la venta o la reparación — vía InvoiceXpress, con la cuenta y la clave de la propia tienda.",
+        "Solo para tiendas en Portugal: facturas y facturas-recibo legales emitidas directamente desde la venta o la reparación — vía InvoiceXpress, con la cuenta y la clave de la propia tienda.",
       sections: [
+        {
+          heading: "Solo para Portugal",
+          paragraphs: [
+            "El módulo emite documentos a través de InvoiceXpress, un servicio de facturación certificado para Portugal, y los tipos de IVA disponibles en la app son los de Portugal continental (IVA23, IVA13, IVA6 e IVA0). La facturación española (Verifactu, TicketBAI) todavía no está soportada: las tiendas en España no pueden usar este módulo para emitir facturas legales.",
+          ],
+          links: [],
+        },
         {
           heading: "Qué hace el módulo",
           paragraphs: [
@@ -1012,9 +1095,9 @@ export const t: Copy = {
         {
           heading: "Qué necesitas",
           list: [
-            "Una cuenta InvoiceXpress de la tienda (su servicio tiene coste propio — independiente de OficinaOS)",
+            "Una tienda en Portugal con cuenta en InvoiceXpress (su servicio tiene coste propio — independiente de OficinaOS)",
             "La clave API de la cuenta — se crea en los ajustes de InvoiceXpress",
-            "La tasa de IVA que la tienda usa (ej.: IVA 21% — o la de tu región)",
+            "El tipo de IVA predeterminado de la tienda — IVA23, IVA13, IVA6 o IVA0 (tipos portugueses)",
             "El módulo invoicing activo en la cuenta OficinaOS Cloud (en beta lo activamos nosotros)",
           ],
           paragraphs: [],
@@ -1026,9 +1109,9 @@ export const t: Copy = {
           heading: "Configuración — paso a paso (~5 minutos)",
           paragraphs: [
             "1. En InvoiceXpress, entra en la cuenta de la tienda y genera una clave API (en los ajustes de API de la cuenta).",
-            "2. En OficinaOS: Ajustes → pestaña Facturación.",
+            "2. En OficinaOS: Ajustes → pestaña Cloud → sección «Facturación (InvoiceXpress)» (aparece con la app emparejada y el módulo activo).",
             "3. En «Cuenta InvoiceXpress» escribe el subdominio de la cuenta — lo que aparece antes de .app.invoicexpress.com.",
-            "4. Pega la clave API y elige la tasa de IVA predeterminada (ej.: IVA21).",
+            "4. Pega la clave API y elige el tipo de IVA predeterminado (ej.: IVA23).",
             "5. Activa «Activar facturación» y guarda.",
             "6. Prueba con una venta o reparación de valor simbólico y confirma que el documento aparece en InvoiceXpress.",
           ],
@@ -1053,8 +1136,241 @@ export const t: Copy = {
           heading: "Límites honestos",
           list: [
             "Requiere la cuenta InvoiceXpress de la tienda — el coste de ese servicio es de la tienda, separado de OficinaOS",
-            "InvoiceXpress está pensado para Portugal; en otros países el módulo puede no emitir los documentos fiscales correctos",
+            "Solo Portugal: InvoiceXpress y los tipos de IVA disponibles son portugueses — en España y otros países el módulo no emite documentos fiscales válidos",
             "Los documentos emitidos no se borran desde la app — las anulaciones/notas de crédito se hacen en InvoiceXpress",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+      ],
+    },
+    storefront: {
+      title: "Escaparate online",
+      subtitle:
+        "Una página pública con artículos de tu catálogo — el cliente ve el precio y reserva, y la reserva entra en la app como pedido.",
+      sections: [
+        {
+          heading: "Qué hace el módulo",
+          paragraphs: [
+            "La app envía a OficinaOS Cloud los artículos que marques como «listados online», y la Cloud los muestra en una página pública de la tienda (cloud.oficinaos.app/loja/<dirección>). Cada artículo aparece con nombre, categoría y precio; los artículos sin stock dejan de aparecer.",
+            "El cliente elige un artículo y lo reserva con su nombre, su teléfono y una nota opcional. La reserva llega a la app en la siguiente sincronización y entra en la cola de Pedidos («Reserva loja online: …»), con aviso al dueño y al mostrador. No hay pago online: la venta se hace en la tienda.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Activar y publicar",
+          list: [
+            "Emparejar la app con OficinaOS Cloud (Ajustes → pestaña Cloud) y tener activo el módulo storefront (en beta lo activamos nosotros)",
+            "En Ajustes → pestaña Cloud aparece la sección de la tienda online: elige la dirección de la página, una breve descripción y el email de contacto público",
+            "Activa «Publicado» y guarda — el enlace de la página aparece arriba de la sección",
+            "La dirección postal y el teléfono que muestra la página vienen de los ajustes de la tienda",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+        {
+          heading: "Elegir los artículos",
+          paragraphs: [
+            "En el inventario de piezas, edita el artículo y activa la opción de listarlo en la tienda online. El precio mostrado es el precio unitario del catálogo. Cuando cambia el stock (ventas en el TPV, piezas usadas en reparaciones, movimientos de stock), la página se actualiza en la siguiente sincronización (hasta ~2 minutos).",
+          ],
+          links: [],
+        },
+        {
+          heading: "Personalización — módulo storefront-plus",
+          list: [
+            "Color de acento de la página",
+            "Logotipo de la tienda (PNG, JPEG o WebP, hasta 200 KB)",
+            "Dos diseños: Vitrina (tarjetas) o Compacto (lista)",
+          ],
+          paragraphs: [
+            "Sin este módulo, la página usa el aspecto predeterminado.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Privacidad — qué sale y qué se queda",
+          paragraphs: [
+            "A la Cloud van los artículos listados (nombre, categoría, precio y si hay stock) y los contactos públicos de la tienda. Las reservas — nombre, teléfono y nota del cliente — se guardan en la Cloud y se entregan a la app.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Límites honestos",
+          list: [
+            "Hasta ~2 minutos entre cambiar el catálogo y que la página se actualice",
+            "Solo reservas: sin pago ni envío",
+            "Máximo de 500 artículos listados",
+            "La página solo indica si hay stock, no la cantidad",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+      ],
+    },
+    market: {
+      title: "Busco pieza",
+      subtitle:
+        "Un tablón compartido entre tiendas OficinaOS: publica la pieza que necesitas o responde «la tengo» a los pedidos de otras tiendas.",
+      sections: [
+        {
+          heading: "Cómo funciona",
+          paragraphs: [
+            "En el menú, «Procuro-peça» (busco pieza) abre el tablón con los pedidos abiertos de otras tiendas, y la pestaña de tus pedidos muestra los tuyos. Las demás tiendas solo ven el nombre de tu tienda y el pedido.",
+            "Quien tiene la pieza pulsa «La tengo» y envía una respuesta con nota, precio y contacto. Solo la tienda que hizo el pedido ve las respuestas. El trato se cierra directamente entre tiendas, fuera de OficinaOS.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Publicar un pedido",
+          list: [
+            "«Nuevo pedido» → qué buscas (ej.: pantalla iPhone 12)",
+            "Tipo de pieza y estado (cualquiera, nueva, OEM/original o usada)",
+            "Marca, modelo, precio máximo y notas — opcionales",
+            "Cuando consigas la pieza, márcala como encontrada; o cierra el pedido para retirarlo. Un pedido cerrado no se reabre — se publica otro",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+        {
+          heading: "Qué se necesita",
+          list: [
+            "La app emparejada con OficinaOS Cloud",
+            "El módulo market activo en la cuenta (en beta lo activamos nosotros)",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+        {
+          heading: "Límites honestos",
+          list: [
+            "El tablón muestra los 100 pedidos abiertos más recientes",
+            "Hasta 30 pedidos y 60 respuestas por hora, por tienda",
+            "Sin pagos ni garantías en la plataforma — confirma la pieza directamente con la otra tienda",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+      ],
+    },
+    marketPrices: {
+      title: "Precios de mercado",
+      subtitle:
+        "Compara los precios de tus reparaciones y piezas con la mediana anónima de otras tiendas OficinaOS.",
+      sections: [
+        {
+          heading: "Qué muestra",
+          paragraphs: [
+            "En «Precios de mercado» (menú), cada fila muestra un artículo con la mediana de mercado, el rango (mínimo–máximo) y cuántas tiendas han contribuido. Cuando el nombre coincide con un artículo de tu catálogo, aparece también tu precio. Puedes filtrar por reparaciones o piezas.",
+            "Un benchmark solo aparece cuando al menos 3 tiendas comparten un precio para el mismo artículo.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Compartir tus precios (opcional)",
+          paragraphs: [
+            "Activar la opción de compartir tus precios de forma anónima envía a la Cloud el nombre, la categoría y el precio de los artículos activos de tus catálogos de reparaciones y piezas. Cada vez que cambia el catálogo se vuelve a enviar y sustituye al envío anterior.",
+            "Desactivarla borra de la Cloud todos los precios que envió la tienda. Puedes ver los benchmarks sin compartir.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Límites honestos",
+          list: [
+            "Los artículos se comparan por nombre (sin acentos, mayúsculas ni puntuación) — nombres distintos para la misma reparación no se agrupan",
+            "Con pocas tiendas, los extremos del rango son precios reales de tiendas concretas (sin decir cuáles)",
+            "Necesita la app emparejada y el módulo market-prices activo",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+      ],
+    },
+    multiShop: {
+      title: "Multitienda",
+      subtitle:
+        "Para quien tiene más de una tienda: los ingresos y las reparaciones de todas, lado a lado, en el panel de OficinaOS Cloud.",
+      sections: [
+        {
+          heading: "Cómo funciona",
+          paragraphs: [
+            "Cada tienda sigue teniendo su propia instalación de OficinaOS, con sus datos en el PC de la tienda. Con el módulo activo, cada instalación envía a la Cloud un resumen diario solo con totales, y el dueño ve el conjunto al entrar en cloud.oficinaos.app.",
+            "En beta, nosotros vinculamos las tiendas adicionales a tu cuenta; después, cada tienda empareja su app con un código generado en el panel.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Qué muestra el panel",
+          list: [
+            "Ingresos de los últimos 7 y 30 días, sumando todas las tiendas",
+            "Reparaciones entregadas en los últimos 30 días y reparaciones en curso",
+            "Gráfico de ingresos diarios de los últimos 30 días",
+            "Tabla por tienda: ingresos, reparaciones, ventas, en curso y última sincronización",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+        {
+          heading: "Qué sale de la tienda",
+          paragraphs: [
+            "Solo números, por día: ingresos (pagos de ventas y reparaciones), reparaciones abiertas y entregadas, número e importe de las ventas, reparaciones en curso y clientes nuevos. Nunca salen nombres, contactos ni reparaciones individuales. El envío se hace en cada sincronización (~2 minutos) y recalcula también el día anterior.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Límites honestos",
+          list: [
+            "«Entregadas» cuenta las reparaciones en estado Entregado cuyo último cambio fue ese día — es una aproximación",
+            "Una tienda con la app apagada no envía datos hasta volver a encenderla",
+            "El panel está en portugués",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+      ],
+    },
+    remarketing: {
+      title: "Remarketing por WhatsApp",
+      subtitle:
+        "Un mensaje automático desde el WhatsApp de la tienda a los clientes cuya última reparación fue hace tiempo.",
+      sections: [
+        {
+          heading: "Quién lo recibe",
+          list: [
+            "Clientes que aceptaron mensajes automáticos (consentimiento en la ficha del cliente)",
+            "Con al menos una reparación entregada, la última hace más días de los configurados (90 por defecto)",
+            "Que no han recibido este mensaje dentro del intervalo mínimo configurado (180 días por defecto)",
+          ],
+          paragraphs: [
+            "La app comprueba cada hora y envía como máximo 10 mensajes cada vez.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Qué se necesita",
+          list: [
+            "WhatsApp configurado en la app (Business ID, Phone Number ID y token) — el mismo del bot de WhatsApp",
+            "Una plantilla de mensaje creada y APROBADA en tu cuenta Meta Business, en idioma portugués (pt)",
+            "El módulo remarketing activo en la cuenta de OficinaOS Cloud (en beta lo activamos nosotros)",
+          ],
+          paragraphs: [],
+          links: [{ label: "Guía del bot de WhatsApp", href: "/es/docs/whatsapp/" }],
+        },
+        {
+          heading: "Configurar",
+          paragraphs: [
+            "Menú → Notificaciones → Canales → sección WhatsApp → remarketing automático. Define los días de inactividad, el intervalo mínimo entre mensajes y el nombre de la plantilla de Meta (oficinaos_remarketing por defecto).",
+            "La plantilla recibe dos variables: {{1}} es el nombre de pila del cliente y {{2}} el nombre de la tienda. La app sugiere un texto en portugués del estilo: «¡Hola {{1}}! Ha pasado un tiempo desde tu última reparación en {{2}}. Si tu equipo necesita atención, aquí estamos para ayudarte.»",
+          ],
+          links: [],
+        },
+        {
+          heading: "Límites honestos",
+          list: [
+            "Son mensajes iniciados por la tienda: Meta cobra cada mensaje plantilla — coste de Meta, no nuestro",
+            "Solo WhatsApp, no SMS",
+            "La plantilla se envía siempre en portugués (pt)",
+            "Si un envío falla (por ejemplo, plantilla no aprobada), ese cliente solo se vuelve a intentar pasado el intervalo mínimo",
+            "La app tiene que estar encendida para que se hagan las comprobaciones",
           ],
           paragraphs: [],
           links: [],

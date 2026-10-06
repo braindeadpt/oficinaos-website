@@ -1,11 +1,14 @@
 # OficinaOS
 
 > Free, MIT-licensed, self-hosted management system for phone repair shops.
-> Runs on a PC inside the shop over the LAN — customer data never leaves by
-> default. Optional paid "Pro" modules (gated server-side via OficinaOS Cloud,
-> no license files) add a public customer portal, a WhatsApp bot, remote
-> diagnostics intake and AI reports. Documentation in Portuguese (default),
-> English and Spanish.
+> Runs on a PC inside the shop over the LAN — no telemetry, and customer data
+> never leaves by default. Optional "Pro" modules (in beta, gated server-side
+> via OficinaOS Cloud, no license files) send the data they need to OficinaOS
+> servers: customer portal, WhatsApp bot, SMS channel, diagnostics intake, AI
+> reports, InvoiceXpress invoicing (Portugal only), online storefront, parts
+> wanted board, market prices, multi-shop dashboard and WhatsApp remarketing.
+> Windows installer: https://github.com/braindeadpt/OficinaOS/releases/latest/download/oficinaos-install.zip
+> Documentation in Portuguese (default), English and Spanish.
 
 ## Documentation
 
@@ -27,9 +30,24 @@
 - [OficinaOS Diag (PT)](https://oficinaos.app/docs/diag/): free Windows USB diagnostic tool — features, requirements, troubleshooting
 - [OficinaOS Diag (EN)](https://oficinaos.app/en/docs/diag/)
 - [OficinaOS Diag (ES)](https://oficinaos.app/es/docs/diag/)
-- [Certified invoicing (PT)](https://oficinaos.app/docs/invoicing/): InvoiceXpress documents from sales/repairs — setup, VAT handling, privacy
+- [Certified invoicing (PT)](https://oficinaos.app/docs/invoicing/): InvoiceXpress documents from sales/repairs — Portugal only; setup, VAT handling, privacy
 - [Certified invoicing (EN)](https://oficinaos.app/en/docs/invoicing/)
 - [Certified invoicing (ES)](https://oficinaos.app/es/docs/invoicing/)
+- [Online storefront (PT)](https://oficinaos.app/docs/storefront/): public page with listed catalogue items; customer reservations land in the app's Requests queue
+- [Online storefront (EN)](https://oficinaos.app/en/docs/storefront/)
+- [Online storefront (ES)](https://oficinaos.app/es/docs/storefront/)
+- [Parts wanted (PT)](https://oficinaos.app/docs/market/): B2B board between OficinaOS shops to request and offer parts
+- [Parts wanted (EN)](https://oficinaos.app/en/docs/market/)
+- [Parts wanted (ES)](https://oficinaos.app/es/docs/market/)
+- [Market prices (PT)](https://oficinaos.app/docs/market-prices/): anonymous price benchmarks (median, ≥3 shops), opt-in sharing
+- [Market prices (EN)](https://oficinaos.app/en/docs/market-prices/)
+- [Market prices (ES)](https://oficinaos.app/es/docs/market-prices/)
+- [Multi-shop (PT)](https://oficinaos.app/docs/multi-shop/): owner dashboard with daily totals from every shop
+- [Multi-shop (EN)](https://oficinaos.app/en/docs/multi-shop/)
+- [Multi-shop (ES)](https://oficinaos.app/es/docs/multi-shop/)
+- [WhatsApp remarketing (PT)](https://oficinaos.app/docs/remarketing/): automatic Meta-template message to idle, consenting customers
+- [WhatsApp remarketing (EN)](https://oficinaos.app/en/docs/remarketing/)
+- [WhatsApp remarketing (ES)](https://oficinaos.app/es/docs/remarketing/)
 
 ## Customer-facing agent interfaces
 
@@ -45,4 +63,4 @@
 
 ## Optional
 
-- [Privacy policy](https://cloud.oficinaos.app/privacy): what the Cloud relays for Pro modules
+- [Cloud privacy policy](https://cloud.oficinaos.app/privacy): what OficinaOS Cloud receives for Pro modules

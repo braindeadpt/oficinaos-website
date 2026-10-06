@@ -1,7 +1,7 @@
 ---
 import type { Copy } from "../i18n/pt";
 import GithubMark from "./GithubMark.astro";
-import { REPO_URL } from "../i18n/utils";
+import { CONTACT_EMAIL, REPO_URL } from "../i18n/utils";
 
 interface Props {
   t: Copy;
@@ -54,10 +54,10 @@ const UPSTREAM_URL = "https://github.com/cranknet/reparilo";
         {t.footer.community}: Discord
       </a>
       <a
-        href="mailto:oficinaos.app@gmail.com"
+        href={`mailto:${CONTACT_EMAIL}`}
         class="text-xs text-zinc-500 transition hover:text-zinc-300"
       >
-        {t.footer.contact}: oficinaos.app@gmail.com
+        {t.footer.contact}: {CONTACT_EMAIL}
       </a>
     </div>
   </div>
