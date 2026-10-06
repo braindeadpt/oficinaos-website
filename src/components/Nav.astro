@@ -1,8 +1,10 @@
 ---
 import type { Copy } from "../i18n/pt";
 import GithubMark from "./GithubMark.astro";
+import Icon from "./Icon.astro";
 import {
   currentPagePath,
+  INSTALL_ZIP_URL,
   LOCALE_LABELS,
   LOCALES,
   localeUrl,
@@ -19,62 +21,51 @@ const logoUrl = `${import.meta.env.BASE_URL}favicon.svg`;
 // Language switcher must keep the user on the same page, not the
 // locale root.
 const pagePath = currentPagePath(Astro.url.pathname, locale);
+const links = [
+  { href: `${localeUrl(locale)}#features`, label: t.nav.features },
+  { href: `${localeUrl(locale)}#diag`, label: t.nav.diag },
+  { href: `${localeUrl(locale)}#pro`, label: t.nav.pro },
+  { href: `${localeUrl(locale)}#install`, label: t.nav.install },
+  { href: localeUrl(locale, "/docs"), label: t.nav.docs },
+  { href: localeUrl(locale, "/updates"), label: t.nav.updates },
+];
 ---
 
 <header
-  class="sticky top-0 z-50 border-b border-zinc-800/60 bg-zinc-950/80 backdrop-blur"
+  class="sticky top-0 z-50 border-b border-zinc-800/60 bg-zinc-950/90 backdrop-blur"
 >
   <nav
-    class="mx-auto flex h-16 max-w-6xl items-center justify-between px-6"
+    class="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6"
+    aria-label={t.nav.menuLabel}
   >
-    <a href={localeUrl(locale)} class="flex items-center gap-2.5">
-      <img src={logoUrl} alt="" class="h-8 w-8" />
+    <a href={localeUrl(locale)} class="flex shrink-0 items-center gap-2.5">
+      <img src={logoUrl} alt="" class="h-8 w-8" width="32" height="32" />
       <span class="text-lg font-semibold tracking-tight text-white"
         >OficinaOS</span
       >
     </a>
-    <div class="flex items-center gap-6 text-sm text-zinc-400">
-      <a
-        href={`${localeUrl(locale)}#features`}
-        class="hidden transition hover:text-white sm:inline"
-        >{t.nav.features}</a
+    <div class="flex items-center gap-5 text-sm text-zinc-300">
+      {
+        links.map((l) => (
+          <a href={l.href} class="hidden transition hover:text-white lg:inline">
+            {l.label}
+          </a>
+        ))
+      }
+      <div
+        class="hidden items-center gap-1 rounded-full border border-zinc-800 p-0.5 sm:flex"
       >
-      <a
-        href={`${localeUrl(locale)}#diag`}
-        class="hidden transition hover:text-white sm:inline"
-        >{t.nav.diag}</a
-      >
-      <a
-        href={`${localeUrl(locale)}#pro`}
-        class="hidden transition hover:text-white sm:inline"
-        >{t.nav.pro}</a
-      >
-      <a
-        href={`${localeUrl(locale)}#install`}
-        class="hidden transition hover:text-white sm:inline"
-        >{t.nav.install}</a
-      >
-      <a
-        href={localeUrl(locale, "/docs")}
-        class="hidden transition hover:text-white sm:inline"
-        >{t.nav.docs}</a
-      >
-      <a
-        href={localeUrl(locale, "/updates")}
-        class="hidden transition hover:text-white sm:inline"
-        >{t.nav.updates}</a
-      >
-      <div class="flex items-center gap-1 rounded-full border border-zinc-800 p-0.5">
         {
           LOCALES.map((l) => (
             <a
               href={localeUrl(l, pagePath)}
               hreflang={l}
+              aria-current={l === locale ? "true" : undefined}
               class:list={[
                 "rounded-full px-2.5 py-1 text-xs font-medium transition",
                 l === locale
-                  ? "bg-teal-600 text-white"
-                  : "text-zinc-400 hover:text-white",
+                  ? "bg-teal-700 text-white"
+                  : "text-zinc-300 hover:text-white",
               ]}
             >
               {LOCALE_LABELS[l]}
@@ -86,11 +77,122 @@ const pagePath = currentPagePath(Astro.url.pathname, locale);
         href={REPO_URL}
         target="_blank"
         rel="noopener noreferrer"
-        class="flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium text-zinc-950 transition hover:bg-zinc-200"
+        aria-label={t.nav.githubLabel}
+        title={t.nav.githubLabel}
+        class="hidden h-9 w-9 items-center justify-center rounded-full text-zinc-300 transition hover:bg-zinc-800 hover:text-white lg:flex"
       >
-        <GithubMark class="h-4 w-4" />
-        <span class="hidden md:inline">{t.nav.github}</span>
+        <GithubMark class="h-5 w-5" />
       </a>
+      <a
+        href={INSTALL_ZIP_URL}
+        class="inline-flex items-center gap-1.5 rounded-lg bg-teal-500 px-3 py-2 text-sm font-semibold text-zinc-950 transition hover:bg-teal-400 lg:hidden"
+      >
+        <Icon name="download" class="h-4 w-4" />
+        {t.nav.download}
+      </a>
+      <button
+        type="button"
+        id="nav-toggle"
+        class="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-zinc-800 text-zinc-200 transition hover:bg-zinc-800 lg:hidden"
+        aria-expanded="false"
+        aria-controls="nav-panel"
+        aria-label={t.nav.openMenu}
+        data-open-label={t.nav.openMenu}
+        data-close-label={t.nav.closeMenu}
+      >
+        <svg
+          class="h-5 w-5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          aria-hidden="true"
+        >
+          <path class="nav-icon-open" d="M4 7h16M4 12h16M4 17h16"></path>
+          <path class="nav-icon-close hidden" d="M6 6l12 12M18 6 6 18"></path>
+        </svg>
+      </button>
     </div>
   </nav>
+  <div
+    id="nav-panel"
+    class="hidden border-t border-zinc-800/60 bg-zinc-950 lg:hidden"
+  >
+    <ul class="mx-auto max-w-6xl px-4 py-3 sm:px-6">
+      {
+        links.map((l) => (
+          <li>
+            <a
+              href={l.href}
+              class="block rounded-lg px-3 py-3 text-base font-medium text-zinc-200 transition hover:bg-zinc-900 hover:text-white"
+            >
+              {l.label}
+            </a>
+          </li>
+        ))
+      }
+      <li class="mt-2 border-t border-zinc-800/60 pt-3">
+        <a
+          href={REPO_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center gap-2 rounded-lg px-3 py-3 text-sm text-zinc-300 transition hover:bg-zinc-900 hover:text-white"
+        >
+          <GithubMark class="h-4 w-4" />
+          {t.nav.githubLabel}
+        </a>
+      </li>
+      <li class="flex items-center gap-2 px-3 py-3 sm:hidden">
+        <span class="text-sm text-zinc-300">{t.nav.language}:</span>
+        {
+          LOCALES.map((l) => (
+            <a
+              href={localeUrl(l, pagePath)}
+              hreflang={l}
+              aria-current={l === locale ? "true" : undefined}
+              class:list={[
+                "rounded-full px-3 py-1.5 text-sm font-medium transition",
+                l === locale
+                  ? "bg-teal-700 text-white"
+                  : "border border-zinc-700 text-zinc-200 hover:text-white",
+              ]}
+            >
+              {LOCALE_LABELS[l]}
+            </a>
+          ))
+        }
+      </li>
+    </ul>
+  </div>
 </header>
+
+<script>
+  const btn = document.getElementById("nav-toggle");
+  const panel = document.getElementById("nav-panel");
+  if (btn && panel) {
+    const set = (open: boolean) => {
+      btn.setAttribute("aria-expanded", String(open));
+      btn.setAttribute(
+        "aria-label",
+        (open ? btn.dataset.closeLabel : btn.dataset.openLabel) ?? ""
+      );
+      panel.classList.toggle("hidden", !open);
+      btn.querySelector(".nav-icon-open")?.classList.toggle("hidden", open);
+      btn.querySelector(".nav-icon-close")?.classList.toggle("hidden", !open);
+    };
+    btn.addEventListener("click", () =>
+      set(btn.getAttribute("aria-expanded") !== "true")
+    );
+    // Close after following an in-page link, and on Escape.
+    panel.addEventListener("click", (e) => {
+      if ((e.target as HTMLElement).closest("a")) set(false);
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && btn.getAttribute("aria-expanded") === "true") {
+        set(false);
+        btn.focus();
+      }
+    });
+  }
+</script>
