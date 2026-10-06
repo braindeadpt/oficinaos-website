@@ -1,7 +1,13 @@
 ---
 import type { Copy } from "../i18n/pt";
 import GithubMark from "./GithubMark.astro";
-import { LOCALE_LABELS, LOCALES, localeUrl, REPO_URL } from "../i18n/utils";
+import {
+  currentPagePath,
+  LOCALE_LABELS,
+  LOCALES,
+  localeUrl,
+  REPO_URL,
+} from "../i18n/utils";
 import type { Locale } from "../i18n/utils";
 
 interface Props {
@@ -10,6 +16,9 @@ interface Props {
 }
 const { t, locale } = Astro.props;
 const logoUrl = `${import.meta.env.BASE_URL}favicon.svg`;
+// Language switcher must keep the user on the same page, not the
+// locale root.
+const pagePath = currentPagePath(Astro.url.pathname, locale);
 ---
 
 <header
@@ -59,7 +68,7 @@ const logoUrl = `${import.meta.env.BASE_URL}favicon.svg`;
         {
           LOCALES.map((l) => (
             <a
-              href={localeUrl(l)}
+              href={localeUrl(l, pagePath)}
               hreflang={l}
               class:list={[
                 "rounded-full px-2.5 py-1 text-xs font-medium transition",

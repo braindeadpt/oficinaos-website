@@ -16,6 +16,20 @@ export function localeUrl(locale: Locale, path = "/"): string {
   return `${BASE}${prefix}${path}`;
 }
 
+/** Path of the current request stripped of `base` and the locale prefix —
+ *  use with localeUrl(l, currentPagePath(...)) for per-page canonical,
+ *  hreflang alternates and the language switcher. */
+export function currentPagePath(pathname: string, locale: Locale): string {
+  const raw = pathname.slice(BASE.length) || "/";
+  const prefix = `/${locale}`;
+  const stripped =
+    locale !== DEFAULT_LOCALE &&
+    (raw === prefix || raw.startsWith(`${prefix}/`))
+      ? raw.slice(prefix.length) || "/"
+      : raw;
+  return stripped.startsWith("/") ? stripped : `/${stripped}`;
+}
+
 export const REPO_URL = "https://github.com/braindeadpt/OficinaOS";
 export const INSTALL_URL = `${REPO_URL}/blob/main/INSTALL.md`;
 export const RELEASES_URL = `${REPO_URL}/releases`;

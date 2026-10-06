@@ -4,6 +4,6 @@ import Base from "../../../layouts/Base.astro";
 import { lang, locale, ogLocale, t } from "../../../i18n/en";
 ---
 
-<Base t={t} locale={locale} langAttr={lang} ogLocale={ogLocale}>
+<Base t={t} locale={locale} langAttr={lang} ogLocale={ogLocale} title={t.moduleDocs.diag.title + " — OficinaOS"} description={t.moduleDocs.diag.subtitle}>
   <ModuleDoc t={t} locale={locale} page={t.moduleDocs.diag} />
 </Base>
