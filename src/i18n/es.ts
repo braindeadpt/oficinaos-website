@@ -453,6 +453,7 @@ export const t: Copy = {
           rows: [
             ["Portal del cliente", "Enlace público con el estado de la reparación y botones para aceptar/rechazar el presupuesto — sin llamar a la tienda"],
             ["Bot de WhatsApp", "Escribe al WhatsApp de la tienda y recibe el estado de la reparación automáticamente; aprueba presupuestos con SÍ/NO"],
+            ["Canal SMS", "El mismo asistente por SMS — un móvil Android con SIM en la tienda envía y recibe, sin Meta ni coste por mensaje"],
             ["Diagnóstico a distancia", "Hace el diagnóstico del móvil en casa (oficinaos-diag, gratis) y lo envía a la tienda con un código"],
             ["Informes IA", "Informe del diagnóstico escrito en lenguaje sencillo, listo para entregar"],
           ],
@@ -473,6 +474,7 @@ export const t: Copy = {
             ["OficinaOS Diag (herramienta)", "Gratis para siempre", "0 €"],
             ["Portal del cliente", "Disponible (beta)", "Por anunciar — gratis en beta"],
             ["Bot de WhatsApp", "Disponible (beta)", "Por anunciar — gratis en beta*"],
+            ["Canal SMS", "Disponible (beta)", "Por anunciar — gratis en beta"],
             ["Recepción de diagnósticos", "Disponible (beta)", "Por anunciar — gratis en beta"],
             ["Informes IA", "Disponible (beta)", "Por anunciar — por informe"],
           ],
@@ -509,6 +511,16 @@ export const t: Copy = {
         },
         links: [
           { label: "Guía detallada del bot", href: "/es/docs/whatsapp" },
+        ],
+      },
+      {
+        heading: "Canal SMS (Pro)",
+        paragraphs: [
+          "El mismo asistente automático, pero por SMS — para tiendas que no quieren (o aún no tienen) la cuenta empresarial de Meta. Un móvil Android con SIM se queda en la tienda haciendo de puente: la app envía y recibe SMS a través de él, por la red móvil normal.",
+          "Sin cuentas Meta, sin aprobaciones de plantillas y sin coste por mensaje — solo la tarifa del SIM de la tienda (las tarifas con SMS incluidos hacen el coste marginal cero). La configuración tarda ~5 minutos y la guía la explica paso a paso.",
+        ],
+        links: [
+          { label: "Guía detallada del canal SMS", href: "/es/docs/sms" },
         ],
       },
       {
@@ -838,6 +850,127 @@ export const t: Copy = {
               ["Dudas persistentes", "Archivo %APPDATA%\\OficinaDiag\\diag.log — o botón «Enviar log» en la app"],
             ],
           },
+          paragraphs: [],
+          links: [],
+        },
+      ],
+    },
+    sms: {
+      title: "Canal SMS",
+      subtitle:
+        "Notificaciones y asistente automático por SMS, a través de un móvil Android con SIM en la tienda — sin Meta, sin coste por mensaje.",
+      sections: [
+        {
+          heading: "Qué hace el módulo",
+          paragraphs: [
+            "Con el canal SMS activo, la app usa un móvil Android en la tienda como «pasarela»: las notificaciones a clientes (reparación lista, presupuesto enviado, recordatorios) salen por SMS por la red móvil normal — y las respuestas de los clientes entran en la app y reciben respuesta automática.",
+            "Es el mismo asistente del WhatsApp, con los mismos comandos — el cliente escribe «estado» y recibe el punto de la reparación, escribe «presupuesto» y recibe el importe, responde SÍ o NO para aprobar o rechazar. La diferencia: no necesita cuenta Meta, ni plantillas aprobadas, ni internet en el móvil del cliente.",
+          ],
+          table: {
+            head: ["El cliente escribe", "El bot responde"],
+            rows: [
+              ["«¿está listo?» o cualquier texto", "Estado de la reparación + fecha prevista"],
+              ["«presupuesto» / «precio»", "Importe del presupuesto pendiente + cómo responder"],
+              ["SÍ", "Aprueba el presupuesto pendiente — mismo flujo del mostrador"],
+              ["NO", "Rechaza el presupuesto"],
+              ["Código de la reparación (REP-…)", "Estado de ese trabajo concreto"],
+              ["Número sin ficha", "Mensaje amable con los contactos de la tienda"],
+            ],
+          },
+          links: [],
+        },
+        {
+          heading: "Qué se necesita",
+          list: [
+            "Un móvil Android — puede ser un equipo antiguo; se queda siempre en la tienda",
+            "Una tarjeta SIM activa — idealmente con SMS incluidos en la tarifa (el coste de los mensajes es del operador)",
+            "La app gratuita «SMS Gateway for Android» (sms-gate.app), de la Play Store o del sitio oficial",
+            "El móvil y el PC de OficinaOS en la misma red Wi-Fi/LAN",
+            "El módulo sms activo en la cuenta OficinaOS Cloud (en beta, lo activamos nosotros)",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+        {
+          heading: "Instalación — paso a paso (~5 minutos)",
+          paragraphs: [
+            "1. En el móvil Android, instala «SMS Gateway for Android» (sms-gate.app) desde la Play Store o el sitio oficial.",
+            "2. Abre la app y activa el modo «Local Server» (Servidor Local). La app muestra tres cosas: la dirección local (ej.: 192.168.1.50:8080), un nombre de usuario y una contraseña.",
+            "3. Confirma que el móvil está conectado a la misma red Wi-Fi que el PC donde corre OficinaOS.",
+            "4. En el PC, en la app OficinaOS: Menú → Notificaciones → Canales → sección SMS.",
+            "5. En el campo «URL de la pasarela», escribe http:// seguido de la dirección que muestra la app del móvil — por ejemplo http://192.168.1.50:8080.",
+            "6. Rellena el usuario y la contraseña exactamente como aparecen en el móvil y guarda.",
+            "7. Pulsa «Enviar SMS de prueba», pon tu propio número y confirma que llega el mensaje.",
+            "8. Por último, pulsa «Registrar webhook en el móvil» — esto le dice a la app del móvil a dónde enviar los SMS recibidos de los clientes.",
+          ],
+          links: [
+            { label: "SMS Gateway for Android (sitio oficial)", href: "https://sms-gate.app" },
+          ],
+        },
+        {
+          heading: "El detalle del webhook — por qué no puede ser localhost",
+          paragraphs: [
+            "El botón «Registrar webhook» le enseña a la app del móvil a reenviar los SMS recibidos al PC de la tienda. Para ello, OficinaOS necesita saber su propia dirección en la red — y la descubre a partir de la dirección que usas en el navegador.",
+            "Si abres la app en http://localhost:4000, el webhook queda registrado como «localhost» — que para el móvil significa él mismo, no el PC. El registro falla o apunta al sitio equivocado.",
+            "Abre la app por la dirección de red del PC (ej.: http://192.168.1.20:4000 — la misma que usas en otros dispositivos de la tienda) antes de pulsar «Registrar webhook». La app te avisa si estás en localhost.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Mantener la pasarela fiable",
+          list: [
+            "Deja el móvil siempre enchufado al cargador — es la pasarela; apagado, los SMS no salen",
+            "En los ajustes de Android, excluye «SMS Gateway» de la optimización de batería (Batería → Optimización → «No optimizar») para que Android no lo suspenda",
+            "En el router de la tienda, reserva la IP del móvil (reserva DHCP) — si la IP cambia, la configuración deja de apuntar al sitio correcto",
+            "Si la tienda tiene una Wi-Fi de invitados separada, el móvil debe estar en la red principal — la misma del PC",
+            "Prueba rápida de salud: la app llama a GET /health en la pasarela en cada envío; si falla, la notificación queda en cola y reintenta",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+        {
+          heading: "Privacidad — qué sale y qué se queda",
+          paragraphs: [
+            "La conversación entre la app y el móvil ocurre toda dentro de la red de la tienda (LAN) — nada pasa por OficinaOS Cloud ni por servidores externos. El SMS en sí viaja por la red móvil del operador, como cualquier SMS.",
+            "La contraseña de la pasarela queda guardada en la app cifrada (AES-256-GCM) y nunca vuelve a aparecer en los campos — solo se sustituye.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Límites honestos",
+          list: [
+            "Control de flood: máximo 20 mensajes por hora por número — protege contra spam accidental",
+            "El coste por SMS es de la tarifa del SIM de la tienda — con SMS incluidos el coste marginal es cero, pero conviene confirmarlo con el operador",
+            "Los SMS con acentos (ç, ñ, é…) consumen más del límite de 160 caracteres — las plantillas deben ser cortas",
+            "El uso automatizado intensivo puede violar el fair-use de la tarifa — el módulo es para notificaciones y respuestas, no para campañas masivas",
+            "SMS no es WhatsApp: sin imágenes, sin botones, texto simple — pero funciona en cualquier móvil, hasta en los más antiguos",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+        {
+          heading: "Resolución de problemas",
+          table: {
+            head: ["Síntoma", "Qué verificar"],
+            rows: [
+              ["El SMS de prueba no llega", "¿URL correcta (http:// + IP:puerto)? ¿Número de destino con prefijo (ej.: +34…)? ¿Saldo/SMS disponibles en el SIM?"],
+              ["«Fallo de conexión con la pasarela»", "¿El móvil está encendido y en la misma Wi-Fi que el PC? ¿No ha cambiado su IP (ver en la app del móvil)?"],
+              ["Error de autenticación", "Usuario y contraseña exactamente como en la app del móvil (los genera ella, no los eliges tú)"],
+              ["El cliente responde y no pasa nada", "¿Está registrado el webhook? (botón «Registrar webhook») — ¿y se registró con la app abierta por la IP de red, no localhost?"],
+              ["Funcionaba y dejó de funcionar", "¿La optimización de batería de Android suspendió la app? ¿Cambió la IP del móvil?"],
+              ["«Módulo no disponible»", "¿El entitlement sms está activo en la cuenta Cloud y la app ya sincronizó (hasta ~2 min)?"],
+            ],
+          },
+          paragraphs: [],
+          links: [],
+        },
+        {
+          heading: "Seguridad",
+          list: [
+            "Nunca expongas el puerto de la pasarela (ej.: 8080) a internet — es solo para la red interna de la tienda",
+            "Mantén el móvil y el PC en la red de confianza de la tienda — no en la Wi-Fi de clientes/invitados",
+            "Si cambias el móvil o el SIM, repite la configuración y registra el webhook otra vez",
+          ],
           paragraphs: [],
           links: [],
         },

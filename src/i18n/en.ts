@@ -451,6 +451,7 @@ export const t: Copy = {
           rows: [
             ["Customer portal", "Public link with repair status and approve/decline quote buttons — no need to call the shop"],
             ["WhatsApp bot", "Messages the shop's WhatsApp and gets the repair status automatically; approves quotes with YES/NO"],
+            ["SMS channel", "The same assistant over SMS — an Android phone with a SIM in the shop sends and receives, no Meta and no per-message fees"],
             ["Remote diagnostics", "Runs the phone diagnostic at home (oficinaos-diag, free) and sends it to the shop with a code"],
             ["AI reports", "Diagnostic report written in plain language, ready to hand to the customer"],
           ],
@@ -471,6 +472,7 @@ export const t: Copy = {
             ["OficinaOS Diag (tool)", "Free forever", "€0"],
             ["Customer portal", "Available (beta)", "TBA — free during beta"],
             ["WhatsApp bot", "Available (beta)", "TBA — free during beta*"],
+            ["SMS channel", "Available (beta)", "TBA — free during beta"],
             ["Diagnostics intake", "Available (beta)", "TBA — free during beta"],
             ["AI reports", "Available (beta)", "TBA — per report"],
           ],
@@ -507,6 +509,16 @@ export const t: Copy = {
         },
         links: [
           { label: "Detailed bot guide", href: "/en/docs/whatsapp" },
+        ],
+      },
+      {
+        heading: "SMS channel (Pro)",
+        paragraphs: [
+          "The same automatic assistant, but over SMS — for shops that don't want (or don't yet have) a Meta business account. An Android phone with a SIM stays in the shop acting as the bridge: the app sends and receives SMS through it, over the normal mobile network.",
+          "No Meta accounts, no template approvals, no per-message cost — only the shop SIM's plan (plans with bundled SMS make the marginal cost zero). Setup takes ~5 minutes and the guide walks through it step by step.",
+        ],
+        links: [
+          { label: "Detailed SMS channel guide", href: "/en/docs/sms" },
         ],
       },
       {
@@ -834,6 +846,127 @@ export const t: Copy = {
               ["Persistent issues", "File %APPDATA%\\OficinaDiag\\diag.log — or the «Send log» button in the app"],
             ],
           },
+          paragraphs: [],
+          links: [],
+        },
+      ],
+    },
+    sms: {
+      title: "SMS channel",
+      subtitle:
+        "Notifications and the automatic assistant over SMS, through an Android phone with a SIM in the shop — no Meta, no per-message cost.",
+      sections: [
+        {
+          heading: "What the module does",
+          paragraphs: [
+            "With the SMS channel active, the app uses an Android phone in the shop as a «gateway»: customer notifications (repair ready, quote sent, reminders) go out as SMS over the normal mobile network — and customer replies come into the app and get an automatic answer.",
+            "It's the same assistant as WhatsApp, with the same commands — the customer texts «status» and gets the repair progress, texts «quote» and gets the amount, replies YES or NO to approve or decline. The difference: no Meta account, no approved templates, and no internet needed on the customer's phone.",
+          ],
+          table: {
+            head: ["Customer texts", "Bot replies"],
+            rows: [
+              ["«is it ready?» or any text", "Repair status + due date"],
+              ["«quote» / «price»", "Pending quote amount + how to answer"],
+              ["YES", "Approves the pending quote — same flow as at the counter"],
+              ["NO", "Declines the quote"],
+              ["Repair code (REP-…)", "Status of that specific job"],
+              ["Number with no job on file", "Friendly message with the shop's contacts"],
+            ],
+          },
+          links: [],
+        },
+        {
+          heading: "What you need",
+          list: [
+            "An Android phone — an old one is fine; it stays in the shop permanently",
+            "An active SIM card — ideally with SMS bundled in the plan (message cost is the carrier's)",
+            "The free «SMS Gateway for Android» app (sms-gate.app), from the Play Store or the official site",
+            "The phone and the OficinaOS PC on the same Wi-Fi/LAN",
+            "The sms module active on your OficinaOS Cloud account (during beta, we enable it)",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+        {
+          heading: "Setup — step by step (~5 minutes)",
+          paragraphs: [
+            "1. On the Android phone, install «SMS Gateway for Android» (sms-gate.app) from the Play Store or the official site.",
+            "2. Open the app and enable «Local Server» mode. The app shows three things: the local address (e.g. 192.168.1.50:8080), a username and a password.",
+            "3. Make sure the phone is on the same Wi-Fi network as the PC running OficinaOS.",
+            "4. On the PC, in the OficinaOS app: Menu → Notifications → Channels → SMS section.",
+            "5. In the «Gateway URL» field, type http:// followed by the address shown on the phone — e.g. http://192.168.1.50:8080.",
+            "6. Fill in the username and password exactly as shown on the phone, then save.",
+            "7. Press «Send test SMS», enter your own number and confirm the message arrives.",
+            "8. Finally, press «Register webhook on phone» — this tells the phone app where to forward SMS received from customers.",
+          ],
+          links: [
+            { label: "SMS Gateway for Android (official site)", href: "https://sms-gate.app" },
+          ],
+        },
+        {
+          heading: "The webhook detail — why localhost won't work",
+          paragraphs: [
+            "The «Register webhook» button teaches the phone app where to forward incoming SMS — the shop PC. To do that, OficinaOS needs to know its own network address, which it discovers from the address you use in the browser.",
+            "If you open the app at http://localhost:4000, the webhook gets registered as «localhost» — which to the phone means itself, not the PC. Registration fails or points at the wrong place.",
+            "Open the app using the PC's network address (e.g. http://192.168.1.20:4000 — the same one you use on other shop devices) before pressing «Register webhook». The app warns you if you're on localhost.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Keeping the gateway reliable",
+          list: [
+            "Keep the phone always on the charger — it is the gateway; powered off, no SMS goes out",
+            "In Android settings, exclude «SMS Gateway» from battery optimization (Battery → Optimization → «Don't optimize») so Android doesn't suspend it",
+            "In the shop router, reserve the phone's IP (DHCP reservation) — if the IP changes, the configuration points at the wrong place",
+            "If the shop has a separate guest Wi-Fi, the phone must be on the main network — the same one as the PC",
+            "Quick health check: the app calls GET /health on the gateway on each send; if it fails, the notification stays queued and retries",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+        {
+          heading: "Privacy — what leaves and what stays",
+          paragraphs: [
+            "The conversation between the app and the phone happens entirely inside the shop network (LAN) — nothing goes through OficinaOS Cloud or external servers. The SMS itself travels over the carrier's mobile network, like any SMS.",
+            "The gateway password is stored encrypted (AES-256-GCM) and never shown again in the fields — you can only replace it.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Honest limits",
+          list: [
+            "Flood control: max 20 messages per hour per number — protects against accidental spam",
+            "Per-SMS cost comes from the shop SIM's plan — bundled SMS makes the marginal cost zero, but confirm with the carrier",
+            "SMS with accents (ç, ã, é…) count against more of the 160-character limit — keep templates short",
+            "Intensive automated use may breach the plan's fair-use policy — the module is for notifications and replies, not mass campaigns",
+            "SMS isn't WhatsApp: no images, no buttons, plain text — but it works on any phone, even the oldest",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+        {
+          heading: "Troubleshooting",
+          table: {
+            head: ["Symptom", "What to check"],
+            rows: [
+              ["Test SMS doesn't arrive", "Correct URL (http:// + IP:port)? Destination number with country code (e.g. +351…)? SMS credit on the SIM?"],
+              ["«Gateway connection failed»", "Is the phone powered on and on the same Wi-Fi as the PC? Has its IP changed (check the phone app)?"],
+              ["Authentication error", "Username and password exactly as shown in the phone app (it generates them, you don't choose them)"],
+              ["Customer replies and nothing happens", "Is the webhook registered? («Register webhook» button) — and was it registered with the app opened via the network IP, not localhost?"],
+              ["It worked and stopped", "Did Android battery optimization suspend the app? Did the phone's IP change?"],
+              ["«Module not available»", "Is the sms entitlement active on the Cloud account and has the app synced (up to ~2 min)?"],
+            ],
+          },
+          paragraphs: [],
+          links: [],
+        },
+        {
+          heading: "Security",
+          list: [
+            "Never expose the gateway port (e.g. 8080) to the internet — it's for the shop's internal network only",
+            "Keep the phone and PC on the shop's trusted network — not the customer/guest Wi-Fi",
+            "If you swap the phone or SIM, redo the configuration and register the webhook again",
+          ],
           paragraphs: [],
           links: [],
         },

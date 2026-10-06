@@ -468,6 +468,7 @@ export const t = {
           rows: [
             ["Portal do cliente", "Link público com o estado da reparação e botões para aceitar/recusar orçamento — sem ligar à loja"],
             ["Bot de WhatsApp", "Escreve para o WhatsApp da loja e recebe o estado da reparação automaticamente; aprova orçamentos com SIM/NÃO"],
+            ["Canal SMS", "O mesmo assistente por SMS — um telemóvel Android com SIM na loja envia e recebe, sem Meta nem custos por mensagem"],
             ["Diagnóstico à distância", "Faz o diagnóstico do telemóvel em casa (oficinaos-diag, grátis) e envia à loja com um código"],
             ["Relatórios IA", "Relatório do diagnóstico escrito em linguagem simples, pronto a entregar"],
           ],
@@ -488,6 +489,7 @@ export const t = {
             ["OficinaOS Diag (ferramenta)", "Grátis para sempre", "0 €"],
             ["Portal do cliente", "Disponível (beta)", "A anunciar — grátis no beta"],
             ["Bot de WhatsApp", "Disponível (beta)", "A anunciar — grátis no beta*"],
+            ["Canal SMS", "Disponível (beta)", "A anunciar — grátis no beta"],
             ["Receção de diagnósticos", "Disponível (beta)", "A anunciar — grátis no beta"],
             ["Relatórios IA", "Disponível (beta)", "A anunciar — por relatório"],
           ],
@@ -524,6 +526,16 @@ export const t = {
         },
         links: [
           { label: "Guia detalhado do bot", href: "/docs/whatsapp" },
+        ],
+      },
+      {
+        heading: "Canal SMS (Pro)",
+        paragraphs: [
+          "O mesmo assistente automático, mas por SMS — para lojas que não querem (ou ainda não têm) a conta empresarial da Meta. Um telemóvel Android com SIM fica na loja a fazer de ponte: a app envia e recebe SMS através dele, pela rede móvel normal.",
+          "Sem contas Meta, sem aprovações de modelos e sem custo por mensagem — só o tarifário do SIM da loja (cartões com SMS incluídos tornam o custo marginal zero). O setup são ~5 minutos e está explicado passo a passo no guia.",
+        ],
+        links: [
+          { label: "Guia detalhado do canal SMS", href: "/docs/sms" },
         ],
       },
       {
@@ -853,6 +865,127 @@ export const t = {
               ["Dúvidas persistentes", "Ficheiro %APPDATA%\\OficinaDiag\\diag.log — ou botão «Enviar log» na app"],
             ],
           },
+          paragraphs: [],
+          links: [],
+        },
+      ],
+    },
+    sms: {
+      title: "Canal SMS",
+      subtitle:
+        "Notificações e assistente automático por SMS, através de um telemóvel Android com SIM na loja — sem Meta, sem custo por mensagem.",
+      sections: [
+        {
+          heading: "O que o módulo faz",
+          paragraphs: [
+            "Com o canal SMS ativo, a app usa um telemóvel Android na loja como «gateway»: as notificações aos clientes (reparação pronta, orçamento enviado, lembretes) saem por SMS pela rede móvel normal — e as respostas dos clientes entram na app e recebem resposta automática.",
+            "É o mesmo assistente do WhatsApp, com os mesmos comandos — o cliente escreve «estado» e recebe o ponto da reparação, escreve «orçamento» e recebe o valor, responde SIM ou NÃO para aprovar ou recusar. A diferença: não precisa de conta Meta, de modelos aprovados, nem de internet no telemóvel do cliente.",
+          ],
+          table: {
+            head: ["O cliente escreve", "O bot responde"],
+            rows: [
+              ["«está pronto?» ou qualquer texto", "Estado da reparação + previsão de entrega"],
+              ["«orçamento» / «preço»", "Valor do orçamento pendente + instruções"],
+              ["SIM", "Aprova o orçamento pendente — mesmo fluxo do balcão"],
+              ["NÃO", "Recusa o orçamento"],
+              ["Código da reparação (REP-…)", "Estado dessa reparação específica"],
+              ["Número sem ficha", "Mensagem simpática com os contactos da loja"],
+            ],
+          },
+          links: [],
+        },
+        {
+          heading: "O que é preciso",
+          list: [
+            "Um telemóvel Android — pode ser um equipamento antigo; fica sempre na loja",
+            "Um cartão SIM ativo — idealmente com SMS incluídos no tarifário (o custo das mensagens é da operadora)",
+            "A app gratuita «SMS Gateway for Android» (sms-gate.app), da Play Store ou do site oficial",
+            "O telemóvel e o PC do OficinaOS na mesma rede Wi-Fi/LAN",
+            "O módulo sms ativo na conta OficinaOS Cloud (no beta, ativamos nós)",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+        {
+          heading: "Instalação — passo a passo (~5 minutos)",
+          paragraphs: [
+            "1. No telemóvel Android, instala «SMS Gateway for Android» (sms-gate.app) a partir da Play Store ou do site oficial.",
+            "2. Abre a app e ativa o modo «Local Server» (Servidor Local). A app mostra três coisas: o endereço local (ex.: 192.168.1.50:8080), um nome de utilizador e uma palavra-passe.",
+            "3. Confirma que o telemóvel está ligado à mesma rede Wi-Fi do PC onde corre o OficinaOS.",
+            "4. No PC, na app OficinaOS: Menu → Notificações → Canais → secção SMS.",
+            "5. No campo «URL do gateway», escreve http:// seguido do endereço que a app do telemóvel mostra — por exemplo http://192.168.1.50:8080.",
+            "6. Preenche o utilizador e a palavra-passe exatamente como aparecem no telemóvel e guarda.",
+            "7. Carrega «Enviar SMS de teste», mete o teu próprio número e confirma que a mensagem chega.",
+            "8. Por fim, carrega «Registar webhook no telemóvel» — isto diz à app do telemóvel para onde enviar os SMS recebidos dos clientes.",
+          ],
+          links: [
+            { label: "SMS Gateway for Android (site oficial)", href: "https://sms-gate.app" },
+          ],
+        },
+        {
+          heading: "O detalhe do webhook — porque não pode ser localhost",
+          paragraphs: [
+            "O botão «Registar webhook» ensina a app do telemóvel a reencaminhar os SMS recebidos para o PC da loja. Para isso, a OficinaOS precisa de saber o seu próprio endereço na rede — e descobre-o a partir do endereço que usas no browser.",
+            "Se abrires a app em http://localhost:4000, o webhook fica registado como «localhost» — que para o telemóvel significa ele próprio, não o PC. O registo falha ou fica a apontar para o sítio errado.",
+            "Abre a app pelo endereço de rede do PC (ex.: http://192.168.1.20:4000 — o mesmo que usas noutros dispositivos da loja) antes de carregar «Registar webhook». A app avisa se estiveres em localhost.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Manter o gateway fiável",
+          list: [
+            "Deixa o telemóvel sempre ligado ao carregador — o gateway é ele; desligado, os SMS não saem",
+            "Nas definições do Android, exclui «SMS Gateway» da otimização de bateria (Bateria → Otimização → «Não otimizar») para o Android não o suspender",
+            "No router da loja, reserva o IP do telemóvel (DHCP reservation) — se o IP mudar, a configuração deixa de apontar para o sítio certo",
+            "Se a loja tiver uma rede Wi-Fi de convidados separada, o telemóvel tem de estar na rede principal — a mesma do PC",
+            "Teste rápido de saúde: a app chama GET /health no gateway a cada envio; se falhar, a notificação fica na fila e tenta de novo",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+        {
+          heading: "Privacidade — o que sai e o que fica",
+          paragraphs: [
+            "A conversa entre a app e o telemóvel acontece toda dentro da rede da loja (LAN) — nada passa pela OficinaOS Cloud nem por servidores externos. O SMS em si viaja pela rede móvel da operadora, como qualquer SMS.",
+            "A palavra-passe do gateway fica guardada na app encriptada (AES-256-GCM) e nunca volta a aparecer nos campos — só se substitui.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Limites honestos",
+          list: [
+            "Flood control: máximo 20 mensagens por hora por número — protege contra spam acidental",
+            "O custo por SMS é do tarifário do SIM da loja — com SMS incluídos o custo marginal é zero, mas convém confirmar com a operadora",
+            "SMS com acentos (ç, ã, é…) consomem mais do limite de 160 caracteres — os modelos devem ser curtos",
+            "Uso automatizado intensivo pode violar o fair-use do tarifário — o módulo é para notificações e respostas, não para campanhas em massa",
+            "SMS não é WhatsApp: sem imagens, sem botões, texto simples — mas funciona em qualquer telemóvel, até nos mais antigos",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+        {
+          heading: "Resolução de problemas",
+          table: {
+            head: ["Sintoma", "O que verificar"],
+            rows: [
+              ["SMS de teste não chega", "URL correto (http:// + IP:porta)? Número de destino com indicativo (ex.: +351…)? Saldo/SMS disponíveis no SIM?"],
+              ["«Falha na ligação ao gateway»", "O telemóvel está ligado e na mesma Wi-Fi do PC? O IP não mudou (ver na app do telemóvel)?"],
+              ["Erro de autenticação", "Utilizador e palavra-passe exatamente como na app do telemóvel (são gerados por ela, não escolhes tu)"],
+              ["Cliente responde e nada acontece", "O webhook está registado? (botão «Registar webhook») — e foi registado com a app aberta pelo IP de rede, não localhost?"],
+              ["Funcionava e parou", "Otimização de bateria do Android suspendeu a app? O IP do telemóvel mudou?"],
+              ["«Módulo não disponível»", "O entitlement sms está ativo na conta Cloud e a app já sincronizou (até ~2 min)?"],
+            ],
+          },
+          paragraphs: [],
+          links: [],
+        },
+        {
+          heading: "Segurança",
+          list: [
+            "Nunca exponhas a porta do gateway (ex.: 8080) à internet — é só para a rede interna da loja",
+            "Mantém o telemóvel e o PC na rede de confiança da loja — não na Wi-Fi de clientes/convidados",
+            "Se trocares o telemóvel ou o SIM, repete a configuração e regista o webhook outra vez",
+          ],
           paragraphs: [],
           links: [],
         },
