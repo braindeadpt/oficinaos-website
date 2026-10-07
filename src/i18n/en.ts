@@ -188,7 +188,7 @@ export const t: Copy = {
       {
         name: "OficinaOS Cloud (Pro modules)",
         to: "OficinaOS servers",
-        what: "Account and pairing; each active module's data — portal pages (with the customer's name), incoming WhatsApp messages, storefront reservations, submitted diagnostics, daily totals (multi-shop) and shared prices",
+        what: "Account and pairing; each active module's data — portal pages (with the customer's name), incoming WhatsApp messages, storefront reservations, submitted diagnostics, daily totals (multi-shop) and shared prices. The shop's Meta token is stored encrypted on the Cloud to send WhatsApp on its behalf",
       },
       {
         name: "AI reports (Pro)",
@@ -201,9 +201,9 @@ export const t: Copy = {
         what: "Only when you press “Send log”: the tail of the diag.log file",
       },
       {
-        name: "WhatsApp notifications",
-        to: "Meta",
-        what: "Customer phone number + repair status",
+        name: "WhatsApp notifications & bot",
+        to: "Meta, via the OficinaOS Cloud relay",
+        what: "Customer phone number + message text — they transit through the Cloud without being stored or logged (logs only carry id, status and masked phone)",
       },
       {
         name: "Remote access & customer links",
@@ -500,7 +500,6 @@ export const t: Copy = {
           rows: [
             ["Customer portal", "Public link with repair status and approve/decline quote buttons — no need to call the shop"],
             ["WhatsApp bot", "Messages the shop's WhatsApp and gets the repair status automatically; approves quotes with YES/NO"],
-            ["SMS channel", "The same assistant over SMS — an Android phone with a SIM in the shop sends and receives, no Meta and no per-message fees"],
             ["Remote diagnostics", "Runs the phone diagnostic at home (oficinaos-diag, free) and sends it to the shop with a code"],
             ["AI reports", "Diagnostic report written in plain language, ready to hand to the customer"],
             ["Certified invoicing", "Legal invoice or invoice-receipt issued straight from the repair or sale — via InvoiceXpress, on the shop's own account — Portugal only"],
@@ -527,7 +526,7 @@ export const t: Copy = {
             ["OficinaOS Diag (tool)", "Free forever", "€0"],
             ["Customer portal", "Available (beta)", "TBA — free during beta"],
             ["WhatsApp bot", "Available (beta)", "TBA — free during beta*"],
-            ["SMS channel", "Available (beta)", "TBA — free during beta"],
+            ["SMS channel (Android gateway)", "Included in core", "€0 — free"],
             ["Diagnostics intake", "Available (beta)", "TBA — free during beta"],
             ["AI reports", "Available (beta)", "TBA — per report"],
             ["Invoicing (InvoiceXpress)", "Available (beta)", "TBA — free during beta. The InvoiceXpress account is the shop's own and carries its own service cost"],
@@ -573,9 +572,9 @@ export const t: Copy = {
         ],
       },
       {
-        heading: "SMS channel (Pro)",
+        heading: "SMS channel (free in core)",
         paragraphs: [
-          "The same automatic assistant, but over SMS — for shops that don't want (or don't yet have) a Meta business account. An Android phone with a SIM stays in the shop acting as the bridge: the app sends and receives SMS through it, over the normal mobile network.",
+          "The same automatic assistant, but over SMS — for shops that don't want (or don't yet have) a Meta business account. An Android phone with a SIM stays in the shop acting as the bridge: the app sends and receives SMS through it, over the normal mobile network. It's free and needs no Cloud — everything happens on the shop network.",
           "No Meta accounts, no template approvals, no per-message cost — only the shop SIM's plan (plans with bundled SMS make the marginal cost zero). Setup takes ~5 minutes and the guide walks through it step by step.",
         ],
         links: [
@@ -796,8 +795,8 @@ export const t: Copy = {
           list: [
             "Menu → Notifications → Setup → WhatsApp section",
             "Business ID + Phone Number ID — provided during onboarding",
-            "API Token — the permanent system-user token (the app stores it encrypted)",
-            "Enable — the app registers the phone_number_id with the Cloud by itself and the bot goes live",
+            "API Token — the permanent system-user token (the app uploads it once to the Cloud, where it's stored encrypted — sends then go through the relay and the token is never asked for again)",
+            "Enable — the app registers the phone_number_id and credentials with the Cloud by itself and the bot goes live",
           ],
           links: [],
         },
@@ -975,7 +974,7 @@ export const t: Copy = {
             "An active SIM card — ideally with SMS bundled in the plan (message cost is the carrier's)",
             "The free «SMS Gateway for Android» app (sms-gate.app), from the Play Store or the official site",
             "The phone and the OficinaOS PC on the same Wi-Fi/LAN",
-            "The sms module active on your OficinaOS Cloud account (during beta, we enable it)",
+            "Nothing else — the SMS channel is free and needs no Cloud account or modules",
           ],
           paragraphs: [],
           links: [],
@@ -1047,7 +1046,6 @@ export const t: Copy = {
               ["Authentication error", "Username and password exactly as shown in the phone app (it generates them, you don't choose them)"],
               ["Customer replies and nothing happens", "Is the webhook registered? («Register webhook» button) — and was it registered with the app opened via the network IP, not localhost?"],
               ["It worked and stopped", "Did Android battery optimization suspend the app? Did the phone's IP change?"],
-              ["«Module not available»", "Is the sms entitlement active on the Cloud account and has the app synced (up to ~2 min)?"],
             ],
           },
           paragraphs: [],
