@@ -4,17 +4,17 @@
 @import "./design-system/tokens.css";
 @import "./design-system/tokens.theme.css";
 
-/* Cor do símbolo da marca (quadrado + ranhura): #1D4ED8 no claro, #2F5BEA no escuro (§2.1). */
+/* Cor do símbolo da marca (quadrado + encaixe pentalobe): #1D4ED8 no claro e no escuro (§2.1). */
 :root {
   --oos-logo-mark: #1d4ed8;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --oos-logo-mark: #2f5bea;
+    --oos-logo-mark: #1d4ed8;
   }
 }
 :root[data-theme="dark"] {
-  --oos-logo-mark: #2f5bea;
+  --oos-logo-mark: #1d4ed8;
 }
 
 html {
