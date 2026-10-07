@@ -310,17 +310,17 @@ export const t = {
         },
         images: [
           {
-            src: "/screenshots/dashboard.png",
+            src: "/screenshots/dashboard.webp",
             alt: "Painel de reparações do OficinaOS",
             caption: "O painel — as reparações do dia de relance",
           },
           {
-            src: "/screenshots/job-detail.png",
+            src: "/screenshots/job-detail.webp",
             alt: "Ficha de reparação com estados, orçamento e timeline",
             caption: "A ficha — estados, orçamento e cronologia completa",
           },
           {
-            src: "/screenshots/tracking.png",
+            src: "/screenshots/tracking.webp",
             alt: "Página de acompanhamento que o cliente vê no telemóvel",
             caption: "A página de tracking que o cliente abre no telemóvel",
           },

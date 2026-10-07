@@ -295,17 +295,17 @@ export const t: Copy = {
         },
         images: [
           {
-            src: "/screenshots/dashboard.png",
+            src: "/screenshots/dashboard.webp",
             alt: "OficinaOS repair dashboard",
             caption: "The dashboard — the day's repairs at a glance",
           },
           {
-            src: "/screenshots/job-detail.png",
+            src: "/screenshots/job-detail.webp",
             alt: "Repair job card with statuses, quote and timeline",
             caption: "The job card — statuses, quote and full timeline",
           },
           {
-            src: "/screenshots/tracking.png",
+            src: "/screenshots/tracking.webp",
             alt: "Customer tracking page on a phone",
             caption: "The tracking page the customer opens on their phone",
           },
