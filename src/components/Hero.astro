@@ -1,7 +1,7 @@
 ---
 import type { Copy } from "../i18n/pt";
 import Icon from "./Icon.astro";
-import { INSTALL_ZIP_URL } from "../i18n/utils";
+import { SETUP_EXE_URL } from "../i18n/utils";
 
 interface Props {
   t: Copy;
@@ -33,7 +33,7 @@ const { t } = Astro.props;
     </p>
     <div class="mt-10 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
       <a
-        href={INSTALL_ZIP_URL}
+        href={SETUP_EXE_URL}
         class="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-primary px-[18px] text-md font-semibold text-on-primary shadow-sm transition hover:bg-primary-hover"
       >
         <Icon name="download" class="h-4 w-4" />
