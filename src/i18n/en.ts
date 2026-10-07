@@ -141,6 +141,11 @@ export const t: Copy = {
         "Submitting opens your email app with the details filled in — just press Send.",
       cloudText: "Already have an OficinaOS Cloud account?",
       cloudLink: "Sign in at cloud.oficinaos.app",
+      sending: "Sending…",
+      success: "Request received — we'll be in touch soon.",
+      errorInvalid:
+        "We couldn't register your request — check the details and try again.",
+      errorRate: "Too many requests — please try again in an hour.",
     },
   },
   diag: {
@@ -1390,6 +1395,7 @@ export const t: Copy = {
     credits: "Based on the open-source project",
     rights: "Free software for independent repair shops.",
     contact: "Contact",
-    community: "Community"
+    community: "Community",
+    privacy: "Privacy"
   },
 };

@@ -1,0 +1,73 @@
+---
+import Base from "../layouts/Base.astro";
+import { lang, locale, ogLocale, t } from "../i18n/pt";
+
+// One static 404 for every locale — GitHub Pages serves this file for any
+// missing path, so the right language is picked client-side from the URL
+// prefix (/en/…, /es/…, otherwise pt).
+const copy = {
+  pt: {
+    title: "Página não encontrada",
+    body: "A página que procura não existe ou foi movida.",
+    home: "Voltar ao início",
+    href: "/",
+  },
+  en: {
+    title: "Page not found",
+    body: "The page you're looking for doesn't exist or was moved.",
+    home: "Back to home",
+    href: "/en/",
+  },
+  es: {
+    title: "Página no encontrada",
+    body: "La página que buscas no existe o fue movida.",
+    home: "Volver al inicio",
+    href: "/es/",
+  },
+} as const;
+---
+
+<Base
+  t={t}
+  locale={locale}
+  langAttr={lang}
+  ogLocale={ogLocale}
+  title="404 — OficinaOS"
+  description="Página não encontrada."
+>
+  <main
+    class="flex min-h-screen flex-col items-center justify-center px-6 text-center"
+  >
+    <img src="/favicon.svg" alt="OficinaOS" class="h-14 w-14" />
+    <p class="mt-6 font-mono text-sm font-semibold text-text-muted">404</p>
+    {
+      (Object.keys(copy) as (keyof typeof copy)[]).map((l) => (
+        <div data-l404={l} hidden={l !== "pt"}>
+          <h1 class="mt-2 text-2xl font-extrabold tracking-tight text-text sm:text-3xl">
+            {copy[l].title}
+          </h1>
+          <p class="mt-3 text-lg text-text-muted">{copy[l].body}</p>
+          <a
+            href={copy[l].href}
+            class="mt-8 inline-flex h-11 items-center rounded-md bg-primary px-5 font-semibold text-on-primary shadow-sm transition hover:bg-primary-hover"
+          >
+            {copy[l].home}
+          </a>
+        </div>
+      ))
+    }
+  </main>
+  <script is:inline>
+    (function () {
+      var l = /^\/(en|es)(\/|$)/.exec(location.pathname)?.[1] || "pt";
+      if (l !== "pt") {
+        document
+          .querySelectorAll("[data-l404]")
+          .forEach(function (el) {
+            el.hidden = el.getAttribute("data-l404") !== l;
+          });
+        document.documentElement.lang = l;
+      }
+    })();
+  </script>
+</Base>

@@ -141,6 +141,11 @@ export const t: Copy = {
         "Al enviar se abre tu programa de correo con los datos rellenados — solo tienes que pulsar Enviar.",
       cloudText: "¿Ya tienes cuenta en OficinaOS Cloud?",
       cloudLink: "Entrar en cloud.oficinaos.app",
+      sending: "Enviando…",
+      success: "Solicitud recibida — te contactaremos pronto.",
+      errorInvalid:
+        "No pudimos registrar tu solicitud — revisa los datos e inténtalo de nuevo.",
+      errorRate: "Demasiadas solicitudes — inténtalo de nuevo dentro de una hora.",
     },
   },
   diag: {
@@ -1395,6 +1400,7 @@ export const t: Copy = {
     credits: "Basado en el proyecto de código abierto",
     rights: "Software libre para talleres independientes.",
     contact: "Contacto",
-    community: "Comunidad"
+    community: "Comunidad",
+    privacy: "Privacidad"
   },
 };

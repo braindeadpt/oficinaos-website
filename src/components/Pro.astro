@@ -82,12 +82,22 @@ const inputClass =
           {t.pro.signup.subtitle}
         </p>
       </div>
+      <p
+        id="beta-signup-result"
+        role="status"
+        hidden
+        class="mx-auto mt-6 max-w-2xl rounded-md px-4 py-3 text-sm font-medium"
+      ></p>
       <form
         id="beta-signup"
         action={FORM_ENDPOINT || MAILTO}
         method="POST"
         enctype={FORM_ENDPOINT ? "application/x-www-form-urlencoded" : "text/plain"}
         data-mailto={FORM_ENDPOINT ? undefined : CONTACT_EMAIL}
+        data-sending={t.pro.signup.sending}
+        data-msg-success={t.pro.signup.success}
+        data-msg-invalid={t.pro.signup.errorInvalid}
+        data-msg-rate={t.pro.signup.errorRate}
         data-subject={t.pro.signup.mailSubject}
         data-label-email={t.pro.signup.email}
         data-label-shop={t.pro.signup.shop}
@@ -144,9 +154,45 @@ const inputClass =
 </section>
 
 <script>
+  // Feedback: the cloud redirects back with ?beta=ok|invalid|rate after a
+  // native form POST — surface it as an inline banner, then clean the URL.
+  const form = document.getElementById("beta-signup") as HTMLFormElement | null;
+  const result = document.getElementById("beta-signup-result");
+  if (form && result) {
+    const msgs: Record<string, string | undefined> = {
+      ok: form.dataset.msgSuccess,
+      invalid: form.dataset.msgInvalid,
+      rate: form.dataset.msgRate,
+    };
+    const status = new URLSearchParams(location.search).get("beta");
+    const msg = status ? msgs[status] : undefined;
+    if (status && msg) {
+      result.textContent = msg;
+      result.classList.toggle("bg-success-soft", status === "ok");
+      result.classList.toggle("text-on-success-soft", status === "ok");
+      result.classList.toggle("bg-danger-soft", status !== "ok");
+      result.classList.toggle("text-on-danger-soft", status !== "ok");
+      result.hidden = false;
+      const url = new URL(location.href);
+      url.searchParams.delete("beta");
+      history.replaceState(null, "", url);
+    }
+    // Loading state while the browser posts to the cloud — mailto mode keeps
+    // the button usable since the page never navigates.
+    if (!form.dataset.mailto) {
+      form.addEventListener("submit", () => {
+        if (!form.reportValidity()) return;
+        const btn = form.querySelector<HTMLButtonElement>("button[type=submit]");
+        if (btn && form.dataset.sending) {
+          btn.disabled = true;
+          btn.textContent = form.dataset.sending;
+        }
+      });
+    }
+  }
+
   // Without a form endpoint, build a readable mailto: from the fields instead
   // of the browser's raw text/plain form encoding.
-  const form = document.getElementById("beta-signup") as HTMLFormElement | null;
   const to = form?.dataset.mailto;
   if (form && to) {
     form.addEventListener("submit", (e) => {
