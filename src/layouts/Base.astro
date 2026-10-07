@@ -95,6 +95,21 @@ const ogImage = new URL(
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content={ogImage} />
     <meta name="generator" content={Astro.generator} />
+    {
+      // Cloudflare Web Analytics — cookieless, no fingerprinting, no
+      // personal data (fits the privacy-first brand; no banner needed).
+      // Token comes from a build-time var, never committed to the repo.
+      // Empty → no beacon (local dev, forks).
+      import.meta.env.PUBLIC_CF_BEACON_TOKEN && (
+        <script
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon={JSON.stringify({
+            token: import.meta.env.PUBLIC_CF_BEACON_TOKEN,
+          })}
+        />
+      )
+    }
   </head>
   <body
     class="min-h-screen bg-bg font-sans text-text antialiased"

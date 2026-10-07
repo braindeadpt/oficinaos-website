@@ -1,0 +1,22 @@
+---
+import Footer from "../../components/Footer.astro";
+import Nav from "../../components/Nav.astro";
+import Terms from "../../components/Terms.astro";
+import Base from "../../layouts/Base.astro";
+import { lang, locale, ogLocale, t } from "../../i18n/es";
+---
+
+<Base
+  t={t}
+  locale={locale}
+  langAttr={lang}
+  ogLocale={ogLocale}
+  title={`${t.terms.title} — OficinaOS`}
+  description={t.terms.subtitle}
+>
+  <Nav t={t} locale={locale} />
+  <main>
+    <Terms t={t} />
+  </main>
+  <Footer t={t} locale={locale} />
+</Base>

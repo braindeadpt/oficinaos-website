@@ -241,6 +241,38 @@ export const t = {
     tableNote:
       "Ver o detalhe completo no repositório — incluindo o que nunca sai.",
   },
+  terms: {
+    badge: "Legal",
+    title: "Termos e condições",
+    subtitle:
+      "O essencial, em linguagem simples: o OficinaOS é software livre, os dados são seus e os serviços pagos são sempre opcionais.",
+    sections: [
+      {
+        heading: "Software livre (MIT)",
+        body: "O OficinaOS é distribuído sob a licença MIT: pode usar, copiar, modificar e redistribuir, inclusive comercialmente. O código-fonte completo está no GitHub. É um fork de Reparilo — o nome «Reparilo» não está coberto pela licença e não pode ser reutilizado noutras distribuições.",
+      },
+      {
+        heading: "Sem garantia",
+        body: "O software é fornecido «tal como está», sem garantia de qualquer tipo. A app faz backups automáticos, mas verificar que os backups existem e guardar cópias fora do PC é responsabilidade da loja.",
+      },
+      {
+        heading: "Os seus dados",
+        body: "A app corre num PC dentro da loja e os dados dos seus clientes ficam lá. A loja é a responsável pelo tratamento desses dados (RGPD): quem os recolhe, por quanto tempo os guarda e quem pode ver. Nós não temos acesso — nem pedimos.",
+      },
+      {
+        heading: "Módulos Pro e OficinaOS Cloud",
+        body: "O núcleo é grátis para sempre. Os módulos Pro são serviços opcionais pagos, ativados por servidor na OficinaOS Cloud, e regem-se pelos termos apresentados na subscrição. Desligar um módulo não apaga os dados locais — são seus.",
+      },
+      {
+        heading: "Este site",
+        body: "O site usa Cloudflare Web Analytics: estatísticas de visitas sem cookies, sem fingerprinting e sem dados pessoais — por isso não tem banner de cookies.",
+      },
+      {
+        heading: "Lei aplicável",
+        body: "Estes termos regem-se pela lei portuguesa. Dúvidas ou problemas: fale connosco pelo email de contacto no rodapé antes de qualquer disputa — resolvemos quase tudo a conversar.",
+      },
+    ],
+  },
   install: {
     title: "A funcionar em minutos",
     subtitle:
@@ -1418,7 +1450,8 @@ export const t = {
     rights: "Software livre para oficinas independentes.",
     contact: "Contacto",
     community: "Comunidade",
-    privacy: "Privacidade"
+    privacy: "Privacidade",
+    terms: "Termos"
   },
 };
 

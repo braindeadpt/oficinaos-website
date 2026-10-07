@@ -226,6 +226,38 @@ export const t: Copy = {
     tableNote:
       "Ver el detalle completo — incluido lo que nunca sale — en el repositorio.",
   },
+  terms: {
+    badge: "Legal",
+    title: "Términos y condiciones",
+    subtitle:
+      "Lo esencial, en lenguaje sencillo: OficinaOS es software libre, los datos son suyos y los servicios de pago son siempre opcionales.",
+    sections: [
+      {
+        heading: "Software libre (MIT)",
+        body: "OficinaOS se distribuye bajo la licencia MIT: puede usarlo, copiarlo, modificarlo y redistribuirlo, incluso comercialmente. El código fuente completo está en GitHub. Es un fork de Reparilo — el nombre «Reparilo» no está cubierto por la licencia y no puede reutilizarse en otras distribuciones.",
+      },
+      {
+        heading: "Sin garantía",
+        body: "El software se proporciona «tal cual», sin garantía de ningún tipo. La app hace copias de seguridad automáticas, pero comprobar que existen y guardar copias fuera del PC es responsabilidad de la tienda.",
+      },
+      {
+        heading: "Sus datos",
+        body: "La app se ejecuta en un PC dentro de la tienda y los datos de sus clientes se quedan ahí. La tienda es la responsable del tratamiento de esos datos (RGPD): qué se recoge, cuánto tiempo se guarda y quién puede verlo. Nosotros no tenemos acceso — ni lo pedimos.",
+      },
+      {
+        heading: "Módulos Pro y OficinaOS Cloud",
+        body: "El núcleo es gratis para siempre. Los módulos Pro son servicios opcionales de pago, activados por servidor en OficinaOS Cloud, y se rigen por los términos mostrados en la suscripción. Desactivar un módulo no borra los datos locales — son suyos.",
+      },
+      {
+        heading: "Este sitio web",
+        body: "Este sitio usa Cloudflare Web Analytics: estadísticas de visitas sin cookies, sin fingerprinting y sin datos personales — por eso no hay banner de cookies.",
+      },
+      {
+        heading: "Ley aplicable",
+        body: "Estos términos se rigen por la ley portuguesa. ¿Dudas o problemas? Escríbanos al email de contacto del pie de página antes de cualquier disputa — casi todo se resuelve hablando.",
+      },
+    ],
+  },
   install: {
     title: "En marcha en minutos",
     subtitle:
@@ -1404,6 +1436,7 @@ export const t: Copy = {
     rights: "Software libre para talleres independientes.",
     contact: "Contacto",
     community: "Comunidad",
-    privacy: "Privacidad"
+    privacy: "Privacidad",
+    terms: "Términos"
   },
 };

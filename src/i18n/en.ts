@@ -226,6 +226,38 @@ export const t: Copy = {
     tableNote:
       "See the full detail — including what never leaves — in the repository.",
   },
+  terms: {
+    badge: "Legal",
+    title: "Terms and conditions",
+    subtitle:
+      "The essentials, in plain language: OficinaOS is free software, the data is yours and paid services are always optional.",
+    sections: [
+      {
+        heading: "Free software (MIT)",
+        body: "OficinaOS is distributed under the MIT license: you may use, copy, modify and redistribute it, including commercially. The full source code is on GitHub. It is a fork of Reparilo — the name «Reparilo» is not covered by the license and may not be reused in other distributions.",
+      },
+      {
+        heading: "No warranty",
+        body: "The software is provided «as is», without warranty of any kind. The app makes automatic backups, but checking that backups exist and keeping copies off the PC is the shop's responsibility.",
+      },
+      {
+        heading: "Your data",
+        body: "The app runs on a PC inside the shop and your customers' data stays there. The shop is the data controller (GDPR): it decides what is collected, how long it is kept and who can see it. We have no access — and don't ask for any.",
+      },
+      {
+        heading: "Pro modules and OficinaOS Cloud",
+        body: "The core is free forever. Pro modules are optional paid services, activated server-side through OficinaOS Cloud, and are governed by the terms shown at subscription. Turning off a module does not delete local data — it is yours.",
+      },
+      {
+        heading: "This website",
+        body: "This site uses Cloudflare Web Analytics: visit statistics without cookies, without fingerprinting and without personal data — which is why there is no cookie banner.",
+      },
+      {
+        heading: "Governing law",
+        body: "These terms are governed by Portuguese law. Questions or problems: talk to us via the contact email in the footer before any dispute — we solve almost everything by talking.",
+      },
+    ],
+  },
   install: {
     title: "Running in minutes",
     subtitle:
@@ -1399,6 +1431,7 @@ export const t: Copy = {
     rights: "Free software for independent repair shops.",
     contact: "Contact",
     community: "Community",
-    privacy: "Privacy"
+    privacy: "Privacy",
+    terms: "Terms"
   },
 };
