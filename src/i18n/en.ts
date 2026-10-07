@@ -12,6 +12,7 @@ import {
   PORTABLE_ZIP_URL,
   RELEASES_URL,
   REPO_URL,
+  SETUP_EXE_URL,
 } from "./utils";
 
 export const lang = "en";
@@ -245,6 +246,7 @@ export const t: Copy = {
     ],
     downloadButton: "Download for Windows",
     dockerLink: "Advanced install (Docker)",
+    portableLink: "Portable version (no admin)",
     downloadNote: "Windows 10/11 64-bit · free · runs as a service, no Docker · latest release on GitHub",
     advanced: {
       badge: "Advanced",
@@ -311,24 +313,25 @@ export const t: Copy = {
         links: [],
       },
       {
-        heading: "Two ways to install",
+        heading: "Three ways to install",
         paragraphs: [
-          "OficinaOS is always the same program — what differs is how it runs on the shop PC. The installer picks the right path automatically, but it helps to understand both:",
-          "Docker is the normal, recommended way: a free program that packages the app and database in isolated «containers». It needs a processor feature called virtualization — most PCs have it, but some ship with it disabled in the BIOS or don't support it at all.",
-          "Portable mode exists for those PCs: a single bundle with everything inside (the app, the PostgreSQL database and the runtime) — no Docker, no virtualization, no Windows services.",
+          "OficinaOS is always the same program — what differs is how it runs on the shop PC. There are three paths:",
+          "OficinaOS-Setup.exe (recommended) — a normal Windows installer, no Docker: runs as a service, starts with the PC, creates the firewall rule, does automatic daily backups and leaves a tray icon. The right path for the shop PC.",
+          "Portable mode — a single bundle with everything inside (the app, the PostgreSQL database and the runtime), with no installation and no Windows services. It exists for the cases where the installer doesn't fit: PCs where you don't have the admin password, people who'd rather not install anything on the system, and as a fallback if the installer fails on a specific machine (antivirus, company policies).",
+          "Docker — for a NAS, a dedicated server, Linux or macOS, or for people who already use Docker.",
         ],
         table: {
-          head: ["", "Docker (recommended)", "Portable (fallback)"],
+          head: ["", "Setup.exe (recommended)", "Portable", "Docker"],
           rows: [
-            ["When to use", "Whenever possible", "PCs without virtualization (VT-x/SVM)"],
-            ["Requirements", "Docker Desktop + BIOS virtualization", "Any Windows 10/11 64-bit"],
-            ["Download", "~1 GB (Docker + app)", "~540 MB (all-in-one)"],
-            ["Boot with the PC", "Automatic", "Automatic (optional, asked on first run)"],
-            ["If the app crashes", "Restarts by itself", "Restarts by itself (wrapper)"],
-            ["Backups", "Daily, automatic (every 24h)", "At every startup + manual BACKUP.bat"],
-            ["Off-PC backups", "Supported (rclone → S3/B2/GCS)", "Manual — copy the backups folder"],
-            ["Updates", "Downloads only what changed; optional auto-update", "Downloads the whole bundle; always manual"],
-            ["Remote access (HTTPS)", "Cloudflare Tunnel included", "Cloudflare Tunnel installed separately"],
+            ["When to use", "Shop PC — almost always", "No admin, no install, or installer fails", "NAS, server, Linux/macOS"],
+            ["Requires admin", "Yes, during install", "No", "Yes, when installing Docker"],
+            ["Download", "~339 MB", "~540 MB", "~1 GB (Docker + app)"],
+            ["Boot with the PC", "Automatic (Windows service)", "Optional — scheduled task, asked on first run", "Automatic"],
+            ["If the app crashes", "Restarts by itself", "Restarts by itself (wrapper)", "Restarts by itself"],
+            ["Backups", "Automatic daily at 03:30", "At every startup + BACKUP.bat", "Automatic daily (every 24h)"],
+            ["Off-PC backups", "Copy the backups folder", "Copy the backups folder", "Supported (rclone → S3/B2/GCS)"],
+            ["Updates", "«Update» button in the app (~100 MB) or Setup over the top", "«Update» button in the app or ATUALIZAR.bat", "ATUALIZAR.bat — downloads only what changed"],
+            ["Remote access (HTTPS)", "Cloudflare Tunnel installed separately", "Cloudflare Tunnel installed separately", "Cloudflare Tunnel included"],
           ],
         },
         links: [
@@ -337,27 +340,26 @@ export const t: Copy = {
         ],
       },
       {
-        heading: "Normal install — Docker (once, ~10 minutes)",
+        heading: "Install — OficinaOS-Setup.exe (once, ~10 minutes)",
         paragraphs: [
-          "Download the installer ZIP, extract to a folder (e.g. C:\\OficinaOS) and double-click INSTALAR.bat. If Windows SmartScreen warns: «More info» → «Run anyway».",
-          "The installer does everything: checks whether the PC can run Docker, installs Docker Desktop if missing, generates passwords and secrets, downloads the app and starts it. If it asks for a reboot, reboot and run INSTALAR.bat again.",
-          "At the end the browser opens at http://localhost:4000. First login: user admin, password braindead — the app forces you to change both.",
-          "On Linux or Mac there's no auto-installer — Docker is used directly:",
+          "Download OficinaOS-Setup.exe from the releases page and double-click it. If Windows SmartScreen warns: «More info» → «Run anyway».",
+          "It asks for admin once (services, firewall and the backup task) and does everything by itself. At the end the browser opens at http://localhost:4000. First login: user admin, password braindead — the app forces you to change both.",
+          "A tray icon stays next to the clock: open the app, check status, stop/start, run a backup. On other shop devices: http://oficinaos.local:4000 — or the QR code on the Help page.",
+          "On Linux or macOS there's no installer — Docker is used directly:",
         ],
         code: "git clone https://github.com/braindeadpt/OficinaOS.git\ncd OficinaOS && cp .env.example .env\ndocker compose up -d\ndocker compose exec app bun run db:seed",
         links: [
           { label: "Full installation guide", href: INSTALL_URL },
-          { label: "Download installer (oficinaos-install.zip)", href: INSTALL_ZIP_URL },
+          { label: "Download OficinaOS-Setup.exe", href: SETUP_EXE_URL },
         ],
       },
       {
-        heading: "The «virtualization support not detected» error",
+        heading: "Portable mode — no admin, nothing installed",
         paragraphs: [
-          "If the PC can't run Docker, the installer detects it before trying and offers two options:",
-        ],
-        list: [
-          "Enable it in the BIOS — reboot, press F2/F10/DEL/ESC at startup, look for «Intel VT-x», «Virtualization Technology» or «SVM Mode», enable and save (F10). The normal Docker path then works.",
-          "Portable install — the installer downloads oficinaos-portable.zip (~540 MB) and runs without Docker: same app, same database, same features.",
+          "For when the installer isn't an option: you don't have the PC's admin password, you'd rather nothing get installed on the system, or the installer/services were blocked on that machine (antivirus, company policies).",
+          "Download oficinaos-portable.zip, extract to a folder and run INICIAR.bat. The app is exactly the same — same code, same PostgreSQL database, same features — and it also has the in-app «Update» button.",
+          "Two practical differences versus Setup.exe: autostart is an optional scheduled task (INICIAR.bat asks on first run) instead of a service; and since nobody opens the firewall for you, Windows asks once whether to allow the connection — choose «Allow» so the shop's tablets can connect.",
+          "If you arrived here because of the Docker path's «virtualization support not detected» error, portable mode fixes it — but in that case Setup.exe is even simpler, since it doesn't need Docker either.",
         ],
         links: [
           { label: "Download the portable bundle", href: PORTABLE_ZIP_URL },
@@ -380,6 +382,7 @@ export const t: Copy = {
           ],
         },
         list: [
+          "Setup.exe install: the service runs by itself — stop/start and manual backup via the tray icon.",
           "Docker mode: in the folder where you extracted the installer.",
           "Portable mode: inside the oficinaos-portable folder — data lives in data\\, backups in app\\uploads\\backups.",
           "Other shop devices (tablet, phone, another PC) install nothing — they open http://<PC-IP>:4000 in a browser.",
@@ -389,8 +392,8 @@ export const t: Copy = {
       {
         heading: "Backups and restore",
         paragraphs: [
-          "Backups are compressed files (.sql.gz) containing the whole database. The app shows the last backup status under Settings → Shop → Backups — it works the same in both modes.",
-          "In Docker mode a dedicated service backs up every 24 hours, keeps 14 days, and can optionally copy to external storage (S3, Backblaze, etc.) and automatically verify restores.",
+          "Backups are compressed files (.sql.gz) containing the whole database. The app shows the last backup status under Settings → Shop → Backups — it works the same in every mode.",
+          "With a Setup.exe install a scheduled task backs up daily at 03:30 to C:\\ProgramData\\OficinaOS\\backups. In Docker mode a dedicated service backs up every 24 hours, keeps 14 days, and can optionally copy to external storage (S3, Backblaze, etc.) and automatically verify restores.",
           "In portable mode the backup runs at every startup and via BACKUP.bat. Restoring is done with RESTAURAR.bat (pick a file from backups). Since there's no automatic off-PC copy, copy the app\\uploads\\backups folder to an external drive or USB stick — backups on the same disk don't protect against failure, theft or ransomware.",
         ],
         links: [
@@ -401,8 +404,8 @@ export const t: Copy = {
       {
         heading: "Updates",
         paragraphs: [
-          "The app shows a banner when a new version exists. To update, double-click ATUALIZAR.bat — it backs up, downloads the new version and restarts. Database migrations run by themselves.",
-          "Practical difference: Docker only downloads what changed; portable re-downloads the whole bundle (~540 MB). Docker can also update fully automatically (Watchtower).",
+          "The app shows a banner when a new version exists. On Setup.exe installs and in portable mode, the shop owner gets an «Update» button on that banner — it downloads only the app payload (~100 MB) with SHA-256 verification, backs up the database first and restores the previous version by itself if the new one fails to start. The app is offline ~1-2 minutes during the swap.",
+          "Manually also works: run the new Setup.exe over the top, or ATUALIZAR.bat in portable and Docker modes. Docker can also update fully automatically (Watchtower) — database migrations always run by themselves.",
         ],
         links: [{ label: "All releases", href: RELEASES_URL }],
       },

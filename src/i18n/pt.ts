@@ -11,6 +11,7 @@ import {
   PORTABLE_ZIP_URL,
   RELEASES_URL,
   REPO_URL,
+  SETUP_EXE_URL,
 } from "./utils";
 
 export type DocsSection = {
@@ -260,6 +261,7 @@ export const t = {
     ],
     downloadButton: "Descarregar para Windows",
     dockerLink: "Instalação avançada (Docker)",
+    portableLink: "Versão portátil (sem administrador)",
     downloadNote: "Windows 10/11 64-bit · grátis · corre como serviço, sem Docker · última versão no GitHub",
     advanced: {
       badge: "Avançado",
@@ -417,8 +419,8 @@ export const t = {
       {
         heading: "Atualizações",
         paragraphs: [
-          "A app avisa no topo quando existe versão nova. Para atualizar, basta duplo clique em ATUALIZAR.bat — faz backup, descarrega a versão nova e reinicia. As migrações da base de dados correm sozinhas.",
-          "Diferença prática: no Docker só se descarrega o que mudou; no portátil descarrega-se o pacote inteiro (~540 MB). No modo Docker pode ainda ativar atualizações 100% automáticas (Watchtower).",
+          "A app avisa no topo quando existe versão nova. Nas instalações por Setup.exe e no modo portátil, o dono da loja tem um botão «Atualizar» no aviso — descarrega só a parte da app (~100 MB) com verificação SHA-256, faz backup da base de dados antes e repõe a versão anterior sozinho se a nova não arrancar. A app fica offline ~1-2 minutos durante a troca.",
+          "À mão também funciona: o Setup.exe da versão nova por cima, ou ATUALIZAR.bat no portátil e no Docker. No Docker pode ainda ativar-se atualização 100% automática (Watchtower) — as migrações da base de dados correm sempre sozinhas.",
         ],
         links: [{ label: "Todas as releases", href: RELEASES_URL }],
       },
