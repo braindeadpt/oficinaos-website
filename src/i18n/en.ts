@@ -87,8 +87,8 @@ export const t: Copy = {
         desc: "Available in European Portuguese, English, French and Spanish.",
       },
       {
-        title: "Android app",
-        desc: "The same app on Android tablets at the counter — no separate codebase.",
+        title: "Android app — coming soon",
+        desc: "Works today on any phone or tablet browser as an installable PWA; the native Android app is on the way.",
       },
       {
         title: "Backups",
@@ -378,6 +378,13 @@ export const t: Copy = {
           "It asks for admin once (services, firewall and the backup task) and does everything by itself. At the end the browser opens at http://localhost:4000. First login: user admin, password braindead — the app forces you to change both.",
           "A tray icon stays next to the clock: open the app, check status, stop/start, run a backup. On other shop devices: http://oficinaos.local:4000 — or the QR code on the Help page.",
           "On Linux or macOS there's no installer — Docker is used directly:",
+        ],
+        images: [
+          {
+            src: "/screenshots/smartscreen-en.webp",
+            alt: "Windows SmartScreen warning — «More info» then «Run anyway»",
+            caption: "The installer isn't signed yet — Windows may show this warning. «More info» → «Run anyway».",
+          },
         ],
         code: "git clone https://github.com/braindeadpt/OficinaOS.git\ncd OficinaOS && cp .env.example .env\ndocker compose up -d\ndocker compose exec app bun run db:seed",
         links: [

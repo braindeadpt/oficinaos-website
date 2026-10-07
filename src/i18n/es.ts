@@ -87,8 +87,8 @@ export const t: Copy = {
         desc: "Disponible en portugués europeo, inglés, francés y español.",
       },
       {
-        title: "App Android",
-        desc: "La misma app en tablets Android en el mostrador — sin código separado.",
+        title: "App Android — próximamente",
+        desc: "Hoy funciona en el navegador de cualquier móvil o tablet como PWA instalable; la app Android nativa está en camino.",
       },
       {
         title: "Copias de seguridad",
@@ -378,6 +378,13 @@ export const t: Copy = {
           "Pide administrador una sola vez (servicios, firewall y la tarea de copias) y lo hace todo solo. Al final el navegador se abre en http://localhost:4000. Primer acceso: usuario admin, contraseña braindead — la app obliga a cambiar ambos.",
           "Queda un icono en la bandeja junto al reloj: abrir la app, ver el estado, parar/arrancar, hacer una copia. En otros aparatos de la tienda: http://oficinaos.local:4000 — o el código QR en la página Ayuda.",
           "En Linux o macOS no hay instalador — se usa Docker directamente:",
+        ],
+        images: [
+          {
+            src: "/screenshots/smartscreen-es.webp",
+            alt: "Aviso SmartScreen de Windows — «Más información» y después «Ejecutar de todos modos»",
+            caption: "El instalador aún no está firmado — Windows puede mostrar este aviso. «Más información» → «Ejecutar de todos modos».",
+          },
         ],
         code: "git clone https://github.com/braindeadpt/OficinaOS.git\ncd OficinaOS && cp .env.example .env\ndocker compose up -d\ndocker compose exec app bun run db:seed",
         links: [
