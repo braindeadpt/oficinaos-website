@@ -20,6 +20,51 @@ export interface UpdateEntry {
 
 export const UPDATES: UpdateEntry[] = [
   {
+    date: "2026-10-07",
+    tier: "free",
+    area: { pt: "Instalação", en: "Install", es: "Instalación" },
+    title: {
+      pt: "Instalador Windows de um clique",
+      en: "One-click Windows installer",
+      es: "Instalador Windows de un clic",
+    },
+    desc: {
+      pt: "O novo OficinaOS-Setup.exe instala tudo — corre como serviço Windows (arranca com o PC), faz backup diário da base de dados e tem ícone na bandeja. Sem Docker, sem consolas.",
+      en: "The new OficinaOS-Setup.exe installs everything — runs as a Windows service (starts with the PC), backs up the database daily and sits in the system tray. No Docker, no consoles.",
+      es: "El nuevo OficinaOS-Setup.exe lo instala todo — corre como servicio de Windows (arranca con el PC), hace copia diaria de la base de datos y tiene icono en la bandeja. Sin Docker, sin consolas.",
+    },
+  },
+  {
+    date: "2026-10-07",
+    tier: "free",
+    area: { pt: "Acesso à loja", en: "Shop access", es: "Acceso a la tienda" },
+    title: {
+      pt: "oficinaos.local + QR — adeus IP decorado",
+      en: "oficinaos.local + QR — no more memorized IPs",
+      es: "oficinaos.local + QR — adiós IP memorizada",
+    },
+    desc: {
+      pt: "A app anuncia-se como oficinaos.local na rede da loja e a página de Ajuda mostra um QR — lê-se com o telemóvel ou tablet e abre-se a loja, mesmo quando o IP muda.",
+      en: "The app announces itself as oficinaos.local on the shop network and the Help page shows a QR code — scan it with a phone or tablet to open the shop, even when the IP changes.",
+      es: "La app se anuncia como oficinaos.local en la red de la tienda y la página de Ayuda muestra un QR — se lee con el móvil o tablet y abre la tienda, aunque cambie la IP.",
+    },
+  },
+  {
+    date: "2026-10-07",
+    tier: "diag",
+    area: { pt: "OficinaOS Diag", en: "OficinaOS Diag", es: "OficinaOS Diag" },
+    title: {
+      pt: "Novo logótipo e testes de campo reforçados",
+      en: "New logo and stronger field tests",
+      es: "Nuevo logotipo y pruebas de campo reforzadas",
+    },
+    desc: {
+      pt: "v0.2.1: logótipo «parafuso pentalobe», zonas térmicas no benchmark (bateria vs SoC), contagem de quedas USB, deteção de bloqueio SIM/operadora, rampa de cinzentos e teste multi-toque.",
+      en: "v0.2.1: «pentalobe screw» logo, thermal zones in the benchmark (cell vs SoC), USB drop counting, SIM/carrier lock detection, grey ramp and multi-touch test.",
+      es: "v0.2.1: logotipo «tornillo pentalobe», zonas térmicas en el benchmark (batería vs SoC), conteo de caídas USB, detección de bloqueo SIM/operadora, rampa de grises y prueba multitáctil.",
+    },
+  },
+  {
     date: "2026-10-05",
     tier: "pro",
     area: { pt: "Loja online", en: "Online store", es: "Tienda online" },
