@@ -4,6 +4,7 @@ import Icon from "./Icon.astro";
 import {
   INSTALL_URL,
   INSTALL_ZIP_URL,
+  PORTABLE_ZIP_URL,
   RELEASES_URL,
   REPO_URL,
   SETUP_EXE_URL,
@@ -44,6 +45,12 @@ const { t } = Astro.props;
         >
           <Icon name="download" class="h-4 w-4" />
           {t.install.downloadButton}
+        </a>
+        <a
+          href={PORTABLE_ZIP_URL}
+          class="text-sm font-medium text-link transition hover:text-primary-hover"
+        >
+          {t.install.portableLink}
         </a>
         <a
           href={INSTALL_ZIP_URL}

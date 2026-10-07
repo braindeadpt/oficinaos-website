@@ -12,6 +12,7 @@ import {
   PORTABLE_ZIP_URL,
   RELEASES_URL,
   REPO_URL,
+  SETUP_EXE_URL,
 } from "./utils";
 
 export const lang = "es";
@@ -141,6 +142,11 @@ export const t: Copy = {
         "Al enviar se abre tu programa de correo con los datos rellenados — solo tienes que pulsar Enviar.",
       cloudText: "¿Ya tienes cuenta en OficinaOS Cloud?",
       cloudLink: "Entrar en cloud.oficinaos.app",
+      sending: "Enviando…",
+      success: "Solicitud recibida — te contactaremos pronto.",
+      errorInvalid:
+        "No pudimos registrar tu solicitud — revisa los datos e inténtalo de nuevo.",
+      errorRate: "Demasiadas solicitudes — inténtalo de nuevo dentro de una hora.",
     },
   },
   diag: {
@@ -240,6 +246,7 @@ export const t: Copy = {
     ],
     downloadButton: "Descargar para Windows",
     dockerLink: "Instalación avanzada (Docker)",
+    portableLink: "Versión portátil (sin administrador)",
     downloadNote: "Windows 10/11 64-bit · gratis · corre como servicio, sin Docker · última versión en GitHub",
     advanced: {
       badge: "Avanzado",
@@ -306,24 +313,25 @@ export const t: Copy = {
         links: [],
       },
       {
-        heading: "Dos formas de instalar",
+        heading: "Tres formas de instalar",
         paragraphs: [
-          "OficinaOS es siempre el mismo programa — la diferencia está en cómo se ejecuta en el PC de la tienda. El instalador elige el camino correcto solo, pero conviene entender los dos:",
-          "Docker es la forma normal y recomendada: un programa gratuito que empaqueta la app y la base de datos en «contenedores» aislados. Necesita una función del procesador llamada virtualización — la mayoría de los PCs la tienen, pero algunos la traen desactivada en la BIOS o no la soportan.",
-          "El modo portátil existe para esos PCs: trae todo en un único paquete (la app, la base de datos PostgreSQL y el runtime), sin Docker, sin virtualización y sin servicios de Windows.",
+          "OficinaOS es siempre el mismo programa — la diferencia está en cómo se ejecuta en el PC de la tienda. Hay tres caminos:",
+          "OficinaOS-Setup.exe (recomendado) — un instalador Windows normal, sin Docker: corre como servicio, arranca con el PC, crea la regla de firewall, hace copias de seguridad diarias automáticas y deja un icono en la bandeja. El camino correcto para el PC de la tienda.",
+          "Modo portátil — un único paquete con todo incluido (la app, la base de datos PostgreSQL y el runtime), sin instalación y sin servicios de Windows. Existe para los casos en que el instalador no sirve: PCs donde no tienes la contraseña de administrador, quien prefiere no instalar nada en el sistema, y como plan B si el instalador falla en una máquina concreta (antivirus, políticas de empresa).",
+          "Docker — para un NAS, un servidor dedicado, Linux o macOS, o para quien ya usa Docker.",
         ],
         table: {
-          head: ["", "Docker (recomendado)", "Portátil (alternativa)"],
+          head: ["", "Setup.exe (recomendado)", "Portátil", "Docker"],
           rows: [
-            ["Cuándo usarlo", "Siempre que sea posible", "PCs sin virtualización (VT-x/SVM)"],
-            ["Requisitos", "Docker Desktop + virtualización en BIOS", "Cualquier Windows 10/11 64-bit"],
-            ["Descarga", "~1 GB (Docker + app)", "~540 MB (todo incluido)"],
-            ["Arranque con el PC", "Automático", "Automático (opcional, se pregunta la 1ª vez)"],
-            ["Si la app falla", "Se reinicia sola", "Se reinicia sola (wrapper)"],
-            ["Copias de seguridad", "Diarias, automáticas (cada 24h)", "En cada arranque + BACKUP.bat manual"],
-            ["Copias fuera del PC", "Soportado (rclone → S3/B2/GCS)", "Manual — copiar la carpeta de backups"],
-            ["Actualizaciones", "Solo descarga lo que cambió; automático opcional", "Descarga el paquete entero; siempre manual"],
-            ["Acceso remoto (HTTPS)", "Cloudflare Tunnel incluido", "Cloudflare Tunnel instalado aparte"],
+            ["Cuándo usarlo", "PC de la tienda — casi siempre", "Sin admin, sin instalar nada, o el instalador falla", "NAS, servidor, Linux/macOS"],
+            ["Requiere administrador", "Sí, durante la instalación", "No", "Sí, al instalar Docker"],
+            ["Descarga", "~339 MB", "~540 MB", "~1 GB (Docker + app)"],
+            ["Arranque con el PC", "Automático (servicio Windows)", "Opcional — tarea programada, se pregunta la 1ª vez", "Automático"],
+            ["Si la app falla", "Se reinicia sola", "Se reinicia sola (wrapper)", "Se reinicia sola"],
+            ["Copias de seguridad", "Diaria automática a las 03:30", "En cada arranque + BACKUP.bat", "Diaria automática (cada 24h)"],
+            ["Copias fuera del PC", "Copiar la carpeta de backups", "Copiar la carpeta de backups", "Soportado (rclone → S3/B2/GCS)"],
+            ["Actualizaciones", "Botón «Actualizar» en la app (~100 MB) o Setup encima", "Botón «Actualizar» en la app o ATUALIZAR.bat", "ATUALIZAR.bat — solo descarga lo que cambió"],
+            ["Acceso remoto (HTTPS)", "Cloudflare Tunnel instalado aparte", "Cloudflare Tunnel instalado aparte", "Cloudflare Tunnel incluido"],
           ],
         },
         links: [
@@ -332,27 +340,26 @@ export const t: Copy = {
         ],
       },
       {
-        heading: "Instalación normal — Docker (una vez, ~10 minutos)",
+        heading: "Instalación — OficinaOS-Setup.exe (una vez, ~10 minutos)",
         paragraphs: [
-          "Descarga el instalador ZIP, extráelo en una carpeta (ej.: C:\\OficinaOS) y haz doble clic en INSTALAR.bat. Si Windows Defender SmartScreen avisa: «Más información» → «Ejecutar de todas formas».",
-          "El instalador lo hace todo: comprueba si el PC puede ejecutar Docker, instala Docker Desktop si falta, genera las contraseñas y secretos, descarga la app y la arranca. Si pide reiniciar, reinicia y ejecuta INSTALAR.bat otra vez.",
-          "Al final el navegador se abre en http://localhost:4000. Primer acceso: usuario admin, contraseña braindead — la app obliga a cambiar ambos.",
-          "En Linux o Mac no hay instalador automático — se usa Docker directamente:",
+          "Descarga OficinaOS-Setup.exe en la página de releases y haz doble clic. Si Windows Defender SmartScreen avisa: «Más información» → «Ejecutar de todas formas».",
+          "Pide administrador una sola vez (servicios, firewall y la tarea de copias) y lo hace todo solo. Al final el navegador se abre en http://localhost:4000. Primer acceso: usuario admin, contraseña braindead — la app obliga a cambiar ambos.",
+          "Queda un icono en la bandeja junto al reloj: abrir la app, ver el estado, parar/arrancar, hacer una copia. En otros aparatos de la tienda: http://oficinaos.local:4000 — o el código QR en la página Ayuda.",
+          "En Linux o macOS no hay instalador — se usa Docker directamente:",
         ],
         code: "git clone https://github.com/braindeadpt/OficinaOS.git\ncd OficinaOS && cp .env.example .env\ndocker compose up -d\ndocker compose exec app bun run db:seed",
         links: [
           { label: "Guía de instalación completa", href: INSTALL_URL },
-          { label: "Descargar instalador (oficinaos-install.zip)", href: INSTALL_ZIP_URL },
+          { label: "Descargar OficinaOS-Setup.exe", href: SETUP_EXE_URL },
         ],
       },
       {
-        heading: "El error «virtualization support not detected»",
+        heading: "Modo portátil — sin admin, sin instalar nada",
         paragraphs: [
-          "Si el PC no puede ejecutar Docker, el instalador lo detecta antes de intentarlo y ofrece dos opciones:",
-        ],
-        list: [
-          "Activarlo en la BIOS — reiniciar, pulsar F2/F10/DEL/ESC al arrancar, buscar «Intel VT-x», «Virtualization Technology» o «SVM Mode», activar y guardar (F10). Después funciona el camino Docker normal.",
-          "Instalación portátil — el instalador descarga oficinaos-portable.zip (~540 MB) y arranca sin Docker: la misma app, la misma base de datos, las mismas funciones.",
+          "Para cuando el instalador no es opción: no tienes la contraseña de administrador del PC, no quieres que nada quede instalado en el sistema, o el instalador/servicios fueron bloqueados en esa máquina (antivirus, políticas de empresa).",
+          "Descarga oficinaos-portable.zip, extráelo en una carpeta y ejecuta INICIAR.bat. La app es exactamente la misma — mismo código, misma base de datos PostgreSQL, mismas funciones — y también tiene el botón «Actualizar» dentro de la app.",
+          "Dos diferencias prácticas frente a Setup.exe: el arranque automático es una tarea programada opcional (INICIAR.bat pregunta la 1ª vez) en vez de un servicio; y como nadie abre el firewall por ti, Windows pregunta una vez si permite la conexión — elige «Permitir» para que los tablets de la tienda conecten.",
+          "Si llegaste aquí por el error «virtualization support not detected» del camino Docker, el portátil lo resuelve — pero en ese caso el Setup.exe es aún más simple, porque tampoco necesita Docker.",
         ],
         links: [
           { label: "Descargar paquete portátil", href: PORTABLE_ZIP_URL },
@@ -375,6 +382,7 @@ export const t: Copy = {
           ],
         },
         list: [
+          "Instalación por Setup.exe: el servicio corre solo — parar/arrancar y copia manual desde el icono de la bandeja.",
           "Modo Docker: en la carpeta donde extrajiste el instalador.",
           "Modo portátil: dentro de la carpeta oficinaos-portable — los datos viven en data\\, las copias en app\\uploads\\backups.",
           "Otros dispositivos de la tienda (tablet, móvil, otro PC) no instalan nada — abren http://<IP-del-PC>:4000 en el navegador.",
@@ -384,8 +392,8 @@ export const t: Copy = {
       {
         heading: "Copias de seguridad y restauración",
         paragraphs: [
-          "Las copias son archivos comprimidos (.sql.gz) con toda la base de datos. La app muestra el estado de la última copia en Ajustes → Tienda → Copias de seguridad — funciona igual en los dos modos.",
-          "En modo Docker un servicio dedicado hace una copia cada 24 horas, guarda 14 días, y opcionalmente copia a almacenamiento externo (S3, Backblaze, etc.) y prueba la restauración automáticamente.",
+          "Las copias son archivos comprimidos (.sql.gz) con toda la base de datos. La app muestra el estado de la última copia en Ajustes → Tienda → Copias de seguridad — funciona igual en todos los modos.",
+          "Con la instalación por Setup.exe una tarea programada hace copia diaria a las 03:30 en C:\\ProgramData\\OficinaOS\\backups. En modo Docker un servicio dedicado hace una copia cada 24 horas, guarda 14 días, y opcionalmente copia a almacenamiento externo (S3, Backblaze, etc.) y prueba la restauración automáticamente.",
           "En modo portátil la copia se hace en cada arranque y con BACKUP.bat. Restaurar se hace con RESTAURAR.bat (elige un archivo de backups). Como no hay copia fuera del PC automática, copia la carpeta app\\uploads\\backups a un disco externo o USB — las copias en el mismo disco no protegen contra avería, robo o ransomware.",
         ],
         links: [
@@ -396,8 +404,8 @@ export const t: Copy = {
       {
         heading: "Actualizaciones",
         paragraphs: [
-          "La app avisa arriba cuando hay una versión nueva. Para actualizar basta doble clic en ATUALIZAR.bat — hace copia, descarga la versión nueva y reinicia. Las migraciones de la base de datos corren solas.",
-          "Diferencia práctica: en Docker solo se descarga lo que cambió; en portátil se descarga el paquete entero (~540 MB). En Docker puedes activar actualizaciones 100% automáticas (Watchtower).",
+          "La app avisa arriba cuando hay una versión nueva. En las instalaciones por Setup.exe y en modo portátil, el dueño de la tienda tiene un botón «Actualizar» en el aviso — descarga solo la parte de la app (~100 MB) con verificación SHA-256, hace copia de la base de datos antes y repone la versión anterior solo si la nueva no arranca. La app queda offline ~1-2 minutos durante el cambio.",
+          "A mano también funciona: el Setup.exe de la versión nueva encima, o ATUALIZAR.bat en portátil y en Docker. En Docker puedes activar actualizaciones 100% automáticas (Watchtower) — las migraciones de la base de datos corren siempre solas.",
         ],
         links: [{ label: "Todas las releases", href: RELEASES_URL }],
       },
@@ -1395,6 +1403,7 @@ export const t: Copy = {
     credits: "Basado en el proyecto de código abierto",
     rights: "Software libre para talleres independientes.",
     contact: "Contacto",
-    community: "Comunidad"
+    community: "Comunidad",
+    privacy: "Privacidad"
   },
 };

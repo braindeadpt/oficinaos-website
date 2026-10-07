@@ -11,6 +11,7 @@ import {
   PORTABLE_ZIP_URL,
   RELEASES_URL,
   REPO_URL,
+  SETUP_EXE_URL,
 } from "./utils";
 
 export type DocsSection = {
@@ -156,6 +157,11 @@ export const t = {
         "Ao enviar, abre-se o seu programa de email com os dados preenchidos — basta carregar em Enviar.",
       cloudText: "Já tem conta na OficinaOS Cloud?",
       cloudLink: "Entrar em cloud.oficinaos.app",
+      sending: "A enviar…",
+      success: "Pedido recebido — falamos consigo em breve.",
+      errorInvalid:
+        "Não conseguimos registar o pedido — verifique os dados e tente outra vez.",
+      errorRate: "Demasiados pedidos — tente novamente daqui a uma hora.",
     },
   },
   diag: {
@@ -255,6 +261,7 @@ export const t = {
     ],
     downloadButton: "Descarregar para Windows",
     dockerLink: "Instalação avançada (Docker)",
+    portableLink: "Versão portátil (sem administrador)",
     downloadNote: "Windows 10/11 64-bit · grátis · corre como serviço, sem Docker · última versão no GitHub",
     advanced: {
       badge: "Avançado",
@@ -321,24 +328,25 @@ export const t = {
         links: [],
       },
       {
-        heading: "Duas formas de instalar",
+        heading: "Três formas de instalar",
         paragraphs: [
-          "O OficinaOS é sempre o mesmo programa — a diferença está em como é arrancado no PC da loja. O instalador escolhe o caminho certo sozinho, mas convém perceber os dois:",
-          "Docker é a forma normal e recomendada: um programa gratuito que embala a app e a base de dados em «contentores» isolados. Precisa de uma funcionalidade do processador chamada virtualização — a maioria dos PCs a tem, mas alguns trazem-na desligada na BIOS ou não a suportam.",
-          "O modo portátil existe para esses PCs: traz tudo embutido num pacote único (a app, a base de dados PostgreSQL e o runtime), sem Docker, sem virtualização e sem serviços Windows.",
+          "O OficinaOS é sempre o mesmo programa — a diferença está em como é arrancado no PC da loja. Há três caminhos:",
+          "OficinaOS-Setup.exe (recomendado) — um instalador Windows normal, sem Docker: corre como serviço, arranca com o PC, cria a regra de firewall, faz backup diário automático e deixa um ícone na bandeja. É o caminho certo para o PC da loja.",
+          "Modo portátil — um pacote único com tudo embutido (a app, a base de dados PostgreSQL e o runtime), sem instalação e sem serviços Windows. Existe para as situações em que o instalador não serve: PCs onde não tens a password de administrador, quem prefere não instalar nada no sistema, e como fallback se o instalador falhar numa máquina concreta (antivírus, políticas da empresa).",
+          "Docker — para um NAS, um servidor dedicado, Linux ou macOS, ou para quem já usa Docker.",
         ],
         table: {
-          head: ["", "Docker (recomendado)", "Portátil (fallback)"],
+          head: ["", "Setup.exe (recomendado)", "Portátil", "Docker"],
           rows: [
-            ["Quando usar", "Sempre que possível", "PCs sem virtualização (VT-x/SVM)"],
-            ["Requisitos", "Docker Desktop + virtualização na BIOS", "Qualquer Windows 10/11 64-bit"],
-            ["Download", "~1 GB (Docker + app)", "~540 MB (tudo embutido)"],
-            ["Arranque com o PC", "Automático", "Automático (opcional, perguntado na 1ª execução)"],
-            ["Se a app crashar", "Reinicia sozinha", "Reinicia sozinha (wrapper)"],
-            ["Backups", "Diários, automáticos (a cada 24h)", "A cada arranque + BACKUP.bat manual"],
-            ["Backups fora do PC", "Suportado (rclone → S3/B2/GCS)", "Manual — copiar a pasta de backups"],
-            ["Atualizações", "Só descarrega o que mudou; automático opcional", "Descarrega o pacote inteiro; sempre manual"],
-            ["Acesso remoto (HTTPS)", "Cloudflare Tunnel incluído", "Cloudflare Tunnel instalado à parte"],
+            ["Quando usar", "PC da loja — quase sempre", "Sem admin, sem instalar nada, ou instalador falha", "NAS, servidor, Linux/macOS"],
+            ["Requer administrador", "Sim, durante a instalação", "Não", "Sim, na instalação do Docker"],
+            ["Download", "~339 MB", "~540 MB", "~1 GB (Docker + app)"],
+            ["Arranque com o PC", "Automático (serviço Windows)", "Opcional — tarefa agendada, perguntado na 1ª execução", "Automático"],
+            ["Se a app crashar", "Reinicia sozinha", "Reinicia sozinha (wrapper)", "Reinicia sozinha"],
+            ["Backups", "Diário automático às 03:30", "A cada arranque + BACKUP.bat", "Diário automático (a cada 24h)"],
+            ["Backups fora do PC", "Copiar a pasta de backups", "Copiar a pasta de backups", "Suportado (rclone → S3/B2/GCS)"],
+            ["Atualizações", "Botão «Atualizar» na app (~100 MB) ou Setup por cima", "Botão «Atualizar» na app ou ATUALIZAR.bat", "ATUALIZAR.bat — só descarrega o que mudou"],
+            ["Acesso remoto (HTTPS)", "Cloudflare Tunnel instalado à parte", "Cloudflare Tunnel instalado à parte", "Cloudflare Tunnel incluído"],
           ],
         },
         links: [
@@ -347,27 +355,26 @@ export const t = {
         ],
       },
       {
-        heading: "Instalação normal — Docker (uma vez, ~10 minutos)",
+        heading: "Instalação — OficinaOS-Setup.exe (uma vez, ~10 minutos)",
         paragraphs: [
-          "Descarregue o instalador ZIP, extraia para uma pasta (ex.: C:\\OficinaOS) e faça duplo clique em INSTALAR.bat. Se o Windows Defender SmartScreen avisar: «Mais informações» → «Executar mesmo assim».",
-          "O instalador faz tudo sozinho: verifica se o PC consegue correr Docker, instala o Docker Desktop se faltar, gera as palavras-passe e segredos, descarrega a app e arranca. Se pedir para reiniciar, reinicie e corra INSTALAR.bat outra vez.",
-          "No fim o browser abre em http://localhost:4000. Primeiro login: utilizador admin, palavra-passe braindead — a app obriga a mudar ambos.",
-          "Em Linux ou Mac não há instalador automático — usa-se Docker manualmente:",
+          "Descarregue o OficinaOS-Setup.exe na página de releases e faça duplo clique. Se o Windows Defender SmartScreen avisar: «Mais informações» → «Executar mesmo assim».",
+          "Pede administrador uma só vez (serviços, firewall e a tarefa de backup) e faz tudo sozinho. No fim o browser abre em http://localhost:4000. Primeiro login: utilizador admin, palavra-passe braindead — a app obriga a mudar ambos.",
+          "Fica um ícone na bandeja junto ao relógio: abrir a app, ver o estado, parar/arrancar, fazer backup. Noutros aparelhos da loja: http://oficinaos.local:4000 — ou o QR code na página Ajuda.",
+          "Em Linux ou macOS não há instalador — usa-se o Docker manualmente:",
         ],
         code: "git clone https://github.com/braindeadpt/OficinaOS.git\ncd OficinaOS && cp .env.example .env\ndocker compose up -d\ndocker compose exec app bun run db:seed",
         links: [
           { label: "Guia de instalação completo", href: INSTALL_URL },
-          { label: "Descarregar instalador (oficinaos-install.zip)", href: INSTALL_ZIP_URL },
+          { label: "Descarregar OficinaOS-Setup.exe", href: SETUP_EXE_URL },
         ],
       },
       {
-        heading: "Erro «virtualization support not detected»",
+        heading: "Modo portátil — sem admin, sem instalar nada",
         paragraphs: [
-          "Se o PC não consegue correr Docker, o instalador deteta isso antes de tentar e apresenta duas opções:",
-        ],
-        list: [
-          "Ativar na BIOS — reiniciar, premir F2/F10/DEL/ESC no arranque, procurar «Intel VT-x», «Virtualization Technology» ou «SVM Mode», ativar e gravar (F10). Depois o caminho Docker normal funciona.",
-          "Instalação portátil — o instalador descarrega oficinaos-portable.zip (~540 MB) e arranca sem Docker: a mesma app, a mesma base de dados, as mesmas funcionalidades.",
+          "Para quando o instalador não é opção: não tens a password de administrador do PC, não queres que nada fique instalado no sistema, ou o instalador/serviços foram bloqueados naquela máquina (antivírus, políticas da empresa).",
+          "Descarrega oficinaos-portable.zip, extrai para uma pasta e corre INICIAR.bat. A app é exatamente a mesma — mesmo código, mesma base de dados PostgreSQL, mesmas funcionalidades — e também tem o botão «Atualizar» dentro da app.",
+          "Duas diferenças práticas face ao Setup.exe: o arranque automático é uma tarefa agendada opcional (o INICIAR.bat pergunta na 1ª execução) em vez de um serviço; e como ninguém abre a firewall por ti, o Windows pergunta uma vez se permite a ligação — escolhe «Permitir» para os tablets da loja ligarem.",
+          "Se chegaste aqui por causa do erro «virtualization support not detected» do caminho Docker, o portátil resolve — mas nesse caso o Setup.exe é ainda mais simples, porque também não precisa de Docker.",
         ],
         links: [
           { label: "Descarregar pacote portátil", href: PORTABLE_ZIP_URL },
@@ -390,6 +397,7 @@ export const t = {
           ],
         },
         list: [
+          "Instalação por Setup.exe: o serviço corre sozinho — parar/arrancar e backup manual pelo ícone na bandeja.",
           "Modo Docker: na pasta onde extraiu o instalador.",
           "Modo portátil: dentro da pasta oficinaos-portable — os dados vivem em data\\, os backups em app\\uploads\\backups.",
           "Outros dispositivos da loja (tablet, telemóvel, outro PC) não instalam nada — abrem http://<IP-do-PC>:4000 no browser.",
@@ -399,8 +407,8 @@ export const t = {
       {
         heading: "Backups e restauro",
         paragraphs: [
-          "Os backups são ficheiros comprimidos (.sql.gz) com a base de dados inteira. A app mostra o estado do último backup em Definições → Loja → Backups — funciona igual nos dois modos.",
-          "No modo Docker um serviço dedicado faz um backup a cada 24 horas, guarda 14 dias, e opcionalmente copia para armazenamento externo (S3, Backblaze, etc.) e testa o restauro automaticamente.",
+          "Os backups são ficheiros comprimidos (.sql.gz) com a base de dados inteira. A app mostra o estado do último backup em Definições → Loja → Backups — funciona igual em todos os modos.",
+          "Na instalação por Setup.exe uma tarefa agendada faz backup diário às 03:30 para C:\\ProgramData\\OficinaOS\\backups. No modo Docker um serviço dedicado faz um backup a cada 24 horas, guarda 14 dias, e opcionalmente copia para armazenamento externo (S3, Backblaze, etc.) e testa o restauro automaticamente.",
           "No modo portátil o backup corre a cada arranque e com BACKUP.bat. Restaurar é com RESTAURAR.bat (repor um ficheiro de backups). Como não há cópia fora do PC automática, copie a pasta app\\uploads\\backups para um disco externo ou pen — backups no mesmo disco não protegem contra avaria, roubo ou ransomware.",
         ],
         links: [
@@ -411,8 +419,8 @@ export const t = {
       {
         heading: "Atualizações",
         paragraphs: [
-          "A app avisa no topo quando existe versão nova. Para atualizar, basta duplo clique em ATUALIZAR.bat — faz backup, descarrega a versão nova e reinicia. As migrações da base de dados correm sozinhas.",
-          "Diferença prática: no Docker só se descarrega o que mudou; no portátil descarrega-se o pacote inteiro (~540 MB). No modo Docker pode ainda ativar atualizações 100% automáticas (Watchtower).",
+          "A app avisa no topo quando existe versão nova. Nas instalações por Setup.exe e no modo portátil, o dono da loja tem um botão «Atualizar» no aviso — descarrega só a parte da app (~100 MB) com verificação SHA-256, faz backup da base de dados antes e repõe a versão anterior sozinho se a nova não arrancar. A app fica offline ~1-2 minutos durante a troca.",
+          "À mão também funciona: o Setup.exe da versão nova por cima, ou ATUALIZAR.bat no portátil e no Docker. No Docker pode ainda ativar-se atualização 100% automática (Watchtower) — as migrações da base de dados correm sempre sozinhas.",
         ],
         links: [{ label: "Todas as releases", href: RELEASES_URL }],
       },
@@ -1409,7 +1417,8 @@ export const t = {
     credits: "Baseado no projeto de código aberto",
     rights: "Software livre para oficinas independentes.",
     contact: "Contacto",
-    community: "Comunidade"
+    community: "Comunidade",
+    privacy: "Privacidade"
   },
 };
 
