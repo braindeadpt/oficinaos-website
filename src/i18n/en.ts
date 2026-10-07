@@ -1432,6 +1432,8 @@ export const t: Copy = {
     contact: "Contact",
     community: "Community",
     privacy: "Privacy",
-    terms: "Terms"
+    terms: "Terms",
+    madeBy: "Made by",
+    madeIn: "in Portugal"
   },
 };

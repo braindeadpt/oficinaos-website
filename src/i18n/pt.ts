@@ -1451,7 +1451,9 @@ export const t = {
     contact: "Contacto",
     community: "Comunidade",
     privacy: "Privacidade",
-    terms: "Termos"
+    terms: "Termos",
+    madeBy: "Feito por",
+    madeIn: "em Portugal"
   },
 };
 

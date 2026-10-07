@@ -1437,6 +1437,8 @@ export const t: Copy = {
     contact: "Contacto",
     community: "Comunidad",
     privacy: "Privacidad",
-    terms: "Términos"
+    terms: "Términos",
+    madeBy: "Hecho por",
+    madeIn: "en Portugal"
   },
 };
