@@ -188,7 +188,7 @@ export const t: Copy = {
       {
         name: "OficinaOS Cloud (módulos Pro)",
         to: "Servidores de OficinaOS",
-        what: "Cuenta y emparejamiento; datos de cada módulo activo — páginas del portal (con el nombre del cliente), mensajes de WhatsApp recibidos, reservas del escaparate, diagnósticos enviados, totales diarios (multitienda) y precios compartidos",
+        what: "Cuenta y emparejamiento; datos de cada módulo activo — páginas del portal (con el nombre del cliente), mensajes de WhatsApp recibidos, reservas del escaparate, diagnósticos enviados, totales diarios (multitienda) y precios compartidos. El token Meta de la tienda queda cifrado en Cloud para enviar WhatsApp en su nombre",
       },
       {
         name: "Informes IA (Pro)",
@@ -201,9 +201,9 @@ export const t: Copy = {
         what: "Solo al pulsar «Enviar log»: el final del archivo diag.log",
       },
       {
-        name: "Notificaciones WhatsApp",
-        to: "Meta",
-        what: "Nº de teléfono del cliente + estado de la reparación",
+        name: "Notificaciones y bot WhatsApp",
+        to: "Meta, vía el relay de OficinaOS Cloud",
+        what: "Nº de teléfono del cliente + texto del mensaje — transitan por Cloud sin quedar guardados ni registrados (logs solo con id, estado y teléfono enmascarado)",
       },
       {
         name: "Acceso remoto y enlaces al cliente",
@@ -502,7 +502,6 @@ export const t: Copy = {
           rows: [
             ["Portal del cliente", "Enlace público con el estado de la reparación y botones para aceptar/rechazar el presupuesto — sin llamar a la tienda"],
             ["Bot de WhatsApp", "Escribe al WhatsApp de la tienda y recibe el estado de la reparación automáticamente; aprueba presupuestos con SÍ/NO"],
-            ["Canal SMS", "El mismo asistente por SMS — un móvil Android con SIM en la tienda envía y recibe, sin Meta ni coste por mensaje"],
             ["Diagnóstico a distancia", "Hace el diagnóstico del móvil en casa (oficinaos-diag, gratis) y lo envía a la tienda con un código"],
             ["Informes IA", "Informe del diagnóstico escrito en lenguaje sencillo, listo para entregar"],
             ["Facturación certificada", "Factura o factura-recibo legal emitida directamente desde la reparación o la venta — vía InvoiceXpress, con la cuenta de la propia tienda — solo Portugal"],
@@ -529,7 +528,7 @@ export const t: Copy = {
             ["OficinaOS Diag (herramienta)", "Gratis para siempre", "0 €"],
             ["Portal del cliente", "Disponible (beta)", "Por anunciar — gratis en beta"],
             ["Bot de WhatsApp", "Disponible (beta)", "Por anunciar — gratis en beta*"],
-            ["Canal SMS", "Disponible (beta)", "Por anunciar — gratis en beta"],
+            ["Canal SMS (pasarela Android)", "Incluido en el core", "0 € — gratis"],
             ["Recepción de diagnósticos", "Disponible (beta)", "Por anunciar — gratis en beta"],
             ["Informes IA", "Disponible (beta)", "Por anunciar — por informe"],
             ["Facturación (InvoiceXpress)", "Disponible (beta)", "Por anunciar — gratis en beta. La cuenta de InvoiceXpress es de la tienda y tiene el coste propio del servicio"],
@@ -575,9 +574,9 @@ export const t: Copy = {
         ],
       },
       {
-        heading: "Canal SMS (Pro)",
+        heading: "Canal SMS (gratis en el core)",
         paragraphs: [
-          "El mismo asistente automático, pero por SMS — para tiendas que no quieren (o aún no tienen) la cuenta empresarial de Meta. Un móvil Android con SIM se queda en la tienda haciendo de puente: la app envía y recibe SMS a través de él, por la red móvil normal.",
+          "El mismo asistente automático, pero por SMS — para tiendas que no quieren (o aún no tienen) la cuenta empresarial de Meta. Un móvil Android con SIM se queda en la tienda haciendo de puente: la app envía y recibe SMS a través de él, por la red móvil normal. Es gratuito y no necesita Cloud — todo ocurre en la red de la tienda.",
           "Sin cuentas Meta, sin aprobaciones de plantillas y sin coste por mensaje — solo la tarifa del SIM de la tienda (las tarifas con SMS incluidos hacen el coste marginal cero). La configuración tarda ~5 minutos y la guía la explica paso a paso.",
         ],
         links: [
@@ -800,8 +799,8 @@ export const t: Copy = {
           list: [
             "Menú → Notificaciones → Setup → sección WhatsApp",
             "Business ID + Phone Number ID — facilitados en el alta",
-            "API Token — el token permanente del system user (la app lo guarda cifrado)",
-            "Enabled activado — la app registra el phone_number_id en Cloud sola y el bot queda activo",
+            "API Token — el token permanente del system user (la app lo sube una vez a la Cloud, donde queda cifrado — los envíos salen por el relay y el token no se vuelve a pedir)",
+            "Enabled activado — la app registra el phone_number_id y las credenciales en Cloud sola y el bot queda activo",
           ],
           links: [],
         },
@@ -979,7 +978,7 @@ export const t: Copy = {
             "Una tarjeta SIM activa — idealmente con SMS incluidos en la tarifa (el coste de los mensajes es del operador)",
             "La app gratuita «SMS Gateway for Android» (sms-gate.app), de la Play Store o del sitio oficial",
             "El móvil y el PC de OficinaOS en la misma red Wi-Fi/LAN",
-            "El módulo sms activo en la cuenta OficinaOS Cloud (en beta, lo activamos nosotros)",
+            "Nada más — el canal SMS es gratuito y no necesita cuenta Cloud ni módulos",
           ],
           paragraphs: [],
           links: [],
@@ -1051,7 +1050,7 @@ export const t: Copy = {
               ["Error de autenticación", "Usuario y contraseña exactamente como en la app del móvil (los genera ella, no los eliges tú)"],
               ["El cliente responde y no pasa nada", "¿Está registrado el webhook? (botón «Registrar webhook») — ¿y se registró con la app abierta por la IP de red, no localhost?"],
               ["Funcionaba y dejó de funcionar", "¿La optimización de batería de Android suspendió la app? ¿Cambió la IP del móvil?"],
-              ["«Módulo no disponible»", "¿El entitlement sms está activo en la cuenta Cloud y la app ya sincronizó (hasta ~2 min)?"],
+
             ],
           },
           paragraphs: [],

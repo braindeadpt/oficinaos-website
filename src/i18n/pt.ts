@@ -203,7 +203,7 @@ export const t = {
       {
         name: "OficinaOS Cloud (módulos Pro)",
         to: "Servidores OficinaOS",
-        what: "Conta e emparelhamento; dados de cada módulo ativo — páginas do portal (com nome do cliente), mensagens WhatsApp recebidas, reservas da montra, diagnósticos enviados, totais diários (multi-loja) e preços partilhados",
+        what: "Conta e emparelhamento; dados de cada módulo ativo — páginas do portal (com nome do cliente), mensagens WhatsApp recebidas, reservas da montra, diagnósticos enviados, totais diários (multi-loja) e preços partilhados. O token Meta da loja fica cifrado na Cloud para o envio de WhatsApp",
       },
       {
         name: "Relatórios IA (Pro)",
@@ -216,9 +216,9 @@ export const t = {
         what: "Só quando se carrega em «Enviar log»: o fim do ficheiro diag.log",
       },
       {
-        name: "Notificações WhatsApp",
-        to: "Meta",
-        what: "Nº de telefone do cliente + estado da reparação",
+        name: "Notificações e bot WhatsApp",
+        to: "Meta, via relay da OficinaOS Cloud",
+        what: "Nº de telefone do cliente + texto da mensagem — transitam pela Cloud sem ficarem guardados nem registados (logs só com id, estado e telefone mascarado)",
       },
       {
         name: "Acesso remoto e links ao cliente",
@@ -517,7 +517,6 @@ export const t = {
           rows: [
             ["Portal do cliente", "Link público com o estado da reparação e botões para aceitar/recusar orçamento — sem ligar à loja"],
             ["Bot de WhatsApp", "Escreve para o WhatsApp da loja e recebe o estado da reparação automaticamente; aprova orçamentos com SIM/NÃO"],
-            ["Canal SMS", "O mesmo assistente por SMS — um telemóvel Android com SIM na loja envia e recebe, sem Meta nem custos por mensagem"],
             ["Diagnóstico à distância", "Faz o diagnóstico do telemóvel em casa (oficinaos-diag, grátis) e envia à loja com um código"],
             ["Relatórios IA", "Relatório do diagnóstico escrito em linguagem simples, pronto a entregar"],
             ["Faturação certificada", "Fatura ou fatura-recibo legal emitida diretamente da reparação ou venda — via InvoiceXpress, com a conta da própria loja — só Portugal"],
@@ -544,7 +543,7 @@ export const t = {
             ["OficinaOS Diag (ferramenta)", "Grátis para sempre", "0 €"],
             ["Portal do cliente", "Disponível (beta)", "A anunciar — grátis no beta"],
             ["Bot de WhatsApp", "Disponível (beta)", "A anunciar — grátis no beta*"],
-            ["Canal SMS", "Disponível (beta)", "A anunciar — grátis no beta"],
+            ["Canal SMS (gateway Android)", "Incluído no core", "0 € — grátis"],
             ["Receção de diagnósticos", "Disponível (beta)", "A anunciar — grátis no beta"],
             ["Relatórios IA", "Disponível (beta)", "A anunciar — por relatório"],
             ["Faturação (InvoiceXpress)", "Disponível (beta)", "A anunciar — grátis no beta. A conta InvoiceXpress é da loja e tem o custo próprio do serviço deles"],
@@ -590,9 +589,9 @@ export const t = {
         ],
       },
       {
-        heading: "Canal SMS (Pro)",
+        heading: "Canal SMS (grátis no core)",
         paragraphs: [
-          "O mesmo assistente automático, mas por SMS — para lojas que não querem (ou ainda não têm) a conta empresarial da Meta. Um telemóvel Android com SIM fica na loja a fazer de ponte: a app envia e recebe SMS através dele, pela rede móvel normal.",
+          "O mesmo assistente automático, mas por SMS — para lojas que não querem (ou ainda não têm) a conta empresarial da Meta. Um telemóvel Android com SIM fica na loja a fazer de ponte: a app envia e recebe SMS através dele, pela rede móvel normal. É gratuito e não precisa de Cloud — tudo acontece na rede da loja.",
           "Sem contas Meta, sem aprovações de modelos e sem custo por mensagem — só o tarifário do SIM da loja (cartões com SMS incluídos tornam o custo marginal zero). O setup são ~5 minutos e está explicado passo a passo no guia.",
         ],
         links: [
@@ -815,8 +814,8 @@ export const t = {
           list: [
             "Menu → Notificações → Setup → secção WhatsApp",
             "Business ID + Phone Number ID — fornecidos no onboarding",
-            "API Token — o token permanente do system user (a app guarda-o encriptado)",
-            "Enabled ligado — a app regista o phone_number_id na Cloud sozinha e o bot fica ativo",
+            "API Token — o token permanente do system user (a app envia-o uma vez para a Cloud, onde fica cifrado — os envios saem pelo relay e o token não volta a ser pedido)",
+            "Enabled ligado — a app regista o phone_number_id e as credenciais na Cloud sozinha e o bot fica ativo",
           ],
           links: [],
         },
@@ -994,7 +993,7 @@ export const t = {
             "Um cartão SIM ativo — idealmente com SMS incluídos no tarifário (o custo das mensagens é da operadora)",
             "A app gratuita «SMS Gateway for Android» (sms-gate.app), da Play Store ou do site oficial",
             "O telemóvel e o PC do OficinaOS na mesma rede Wi-Fi/LAN",
-            "O módulo sms ativo na conta OficinaOS Cloud (no beta, ativamos nós)",
+            "Nada mais — o canal SMS é gratuito e não precisa de Cloud nem de módulos",
           ],
           paragraphs: [],
           links: [],
@@ -1066,7 +1065,6 @@ export const t = {
               ["Erro de autenticação", "Utilizador e palavra-passe exatamente como na app do telemóvel (são gerados por ela, não é o utilizador que os escolhe)"],
               ["Cliente responde e nada acontece", "O webhook está registado? (botão «Registar webhook») — e foi registado com a app aberta pelo IP de rede, não localhost?"],
               ["Funcionava e parou", "Otimização de bateria do Android suspendeu a app? O IP do telemóvel mudou?"],
-              ["«Módulo não disponível»", "O entitlement sms está ativo na conta Cloud e a app já sincronizou (até ~2 min)?"],
             ],
           },
           paragraphs: [],
