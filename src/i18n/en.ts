@@ -227,20 +227,20 @@ export const t: Copy = {
     steps: [
       {
         title: "Download the installer",
-        desc: "Download oficinaos-install.zip and extract it to a folder, e.g. C:\\OficinaOS.",
+        desc: "Download OficinaOS-Setup.exe — a regular Windows installer, no Docker needed.",
       },
       {
-        title: "Double-click INSTALAR.bat",
-        desc: "The installer does everything: installs Docker if missing, generates the passwords and starts the app. If the PC can't run Docker, it offers the portable mode. If SmartScreen warns: “More info” → “Run anyway”.",
+        title: "Double-click the installer",
+        desc: "It asks for admin once (services and firewall) and does everything itself. If SmartScreen warns: “More info” → “Run anyway”.",
       },
       {
         title: "Open in the browser",
-        desc: "At the end http://localhost:4000 opens. On other devices in the shop, use the PC's IP (e.g. http://192.168.1.33:4000). Day to day, just run INICIAR.bat.",
+        desc: "When it finishes, http://localhost:4000 opens and a tray icon stays running. On other devices in the shop: http://oficinaos.local:4000 — or scan the QR code on the Help page.",
       },
     ],
     downloadButton: "Download for Windows",
-    portableLink: "Portable version (no Docker)",
-    downloadNote: "Windows 10/11 64-bit · free · latest release on GitHub",
+    dockerLink: "Advanced install (Docker)",
+    downloadNote: "Windows 10/11 64-bit · free · runs as a service, no Docker · latest release on GitHub",
     advanced: {
       badge: "Advanced",
       title: "Linux and macOS — manual Docker",

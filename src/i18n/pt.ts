@@ -242,20 +242,20 @@ export const t = {
     steps: [
       {
         title: "Descarregar o instalador",
-        desc: "Descarregue oficinaos-install.zip e extraia-o para uma pasta, por exemplo C:\\OficinaOS.",
+        desc: "Descarregue o OficinaOS-Setup.exe — um instalador Windows normal, sem Docker.",
       },
       {
-        title: "Duplo clique em INSTALAR.bat",
-        desc: "O instalador trata de tudo: instala o Docker se faltar, gera as palavras-passe e arranca a app. Se o PC não suportar Docker, oferece o modo portátil. Se o SmartScreen avisar: «Mais informações» → «Executar mesmo assim».",
+        title: "Duplo clique no instalador",
+        desc: "Pede administrador uma só vez (serviços e firewall) e faz tudo sozinho. Se o SmartScreen avisar: «Mais informações» → «Executar mesmo assim».",
       },
       {
         title: "Abrir no browser",
-        desc: "No fim abre-se http://localhost:4000. Nos outros dispositivos da loja, use o IP do PC (ex.: http://192.168.1.33:4000). No dia a dia, basta INICIAR.bat.",
+        desc: "No fim abre http://localhost:4000 e fica um ícone na bandeja. Nos outros dispositivos da loja: http://oficinaos.local:4000 — ou leia o QR code na página Ajuda.",
       },
     ],
     downloadButton: "Descarregar para Windows",
-    portableLink: "Versão portátil (sem Docker)",
-    downloadNote: "Windows 10/11 64-bit · grátis · última versão publicada no GitHub",
+    dockerLink: "Instalação avançada (Docker)",
+    downloadNote: "Windows 10/11 64-bit · grátis · corre como serviço, sem Docker · última versão no GitHub",
     advanced: {
       badge: "Avançado",
       title: "Linux e macOS — Docker manual",
