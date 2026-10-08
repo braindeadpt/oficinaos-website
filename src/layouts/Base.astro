@@ -34,8 +34,11 @@ const localeMap: Record<Locale, string> = {
 const pagePath = currentPagePath(Astro.url.pathname, locale);
 const canonical = new URL(localeUrl(locale, pagePath), Astro.site);
 const favicon = `${import.meta.env.BASE_URL}favicon.svg`;
+// Versioned filename — X/Telegram/WhatsApp/Discord cache OG cards per image
+// URL, so a renamed file forces a fresh scrape. og-cover.png stays as a
+// fallback for old links.
 const ogImage = new URL(
-  `${import.meta.env.BASE_URL}og-cover.png`,
+  `${import.meta.env.BASE_URL}og-cover-2026.png`,
   Astro.site
 );
 ---
