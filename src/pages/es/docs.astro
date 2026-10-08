@@ -2,8 +2,9 @@
 import Docs from "../../components/Docs.astro";
 import Base from "../../layouts/Base.astro";
 import { lang, locale, ogLocale, t } from "../../i18n/es";
+import { docsJsonLd } from "../../i18n/schema";
 ---
 
-<Base t={t} locale={locale} langAttr={lang} ogLocale={ogLocale} title={t.docs.title + " — OficinaOS"} description={t.docs.subtitle}>
+<Base t={t} locale={locale} langAttr={lang} ogLocale={ogLocale} jsonLd={docsJsonLd(t, locale)} title={t.docs.title + " — OficinaOS"} description={t.docs.subtitle}>
   <Docs t={t} locale={locale} />
 </Base>

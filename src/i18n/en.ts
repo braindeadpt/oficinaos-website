@@ -46,6 +46,7 @@ export const t: Copy = {
     titleAccent: "Your repair shop, organised.",
     subtitle:
       "Check-in, quotes, stock and till in one program, installed on your shop's PC. Customers can follow their repair on their phone and your team always knows what's next.",
+    footerLabel: "Software for repair shops",
     ctaPrimary: "Download for Windows",
     ctaSecondary: "See how it works",
     downloadNote: "Free · Windows 10/11 · guided install",
@@ -1432,6 +1433,82 @@ export const t: Copy = {
       "What's changed in OficinaOS — new features, improvements and Pro modules. Updated with every release.",
     free: "Free",
     pro: "Pro",
+  },
+  seoPage: {
+    metaTitle: "Repair shop management software — free, no monthly fees",
+    metaDesc:
+      "Free management software for phone repair shops: check-ins, quotes approved on the customer's phone, stock, POS and backups. Runs on the shop's own PC.",
+    badge: "Open source · Made in Portugal",
+    title: "Management software for phone repair shops",
+    subtitle:
+      "The free app that replaces paper, spreadsheets and \"is it ready yet?\" phone calls — built for independent repair shops.",
+    ctaTitle: "Ready to try it?",
+    ctaText:
+      "Download, install on the shop PC and do your first check-in today. No account, no card, no monthly fees.",
+    ctaPrimary: "Download free",
+    ctaSecondary: "Read the install guide",
+    sections: [
+      {
+        heading: "What it does",
+        paragraphs: [
+          "OficinaOS covers the whole day of a repair shop — from the moment a customer walks in until they pick up the device:",
+        ],
+        list: [
+          "Repair check-in with brand, model, IMEI, condition and accessories left behind",
+          "Quotes with parts and labour — the customer approves or declines on their own phone",
+          "Public tracking page: the customer sees live status without calling the shop",
+          "Stock management with reorder alerts and per-part history",
+          "POS / till for accessories and payments (cash, card, MB Way)",
+          "Revenue, margins and average repair time on a daily dashboard",
+          "Automatic SMS to the customer when the repair is ready (via an Android phone in the shop)",
+          "Automatic daily database backups",
+        ],
+      },
+      {
+        heading: "Free, no asterisks",
+        paragraphs: [
+          "Most repair shop software charges monthly per seat or per technician. OficinaOS is open source (MIT licence): the full app — repairs, quotes, stock, POS, backups — is free forever, for one shop or ten workstations.",
+          "Optional Pro modules (cloud customer portal, WhatsApp bot, online storefront, market prices, multi-shop) are beta subscriptions for shops that need them. The core you use every day is never behind a paywall.",
+        ],
+        links: [
+          { label: "Source code on GitHub", href: "https://github.com/braindeadpt/OficinaOS" },
+          { label: "Pro modules", href: "/en/#pro" },
+        ],
+      },
+      {
+        heading: "Your customers' data stays in your shop",
+        paragraphs: [
+          "The app runs on the shop's PC and keeps everything in a local database. No telemetry, no mandatory account, and customer data — names, phones, repair history — never leaves the shop network unless you enable a Pro module.",
+          "For most shops this settles most of GDPR: no subprocessors, no international transfers, and if the internet goes down the shop keeps working.",
+        ],
+        links: [{ label: "Privacy policy", href: "/en/privacy" }],
+      },
+      {
+        heading: "Compared to what you use today",
+        paragraphs: [],
+        table: {
+          head: ["", "Paper and spreadsheets", "Subscription software", "OficinaOS"],
+          rows: [
+            ["Cost", "'Free' but expensive in lost time", "€20–60/month per seat", "Free (MIT)"],
+            ["Customer tracks the repair?", "No — they call the shop", "Sometimes, paid", "Yes, free public page"],
+            ["Where data lives", "In a drawer / a file", "In the vendor's cloud", "On your shop PC"],
+            ["Works without internet", "Yes", "Usually no", "Yes"],
+            ["In your language", "—", "Rarely", "UI and help in EN, PT, ES"],
+          ],
+        },
+      },
+      {
+        heading: "Up and running in an afternoon",
+        paragraphs: [
+          "On Windows 10/11 just run the installer: it sets everything up, creates the service and leaves a tray icon. The other devices in the shop — phones, tablets, the front-desk PC — just open the local address in a browser, nothing to install.",
+          "Alternatively, the portable package runs from a folder (even a USB stick) with no installation, and there's a Docker image for Linux and macOS.",
+        ],
+        links: [
+          { label: "Step-by-step install guide", href: "/en/docs" },
+          { label: "News and releases", href: "/en/updates" },
+        ],
+      },
+    ],
   },
   footer: {
     license: "MIT License",

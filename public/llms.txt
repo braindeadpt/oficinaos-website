@@ -15,6 +15,9 @@
 - [Full guide (PT)](https://oficinaos.app/docs/): install (Docker/portable), daily use, backups, remote access, Pro modules, pricing, FAQ
 - [Full guide (EN)](https://oficinaos.app/en/docs/): same guide in English
 - [Full guide (ES)](https://oficinaos.app/es/docs/): same guide in Spanish
+- [Software for repair shops (PT)](https://oficinaos.app/software-reparacao-telemoveis/): overview page — features, pricing model, privacy, install
+- [Software for repair shops (EN)](https://oficinaos.app/en/software-reparacao-telemoveis/)
+- [Software for repair shops (ES)](https://oficinaos.app/es/software-reparacao-telemoveis/)
 
 ## Pro module guides
 

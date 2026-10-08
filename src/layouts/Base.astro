@@ -16,6 +16,7 @@ interface Props {
   ogLocale: string;
   title?: string;
   description?: string;
+  jsonLd?: object[];
 }
 
 const { t, locale, langAttr, ogLocale } = Astro.props;
@@ -98,6 +99,14 @@ const ogImage = new URL(
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content={ogImage} />
     <meta name="generator" content={Astro.generator} />
+    {
+      Astro.props.jsonLd?.length ? (
+        <script
+          type="application/ld+json"
+          set:html={JSON.stringify({ "@context": "https://schema.org", "@graph": Astro.props.jsonLd })}
+        />
+      ) : null
+    }
     {
       // Cloudflare Web Analytics — cookieless, no fingerprinting, no
       // personal data (fits the privacy-first brand; no banner needed).

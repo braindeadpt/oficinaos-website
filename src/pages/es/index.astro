@@ -2,8 +2,9 @@
 import Landing from "../../components/Landing.astro";
 import Base from "../../layouts/Base.astro";
 import { lang, locale, ogLocale, t } from "../../i18n/es";
+import { landingJsonLd } from "../../i18n/schema";
 ---
 
-<Base t={t} locale={locale} langAttr={lang} ogLocale={ogLocale}>
+<Base t={t} locale={locale} langAttr={lang} ogLocale={ogLocale} jsonLd={landingJsonLd(t)}>
   <Landing t={t} locale={locale} />
 </Base>

@@ -1,0 +1,75 @@
+---
+import type { Copy } from "../i18n/pt";
+import type { Locale } from "../i18n/utils";
+import { localeUrl, SETUP_EXE_URL } from "../i18n/utils";
+import DocSections from "./DocSections.astro";
+import Footer from "./Footer.astro";
+import Icon from "./Icon.astro";
+import Nav from "./Nav.astro";
+
+interface Props {
+  t: Copy;
+  locale: Locale;
+}
+const { t, locale } = Astro.props;
+const p = t.seoPage;
+---
+
+<Nav t={t} locale={locale} />
+<main class="mx-auto max-w-3xl px-6 py-16">
+  <span
+    class="inline-flex items-center gap-2 rounded-full border border-primary-soft bg-primary-soft px-4 py-1.5 text-xs font-medium text-on-primary-soft"
+  >
+    <Icon name="shield" class="h-3.5 w-3.5" />
+    {p.badge}
+  </span>
+  <h1
+    class="mt-6 text-[clamp(1.75rem,5vw,2.5rem)] leading-[1.12] font-extrabold tracking-tight text-balance text-text"
+  >
+    {p.title}
+  </h1>
+  <p class="mt-5 text-lg text-text-muted">{p.subtitle}</p>
+
+  <div class="mt-8 flex flex-col items-stretch gap-3 sm:flex-row">
+    <a
+      href={SETUP_EXE_URL}
+      class="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-primary px-[18px] text-md font-semibold text-on-primary shadow-sm transition hover:bg-primary-hover"
+    >
+      <Icon name="download" class="h-4 w-4" />
+      {p.ctaPrimary}
+    </a>
+    <a
+      href={localeUrl(locale, "/docs")}
+      class="inline-flex h-12 items-center justify-center gap-2 rounded-md border border-border-strong bg-surface px-[18px] text-md font-semibold text-text transition hover:bg-surface-2"
+    >
+      {p.ctaSecondary}
+      <Icon name="arrow" class="h-4 w-4" />
+    </a>
+  </div>
+
+  <div class="mt-14">
+    <DocSections sections={p.sections} />
+  </div>
+
+  <div class="mt-16 rounded-lg border border-border bg-surface p-8 text-center">
+    <h2 class="text-xl font-bold text-text">{p.ctaTitle}</h2>
+    <p class="mx-auto mt-3 max-w-xl text-text-muted">{p.ctaText}</p>
+    <div class="mt-6 flex flex-col items-stretch justify-center gap-3 sm:flex-row">
+      <a
+        href={SETUP_EXE_URL}
+        class="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-primary px-[18px] text-md font-semibold text-on-primary shadow-sm transition hover:bg-primary-hover"
+      >
+        <Icon name="download" class="h-4 w-4" />
+        {p.ctaPrimary}
+      </a>
+      <a
+        href={localeUrl(locale, "/docs")}
+        class="inline-flex h-12 items-center justify-center gap-2 rounded-md border border-border-strong bg-surface px-[18px] text-md font-semibold text-text transition hover:bg-surface-2"
+      >
+        {p.ctaSecondary}
+        <Icon name="arrow" class="h-4 w-4" />
+      </a>
+    </div>
+  </div>
+</main>
+<Footer t={t} locale={locale} />

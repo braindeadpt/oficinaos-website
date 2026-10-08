@@ -1,0 +1,18 @@
+---
+import SeoPage from "../../components/SeoPage.astro";
+import Base from "../../layouts/Base.astro";
+import { lang, locale, ogLocale, t } from "../../i18n/en";
+import { landingJsonLd } from "../../i18n/schema";
+---
+
+<Base
+  t={t}
+  locale={locale}
+  langAttr={lang}
+  ogLocale={ogLocale}
+  title={t.seoPage.metaTitle}
+  description={t.seoPage.metaDesc}
+  jsonLd={landingJsonLd(t)}
+>
+  <SeoPage t={t} locale={locale} />
+</Base>

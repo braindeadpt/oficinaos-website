@@ -61,6 +61,7 @@ export const t = {
     titleAccent: "A sua loja de reparações, organizada.",
     subtitle:
       "Receção, orçamentos, stock e caixa num só programa, instalado no PC da loja. Os clientes podem acompanhar a reparação no telemóvel e a equipa sabe sempre o que há para fazer.",
+    footerLabel: "Programa para lojas de reparação",
     ctaPrimary: "Descarregar para Windows",
     ctaSecondary: "Ver como funciona",
     downloadNote: "Grátis · Windows 10/11 · instalação guiada",
@@ -1451,6 +1452,83 @@ export const t = {
       "O que mudou no OficinaOS — funcionalidades novas, melhorias e módulos Pro. Atualizado a cada lançamento.",
     free: "Grátis",
     pro: "Pro",
+  },
+  seoPage: {
+    metaTitle:
+      "Software para loja de reparação de telemóveis — grátis, sem mensalidades",
+    metaDesc:
+      "Programa de gestão para oficinas de reparação de telemóveis: check-ins, orçamentos, aprovação no telemóvel do cliente, stock, POS e backups. Grátis, em português, com os dados no PC da loja.",
+    badge: "Software livre · Feito em Portugal",
+    title: "Software de gestão para lojas de reparação de telemóveis",
+    subtitle:
+      "O programa gratuito que substitui o papel, o Excel e os telefonemas de «já está pronto?» — feito para oficinas independentes em Portugal.",
+    ctaTitle: "Pronto para experimentar?",
+    ctaText:
+      "Descarregue, instale no PC da loja e faça o primeiro check-in hoje. Sem conta, sem cartão, sem mensalidades.",
+    ctaPrimary: "Descarregar grátis",
+    ctaSecondary: "Ver o guia de instalação",
+    sections: [
+      {
+        heading: "O que o programa faz",
+        paragraphs: [
+          "O OficinaOS cobre o dia a dia completo de uma loja de reparações — do momento em que o cliente entra até ao levantamento do aparelho:",
+        ],
+        list: [
+          "Check-in da reparação com marca, modelo, IMEI, estado e acessórios que ficam",
+          "Orçamentos com peças e mão de obra — o cliente aprova ou recusa no próprio telemóvel",
+          "Página pública de acompanhamento: o cliente vê o estado em tempo real sem ligar",
+          "Gestão de stock com alertas de reposição e histórico de peças usadas",
+          "Caixa / POS para vender acessórios e registar pagamentos MB Way, numerário e cartão",
+          "Receitas, margens e tempo médio de reparação num painel diário",
+          "SMS automáticos ao cliente quando a reparação fica pronta (via telemóvel Android na loja)",
+          "Backups diários automáticos da base de dados",
+        ],
+      },
+      {
+        heading: "Grátis, sem asteriscos",
+        paragraphs: [
+          "A maioria dos programas para oficinas cobra mensalidades por posto ou por técnico. O OficinaOS é software livre (licença MIT): a aplicação completa — reparações, orçamentos, stock, POS, backups — é gratuita para sempre, para uma loja ou para dez postos.",
+          "Os módulos Pro opcionais (portal do cliente na cloud, bot de WhatsApp, loja online, preços de mercado, multi-loja) são subscrições em beta para quem precisar deles. O núcleo que usa todos os dias nunca fica atrás de um pagamento.",
+        ],
+        links: [
+          { label: "Código-fonte no GitHub", href: "https://github.com/braindeadpt/OficinaOS" },
+          { label: "Módulos Pro", href: "/#pro" },
+        ],
+      },
+      {
+        heading: "Os dados dos seus clientes ficam na sua loja",
+        paragraphs: [
+          "A aplicação corre no PC da loja e guarda tudo numa base de dados local. Não há telemetria, não há conta obrigatória, e os dados dos seus clientes — nomes, telefones, histórico de reparações — não saem da rede da loja a menos que ative um módulo Pro.",
+          "Para a maioria das lojas isto resolve o RGPD por si: não há subcontratantes, não há transferências internacionais, e se a internet falhar a loja continua a funcionar.",
+        ],
+        links: [{ label: "Política de privacidade", href: "/privacy" }],
+      },
+      {
+        heading: "Comparado com o que usa hoje",
+        paragraphs: [],
+        table: {
+          head: ["", "Papel e Excel", "Software com mensalidade", "OficinaOS"],
+          rows: [
+            ["Custo", "«Grátis», mas caro em tempo perdido", "20–60 €/mês por posto", "Grátis (MIT)"],
+            ["O cliente acompanha a reparação?", "Não — telefona à loja", "Às vezes, pago", "Sim, página pública grátis"],
+            ["Onde ficam os dados", "Na gaveta / num ficheiro", "Na cloud do fornecedor", "No PC da sua loja"],
+            ["Funciona sem internet", "Sim", "Normalmente não", "Sim"],
+            ["Em português", "—", "Raramente", "Interface e ajuda em PT-PT"],
+          ],
+        },
+      },
+      {
+        heading: "Pronto numa tarde",
+        paragraphs: [
+          "No Windows 10/11 basta correr o instalador: ele trata de tudo, cria o serviço e deixa um ícone na bandeja. Os outros dispositivos da loja — telemóveis, tablets, o PC da receção — abrem o endereço local no browser, sem instalar nada.",
+          "Em alternativa, o pacote portátil corre de uma pasta (pen USB incluída) sem instalar nada, e há imagem Docker para Linux e macOS.",
+        ],
+        links: [
+          { label: "Guia de instalação passo a passo", href: "/docs" },
+          { label: "Novidades e versões", href: "/updates" },
+        ],
+      },
+    ],
   },
   footer: {
     license: "Licença MIT",
