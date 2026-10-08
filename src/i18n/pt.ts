@@ -60,7 +60,7 @@ export const t = {
     title: "Menos telefonemas de «já está pronto?».",
     titleAccent: "A sua loja de reparações, organizada.",
     subtitle:
-      "Receção, orçamentos, stock e caixa num só programa, instalado no PC da loja. Os clientes podem acompanhar a reparação no telemóvel e a equipa sabe sempre o que há para fazer.",
+      "Programa grátis para lojas de reparação de telemóveis. Receção, orçamentos, stock e caixa num só programa, instalado no PC da loja. Os clientes podem acompanhar a reparação no telemóvel e a equipa sabe sempre o que há para fazer.",
     footerLabel: "Programa para lojas de reparação",
     ctaPrimary: "Descarregar para Windows",
     ctaSecondary: "Ver como funciona",

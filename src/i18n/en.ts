@@ -45,7 +45,7 @@ export const t: Copy = {
     title: "Fewer “is it ready yet?” calls.",
     titleAccent: "Your repair shop, organised.",
     subtitle:
-      "Check-in, quotes, stock and till in one program, installed on your shop's PC. Customers can follow their repair on their phone and your team always knows what's next.",
+      "Free software for phone repair shops. Check-in, quotes, stock and till in one program, installed on your shop's PC. Customers can follow their repair on their phone and your team always knows what's next.",
     footerLabel: "Software for repair shops",
     ctaPrimary: "Download for Windows",
     ctaSecondary: "See how it works",

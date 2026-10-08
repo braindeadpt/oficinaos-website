@@ -52,6 +52,16 @@ export function landingJsonLd(t: Copy): object[] {
       publisher: { "@id": `${SITE}/#org` },
       inLanguage: ["pt-PT", "en", "es"],
     },
+    {
+      "@type": "VideoObject",
+      name: `OficinaOS — ${t.screenshots.title}`,
+      description: t.screenshots.subtitle,
+      thumbnailUrl: `${SITE}/screenshots/dashboard.webp`,
+      contentUrl: `${SITE}/video/oficinaos-demo.mp4`,
+      uploadDate: "2026-10-08",
+      duration: "PT1M2S",
+      publisher: { "@id": `${SITE}/#org` },
+    },
   ];
 }
 

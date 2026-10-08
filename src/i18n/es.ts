@@ -45,7 +45,7 @@ export const t: Copy = {
     title: "Menos llamadas de «¿ya está listo?».",
     titleAccent: "Tu tienda de reparaciones, organizada.",
     subtitle:
-      "Recepción, presupuestos, stock y caja en un solo programa, instalado en el PC de la tienda. Tus clientes pueden seguir la reparación desde el móvil y tu equipo siempre sabe qué toca hacer.",
+      "Programa gratis para tiendas de reparación de móviles. Recepción, presupuestos, stock y caja en un solo programa, instalado en el PC de la tienda. Tus clientes pueden seguir la reparación desde el móvil y tu equipo siempre sabe qué toca hacer.",
     footerLabel: "Programa para talleres",
     ctaPrimary: "Descargar para Windows",
     ctaSecondary: "Ver cómo funciona",
