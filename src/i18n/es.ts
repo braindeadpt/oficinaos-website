@@ -49,7 +49,7 @@ export const t: Copy = {
     footerLabel: "Programa para talleres",
     ctaPrimary: "Descargar para Windows",
     ctaSecondary: "Ver cómo funciona",
-    downloadNote: "Gratis · Windows 10/11 · instalación guiada",
+    downloadNote: "Gratis · Windows 10/11 · instalación guiada — si SmartScreen avisa, es normal en programas nuevos: «Más información» → «Ejecutar de todos modos»",
     chips: ["Sin cuotas mensuales", "Funciona sin internet", "En PC, tablet y móvil"],
     techNote: "Para técnicos: código abierto (licencia MIT), Linux/macOS con Docker —",
     techLink: "ver instalación avanzada",

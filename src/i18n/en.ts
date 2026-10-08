@@ -49,7 +49,7 @@ export const t: Copy = {
     footerLabel: "Software for repair shops",
     ctaPrimary: "Download for Windows",
     ctaSecondary: "See how it works",
-    downloadNote: "Free · Windows 10/11 · guided install",
+    downloadNote: "Free · Windows 10/11 · guided install — if SmartScreen warns, that's normal for a new program: click «More info» → «Run anyway»",
     chips: ["No monthly fees", "Works without internet", "On PC, tablet and phone"],
     techNote: "For technicians: open source (MIT licence), Linux/macOS with Docker —",
     techLink: "see advanced install",

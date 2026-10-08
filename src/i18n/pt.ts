@@ -64,7 +64,7 @@ export const t = {
     footerLabel: "Programa para lojas de reparação",
     ctaPrimary: "Descarregar para Windows",
     ctaSecondary: "Ver como funciona",
-    downloadNote: "Grátis · Windows 10/11 · instalação guiada",
+    downloadNote: "Grátis · Windows 10/11 · instalação guiada — se o SmartScreen avisar, é normal: programa novo sem reputação. «Mais informações» → «Executar mesmo assim»",
     chips: ["Sem mensalidades", "Funciona sem internet", "No PC, tablet e telemóvel"],
     techNote: "Para técnicos: código aberto (licença MIT), Linux/macOS com Docker —",
     techLink: "ver instalação avançada",
