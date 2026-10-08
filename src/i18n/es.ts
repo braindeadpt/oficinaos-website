@@ -52,6 +52,7 @@ export const t: Copy = {
     chips: ["Sin cuotas mensuales", "Funciona sin internet", "En PC, tablet y móvil"],
     techNote: "Para técnicos: código abierto (licencia MIT), Linux/macOS con Docker —",
     techLink: "ver instalación avanzada",
+    videoLabel: "Ver la presentación en vídeo",
   },
   features: {
     title: "Todo lo que necesita un taller",
@@ -98,9 +99,9 @@ export const t: Copy = {
   },
   screenshots: {
     title: "Míralo en acción",
-    subtitle: "Capturas reales de la app funcionando en un taller.",
-    items: ["Panel de reparaciones", "Detalle del trabajo", "Página del cliente"],
-    comingSoon: "Captura próximamente",
+    subtitle:
+      "El flujo completo en un minuto: check-in, presupuesto y aprobación en el móvil.",
+    videoAria: "Vídeo de demostración de OficinaOS",
   },
   pro: {
     badge: "Beta — gratis para tiendas piloto",

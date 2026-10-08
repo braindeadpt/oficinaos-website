@@ -1,0 +1,62 @@
+---
+import type { Copy } from "../i18n/pt";
+
+interface Props {
+  t: Copy;
+}
+const { t } = Astro.props;
+
+// Manus intro video (PT narration) — facade: no YouTube requests until click,
+// then loads the privacy-enhanced nocookie embed.
+const VIDEO_ID = "y7WhY7DYLOk";
+---
+
+<section class="mx-auto max-w-3xl px-6 pb-20">
+  <div
+    class="yt-facade relative aspect-video overflow-hidden rounded-xl border border-border bg-surface-2 shadow-lg"
+    data-video={VIDEO_ID}
+  >
+    <button
+      type="button"
+      aria-label={t.hero.videoLabel}
+      class="group absolute inset-0 block h-full w-full cursor-pointer"
+    >
+      <img
+        src={`https://i.ytimg.com/vi/${VIDEO_ID}/maxresdefault.jpg`}
+        alt={t.hero.videoLabel}
+        loading="lazy"
+        class="h-full w-full object-cover"
+      />
+      <span
+        class="absolute inset-0 flex items-center justify-center bg-black/25 transition group-hover:bg-black/15"
+        aria-hidden="true"
+      >
+        <span
+          class="flex h-16 w-16 items-center justify-center rounded-full bg-primary/95 shadow-xl transition group-hover:scale-105"
+        >
+          <svg class="ml-1 h-7 w-7 text-on-primary" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M8 5.14v14l11-7z" />
+          </svg>
+        </span>
+      </span>
+    </button>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>(".yt-facade").forEach((wrap) => {
+    wrap.querySelector("button")?.addEventListener("click", () => {
+      const id = wrap.dataset.video;
+      if (!id) return;
+      const iframe = document.createElement("iframe");
+      iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
+      iframe.className = "absolute inset-0 h-full w-full";
+      iframe.allow =
+        "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+      iframe.allowFullscreen = true;
+      iframe.title =
+        wrap.querySelector("button")?.getAttribute("aria-label") ?? "YouTube video";
+      wrap.replaceChildren(iframe);
+    });
+  });
+</script>

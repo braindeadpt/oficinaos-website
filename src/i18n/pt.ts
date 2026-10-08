@@ -67,6 +67,7 @@ export const t = {
     chips: ["Sem mensalidades", "Funciona sem internet", "No PC, tablet e telemóvel"],
     techNote: "Para técnicos: código aberto (licença MIT), Linux/macOS com Docker —",
     techLink: "ver instalação avançada",
+    videoLabel: "Ver a apresentação em vídeo",
   },
   features: {
     title: "Tudo o que uma oficina precisa",
@@ -113,9 +114,9 @@ export const t = {
   },
   screenshots: {
     title: "Veja em ação",
-    subtitle: "Capturas de ecrã reais da app a correr numa oficina.",
-    items: ["Painel de reparações", "Detalhe da reparação", "Página do cliente"],
-    comingSoon: "Captura em breve",
+    subtitle:
+      "O fluxo completo num minuto: check-in, orçamento e aprovação no telemóvel.",
+    videoAria: "Vídeo de demonstração do OficinaOS",
   },
   pro: {
     badge: "Beta — grátis para lojas piloto",

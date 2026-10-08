@@ -52,6 +52,7 @@ export const t: Copy = {
     chips: ["No monthly fees", "Works without internet", "On PC, tablet and phone"],
     techNote: "For technicians: open source (MIT licence), Linux/macOS with Docker —",
     techLink: "see advanced install",
+    videoLabel: "Watch the video presentation",
   },
   features: {
     title: "Everything a repair shop needs",
@@ -98,9 +99,9 @@ export const t: Copy = {
   },
   screenshots: {
     title: "See it in action",
-    subtitle: "Real screenshots from the app running in a shop.",
-    items: ["Jobs board", "Job detail", "Customer tracking"],
-    comingSoon: "Screenshot coming soon",
+    subtitle:
+      "The full flow in one minute: check-in, quote and approval on the phone.",
+    videoAria: "OficinaOS demo video",
   },
   pro: {
     badge: "Beta — free for pilot shops",

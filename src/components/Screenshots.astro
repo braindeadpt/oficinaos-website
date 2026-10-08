@@ -5,33 +5,28 @@ interface Props {
   t: Copy;
 }
 const { t } = Astro.props;
-
-// Order must match t.screenshots.items captions.
-const SCREENSHOT_FILES = ["dashboard.webp", "job-detail.webp", "tracking.webp"];
 ---
 
-<section class="mx-auto max-w-6xl px-6 pb-24">
+<section class="mx-auto max-w-4xl px-6 pb-24">
   <div class="max-w-2xl">
     <h2 class="text-2xl font-extrabold tracking-tight text-text sm:text-3xl">
       {t.screenshots.title}
     </h2>
     <p class="mt-4 text-lg text-text-muted">{t.screenshots.subtitle}</p>
   </div>
-  <div class="mt-12 grid gap-6 md:grid-cols-3">
-    {
-      t.screenshots.items.map((name, i) => (
-        <figure class="overflow-hidden rounded-lg border border-border bg-surface">
-          <img
-            src={`${import.meta.env.BASE_URL}screenshots/${SCREENSHOT_FILES[i]}`}
-            alt={name}
-            loading="lazy"
-            class="oos-photo aspect-[21/10] w-full bg-surface-2 object-cover object-top"
-          />
-          <figcaption class="border-t border-border px-4 py-3 text-sm font-medium text-text">
-            {name}
-          </figcaption>
-        </figure>
-      ))
-    }
+  <div
+    class="mt-12 overflow-hidden rounded-xl border border-border bg-surface-2 shadow-lg"
+  >
+    <video
+      src={`${import.meta.env.BASE_URL}video/oficinaos-demo.mp4`}
+      poster={`${import.meta.env.BASE_URL}screenshots/dashboard.webp`}
+      class="aspect-[20/9] w-full"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      controls
+      aria-label={t.screenshots.videoAria}></video>
   </div>
 </section>

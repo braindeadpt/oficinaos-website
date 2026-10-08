@@ -10,6 +10,7 @@ import Nav from "./Nav.astro";
 import Privacy from "./Privacy.astro";
 import Pro from "./Pro.astro";
 import Screenshots from "./Screenshots.astro";
+import VideoEmbed from "./VideoEmbed.astro";
 
 interface Props {
   t: Copy;
@@ -21,6 +22,7 @@ const { t, locale } = Astro.props;
 <Nav t={t} locale={locale} />
 <main>
   <Hero t={t} />
+  <VideoEmbed t={t} />
   <Features t={t} />
   <Screenshots t={t} />
   <Diag t={t} />
