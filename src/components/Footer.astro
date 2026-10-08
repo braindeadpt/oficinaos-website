@@ -56,14 +56,26 @@ const UPSTREAM_URL = "https://github.com/cranknet/reparilo";
         <GithubMark class="h-4 w-4" />
         braindeadpt/OficinaOS
       </a>
-      <a
-        href="https://discord.gg/secdgJYZNn"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-xs text-text-muted transition hover:text-text"
-      >
-        {t.footer.community}: Discord
-      </a>
+      <p class="text-xs text-text-muted">
+        {t.footer.community}:{" "}
+        <a
+          href="https://discord.gg/secdgJYZNn"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="transition hover:text-text"
+        >
+          Discord
+        </a>{" "}
+        ·{" "}
+        <a
+          href="https://www.facebook.com/OficinaOS"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="transition hover:text-text"
+        >
+          Facebook
+        </a>
+      </p>
       <a
         href={localeUrl(locale, "/software-reparacao-telemoveis/")}
         class="text-xs text-text-muted transition hover:text-text"

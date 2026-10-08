@@ -13,6 +13,7 @@ const organization = {
     "https://github.com/braindeadpt/OficinaOS",
     "https://discord.gg/secdgJYZNn",
     "https://www.youtube.com/@OficinaOSapp",
+    "https://www.facebook.com/OficinaOS",
   ],
 };
 
