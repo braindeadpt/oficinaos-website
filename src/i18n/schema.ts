@@ -28,8 +28,8 @@ const website = {
 
 /** Homepage: SoftwareApplication + Organization + WebSite.
  *  Only facts the site/repo actually support — price 0 (MIT core),
- *  Windows installer + Docker on Linux/macOS, Android "em breve" is
- *  intentionally NOT claimed. */
+ *  Windows installer + Docker on Linux/macOS; no native Android app
+ *  is claimed (phones use the browser/PWA). */
 export function landingJsonLd(t: Copy): object[] {
   return [
     organization,
