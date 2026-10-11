@@ -89,8 +89,8 @@ export const t: Copy = {
         desc: "Available in European Portuguese, English, French and Spanish.",
       },
       {
-        title: "Android app — coming soon",
-        desc: "Works today on any phone or tablet browser as an installable PWA; the native Android app is on the way.",
+        title: "Works on your phone",
+        desc: "Open it in any phone or tablet browser on the shop network and add it to your home screen. Nothing to install.",
       },
       {
         title: "Backups",
