@@ -89,8 +89,8 @@ export const t: Copy = {
         desc: "Disponible en portugués europeo, inglés, francés y español.",
       },
       {
-        title: "App Android — próximamente",
-        desc: "Hoy funciona en el navegador de cualquier móvil o tablet como PWA instalable; la app Android nativa está en camino.",
+        title: "Funciona en el móvil",
+        desc: "Ábrelo en el navegador de cualquier móvil o tablet, en la red de la tienda, y añádelo a la pantalla de inicio. Sin instalar nada.",
       },
       {
         title: "Copias de seguridad",

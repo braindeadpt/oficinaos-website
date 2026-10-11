@@ -104,8 +104,8 @@ export const t = {
         desc: "Disponível em português europeu, inglês, francês e espanhol.",
       },
       {
-        title: "App Android — em breve",
-        desc: "Hoje corre no browser de qualquer telemóvel ou tablet como PWA instalável; a app Android nativa está a caminho.",
+        title: "Funciona no telemóvel",
+        desc: "Abra no browser de qualquer telemóvel ou tablet, na rede da loja, e adicione ao ecrã principal. Sem instalar nada.",
       },
       {
         title: "Cópias de segurança",
