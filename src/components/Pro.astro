@@ -10,12 +10,13 @@ interface Props {
 const { t } = Astro.props;
 const locale = (Astro.currentLocale ?? DEFAULT_LOCALE) as Locale;
 
-// Beta sign-up form. Set PUBLIC_BETA_FORM_ENDPOINT at build time (e.g. a
-// Formspree URL "https://formspree.io/f/xxxx", or any endpoint that accepts
-// a urlencoded POST) — in CI it comes from the repository variable of the
-// same name (see .github/workflows/deploy.yml). While unset, the form falls
-// back to opening an email to CONTACT_EMAIL with the fields filled in.
-const FORM_ENDPOINT = (import.meta.env.PUBLIC_BETA_FORM_ENDPOINT ?? "").trim();
+// Beta sign-up form posts to the cloud endpoint; PUBLIC_BETA_FORM_ENDPOINT
+// can override it at build time. If the endpoint were ever unset/empty the
+// form would fall back to opening an email to CONTACT_EMAIL.
+const FORM_ENDPOINT = (
+  import.meta.env.PUBLIC_BETA_FORM_ENDPOINT ??
+  "https://cloud.oficinaos.app/beta-signup"
+).trim();
 const MAILTO = `mailto:${CONTACT_EMAIL}`;
 
 const icons = [

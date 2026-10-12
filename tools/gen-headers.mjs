@@ -38,7 +38,7 @@ const csp = [
   "base-uri 'self'",
   "frame-ancestors 'self'",
   "object-src 'none'",
-  "form-action 'self' mailto:",
+  "form-action 'self' mailto: https://cloud.oficinaos.app",
   "img-src 'self' https://i.ytimg.com",
   "media-src 'self'",
   "style-src 'self'",
