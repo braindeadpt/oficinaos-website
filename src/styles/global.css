@@ -17,6 +17,21 @@
   --oos-logo-mark: #1d4ed8;
 }
 
+/* Cores do lockup SVG inline — substituem atributos style= para a CSP poder
+   servir style-src 'self' sem unsafe-inline. */
+.oos-logo-fill {
+  fill: var(--oos-logo-mark);
+}
+.oos-logo-stroke {
+  stroke: var(--oos-logo-mark);
+}
+.oos-logo-text {
+  fill: var(--oos-color-text);
+}
+.oos-logo-primary {
+  fill: var(--oos-color-primary);
+}
+
 html {
   scroll-behavior: smooth;
   background-color: var(--oos-color-bg);
