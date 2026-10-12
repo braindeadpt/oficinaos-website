@@ -14,5 +14,6 @@
     "@tailwindcss/vite": "^4.1.0",
     "astro": "^5.0.0",
     "tailwindcss": "^4.1.0"
-  }
+  },
+  "packageManager": "bun@1.4.2"
 }
