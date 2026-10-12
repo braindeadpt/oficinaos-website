@@ -108,7 +108,7 @@ export const t: Copy = {
     badge: "Beta — gratis para tiendas piloto",
     title: "Módulos Pro",
     subtitle:
-      "Funciones opcionales que necesitan «llegar a internet», a través de OficinaOS Cloud. Ya están disponibles en beta y, durante la beta, las tiendas piloto las usan gratis. El núcleo sigue siendo gratuito y MIT — para siempre.",
+      "El programa que descargas es y será siempre gratuito y open source (licencia MIT) — nunca será de pago. Los módulos Pro son add-ons opcionales que necesitan «llegar a internet», a través de OficinaOS Cloud. Están en beta: los beta testers tienen 90 días gratis de todos los módulos cuando el Pro arranque.",
     statusLabel: "Beta",
     modules: [
       { title: "Portal del cliente", desc: "Enlace público por reparación, con estado y respuesta a presupuestos.", href: "/docs/portal/" },
@@ -126,7 +126,7 @@ export const t: Copy = {
     signup: {
       title: "Quiero entrar en la beta Pro",
       subtitle:
-        "Déjanos los datos de tu tienda y te contactamos para activar los módulos. Sin compromiso.",
+        "Déjanos los datos de tu tienda y te contactamos para activar los módulos. Sin compromiso — los beta testers tienen 90 días gratis de todos los módulos Pro.",
       email: "Email",
       emailPlaceholder: "tu@tutaller.es",
       shop: "Nombre de la tienda",

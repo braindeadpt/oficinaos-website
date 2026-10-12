@@ -123,7 +123,7 @@ export const t = {
     badge: "Beta — grátis para lojas piloto",
     title: "Módulos Pro",
     subtitle:
-      "Funcionalidades opcionais que precisam de «chegar à internet», através da OficinaOS Cloud. Já estão disponíveis em beta e, durante o beta, as lojas piloto usam-nas gratuitamente. O núcleo continua gratuito e MIT — para sempre.",
+      "O programa que descarrega é e será sempre gratuito e open source (licença MIT) — nunca será pago. Os módulos Pro são add-ons opcionais que precisam de «chegar à internet», através da OficinaOS Cloud. Estão em beta: os beta testers têm 90 dias grátis de todos os módulos quando o Pro arrancar.",
     statusLabel: "Beta",
     modules: [
       { title: "Portal do cliente", desc: "Link público por reparação, com estado e resposta a orçamentos.", href: "/docs/portal/" },
@@ -141,7 +141,7 @@ export const t = {
     signup: {
       title: "Quero entrar no beta Pro",
       subtitle:
-        "Deixe o contacto da loja e falamos consigo para ativar os módulos. Sem compromisso.",
+        "Deixe o contacto da loja e falamos consigo para ativar os módulos. Sem compromisso — os beta testers têm 90 dias grátis de todos os módulos Pro.",
       email: "Email",
       emailPlaceholder: "voce@sualoja.pt",
       shop: "Nome da loja",

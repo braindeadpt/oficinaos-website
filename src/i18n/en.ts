@@ -108,7 +108,7 @@ export const t: Copy = {
     badge: "Beta — free for pilot shops",
     title: "Pro modules",
     subtitle:
-      "Optional features that need to “reach the internet”, through OficinaOS Cloud. They are already available in beta, and pilot shops use them for free during the beta. The core stays free and MIT-licensed — forever.",
+      "The program you download is and always will be free and open source (MIT license) — it will never be paid. Pro modules are optional add-ons that need to “reach the internet”, through OficinaOS Cloud. They're in beta: beta testers get 90 days free on every module when Pro launches.",
     statusLabel: "Beta",
     modules: [
       { title: "Customer portal", desc: "A public link per repair, with status and quote replies.", href: "/docs/portal/" },
@@ -126,7 +126,7 @@ export const t: Copy = {
     signup: {
       title: "Join the Pro beta",
       subtitle:
-        "Leave your shop's details and we'll get in touch to switch the modules on. No commitment.",
+        "Leave your shop's details and we'll get in touch to switch the modules on. No commitment — beta testers get 90 days free on all Pro modules.",
       email: "Email",
       emailPlaceholder: "you@yourshop.com",
       shop: "Shop name",
