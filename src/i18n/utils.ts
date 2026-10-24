@@ -49,7 +49,8 @@ export const CLOUD_URL = "https://cloud.oficinaos.app";
 export const CLOUD_PRIVACY_URL = `${CLOUD_URL}/privacy`;
 
 export const DIAG_REPO_URL = "https://github.com/braindeadpt/oficinaos-diag";
-export const DIAG_ZIP_URL = `${DIAG_REPO_URL}/releases/latest/download/oficinaos-diag-win-x64.zip`;
+/** Latest Diag release page (asset names are versioned, so no fixed download URL). */
+export const DIAG_ZIP_URL = `${DIAG_REPO_URL}/releases/latest`;
 export const DIAG_STORE_URL = "https://apps.microsoft.com/detail/9P2BM91SFKFM";
 
 /** Heading → URL-safe anchor id (strips accents and punctuation). */
