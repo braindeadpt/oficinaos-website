@@ -5,7 +5,9 @@
       "url": [
         "http://localhost/",
         "http://localhost/en/",
+        "http://localhost/docs/",
         "http://localhost/docs/diag/",
+        "http://localhost/es/docs/invoicing/",
         "http://localhost/download/",
         "http://localhost/diag/",
         "http://localhost/pro/",

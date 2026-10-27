@@ -1,7 +1,7 @@
 name: Lighthouse CI
 
-# Corre em cada PR para main: build, serve o dist/ e mede /, /en/, /docs/diag/ e /download/
-# (3 execuções cada, perfil mobile por omissão do Lighthouse). Falha se a mediana de
+# Corre em cada PR para main: build, serve o dist/ e mede as páginas de lighthouserc.json
+# (home, docs, download, produtos — 3 execuções cada, perfil mobile por omissão do Lighthouse). Falha se a mediana de
 # qualquer categoria ficar abaixo de 95. Não faz deploy.
 on:
   pull_request:
@@ -30,7 +30,7 @@ jobs:
         env:
           # Só para ler as estrelas do repositório no build (evita o rate-limit anónimo).
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Lighthouse — recolher (3 execuções × 4 páginas)
+      - name: Lighthouse — recolher (3 execuções por página)
         run: npx --yes @lhci/cli@0.15.1 collect
       - name: Métricas por execução (FCP / LCP / TBT / CLS)
         if: always()
