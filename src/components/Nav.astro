@@ -38,7 +38,9 @@ const activeProduct =
       ? "diag"
       : pagePath.startsWith("/pro")
         ? "pro"
-        : null;
+        : pagePath.startsWith("/trade")
+          ? "trade"
+          : null;
 
 const links = [
   { href: localeUrl(locale, "/docs/"), label: t.nav.docs, current: isDocs && !activeProduct },
