@@ -55,7 +55,7 @@ const linkCls =
               <a href={release.url} class="num font-mono font-semibold text-text underline decoration-border-strong underline-offset-4 hover:text-link">
                 {release.version}
               </a>
-              {date && <> · {d.published} {date}</>}
+              {date && ` · ${d.published} ${date}`}
             </>
           ) : (
             <a href={RELEASES_URL} class={linkCls}>{d.unknownVersion}</a>
@@ -85,10 +85,10 @@ const linkCls =
           >
             <Icon name="download" class="h-4 w-4" />
             {d.winButton}
-            <span class="font-normal">OficinaOS-Setup.exe{size && <span class="num"> · {size}</span>}</span>
+            {size && <span class="num font-normal">({size})</span>}
           </a>
         </div>
-        <p class="mt-3 text-sm text-text-muted">{d.winReq}</p>
+        <p class="mt-3 text-sm text-text-muted"><span class="font-mono text-[13px] text-text">OficinaOS-Setup.exe</span> · {d.winReq}</p>
 
         <div class="mt-8 border-t border-border pt-6">
           <h3 class="font-display text-md font-bold text-text">{d.checksumTitle}</h3>

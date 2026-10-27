@@ -48,7 +48,7 @@ const links = [
       release && (
         <p class="mt-3 text-sm text-text-muted">
           <span class="num font-mono text-text">{release.version}</span>
-          {date && <> · {c.published} {date}</>}
+          {date && ` · ${c.published} ${date}`}
         </p>
       )
     }

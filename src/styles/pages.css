@@ -135,7 +135,7 @@
     row-gap: 0;
   }
   .tour.is-live .tour-text {
-    min-height: 62vh;
+    min-height: 56vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -145,7 +145,7 @@
   .tour.is-live .tour-visual {
     grid-row: 1 / span 5;
     position: sticky;
-    top: max(6rem, calc(50vh - 13rem));
+    top: max(6rem, calc(50vh - 11rem));
     align-self: start;
     opacity: 0;
     visibility: hidden;
