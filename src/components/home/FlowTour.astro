@@ -1,0 +1,220 @@
+---
+// Tour do fluxo (o momento «uau» da home): 5 passos, cada um com o seu ecrã recriado em HTML.
+// - Sem JS e em móvel: os passos empilham, cada um com o ecrã por baixo (tudo visível).
+// - Desktop com JS: os ecrãs ficam numa janela sticky à direita e trocam (crossfade) conforme o
+//   passo que está a meio do ecrã (IntersectionObserver). CSS em pages.css §4.
+// Os ecrãs são ilustrativos (aria-hidden): o texto de cada passo diz o mesmo.
+import type { Copy } from "../../i18n/pt";
+import type { Locale } from "../../i18n/utils";
+import type { RepairStatus } from "../../lib/status";
+import Heading from "../ui/Heading.astro";
+import StatusChip from "../ui/StatusChip.astro";
+import UiFrame from "../ui/UiFrame.astro";
+
+interface Props {
+  t: Copy;
+  locale: Locale;
+}
+const { t, locale } = Astro.props;
+const tour = t.home.tour;
+const ui = tour.ui;
+const langTag = locale === "pt" ? "pt-PT" : locale === "es" ? "es-ES" : "en-IE";
+const money = new Intl.NumberFormat(langTag, { style: "currency", currency: "EUR" });
+const quoteTotal = ui.quote.lines.reduce((sum, [, v]) => sum + Number(v), 0);
+const imei = "356938108542176";
+const imeiFmt = `${imei.slice(0, 2)} ${imei.slice(2, 8)} ${imei.slice(8, 14)} ${imei.slice(14)}`;
+const timeline: RepairStatus[] = ["intake", "in-repair", "done"];
+const frameTitles = [ui.intake.title, "R-2614", ui.quote.title, "R-2614", ui.receipt.title];
+const check =
+  '<path d="m5 13 4 4L19 7"/>';
+---
+
+<section id="tour" aria-labelledby="tour-title" class="border-y border-border bg-surface">
+  <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24">
+    <Heading id="tour-title">
+      {tour.title}
+      <Fragment slot="lead">{tour.lead}</Fragment>
+    </Heading>
+
+    <div class="tour mt-12 lg:mt-4" data-tour>
+      {
+        tour.steps.map((step, i) => (
+          <div class="tour-step">
+            <div class="tour-text max-w-md">
+              <p class="flex items-center gap-3 text-sm font-semibold text-text-muted">
+                <span class="tour-num num grid h-8 w-8 place-items-center rounded-full bg-primary-soft text-sm font-bold text-on-primary-soft">
+                  {i + 1}
+                </span>
+                <span class="sr-only">{tour.stepLabel} {i + 1}:</span>
+              </p>
+              <h3 class="mt-3 text-[clamp(1.375rem,2.4vw,1.75rem)] leading-tight font-bold tracking-[-0.02em] text-balance text-text">
+                {step.title}
+              </h3>
+              <p class="mt-3 text-pretty text-lg text-text-muted">{step.text}</p>
+            </div>
+
+            <div class="tour-visual mt-6 lg:mt-0" aria-hidden="true">
+              <UiFrame title={frameTitles[i]} caption={step.title} class="mx-auto max-w-xl">
+                {i === 0 && (
+                  <div class="space-y-3 p-4 text-sm sm:p-5">
+                    {ui.intake.fields.map(([label, value], j) => (
+                      <div>
+                        <span class="block text-xs font-semibold text-text-muted">{label}</span>
+                        <span class:list={["mt-1 flex h-10 items-center rounded-md border bg-surface px-3 text-text", j === 3 ? "border-focus" : "border-border-strong"]}>
+                          {value}
+                        </span>
+                      </div>
+                    ))}
+                    <p class="flex items-center gap-2 rounded-md bg-primary-soft px-3 py-2 text-xs font-medium text-on-primary-soft">
+                      <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4" /><path d="M4 21a8 8 0 0 1 16 0" /></svg>
+                      {ui.intake.hint}
+                    </p>
+                  </div>
+                )}
+                {i === 1 && (
+                  <div class="space-y-4 p-4 text-sm sm:p-5">
+                    <div>
+                      <span class="block text-xs font-semibold text-text-muted">{ui.device.imeiLabel}</span>
+                      <span class="num mt-1 flex h-11 items-center rounded-md border border-border-strong bg-surface px-3 font-mono text-[15px] tracking-wide text-text">
+                        {imeiFmt}
+                      </span>
+                    </div>
+                    <div class="grid gap-4 sm:grid-cols-2">
+                      <div>
+                        <span class="block text-xs font-semibold text-text-muted">{ui.device.accessoriesLabel}</span>
+                        <span class="mt-1.5 flex flex-wrap gap-1.5">
+                          {ui.device.accessories.map((a) => (
+                            <span class="inline-flex h-7 items-center rounded-full border border-border-strong px-2.5 text-xs font-medium text-text">{a}</span>
+                          ))}
+                        </span>
+                      </div>
+                      <div>
+                        <span class="block text-xs font-semibold text-text-muted">{ui.device.conditionLabel}</span>
+                        <span class="mt-1.5 block text-text">{ui.device.condition}</span>
+                      </div>
+                    </div>
+                    <div class="flex items-end justify-between gap-3 border-t border-border pt-4">
+                      <svg class="h-10 w-36 text-text" viewBox="0 0 144 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 30c8-14 14-22 18-18s-6 20 0 18 10-16 16-14-2 14 4 13 8-9 14-9 4 8 10 7 10-5 16-6 12 2 18 1 14-3 20-4" /></svg>
+                      <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-on-success-soft">
+                        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" set:html={check} />
+                        {ui.device.signature}
+                      </span>
+                    </div>
+                  </div>
+                )}
+                {i === 2 && (
+                  <div class="p-4 text-sm sm:p-5">
+                    <table class="w-full border-collapse">
+                      <tbody>
+                        {ui.quote.lines.map(([label, value]) => (
+                          <tr class="border-b border-border">
+                            <td class="py-2.5 text-text">{label}</td>
+                            <td class="num py-2.5 text-right whitespace-nowrap text-text">{money.format(Number(value))}</td>
+                          </tr>
+                        ))}
+                        <tr>
+                          <td class="pt-3 font-semibold text-text">{ui.quote.total}</td>
+                          <td class="num pt-3 text-right font-display text-xl font-bold whitespace-nowrap text-text">{money.format(quoteTotal)}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div class="mt-5 flex items-start gap-3 rounded-lg border border-border bg-surface-2 p-3">
+                      <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-success-soft text-on-success-soft">
+                        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" set:html={check} />
+                      </span>
+                      <span>
+                        <span class="block font-semibold text-text">{ui.quote.approved}</span>
+                        <span class="num block text-xs text-text-muted">{ui.quote.when}</span>
+                      </span>
+                    </div>
+                  </div>
+                )}
+                {i === 3 && (
+                  <div class="space-y-5 p-4 text-sm sm:p-5">
+                    <ol class="space-y-3">
+                      {timeline.map((s, j) => (
+                        <li class="flex items-center justify-between gap-3">
+                          <StatusChip status={s} label={t.ui.status[s]} />
+                          <span class="h-px flex-1 border-t border-dashed border-border-strong" />
+                          <span class="num font-mono text-xs text-text-muted">{ui.repair.times[j]}</span>
+                        </li>
+                      ))}
+                    </ol>
+                    <div class="grid gap-3 border-t border-border pt-4 sm:grid-cols-2">
+                      <p>
+                        <span class="block text-xs font-semibold text-text-muted">{ui.repair.tech}</span>
+                        <span class="mt-1 flex items-center gap-2 text-text">
+                          <span class="grid h-6 w-6 place-items-center rounded-full bg-primary-soft text-xs font-bold text-on-primary-soft">R</span>
+                          {ui.repair.techName}
+                        </span>
+                      </p>
+                      <p>
+                        <span class="block text-xs font-semibold text-text-muted">{ui.repair.stockLabel}</span>
+                        <span class="num mt-1 block text-text">
+                          <span class="text-text-muted line-through">3</span> → <span class="font-semibold">2</span> {ui.repair.stockUnit}
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                )}
+                {i === 4 && (
+                  <div class="flex flex-col gap-4 p-4 text-sm sm:flex-row sm:p-5">
+                    <div class="min-w-0 flex-1 rounded-md border border-dashed border-border-strong bg-surface p-4 font-mono text-xs leading-relaxed text-text">
+                      <p class="text-center font-sans text-sm font-bold">{ui.receipt.title}</p>
+                      <p class="mt-3 flex justify-between gap-3">
+                        <span class="min-w-0">{ui.receipt.line}</span>
+                        <span class="num whitespace-nowrap">{money.format(quoteTotal)}</span>
+                      </p>
+                      <p class="mt-2 border-t border-dashed border-border-strong pt-2 text-text-muted">{ui.receipt.paid}</p>
+                      <div class="mt-3 flex items-center gap-3">
+                        <svg class="h-14 w-14 shrink-0 text-text" viewBox="0 0 21 21" fill="currentColor" shape-rendering="crispEdges"><path d="M0 0h7v7H0zM1 1v5h5V1zM2 2h3v3H2zM14 0h7v7h-7zM15 1v5h5V1zM16 2h3v3h-3zM0 14h7v7H0zM1 15v5h5v-5zM2 16h3v3H2zM8 0h2v2H8zM11 1h2v3h-2zM8 4h2v4H8zM9 9h3v2H9zM13 8h2v3h-2zM16 9h3v2h-3zM8 12h2v3H8zM11 13h3v2h-3zM15 12h2v2h-2zM18 13h3v2h-3zM8 16h3v2H8zM12 17h2v4h-2zM15 16h3v2h-3zM19 17h2v4h-2zM9 19h2v2H9zM16 19h2v2h-2zM0 8h2v2H0zM3 9h3v2H3z" /></svg>
+                        <span class="font-sans text-text-muted">{ui.receipt.warranty}</span>
+                      </div>
+                    </div>
+                    <div class="flex flex-col items-start justify-center gap-3 sm:w-44">
+                      <StatusChip status="delivered" label={t.ui.status.delivered} />
+                      <span data-product="pro" class="inline-flex items-center gap-2 rounded-md bg-product-soft px-2.5 py-1.5 text-xs font-semibold text-on-product-soft">
+                        <span class="h-2 w-2 rounded-[2px] bg-product" />
+                        {ui.receipt.invoice}
+                      </span>
+                    </div>
+                  </div>
+                )}
+              </UiFrame>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  // Tour em desktop: ecrãs sticky + passo ativo. Só a partir de 64rem e com IntersectionObserver;
+  // sem isto fica a versão empilhada (tudo visível).
+  (function () {
+    var tour = document.querySelector("[data-tour]");
+    if (!tour || !("IntersectionObserver" in window)) return;
+    var mq = matchMedia("(min-width: 64rem)"), io = null;
+    var texts = tour.querySelectorAll(".tour-text");
+    function on() {
+      tour.classList.add("is-live");
+      tour.setAttribute("data-active", "0");
+      io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (e.isIntersecting) tour.setAttribute("data-active", String([].indexOf.call(texts, e.target)));
+        });
+      }, { rootMargin: "-45% 0px -45% 0px" });
+      texts.forEach(function (el) { io.observe(el); });
+    }
+    function off() {
+      if (io) io.disconnect();
+      io = null;
+      tour.classList.remove("is-live");
+      tour.removeAttribute("data-active");
+    }
+    function sync() { mq.matches ? on() : off(); }
+    sync();
+    mq.addEventListener("change", function () { off(); sync(); });
+  })();
+</script>

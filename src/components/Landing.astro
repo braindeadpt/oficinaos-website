@@ -1,33 +1,37 @@
 ---
+// Home (fase 2): hero com UI viva → tour do fluxo (momento «uau») → vídeo (clicar para ver) →
+// ecossistema (bento) → Pro (#pro, até haver /pro) → dados → novidades → descarregar.
 import type { Copy } from "../i18n/pt";
 import type { Locale } from "../i18n/utils";
-import Diag from "./Diag.astro";
-import Features from "./Features.astro";
+import { getLatestRelease } from "../lib/release";
 import Footer from "./Footer.astro";
-import Hero from "./Hero.astro";
-import Install from "./Install.astro";
 import Nav from "./Nav.astro";
-import Privacy from "./Privacy.astro";
 import Pro from "./Pro.astro";
-import Screenshots from "./Screenshots.astro";
-import VideoEmbed from "./VideoEmbed.astro";
+import Changelog from "./home/Changelog.astro";
+import DemoVideo from "./home/DemoVideo.astro";
+import DownloadCta from "./home/DownloadCta.astro";
+import Ecosystem from "./home/Ecosystem.astro";
+import FlowTour from "./home/FlowTour.astro";
+import HomeHero from "./home/HomeHero.astro";
+import HomePrivacy from "./home/HomePrivacy.astro";
 
 interface Props {
   t: Copy;
   locale: Locale;
 }
 const { t, locale } = Astro.props;
+const release = await getLatestRelease();
 ---
 
 <Nav t={t} locale={locale} />
 <main id="main" tabindex="-1">
-  <Hero t={t} />
-  <VideoEmbed t={t} />
-  <Features t={t} />
-  <Screenshots t={t} />
-  <Diag t={t} />
+  <HomeHero t={t} locale={locale} release={release} />
+  <FlowTour t={t} locale={locale} />
+  <DemoVideo t={t} />
+  <Ecosystem t={t} locale={locale} />
   <Pro t={t} />
-  <Privacy t={t} />
-  <Install t={t} />
+  <HomePrivacy t={t} locale={locale} />
+  <Changelog t={t} locale={locale} />
+  <DownloadCta t={t} locale={locale} release={release} />
 </main>
 <Footer t={t} locale={locale} />

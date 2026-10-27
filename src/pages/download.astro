@@ -1,0 +1,17 @@
+---
+import DownloadPage from "../components/DownloadPage.astro";
+import Base from "../layouts/Base.astro";
+import { lang, locale, ogLocale, t } from "../i18n/pt";
+---
+
+<Base
+  t={t}
+  locale={locale}
+  langAttr={lang}
+  ogLocale={ogLocale}
+  title={t.download.metaTitle}
+  description={t.download.metaDesc}
+  preloadDisplayFont
+>
+  <DownloadPage t={t} locale={locale} />
+</Base>

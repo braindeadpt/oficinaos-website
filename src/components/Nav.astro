@@ -9,7 +9,6 @@ import Icon from "./Icon.astro";
 import Logo from "./Logo.astro";
 import {
   currentPagePath,
-  SETUP_EXE_URL,
   LOCALE_LABELS,
   LOCALES,
   localeUrl,
@@ -18,6 +17,7 @@ import {
 import type { Locale } from "../i18n/utils";
 import { products } from "../lib/products";
 import { getRepoStars, STARS_MIN_TO_SHOW } from "../lib/github";
+import { downloadAttrs } from "../lib/download";
 
 interface Props {
   t: Copy;
@@ -39,6 +39,7 @@ const links = [
   { href: localeUrl(locale, "/updates/"), label: t.nav.updates, current: isUpdates },
 ];
 
+const dl = downloadAttrs(locale);
 const stars = await getRepoStars();
 const showStars = stars !== null && stars >= STARS_MIN_TO_SHOW;
 const starsText = showStars
@@ -157,7 +158,7 @@ const chevron =
       </button>
 
       <a
-        href={SETUP_EXE_URL}
+        {...dl}
         class="inline-flex h-10 items-center gap-1.5 rounded-md bg-primary px-3.5 text-base font-semibold text-on-primary shadow-sm transition-colors hover:bg-primary-hover"
       >
         <Icon name="download" class="h-4 w-4" />
@@ -343,7 +344,7 @@ const chevron =
 
       <div class="shrink-0 border-t border-border p-4">
         <a
-          href={SETUP_EXE_URL}
+          {...dl}
           class="flex h-12 w-full items-center justify-center gap-2 rounded-md bg-primary text-md font-semibold text-on-primary shadow-sm transition-colors hover:bg-primary-hover"
         >
           <Icon name="download" class="h-4 w-4" />

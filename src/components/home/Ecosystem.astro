@@ -1,0 +1,89 @@
+---
+// Bento do ecossistema: OficinaOS (azul, grande) · Diag (ciano) · Pro (âmbar, com a Cloud como
+// motor) · Trade (lima). Cada célula mostra um pedaço de produto, não um ícone.
+// Diag e Pro têm vt (morph para /diag e /pro quando existirem, fase 3).
+import type { Copy } from "../../i18n/pt";
+import type { Locale } from "../../i18n/utils";
+import { localeUrl } from "../../i18n/utils";
+import { productHref } from "../../lib/products";
+import type { RepairStatus } from "../../lib/status";
+import Bento from "../ui/Bento.astro";
+import BentoCell from "../ui/BentoCell.astro";
+import Heading from "../ui/Heading.astro";
+import StatusChip from "../ui/StatusChip.astro";
+
+interface Props {
+  t: Copy;
+  locale: Locale;
+}
+const { t, locale } = Astro.props;
+const e = t.home.ecosystem;
+const names = t.nav.productItems;
+const chips: RepairStatus[] = ["intake", "waiting-for-parts", "in-repair", "done", "delivered"];
+const pct = new Intl.NumberFormat(locale === "pt" ? "pt-PT" : locale, { style: "percent" });
+---
+
+<section id="produtos" aria-labelledby="eco-title" class="relative isolate">
+  <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24">
+    <Heading id="eco-title">
+      {e.title}
+      <Fragment slot="lead">{e.lead}</Fragment>
+    </Heading>
+
+    <Bento class="reveal mt-12" label={e.listLabel}>
+      <BentoCell size="two-thirds" product="os" label={names.os.name} title={e.os.title} text={e.os.text} href={localeUrl(locale, "/docs/")}>
+        <div class="flex flex-wrap gap-2 pb-1" aria-hidden="true">
+          {chips.map((s) => <StatusChip status={s} label={t.ui.status[s]} />)}
+        </div>
+      </BentoCell>
+
+      <BentoCell size="third" product="diag" vt label={names.diag.name} title={e.diag.title} text={e.diag.text} href={productHref("diag", locale)}>
+        <div class="rounded-lg border border-border bg-surface-2 p-3" aria-hidden="true">
+          <p class="flex items-baseline justify-between gap-3 text-xs text-text-muted">
+            <span>{e.diag.battery}</span>
+            <span class="num font-display text-xl font-bold text-text">{pct.format(0.87)}</span>
+          </p>
+          <span class="mt-2 block h-2 overflow-hidden rounded-full bg-border">
+            <span class="block h-full w-[87%] rounded-full bg-product"></span>
+          </span>
+          <p class="num mt-2 font-mono text-xs text-text-muted">412 {e.diag.cycles} · 3 279 mAh</p>
+        </div>
+      </BentoCell>
+
+      <BentoCell size="half" product="pro" vt label={names.pro.name} title={e.pro.title} text={e.pro.text} href={productHref("pro", locale)}>
+        <div class="flex flex-col items-start gap-2" aria-hidden="true">
+          <p class="max-w-sm rounded-2xl rounded-bl-sm bg-product-soft px-3.5 py-2.5 text-sm text-on-product-soft">{e.pro.bubble}</p>
+          <span class="inline-flex items-center gap-1.5 text-xs font-medium text-text-muted">
+            <span class="h-2 w-2 rounded-[2px] bg-product"></span>
+            {e.pro.via}
+          </span>
+        </div>
+      </BentoCell>
+
+      <BentoCell
+        size="half"
+        product="trade"
+        label={names.trade.name}
+        title={e.trade.title}
+        text={e.trade.text}
+        href={productHref("trade", locale)}
+        external
+        externalHint={t.footer.externalHint}
+      >
+        <ul role="list" class="divide-y divide-border rounded-lg border border-border text-sm" aria-hidden="true">
+          {
+            e.trade.rows.map(([item, city]) => (
+              <li class="flex items-center justify-between gap-3 px-3 py-2">
+                <span class="min-w-0">
+                  <span class="block truncate font-medium text-text">{item}</span>
+                  <span class="block text-xs text-text-muted">{city}</span>
+                </span>
+                <span class="shrink-0 rounded-md bg-product-soft px-2 py-1 text-xs font-semibold text-on-product-soft">{e.trade.price}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </BentoCell>
+    </Bento>
+  </div>
+</section>

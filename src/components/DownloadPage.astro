@@ -1,0 +1,242 @@
+---
+// /download/ — a página para onde vão todos os botões «Descarregar».
+// - Versão, data, tamanho e SHA-256 lidos no build das GitHub Releases (fail-soft: sem dados,
+//   mostra o link para as Releases).
+// - Com ?start=windows (vindo de um botão, num PC Windows) inicia o Setup.exe desta versão e
+//   mostra o aviso «a transferência vai começar». Sem JS, nada começa sozinho: há o botão.
+// - Passos do SmartScreen recriados em HTML (nítido, traduzido, sem PNG).
+import type { Copy } from "../i18n/pt";
+import type { Locale } from "../i18n/utils";
+import {
+  DISCORD_URL,
+  localeUrl,
+  PORTABLE_ZIP_URL,
+  RELEASES_URL,
+  SETUP_EXE_URL,
+} from "../i18n/utils";
+import { formatDate, formatSize, getLatestRelease } from "../lib/release";
+import DockerSteps from "./DockerSteps.astro";
+import Footer from "./Footer.astro";
+import Icon from "./Icon.astro";
+import Nav from "./Nav.astro";
+
+interface Props {
+  t: Copy;
+  locale: Locale;
+}
+const { t, locale } = Astro.props;
+const d = t.download;
+const ss = d.smartscreen;
+const release = await getLatestRelease();
+const dateLocale = { pt: "pt-PT", en: "en-GB", es: "es-ES" }[locale];
+const exeUrl = release?.exeUrl ?? SETUP_EXE_URL;
+const size = release ? formatSize(release.exeSize, dateLocale) : null;
+const date = release ? formatDate(release.date, dateLocale) : null;
+const sha = release?.sha256 ?? null;
+const psCmd = "Get-FileHash .\\OficinaOS-Setup.exe -Algorithm SHA256";
+const linkCls =
+  "inline-flex items-center gap-1.5 font-medium text-link underline decoration-border-strong underline-offset-4 transition-colors hover:text-primary-hover";
+---
+
+<Nav t={t} locale={locale} />
+<main id="main" tabindex="-1">
+  <section class="relative isolate border-b border-border" aria-labelledby="dl-title">
+    <div class="bg-tech-grid tech-grid-fade pointer-events-none absolute inset-0 -z-10" aria-hidden="true"></div>
+    <div class="mx-auto max-w-6xl px-4 pt-10 pb-12 sm:px-6 sm:pt-16">
+      <h1 id="dl-title" class="text-[clamp(2.25rem,5vw,3.25rem)] leading-[1.05] font-extrabold tracking-[-0.03em] text-balance text-text">
+        {d.title}
+      </h1>
+      <p class="mt-4 max-w-2xl text-pretty text-lg text-text-muted">{d.lead}</p>
+      <p class="mt-4 text-sm text-text-muted">
+        {
+          release ? (
+            <>
+              {d.latest}:{" "}
+              <a href={release.url} class="num font-mono font-semibold text-text underline decoration-border-strong underline-offset-4 hover:text-link">
+                {release.version}
+              </a>
+              {date && ` · ${d.published} ${date}`}
+            </>
+          ) : (
+            <a href={RELEASES_URL} class={linkCls}>{d.unknownVersion}</a>
+          )
+        }
+      </p>
+      <p id="dl-status" role="status" class="mt-5 max-w-2xl rounded-md bg-success-soft px-4 py-3 text-sm font-medium text-on-success-soft" hidden>
+        {d.starting}
+      </p>
+      <aside id="mobile" class="os-mobile-only mt-5 max-w-2xl rounded-lg border border-border bg-surface p-4" aria-labelledby="dl-mobile-title">
+        <h2 id="dl-mobile-title" class="font-display text-md font-bold text-text">{d.mobileTitle}</h2>
+        <p class="mt-1 text-sm text-text-muted">{d.mobileText}</p>
+      </aside>
+    </div>
+  </section>
+
+  <section aria-labelledby="dl-win-title">
+    <div class="mx-auto grid max-w-6xl gap-6 px-4 py-12 sm:px-6 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
+      <div class="min-w-0 rounded-xl border border-border bg-surface p-5 shadow-sm sm:p-7">
+        <h2 id="dl-win-title" class="font-display text-xl font-bold text-text">{d.winTitle}</h2>
+        <p class="mt-2 text-text-muted">{d.winText}</p>
+        <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+          <a
+            id="dl-exe"
+            href={exeUrl}
+            class="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-primary px-5 text-md font-semibold text-on-primary shadow-sm transition-colors hover:bg-primary-hover"
+          >
+            <Icon name="download" class="h-4 w-4" />
+            {d.winButton}
+            {size && <span class="num font-normal">({size})</span>}
+          </a>
+        </div>
+        <p class="mt-3 text-sm text-text-muted"><span class="font-mono text-[13px] text-text">OficinaOS-Setup.exe</span> · {d.winReq}</p>
+
+        <div class="mt-8 border-t border-border pt-6">
+          <h3 class="font-display text-md font-bold text-text">{d.checksumTitle}</h3>
+          {
+            sha ? (
+              <>
+                <p class="mt-2 text-sm text-text-muted">{d.checksumText}</p>
+                <pre tabindex="0" role="region" aria-label="PowerShell" class="code-block scroll-region mt-4 rounded-md border border-border bg-surface-2 p-3 font-mono text-[13px] text-text"><code>{psCmd}</code></pre>
+                <div class="mt-3 flex items-stretch gap-2">
+                  <code class="num block min-w-0 flex-1 rounded-md border border-border bg-surface-2 px-3 py-2.5 font-mono text-[13px] leading-snug break-all text-text">{sha}</code>
+                  <button
+                    type="button"
+                    class="js-copy shrink-0 rounded-md border border-border-strong bg-surface px-3 text-sm font-semibold text-text transition-colors hover:bg-surface-2"
+                    data-copy={sha}
+                    data-done={d.copied}
+                    hidden
+                  >
+                    {d.copy}
+                  </button>
+                </div>
+              </>
+            ) : (
+              <p class="mt-2 text-sm text-text-muted">
+                {d.checksumMissing}{" "}
+                <a href={RELEASES_URL} class={linkCls}>GitHub Releases</a>
+              </p>
+            )
+          }
+        </div>
+      </div>
+
+      <div class="min-w-0 space-y-6">
+        <div id="docker" class="scroll-mt-24 rounded-xl border border-border bg-surface p-5 sm:p-6">
+          <h2 class="font-display text-lg font-bold text-text">{d.dockerTitle}</h2>
+          <p class="mt-2 mb-4 text-sm text-text-muted">{d.dockerText}</p>
+          <DockerSteps t={t} />
+        </div>
+        <div id="portable" class="scroll-mt-24 rounded-xl border border-border bg-surface p-5 sm:p-6">
+          <h2 class="font-display text-lg font-bold text-text">{d.portableTitle}</h2>
+          <p class="mt-2 text-sm text-text-muted">{d.portableText}</p>
+          <a href={PORTABLE_ZIP_URL} class:list={[linkCls, "mt-3 text-sm"]}>
+            <Icon name="download" class="h-4 w-4" />
+            {d.portableLink}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="dl-steps-title" class="border-y border-border bg-surface">
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
+      <h2 id="dl-steps-title" class="text-[clamp(1.5rem,2.6vw,1.75rem)] leading-tight font-bold tracking-[-0.02em] text-text">{d.stepsTitle}</h2>
+      <ol class="mt-8 space-y-10">
+        {
+          d.steps.map((s, i) => (
+            <li class="grid gap-4 sm:grid-cols-[2.5rem_minmax(0,1fr)]">
+              <span class="num grid h-9 w-9 place-items-center rounded-full bg-primary-soft font-bold text-on-primary-soft" aria-hidden="true">
+                {i + 1}
+              </span>
+              <div class="min-w-0">
+                <h3 class="font-display text-lg font-bold text-text">{s.title}</h3>
+                <p class="mt-1 max-w-3xl text-text-muted">{s.text}</p>
+                {i === 1 && (
+                  <figure class="mt-6">
+                    <div class="grid gap-4 md:grid-cols-2">
+                      {[0, 1].map((screen) => (
+                        <div class="min-w-0">
+                          <p class="mb-2 text-sm font-semibold text-text-muted">{screen === 0 ? ss.step1 : ss.step2}</p>
+                          <div class="ss-win flex min-h-[19rem] flex-col rounded-md p-5 shadow-lg sm:p-6" aria-hidden="true">
+                            <p class="text-[1.625rem] leading-tight font-light">{ss.heading}</p>
+                            <p class="ss-muted mt-4 text-sm leading-relaxed">{ss.body}</p>
+                            {screen === 0 ? (
+                              <p class="mt-3 text-sm">
+                                <span class="ss-target underline underline-offset-2">{ss.moreInfo}</span>
+                              </p>
+                            ) : (
+                              <dl class="ss-muted mt-4 grid grid-cols-[auto_minmax(0,1fr)] gap-x-3 gap-y-1 text-sm">
+                                <dt>{ss.appLabel}</dt>
+                                <dd class="break-all text-white">OficinaOS-Setup.exe</dd>
+                                <dt>{ss.publisherLabel}</dt>
+                                <dd class="text-white">{ss.publisher}</dd>
+                              </dl>
+                            )}
+                            <div class="mt-auto flex flex-wrap justify-end gap-2 pt-6 text-sm">
+                              {screen === 1 && <span class="ss-btn ss-target px-4 py-1.5">{ss.run}</span>}
+                              <span class:list={["px-4 py-1.5", screen === 1 ? "ss-btn" : "ss-btn-plain"]}>{ss.dontRun}</span>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    <figcaption class="mt-3 text-sm text-text-muted">{ss.caption}</figcaption>
+                  </figure>
+                )}
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section aria-labelledby="dl-help-title">
+    <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+      <h2 id="dl-help-title" class="font-display text-xl font-bold text-text">{d.helpTitle}</h2>
+      <ul role="list" class="mt-4 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-x-8">
+        <li><a href={localeUrl(locale, "/docs/")} class={linkCls}>{d.helpGuide}<Icon name="arrow" class="h-4 w-4" /></a></li>
+        <li>
+          <a href={DISCORD_URL} target="_blank" rel="noopener" class={linkCls}>
+            {d.helpDiscord}<Icon name="external" class="h-3.5 w-3.5" /><span class="sr-only">({t.footer.externalHint})</span>
+          </a>
+        </li>
+        <li>
+          <a href={release?.url ?? RELEASES_URL} target="_blank" rel="noopener" class={linkCls}>
+            {d.helpReleases}<Icon name="external" class="h-3.5 w-3.5" /><span class="sr-only">({t.footer.externalHint})</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+</main>
+<Footer t={t} locale={locale} />
+
+<script is:inline>
+  (function () {
+    // Vindo de um botão «Descarregar» num PC Windows: inicia o Setup.exe desta versão.
+    var q = new URLSearchParams(location.search);
+    if (q.get("start") === "windows") {
+      var exe = document.getElementById("dl-exe"), st = document.getElementById("dl-status");
+      q.delete("start");
+      history.replaceState(null, "", location.pathname + (q.toString() ? "?" + q : "") + location.hash);
+      if (exe && document.documentElement.getAttribute("data-os") === "win") {
+        if (st) st.hidden = false;
+        setTimeout(function () { location.href = exe.href; }, 600);
+      }
+    }
+    // Copiar o SHA-256 (o botão só aparece com JS e clipboard).
+    if (navigator.clipboard) {
+      document.querySelectorAll(".js-copy").forEach(function (b) {
+        b.hidden = false;
+        var label = b.textContent;
+        b.addEventListener("click", function () {
+          navigator.clipboard.writeText(b.getAttribute("data-copy")).then(function () {
+            b.textContent = b.getAttribute("data-done");
+            setTimeout(function () { b.textContent = label; }, 2000);
+          });
+        });
+      });
+    }
+  })();
+</script>
