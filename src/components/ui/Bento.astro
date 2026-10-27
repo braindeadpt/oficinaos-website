@@ -1,0 +1,18 @@
+---
+// Grelha bento de células desiguais (trends §4.5): 6 colunas em desktop, 2 em tablet, 1 em móvel.
+// Cada célula escolhe o tamanho e o produto: <Bento><BentoCell size="two-thirds" product="diag" …/></Bento>
+interface Props {
+  class?: string;
+  /** Rótulo da lista para leitores de ecrã (ex.: «Produtos OficinaOS»). */
+  label?: string;
+}
+const { class: cls, label } = Astro.props;
+---
+
+<ul
+  role="list"
+  aria-label={label}
+  class:list={["grid grid-cols-1 gap-3 sm:grid-cols-2 lg:auto-rows-[minmax(13rem,auto)] lg:grid-cols-6 lg:gap-4", cls]}
+>
+  <slot />
+</ul>

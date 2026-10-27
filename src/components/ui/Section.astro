@@ -1,0 +1,53 @@
+---
+// Secção-base do redesign: largura, ritmo vertical, fundo e acento de produto num só sítio.
+// <Section id="diag" product="diag" tone="grid" labelledby="diag-title"> … </Section>
+import type { ProductId } from "../../lib/products";
+
+interface Props {
+  id?: string;
+  /** narrow 48rem (texto) · default 72rem · wide 80rem (bento, UI) */
+  width?: "narrow" | "default" | "wide";
+  /** plain = fundo da página · raised = surface com bordas · grid = grelha técnica fina */
+  tone?: "plain" | "raised" | "grid";
+  pad?: "md" | "lg";
+  product?: ProductId;
+  labelledby?: string;
+  /** Revela o conteúdo ao entrar no ecrã (só com movimento permitido). */
+  reveal?: boolean;
+  class?: string;
+}
+const {
+  id,
+  width = "default",
+  tone = "plain",
+  pad = "lg",
+  product,
+  labelledby,
+  reveal = false,
+  class: cls,
+} = Astro.props;
+
+const widths = { narrow: "max-w-3xl", default: "max-w-6xl", wide: "max-w-7xl" };
+const pads = { md: "py-14 sm:py-16", lg: "py-16 sm:py-24" };
+const tones = {
+  plain: "",
+  raised: "border-y border-border bg-surface",
+  grid: "relative isolate",
+};
+---
+
+<section
+  id={id}
+  data-product={product}
+  aria-labelledby={labelledby}
+  class:list={[tones[tone], cls]}
+>
+  {
+    tone === "grid" && (
+      <div class="bg-tech-grid tech-grid-fade pointer-events-none absolute inset-0 -z-10" aria-hidden="true" />
+    )
+  }
+  <div class:list={["mx-auto px-4 sm:px-6", widths[width], pads[pad], reveal && "reveal"]}>
+    <slot />
+  </div>
+</section>

@@ -1,0 +1,74 @@
+---
+// Laboratório de componentes do redesign (fase 1). Só existe em `astro dev` ou com
+// OOS_LAB=1 no build — nunca vai para produção. Abre em /lab/.
+import Base from "../../layouts/Base.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+import Section from "../../components/ui/Section.astro";
+import Heading from "../../components/ui/Heading.astro";
+import UiFrame from "../../components/ui/UiFrame.astro";
+import Bento from "../../components/ui/Bento.astro";
+import BentoCell from "../../components/ui/BentoCell.astro";
+import StatusChip from "../../components/ui/StatusChip.astro";
+import type { RepairStatus } from "../../lib/status";
+import RepairList from "../../components/mocks/RepairList.astro";
+import { lang, locale, ogLocale, t } from "../../i18n/pt";
+import { products } from "../../lib/products";
+
+export function getStaticPaths() {
+  const on = import.meta.env.DEV || process.env.OOS_LAB === "1";
+  return on ? [{ params: { lab: "lab" } }] : [];
+}
+
+const ps = products(t, locale);
+const statuses = Object.keys(t.ui.status) as RepairStatus[];
+---
+
+<Base t={t} locale={locale} langAttr={lang} ogLocale={ogLocale} title="Lab · componentes — OficinaOS">
+  <Nav t={t} locale={locale} />
+  <main id="main" tabindex="-1">
+    <Section tone="grid" labelledby="lab-hero">
+      <div class="grid items-center gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
+        <Heading id="lab-hero" level={1} size="hero">
+          Cliente entra, IMEI lido, orçamento enviado.
+          <Fragment slot="lead">
+            Primitivas Section + Heading, grelha técnica, UiFrame e a lista de reparações em HTML.
+          </Fragment>
+        </Heading>
+        <UiFrame title={t.ui.repairList.title} caption={t.ui.frame.caption}>
+          <RepairList t={t} locale={locale} highlight={0} />
+        </UiFrame>
+      </div>
+    </Section>
+
+    <Section tone="raised" labelledby="lab-status" reveal>
+      <Heading id="lab-status" size="lg">Estados da reparação</Heading>
+      <ul class="mt-6 flex flex-wrap gap-2" role="list">
+        {statuses.map((s) => <li><StatusChip status={s} label={t.ui.status[s]} /></li>)}
+      </ul>
+    </Section>
+
+    <Section labelledby="lab-bento" width="default">
+      <Heading id="lab-bento" size="xl">
+        Um ecossistema, quatro ferramentas
+        <Fragment slot="lead">Bento com células desiguais e acento por produto.</Fragment>
+      </Heading>
+      <Bento class="mt-10" label={t.nav.productsMenuLabel}>
+        <BentoCell size="two-thirds" tall product="os" label="OficinaOS" title={ps[0].desc} href={ps[0].href} vt bleed>
+          <UiFrame title={t.ui.repairList.title} caption={t.ui.frame.caption} elevated={false} class="rounded-r-none rounded-b-none border-r-0 border-b-0">
+            <RepairList t={t} locale={locale} rows={3} />
+          </UiFrame>
+        </BentoCell>
+        <BentoCell size="third" product="diag" label="Diag" title={ps[1].desc} href={ps[1].href} vt />
+        <BentoCell size="third" product="pro" label="Pro" title={ps[2].desc} href={ps[2].href} vt />
+        <BentoCell size="full" product="trade" label="Trade" title={ps[3].desc} href={ps[3].href} external externalHint={t.footer.externalHint} vt />
+      </Bento>
+    </Section>
+
+    <Section width="narrow" labelledby="lab-num" reveal>
+      <Heading id="lab-num" size="md">Números tabulares</Heading>
+      <p class="num mt-4 font-mono text-sm text-text-muted">111,11 € · 999,99 € · v1.0.21 · 35 693810 854217 6</p>
+    </Section>
+  </main>
+  <Footer t={t} locale={locale} />
+</Base>

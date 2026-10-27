@@ -1,0 +1,66 @@
+---
+// Janela da app (cromado tipo Windows) para alojar UI do produto recriada em HTML.
+// Nítida a qualquer zoom, traduzível e indexável — nunca um PNG.
+// <UiFrame title="Reparações" product="os" caption={t.ui.frame.caption}><RepairList … /></UiFrame>
+import type { ProductId } from "../../lib/products";
+
+interface Props {
+  /** Texto da barra de título, a seguir ao nome da app. */
+  title?: string;
+  appName?: string;
+  product?: ProductId;
+  /** Descrição para leitores de ecrã (a UI é uma recriação com dados de exemplo). */
+  caption: string;
+  /** Classe de view transition (ex.: "vt-product-diag") para o morph entre páginas. */
+  vt?: string;
+  elevated?: boolean;
+  class?: string;
+}
+const {
+  title,
+  appName = "OficinaOS",
+  product = "os",
+  caption,
+  vt,
+  elevated = true,
+  class: cls,
+} = Astro.props;
+---
+
+<figure
+  data-product={product}
+  class:list={[
+    "ui-frame overflow-hidden rounded-xl border border-border bg-surface text-left",
+    elevated && "shadow-lg",
+    vt,
+    cls,
+  ]}
+>
+  <div
+    class="flex h-9 select-none items-center gap-2 border-b border-border bg-surface-2 pl-3 text-xs text-text-muted"
+    aria-hidden="true"
+  >
+    <span class="grid h-4 w-4 shrink-0 place-items-center rounded-[4px] bg-product">
+      <span class="h-2 w-2 rounded-full bg-surface"></span>
+    </span>
+    <span class="truncate">
+      <span class="font-semibold text-text">{appName}</span>
+      {title && <span> — {title}</span>}
+    </span>
+    <span class="ml-auto flex h-full text-text-subtle">
+      <span class="grid w-10 place-items-center">
+        <svg class="h-3 w-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 6h8" /></svg>
+      </span>
+      <span class="grid w-10 place-items-center">
+        <svg class="h-3 w-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1"><rect x="2.5" y="2.5" width="7" height="7" rx="1" /></svg>
+      </span>
+      <span class="grid w-10 place-items-center">
+        <svg class="h-3 w-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1"><path d="M2.5 2.5l7 7M9.5 2.5l-7 7" /></svg>
+      </span>
+    </span>
+  </div>
+  <div class="relative">
+    <slot />
+  </div>
+  <figcaption class="sr-only">{caption}</figcaption>
+</figure>

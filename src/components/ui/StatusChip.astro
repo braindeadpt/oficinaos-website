@@ -1,0 +1,59 @@
+---
+// Chip de estado da reparação (Parafuso §3.2): cor + ícone + texto, nunca só cor.
+import type { RepairStatus } from "../../lib/status";
+
+interface Props {
+  status: RepairStatus;
+  label: string;
+  class?: string;
+}
+const { status, label, class: cls } = Astro.props;
+
+// Classes completas (o Tailwind só gera o que encontra escrito por extenso).
+const tone: Record<RepairStatus, string> = {
+  intake: "bg-status-intake-bg text-status-intake-fg",
+  "waiting-for-parts": "bg-status-waiting-for-parts-bg text-status-waiting-for-parts-fg",
+  "in-repair": "bg-status-in-repair-bg text-status-in-repair-fg",
+  "on-hold": "bg-status-on-hold-bg text-status-on-hold-fg",
+  done: "bg-status-done-bg text-status-done-fg",
+  delivered: "bg-status-delivered-bg text-status-delivered-fg",
+  returned: "bg-status-returned-bg text-status-returned-fg",
+  cancelled: "bg-status-cancelled-bg text-status-cancelled-fg",
+};
+// Ícones Lucide (inbox, package, wrench, pause, circle-check, package-check, undo-2, circle-x).
+const icon: Record<RepairStatus, string> = {
+  intake:
+    '<path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>',
+  "waiting-for-parts":
+    '<path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/>',
+  "in-repair":
+    '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+  "on-hold": '<rect x="14" y="4" width="4" height="16" rx="1"/><rect x="6" y="4" width="4" height="16" rx="1"/>',
+  done: '<circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/>',
+  delivered:
+    '<path d="m16 16 2 2 4-4"/><path d="M21 10V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l2-1.14"/><path d="m7.5 4.27 9 5.15"/><path d="M3.29 7 12 12l8.71-5"/><path d="M12 22V12"/>',
+  returned: '<path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11"/>',
+  cancelled: '<circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/>',
+};
+---
+
+<span
+  class:list={[
+    "inline-flex h-6 items-center gap-1.5 whitespace-nowrap rounded-full pr-2.5 pl-2 text-xs font-semibold",
+    tone[status],
+    cls,
+  ]}
+>
+  <svg
+    class="h-3.5 w-3.5 shrink-0"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+    set:html={icon[status]}
+  />
+  {label}
+</span>
