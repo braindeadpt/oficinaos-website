@@ -1,7 +1,8 @@
 ---
 // Formulário do beta/piloto Pro (antes vivia na secção #pro da home; desde a fase 3 está em /pro).
 // POST nativo para a Cloud (PUBLIC_BETA_FORM_ENDPOINT pode substituí-lo no build); sem endpoint,
-// cai para mailto. A Cloud redireciona com ?beta=ok|invalid|rate e o script mostra o aviso.
+// cai para mailto. A Cloud redireciona para /<idioma>/pro/?beta=ok|invalid|rate#beta (o honeypot
+// também volta com ok) e o script mostra o aviso; «rate-limited»/«rate_limited» contam como rate.
 import type { Copy } from "../../i18n/pt";
 import type { Locale } from "../../i18n/utils";
 import { cloudLoginUrl, CONTACT_EMAIL, DEFAULT_LOCALE } from "../../i18n/utils";
@@ -125,6 +126,9 @@ const inputClass =
       result.classList.toggle("bg-danger-soft", status !== "ok");
       result.classList.toggle("text-on-danger-soft", status !== "ok");
       result.hidden = false;
+      // A Cloud volta direto a /<idioma>/pro/?beta=…#beta: garantir que o aviso fica à vista
+      // (o salto pela âncora nem sempre acontece antes de o aviso aparecer).
+      result.scrollIntoView({ block: "center" });
       const url = new URL(location.href);
       url.searchParams.delete("beta");
       history.replaceState(null, "", url);
