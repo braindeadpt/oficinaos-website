@@ -139,8 +139,20 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    opacity: 0.45;
-    transition: opacity var(--dur-2) var(--ease-out);
+  }
+  /* Passo ativo: número cheio (o texto dos outros passos mantém o contraste AA). */
+  .tour-num {
+    transition:
+      background-color var(--dur-2) var(--ease-out),
+      color var(--dur-2) var(--ease-out);
+  }
+  .tour.is-live[data-active="0"] .tour-step:nth-child(1) .tour-num,
+  .tour.is-live[data-active="1"] .tour-step:nth-child(2) .tour-num,
+  .tour.is-live[data-active="2"] .tour-step:nth-child(3) .tour-num,
+  .tour.is-live[data-active="3"] .tour-step:nth-child(4) .tour-num,
+  .tour.is-live[data-active="4"] .tour-step:nth-child(5) .tour-num {
+    background-color: var(--oos-color-primary);
+    color: var(--oos-color-on-primary);
   }
   .tour.is-live .tour-visual {
     grid-row: 1 / span 5;
@@ -155,11 +167,11 @@
       transform var(--dur-3) var(--ease-out),
       visibility 0s linear var(--dur-3);
   }
-  .tour.is-live[data-active="0"] .tour-step:nth-child(1) > *,
-  .tour.is-live[data-active="1"] .tour-step:nth-child(2) > *,
-  .tour.is-live[data-active="2"] .tour-step:nth-child(3) > *,
-  .tour.is-live[data-active="3"] .tour-step:nth-child(4) > *,
-  .tour.is-live[data-active="4"] .tour-step:nth-child(5) > * {
+  .tour.is-live[data-active="0"] .tour-step:nth-child(1) > .tour-visual,
+  .tour.is-live[data-active="1"] .tour-step:nth-child(2) > .tour-visual,
+  .tour.is-live[data-active="2"] .tour-step:nth-child(3) > .tour-visual,
+  .tour.is-live[data-active="3"] .tour-step:nth-child(4) > .tour-visual,
+  .tour.is-live[data-active="4"] .tour-step:nth-child(5) > .tour-visual {
     opacity: 1;
     visibility: visible;
     transform: none;
