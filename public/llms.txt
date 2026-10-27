@@ -30,6 +30,9 @@
 - [SMS channel (PT)](https://oficinaos.app/docs/sms/): SMS via a local Android gateway (sms-gate) — setup, bot commands, limits
 - [SMS channel (EN)](https://oficinaos.app/en/docs/sms/)
 - [SMS channel (ES)](https://oficinaos.app/es/docs/sms/)
+- [OficinaOS Trade (PT)](https://oficinaos.app/trade/): B2B marketplace between verified technicians, repair shops and resellers (devices, parts, lots); Portugal and Spain only; app at https://trade.oficinaos.app/
+- [OficinaOS Trade (EN)](https://oficinaos.app/en/trade/)
+- [OficinaOS Trade (ES)](https://oficinaos.app/es/trade/)
 - [OficinaOS Diag (PT)](https://oficinaos.app/docs/diag/): free Windows USB diagnostic tool — features, requirements, troubleshooting
 - [OficinaOS Diag (EN)](https://oficinaos.app/en/docs/diag/)
 - [OficinaOS Diag (ES)](https://oficinaos.app/es/docs/diag/)

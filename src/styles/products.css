@@ -1,8 +1,9 @@
 /*
- * Fase 3 — páginas de produto (/diag, /pro).
+ * Fases 3–4 — páginas de produto (/diag, /pro, /trade).
  *  1. Hero do Diag: scan a completar-se (o momento «uau» de /diag)
  *  2. <details> (FAQ e relatório de exemplo): marcador próprio
  *  3. Esquema da Cloud (/pro): setas na vertical em ecrãs estreitos
+ *  4. Hero do Trade: frase → filtros → anúncios
  * Regras de sempre: estado final visível por omissão (sem JS e com reduced motion), só
  * transform/opacity, sem style= inline.
  */
@@ -82,4 +83,35 @@
   .cloud-arrow {
     transform: rotate(90deg);
   }
+}
+
+/* ───────────── 4 · Trade: frase → filtros → anúncios ─────────────
+   Estado base = pesquisa resolvida (nota da IA, chips e anúncios visíveis). Com movimento
+   permitido, corre UMA vez: a nota da IA aparece, os chips entram um a um e depois os
+   anúncios sobem para o lugar. */
+@media (prefers-reduced-motion: no-preference) {
+  .trd-search .trd-ai {
+    animation: trd-in var(--dur-3) var(--ease-out) 0.5s both;
+  }
+  .trd-search .trd-chip {
+    animation: trd-chip var(--dur-2) var(--ease-out) both;
+  }
+  .trd-search .trd-row {
+    animation: trd-in var(--dur-3) var(--ease-out) both;
+  }
+  .trd-chip:nth-child(1) { animation-delay: 0.9s; }
+  .trd-chip:nth-child(2) { animation-delay: 1.05s; }
+  .trd-chip:nth-child(3) { animation-delay: 1.2s; }
+  .trd-chip:nth-child(4) { animation-delay: 1.35s; }
+  .trd-chip:nth-child(5) { animation-delay: 1.5s; }
+  .trd-chip:nth-child(6) { animation-delay: 1.65s; }
+  .trd-row:nth-child(1) { animation-delay: 2.1s; }
+  .trd-row:nth-child(2) { animation-delay: 2.3s; }
+  .trd-row:nth-child(3) { animation-delay: 2.5s; }
+}
+@keyframes trd-chip {
+  from { opacity: 0; transform: scale(0.85); }
+}
+@keyframes trd-in {
+  from { opacity: 0; transform: translateY(8px); }
 }

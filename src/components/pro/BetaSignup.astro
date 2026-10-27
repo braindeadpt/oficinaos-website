@@ -4,7 +4,7 @@
 // cai para mailto. A Cloud redireciona com ?beta=ok|invalid|rate e o script mostra o aviso.
 import type { Copy } from "../../i18n/pt";
 import type { Locale } from "../../i18n/utils";
-import { CLOUD_URL, CONTACT_EMAIL, DEFAULT_LOCALE } from "../../i18n/utils";
+import { cloudLoginUrl, CONTACT_EMAIL, DEFAULT_LOCALE } from "../../i18n/utils";
 
 interface Props {
   t: Copy;
@@ -94,7 +94,7 @@ const inputClass =
   <p class="mt-6 text-center text-xs text-text-muted">
     {t.pro.signup.cloudText}{" "}
     <a
-      href={CLOUD_URL}
+      href={cloudLoginUrl(locale)}
       target="_blank"
       rel="noopener noreferrer"
       class="text-link underline underline-offset-2 hover:text-primary-hover"
@@ -114,7 +114,9 @@ const inputClass =
       invalid: form.dataset.msgInvalid,
       rate: form.dataset.msgRate,
     };
-    const status = new URLSearchParams(location.search).get("beta");
+    // A Cloud devolve ok (também no honeypot), invalid ou rate; aceita variantes de «rate».
+    const raw = new URLSearchParams(location.search).get("beta");
+    const status = raw && /^rate[-_]?limit(ed)?$/.test(raw) ? "rate" : raw;
     const msg = status ? msgs[status] : undefined;
     if (status && msg) {
       result.textContent = msg;

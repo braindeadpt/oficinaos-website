@@ -49,6 +49,12 @@ export const CONTACT_EMAIL = "oficinaos.app@gmail.com";
 export const CLOUD_URL = "https://cloud.oficinaos.app";
 export const CLOUD_PRIVACY_URL = `${CLOUD_URL}/privacy`;
 
+/** Login da Cloud no idioma da página: a Cloud lê ?lang=en|es para localizar os links de
+ *  volta e do beta (oficinaos-cloud PR #17). PT fica sem parâmetro (é o padrão). */
+export function cloudLoginUrl(locale: Locale): string {
+  return locale === DEFAULT_LOCALE ? `${CLOUD_URL}/` : `${CLOUD_URL}/?lang=${locale}`;
+}
+
 export const DIAG_REPO_URL = "https://github.com/braindeadpt/oficinaos-diag";
 /** Latest Diag release page (asset names are versioned, so no fixed download URL). */
 export const DIAG_ZIP_URL = `${DIAG_REPO_URL}/releases/latest`;

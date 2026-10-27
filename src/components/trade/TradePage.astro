@@ -1,0 +1,224 @@
+---
+// /trade (fase 4): hero (pesquisa em linguagem natural → filtros → anúncios) → como funciona (com
+// um acordo real recriado) → o que se negoceia (taxonomia v2 do Trade) → confiança (só o que
+// existe no oficinaos-market e é visível ao membro) → ferramentas para volume (com o formulário
+// rápido + IA) → FAQ → entrar na rede. A app vive em trade.oficinaos.app; aqui só se apresenta.
+// Sem secção «ligação à OficinaOS»: o lado OficinaOS da integração ainda não existe na app.
+import type { Copy } from "../../i18n/pt";
+import type { Locale } from "../../i18n/utils";
+import { TRADE_APPLY_URL, TRADE_MARKET_URL, TRADE_SIGNIN_URL } from "../../lib/products";
+import Footer from "../Footer.astro";
+import Icon from "../Icon.astro";
+import Nav from "../Nav.astro";
+import Faq from "../ui/Faq.astro";
+import Heading from "../ui/Heading.astro";
+import Section from "../ui/Section.astro";
+import UiFrame from "../ui/UiFrame.astro";
+import TradeHero from "./TradeHero.astro";
+
+interface Props {
+  t: Copy;
+  locale: Locale;
+}
+const { t, locale } = Astro.props;
+const d = t.tradePage;
+const ag = d.how.frame;
+const as = d.tools.frame;
+// Acordo de exemplo: aceite, pago e enviado já feitos; a seguir, «Recebido».
+const DONE = 3;
+const check = '<path d="m5 13 4 4L19 7"/>';
+---
+
+<Nav t={t} locale={locale} />
+<main id="main" tabindex="-1" data-product="trade">
+  <TradeHero t={t} />
+
+  <Section id="how" product="trade" labelledby="how-title" class="scroll-mt-16">
+    <div class="grid gap-12 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] lg:items-center">
+      <div class="min-w-0">
+        <Heading id="how-title">
+          {d.how.title}
+          <Fragment slot="lead">{d.how.lead}</Fragment>
+        </Heading>
+        <ol role="list" class="mt-8 space-y-6">
+          {
+            d.how.steps.map((s, i) => (
+              <li class="grid grid-cols-[2rem_minmax(0,1fr)] gap-4">
+                <span class="num grid h-8 w-8 place-items-center rounded-full bg-product-soft text-sm font-bold text-on-product-soft" aria-hidden="true">
+                  {i + 1}
+                </span>
+                <div>
+                  <h3 class="font-display text-lg font-bold text-text">{s.title}</h3>
+                  <p class="mt-1 text-base text-text-muted">{s.text}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+      <div class="reveal min-w-0">
+        <UiFrame appName="OficinaOS Trade" title={ag.title} product="trade" caption={ag.caption} class="mx-auto max-w-lg">
+          <div class="p-4 text-sm sm:p-5" aria-hidden="true">
+            <p class="font-semibold text-text">{ag.deal}</p>
+            <p class="mt-0.5 text-xs text-text-muted">{ag.sides}</p>
+            <ol role="list" class="mt-4 grid gap-2 sm:grid-cols-5 sm:gap-1">
+              {
+                ag.steps.map((s, i) => (
+                  <li class="flex items-center gap-2 sm:flex-col sm:gap-1.5 sm:text-center">
+                    {i < DONE ? (
+                      <span class="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-product text-on-product">
+                        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" set:html={check} />
+                      </span>
+                    ) : (
+                      <span
+                        class:list={[
+                          "h-6 w-6 shrink-0 rounded-full border-2 bg-surface",
+                          i === DONE ? "border-product" : "border-border-strong",
+                        ]}
+                      />
+                    )}
+                    <span class:list={["text-xs", i <= DONE ? "font-semibold text-text" : "text-text-muted"]}>{s}</span>
+                  </li>
+                ))
+              }
+            </ol>
+            <div class="mt-5 rounded-lg border border-product bg-product-soft p-3.5 text-on-product-soft">
+              <p class="text-xs font-semibold">{ag.yourTurn}</p>
+              <span class="mt-2 inline-flex h-8 items-center rounded-md bg-product px-3 text-xs font-semibold text-on-product">{ag.action}</span>
+            </div>
+            <p class="mt-3 text-xs text-text-muted">{ag.explainer}</p>
+          </div>
+        </UiFrame>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="catalog" tone="raised" product="trade" labelledby="catalog-title">
+    <Heading id="catalog-title">
+      {d.catalog.title}
+      <Fragment slot="lead">{d.catalog.lead}</Fragment>
+    </Heading>
+    <div class="reveal mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        d.catalog.groups.map((g) => (
+          <div class="min-w-0">
+            <h3 class="font-display text-lg font-bold text-text">{g.title}</h3>
+            <ul role="list" class="mt-3 flex flex-wrap gap-2">
+              {g.items.map((it) => (
+                <li class="rounded-md border border-border bg-bg px-2.5 py-1 text-sm text-text">{it}</li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+    <p class="mt-10 max-w-3xl text-pretty text-base text-text-muted">{d.catalog.volume}</p>
+  </Section>
+
+  <Section id="trust" product="trade" labelledby="trust-title">
+    <Heading id="trust-title">
+      {d.trust.title}
+      <Fragment slot="lead">{d.trust.lead}</Fragment>
+    </Heading>
+    <ul role="list" class="reveal mt-12 grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        d.trust.items.map((c) => (
+          <li class="border-t-2 border-product pt-4">
+            <h3 class="font-display text-lg font-bold tracking-[-0.01em] text-text">{c.title}</h3>
+            <p class="mt-2 text-pretty text-base text-text-muted">{c.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="mt-10 flex max-w-3xl items-start gap-3 rounded-xl border border-border bg-surface p-4 text-sm text-text-muted sm:p-5">
+      <Icon name="shield" class="mt-0.5 h-5 w-5 shrink-0 text-product" />
+      <span>{d.trust.note}</span>
+    </p>
+  </Section>
+
+  <Section id="tools" tone="raised" width="wide" product="trade" labelledby="tools-title">
+    <div class="grid gap-12 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-center">
+      <div class="min-w-0">
+        <Heading id="tools-title">
+          {d.tools.title}
+          <Fragment slot="lead">{d.tools.lead}</Fragment>
+        </Heading>
+        <ul role="list" class="mt-10 grid gap-x-8 gap-y-6 sm:grid-cols-2">
+          {
+            d.tools.items.map((it) => (
+              <li>
+                <h3 class="flex flex-wrap items-center gap-2 font-semibold text-text">
+                  {it.title}
+                  {it.beta && <span class="rounded-full bg-product-soft px-2 py-0.5 text-xs font-semibold text-on-product-soft">{d.tools.beta}</span>}
+                </h3>
+                <p class="mt-1 text-sm text-text-muted">{it.text}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div class="reveal min-w-0">
+        <UiFrame appName="OficinaOS Trade" title={as.title} product="trade" caption={as.caption} class="mx-auto max-w-md">
+          <div class="p-4 text-sm sm:p-5" aria-hidden="true">
+            <div class="flex items-center gap-3">
+              <span class="grid h-16 w-16 shrink-0 place-items-center rounded-md border border-border bg-surface-2 text-text-subtle">
+                <Icon name="smartphone" class="h-6 w-6" />
+              </span>
+              <span class="min-w-0">
+                <span class="block text-xs text-text-muted">{as.photo}</span>
+                <span class="mt-1.5 inline-flex h-8 items-center rounded-md border border-product bg-product-soft px-3 text-xs font-semibold text-on-product-soft">{as.assist}</span>
+              </span>
+            </div>
+            <dl class="mt-4 divide-y divide-border rounded-lg border border-border">
+              {
+                as.fields.map(([k, v]) => (
+                  <div class="flex items-center justify-between gap-3 px-3 py-2">
+                    <dt class="text-xs text-text-muted">{k}</dt>
+                    <dd class="flex min-w-0 items-center gap-2">
+                      <span class="truncate font-medium text-text">{v}</span>
+                      <span class="shrink-0 rounded bg-product-soft px-1.5 py-0.5 text-[0.6875rem] font-bold text-on-product-soft">{as.aiTag}</span>
+                    </dd>
+                  </div>
+                ))
+              }
+            </dl>
+            <p class="mt-3 text-xs text-text-muted">{as.done}</p>
+            <span class="mt-3 flex h-10 items-center justify-center rounded-md bg-product text-sm font-semibold text-on-product">{as.publish}</span>
+          </div>
+        </UiFrame>
+      </div>
+    </div>
+  </Section>
+
+  <Faq title={d.faq.title} items={d.faq.items} product="trade" />
+
+  <Section id="join" tone="grid" product="trade" labelledby="join-title" class="border-t border-border">
+    <div class="mx-auto max-w-2xl text-center">
+      <Heading id="join-title" align="center">
+        {d.cta.title}
+        <Fragment slot="lead">{d.cta.lead}</Fragment>
+      </Heading>
+      <div class="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center sm:gap-5">
+        <a
+          href={TRADE_APPLY_URL}
+          class="inline-flex h-12 items-center justify-center gap-2 whitespace-nowrap rounded-md bg-product px-5 text-md font-semibold text-on-product shadow-sm transition-colors hover:bg-product-hover"
+        >
+          {d.cta.primary}
+          <Icon name="arrow" class="h-4 w-4" />
+        </a>
+        <a
+          href={TRADE_MARKET_URL}
+          class="inline-flex h-12 items-center justify-center gap-2 whitespace-nowrap rounded-md border border-border-strong bg-surface px-5 text-md font-semibold text-text transition-colors hover:border-product"
+        >
+          <Icon name="search" class="h-4 w-4" />
+          {d.cta.secondary}
+        </a>
+      </div>
+      <p class="mt-5 text-sm text-text-muted">
+        {d.cta.member}
+        <a href={TRADE_SIGNIN_URL} class="font-semibold text-link underline underline-offset-2 hover:text-primary-hover">{d.cta.signin}</a>
+      </p>
+    </div>
+  </Section>
+</main>
+<Footer t={t} locale={locale} />
