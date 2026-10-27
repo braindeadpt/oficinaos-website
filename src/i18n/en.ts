@@ -316,7 +316,7 @@ export const t: Copy = {
   docs: {
     title: "Full guide",
     subtitle:
-      "Install, daily use, backups and troubleshooting — step by step, no technical background needed.",
+      "For technicians, repair shops and resellers: install, daily use, backups and troubleshooting — step by step, no technical background needed.",
     toc: "In this guide",
     backToGuide: "Full guide",
     ui: {
@@ -605,7 +605,7 @@ export const t: Copy = {
         heading: "Pricing",
         paragraphs: [
           "The full app is free and open source (MIT) — no limits, no accounts, no trial period. Forever.",
-          "Pro modules are in beta: during this period, pilot members use them for free while we measure the real value they bring to the counter. When prices are announced they'll be simple monthly subscriptions — no lock-in, no hidden costs.",
+          "Pro modules are in beta: during this period they're free while we measure the real value they bring to the counter. When prices are announced they'll be simple monthly subscriptions — no lock-in, no hidden costs.",
           "* WhatsApp note: replying to customers within the 24-hour window is free. Proactive notifications («it's ready») outside that window need Meta-approved templates, which carry small per-message fees — Meta's cost, not ours.",
         ],
         table: {
@@ -643,7 +643,7 @@ export const t: Copy = {
         heading: "WhatsApp bot (Pro)",
         paragraphs: [
           "The customer texts the shop's WhatsApp number and the bot replies with real job data — nobody picks up the phone. It works on the shop's own number (the WhatsApp Business app on the phone keeps working in parallel).",
-          "Honest notes: replies can take up to ~2 minutes (sync cycle); setup uses Meta's official WhatsApp Business Platform and we assist the first shop's onboarding.",
+          "Honest notes: replies can take up to ~2 minutes (sync cycle); setup uses Meta's official WhatsApp Business Platform and during the beta we help with the setup.",
         ],
         table: {
           head: ["Customer writes", "Bot replies"],
@@ -879,7 +879,7 @@ export const t: Copy = {
         {
           heading: "Setup in the app (per shop)",
           paragraphs: [
-            "After Meta onboarding (we assist the first shop), the app-side setup is 4 fields:",
+            "After Meta onboarding (during the beta we help with this step), the app-side setup is 4 fields:",
           ],
           list: [
             "Menu → Notifications → Setup → WhatsApp section",

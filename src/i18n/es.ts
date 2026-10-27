@@ -316,7 +316,7 @@ export const t: Copy = {
   docs: {
     title: "Guía completa",
     subtitle:
-      "Instalación, uso diario, copias de seguridad y resolución de problemas — paso a paso, sin necesidad de saber de tecnología.",
+      "Para técnicos, tiendas de reparación y revendedores: instalación, uso diario, copias de seguridad y resolución de problemas — paso a paso, sin necesidad de saber de tecnología.",
     toc: "En esta guía",
     backToGuide: "Guía completa",
     ui: {
@@ -607,7 +607,7 @@ export const t: Copy = {
         heading: "Precios",
         paragraphs: [
           "La app completa es gratuita y open source (MIT) — sin límites, sin cuentas, sin periodo de prueba. Para siempre.",
-          "Los módulos Pro están en beta: durante este periodo, quienes están en el piloto los usan gratis mientras medimos el valor real que aportan al mostrador. Cuando se anuncien los precios serán suscripciones mensuales sencillas — sin permanencia ni costes ocultos.",
+          "Los módulos Pro están en beta: durante este periodo son gratis mientras medimos el valor real que aportan al mostrador. Cuando se anuncien los precios serán suscripciones mensuales sencillas — sin permanencia ni costes ocultos.",
           "* Nota WhatsApp: responder a clientes dentro de la ventana de 24h es gratis. Para notificaciones proactivas («está lista») fuera de esa ventana, Meta cobra pequeños importes por mensaje plantilla — coste de Meta, no nuestro.",
         ],
         table: {
@@ -645,7 +645,7 @@ export const t: Copy = {
         heading: "Bot de WhatsApp (Pro)",
         paragraphs: [
           "El cliente escribe al número de WhatsApp de la tienda y el bot responde con datos reales de la ficha — sin que nadie coja el teléfono. Funciona con el propio número de la tienda (el WhatsApp Business del móvil sigue funcionando en paralelo).",
-          "Notas honestas: la respuesta puede tardar hasta ~2 minutos (ciclo de sincronización); el alta usa la WhatsApp Business Platform oficial de Meta y la primera tienda la acompañamos nosotros.",
+          "Notas honestas: la respuesta puede tardar hasta ~2 minutos (ciclo de sincronización); el alta usa la WhatsApp Business Platform oficial de Meta y durante la beta te ayudamos con la configuración.",
         ],
         table: {
           head: ["El cliente escribe", "El bot responde"],
@@ -883,7 +883,7 @@ export const t: Copy = {
         {
           heading: "Configuración en la app (por tienda)",
           paragraphs: [
-            "Tras el alta en Meta (acompañada por nosotros en la primera tienda), la configuración en la app son 4 campos:",
+            "Tras el alta en Meta (durante la beta te ayudamos en este paso), la configuración en la app son 4 campos:",
           ],
           list: [
             "Menú → Notificaciones → Setup → sección WhatsApp",
