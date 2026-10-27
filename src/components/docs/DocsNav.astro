@@ -1,0 +1,66 @@
+---
+// Navegação da documentação: guia completo (secções em 5 grupos, <details> nativos) + guias dos
+// módulos. A página atual leva aria-current="page". Usada na coluna lateral (desktop) e no menu
+// recolhível (móvel) — uma das duas está sempre com display:none, por isso não há duplicados
+// expostos a leitores de ecrã.
+import type { Copy } from "../../i18n/pt";
+import type { Locale } from "../../i18n/utils";
+import { localeUrl } from "../../i18n/utils";
+import { moduleLinks, overviewGroups } from "../../lib/docs";
+
+interface Props {
+  t: Copy;
+  locale: Locale;
+  /** "overview" para /docs/, ou o slug do módulo. */
+  current: string;
+}
+const { t, locale, current } = Astro.props;
+const ui = t.docs.ui;
+const isOverview = current === "overview";
+const groups = overviewGroups(t, locale);
+const mods = moduleLinks(t, locale);
+---
+
+<nav aria-label={ui.navLabel} class="docs-nav text-sm">
+  <a
+    href={localeUrl(locale, "/docs/")}
+    class="docs-link docs-link-top"
+    aria-current={isOverview ? "page" : undefined}
+  >
+    {t.docs.title}
+  </a>
+  <div class="mt-1 space-y-0.5">
+    {
+      groups.map((g) => (
+        <details class="docs-group" open={isOverview}>
+          <summary class="docs-group-sum">
+            <span>{g.label}</span>
+            <svg class="docs-chev h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </summary>
+          <ul class="docs-sub">
+            {g.links.map((l) => (
+              <li>
+                <a href={l.href} class="docs-link docs-link-sub">{l.label}</a>
+              </li>
+            ))}
+          </ul>
+        </details>
+      ))
+    }
+  </div>
+  <p class="docs-label">{ui.modules}</p>
+  <ul class="space-y-0.5">
+    {
+      mods.map((m) => (
+        <li data-product={m.product}>
+          <a href={m.href} class="docs-link" aria-current={current === m.slug ? "page" : undefined}>
+            <span class="docs-dot" aria-hidden="true" />
+            {m.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>

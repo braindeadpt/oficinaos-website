@@ -1,0 +1,64 @@
+---
+// Pesquisa da documentação: <dialog> nativo (foco preso, Esc, fundo inerte) com combobox +
+// listbox. O índice é um JSON estático por idioma (/docs/search-index.json, gerado no build por
+// src/lib/docs.ts) e só é descarregado quando a pesquisa abre. Atalhos: «/» e Ctrl/⌘+K.
+// Sem JS a pesquisa não abre — a side-nav e o índice continuam a funcionar.
+import type { Copy } from "../../i18n/pt";
+import type { Locale } from "../../i18n/utils";
+import { localeUrl } from "../../i18n/utils";
+
+interface Props {
+  t: Copy;
+  locale: Locale;
+}
+const { t, locale } = Astro.props;
+const ui = t.docs.ui;
+---
+
+<dialog
+  id="docs-search"
+  class="docs-search"
+  aria-labelledby="docs-search-title"
+  data-index={localeUrl(locale, "/docs/search-index.json")}
+  data-empty={ui.searchEmpty}
+  data-one={ui.searchOne}
+  data-many={ui.searchMany}
+  data-error={ui.searchError}
+  data-hint={ui.searchHint}
+>
+  <div class="docs-search-panel" role="search">
+    <h2 id="docs-search-title" class="sr-only">{ui.search}</h2>
+    <div class="flex items-center gap-3 border-b border-border px-4">
+      <svg class="h-5 w-5 shrink-0 text-text-subtle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" />
+      </svg>
+      <input
+        id="docs-q"
+        type="search"
+        role="combobox"
+        aria-autocomplete="list"
+        aria-expanded="false"
+        aria-controls="docs-results"
+        aria-label={ui.search}
+        aria-describedby="docs-status"
+        autocomplete="off"
+        autocapitalize="off"
+        spellcheck="false"
+        enterkeyhint="go"
+        placeholder={ui.searchPlaceholder}
+        class="min-h-14 w-full min-w-0 bg-transparent text-base text-text placeholder:text-text-subtle focus:outline-none"
+      />
+      <button
+        type="button"
+        data-close
+        class="nav-icon-btn shrink-0 rounded-md border border-border px-2 py-1 font-mono text-xs"
+        aria-label={ui.close}
+      >
+        Esc
+      </button>
+    </div>
+    <div id="docs-results" role="listbox" aria-label={ui.search} class="docs-results"></div>
+    <p id="docs-status" role="status" class="px-4 py-5 text-sm text-text-muted">{ui.searchHint}</p>
+    <p class="hidden border-t border-border px-4 py-2.5 text-xs text-text-muted sm:block">{ui.searchKeys}</p>
+  </div>
+</dialog>
