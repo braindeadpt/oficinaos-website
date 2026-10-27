@@ -1,0 +1,108 @@
+---
+// Hero de /trade (fase 4) — o momento «uau»: uma frase em linguagem natural vira filtros (chips)
+// e os anúncios compatíveis aparecem, com o preço reservado a membros verificados. É a pesquisa
+// real do Trade (F3b, beta) recriada em HTML com dados de exemplo.
+// Só CSS (transform/opacity, products.css §4), corre uma vez. O estado final é o estado base:
+// sem JS ou com prefers-reduced-motion vê-se a pesquisa resolvida.
+// A janela leva vt-product-trade: morph a partir da célula Trade do bento da home.
+import type { Copy } from "../../i18n/pt";
+import { TRADE_APPLY_URL, TRADE_MARKET_URL } from "../../lib/products";
+import Icon from "../Icon.astro";
+import UiFrame from "../ui/UiFrame.astro";
+
+interface Props {
+  t: Copy;
+}
+const { t } = Astro.props;
+const h = t.tradePage.hero;
+const x = '<path d="M18 6 6 18M6 6l12 12"/>';
+---
+
+<section data-product="trade" class="relative isolate overflow-x-clip" aria-labelledby="trade-hero-title">
+  <div class="bg-tech-grid tech-grid-fade pointer-events-none absolute inset-0 -z-10" aria-hidden="true"></div>
+  <div class="mx-auto grid max-w-7xl items-center gap-12 px-4 pt-10 pb-16 sm:px-6 sm:pt-16 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-14 lg:pt-20 lg:pb-24">
+    <div class="min-w-0">
+      <p class="flex flex-wrap items-center gap-3 text-sm font-semibold text-product">
+        <span class="inline-flex items-center gap-2">
+          <span class="h-2.5 w-2.5 rounded-[3px] bg-product" aria-hidden="true"></span>
+          {h.label}
+        </span>
+        <span class="rounded-full bg-product-soft px-2.5 py-0.5 text-xs font-semibold text-on-product-soft">{h.badge}</span>
+      </p>
+      <h1
+        id="trade-hero-title"
+        class="mt-3 text-[clamp(2.25rem,5.2vw,3.5rem)] leading-[1.05] font-extrabold tracking-[-0.03em] text-balance text-text"
+      >
+        {h.title}
+      </h1>
+      <p class="mt-5 max-w-xl text-pretty text-lg text-text-muted sm:text-xl">{h.subtitle}</p>
+      <div class="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:gap-5">
+        <a
+          href={TRADE_APPLY_URL}
+          class="inline-flex h-12 items-center justify-center gap-2 whitespace-nowrap rounded-md bg-product px-5 text-md font-semibold text-on-product shadow-sm transition-colors hover:bg-product-hover"
+        >
+          {h.cta}
+          <Icon name="arrow" class="h-4 w-4" />
+        </a>
+        <a
+          href={TRADE_MARKET_URL}
+          class="inline-flex h-12 items-center justify-center gap-1.5 whitespace-nowrap rounded-md px-2 text-md font-semibold text-link underline decoration-border-strong underline-offset-4 transition-colors hover:text-primary-hover sm:justify-start"
+        >
+          {h.ctaSecondary}
+        </a>
+      </div>
+      <p class="mt-3 text-sm text-text-muted">{h.note}</p>
+    </div>
+
+    <div class="min-w-0 xl:-mr-16">
+      <UiFrame appName="OficinaOS Trade" title={h.frameTitle} product="trade" caption={h.frameCaption} vt="vt-product-trade">
+        <div class="trd-search p-4 text-sm sm:p-5" aria-hidden="true">
+          <div class="flex items-center gap-2 rounded-lg border border-border-strong bg-bg py-1.5 pr-1.5 pl-3">
+            <Icon name="search" class="h-4 w-4 shrink-0 text-text-subtle" />
+            <span class="min-w-0 flex-1 truncate py-1 text-text">{h.query}</span>
+            <span class="hidden h-8 shrink-0 items-center rounded-md bg-product px-3 text-xs font-semibold text-on-product sm:inline-flex">{h.searchButton}</span>
+          </div>
+
+          <p class="trd-ai mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-text-muted">
+            <span class="rounded-full bg-product-soft px-2 py-0.5 font-semibold text-on-product-soft">{h.aiBeta}</span>
+            <span>{h.aiApplied}</span>
+            <span class="font-semibold text-link underline underline-offset-2">{h.aiUndo}</span>
+          </p>
+
+          <ul role="list" class="mt-3 flex flex-wrap gap-2">
+            {
+              h.chips.map((c) => (
+                <li class="trd-chip inline-flex h-7 items-center gap-1.5 rounded-full border border-product bg-product-soft pr-2 pl-3 text-xs font-semibold text-on-product-soft">
+                  {c}
+                  <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" set:html={x} />
+                </li>
+              ))
+            }
+          </ul>
+
+          <ul role="list" class="mt-4 divide-y divide-border rounded-lg border border-border">
+            {
+              h.results.map(([title, meta, region, qty]) => (
+                <li class="trd-row grid grid-cols-[2.5rem_minmax(0,1fr)] items-center gap-x-3 gap-y-2 px-3 py-3 sm:grid-cols-[2.5rem_minmax(0,1fr)_auto]">
+                  <span class="grid h-10 w-10 place-items-center rounded-md bg-surface-2 text-text-subtle">
+                    <Icon name="smartphone" class="h-5 w-5" />
+                  </span>
+                  <span class="min-w-0">
+                    <span class="block truncate font-semibold text-text">{title}</span>
+                    <span class="block truncate text-xs text-text-muted">
+                      {meta} · {region} · <span class="num">{qty}</span>
+                    </span>
+                  </span>
+                  <span class="col-start-2 inline-flex w-fit items-center gap-1.5 rounded-md bg-surface-2 px-2 py-1 text-xs font-semibold text-text-muted sm:col-start-3">
+                    <Icon name="lock" class="h-3.5 w-3.5" />
+                    {h.priceLock}
+                  </span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </UiFrame>
+    </div>
+  </div>
+</section>

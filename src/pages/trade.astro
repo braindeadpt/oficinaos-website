@@ -1,0 +1,10 @@
+---
+import TradePage from "../components/trade/TradePage.astro";
+import { tradeJsonLd } from "../i18n/schema";
+import Base from "../layouts/Base.astro";
+import { lang, locale, ogLocale, t } from "../i18n/pt";
+---
+
+<Base t={t} locale={locale} langAttr={lang} ogLocale={ogLocale} title={t.tradePage.metaTitle} description={t.tradePage.metaDesc} jsonLd={tradeJsonLd(t, "https://oficinaos.app/trade/")} preloadDisplayFont>
+  <TradePage t={t} locale={locale} />
+</Base>

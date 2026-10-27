@@ -2101,6 +2101,140 @@ export const t: Copy = {
       ],
     },
   },
+  tradePage: {
+    metaTitle: "OficinaOS Trade — piezas y equipos entre profesionales",
+    metaDesc:
+      "Red B2B donde técnicos, talleres y revendedores verificados compran y venden móviles, ordenadores, piezas y lotes. Sin particulares, sin mínimos y sin comisión por operación. Portugal y España.",
+    hero: {
+      label: "OficinaOS Trade",
+      badge: "Gratis en el lanzamiento",
+      title: "Piezas y equipos, de profesional a profesional.",
+      subtitle:
+        "La red B2B donde técnicos, talleres y revendedores verificados compran y venden móviles, ordenadores, piezas y lotes entre sí. Sin particulares, sin mínimo de compra y sin comisión por operación.",
+      cta: "Solicitar acceso — es gratis",
+      ctaSecondary: "Ver el mercado",
+      note: "Solo empresas verificadas · Portugal y España",
+      frameTitle: "Mercado",
+      frameCaption:
+        "Recreación ilustrativa de la búsqueda de OficinaOS Trade con datos de ejemplo: la frase «10 pantallas iPhone 13 en Madrid, originales» se convierte en filtros (pieza, pantalla, original nueva, iPhone 13, Madrid, stock de al menos 10) y aparecen tres anuncios compatibles, con el precio reservado a miembros verificados.",
+      query: "10 pantallas iPhone 13 en Madrid, originales",
+      searchButton: "Buscar",
+      aiApplied: "Filtros sugeridos por la IA a partir de su frase.",
+      aiBeta: "beta",
+      aiUndo: "Buscar solo el texto",
+      chips: ["Pieza", "Pantalla", "Original nueva", "iPhone 13", "Madrid", "stock ≥ 10"],
+      results: [
+        ["Pantalla iPhone 13 OLED", "Pieza · Original nueva · Nuevo", "Madrid", "×12"],
+        ["Pantallas iPhone 13 · lote", "Lote · Original nueva · Nuevo", "Madrid", "×25"],
+        ["Pantalla iPhone 13 con marco", "Pieza · Original nueva · Nuevo", "Madrid", "×10"],
+      ],
+      priceLock: "Precio visible para miembros verificados",
+    },
+    how: {
+      title: "Cómo funciona",
+      lead: "De la solicitud de acceso a la operación cerrada, en tres pasos.",
+      steps: [
+        {
+          title: "Solicite acceso con su empresa",
+          text: "En España, el NIF-IVA comprobado en VIES y el documento de registro de la empresa. En Portugal, el NIF y el código de la certidão permanente, o el alta de actividad si trabaja por cuenta propia. Algunas solicitudes se aprueban al momento; el resto las revisa una persona.",
+        },
+        {
+          title: "Publique lo que tiene, pida lo que le falta",
+          text: "Equipos completos, piezas, unidades «para piezas» y lotes. O cree una solicitud «Busco»: quien tiene stock compatible recibe el aviso y usted recibe las alertas.",
+        },
+        {
+          title: "Proponga y cierre con registro",
+          text: "Propuesta, contrapropuesta y acuerdo quedan registrados con los datos para la factura. El pago es directo entre las empresas y las valoraciones solo se abren tras la recepción.",
+        },
+      ],
+      frame: {
+        title: "Acuerdos",
+        caption:
+          "Recreación ilustrativa de un acuerdo en OficinaOS Trade con datos de ejemplo: 12 pantallas iPhone 13 OLED, con los pasos aceptado, pagado y enviado completados; el siguiente paso del comprador es confirmar la recepción.",
+        deal: "Pantalla iPhone 13 OLED · ×12",
+        sides: "Vendedor ⇄ Comprador",
+        steps: ["Aceptado", "Pagado", "Enviado", "Recibido", "Cerrado"],
+        yourTurn: "El siguiente paso es suyo",
+        action: "Confirmar recepción",
+        explainer: "El pago va directo a la contraparte — la plataforma no mueve dinero.",
+      },
+    },
+    catalog: {
+      title: "Equipos, piezas y lotes",
+      lead: "Cada anuncio dice qué es, en qué estado está y cuántas unidades hay, con los mismos términos para toda la red.",
+      groups: [
+        { title: "Equipos", items: ["Móvil", "Tablet", "Portátil", "Sobremesa", "Reloj", "Consola"] },
+        { title: "Piezas", items: ["Pantalla", "Batería", "Placa", "Cámara", "Tapa trasera", "Conector de carga", "Altavoz", "Chasis"] },
+        { title: "Calidad de la pieza", items: ["Original nueva", "Original recuperada", "Service pack", "Compatible premium", "Compatible"] },
+        { title: "Estado", items: ["Nuevo", "Como nuevo", "Buen estado", "Aceptable", "Para piezas"] },
+      ],
+      volume:
+        "Para volumen: lotes, tramos de precio por cantidad (1, 10+, 50+), cantidad mínima y plazo de envío — o recogida en mano. Sin mínimo de compra: se puede operar desde una unidad.",
+    },
+    trust: {
+      title: "Solo entran profesionales",
+      lead: "Lo que separa Trade de un grupo de WhatsApp o de una web de anuncios.",
+      items: [
+        { title: "Solo empresas verificadas", text: "Cada miembro es una empresa o un profesional dado de alta, comprobado por su número fiscal y por documento. Sin particulares." },
+        { title: "Precios solo para verificados", text: "Quien está fuera ve que hay stock, pero nunca el precio ni quién vende." },
+        { title: "Contactos fuera de los anuncios", text: "Teléfonos, emails e IBAN escritos en un anuncio quedan ocultos para quien aún no está verificado." },
+        { title: "Periodo de prueba", text: "Los miembros nuevos empiezan con un límite de propuestas abiertas y un tope por operación." },
+        { title: "Valoraciones tras recibir", text: "Solo se valora después de la recepción. Si algo sale mal, se abre una disputa y la moderación media — las valoraciones quedan bloqueadas hasta resolverla." },
+        { title: "Denuncias con consecuencias", text: "Fraude, equipo robado o información incorrecta: la denuncia va a moderación, y las denuncias repetidas de miembros verificados suspenden la cuenta hasta su revisión." },
+      ],
+      note: "El IMEI nunca aparece completo: solo se guarda como hash, con los 4 últimos dígitos. La cuenta se bloquea tras intentos de acceso fallidos, la contraseña se recupera con un enlace de un solo uso y puede exportar o eliminar sus datos (RGPD).",
+    },
+    tools: {
+      title: "Pensado para volumen",
+      lead: "Menos formularios, más stock publicado.",
+      beta: "beta",
+      items: [
+        { title: "Publicar en 30 s", text: "Foto, modelo, estado y precio. El resto sale de su último anuncio.", beta: false },
+        { title: "Rellenar con IA", text: "La IA sugiere los campos a partir de las fotos o de una frase. No se publica nada sin su confirmación.", beta: true },
+        { title: "Búsqueda en lenguaje natural", text: "Escriba como habla: la frase se convierte en filtros que puede quitar uno a uno.", beta: true },
+        { title: "Importar y editar en tabla", text: "CSV o XLSX para crear o actualizar anuncios en lote, y edición masiva de precios, cantidades y tramos.", beta: false },
+        { title: "Solicitudes «Busco» con alertas", text: "Diga qué busca y hasta qué precio. Quien tiene stock compatible recibe el aviso.", beta: false },
+        { title: "Agentes IA y API", text: "Los miembros verificados pueden conectar ChatGPT, Claude o su propio agente por MCP, o usar claves API.", beta: false },
+      ],
+      frame: {
+        title: "Publicar en 30 s",
+        caption:
+          "Recreación ilustrativa del formulario rápido de OficinaOS Trade con datos de ejemplo: a partir de una foto, la IA rellenó cinco campos (pieza, pantalla, iPhone 13, original nueva, 10 unidades), marcados para confirmar antes de publicar.",
+        photo: "Foto 1",
+        assist: "Rellenar con IA",
+        fields: [
+          ["Tipo de anuncio", "Pieza"],
+          ["Pieza", "Pantalla"],
+          ["Modelo", "iPhone 13"],
+          ["Calidad", "Original nueva"],
+          ["Cantidad", "10"],
+        ],
+        aiTag: "IA",
+        done: "He rellenado 5 campos, marcados con IA. Revíselos antes de publicar.",
+        publish: "Publicar",
+      },
+    },
+    faq: {
+      title: "Preguntas frecuentes",
+      items: [
+        { q: "¿Cuánto cuesta?", a: "Nada durante el lanzamiento. Después habrá un plan gratis para miembros verificados y un Pro por suscripción mensual. No hay comisión por operación." },
+        { q: "¿Dónde está disponible?", a: "En Portugal y España, para empresas de esos dos países. La app está en portugués, español e inglés." },
+        { q: "Trabajo por cuenta propia. ¿Puedo entrar?", a: "Sí. Trade es para técnicos independientes, talleres y revendedores. En Portugal, quien trabaja como empresario individual usa el alta de actividad en lugar de la certidão permanente." },
+        { q: "¿Quién ve mis precios?", a: "Solo los miembros verificados. Quien está fuera ve que hay stock, pero nunca el precio ni quién vende." },
+        { q: "¿Cómo se paga?", a: "Directamente entre empresas — la plataforma no mueve dinero. Trade registra la propuesta y el acuerdo con los datos para la factura, y las valoraciones solo cuentan tras la recepción." },
+        { q: "¿Puedo vender a particulares?", a: "No. Trade es solo entre profesionales." },
+        { q: "¿Necesito usar OficinaOS?", a: "No. Trade es un producto aparte: cualquier empresa se registra directamente, use o no OficinaOS." },
+      ],
+    },
+    cta: {
+      title: "Entre en la red",
+      lead: "Gratis durante el lanzamiento para técnicos, talleres y revendedores verificados en Portugal y España.",
+      primary: "Solicitar acceso — es gratis",
+      secondary: "Ver el mercado",
+      member: "¿Ya es miembro?",
+      signin: "Entrar en Trade",
+    },
+  },
   footer: {
     license: "Licencia MIT",
     credits: "Basado en el proyecto de código abierto",

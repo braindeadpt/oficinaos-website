@@ -2096,6 +2096,140 @@ export const t: Copy = {
       ],
     },
   },
+  tradePage: {
+    metaTitle: "OficinaOS Trade — parts and devices between professionals",
+    metaDesc:
+      "B2B network where verified technicians, repair shops and resellers buy and sell phones, computers, parts and lots. No consumers, no minimums and no per-deal commission. Portugal and Spain.",
+    hero: {
+      label: "OficinaOS Trade",
+      badge: "Free at launch",
+      title: "Parts and devices, from pro to pro.",
+      subtitle:
+        "The B2B network where verified technicians, repair shops and resellers buy and sell phones, computers, parts and lots with each other. No consumers, no minimum order and no per-deal commission.",
+      cta: "Apply — it's free",
+      ctaSecondary: "Browse the market",
+      note: "Verified businesses only · Portugal and Spain",
+      frameTitle: "Market",
+      frameCaption:
+        "Illustrative recreation of OficinaOS Trade search with sample data: the phrase «10 iPhone 13 screens in Porto, original» becomes filters (part, screen, original new, iPhone 13, Porto, stock of at least 10) and three matching listings appear, with the price reserved for verified members.",
+      query: "10 iPhone 13 screens in Porto, original",
+      searchButton: "Search",
+      aiApplied: "Filters suggested by AI from your phrase.",
+      aiBeta: "beta",
+      aiUndo: "Search the text only",
+      chips: ["Part", "Screen", "Original new", "iPhone 13", "Porto", "stock ≥ 10"],
+      results: [
+        ["iPhone 13 OLED screen", "Part · Original new · New", "Porto", "×12"],
+        ["iPhone 13 screens · lot", "Lot · Original new · New", "Porto", "×25"],
+        ["iPhone 13 screen with frame", "Part · Original new · New", "Porto", "×10"],
+      ],
+      priceLock: "Price visible to verified members",
+    },
+    how: {
+      title: "How it works",
+      lead: "From application to closed deal, in three steps.",
+      steps: [
+        {
+          title: "Apply with your business",
+          text: "In Portugal, your NIF and permanent-certificate code — or your start-of-activity proof if you're self-employed. In Spain, your VAT number checked against VIES plus your registration document. Some applications are approved straight away; the rest are reviewed by a person.",
+        },
+        {
+          title: "List what you have, request what you need",
+          text: "Whole devices, parts, «for parts» units and lots. Or post a wanted request: sellers with matching stock are notified and you get the alerts.",
+        },
+        {
+          title: "Make an offer and close on the record",
+          text: "Offer, counter-offer and agreement are recorded with invoicing details. Payment goes directly between businesses, and reviews only open after delivery.",
+        },
+      ],
+      frame: {
+        title: "Agreements",
+        caption:
+          "Illustrative recreation of an OficinaOS Trade agreement with sample data: 12 iPhone 13 OLED screens, past the accepted, paid and shipped steps; the buyer's next step is to confirm receipt.",
+        deal: "iPhone 13 OLED screen · ×12",
+        sides: "Seller ⇄ Buyer",
+        steps: ["Accepted", "Paid", "Shipped", "Received", "Closed"],
+        yourTurn: "The next step is yours",
+        action: "Confirm receipt",
+        explainer: "Payment goes directly to the counterparty — the platform never moves money.",
+      },
+    },
+    catalog: {
+      title: "Devices, parts and lots",
+      lead: "Every listing says what it is, what condition it's in and how many there are, in the same terms across the network.",
+      groups: [
+        { title: "Devices", items: ["Phone", "Tablet", "Laptop", "Desktop", "Watch", "Console"] },
+        { title: "Parts", items: ["Screen", "Battery", "Board", "Camera", "Back cover", "Charging port", "Speaker", "Housing"] },
+        { title: "Part quality", items: ["Original new", "Original pulled", "Service pack", "Aftermarket premium", "Aftermarket"] },
+        { title: "Condition", items: ["New", "Like new", "Good", "Fair", "For parts"] },
+      ],
+      volume:
+        "For volume: lots, quantity price tiers (1, 10+, 50+), minimum order and shipping lead time — or local pickup. No minimum purchase: you can trade a single unit.",
+    },
+    trust: {
+      title: "Professionals only",
+      lead: "What sets Trade apart from a WhatsApp group or a classifieds site.",
+      items: [
+        { title: "Verified businesses only", text: "Every member is a company or a registered self-employed professional, checked by tax number and document. No consumers." },
+        { title: "Prices for verified members", text: "Outsiders can see stock exists, never the price or the seller." },
+        { title: "Contacts kept out of listings", text: "Phone numbers, emails and IBANs written into a listing are hidden from anyone not yet verified." },
+        { title: "Probation period", text: "New members start with a cap on open offers and a ceiling per deal." },
+        { title: "Reviews after delivery", text: "You can only review after receipt. If something goes wrong, open a dispute and moderation mediates — reviews stay locked until it's resolved." },
+        { title: "Reports that count", text: "Fraud, a stolen device or wrong information: the report goes to moderation, and repeated reports from verified members suspend the account until it's reviewed." },
+      ],
+      note: "The IMEI never appears in full: it is stored only as a hash, with the last 4 digits. Accounts lock after repeated failed sign-ins, password recovery uses a single-use link, and you can export or delete your data (GDPR).",
+    },
+    tools: {
+      title: "Built for volume",
+      lead: "Less form-filling, more stock listed.",
+      beta: "beta",
+      items: [
+        { title: "Publish in 30 s", text: "Photo, model, condition and price. The rest comes from your last listing.", beta: false },
+        { title: "Fill in with AI", text: "AI suggests the fields from your photos or a sentence. Nothing is published until you confirm.", beta: true },
+        { title: "Plain-language search", text: "Type the way you talk: the phrase becomes filters you can remove one by one.", beta: true },
+        { title: "Import and edit in a grid", text: "CSV or XLSX to create or update listings in bulk, plus bulk edits to prices, quantities and tiers.", beta: false },
+        { title: "Wanted requests with alerts", text: "Say what you're looking for and your price ceiling. Sellers with matching stock are notified.", beta: false },
+        { title: "AI agents and API", text: "Verified members can connect ChatGPT, Claude or their own agent over MCP, or use API keys.", beta: false },
+      ],
+      frame: {
+        title: "Publish in 30 s",
+        caption:
+          "Illustrative recreation of the OficinaOS Trade quick-publish form with sample data: from one photo, AI filled five fields (part, screen, iPhone 13, original new, 10 units), flagged for confirmation before publishing.",
+        photo: "Photo 1",
+        assist: "Fill in with AI",
+        fields: [
+          ["Listing type", "Part"],
+          ["Part", "Screen"],
+          ["Model", "iPhone 13"],
+          ["Quality", "Original new"],
+          ["Quantity", "10"],
+        ],
+        aiTag: "AI",
+        done: "Filled 5 fields, marked AI. Check them before publishing.",
+        publish: "Publish",
+      },
+    },
+    faq: {
+      title: "Frequently asked questions",
+      items: [
+        { q: "How much does it cost?", a: "Nothing during launch. After that there will be a free plan for verified members and a monthly Pro subscription. There is no per-deal commission." },
+        { q: "Where is it available?", a: "In Portugal and Spain, for businesses based in those two countries. The app is available in Portuguese, Spanish and English." },
+        { q: "I'm self-employed. Can I join?", a: "Yes. Trade is for independent technicians, repair shops and resellers. In Portugal, sole traders use their start-of-activity proof instead of the permanent certificate." },
+        { q: "Who sees my prices?", a: "Only verified members. Outsiders can see stock exists, never the price or the seller." },
+        { q: "How does payment work?", a: "Directly between businesses — the platform never moves money. Trade records the offer and agreement with invoicing details, and reviews only count after delivery." },
+        { q: "Can I sell to consumers?", a: "No. Trade is between professionals only." },
+        { q: "Do I need to use OficinaOS?", a: "No. Trade is a separate product: any business can sign up directly, whether or not it uses OficinaOS." },
+      ],
+    },
+    cta: {
+      title: "Join the network",
+      lead: "Free during launch for verified technicians, repair shops and resellers in Portugal and Spain.",
+      primary: "Apply — it's free",
+      secondary: "Browse the market",
+      member: "Already a member?",
+      signin: "Sign in to Trade",
+    },
+  },
   footer: {
     license: "MIT License",
     credits: "Based on the open-source project",

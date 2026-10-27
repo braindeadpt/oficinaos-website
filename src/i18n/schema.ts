@@ -121,3 +121,29 @@ export function diagJsonLd(t: Copy, url: string): object[] {
     },
   ];
 }
+
+/** /trade: WebApplication do OficinaOS Trade — só factos do oficinaos-market: app web em
+ *  trade.oficinaos.app, grátis no lançamento, disponível em Portugal e Espanha, PT/ES/EN. */
+export function tradeJsonLd(t: Copy, url: string): object[] {
+  return [
+    organization,
+    {
+      "@type": "WebApplication",
+      name: "OficinaOS Trade",
+      description: t.tradePage.metaDesc,
+      applicationCategory: "BusinessApplication",
+      operatingSystem: "Web",
+      browserRequirements: "Requires JavaScript",
+      url: "https://trade.oficinaos.app/",
+      mainEntityOfPage: url,
+      areaServed: [
+        { "@type": "Country", name: "Portugal" },
+        { "@type": "Country", name: "Spain" },
+      ],
+      inLanguage: ["pt-PT", "es", "en"],
+      audience: { "@type": "BusinessAudience" },
+      offers: { "@type": "Offer", price: "0", priceCurrency: "EUR" },
+      publisher: { "@id": `${SITE}/#org` },
+    },
+  ];
+}

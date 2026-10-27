@@ -4,7 +4,7 @@
 // formulário do piloto → FAQ. Não há página de marketing da Cloud: vive aqui.
 import type { Copy } from "../../i18n/pt";
 import type { Locale } from "../../i18n/utils";
-import { CLOUD_URL, localeUrl } from "../../i18n/utils";
+import { cloudLoginUrl, localeUrl } from "../../i18n/utils";
 import Footer from "../Footer.astro";
 import Icon from "../Icon.astro";
 import Nav from "../Nav.astro";
@@ -290,7 +290,7 @@ const check = '<path d="m5 13 4 4L19 7"/>';
       </div>
       <div>
         <p class="border-l-2 border-product pl-4 text-base text-text">{p.cloud.offline}</p>
-        <a href={CLOUD_URL} class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-link underline underline-offset-2 hover:text-primary-hover">
+        <a href={cloudLoginUrl(locale)} class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-link underline underline-offset-2 hover:text-primary-hover">
           {p.cloud.login}
           <Icon name="external" class="h-3.5 w-3.5" />
         </a>
