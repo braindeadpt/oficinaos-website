@@ -1,0 +1,102 @@
+---
+// Relatório de exemplo explorável (/diag): resumo sempre visível + secções em <details> nativos
+// (sem JS, teclado e leitor de ecrã de origem). Dados de exemplo, iguais aos do hero.
+import type { Copy } from "../../i18n/pt";
+import type { Locale } from "../../i18n/utils";
+import { localeUrl } from "../../i18n/utils";
+import Heading from "../ui/Heading.astro";
+import Section from "../ui/Section.astro";
+
+interface Props {
+  t: Copy;
+  locale: Locale;
+}
+const { t, locale } = Astro.props;
+const r = t.diagPage.report;
+const json = `{
+  "device": { "model": "iPhone 13", "os": "iOS 18.1" },
+  "battery": {
+    "level": 64,
+    "temperatureC": 31.2,
+    "cycles": 412,
+    "capacityMah": 2808,
+    "designCapacityMah": 3227
+  },
+  "storage": { "usedGb": 56.6, "totalGb": 128 },
+  "screenTest": { "deadPixels": 0, "deadTouchZones": 1 }
+}`;
+const chevron = '<path d="m6 9 6 6 6-6"/>';
+---
+
+<Section id="report" tone="raised" width="wide" product="diag" labelledby="report-title">
+  <div class="grid gap-10 lg:grid-cols-[minmax(0,4fr)_minmax(0,7fr)] lg:gap-14">
+    <div class="min-w-0">
+      <Heading id="report-title">
+        {r.title}
+        <Fragment slot="lead">{r.lead}</Fragment>
+      </Heading>
+      <p class="mt-6 text-sm text-text-muted">{r.exportNote}</p>
+      <p class="mt-2 text-sm">
+        <a href={localeUrl(locale, "/docs/diag/")} class="font-semibold text-link underline underline-offset-2 hover:text-primary-hover">{t.diagPage.docsLink}</a>
+      </p>
+    </div>
+
+    <article class="reveal min-w-0 overflow-hidden rounded-xl border border-border bg-bg shadow-md" aria-labelledby="report-doc-title">
+      <header class="flex flex-wrap items-center justify-between gap-3 border-b border-border bg-surface px-5 py-4">
+        <div class="flex items-center gap-3">
+          <span class="grid h-8 w-8 place-items-center rounded-md bg-product" aria-hidden="true">
+            <span class="h-3 w-3 rounded-full bg-surface"></span>
+          </span>
+          <div>
+            <h3 id="report-doc-title" class="font-display text-base font-bold text-text">{r.docTitle}</h3>
+            <p class="text-xs text-text-muted">{r.docMeta}</p>
+          </div>
+        </div>
+        <span class="font-mono text-xs text-text-muted">OficinaOS Diag</span>
+      </header>
+
+      <div class="p-4 sm:p-5">
+        <h4 class="text-sm font-semibold text-text-muted">{r.summaryLabel}</h4>
+        <dl class="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          {
+            r.summary.map(([label, value, sub]) => (
+              <div class="rounded-lg border border-border bg-surface p-3">
+                <dt class="text-xs font-medium text-text-muted">{label}</dt>
+                <dd class="num mt-1 font-display text-2xl font-bold text-text">{value}</dd>
+                <dd class="text-xs text-text-muted">{sub}</dd>
+              </div>
+            ))
+          }
+        </dl>
+
+        <div class="mt-5 divide-y divide-border overflow-hidden rounded-lg border border-border bg-surface">
+          {
+            r.sections.map((s, i) => (
+              <details class="rp group" open={i === 1}>
+                <summary class="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 font-semibold text-text">
+                  {s.title}
+                  <svg class="rp-chev h-4 w-4 shrink-0 text-text-subtle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={chevron} />
+                </summary>
+                <dl class="grid grid-cols-1 gap-x-6 gap-y-2 px-4 pb-4 text-sm sm:grid-cols-[minmax(0,14rem)_minmax(0,1fr)]">
+                  {s.rows.map(([k, v]) => (
+                    <>
+                      <dt class="text-text-muted">{k}</dt>
+                      <dd class="num font-medium text-text">{v}</dd>
+                    </>
+                  ))}
+                </dl>
+              </details>
+            ))
+          }
+          <details class="rp group">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 font-semibold text-text">
+              {r.jsonTitle}
+              <svg class="rp-chev h-4 w-4 shrink-0 text-text-subtle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={chevron} />
+            </summary>
+            <pre class="code-block scroll-region mx-4 mb-4 rounded-md border border-border bg-surface-2 p-3 font-mono text-xs leading-relaxed text-text" role="region" aria-label={r.jsonTitle} tabindex="0"><code>{json}</code></pre>
+          </details>
+        </div>
+      </div>
+    </article>
+  </div>
+</Section>

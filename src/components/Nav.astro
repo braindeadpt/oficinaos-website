@@ -32,7 +32,13 @@ const items = products(t, locale);
 const isDocs = pagePath.startsWith("/docs");
 const isUpdates = pagePath.startsWith("/updates");
 const activeProduct =
-  pagePath === "/" ? "os" : pagePath.startsWith("/docs/diag") ? "diag" : null;
+  pagePath === "/"
+    ? "os"
+    : pagePath.startsWith("/diag")
+      ? "diag"
+      : pagePath.startsWith("/pro")
+        ? "pro"
+        : null;
 
 const links = [
   { href: localeUrl(locale, "/docs/"), label: t.nav.docs, current: isDocs && !activeProduct },

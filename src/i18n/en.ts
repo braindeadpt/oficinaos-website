@@ -2,7 +2,6 @@ import type { Copy } from "./pt";
 import {
   BACKUP_DOCS_URL,
   DIAG_REPO_URL,
-  DIAG_STORE_URL,
   DIAG_ZIP_URL,
   DOCS_MOBILE_URL,
   DOCS_REMOTE_URL,
@@ -119,11 +118,15 @@ export const t: Copy = {
     videoAria: "OficinaOS demo video",
   },
   pro: {
-    badge: "Beta — free for pilot shops",
+    badge: "Beta — free in the pilot programme",
     title: "Pro modules",
     subtitle:
       "The program you download is and always will be free and open source (MIT license) — it will never be paid. Pro modules are optional add-ons that need to “reach the internet”, through OficinaOS Cloud. They're in beta: beta testers get 90 days free on every module when Pro launches.",
     statusLabel: "Beta",
+    teaser:
+      "Customer portal, WhatsApp, certified invoicing, online storefront and more — optional modules on top of the free app, for independent technicians, repair shops and resellers.",
+    more: "Explore Pro",
+    ctaBeta: "Request beta access",
     groups: ["Talk to customers", "Sell and invoice", "Run and grow"],
     cloudEngine: "OficinaOS Cloud is the engine behind these modules: it connects the app to the internet only for what you switch on.",
     modules: [
@@ -142,10 +145,10 @@ export const t: Copy = {
     signup: {
       title: "Join the Pro beta",
       subtitle:
-        "Leave your shop's details and we'll get in touch to switch the modules on. No commitment — beta testers get 90 days free on all Pro modules.",
+        "Leave your details and we'll get in touch to switch the modules on. No commitment — pilot members get 90 days free on all Pro modules when Pro launches.",
       email: "Email",
-      emailPlaceholder: "you@yourshop.com",
-      shop: "Shop name",
+      emailPlaceholder: "you@example.com",
+      shop: "Business name",
       shopPlaceholder: "e.g. Fix It Fast",
       city: "City",
       cityPlaceholder: "e.g. Porto",
@@ -581,7 +584,7 @@ export const t: Copy = {
         heading: "Pricing",
         paragraphs: [
           "The full app is free and open source (MIT) — no limits, no accounts, no trial period. Forever.",
-          "Pro modules are in beta: during this period, pilot shops use them for free while we measure the real value they bring to the counter. When prices are announced they'll be simple monthly subscriptions — no lock-in, no hidden costs.",
+          "Pro modules are in beta: during this period, pilot members use them for free while we measure the real value they bring to the counter. When prices are announced they'll be simple monthly subscriptions — no lock-in, no hidden costs.",
           "* WhatsApp note: replying to customers within the 24-hour window is free. Proactive notifications («it's ready») outside that window need Meta-approved templates, which carry small per-message fees — Meta's cost, not ours.",
         ],
         table: {
@@ -900,13 +903,12 @@ export const t: Copy = {
         "The free Windows tool that reads any Android or iPhone over USB — local scans are always free; send-to-shop and AI reports are Pro modules.",
       sections: [
         {
-          heading: "Install — Microsoft Store",
+          heading: "Install",
           paragraphs: [
-            "The easiest way: install from the Microsoft Store — one click, no SmartScreen warning, automatic updates. Free.",
-            "Portable alternative: download the zip, extract the whole folder (the exe needs the files next to it) and run OficinaDiag.exe — Windows may show a SmartScreen warning on first run: «More info» → «Run anyway».",
+            "Diag ships as a free portable ZIP on GitHub. It isn't on the Microsoft Store yet: the submission is awaiting Microsoft's approval.",
+            "Download the zip, extract the whole folder (the exe needs the files next to it) and run OficinaDiag.exe — Windows may show a SmartScreen warning on first run: «More info» → «Run anyway».",
           ],
           links: [
-            { label: "Microsoft Store", href: DIAG_STORE_URL },
             { label: "Portable ZIP (GitHub)", href: DIAG_ZIP_URL },
             { label: "Source code on GitHub", href: DIAG_REPO_URL },
           ],
@@ -1771,6 +1773,327 @@ export const t: Copy = {
       delivered: "Delivered",
       returned: "Returned",
       cancelled: "Cancelled",
+    },
+  },
+  diagPage: {
+    metaTitle: "OficinaOS Diag — free phone diagnostics over USB",
+    metaDesc:
+      "Free, open-source Windows app that reads Android and iPhone over USB: battery, screen, touch, sensors and storage, with an HTML/JSON report. No account, no internet.",
+    hero: {
+      label: "OficinaOS Diag",
+      title: "Plug in the cable. The report writes itself.",
+      subtitle:
+        "Free Windows app that reads any Android or iPhone over USB: battery, screen and touch, sensors and storage. Everything runs on the PC, no account.",
+      cta: "Download for Windows",
+      ctaSecondary: "See a sample report",
+      note: "Windows 10/11 · free · no account · open source (MIT)",
+      frameTitle: "USB scan",
+      frameCaption:
+        "Illustrative recreation of an OficinaOS Diag scan with sample data: an iPhone 13 connected over USB, the tests completing and the report ready to export.",
+      device: "iPhone 13 · 128 GB",
+      connected: "Connected over USB",
+      trusted: "“Trust This Computer” accepted",
+      tests: [
+        ["Identification", "iOS 18.1 · serial read"],
+        ["Battery", "87% of capacity · 412 cycles"],
+        ["Storage and RAM", "56.6 of 128 GB used"],
+        ["Sensors", "4 of 4 responding"],
+        ["Screen and touch", "0 dead pixels · 1 dead zone"],
+        ["Activation and carrier", "Activated"],
+      ],
+      reportReady: "Report ready",
+      export: "Export HTML · JSON",
+    },
+    caps: {
+      title: "What Diag does — free, always",
+      lead: "No account and no server: the scan runs 100% on the PC. Two optional extras connect it to whoever does the repair.",
+      free: [
+        { title: "USB scan", text: "Model, serial number, OS version, battery (level, temperature, cycles and real vs. design capacity), storage, RAM and sensors." },
+        { title: "Screen and touch test", text: "The app serves a test page on the local network — Android opens it by itself, iPhone scans a QR code. Dead pixels and dead touch zones go into the report." },
+        { title: "HTML and JSON report", text: "Every scan exports a printable report (save as PDF and hand it to the customer) plus the raw JSON with all the data." },
+        { title: "History on the PC", text: "Previous scans stay on the PC — compare the battery health of the same device over time, handy for warranties and used devices." },
+        { title: "Android and iPhone", text: "Android with adb built in (nothing to install on the PC). iPhone and iPad with Apple's USB driver." },
+        { title: "Portuguese and English, three themes", text: "Terminal (the original retro look), Windows 95 and Modern. Your choice is remembered." },
+      ],
+      proTitle: "With the repairer's Pro",
+      pro: [
+        { title: "Send to the repairer", text: "The customer runs the scan at home, types the code they were given and the diagnosis reaches OficinaOS as a pre-check." },
+        { title: "Plain-language report", text: "The technical data becomes a clear text for the customer — “the battery is at 78% of its original capacity, replacement recommended”." },
+      ],
+      proBadge: "Pro",
+    },
+    report: {
+      title: "Explore a sample report",
+      lead: "This is what Diag hands you at the end of every scan. Open each section — the numbers are sample data.",
+      docTitle: "Diagnostic report",
+      docMeta: "iPhone 13 · sample scan",
+      summaryLabel: "Summary",
+      summary: [
+        ["Battery", "87%", "of design capacity"],
+        ["Screen", "0", "dead pixels"],
+        ["Touch", "1", "dead zone"],
+        ["Sensors", "4/4", "responding"],
+      ],
+      sections: [
+        {
+          title: "Device",
+          rows: [
+            ["Model", "iPhone 13 (A2633)"],
+            ["Serial number", "F2LX••••Q6R"],
+            ["System", "iOS 18.1"],
+          ],
+        },
+        {
+          title: "Battery",
+          rows: [
+            ["Level", "64%"],
+            ["Temperature", "31.2 °C"],
+            ["Charge cycles", "412"],
+            ["Real / design capacity", "2,808 / 3,227 mAh (87%)"],
+          ],
+        },
+        {
+          title: "Storage and RAM",
+          rows: [
+            ["Storage", "56.6 GB used of 128 GB"],
+            ["RAM", "4 GB"],
+          ],
+        },
+        {
+          title: "Sensors",
+          rows: [
+            ["Accelerometer", "OK"],
+            ["Gyroscope", "OK"],
+            ["Proximity", "OK"],
+            ["Compass", "OK"],
+          ],
+        },
+        {
+          title: "Screen and touch",
+          rows: [
+            ["Colour test", "0 dead pixels"],
+            ["Touch grid", "1 dead zone (top-right corner)"],
+          ],
+        },
+        {
+          title: "Activation and carrier",
+          rows: [
+            ["Activation state", "Activated"],
+            ["Carrier", "Unlocked"],
+          ],
+        },
+      ],
+      jsonTitle: "Raw JSON (illustrative excerpt)",
+      exportNote: "In Diag: Export → HTML (printable) or JSON.",
+    },
+    integration: {
+      title: "From the customer's sofa to the bench",
+      lead: "With the diagnostics intake module (Pro) switched on by the repairer, Diag stops being just a tool and becomes the front door.",
+      steps: [
+        { title: "The customer scans at home", text: "Downloads Diag (free), connects the phone and runs the scan." },
+        { title: "Types the code they were given", text: "The diagnosis travels to OficinaOS Cloud. Nothing leaves the PC without this click." },
+        { title: "It lands in OficinaOS as a pre-check", text: "It shows up in the Requests queue, ready to turn into a repair — or to value a used device for purchase." },
+      ],
+      uses: "Use cases: pre-diagnosis before the customer comes in, valuing used devices for buy and sell, and grading with objective data.",
+      queue: {
+        title: "Requests",
+        caption: "Illustrative recreation of the OficinaOS Requests queue with a diagnosis sent by a customer (sample data).",
+        item: "Diagnosis sent by the customer",
+        meta: "iPhone 13 · battery 87% · 1 dead touch zone",
+        tag: "Diag",
+        action: "Convert into a repair",
+      },
+      proLink: "See the Pro modules",
+      docsLink: "How sending works (guide)",
+    },
+    compat: {
+      title: "Compatibility",
+      lead: "A PC with Windows 10 or 11 and a data cable. The rest depends on the phone.",
+      readTitle: "What the scan reads",
+      readCaption: "What the Diag scan reads on Android and on iPhone/iPad",
+      readHead: ["Data", "Android", "iPhone/iPad"],
+      readRows: [
+        ["Model, serial number, OS version", "✓", "✓"],
+        ["Battery — level, temperature, cycles", "✓", "✓"],
+        ["Battery — real vs. design capacity", "where the manufacturer exposes it", "✓"],
+        ["Storage and RAM", "✓", "✓"],
+        ["Sensors", "✓", "✓"],
+        ["Root / unlocked bootloader", "✓", "—"],
+        ["Activation state / carrier", "—", "✓"],
+      ],
+      reqTitle: "What you need",
+      reqCaption: "Diag requirements by platform",
+      reqHead: ["", "Android", "iPhone/iPad"],
+      reqRows: [
+        ["On the phone", "Turn on “USB debugging” in developer options", "Accept “Trust This Computer”"],
+        ["On the PC", "Nothing — adb is built in", "Apple USB driver (iTunes or the “Apple Devices” app)"],
+        ["Extra", "A data cable (not charge-only)", "Close the Windows Photos app before scanning"],
+      ],
+      scrollLabel: "Horizontally scrollable table",
+    },
+    faq: {
+      title: "Frequently asked questions",
+      items: [
+        { q: "Is Diag really free?", a: "Yes. The scan, the screen and touch test, export and history are free, with no account and no limit. The code is open source (MIT). Only sending to a repairer and the plain-language report are Pro modules — switched on by the repairer, not the customer." },
+        { q: "Does it need internet?", a: "No. The scan runs 100% on the PC. It only goes online if the user chooses “Send to shop”, “AI report” or “Send log” — and the destination is always the OficinaOS server." },
+        { q: "Does it run on Mac or Linux?", a: "No: Diag is a Windows app (10 or 11). The phone can be Android, iPhone or iPad." },
+        { q: "Is it on the Microsoft Store?", a: "Not yet. For now it ships as a portable ZIP on GitHub. Because the executable isn't code-signed yet, Windows may show the SmartScreen warning the first time: “More info” → “Run anyway”." },
+        { q: "The phone isn't detected. What now?", a: "Check that the cable is a data cable (not charge-only) and try another USB port. Android: “USB debugging” on and the authorisation prompt accepted on the phone. iPhone: “Trust This Computer” accepted, Apple driver installed and the Photos app closed. Keep the screen unlocked during the scan." },
+        { q: "Is the phone's data stored?", a: "Only on your PC, in Diag's local history. It isn't sent to anyone without an action from you, and the AI (when used) doesn't train models on it." },
+      ],
+    },
+    download: {
+      title: "Download Diag",
+      lead: "Portable ZIP for Windows 10/11 — no installation needed.",
+      button: "Download ZIP for Windows",
+      buttonFallback: "See the latest version on GitHub",
+      version: "Version",
+      released: "Published",
+      size: "Size",
+      sums: "Checksums (SHA256SUMS.txt)",
+      steps: [
+        "Extract the whole folder — OficinaDiag.exe needs the files next to it.",
+        "Open OficinaDiag.exe. If Windows warns you: “More info” → “Run anyway” (first time only).",
+        "Connect the phone by cable and follow the on-screen steps.",
+      ],
+      source: "Source code on GitHub",
+      docs: "Full Diag documentation",
+      store: "Not on the Microsoft Store yet.",
+    },
+    productLink: "About OficinaOS Diag",
+    docsLink: "Full documentation",
+  },
+  proPage: {
+    metaTitle: "OficinaOS Pro — online modules for technicians, repair shops and resellers",
+    metaDesc:
+      "Customer portal, WhatsApp, certified invoicing, online storefront and more — optional modules on top of free OficinaOS, powered by OficinaOS Cloud. In beta.",
+    hero: {
+      label: "OficinaOS Pro",
+      title: "The app is free. Pro takes it beyond the counter.",
+      subtitle:
+        "Optional modules for independent technicians, repair shops and resellers: talk to customers, sell and invoice, manage and grow. Switch them on one by one; OficinaOS Cloud bridges to the internet.",
+      cta: "Request pilot access",
+      ctaSecondary: "See the modules",
+      frameTitle: "Settings — Cloud",
+      frameCaption:
+        "Illustrative recreation of the Cloud tab in OficinaOS settings, with sample data: connected to OficinaOS Cloud, synced a minute ago, with three active modules.",
+      status: "Connected to OficinaOS Cloud",
+      sync: "Last sync: 1 min ago",
+      modulesTitle: "Active modules",
+      modules: ["Customer portal", "WhatsApp bot", "Invoicing (InvoiceXpress)"],
+      active: "Active",
+      offline: "Without a connection, everything else keeps working on the local network.",
+    },
+    core: {
+      title: "The core is free. Always.",
+      lead: "Pro takes nothing away from the app you download. OficinaOS is and will stay free and open source — no limits, no accounts, no trial period.",
+      items: [
+        "Repairs, quotes, customers, stock and till",
+        "On your PC, working without internet",
+        "Open source, MIT licence",
+        "SMS channel with an Android phone in the shop — free, no Cloud",
+        "OficinaOS Diag — cable diagnostics, free",
+      ],
+      link: "Download OficinaOS",
+    },
+    groups: {
+      title: "Modules by what you want to solve",
+      lead: "Eleven modules in three groups. All optional, all in beta.",
+      smsNote: "free, in the core",
+      more: "Guide",
+      items: [
+        {
+          title: "Talk to customers",
+          text: "Customers know where their repair stands and approve the quote without calling.",
+          ui: {
+            title: "WhatsApp",
+            caption: "Sample conversation with the WhatsApp bot: the customer approves a quote by replying YES.",
+            messages: [
+              ["in", "Hi, is there a quote for the iPhone yet?"],
+              ["out", "REP-2614 · iPhone 13: replace screen — €129.00. Reply YES to approve or NO to decline."],
+              ["in", "YES"],
+              ["out", "Quote approved. We'll let you know when it's ready."],
+            ],
+          },
+        },
+        {
+          title: "Sell and invoice",
+          text: "From the counter to a certified invoice, plus an online storefront whose reservations land in the app.",
+          ui: {
+            title: "Sale",
+            caption: "Sample sale in OficinaOS with the invoice-receipt issued through InvoiceXpress.",
+            lines: [
+              ["Screen replacement · iPhone 13", "129.00"],
+              ["Tempered glass", "9.90"],
+            ],
+            total: "Total (VAT incl.)",
+            issued: "Invoice-receipt issued · InvoiceXpress",
+            reservation: "New storefront reservation",
+            reservationItem: "iPhone 13 case — in Requests",
+          },
+        },
+        {
+          title: "Manage and grow",
+          text: "Compare your prices with the market, see several shops in one dashboard and receive diagnostics done at home.",
+          ui: {
+            title: "Market prices",
+            caption: "Sample market prices table: median, range and number of shops next to your own price.",
+            head: ["Item", "Median", "Range", "Yours"],
+            rows: [
+              ["iPhone 13 screen", "129", "99–159", "7", "135"],
+              ["iPhone 12 battery", "59", "45–75", "5", "55"],
+              ["Galaxy A52 connector", "45", "35–60", "3", ""],
+            ],
+            shops: "shops",
+            note: "A price only shows when 3 or more shops share it.",
+          },
+        },
+      ],
+    },
+    cloud: {
+      title: "Cloud is the engine of Pro",
+      lead: "OficinaOS Cloud is the bridge between the app on your PC and the outside world. It isn't another program to learn: you connect it once and it works behind the scenes.",
+      steps: [
+        { title: "Pair once", text: "Create an account at cloud.oficinaos.app (or get a code from the team) and paste the pairing code in Settings → Cloud." },
+        { title: "Switch on only what you need", text: "Each module is enabled on the server side, with no licence files. During the beta, we enable them for you." },
+        { title: "The app syncs by itself", text: "Every ~2 minutes it sends and receives what the active modules need. The PC is never exposed to the internet." },
+      ],
+      diagram: { pc: "OficinaOS on your PC", cloud: "OficinaOS Cloud", out: "Customers and services", sync: "every ~2 min" },
+      dataTitle: "What goes to the Cloud",
+      dataText: "Only the data each active module needs — for example, the redacted summary of a repair for the portal. With no modules active, nothing leaves the PC.",
+      dataLink: "Privacy, module by module",
+      offline: "Without pairing, OficinaOS still works on the local network — the Pro modules simply don't appear.",
+      login: "Already have an account? Sign in to OficinaOS Cloud",
+    },
+    pricing: {
+      title: "Pricing: where it really stands",
+      lead: "Pro is in beta. During the pilot, the modules are free while we measure the real value they bring. No prices have been announced yet — and we don't make them up here.",
+      caption: "Status and price of each part of OficinaOS",
+      head: ["What", "Status", "Price"],
+      rows: [
+        ["Full app (core)", "Free forever", "€0"],
+        ["OficinaOS Diag", "Free forever", "€0"],
+        ["SMS channel (Android in the shop)", "In the core", "€0"],
+        ["Pro modules (portal, WhatsApp, invoicing, storefront…)", "Beta", "To be announced — free in the pilot"],
+        ["AI reports", "Beta", "To be announced — per report"],
+      ],
+      notes: [
+        "When prices are announced, they'll be simple monthly subscriptions — no lock-in and no hidden costs.",
+        "Pilot members get 90 days of every module free when Pro launches.",
+        "Third-party costs aren't ours: the InvoiceXpress account is yours; WhatsApp template messages outside the 24 h window are charged by Meta.",
+      ],
+      scrollLabel: "Horizontally scrollable table",
+    },
+    form: { title: "Join the Pro pilot" },
+    faq: {
+      title: "Frequently asked questions",
+      items: [
+        { q: "Will OficinaOS stop being free?", a: "No. The app is open source (MIT) and the core never goes behind a paywall. Pro only adds what needs the internet." },
+        { q: "Do I need Pro to use OficinaOS?", a: "No. Repairs, quotes, customers, stock, till and the SMS channel work without Pro and without internet." },
+        { q: "Is Pro only for shops?", a: "No. It's for anyone who repairs, diagnoses or resells: independent technicians, repair shops and resellers. Certified invoicing is Portugal-only." },
+        { q: "What happens if I disconnect the Cloud?", a: "The app keeps working on the local network with all your data; the Pro modules stop appearing. Turning off price sharing deletes the prices you sent from the Cloud." },
+        { q: "How do I join the pilot?", a: "Leave your details in the form. We'll get in touch, help you pair and switch on the modules that make sense." },
+      ],
     },
   },
   footer: {

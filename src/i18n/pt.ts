@@ -1,7 +1,6 @@
 import {
   BACKUP_DOCS_URL,
   DIAG_REPO_URL,
-  DIAG_STORE_URL,
   DIAG_ZIP_URL,
   DOCS_MOBILE_URL,
   DOCS_REMOTE_URL,
@@ -134,11 +133,15 @@ export const t = {
     videoAria: "Vídeo de demonstração do OficinaOS",
   },
   pro: {
-    badge: "Beta — grátis para lojas piloto",
+    badge: "Beta — grátis no programa piloto",
     title: "Módulos Pro",
     subtitle:
       "O programa que descarrega é e será sempre gratuito e open source (licença MIT) — nunca será pago. Os módulos Pro são add-ons opcionais que precisam de «chegar à internet», através da OficinaOS Cloud. Estão em beta: os beta testers têm 90 dias grátis de todos os módulos quando o Pro arrancar.",
     statusLabel: "Beta",
+    teaser:
+      "Portal do cliente, WhatsApp, faturação certificada, montra online e mais — módulos opcionais por cima do programa grátis, para técnicos independentes, oficinas e revendedores.",
+    more: "Conhecer o Pro",
+    ctaBeta: "Pedir acesso ao beta",
     groups: ["Falar com clientes", "Vender e faturar", "Gerir e crescer"],
     cloudEngine: "A OficinaOS Cloud é o motor destes módulos: liga a app à internet só para o que ativar.",
     modules: [
@@ -157,10 +160,10 @@ export const t = {
     signup: {
       title: "Quero entrar no beta Pro",
       subtitle:
-        "Deixe o contacto da loja e falamos consigo para ativar os módulos. Sem compromisso — os beta testers têm 90 dias grátis de todos os módulos Pro.",
+        "Deixe o seu contacto e falamos consigo para ativar os módulos. Sem compromisso — quem entra no piloto tem 90 dias grátis de todos os módulos Pro quando o Pro arrancar.",
       email: "Email",
-      emailPlaceholder: "voce@sualoja.pt",
-      shop: "Nome da loja",
+      emailPlaceholder: "voce@exemplo.pt",
+      shop: "Nome do negócio",
       shopPlaceholder: "ex.: Repara Já",
       city: "Cidade",
       cityPlaceholder: "ex.: Braga",
@@ -598,7 +601,7 @@ export const t = {
         heading: "Preços",
         paragraphs: [
           "A app completa é gratuita e open source (MIT) — sem limites, sem contas, sem período de teste. Para sempre.",
-          "Os módulos Pro estão em beta: durante este período, as lojas piloto usam-nos gratuitamente enquanto medimos o valor real que trazem ao balcão. Quando os preços forem anunciados serão subscrições mensais simples — sem fidelização e sem custos escondidos.",
+          "Os módulos Pro estão em beta: durante este período, quem está no piloto usa-os gratuitamente enquanto medimos o valor real que trazem ao balcão. Quando os preços forem anunciados serão subscrições mensais simples — sem fidelização e sem custos escondidos.",
           "* Nota WhatsApp: responder a clientes dentro da janela de 24h é grátis. Para notificações proativas («está pronta») fora dessa janela, a Meta cobra pequenos valores por mensagem modelo — custo da Meta, não nosso.",
         ],
         table: {
@@ -919,13 +922,12 @@ export const t = {
         "A ferramenta Windows gratuita que lê qualquer Android ou iPhone por cabo — scan local sempre grátis; envio à loja e relatórios IA são módulos Pro.",
       sections: [
         {
-          heading: "Instalar — Microsoft Store",
+          heading: "Instalar",
           paragraphs: [
-            "A forma mais simples: instale pela Microsoft Store — um clique, sem aviso SmartScreen e com atualizações automáticas. Grátis.",
-            "Alternativa portátil: descarrega o zip, extrai a pasta inteira (o exe precisa dos ficheiros ao lado) e corre OficinaDiag.exe — o Windows pode mostrar o aviso SmartScreen na primeira execução: «Mais informações» → «Executar mesmo assim».",
+            "O Diag distribui-se como ZIP portátil no GitHub, grátis. Ainda não está na Microsoft Store: a submissão aguarda aprovação da Microsoft.",
+            "Descarrega o zip, extrai a pasta inteira (o exe precisa dos ficheiros ao lado) e corre OficinaDiag.exe — o Windows pode mostrar o aviso SmartScreen na primeira execução: «Mais informações» → «Executar mesmo assim».",
           ],
           links: [
-            { label: "Microsoft Store", href: DIAG_STORE_URL },
             { label: "ZIP portátil (GitHub)", href: DIAG_ZIP_URL },
             { label: "Código-fonte no GitHub", href: DIAG_REPO_URL },
           ],
@@ -1791,6 +1793,327 @@ export const t = {
       delivered: "Entregue",
       returned: "Devolvido",
       cancelled: "Cancelado",
+    },
+  },
+  diagPage: {
+    metaTitle: "OficinaOS Diag — diagnóstico de telemóveis por cabo, grátis",
+    metaDesc:
+      "App Windows grátis e de código aberto que lê Android e iPhone por USB: bateria, ecrã, toque, sensores e armazenamento, com relatório HTML/JSON. Sem conta e sem internet.",
+    hero: {
+      label: "OficinaOS Diag",
+      title: "Ligue o cabo. O relatório faz o resto.",
+      subtitle:
+        "App Windows grátis que lê qualquer Android ou iPhone por USB: bateria, ecrã e toque, sensores e armazenamento. Tudo corre no PC, sem conta.",
+      cta: "Descarregar para Windows",
+      ctaSecondary: "Ver um relatório de exemplo",
+      note: "Windows 10/11 · grátis · sem conta · código aberto (MIT)",
+      frameTitle: "Scan USB",
+      frameCaption:
+        "Recriação ilustrativa de um scan do OficinaOS Diag com dados de exemplo: um iPhone 13 ligado por USB, os testes a completarem-se e o relatório pronto a exportar.",
+      device: "iPhone 13 · 128 GB",
+      connected: "Ligado por USB",
+      trusted: "«Confiar neste computador» aceite",
+      tests: [
+        ["Identificação", "iOS 18.1 · série lida"],
+        ["Bateria", "87 % da capacidade · 412 ciclos"],
+        ["Armazenamento e RAM", "56,6 de 128 GB usados"],
+        ["Sensores", "4 de 4 a responder"],
+        ["Ecrã e toque", "0 pixeis mortos · 1 zona morta"],
+        ["Ativação e operadora", "Ativado"],
+      ],
+      reportReady: "Relatório pronto",
+      export: "Exportar HTML · JSON",
+    },
+    caps: {
+      title: "O que o Diag faz — grátis, sempre",
+      lead: "Sem conta e sem servidor: o scan corre 100% no PC. Dois extras opcionais ligam-no a quem repara.",
+      free: [
+        { title: "Scan por USB", text: "Modelo, número de série, versão do sistema, bateria (nível, temperatura, ciclos e capacidade real vs. de origem), armazenamento, RAM e sensores." },
+        { title: "Teste de ecrã e toque", text: "A app serve uma página de teste na rede local — no Android abre sozinha, no iPhone lê-se um QR code. Pixeis mortos e zonas de toque mortas ficam no relatório." },
+        { title: "Relatório HTML e JSON", text: "Cada scan exporta um relatório imprimível (dá para PDF e entregar ao cliente) e o JSON bruto com todos os dados." },
+        { title: "Histórico no PC", text: "Os scans anteriores ficam guardados localmente — compare a saúde da bateria do mesmo equipamento ao longo do tempo, útil em garantias e usados." },
+        { title: "Android e iPhone", text: "Android com o adb já incluído (nada a instalar no PC). iPhone e iPad com o driver USB da Apple." },
+        { title: "Português e inglês, três temas", text: "Terminal (o visual retro original), Windows 95 e Moderno. A escolha fica guardada." },
+      ],
+      proTitle: "Com o Pro de quem repara",
+      pro: [
+        { title: "Enviar a quem repara", text: "O cliente faz o scan em casa, escreve o código que lhe deram e o diagnóstico chega à OficinaOS como pré-check." },
+        { title: "Relatório em linguagem simples", text: "Os dados técnicos viram um texto claro para o cliente — «a bateria está a 78% da capacidade original, recomenda-se substituição»." },
+      ],
+      proBadge: "Pro",
+    },
+    report: {
+      title: "Explore um relatório de exemplo",
+      lead: "É isto que o Diag entrega no fim de cada scan. Abra cada secção — os números são de exemplo.",
+      docTitle: "Relatório de diagnóstico",
+      docMeta: "iPhone 13 · scan de exemplo",
+      summaryLabel: "Resumo",
+      summary: [
+        ["Bateria", "87 %", "da capacidade de origem"],
+        ["Ecrã", "0", "pixeis mortos"],
+        ["Toque", "1", "zona morta"],
+        ["Sensores", "4/4", "a responder"],
+      ],
+      sections: [
+        {
+          title: "Equipamento",
+          rows: [
+            ["Modelo", "iPhone 13 (A2633)"],
+            ["Número de série", "F2LX••••Q6R"],
+            ["Sistema", "iOS 18.1"],
+          ],
+        },
+        {
+          title: "Bateria",
+          rows: [
+            ["Nível", "64 %"],
+            ["Temperatura", "31,2 °C"],
+            ["Ciclos de carga", "412"],
+            ["Capacidade real / de origem", "2 808 / 3 227 mAh (87 %)"],
+          ],
+        },
+        {
+          title: "Armazenamento e RAM",
+          rows: [
+            ["Armazenamento", "56,6 GB usados de 128 GB"],
+            ["RAM", "4 GB"],
+          ],
+        },
+        {
+          title: "Sensores",
+          rows: [
+            ["Acelerómetro", "OK"],
+            ["Giroscópio", "OK"],
+            ["Proximidade", "OK"],
+            ["Bússola", "OK"],
+          ],
+        },
+        {
+          title: "Ecrã e toque",
+          rows: [
+            ["Teste de cores", "0 pixeis mortos"],
+            ["Grelha de toque", "1 zona morta (canto superior direito)"],
+          ],
+        },
+        {
+          title: "Ativação e operadora",
+          rows: [
+            ["Estado de ativação", "Ativado"],
+            ["Operadora", "Livre"],
+          ],
+        },
+      ],
+      jsonTitle: "JSON bruto (excerto ilustrativo)",
+      exportNote: "No Diag: Exportar → HTML (imprimível) ou JSON.",
+    },
+    integration: {
+      title: "Do sofá do cliente para a bancada",
+      lead: "Com o módulo de receção de diagnósticos (Pro) ativo do lado de quem repara, o Diag deixa de ser só uma ferramenta: passa a ser a porta de entrada.",
+      steps: [
+        { title: "O cliente faz o scan em casa", text: "Descarrega o Diag (grátis), liga o telemóvel e corre o scan." },
+        { title: "Escreve o código que lhe deram", text: "O diagnóstico viaja para a OficinaOS Cloud. Nada sai do PC sem este clique." },
+        { title: "Chega à OficinaOS como pré-check", text: "Aparece na fila de Pedidos, pronto a converter em reparação — ou a avaliar um usado para compra." },
+      ],
+      uses: "Casos de uso: pré-diagnóstico antes de o cliente vir, avaliação de usados para compra e venda, e grading com dados objetivos.",
+      queue: {
+        title: "Pedidos",
+        caption: "Recriação ilustrativa da fila de Pedidos da OficinaOS com um diagnóstico enviado por um cliente (dados de exemplo).",
+        item: "Diagnóstico enviado pelo cliente",
+        meta: "iPhone 13 · bateria 87 % · 1 zona de toque morta",
+        tag: "Diag",
+        action: "Converter em reparação",
+      },
+      proLink: "Ver os módulos Pro",
+      docsLink: "Como funciona o envio (guia)",
+    },
+    compat: {
+      title: "Compatibilidade",
+      lead: "Um PC com Windows 10 ou 11 e um cabo de dados. O resto depende do telemóvel.",
+      readTitle: "O que o scan lê",
+      readCaption: "O que o scan do Diag lê em Android e em iPhone/iPad",
+      readHead: ["Dados", "Android", "iPhone/iPad"],
+      readRows: [
+        ["Modelo, número de série, versão do sistema", "✓", "✓"],
+        ["Bateria — nível, temperatura, ciclos", "✓", "✓"],
+        ["Bateria — capacidade real vs. de origem", "onde o fabricante expõe", "✓"],
+        ["Armazenamento e RAM", "✓", "✓"],
+        ["Sensores", "✓", "✓"],
+        ["Root / bootloader desbloqueado", "✓", "—"],
+        ["Estado de ativação / operadora", "—", "✓"],
+      ],
+      reqTitle: "O que é preciso",
+      reqCaption: "Requisitos do Diag por plataforma",
+      reqHead: ["", "Android", "iPhone/iPad"],
+      reqRows: [
+        ["No telemóvel", "Ativar «Depuração USB» nas opções de programador", "Aceitar «Confiar neste computador»"],
+        ["No PC", "Nada — o adb vem incluído", "Driver USB da Apple (iTunes ou app «Apple Devices»)"],
+        ["Extra", "Cabo de dados (não só de carga)", "Fechar a app Fotos do Windows antes do scan"],
+      ],
+      scrollLabel: "Tabela com scroll horizontal",
+    },
+    faq: {
+      title: "Perguntas frequentes",
+      items: [
+        { q: "O Diag é mesmo grátis?", a: "Sim. O scan, o teste de ecrã e toque, a exportação e o histórico são grátis, sem conta e sem limite. O código é aberto (MIT). Só o envio a quem repara e o relatório em linguagem simples são módulos Pro — e são ativados do lado de quem repara, não do cliente." },
+        { q: "Precisa de internet?", a: "Não. O scan corre 100% no PC. Só há ligação à internet se o utilizador escolher «Enviar à loja», «Relatório IA» ou «Enviar log» — e o destino é sempre o servidor OficinaOS." },
+        { q: "Funciona em Mac ou Linux?", a: "Não: o Diag é uma app Windows (10 ou 11). O telemóvel pode ser Android, iPhone ou iPad." },
+        { q: "Está na Microsoft Store?", a: "Ainda não. Por agora distribui-se como ZIP portátil no GitHub. Como o executável ainda não tem assinatura de código, o Windows pode mostrar o aviso SmartScreen na primeira vez: «Mais informações» → «Executar mesmo assim»." },
+        { q: "O telemóvel não é detetado. E agora?", a: "Confirme que o cabo é de dados (não só de carga) e experimente outra porta USB. Android: «Depuração USB» ativa e o pedido de autorização aceite no telemóvel. iPhone: «Confiar neste computador» aceite, driver da Apple instalado e app Fotos fechada. Mantenha o ecrã desbloqueado durante o scan." },
+        { q: "Os dados do telemóvel ficam guardados?", a: "Só no seu PC, no histórico local do Diag. Não são enviados a ninguém sem uma ação sua, e a IA (quando usada) não treina modelos com eles." },
+      ],
+    },
+    download: {
+      title: "Descarregar o Diag",
+      lead: "ZIP portátil para Windows 10/11 — não precisa de instalação.",
+      button: "Descarregar ZIP para Windows",
+      buttonFallback: "Ver a última versão no GitHub",
+      version: "Versão",
+      released: "Publicada a",
+      size: "Tamanho",
+      sums: "Checksums (SHA256SUMS.txt)",
+      steps: [
+        "Extraia a pasta inteira — o OficinaDiag.exe precisa dos ficheiros que vêm ao lado.",
+        "Abra o OficinaDiag.exe. Se o Windows avisar: «Mais informações» → «Executar mesmo assim» (só na primeira vez).",
+        "Ligue o telemóvel por cabo e siga as indicações no ecrã.",
+      ],
+      source: "Código-fonte no GitHub",
+      docs: "Documentação completa do Diag",
+      store: "Ainda não está na Microsoft Store.",
+    },
+    productLink: "Conhecer o OficinaOS Diag",
+    docsLink: "Documentação completa",
+  },
+  proPage: {
+    metaTitle: "OficinaOS Pro — módulos online para técnicos, oficinas e revendedores",
+    metaDesc:
+      "Portal do cliente, WhatsApp, faturação certificada, montra online e mais — módulos opcionais por cima da OficinaOS grátis, com a OficinaOS Cloud como motor. Em beta.",
+    hero: {
+      label: "OficinaOS Pro",
+      title: "O programa é grátis. O Pro leva-o para fora do balcão.",
+      subtitle:
+        "Módulos opcionais para técnicos independentes, oficinas e revendedores: falar com clientes, vender e faturar, gerir e crescer. Liga-os um a um; a OficinaOS Cloud faz a ponte com a internet.",
+      cta: "Pedir acesso ao piloto",
+      ctaSecondary: "Ver os módulos",
+      frameTitle: "Definições — Cloud",
+      frameCaption:
+        "Recriação ilustrativa do separador Cloud nas definições da OficinaOS, com dados de exemplo: ligada à OficinaOS Cloud, sincronizada há um minuto e com três módulos ativos.",
+      status: "Ligado à OficinaOS Cloud",
+      sync: "Última sincronização: há 1 min",
+      modulesTitle: "Módulos ativos",
+      modules: ["Portal do cliente", "Bot de WhatsApp", "Faturação (InvoiceXpress)"],
+      active: "Ativo",
+      offline: "Sem ligação, tudo o resto continua a funcionar na rede local.",
+    },
+    core: {
+      title: "O núcleo é grátis. Sempre.",
+      lead: "O Pro não tira nada ao programa que descarrega. A OficinaOS é e continuará gratuita e de código aberto — sem limites, sem contas, sem período de teste.",
+      items: [
+        "Reparações, orçamentos, clientes, stock e caixa",
+        "No seu PC, a funcionar sem internet",
+        "Código aberto, licença MIT",
+        "Canal SMS com um Android na loja — grátis, sem Cloud",
+        "OficinaOS Diag — diagnóstico por cabo, grátis",
+      ],
+      link: "Descarregar a OficinaOS",
+    },
+    groups: {
+      title: "Módulos pelo que quer resolver",
+      lead: "Onze módulos em três grupos. Todos opcionais, todos em beta.",
+      smsNote: "grátis, no núcleo",
+      more: "Guia",
+      items: [
+        {
+          title: "Falar com clientes",
+          text: "O cliente sabe em que ponto está a reparação e aprova o orçamento sem telefonar.",
+          ui: {
+            title: "WhatsApp",
+            caption: "Conversa de exemplo com o bot de WhatsApp: o cliente aprova um orçamento respondendo SIM.",
+            messages: [
+              ["in", "Olá, o iPhone já tem orçamento?"],
+              ["out", "REP-2614 · iPhone 13: substituir ecrã — 129,00 €. Responda SIM para aprovar ou NÃO para recusar."],
+              ["in", "SIM"],
+              ["out", "Orçamento aprovado. Avisamos quando estiver pronto."],
+            ],
+          },
+        },
+        {
+          title: "Vender e faturar",
+          text: "Do balcão à fatura certificada, e uma montra online cujas reservas entram na app.",
+          ui: {
+            title: "Venda",
+            caption: "Venda de exemplo na OficinaOS com a fatura-recibo emitida via InvoiceXpress.",
+            lines: [
+              ["Substituição de ecrã · iPhone 13", "129.00"],
+              ["Película de vidro", "9.90"],
+            ],
+            total: "Total (IVA incl.)",
+            issued: "Fatura-recibo emitida · InvoiceXpress",
+            reservation: "Nova reserva da montra",
+            reservationItem: "Capa iPhone 13 — em Pedidos",
+          },
+        },
+        {
+          title: "Gerir e crescer",
+          text: "Compare os seus preços com o mercado, veja várias lojas num painel e receba diagnósticos feitos em casa.",
+          ui: {
+            title: "Preços de mercado",
+            caption: "Tabela de exemplo dos preços de mercado: mediana, intervalo e número de lojas ao lado do seu preço.",
+            head: ["Artigo", "Mediana", "Intervalo", "O seu"],
+            rows: [
+              ["Ecrã iPhone 13", "129", "99–159", "7", "135"],
+              ["Bateria iPhone 12", "59", "45–75", "5", "55"],
+              ["Conector Galaxy A52", "45", "35–60", "3", ""],
+            ],
+            shops: "lojas",
+            note: "Um preço só aparece quando 3 ou mais lojas o partilham.",
+          },
+        },
+      ],
+    },
+    cloud: {
+      title: "A Cloud é o motor do Pro",
+      lead: "A OficinaOS Cloud é a ponte entre a app no seu PC e o exterior. Não é outro programa para aprender: liga-se uma vez e trabalha nos bastidores.",
+      steps: [
+        { title: "Emparelhe uma vez", text: "Crie conta em cloud.oficinaos.app (ou receba o código da equipa) e cole o código de emparelhamento em Definições → Cloud." },
+        { title: "Ative só o que precisa", text: "Cada módulo é ativado do lado do servidor, sem ficheiros de licença. No beta, ativamos nós." },
+        { title: "A app sincroniza sozinha", text: "A cada ~2 minutos envia e recebe o que os módulos ativos precisam. O PC nunca fica exposto à internet." },
+      ],
+      diagram: { pc: "A OficinaOS no seu PC", cloud: "OficinaOS Cloud", out: "Clientes e serviços", sync: "a cada ~2 min" },
+      dataTitle: "O que vai para a Cloud",
+      dataText: "Só os dados que cada módulo ativo precisa — por exemplo, o resumo redigido de uma reparação para o portal. Sem módulos ativos, nada sai do PC.",
+      dataLink: "Privacidade, módulo a módulo",
+      offline: "Sem emparelhamento, a OficinaOS funciona na mesma na rede local — os módulos Pro simplesmente não aparecem.",
+      login: "Já tem conta? Entrar na OficinaOS Cloud",
+    },
+    pricing: {
+      title: "Preços: o estado real",
+      lead: "O Pro está em beta. Durante o piloto, os módulos são grátis enquanto medimos o valor real que trazem. Ainda não há preços anunciados — e não os inventamos aqui.",
+      caption: "Estado e preço de cada parte da OficinaOS",
+      head: ["O quê", "Estado", "Preço"],
+      rows: [
+        ["App completa (núcleo)", "Grátis para sempre", "0 €"],
+        ["OficinaOS Diag", "Grátis para sempre", "0 €"],
+        ["Canal SMS (Android na loja)", "No núcleo", "0 €"],
+        ["Módulos Pro (portal, WhatsApp, faturação, montra…)", "Beta", "A anunciar — grátis no piloto"],
+        ["Relatórios IA", "Beta", "A anunciar — por relatório"],
+      ],
+      notes: [
+        "Quando os preços forem anunciados, serão subscrições mensais simples — sem fidelização e sem custos escondidos.",
+        "Quem entrar no piloto tem 90 dias grátis de todos os módulos quando o Pro arrancar.",
+        "Custos de terceiros não são nossos: a conta InvoiceXpress é sua; as mensagens modelo do WhatsApp fora da janela de 24 h são cobradas pela Meta.",
+      ],
+      scrollLabel: "Tabela com scroll horizontal",
+    },
+    form: { title: "Entrar no piloto Pro" },
+    faq: {
+      title: "Perguntas frequentes",
+      items: [
+        { q: "A OficinaOS vai deixar de ser grátis?", a: "Não. O programa é de código aberto (MIT) e o núcleo nunca fica atrás de um pagamento. O Pro só acrescenta o que precisa de internet." },
+        { q: "Preciso do Pro para usar a OficinaOS?", a: "Não. Reparações, orçamentos, clientes, stock, caixa e o canal SMS funcionam sem Pro e sem internet." },
+        { q: "O Pro é só para lojas?", a: "Não. É para quem repara, diagnostica ou revende: técnicos independentes, oficinas e revendedores. A faturação certificada é só para Portugal." },
+        { q: "O que acontece se desligar a Cloud?", a: "A app continua a funcionar na rede local com todos os seus dados; os módulos Pro deixam de aparecer. Desligar a partilha de preços apaga da Cloud os preços enviados." },
+        { q: "Como entro no piloto?", a: "Deixe o contacto no formulário. Falamos consigo, ajudamos a emparelhar e ativamos os módulos que fizerem sentido." },
+      ],
     },
   },
   footer: {

@@ -7,16 +7,16 @@ export const PRODUCT_IDS: ProductId[] = ["os", "diag", "pro", "trade"];
 
 export const TRADE_URL = "https://trade.oficinaos.app/";
 
-/** Destino de cada produto. /diag e /pro ganham página própria nas fases 3–4;
- *  até lá apontam para o que existe hoje. A Cloud vive dentro do Pro. */
+/** Destino de cada produto. Diag e Pro têm página própria desde a fase 3
+ *  (a documentação do Diag continua em /docs/diag/). A Cloud vive dentro do Pro. */
 export function productHref(id: ProductId, locale: Locale): string {
   switch (id) {
     case "os":
       return localeUrl(locale);
     case "diag":
-      return localeUrl(locale, "/docs/diag/");
+      return localeUrl(locale, "/diag/");
     case "pro":
-      return `${localeUrl(locale)}#pro`;
+      return localeUrl(locale, "/pro/");
     case "trade":
       return TRADE_URL;
   }

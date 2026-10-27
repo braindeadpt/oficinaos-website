@@ -1,0 +1,318 @@
+---
+// /pro (fase 3): hero (a app ligada à Cloud) → núcleo sempre grátis → módulos por objetivo, cada
+// grupo com a sua mini-UI → a Cloud como motor → preços (estado real, sem números inventados) →
+// formulário do piloto → FAQ. Não há página de marketing da Cloud: vive aqui.
+import type { Copy } from "../../i18n/pt";
+import type { Locale } from "../../i18n/utils";
+import { CLOUD_URL, localeUrl } from "../../i18n/utils";
+import Footer from "../Footer.astro";
+import Icon from "../Icon.astro";
+import Nav from "../Nav.astro";
+import DataTable from "../ui/DataTable.astro";
+import Faq from "../ui/Faq.astro";
+import Heading from "../ui/Heading.astro";
+import Section from "../ui/Section.astro";
+import UiFrame from "../ui/UiFrame.astro";
+import BetaSignup from "./BetaSignup.astro";
+
+interface Props {
+  t: Copy;
+  locale: Locale;
+}
+const { t, locale } = Astro.props;
+const p = t.proPage;
+const h = p.hero;
+const langTag = locale === "pt" ? "pt-PT" : locale === "es" ? "es-ES" : "en-IE";
+const money = new Intl.NumberFormat(langTag, { style: "currency", currency: "EUR" });
+const moneyInt = new Intl.NumberFormat(langTag, { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
+// Índices de t.pro.modules por grupo: falar com clientes · vender/faturar · gerir/crescer.
+const groupIdx = [
+  [0, 1, 2, 10],
+  [5, 6, 7],
+  [8, 9, 3, 4],
+];
+const SMS = 2;
+const g = p.groups.items;
+const sale = g[1].ui;
+const saleTotal = sale.lines.reduce((s, [, v]) => s + Number(v), 0);
+const mkt = g[2].ui;
+const check = '<path d="m5 13 4 4L19 7"/>';
+---
+
+<Nav t={t} locale={locale} />
+<main id="main" tabindex="-1" data-product="pro">
+  <section class="relative isolate overflow-x-clip" aria-labelledby="pro-hero-title">
+    <div class="bg-tech-grid tech-grid-fade pointer-events-none absolute inset-0 -z-10" aria-hidden="true"></div>
+    <div class="mx-auto grid max-w-7xl items-center gap-12 px-4 pt-10 pb-16 sm:px-6 sm:pt-16 lg:grid-cols-[minmax(0,6fr)_minmax(0,6fr)] lg:gap-14 lg:pt-20 lg:pb-24">
+      <div class="min-w-0">
+        <p class="flex flex-wrap items-center gap-3 text-sm font-semibold text-product">
+          <span class="inline-flex items-center gap-2">
+            <span class="h-2.5 w-2.5 rounded-[3px] bg-product" aria-hidden="true"></span>
+            {h.label}
+          </span>
+          <span class="rounded-full bg-product-soft px-2.5 py-0.5 text-xs font-semibold text-on-product-soft">{t.pro.badge}</span>
+        </p>
+        <h1 id="pro-hero-title" class="mt-3 text-[clamp(2.25rem,5.2vw,3.5rem)] leading-[1.05] font-extrabold tracking-[-0.03em] text-balance text-text">
+          {h.title}
+        </h1>
+        <p class="mt-5 max-w-xl text-pretty text-lg text-text-muted sm:text-xl">{h.subtitle}</p>
+        <div class="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:gap-5">
+          <a
+            href="#beta"
+            class="inline-flex h-12 items-center justify-center gap-2 whitespace-nowrap rounded-md bg-product px-5 text-md font-semibold text-on-product shadow-sm transition-colors hover:bg-product-hover"
+          >
+            {h.cta}
+            <Icon name="arrow" class="h-4 w-4" />
+          </a>
+          <a
+            href="#modules"
+            class="inline-flex h-12 items-center justify-center whitespace-nowrap rounded-md px-2 text-md font-semibold text-link underline decoration-border-strong underline-offset-4 transition-colors hover:text-primary-hover sm:justify-start"
+          >
+            {h.ctaSecondary}
+          </a>
+        </div>
+      </div>
+
+      <div class="min-w-0">
+        <UiFrame title={h.frameTitle} product="pro" caption={h.frameCaption} vt="vt-product-pro" class="mx-auto max-w-xl">
+          <div class="p-4 text-sm sm:p-5" aria-hidden="true">
+            <div class="flex items-center gap-3 rounded-lg border border-border bg-surface-2 p-3">
+              <span class="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-product-soft text-on-product-soft">
+                <Icon name="globe" class="h-5 w-5" />
+              </span>
+              <span class="min-w-0 flex-1">
+                <span class="block font-semibold text-text">{h.status}</span>
+                <span class="block text-xs text-text-muted">{h.sync}</span>
+              </span>
+              <span class="h-2.5 w-2.5 shrink-0 rounded-full bg-success"></span>
+            </div>
+            <p class="mt-4 text-xs font-semibold text-text-muted">{h.modulesTitle}</p>
+            <ul role="list" class="mt-2 divide-y divide-border rounded-lg border border-border">
+              {
+                h.modules.map((m) => (
+                  <li class="flex items-center justify-between gap-3 px-3 py-2.5">
+                    <span class="truncate font-medium text-text">{m}</span>
+                    <span class="inline-flex shrink-0 items-center gap-1 rounded-full bg-success-soft px-2 py-0.5 text-xs font-semibold text-on-success-soft">
+                      <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" set:html={check} />
+                      {h.active}
+                    </span>
+                  </li>
+                ))
+              }
+            </ul>
+            <p class="mt-3 text-xs text-text-muted">{h.offline}</p>
+          </div>
+        </UiFrame>
+      </div>
+    </div>
+  </section>
+
+  <Section id="core" tone="raised" labelledby="core-title" product="os">
+    <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
+      <div class="min-w-0">
+        <Heading id="core-title">
+          {p.core.title}
+          <Fragment slot="lead">{p.core.lead}</Fragment>
+        </Heading>
+        <a href={localeUrl(locale, "/download/")} class="mt-6 inline-flex items-center gap-1.5 font-semibold text-link underline underline-offset-4 hover:text-primary-hover">
+          {p.core.link}
+          <Icon name="arrow" class="h-4 w-4" />
+        </a>
+      </div>
+      <ul role="list" class="reveal min-w-0 space-y-3">
+        {
+          p.core.items.map((it) => (
+            <li class="flex items-start gap-3 rounded-lg border border-border bg-bg px-4 py-3 text-text">
+              <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-product text-on-product" aria-hidden="true">
+                <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" set:html={check} />
+              </span>
+              {it}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </Section>
+
+  <Section id="modules" width="wide" product="pro" labelledby="modules-title">
+    <Heading id="modules-title">
+      {p.groups.title}
+      <Fragment slot="lead">{p.groups.lead}</Fragment>
+    </Heading>
+    <div class="mt-12 space-y-16 lg:space-y-24">
+      {
+        g.map((grp, gi) => (
+          <div class="pro-group grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-14">
+            <div class:list={["min-w-0", gi === 1 && "lg:order-2"]}>
+              <h3 class="text-[clamp(1.375rem,2.4vw,1.75rem)] leading-tight font-bold tracking-[-0.02em] text-balance text-text">{grp.title}</h3>
+              <p class="mt-3 max-w-prose text-pretty text-lg text-text-muted">{grp.text}</p>
+              <ul role="list" class="mt-6 divide-y divide-border border-y border-border">
+                {groupIdx[gi].map((i) => {
+                  const m = t.pro.modules[i];
+                  return (
+                    <li class="py-3">
+                      <p class="flex flex-wrap items-center gap-x-3 gap-y-1">
+                        <a href={localeUrl(locale, m.href)} class="group inline-flex items-center gap-1.5 font-semibold text-text transition-colors hover:text-link">
+                          {m.title}
+                          <Icon name="arrow" class="h-3.5 w-3.5 text-text-subtle transition-colors group-hover:text-link" />
+                        </a>
+                        {i === SMS && (
+                          <span class="rounded-full bg-success-soft px-2 py-0.5 text-xs font-semibold text-on-success-soft">{p.groups.smsNote}</span>
+                        )}
+                      </p>
+                      <p class="mt-0.5 text-sm text-text-muted">{m.desc}</p>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+
+            <div class:list={["reveal min-w-0", gi === 1 && "lg:order-1"]}>
+              <UiFrame title={grp.ui.title} product="pro" caption={grp.ui.caption} class="mx-auto max-w-lg">
+                {gi === 0 && (
+                  <ol role="list" class="space-y-2.5 bg-surface-2 p-4 text-sm sm:p-5" aria-hidden="true">
+                    {g[0].ui.messages.map(([who, text]) => (
+                      <li class:list={["flex", who === "in" ? "justify-end" : "justify-start"]}>
+                        <p
+                          class:list={[
+                            "max-w-[85%] rounded-2xl px-3.5 py-2",
+                            who === "in"
+                              ? "rounded-br-sm bg-product-soft text-on-product-soft"
+                              : "rounded-bl-sm border border-border bg-surface text-text",
+                          ]}
+                        >
+                          {text}
+                        </p>
+                      </li>
+                    ))}
+                  </ol>
+                )}
+                {gi === 1 && (
+                  <div class="p-4 text-sm sm:p-5" aria-hidden="true">
+                    <ul role="list" class="divide-y divide-border rounded-lg border border-border">
+                      {sale.lines.map(([label, v]) => (
+                        <li class="flex items-center justify-between gap-3 px-3 py-2">
+                          <span class="min-w-0 truncate text-text">{label}</span>
+                          <span class="num shrink-0 text-text">{money.format(Number(v))}</span>
+                        </li>
+                      ))}
+                      <li class="flex items-center justify-between gap-3 bg-surface-2 px-3 py-2 font-semibold">
+                        <span class="text-text">{sale.total}</span>
+                        <span class="num text-text">{money.format(saleTotal)}</span>
+                      </li>
+                    </ul>
+                    <p class="mt-3 inline-flex items-center gap-1.5 rounded-full bg-success-soft px-2.5 py-1 text-xs font-semibold text-on-success-soft">
+                      <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" set:html={check} />
+                      {sale.issued}
+                    </p>
+                    <div class="mt-4 rounded-lg border border-dashed border-border-strong p-3">
+                      <p class="text-xs font-semibold text-product">{sale.reservation}</p>
+                      <p class="mt-0.5 text-text">{sale.reservationItem}</p>
+                    </div>
+                  </div>
+                )}
+                {gi === 2 && (
+                  <div class="p-4 text-sm sm:p-5" aria-hidden="true">
+                    <div class="overflow-hidden rounded-lg border border-border">
+                      <div class="grid grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,0.8fr)] gap-2 bg-surface-2 px-3 py-2 text-xs font-semibold text-text-muted">
+                        {mkt.head.map((c, i) => <span class:list={[i > 0 && "text-right"]}>{c}</span>)}
+                      </div>
+                      {mkt.rows.map(([item, med, range, shops, yours]) => (
+                        <div class="grid grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,0.8fr)] items-center gap-2 border-t border-border px-3 py-2">
+                          <span class="min-w-0 truncate text-text">{item}</span>
+                          <span class="num text-right">
+                            <span class="block font-semibold text-text">{moneyInt.format(Number(med))}</span>
+                            <span class="block text-xs text-text-muted">{shops} {mkt.shops}</span>
+                          </span>
+                          <span class="num text-right text-text-muted">{range}</span>
+                          <span class="num text-right font-semibold text-text">{yours ? moneyInt.format(Number(yours)) : "—"}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <p class="mt-3 text-xs text-text-muted">{mkt.note}</p>
+                  </div>
+                )}
+              </UiFrame>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </Section>
+
+  <Section id="cloud" tone="raised" product="pro" labelledby="cloud-title">
+    <Heading id="cloud-title">
+      {p.cloud.title}
+      <Fragment slot="lead">{p.cloud.lead}</Fragment>
+    </Heading>
+
+    <div class="reveal mt-10 grid items-stretch gap-3 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)]" aria-hidden="true">
+      <div class="rounded-lg border border-border bg-bg p-4 text-center">
+        <Icon name="tablet" class="mx-auto h-6 w-6 text-text-muted" />
+        <p class="mt-2 font-semibold text-text">{p.cloud.diagram.pc}</p>
+      </div>
+      <div class="grid place-items-center px-2 text-xs font-semibold text-text-muted">
+        <span class="flex items-center gap-1.5">
+          <svg class="cloud-arrow h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h12l-3-3" /><path d="M17 17H5l3 3" /></svg>
+          {p.cloud.diagram.sync}
+        </span>
+      </div>
+      <div class="rounded-lg border-2 border-product bg-product-soft p-4 text-center text-on-product-soft">
+        <Icon name="globe" class="mx-auto h-6 w-6" />
+        <p class="mt-2 font-bold">{p.cloud.diagram.cloud}</p>
+      </div>
+      <div class="grid place-items-center px-2 text-text-muted">
+        <svg class="cloud-arrow h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h12l-3-3" /><path d="M17 17H5l3 3" /></svg>
+      </div>
+      <div class="rounded-lg border border-border bg-bg p-4 text-center">
+        <Icon name="message" class="mx-auto h-6 w-6 text-text-muted" />
+        <p class="mt-2 font-semibold text-text">{p.cloud.diagram.out}</p>
+      </div>
+    </div>
+
+    <ol role="list" class="mt-10 grid gap-8 md:grid-cols-3">
+      {
+        p.cloud.steps.map((s, i) => (
+          <li>
+            <span class="num grid h-8 w-8 place-items-center rounded-full bg-product-soft text-sm font-bold text-on-product-soft" aria-hidden="true">{i + 1}</span>
+            <h3 class="mt-3 font-display text-lg font-bold text-text">{s.title}</h3>
+            <p class="mt-1 text-base text-text-muted">{s.text}</p>
+          </li>
+        ))
+      }
+    </ol>
+
+    <div class="mt-10 grid gap-6 rounded-xl border border-border bg-bg p-5 sm:p-6 md:grid-cols-2">
+      <div>
+        <h3 class="font-display text-lg font-bold text-text">{p.cloud.dataTitle}</h3>
+        <p class="mt-2 text-base text-text-muted">{p.cloud.dataText}</p>
+        <a href={localeUrl(locale, "/privacy/")} class="mt-3 inline-block text-sm font-semibold text-link underline underline-offset-2 hover:text-primary-hover">{p.cloud.dataLink}</a>
+      </div>
+      <div>
+        <p class="border-l-2 border-product pl-4 text-base text-text">{p.cloud.offline}</p>
+        <a href={CLOUD_URL} class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-link underline underline-offset-2 hover:text-primary-hover">
+          {p.cloud.login}
+          <Icon name="external" class="h-3.5 w-3.5" />
+        </a>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="pricing" width="narrow" product="pro" labelledby="pricing-title">
+    <Heading id="pricing-title">
+      {p.pricing.title}
+      <Fragment slot="lead">{p.pricing.lead}</Fragment>
+    </Heading>
+    <DataTable class="mt-8" caption={p.pricing.caption} label={`${p.pricing.title} — ${p.pricing.scrollLabel}`} head={p.pricing.head} rows={p.pricing.rows} />
+    <ul role="list" class="mt-6 space-y-2 text-sm text-text-muted">
+      {p.pricing.notes.map((n) => <li class="border-l-2 border-border pl-3">{n}</li>)}
+    </ul>
+  </Section>
+
+  <Section width="default" product="pro" pad="md">
+    <BetaSignup t={t} title={p.form.title} />
+  </Section>
+
+  <Faq title={p.faq.title} items={p.faq.items} product="pro" />
+</main>
+<Footer t={t} locale={locale} />

@@ -102,3 +102,22 @@ export function docsJsonLd(t: Copy, locale: string): object[] {
   }
   return out;
 }
+
+/** /diag: SoftwareApplication do OficinaOS Diag — só factos do repo (Windows, grátis, MIT). */
+export function diagJsonLd(t: Copy, url: string): object[] {
+  return [
+    organization,
+    {
+      "@type": "SoftwareApplication",
+      name: "OficinaOS Diag",
+      description: t.diagPage.metaDesc,
+      applicationCategory: "UtilitiesApplication",
+      operatingSystem: "Windows 10/11",
+      url,
+      downloadUrl: "https://github.com/braindeadpt/oficinaos-diag/releases/latest",
+      license: "https://github.com/braindeadpt/oficinaos-diag/blob/main/LICENSE",
+      offers: { "@type": "Offer", price: "0", priceCurrency: "EUR" },
+      publisher: { "@id": `${SITE}/#org` },
+    },
+  ];
+}

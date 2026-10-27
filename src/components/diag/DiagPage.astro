@@ -1,0 +1,214 @@
+---
+// /diag (fase 3): hero (scan a completar-se) → o que faz → relatório de exemplo → ligação à
+// OficinaOS → compatibilidade → FAQ → descarregar. A documentação continua em /docs/diag/.
+import type { Copy } from "../../i18n/pt";
+import type { Locale } from "../../i18n/utils";
+import { DIAG_REPO_URL, localeUrl } from "../../i18n/utils";
+import { getDiagRelease, DIAG_FALLBACK_URL } from "../../lib/diagRelease";
+import { formatDate, formatSize } from "../../lib/release";
+import Footer from "../Footer.astro";
+import Icon from "../Icon.astro";
+import Nav from "../Nav.astro";
+import DataTable from "../ui/DataTable.astro";
+import Faq from "../ui/Faq.astro";
+import Heading from "../ui/Heading.astro";
+import Section from "../ui/Section.astro";
+import UiFrame from "../ui/UiFrame.astro";
+import DiagHero from "./DiagHero.astro";
+import DiagReport from "./DiagReport.astro";
+
+interface Props {
+  t: Copy;
+  locale: Locale;
+}
+const { t, locale } = Astro.props;
+const d = t.diagPage;
+const langTag = locale === "pt" ? "pt-PT" : locale === "es" ? "es-ES" : "en-GB";
+const rel = await getDiagRelease();
+const relDate = rel ? formatDate(rel.date, langTag) : null;
+const relSize = rel ? formatSize(rel.zipSize, langTag) : null;
+const directZip = !!rel && rel.zipUrl !== rel.url;
+---
+
+<Nav t={t} locale={locale} />
+<main id="main" tabindex="-1" data-product="diag">
+  <DiagHero t={t} locale={locale} />
+
+  <Section id="capabilities" product="diag" labelledby="caps-title">
+    <Heading id="caps-title">
+      {d.caps.title}
+      <Fragment slot="lead">{d.caps.lead}</Fragment>
+    </Heading>
+    <ul role="list" class="reveal mt-12 grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        d.caps.free.map((c) => (
+          <li class="border-t-2 border-product pt-4">
+            <h3 class="font-display text-lg font-bold tracking-[-0.01em] text-text">{c.title}</h3>
+            <p class="mt-2 text-pretty text-base text-text-muted">{c.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+    <div data-product="pro" class="reveal mt-12 rounded-xl border border-border bg-surface p-5 sm:p-6">
+      <p class="flex flex-wrap items-center gap-3">
+        <span class="font-display text-lg font-bold text-text">{d.caps.proTitle}</span>
+        <span class="rounded-full bg-product-soft px-2.5 py-0.5 text-xs font-semibold text-on-product-soft">{d.caps.proBadge}</span>
+      </p>
+      <ul role="list" class="mt-4 grid gap-6 sm:grid-cols-2">
+        {
+          d.caps.pro.map((c) => (
+            <li>
+              <h3 class="font-semibold text-text">{c.title}</h3>
+              <p class="mt-1 text-sm text-text-muted">{c.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </Section>
+
+  <DiagReport t={t} locale={locale} />
+
+  <Section id="integration" product="diag" labelledby="integration-title">
+    <div class="grid gap-12 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] lg:items-center">
+      <div class="min-w-0">
+        <Heading id="integration-title">
+          {d.integration.title}
+          <Fragment slot="lead">{d.integration.lead}</Fragment>
+        </Heading>
+        <ol role="list" class="mt-8 space-y-6">
+          {
+            d.integration.steps.map((s, i) => (
+              <li class="grid grid-cols-[2rem_minmax(0,1fr)] gap-4">
+                <span class="num grid h-8 w-8 place-items-center rounded-full bg-product-soft text-sm font-bold text-on-product-soft" aria-hidden="true">
+                  {i + 1}
+                </span>
+                <div>
+                  <h3 class="font-display text-lg font-bold text-text">{s.title}</h3>
+                  <p class="mt-1 text-base text-text-muted">{s.text}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+        <p class="mt-6 text-sm text-text-muted">{d.integration.uses}</p>
+        <p class="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold">
+          <a href={localeUrl(locale, "/pro/")} class="inline-flex items-center gap-1.5 text-link underline underline-offset-2 hover:text-primary-hover">
+            {d.integration.proLink}
+          </a>
+          <a href={localeUrl(locale, "/docs/diag/")} class="text-link underline underline-offset-2 hover:text-primary-hover">{d.integration.docsLink}</a>
+        </p>
+      </div>
+      <div class="reveal min-w-0">
+        <UiFrame title={d.integration.queue.title} caption={d.integration.queue.caption} class="mx-auto max-w-lg">
+          <div class="p-4 text-sm sm:p-5" aria-hidden="true">
+            <div class="rounded-lg border border-border bg-surface-2 p-3.5">
+              <p class="flex items-start justify-between gap-3">
+                <span class="min-w-0">
+                  <span class="block font-semibold text-text">{d.integration.queue.item}</span>
+                  <span class="num mt-0.5 block text-xs text-text-muted">{d.integration.queue.meta}</span>
+                </span>
+                <span data-product="diag" class="shrink-0 rounded-md bg-product-soft px-2 py-0.5 text-xs font-semibold text-on-product-soft">{d.integration.queue.tag}</span>
+              </p>
+              <span class="mt-3 inline-flex h-8 items-center rounded-md bg-primary px-3 text-xs font-semibold text-on-primary">{d.integration.queue.action}</span>
+            </div>
+          </div>
+        </UiFrame>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="compatibility" tone="raised" product="diag" labelledby="compat-title">
+    <Heading id="compat-title">
+      {d.compat.title}
+      <Fragment slot="lead">{d.compat.lead}</Fragment>
+    </Heading>
+    <div class="mt-10 grid gap-10 lg:grid-cols-2">
+      <div class="min-w-0">
+        <h3 class="font-display text-lg font-bold text-text">{d.compat.readTitle}</h3>
+        <DataTable class="mt-4" caption={d.compat.readCaption} label={`${d.compat.readTitle} — ${d.compat.scrollLabel}`} head={d.compat.readHead} rows={d.compat.readRows} />
+      </div>
+      <div class="min-w-0">
+        <h3 class="font-display text-lg font-bold text-text">{d.compat.reqTitle}</h3>
+        <DataTable class="mt-4" caption={d.compat.reqCaption} label={`${d.compat.reqTitle} — ${d.compat.scrollLabel}`} head={d.compat.reqHead} rows={d.compat.reqRows} />
+      </div>
+    </div>
+  </Section>
+
+  <Faq title={d.faq.title} items={d.faq.items} product="diag" />
+
+  <Section id="download" tone="grid" product="diag" labelledby="diag-dl-title" class="scroll-mt-16 border-t border-border">
+    <div class="grid gap-10 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)]">
+      <div class="min-w-0">
+        <Heading id="diag-dl-title">
+          {d.download.title}
+          <Fragment slot="lead">{d.download.lead}</Fragment>
+        </Heading>
+        <div class="mt-8">
+          <a
+            href={directZip ? rel!.zipUrl : rel?.url ?? DIAG_FALLBACK_URL}
+            class="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-product px-5 text-md font-semibold text-on-product shadow-sm transition-colors hover:bg-product-hover"
+          >
+            <Icon name="download" class="h-4 w-4" />
+            {directZip ? d.download.button : d.download.buttonFallback}
+          </a>
+        </div>
+        {
+          rel && (
+            <dl class="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-sm">
+              <div class="flex gap-1.5">
+                <dt class="text-text-muted">{d.download.version}</dt>
+                <dd>
+                  <a href={rel.url} class="num font-mono text-text underline underline-offset-2 hover:text-link">{rel.version}</a>
+                </dd>
+              </div>
+              {relDate && (
+                <div class="flex gap-1.5">
+                  <dt class="text-text-muted">{d.download.released}</dt>
+                  <dd class="text-text">{relDate}</dd>
+                </div>
+              )}
+              {relSize && (
+                <div class="flex gap-1.5">
+                  <dt class="text-text-muted">{d.download.size}</dt>
+                  <dd class="num text-text">{relSize}</dd>
+                </div>
+              )}
+            </dl>
+          )
+        }
+        <p class="mt-4 text-sm text-text-muted">{d.download.store}</p>
+      </div>
+      <div class="min-w-0">
+        <ol role="list" class="space-y-4">
+          {
+            d.download.steps.map((s, i) => (
+              <li class="grid grid-cols-[2rem_minmax(0,1fr)] gap-3">
+                <span class="num grid h-8 w-8 place-items-center rounded-full border border-border bg-surface text-sm font-bold text-text" aria-hidden="true">
+                  {i + 1}
+                </span>
+                <p class="pt-1 text-base text-text">{s}</p>
+              </li>
+            ))
+          }
+        </ol>
+        <ul role="list" class="mt-6 space-y-2 text-sm font-semibold">
+          {
+            rel?.sumsUrl && (
+              <li>
+                <a href={rel.sumsUrl} class="text-link underline underline-offset-2 hover:text-primary-hover">{d.download.sums}</a>
+              </li>
+            )
+          }
+          <li>
+            <a href={localeUrl(locale, "/docs/diag/")} class="text-link underline underline-offset-2 hover:text-primary-hover">{d.download.docs}</a>
+          </li>
+          <li>
+            <a href={DIAG_REPO_URL} class="text-link underline underline-offset-2 hover:text-primary-hover">{d.download.source}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </Section>
+</main>
+<Footer t={t} locale={locale} />
