@@ -2,7 +2,6 @@ import type { Copy } from "./pt";
 import {
   BACKUP_DOCS_URL,
   DIAG_REPO_URL,
-  DIAG_STORE_URL,
   DIAG_ZIP_URL,
   DOCS_MOBILE_URL,
   DOCS_REMOTE_URL,
@@ -587,7 +586,7 @@ export const t: Copy = {
         heading: "Precios",
         paragraphs: [
           "La app completa es gratuita y open source (MIT) — sin límites, sin cuentas, sin periodo de prueba. Para siempre.",
-          "Los módulos Pro están en beta: durante este periodo, las tiendas piloto los usan gratis mientras medimos el valor real que aportan al mostrador. Cuando se anuncien los precios serán suscripciones mensuales sencillas — sin permanencia ni costes ocultos.",
+          "Los módulos Pro están en beta: durante este periodo, quienes están en el piloto los usan gratis mientras medimos el valor real que aportan al mostrador. Cuando se anuncien los precios serán suscripciones mensuales sencillas — sin permanencia ni costes ocultos.",
           "* Nota WhatsApp: responder a clientes dentro de la ventana de 24h es gratis. Para notificaciones proactivas («está lista») fuera de esa ventana, Meta cobra pequeños importes por mensaje plantilla — coste de Meta, no nuestro.",
         ],
         table: {
@@ -908,13 +907,12 @@ export const t: Copy = {
         "La herramienta Windows gratuita que lee cualquier Android o iPhone por cable — el scan local es siempre gratis; el envío a la tienda y los informes IA son módulos Pro.",
       sections: [
         {
-          heading: "Instalación — Microsoft Store",
+          heading: "Instalación",
           paragraphs: [
-            "La forma más sencilla: instala desde la Microsoft Store — un clic, sin aviso SmartScreen y con actualizaciones automáticas. Gratis.",
-            "Alternativa portátil: descarga el zip, extrae la carpeta entera (el exe necesita los archivos de al lado) y ejecuta OficinaDiag.exe — Windows puede mostrar el aviso SmartScreen en la primera ejecución: «Más información» → «Ejecutar de todas formas».",
+            "El Diag se distribuye como ZIP portátil en GitHub, gratis. Todavía no está en la Microsoft Store: el envío espera la aprobación de Microsoft.",
+            "Descarga el zip, extrae la carpeta entera (el exe necesita los archivos de al lado) y ejecuta OficinaDiag.exe — Windows puede mostrar el aviso SmartScreen en la primera ejecución: «Más información» → «Ejecutar de todas formas».",
           ],
           links: [
-            { label: "Microsoft Store", href: DIAG_STORE_URL },
             { label: "ZIP portable (GitHub)", href: DIAG_ZIP_URL },
             { label: "Código fuente en GitHub", href: DIAG_REPO_URL },
           ],

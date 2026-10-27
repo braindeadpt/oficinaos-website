@@ -204,14 +204,14 @@ export const UPDATES: UpdateEntry[] = [
     tier: "diag",
     area: { pt: "OficinaOS Diag", en: "OficinaOS Diag", es: "OficinaOS Diag" },
     title: {
-      pt: "Inglês + 3 temas + Microsoft Store",
-      en: "English + 3 themes + Microsoft Store",
-      es: "Inglés + 3 temas + Microsoft Store",
+      pt: "Inglês + 3 temas",
+      en: "English + 3 themes",
+      es: "Inglés + 3 temas",
     },
     desc: {
-      pt: "O Diag fala português e inglês, oferece três temas (Terminal, Windows 95, Moderno) e passa a estar disponível na Microsoft Store — instalação sem aviso SmartScreen.",
-      en: "Diag speaks Portuguese and English, offers three themes (Terminal, Windows 95, Modern) and is now on the Microsoft Store — install without the SmartScreen warning.",
-      es: "Diag habla portugués e inglés, ofrece tres temas (Terminal, Windows 95, Moderno) y ahora está en la Microsoft Store — instalación sin aviso SmartScreen.",
+      pt: "O Diag fala português e inglês, oferece três temas (Terminal, Windows 95, Moderno) e foi submetido à Microsoft Store (aguarda aprovação).",
+      en: "Diag speaks Portuguese and English, offers three themes (Terminal, Windows 95, Modern) and has been submitted to the Microsoft Store (awaiting approval).",
+      es: "Diag habla portugués e inglés, ofrece tres temas (Terminal, Windows 95, Moderno) y se ha enviado a la Microsoft Store (pendiente de aprobación).",
     },
   },
   {

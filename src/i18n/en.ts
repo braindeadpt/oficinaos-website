@@ -2,7 +2,6 @@ import type { Copy } from "./pt";
 import {
   BACKUP_DOCS_URL,
   DIAG_REPO_URL,
-  DIAG_STORE_URL,
   DIAG_ZIP_URL,
   DOCS_MOBILE_URL,
   DOCS_REMOTE_URL,
@@ -585,7 +584,7 @@ export const t: Copy = {
         heading: "Pricing",
         paragraphs: [
           "The full app is free and open source (MIT) — no limits, no accounts, no trial period. Forever.",
-          "Pro modules are in beta: during this period, pilot shops use them for free while we measure the real value they bring to the counter. When prices are announced they'll be simple monthly subscriptions — no lock-in, no hidden costs.",
+          "Pro modules are in beta: during this period, pilot members use them for free while we measure the real value they bring to the counter. When prices are announced they'll be simple monthly subscriptions — no lock-in, no hidden costs.",
           "* WhatsApp note: replying to customers within the 24-hour window is free. Proactive notifications («it's ready») outside that window need Meta-approved templates, which carry small per-message fees — Meta's cost, not ours.",
         ],
         table: {
@@ -904,13 +903,12 @@ export const t: Copy = {
         "The free Windows tool that reads any Android or iPhone over USB — local scans are always free; send-to-shop and AI reports are Pro modules.",
       sections: [
         {
-          heading: "Install — Microsoft Store",
+          heading: "Install",
           paragraphs: [
-            "The easiest way: install from the Microsoft Store — one click, no SmartScreen warning, automatic updates. Free.",
-            "Portable alternative: download the zip, extract the whole folder (the exe needs the files next to it) and run OficinaDiag.exe — Windows may show a SmartScreen warning on first run: «More info» → «Run anyway».",
+            "Diag ships as a free portable ZIP on GitHub. It isn't on the Microsoft Store yet: the submission is awaiting Microsoft's approval.",
+            "Download the zip, extract the whole folder (the exe needs the files next to it) and run OficinaDiag.exe — Windows may show a SmartScreen warning on first run: «More info» → «Run anyway».",
           ],
           links: [
-            { label: "Microsoft Store", href: DIAG_STORE_URL },
             { label: "Portable ZIP (GitHub)", href: DIAG_ZIP_URL },
             { label: "Source code on GitHub", href: DIAG_REPO_URL },
           ],
