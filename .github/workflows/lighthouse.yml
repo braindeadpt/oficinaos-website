@@ -1,0 +1,49 @@
+name: Lighthouse CI
+
+# Corre em cada PR para main: build, serve o dist/ e mede /, /en/ e /docs/diag/
+# (3 execuções cada, perfil mobile por omissão do Lighthouse). Falha se a mediana de
+# qualquer categoria ficar abaixo de 95. Não faz deploy.
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lighthouse-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+        env:
+          # Só para ler as estrelas do repositório no build (evita o rate-limit anónimo).
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Lighthouse — recolher (3 execuções × 3 páginas)
+        run: npx --yes @lhci/cli@0.15.1 collect
+      - name: Métricas por execução (FCP / LCP / TBT / CLS)
+        if: always()
+        run: |
+          node tools/lhci-summary.mjs | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Lighthouse — verificar limites (mediana ≥ 95)
+        run: npx --yes @lhci/cli@0.15.1 assert
+      - name: Guardar relatórios HTML
+        if: always()
+        run: npx --yes @lhci/cli@0.15.1 upload
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lighthouse-reports
+          path: .lighthouseci/
+          retention-days: 14

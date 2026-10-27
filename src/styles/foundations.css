@@ -1,0 +1,364 @@
+/*
+ * Fundações do redesign (fase 1) — extensões do Parafuso só para o site.
+ * Não é gerado: tokens.css / tokens.theme.css continuam a vir do design system.
+ *
+ *  1. Tokens de movimento (--dur-*, --ease-*)
+ *  2. Acento por produto (OficinaOS azul · Diag ciano · Pro âmbar · Trade lima), claro + escuro
+ *  3. Utilitários: grelha técnica, números tabulares, tabelas/código com scroll horizontal
+ *  4. Sistema de movimento: reveal ao fazer scroll, @starting-style, view transitions entre páginas
+ *
+ * Regras (trends-2026 §3.2): conteúdo visível por omissão; só transform/opacity;
+ * prefers-reduced-motion desliga translações e deixa crossfades ≤ 150 ms.
+ * Sem atributos style= nem <style> inline (a CSP serve style-src 'self').
+ */
+
+/* ───────────────────────── 1 · Movimento ───────────────────────── */
+:root {
+  --dur-1: 120ms; /* hover, pressionado */
+  --dur-2: 220ms; /* UI: menus, popovers, diálogos */
+  --dur-3: 480ms; /* entradas de conteúdo */
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.6, 0, 0.2, 1);
+  --reveal-distance: 16px;
+}
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-2: 120ms;
+    --dur-3: 150ms;
+    --reveal-distance: 0px;
+  }
+}
+
+/* ───────────────────── 2 · Acento por produto ───────────────────── */
+/* Contraste verificado (WCAG 2.x): acento como texto ≥ 4,5:1 em bg, surface e surface-2;
+   on-* sobre o acento (e sobre o hover) ≥ 4,5:1; on-soft sobre soft ≥ 4,5:1.
+   Tabela completa no PR da fase 1. */
+:root {
+  --oos-product-os: #1d4ed8;
+  --oos-product-os-hover: #1a3fb0;
+  --oos-product-os-on: #ffffff;
+  --oos-product-os-soft: #e6edff;
+  --oos-product-os-on-soft: #1a3daa;
+
+  --oos-product-diag: #0e7490;
+  --oos-product-diag-hover: #155e75;
+  --oos-product-diag-on: #ffffff;
+  --oos-product-diag-soft: #ddf4f8;
+  --oos-product-diag-on-soft: #0b5567;
+
+  --oos-product-pro: #a14e00;
+  --oos-product-pro-hover: #853f00;
+  --oos-product-pro-on: #ffffff;
+  --oos-product-pro-soft: #fcefd9;
+  --oos-product-pro-on-soft: #7a3c00;
+
+  --oos-product-trade: #44700d;
+  --oos-product-trade-hover: #365a0b;
+  --oos-product-trade-on: #ffffff;
+  --oos-product-trade-soft: #e8f5d0;
+  --oos-product-trade-on-soft: #365314;
+
+  /* Linhas da grelha técnica */
+  --oos-grid-minor: rgb(17 24 39 / 0.045);
+  --oos-grid-major: rgb(17 24 39 / 0.07);
+}
+
+/* Escuro: mesmo padrão duplo do tokens.css (sistema + data-theme forçado). */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not(.light) {
+    --oos-product-os: #7da0ff;
+    --oos-product-os-hover: #9db7ff;
+    --oos-product-os-on: #0b1120;
+    --oos-product-os-soft: #1a2552;
+    --oos-product-os-on-soft: #b6c8ff;
+
+    --oos-product-diag: #22d3ee;
+    --oos-product-diag-hover: #67e8f9;
+    --oos-product-diag-on: #0b1120;
+    --oos-product-diag-soft: #0c2e38;
+    --oos-product-diag-on-soft: #a5f0fc;
+
+    --oos-product-pro: #fbbf24;
+    --oos-product-pro-hover: #fcd34d;
+    --oos-product-pro-on: #0b1120;
+    --oos-product-pro-soft: #33240a;
+    --oos-product-pro-on-soft: #fddc8a;
+
+    --oos-product-trade: #a3e635;
+    --oos-product-trade-hover: #bef264;
+    --oos-product-trade-on: #0b1120;
+    --oos-product-trade-soft: #1f2d0c;
+    --oos-product-trade-on-soft: #d4f7a0;
+
+    --oos-grid-minor: rgb(232 237 246 / 0.04);
+    --oos-grid-major: rgb(232 237 246 / 0.07);
+  }
+}
+:root[data-theme="dark"],
+:root.dark {
+  --oos-product-os: #7da0ff;
+  --oos-product-os-hover: #9db7ff;
+  --oos-product-os-on: #0b1120;
+  --oos-product-os-soft: #1a2552;
+  --oos-product-os-on-soft: #b6c8ff;
+
+  --oos-product-diag: #22d3ee;
+  --oos-product-diag-hover: #67e8f9;
+  --oos-product-diag-on: #0b1120;
+  --oos-product-diag-soft: #0c2e38;
+  --oos-product-diag-on-soft: #a5f0fc;
+
+  --oos-product-pro: #fbbf24;
+  --oos-product-pro-hover: #fcd34d;
+  --oos-product-pro-on: #0b1120;
+  --oos-product-pro-soft: #33240a;
+  --oos-product-pro-on-soft: #fddc8a;
+
+  --oos-product-trade: #a3e635;
+  --oos-product-trade-hover: #bef264;
+  --oos-product-trade-on: #0b1120;
+  --oos-product-trade-soft: #1f2d0c;
+  --oos-product-trade-on-soft: #d4f7a0;
+
+  --oos-grid-minor: rgb(232 237 246 / 0.04);
+  --oos-grid-major: rgb(232 237 246 / 0.07);
+}
+
+/* Acento contextual: data-product="os|diag|pro|trade" em qualquer contentor.
+   Fora de um contentor vale o da OficinaOS. Em Tailwind: bg-product, text-product,
+   text-on-product, bg-product-soft, text-on-product-soft, border-product. */
+:root,
+[data-product="os"] {
+  --oos-product: var(--oos-product-os);
+  --oos-product-hover: var(--oos-product-os-hover);
+  --oos-product-on: var(--oos-product-os-on);
+  --oos-product-soft: var(--oos-product-os-soft);
+  --oos-product-on-soft: var(--oos-product-os-on-soft);
+}
+[data-product="diag"] {
+  --oos-product: var(--oos-product-diag);
+  --oos-product-hover: var(--oos-product-diag-hover);
+  --oos-product-on: var(--oos-product-diag-on);
+  --oos-product-soft: var(--oos-product-diag-soft);
+  --oos-product-on-soft: var(--oos-product-diag-on-soft);
+}
+[data-product="pro"] {
+  --oos-product: var(--oos-product-pro);
+  --oos-product-hover: var(--oos-product-pro-hover);
+  --oos-product-on: var(--oos-product-pro-on);
+  --oos-product-soft: var(--oos-product-pro-soft);
+  --oos-product-on-soft: var(--oos-product-pro-on-soft);
+}
+[data-product="trade"] {
+  --oos-product: var(--oos-product-trade);
+  --oos-product-hover: var(--oos-product-trade-hover);
+  --oos-product-on: var(--oos-product-trade-on);
+  --oos-product-soft: var(--oos-product-trade-soft);
+  --oos-product-on-soft: var(--oos-product-trade-on-soft);
+}
+
+@theme inline {
+  --color-product: var(--oos-product);
+  --color-product-hover: var(--oos-product-hover);
+  --color-on-product: var(--oos-product-on);
+  --color-product-soft: var(--oos-product-soft);
+  --color-on-product-soft: var(--oos-product-on-soft);
+  --color-product-os: var(--oos-product-os);
+  --color-product-diag: var(--oos-product-diag);
+  --color-product-pro: var(--oos-product-pro);
+  --color-product-trade: var(--oos-product-trade);
+}
+
+/* Movimento como tema do Tailwind: ease-out / ease-in-out / transition por omissão. */
+@theme {
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.6, 0, 0.2, 1);
+  --default-transition-duration: 120ms;
+  --default-transition-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* ───────────────────────── 3 · Utilitários ───────────────────────── */
+
+/* Grelha técnica fina (papel milimétrico): célula de 8 px, linha maior a cada 40 px. */
+@utility bg-tech-grid {
+  background-image:
+    linear-gradient(to right, var(--oos-grid-major) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--oos-grid-major) 1px, transparent 1px),
+    linear-gradient(to right, var(--oos-grid-minor) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--oos-grid-minor) 1px, transparent 1px);
+  background-size:
+    40px 40px,
+    40px 40px,
+    8px 8px,
+    8px 8px;
+  background-position: -1px -1px;
+}
+/* Desvanece a grelha para as margens (usar junto com bg-tech-grid). */
+@utility tech-grid-fade {
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 35%, transparent 100%);
+}
+
+/* Números tabulares e alinhados (preços, datas, contagens, colunas). */
+@utility num {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* Contentor de tabela com scroll horizontal + sombras de scroll (só CSS). */
+@utility scroll-x {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  background:
+    linear-gradient(to right, var(--oos-color-surface) 30%, transparent) left / 24px 100% no-repeat local,
+    linear-gradient(to left, var(--oos-color-surface) 30%, transparent) right / 24px 100% no-repeat local,
+    radial-gradient(farthest-side at 0 50%, color-mix(in oklab, var(--oos-color-text) 18%, transparent), transparent) left / 10px 100% no-repeat scroll,
+    radial-gradient(farthest-side at 100% 50%, color-mix(in oklab, var(--oos-color-text) 18%, transparent), transparent) right / 10px 100% no-repeat scroll,
+    var(--oos-color-surface);
+}
+
+/* Blocos de código: nunca partem linhas de comando, fazem scroll. */
+@utility code-block {
+  overflow-x: auto;
+  white-space: pre;
+  word-break: normal;
+  overflow-wrap: normal;
+  tab-size: 2;
+}
+
+/* ─────────────────── 4 · Sistema de movimento ─────────────────── */
+
+/* 4.1 Reveal ao fazer scroll — CSS nativo onde há animation-timeline. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: oos-reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 28%;
+    }
+  }
+}
+@keyframes oos-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(var(--reveal-distance));
+  }
+}
+/* Fallback (sem animation-timeline): o módulo inline em Base.astro só põe .io-reveal no
+   <html> quando o browser não suporta scroll-driven e o utilizador aceita movimento.
+   Sem JS, nada fica escondido. */
+.io-reveal .reveal {
+  transition:
+    opacity var(--dur-3) var(--ease-out),
+    transform var(--dur-3) var(--ease-out);
+}
+.io-reveal .reveal:not(.is-in) {
+  opacity: 0;
+  transform: translateY(var(--reveal-distance));
+}
+
+/* 4.2 Entradas de UI com @starting-style (popovers e <dialog>). */
+.oos-popover {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--dur-2) var(--ease-out),
+    transform var(--dur-2) var(--ease-out),
+    overlay var(--dur-2) allow-discrete,
+    display var(--dur-2) allow-discrete;
+}
+.oos-popover:not(:popover-open) {
+  opacity: 0;
+  transform: translateY(-4px);
+}
+@starting-style {
+  .oos-popover:popover-open {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+.oos-sheet {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--dur-2) var(--ease-out),
+    transform var(--dur-2) var(--ease-out),
+    overlay var(--dur-2) allow-discrete,
+    display var(--dur-2) allow-discrete;
+}
+.oos-sheet:not([open]) {
+  opacity: 0;
+  transform: translateX(16px);
+}
+@starting-style {
+  .oos-sheet[open] {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+}
+.oos-sheet::backdrop {
+  background-color: var(--oos-color-overlay);
+  opacity: 1;
+  transition:
+    opacity var(--dur-2) var(--ease-out),
+    overlay var(--dur-2) allow-discrete,
+    display var(--dur-2) allow-discrete;
+}
+.oos-sheet:not([open])::backdrop {
+  opacity: 0;
+}
+@starting-style {
+  .oos-sheet[open]::backdrop {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .oos-popover,
+  .oos-popover:not(:popover-open),
+  .oos-sheet,
+  .oos-sheet:not([open]) {
+    transform: none;
+  }
+  @starting-style {
+    .oos-popover:popover-open,
+    .oos-sheet[open] {
+      transform: none;
+    }
+  }
+}
+/* Sem scroll da página por trás do menu móvel. */
+html:has(dialog.oos-sheet[open]) {
+  overflow: hidden;
+}
+
+/* 4.3 View transitions entre páginas (MPA nativo, sem ClientRouter). */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+::view-transition-group(*) {
+  animation-duration: var(--dur-2);
+  animation-timing-function: var(--ease-in-out);
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--dur-2);
+}
+/* Nomes estáveis: o logótipo fica no sítio; os cartões de produto fazem morph para o
+   hero da página do produto (o hero de /diag, /pro… usa a mesma classe, fases 2–4). */
+.vt-brand {
+  view-transition-name: brand;
+}
+.vt-product-os {
+  view-transition-name: product-os;
+}
+.vt-product-diag {
+  view-transition-name: product-diag;
+}
+.vt-product-pro {
+  view-transition-name: product-pro;
+}
+.vt-product-trade {
+  view-transition-name: product-trade;
+}

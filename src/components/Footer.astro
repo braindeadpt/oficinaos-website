@@ -1,8 +1,19 @@
 ---
+// Rodapé-mapa (redesign, fase 1): colunas de sitemap, comunidade e crédito discreto do autor.
+// A página /pedro chega na fase 5; até lá o nome liga ao LinkedIn, como antes.
 import type { Copy } from "../i18n/pt";
 import GithubMark from "./GithubMark.astro";
+import Logo from "./Logo.astro";
 import type { Locale } from "../i18n/utils";
-import { AUTHOR_LINKEDIN_URL, AUTHOR_NAME, CONTACT_EMAIL, localeUrl, REPO_URL } from "../i18n/utils";
+import {
+  AUTHOR_LINKEDIN_URL,
+  AUTHOR_NAME,
+  CONTACT_EMAIL,
+  localeUrl,
+  RELEASES_URL,
+  REPO_URL,
+} from "../i18n/utils";
+import { products } from "../lib/products";
 
 interface Props {
   t: Copy;
@@ -11,95 +22,131 @@ interface Props {
 const { t, locale } = Astro.props;
 const year = new Date().getFullYear();
 const UPSTREAM_URL = "https://github.com/cranknet/reparilo";
+
+type FLink = { label: string; href: string; external?: boolean; product?: string };
+
+const columns: { id: string; title: string; links: FLink[] }[] = [
+  {
+    id: "products",
+    title: t.footer.columns.products,
+    links: products(t, locale).map((p) => ({
+      label: p.name,
+      href: p.href,
+      external: p.external,
+      product: p.id,
+    })),
+  },
+  {
+    id: "resources",
+    title: t.footer.columns.resources,
+    links: [
+      { label: t.footer.guide, href: localeUrl(locale, "/docs/") },
+      { label: t.footer.updates, href: localeUrl(locale, "/updates/") },
+      { label: t.footer.install, href: `${localeUrl(locale)}#install` },
+      { label: t.footer.releases, href: RELEASES_URL, external: true },
+      { label: t.hero.footerLabel, href: localeUrl(locale, "/software-reparacao-telemoveis/") },
+    ],
+  },
+  {
+    id: "community",
+    title: t.footer.columns.community,
+    links: [
+      { label: "Discord", href: "https://discord.gg/secdgJYZNn", external: true },
+      { label: "Facebook", href: "https://www.facebook.com/OficinaOS", external: true },
+      { label: "YouTube", href: "https://www.youtube.com/@OficinaOSapp", external: true },
+      { label: `GitHub · ${t.footer.source}`, href: REPO_URL, external: true },
+    ],
+  },
+  {
+    id: "project",
+    title: t.footer.columns.project,
+    links: [
+      { label: t.footer.privacy, href: localeUrl(locale, "/privacy/") },
+      { label: t.footer.terms, href: localeUrl(locale, "/terms/") },
+      { label: t.footer.license, href: `${REPO_URL}/blob/main/LICENSE`, external: true },
+      { label: `${t.footer.contact}: ${CONTACT_EMAIL}`, href: `mailto:${CONTACT_EMAIL}` },
+    ],
+  },
+];
+
+const linkClass =
+  "footer-link inline-flex min-h-6 items-center gap-2 rounded-sm text-sm text-text-muted transition-colors hover:text-text";
 ---
 
-<footer class="border-t border-border">
-  <div
-    class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 px-6 py-10 sm:flex-row"
-  >
-    <div class="text-center text-sm text-text-muted sm:text-left">
-      <p>
-        © {year} OficinaOS · <a
-          href={`${REPO_URL}/blob/main/LICENSE`}
+<footer class="mt-8 border-t border-border bg-surface">
+  <div class="mx-auto max-w-6xl px-4 pt-14 pb-8 sm:px-6">
+    <div class="grid gap-10 lg:grid-cols-[minmax(0,1.1fr)_repeat(4,minmax(0,1fr))] lg:gap-8">
+      <div class="max-w-xs">
+        <a href={localeUrl(locale)} class="inline-flex rounded-md" aria-label="OficinaOS">
+          <Logo class="h-8 w-auto" />
+        </a>
+        <p class="mt-4 text-sm text-text-muted">{t.footer.tagline}</p>
+        <a
+          href={REPO_URL}
           target="_blank"
           rel="noopener noreferrer"
-          class="underline decoration-border-strong underline-offset-2 transition hover:text-text"
-          >{t.footer.license}</a
-        > · {t.footer.rights}
-      </p>
-      <p class="mt-1 text-xs text-text-muted">
-        {t.footer.credits}{" "}<a
-          href={UPSTREAM_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="underline decoration-border-strong underline-offset-2 transition hover:text-text"
-          >Reparilo</a
+          class="mt-5 inline-flex items-center gap-2 rounded-sm font-mono text-xs text-text-muted transition-colors hover:text-text"
         >
+          <GithubMark class="h-4 w-4" />
+          braindeadpt/OficinaOS
+          <span class="sr-only">({t.footer.externalHint})</span>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4 lg:col-span-4">
+        {
+          columns.map((col) => (
+            <nav aria-labelledby={`footer-${col.id}`}>
+              <h2 id={`footer-${col.id}`} class="font-sans text-sm font-semibold tracking-normal text-text">
+                {col.title}
+              </h2>
+              <ul class="mt-4 space-y-2.5" role="list">
+                {col.links.map((l) => (
+                  <li data-product={l.product}>
+                    <a
+                      href={l.href}
+                      class={linkClass}
+                      {...(l.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                    >
+                      {l.product && (
+                        <span class="h-2 w-2 shrink-0 rounded-[2px] bg-product" aria-hidden="true" />
+                      )}
+                      <span class="break-words [overflow-wrap:anywhere]">{l.label}</span>
+                      {l.external && <span class="sr-only">({t.footer.externalHint})</span>}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ))
+        }
+      </div>
+    </div>
+
+    <div
+      class="mt-14 flex flex-col gap-3 border-t border-border pt-6 text-xs text-text-subtle sm:flex-row sm:items-center sm:justify-between"
+    >
+      <p>
+        © <span class="num">{year}</span> OficinaOS · {t.footer.rights}
+        <span class="whitespace-nowrap">
+          {t.footer.credits}{" "}<a
+            href={UPSTREAM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="underline decoration-border-strong underline-offset-2 transition-colors hover:text-text"
+            >Reparilo</a
+          >.
+        </span>
       </p>
-      <p class="mt-1 text-xs text-text-muted">
-        {t.footer.madeBy}{" "}<a
+      <p>
+        {t.footer.designedBy}{" "}<a
           href={AUTHOR_LINKEDIN_URL}
           target="_blank"
-          rel="noopener noreferrer"
-          class="underline decoration-border-strong underline-offset-2 transition hover:text-text"
+          rel="noopener noreferrer author"
+          class="font-medium text-text-muted underline decoration-border-strong underline-offset-2 transition-colors hover:text-text"
           >{AUTHOR_NAME}</a
-        >{" "}{t.footer.madeIn}
-      </p>
-    </div>
-    <div class="flex flex-col items-center gap-2 sm:items-end">
-      <a
-        href={REPO_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="flex items-center gap-2 text-sm text-text-muted transition hover:text-text"
-      >
-        <GithubMark class="h-4 w-4" />
-        braindeadpt/OficinaOS
-      </a>
-      <p class="text-xs text-text-muted">
-        {t.footer.community}:{" "}
-        <a
-          href="https://discord.gg/secdgJYZNn"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="transition hover:text-text"
         >
-          Discord
-        </a>{" "}
-        ·{" "}
-        <a
-          href="https://www.facebook.com/OficinaOS"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="transition hover:text-text"
-        >
-          Facebook
-        </a>
       </p>
-      <a
-        href={localeUrl(locale, "/software-reparacao-telemoveis/")}
-        class="text-xs text-text-muted transition hover:text-text"
-      >
-        {t.seoPage.footerLabel}
-      </a>
-      <a
-        href={localeUrl(locale, "/privacy/")}
-        class="text-xs text-text-muted transition hover:text-text"
-      >
-        {t.footer.privacy}
-      </a>
-      <a
-        href={localeUrl(locale, "/terms/")}
-        class="text-xs text-text-muted transition hover:text-text"
-      >
-        {t.footer.terms}
-      </a>
-      <a
-        href={`mailto:${CONTACT_EMAIL}`}
-        class="text-xs text-text-muted transition hover:text-text"
-      >
-        {t.footer.contact}: {CONTACT_EMAIL}
-      </a>
     </div>
   </div>
 </footer>

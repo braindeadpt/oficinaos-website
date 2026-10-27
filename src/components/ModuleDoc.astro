@@ -15,7 +15,7 @@ const { t, locale, page } = Astro.props;
 ---
 
 <Nav t={t} locale={locale} />
-<main class="mx-auto max-w-3xl px-6 py-16">
+<main id="main" tabindex="-1" class="mx-auto max-w-3xl px-6 py-16">
   <a
     href={localeUrl(locale, "/docs")}
     class="text-sm font-medium text-text-muted transition hover:text-primary-hover"

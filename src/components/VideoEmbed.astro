@@ -9,6 +9,7 @@ const { t } = Astro.props;
 // Manus intro video (PT narration) — facade: no YouTube requests until click,
 // then loads the privacy-enhanced nocookie embed.
 const VIDEO_ID = "y7WhY7DYLOk";
+const base = import.meta.env.BASE_URL;
 ---
 
 <section class="mx-auto max-w-3xl px-6 pb-20">
@@ -19,20 +20,37 @@ const VIDEO_ID = "y7WhY7DYLOk";
     <button
       type="button"
       aria-label={t.hero.videoLabel}
-      class="group absolute inset-0 block h-full w-full cursor-pointer"
+      class="group absolute inset-0 block h-full w-full cursor-pointer rounded-xl"
     >
-      <img
-        src={`https://i.ytimg.com/vi/${VIDEO_ID}/maxresdefault.jpg`}
-        alt={t.hero.videoLabel}
-        loading="lazy"
-        class="h-full w-full object-cover"
-      />
+      {/* Poster local (fotograma do vídeo de demonstração), dimensões fixas → sem CLS;
+          lazy porque fica abaixo da dobra. O YouTube só é contactado depois do clique. */}
+      <picture class="block h-full w-full">
+        <source
+          type="image/avif"
+          srcset={`${base}video/oficinaos-demo-poster-640.avif 640w, ${base}video/oficinaos-demo-poster-1280.avif 1280w`}
+          sizes="(min-width: 48rem) 720px, calc(100vw - 3rem)"
+        />
+        <source
+          type="image/webp"
+          srcset={`${base}video/oficinaos-demo-poster-640.webp 640w, ${base}video/oficinaos-demo-poster-1280.webp 1280w`}
+          sizes="(min-width: 48rem) 720px, calc(100vw - 3rem)"
+        />
+        <img
+          src={`${base}video/oficinaos-demo-poster-1280.webp`}
+          alt=""
+          width="1280"
+          height="720"
+          loading="lazy"
+          decoding="async"
+          class="h-full w-full object-cover object-left-top"
+        />
+      </picture>
       <span
-        class="absolute inset-0 flex items-center justify-center bg-black/25 transition group-hover:bg-black/15"
+        class="absolute inset-0 flex items-center justify-center bg-black/25 transition-colors group-hover:bg-black/15"
         aria-hidden="true"
       >
         <span
-          class="flex h-16 w-16 items-center justify-center rounded-full bg-primary/95 shadow-xl transition group-hover:scale-105"
+          class="flex h-16 w-16 items-center justify-center rounded-full bg-primary/95 shadow-xl transition-transform duration-[var(--dur-2)] group-hover:scale-105 motion-reduce:transform-none"
         >
           <svg class="ml-1 h-7 w-7 text-on-primary" viewBox="0 0 24 24" fill="currentColor">
             <path d="M8 5.14v14l11-7z" />

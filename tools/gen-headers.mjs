@@ -39,7 +39,7 @@ const csp = [
   "frame-ancestors 'self'",
   "object-src 'none'",
   "form-action 'self' mailto: https://cloud.oficinaos.app",
-  "img-src 'self' https://i.ytimg.com",
+  "img-src 'self'",
   "media-src 'self'",
   "style-src 'self'",
   "font-src 'self'",

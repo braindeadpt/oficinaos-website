@@ -1,0 +1,94 @@
+---
+// Lista de reparações (mock) — UI real da OficinaOS em HTML, com dados de exemplo por idioma.
+// Estados com as cores do Parafuso, IMEI em mono, valores tabulares. Sem controlos falsos
+// focáveis: a pesquisa e o botão são só desenho (aria-hidden), a tabela é texto real.
+// Usar dentro de <UiFrame>. As colunas encolhem pela largura da janela (container queries).
+import type { Copy } from "../../i18n/pt";
+import type { Locale } from "../../i18n/utils";
+import StatusChip from "../ui/StatusChip.astro";
+import type { RepairStatus } from "../../lib/status";
+
+interface Props {
+  t: Copy;
+  locale: Locale;
+  /** Índice da linha em destaque (ex.: a que está a ser «aberta» num tour). */
+  highlight?: number;
+  /** Quantas linhas mostrar (máx. 5). */
+  rows?: number;
+}
+const { t, locale, highlight, rows: max = 5 } = Astro.props;
+const rl = t.ui.repairList;
+const langTag = locale === "pt" ? "pt-PT" : locale === "es" ? "es-ES" : "en-IE";
+const money = new Intl.NumberFormat(langTag, { style: "currency", currency: "EUR" });
+const rows = rl.rows.slice(0, max);
+const closed = new Set(["delivered", "returned", "cancelled"]);
+const activeCount = rl.rows.filter((r) => !closed.has(r.status)).length;
+
+/** IMEI 15 dígitos → TAC(8) · série(6) · controlo(1), em grupos legíveis. N.º de série fica como está. */
+const fmtImei = (v: string) =>
+  /^\d{15}$/.test(v) ? `${v.slice(0, 2)} ${v.slice(2, 8)} ${v.slice(8, 14)} ${v.slice(14)}` : v;
+---
+
+<div class="text-sm">
+  <div class="flex flex-wrap items-center gap-3 border-b border-border px-4 py-3">
+    <p class="flex items-baseline gap-2">
+      <span class="font-display text-lg font-bold tracking-[-0.01em] text-text">{rl.title}</span>
+      <span class="num text-xs text-text-muted">{activeCount} {rl.active}</span>
+    </p>
+    <div class="ml-auto flex items-center gap-2" aria-hidden="true">
+      <span class="rl-search hidden h-8 w-56 items-center gap-2 rounded-md border border-border bg-surface px-2.5 text-xs text-text-subtle sm:flex">
+        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+        <span class="truncate">{rl.search}</span>
+      </span>
+      <span class="inline-flex h-8 items-center gap-1.5 rounded-md bg-product px-3 text-xs font-semibold text-on-product">
+        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"><path d="M12 5v14M5 12h14" /></svg>
+        {rl.newRepair}
+      </span>
+    </div>
+  </div>
+
+  <table class="w-full border-collapse">
+    <caption class="sr-only">{rl.title}</caption>
+    <thead>
+      <tr class="border-b border-border bg-surface-2 text-left">
+        <th scope="col" class="px-4 py-2 text-caption font-semibold tracking-[0.06em] text-text-muted uppercase">{rl.cols.id}</th>
+        <th scope="col" class="px-3 py-2 text-caption font-semibold tracking-[0.06em] text-text-muted uppercase">{rl.cols.device}</th>
+        <th scope="col" class="rl-col-customer px-3 py-2 text-caption font-semibold tracking-[0.06em] text-text-muted uppercase">{rl.cols.customer}</th>
+        <th scope="col" class="rl-col-imei px-3 py-2 text-caption font-semibold tracking-[0.06em] text-text-muted uppercase">{rl.cols.imei}</th>
+        <th scope="col" class="px-3 py-2 text-caption font-semibold tracking-[0.06em] text-text-muted uppercase">{rl.cols.status}</th>
+        <th scope="col" class="rl-col-total px-4 py-2 text-right text-caption font-semibold tracking-[0.06em] text-text-muted uppercase">{rl.cols.total}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        rows.map((r, i) => (
+          <tr
+            class:list={[
+              "repair-row border-b border-border last:border-0",
+              i === highlight && "bg-product-soft",
+            ]}
+          >
+            <td class="num px-4 py-2.5 align-top font-mono text-xs whitespace-nowrap text-text-muted">{r.id}</td>
+            <td class="px-3 py-2.5 align-top">
+              <span class="block font-medium text-text">{r.device}</span>
+              <span class="block text-xs text-text-muted">{r.issue}</span>
+            </td>
+            <td class="rl-col-customer px-3 py-2.5 align-top">
+              <span class="block text-text">{r.customer}</span>
+              <span class="num block text-xs text-text-subtle">{r.when}</span>
+            </td>
+            <td class="rl-col-imei num px-3 py-2.5 align-top font-mono text-xs whitespace-nowrap text-text-muted">
+              {fmtImei(r.imei)}
+            </td>
+            <td class="px-3 py-2.5 align-top">
+              <StatusChip status={r.status as RepairStatus} label={t.ui.status[r.status as RepairStatus]} />
+            </td>
+            <td class="rl-col-total num px-4 py-2.5 text-right align-top font-medium whitespace-nowrap text-text">
+              {money.format(r.total)}
+            </td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>

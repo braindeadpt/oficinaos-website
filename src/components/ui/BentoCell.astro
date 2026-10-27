@@ -1,0 +1,104 @@
+---
+// Célula do bento. O acento vem do produto (data-product) e aparece em 1–2 sítios só:
+// o marcador junto ao rótulo e o contorno no hover. O título é o link (stretched link),
+// por isso a célula inteira é clicável sem links aninhados e com um só ponto de foco.
+// vt=true dá-lhe view-transition-name «product-<id>»: o hero da página do produto usa a
+// mesma classe (vt-product-<id>) e o browser faz o morph entre páginas.
+import type { ProductId } from "../../lib/products";
+import Icon from "../Icon.astro";
+
+interface Props {
+  size?: "third" | "half" | "two-thirds" | "full";
+  tall?: boolean;
+  product?: ProductId;
+  /** Rótulo curto por cima do título (normalmente o nome do produto). */
+  label?: string;
+  title: string;
+  text?: string;
+  href?: string;
+  external?: boolean;
+  /** Texto para leitores de ecrã quando o link abre noutro separador. */
+  externalHint?: string;
+  vt?: boolean;
+  headingLevel?: 2 | 3;
+  /** Visual sangra até às margens da célula (UI recortada) em vez de ficar com padding. */
+  bleed?: boolean;
+  class?: string;
+}
+const {
+  size = "third",
+  tall = false,
+  product = "os",
+  label,
+  title,
+  text,
+  href,
+  external = false,
+  externalHint,
+  vt = false,
+  headingLevel = 3,
+  bleed = false,
+  class: cls,
+} = Astro.props;
+const H = `h${headingLevel}` as "h2" | "h3";
+const spans = {
+  third: "lg:col-span-2",
+  half: "lg:col-span-3",
+  "two-thirds": "sm:col-span-2 lg:col-span-4",
+  full: "sm:col-span-2 lg:col-span-6",
+};
+const vtClass = {
+  os: "vt-product-os",
+  diag: "vt-product-diag",
+  pro: "vt-product-pro",
+  trade: "vt-product-trade",
+}[product];
+const hasVisual = Astro.slots.has("default");
+---
+
+<li
+  data-product={product}
+  class:list={[
+    "bento-cell relative flex min-w-0 flex-col overflow-hidden rounded-xl border border-border bg-surface",
+    spans[size],
+    tall && "lg:row-span-2",
+    vt && vtClass,
+    cls,
+  ]}
+>
+  <div class="p-5 sm:p-6">
+    {
+      label && (
+        <p class="flex items-center gap-2 text-sm font-semibold text-product">
+          <span class="h-2.5 w-2.5 rounded-[3px] bg-product" aria-hidden="true" />
+          {label}
+        </p>
+      )
+    }
+    <H class:list={["font-display text-lg font-bold tracking-[-0.015em] text-balance text-text", label && "mt-2"]}>
+      {
+        href ? (
+          <a
+            href={href}
+            class="bento-link inline-flex items-center gap-1.5"
+            {...(external ? { target: "_blank", rel: "noopener" } : {})}
+          >
+            {title}
+            <Icon name={external ? "external" : "arrow"} class="h-4 w-4 shrink-0 text-text-subtle" />
+            {external && externalHint && <span class="sr-only">({externalHint})</span>}
+          </a>
+        ) : (
+          title
+        )
+      }
+    </H>
+    {text && <p class="mt-2 max-w-prose text-base text-text-muted">{text}</p>}
+  </div>
+  {
+    hasVisual && (
+      <div class:list={["mt-auto min-h-0", bleed ? "pl-5 sm:pl-6" : "px-5 pb-5 sm:px-6 sm:pb-6"]}>
+        <slot />
+      </div>
+    )
+  }
+</li>

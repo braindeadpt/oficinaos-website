@@ -1,0 +1,35 @@
+---
+// Título de secção: Manrope com tracking apertado e tamanhos contrastantes (trends §2.1).
+// Sem «eyebrow» em mono/maiúsculas por cima — o contexto vem do texto.
+// <Heading id="x" level={2} size="xl">Título<Fragment slot="lead">Frase de apoio.</Fragment></Heading>
+interface Props {
+  id?: string;
+  level?: 1 | 2 | 3;
+  /** hero 40–56px · xl 30–40px · lg 24–28px · md 20px */
+  size?: "hero" | "xl" | "lg" | "md";
+  align?: "start" | "center";
+  class?: string;
+}
+const { id, level = 2, size = "xl", align = "start", class: cls } = Astro.props;
+const Tag = `h${level}` as "h1" | "h2" | "h3";
+const sizes = {
+  hero: "text-[clamp(2.5rem,5.5vw,3.5rem)] leading-[1.05] tracking-[-0.03em] font-extrabold",
+  xl: "text-[clamp(1.875rem,3.6vw,2.5rem)] leading-[1.1] tracking-[-0.025em] font-extrabold",
+  lg: "text-[clamp(1.5rem,2.6vw,1.75rem)] leading-tight tracking-[-0.02em] font-bold",
+  md: "text-xl leading-snug tracking-[-0.01em] font-bold",
+};
+const hasLead = Astro.slots.has("lead");
+---
+
+<div class:list={[align === "center" ? "mx-auto text-center" : "", "max-w-2xl", cls]}>
+  <Tag id={id} class:list={["text-balance text-text", sizes[size]]}>
+    <slot />
+  </Tag>
+  {
+    hasLead && (
+      <p class:list={["mt-4 text-pretty text-lg text-text-muted", size === "hero" && "sm:text-xl"]}>
+        <slot name="lead" />
+      </p>
+    )
+  }
+</div>

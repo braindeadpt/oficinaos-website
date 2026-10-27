@@ -28,15 +28,24 @@ const { sections } = Astro.props;
           </ul>
         )}
         {s.table && (
-          <div class="mt-4 overflow-x-auto rounded-lg border border-border bg-surface">
-            <table class="w-full text-sm">
+          <div
+            class="scroll-x scroll-region mt-4 rounded-lg border border-border"
+            role="region"
+            aria-label={s.heading}
+            tabindex="0"
+          >
+            <table class="doc-table w-full text-sm">
               <thead>
                 <tr class="border-b border-border bg-surface-2">
-                  {s.table.head.map((h) => (
-                    <th class="px-4 py-2.5 text-left text-caption font-semibold uppercase tracking-[0.06em] text-text-muted">
-                      {h}
-                    </th>
-                  ))}
+                  {s.table.head.map((h) =>
+                    h.trim() ? (
+                      <th scope="col" class="px-4 py-2.5 text-left text-caption font-semibold uppercase tracking-[0.06em] text-text-muted">
+                        {h}
+                      </th>
+                    ) : (
+                      <td class="px-4 py-2.5" />
+                    )
+                  )}
                 </tr>
               </thead>
               <tbody>
@@ -54,9 +63,12 @@ const { sections } = Astro.props;
           </div>
         )}
         {s.code && (
-          <pre class="mt-4 overflow-x-auto whitespace-pre-wrap break-words rounded-lg border border-border bg-surface-2 p-4 font-mono text-[13px] leading-relaxed text-text sm:p-5 sm:text-sm">
-            <code>{s.code}</code>
-          </pre>
+          <pre
+            class="code-block scroll-region mt-4 rounded-lg border border-border bg-surface-2 p-4 font-mono text-[13px] leading-relaxed text-text sm:p-5 sm:text-sm"
+            role="region"
+            aria-label={s.heading}
+            tabindex="0"
+          ><code>{s.code}</code></pre>
         )}
         {s.images && s.images.length > 0 && (
           <div class="mt-6 grid gap-4 sm:grid-cols-2">
