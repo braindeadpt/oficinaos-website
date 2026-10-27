@@ -215,3 +215,53 @@
 .scroll-region:focus-visible {
   outline-offset: 0;
 }
+
+/* Tabelas empilhadas (ui/DataTable stack): abaixo de 40rem cada linha é um cartão. */
+@media (max-width: 39.99rem) {
+  .dt-stack {
+    overflow: visible;
+    background: var(--oos-color-surface);
+  }
+  .dt-stack table,
+  .dt-stack tbody,
+  .dt-stack tr,
+  .dt-stack th,
+  .dt-stack td {
+    display: block;
+  }
+  .dt-stack thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .dt-stack .doc-table th,
+  .dt-stack .doc-table td {
+    min-width: 0;
+  }
+  .dt-stack tbody tr {
+    padding: 0.75rem 1rem;
+  }
+  .dt-stack tbody th {
+    padding: 0 0 0.375rem;
+  }
+  .dt-stack tbody td {
+    display: grid;
+    grid-template-columns: minmax(0, 7.5rem) minmax(0, 1fr);
+    gap: 0.75rem;
+    padding: 0.25rem 0;
+    overflow-wrap: anywhere;
+  }
+  .dt-stack tbody td::before {
+    content: attr(data-label);
+    font-size: var(--oos-text-caption);
+    line-height: 1.25rem;
+    font-weight: 600;
+    letter-spacing: var(--oos-tracking-caps);
+    text-transform: uppercase;
+    color: var(--oos-color-text-subtle);
+    overflow-wrap: anywhere;
+  }
+}
