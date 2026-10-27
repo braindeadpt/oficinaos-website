@@ -17,7 +17,7 @@ const { t } = Astro.props;
 ---
 
 <section id="install" class="mx-auto max-w-6xl px-6 py-24">
-  <div class="grid grid-cols-1 items-start gap-12 lg:grid-cols-2">
+  <div class="reveal grid grid-cols-1 items-start gap-12 lg:grid-cols-2">
     <div class="min-w-0">
       <h2 class="text-2xl font-extrabold tracking-tight text-text sm:text-3xl">
         {t.install.title}
@@ -102,7 +102,10 @@ const { t } = Astro.props;
           <span>Linux / macOS</span>
         </div>
         <pre
-          class="overflow-x-auto whitespace-pre-wrap break-words p-4 font-mono text-[13px] leading-relaxed text-text sm:p-6 sm:text-sm"><code><span class="text-text-muted"># {t.install.advanced.commentGet}</span>
+          tabindex="0"
+          role="region"
+          aria-label="Linux / macOS — Docker"
+          class="code-block scroll-region p-4 font-mono text-[13px] leading-relaxed text-text sm:p-6 sm:text-sm"><code><span class="text-text-muted"># {t.install.advanced.commentGet}</span>
 <span class="select-none text-primary">$</span> git clone {REPO_URL}.git
 <span class="select-none text-primary">$</span> cd OficinaOS && cp .env.example .env
 
