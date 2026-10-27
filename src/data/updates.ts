@@ -22,6 +22,36 @@ export const UPDATES: UpdateEntry[] = [
   {
     date: "2026-10-27",
     tier: "free",
+    area: { pt: "Impressão", en: "Printing", es: "Impresión" },
+    title: {
+      pt: "v1.0.21: alto contraste em qualquer impressora",
+      en: "v1.0.21: high contrast on any printer",
+      es: "v1.0.21: alto contraste en cualquier impresora",
+    },
+    desc: {
+      pt: "A opção «Impressão de alto contraste» estava escondida quando a impressão era feita pelo diálogo do Windows — agora aparece em qualquer método e escurece o talão em todos eles.",
+      en: "The «High contrast printing» option was hidden when printing through the Windows print dialog — it now shows under any print method and darkens the receipt on all of them.",
+      es: "La opción «Impresión de alto contraste» estaba oculta cuando se imprimía por el diálogo de Windows — ahora aparece con cualquier método y oscurece el ticket en todos ellos.",
+    },
+  },
+  {
+    date: "2026-10-27",
+    tier: "free",
+    area: { pt: "Estabilidade", en: "Stability", es: "Estabilidad" },
+    title: {
+      pt: "v1.0.21: atualizador usa sempre o script da nova versão",
+      en: "v1.0.21: updater always runs the new version's script",
+      es: "v1.0.21: el actualizador usa siempre el script de la nueva versión",
+    },
+    desc: {
+      pt: "As atualizações in-app passam a descarregar e verificar (SHA-256) o script de atualização da própria versão nova, em vez de usarem o que ficou instalado — updates futuros mais robustos.",
+      en: "In-app updates now download and SHA-256-verify the new version's own update script instead of reusing the previously installed one — more robust updates going forward.",
+      es: "Las actualizaciones in-app ahora descargan y verifican (SHA-256) el script de actualización de la propia versión nueva, en lugar de reutilizar el instalado — actualizaciones futuras más robustas.",
+    },
+  },
+  {
+    date: "2026-10-27",
+    tier: "free",
     area: { pt: "Assinatura", en: "Signature", es: "Firma" },
     title: {
       pt: "v1.0.20: QR de assinatura corrigido no Android",
