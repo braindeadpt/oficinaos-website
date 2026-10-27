@@ -127,5 +127,10 @@ const ogImage = new URL(
     class="min-h-screen bg-bg font-sans text-text antialiased"
   >
     <slot />
+    {/* Reveal: fallback para browsers sem animation-timeline (CSS nativo em foundations.css).
+        Só esconde depois de o JS correr, e nunca o que já está no ecrã. */}
+    <script is:inline type="module">
+      const d=document.documentElement;if(!CSS.supports("animation-timeline: view()")&&matchMedia("(prefers-reduced-motion: no-preference)").matches&&"IntersectionObserver"in window){const els=document.querySelectorAll(".reveal"),h=innerHeight,io=new IntersectionObserver((es)=>{for(const e of es)if(e.isIntersecting){e.target.classList.add("is-in");io.unobserve(e.target)}},{threshold:.2,rootMargin:"0px 0px -10% 0px"});els.forEach((el)=>{if(el.getBoundingClientRect().top<h)el.classList.add("is-in");else io.observe(el)});d.classList.add("io-reveal")}
+    </script>
   </body>
 </html>

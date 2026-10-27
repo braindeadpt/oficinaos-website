@@ -1,0 +1,217 @@
+/*
+ * Estilos de componentes do redesign que não cabem bem em classes utilitárias
+ * (popovers posicionados por âncora, <dialog>, estados aria-current).
+ * Ficam aqui, num ficheiro só, para nunca virarem <style> inline (CSP style-src 'self').
+ */
+
+/* ── Cabeçalho ───────────────────────────────────────────── */
+.skip-link {
+  transition: transform var(--dur-1) var(--ease-out);
+}
+.skip-link:focus-visible {
+  outline-color: var(--oos-color-text);
+}
+
+.nav-link {
+  color: var(--oos-color-text-muted);
+  transition:
+    color var(--dur-1) var(--ease-out),
+    background-color var(--dur-1) var(--ease-out);
+}
+.nav-link:hover {
+  color: var(--oos-color-text);
+  background-color: var(--oos-color-surface-2);
+}
+.nav-link[aria-current="page"],
+.nav-link[data-active="true"] {
+  color: var(--oos-color-text);
+}
+/* Indicador da página atual: traço de 2 px por baixo (não depende só da cor). */
+.nav-link[aria-current="page"],
+.nav-link[data-active="true"] {
+  box-shadow: inset 0 -2px 0 var(--oos-color-primary);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.nav-chevron {
+  transition: transform var(--dur-2) var(--ease-out);
+}
+/* Popover aberto → o botão fica marcado e a seta roda. */
+.site-header:has(#nav-products:popover-open) .nav-products-anchor,
+.site-header:has(#nav-lang:popover-open) .nav-lang-anchor {
+  color: var(--oos-color-text);
+  background-color: var(--oos-color-surface-2);
+}
+.site-header:has(#nav-products:popover-open) .nav-products-anchor .nav-chevron,
+.site-header:has(#nav-lang:popover-open) .nav-lang-anchor .nav-chevron {
+  transform: rotate(180deg);
+}
+
+.nav-icon-btn {
+  color: var(--oos-color-text-muted);
+  transition:
+    color var(--dur-1) var(--ease-out),
+    background-color var(--dur-1) var(--ease-out);
+}
+.nav-icon-btn:hover {
+  color: var(--oos-color-text);
+  background-color: var(--oos-color-surface-2);
+}
+
+/* Popovers do cabeçalho: posição por âncora CSS onde existe; caso contrário, fixos
+   debaixo do cabeçalho, alinhados à grelha de 72rem. */
+.nav-pop {
+  position: fixed;
+  inset: auto;
+  margin: 0;
+  top: 4.25rem;
+  border: 1px solid var(--oos-color-border);
+  border-radius: var(--oos-radius-lg);
+  background: var(--oos-color-surface);
+  color: var(--oos-color-text);
+  box-shadow: var(--oos-shadow-md);
+  padding: 0;
+}
+.nav-pop-products {
+  width: min(36rem, calc(100vw - 2rem));
+  left: max(1rem, calc((100vw - 72rem) / 2 + 10rem));
+}
+.nav-pop-lang {
+  width: 13rem;
+  right: max(1rem, calc((100vw - 72rem) / 2 + 17rem));
+}
+.nav-products-anchor {
+  anchor-name: --nav-products;
+}
+.nav-lang-anchor {
+  anchor-name: --nav-lang;
+}
+@supports (anchor-name: --a) {
+  .nav-pop-products {
+    position-anchor: --nav-products;
+    top: calc(anchor(bottom) + 0.5rem);
+    left: anchor(left);
+    right: auto;
+  }
+  .nav-pop-lang {
+    position-anchor: --nav-lang;
+    top: calc(anchor(bottom) + 0.5rem);
+    right: anchor(right);
+    left: auto;
+  }
+}
+
+.nav-product {
+  transition: background-color var(--dur-1) var(--ease-out);
+}
+.nav-product:hover {
+  background-color: var(--oos-color-surface-2);
+}
+.nav-product[aria-current="page"] {
+  background-color: var(--oos-product-soft);
+}
+.nav-product[aria-current="page"] .text-text {
+  color: var(--oos-product-on-soft);
+}
+
+.nav-lang-item {
+  color: var(--oos-color-text);
+  transition: background-color var(--dur-1) var(--ease-out);
+}
+.nav-lang-item:hover {
+  background-color: var(--oos-color-surface-2);
+}
+.nav-lang-item[aria-current="true"] {
+  font-weight: 600;
+  background-color: var(--oos-color-primary-soft);
+  color: var(--oos-color-on-primary-soft);
+}
+
+.seg-item {
+  color: var(--oos-color-text-muted);
+  transition:
+    color var(--dur-1) var(--ease-out),
+    background-color var(--dur-1) var(--ease-out);
+}
+.seg-item:hover {
+  color: var(--oos-color-text);
+}
+.seg-item[aria-current="true"] {
+  background-color: var(--oos-color-surface);
+  color: var(--oos-color-text);
+  box-shadow: var(--oos-shadow-sm);
+}
+
+/* Menu móvel: painel lateral à direita, altura total. */
+.nav-sheet {
+  margin: 0 0 0 auto;
+  padding: 0;
+  width: min(24rem, calc(100vw - 2.5rem));
+  height: 100dvh;
+  max-height: 100dvh;
+  max-width: none;
+  border: 0;
+  border-left: 1px solid var(--oos-color-border);
+  background: var(--oos-color-surface);
+  color: var(--oos-color-text);
+  box-shadow: var(--oos-shadow-lg);
+}
+
+/* ── UiFrame (janela da app) ─────────────────────────────── */
+.ui-frame {
+  container-type: inline-size;
+}
+
+/* ── RepairList ──────────────────────────────────────────── */
+.repair-row {
+  transition: background-color var(--dur-1) var(--ease-out);
+}
+/* Colunas escondidas em janelas estreitas (consulta ao contentor, não ao ecrã). */
+@container (max-width: 40rem) {
+  .rl-col-imei,
+  .rl-col-customer {
+    display: none;
+  }
+}
+@container (max-width: 28rem) {
+  .rl-col-total {
+    display: none;
+  }
+}
+
+/* ── Bento ───────────────────────────────────────────────── */
+.bento-cell {
+  transition:
+    border-color var(--dur-1) var(--ease-out),
+    box-shadow var(--dur-2) var(--ease-out);
+}
+.bento-cell:hover {
+  border-color: color-mix(in oklab, var(--oos-product) 55%, var(--oos-color-border));
+}
+.bento-cell:has(.bento-link:focus-visible) {
+  outline: 2px solid var(--oos-color-focus);
+  outline-offset: 2px;
+}
+/* «Stretched link»: o título é o link; o cartão inteiro fica clicável sem links aninhados. */
+.bento-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+.bento-link:focus-visible {
+  outline: none;
+}
+
+/* ── Tabelas e código das docs ───────────────────────────── */
+.doc-table th,
+.doc-table td {
+  min-width: 9rem;
+}
+.doc-table th:first-child,
+.doc-table td:first-child {
+  min-width: 8rem;
+}
+.scroll-region:focus-visible {
+  outline-offset: 0;
+}

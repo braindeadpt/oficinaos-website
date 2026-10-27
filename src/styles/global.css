@@ -3,6 +3,9 @@
 @import "./design-system/fonts.css";
 @import "./design-system/tokens.css";
 @import "./design-system/tokens.theme.css";
+/* Fundações do redesign: movimento, acento por produto, utilitários (fase 1). */
+@import "./foundations.css";
+@import "./components.css";
 
 /* Cor do símbolo da marca (quadrado + encaixe pentalobe): #1D4ED8 no claro e no escuro (§2.1). */
 :root {
@@ -34,6 +37,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
   background-color: var(--oos-color-bg);
   -webkit-text-size-adjust: 100%;
 }
@@ -68,12 +72,12 @@ kbd {
   background-color: var(--oos-color-selection);
 }
 
-/* Foco visível em tudo o que é interativo (WCAG 2.4.7) — anel do design system (§4). */
-:where(a, button, summary, input, textarea, select):focus-visible {
-  outline: 2px solid transparent;
+/* Foco visível em tudo o que é interativo (WCAG 2.4.7). Contorno de 2 px na cor de foco
+   com 2 px de folga: segue o raio de cada componente e não é tapado por sombras (shadow-*).
+   Os campos de formulário têm estado de foco próprio (borda + halo, ver Pro.astro). */
+:where(a, button, summary, [tabindex]:not([tabindex="-1"])):focus-visible {
+  outline: 2px solid var(--oos-color-focus);
   outline-offset: 2px;
-  box-shadow: var(--oos-focus-ring);
-  border-radius: var(--oos-radius-xs);
 }
 
 /* Âncoras na página ficam abaixo do cabeçalho fixo. */
@@ -89,4 +93,9 @@ section[id] {
 }
 :root[data-theme="dark"] .oos-photo {
   filter: brightness(0.92);
+}
+
+/* Destino do «Saltar para o conteúdo»: recebe foco sem desenhar um contorno à volta da página. */
+main[tabindex="-1"]:focus {
+  outline: none;
 }
