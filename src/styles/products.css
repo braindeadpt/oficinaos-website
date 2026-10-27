@@ -88,16 +88,25 @@
 /* ───────────── 4 · Trade: frase → filtros → anúncios ─────────────
    Estado base = pesquisa resolvida (nota da IA, chips e anúncios visíveis). Com movimento
    permitido, corre UMA vez: a nota da IA aparece, os chips entram um a um e depois os
-   anúncios sobem para o lugar. */
+   anúncios sobem para o lugar. A opacidade salta 0 → 1 (steps) em vez de fundir: texto
+   semitransparente a meio da animação reprovava o contraste no Lighthouse; o movimento
+   (transform) continua suave. */
 @media (prefers-reduced-motion: no-preference) {
   .trd-search .trd-ai {
-    animation: trd-in var(--dur-3) var(--ease-out) 0.5s both;
+    animation:
+      trd-rise var(--dur-3) var(--ease-out) both,
+      trd-show var(--dur-3) steps(1, jump-start) both;
+    animation-delay: 0.5s;
   }
   .trd-search .trd-chip {
-    animation: trd-chip var(--dur-2) var(--ease-out) both;
+    animation:
+      trd-pop var(--dur-2) var(--ease-out) both,
+      trd-show var(--dur-2) steps(1, jump-start) both;
   }
   .trd-search .trd-row {
-    animation: trd-in var(--dur-3) var(--ease-out) both;
+    animation:
+      trd-rise var(--dur-3) var(--ease-out) both,
+      trd-show var(--dur-3) steps(1, jump-start) both;
   }
   .trd-chip:nth-child(1) { animation-delay: 0.9s; }
   .trd-chip:nth-child(2) { animation-delay: 1.05s; }
@@ -109,9 +118,12 @@
   .trd-row:nth-child(2) { animation-delay: 2.3s; }
   .trd-row:nth-child(3) { animation-delay: 2.5s; }
 }
-@keyframes trd-chip {
-  from { opacity: 0; transform: scale(0.85); }
+@keyframes trd-pop {
+  from { transform: scale(0.85); }
 }
-@keyframes trd-in {
-  from { opacity: 0; transform: translateY(8px); }
+@keyframes trd-rise {
+  from { transform: translateY(8px); }
+}
+@keyframes trd-show {
+  from { opacity: 0; }
 }
