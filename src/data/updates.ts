@@ -20,6 +20,51 @@ export interface UpdateEntry {
 
 export const UPDATES: UpdateEntry[] = [
   {
+    date: "2026-10-27",
+    tier: "free",
+    area: { pt: "Assinatura", en: "Signature", es: "Firma" },
+    title: {
+      pt: "v1.0.20: QR de assinatura corrigido no Android",
+      en: "v1.0.20: signature QR fixed on Android",
+      es: "v1.0.20: QR de firma corregido en Android",
+    },
+    desc: {
+      pt: "O QR do «assinar no telemóvel» apontava para um endereço que o Android não resolve — agora usa o IP local do PC e abre em qualquer telemóvel no Wi-Fi da loja.",
+      en: "The «sign on the customer's phone» QR pointed at an address Android can't resolve — it now uses the PC's LAN IP and opens on any phone on the shop Wi-Fi.",
+      es: "El QR de «firmar en el móvil» apuntaba a una dirección que Android no resuelve — ahora usa la IP local del PC y abre en cualquier móvil en la Wi-Fi de la tienda.",
+    },
+  },
+  {
+    date: "2026-10-27",
+    tier: "free",
+    area: { pt: "Impressão", en: "Printing", es: "Impresión" },
+    title: {
+      pt: "v1.0.20: impressão de alto contraste",
+      en: "v1.0.20: high-contrast printing",
+      es: "v1.0.20: impresión de alto contraste",
+    },
+    desc: {
+      pt: "Nova opção em Definições → Loja que imprime todas as linhas do talão a negrito — resolve talões fracos em impressoras térmicas com densidade baixa ou papel gasto.",
+      en: "New option in Settings → Shop that prints every receipt line in bold — fixes faint receipts on thermal printers with low density or worn paper.",
+      es: "Nueva opción en Configuración → Tienda que imprime todas las líneas del ticket en negrita — resuelve tickets débiles en impresoras térmicas con densidad baja o papel gastado.",
+    },
+  },
+  {
+    date: "2026-10-27",
+    tier: "free",
+    area: { pt: "Estabilidade", en: "Stability", es: "Estabilidad" },
+    title: {
+      pt: "v1.0.20: atualizador Windows blindado + ecrãs pequenos",
+      en: "v1.0.20: hardened Windows updater + small screens",
+      es: "v1.0.20: actualizador Windows reforzado + pantallas pequeñas",
+    },
+    desc: {
+      pt: "Se uma atualização falhar a meio (ficheiro bloqueado, antivírus), a versão anterior é restaurada automaticamente. E o POS, relatórios e navegação ficaram usáveis em ecrãs pequenos.",
+      en: "If an update fails midway (locked file, antivirus), the previous version is automatically restored. Plus POS, reports and navigation now work on small screens.",
+      es: "Si una actualización falla a mitad (archivo bloqueado, antivirus), la versión anterior se restaura automáticamente. Además, el POS, informes y navegación funcionan en pantallas pequeñas.",
+    },
+  },
+  {
     date: "2026-10-07",
     tier: "free",
     area: { pt: "Instalação", en: "Install", es: "Instalación" },
