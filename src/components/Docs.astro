@@ -14,7 +14,7 @@ const { t, locale } = Astro.props;
 ---
 
 <Nav t={t} locale={locale} />
-<main class="mx-auto max-w-3xl px-6 py-16">
+<main id="main" tabindex="-1" class="mx-auto max-w-3xl px-6 py-16">
   <h1 class="text-2xl font-extrabold tracking-tight text-text sm:text-3xl">
     {t.docs.title}
   </h1>

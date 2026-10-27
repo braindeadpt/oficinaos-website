@@ -32,7 +32,7 @@ const grouped = UPDATES.reduce<Map<string, typeof UPDATES>>((acc, u) => {
 ---
 
 <Nav t={t} locale={locale} />
-<main class="mx-auto max-w-3xl px-6 py-16">
+<main id="main" tabindex="-1" class="mx-auto max-w-3xl px-6 py-16">
   <h1 class="text-2xl font-extrabold tracking-tight text-text sm:text-3xl">
     {t.updates.title}
   </h1>
