@@ -5,6 +5,8 @@
 @import "./design-system/tokens.theme.css";
 /* Fundações do redesign: movimento, acento por produto, utilitários (fase 1). */
 @import "./foundations.css";
+/* Fase 2: home e /download (fallback da Manrope, botões por SO, hero vivo, tour, SmartScreen). */
+@import "./pages.css";
 @import "./components.css";
 
 /* Cor do símbolo da marca (quadrado + encaixe pentalobe): #1D4ED8 no claro e no escuro (§2.1). */

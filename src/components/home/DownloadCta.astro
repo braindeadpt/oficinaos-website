@@ -1,0 +1,67 @@
+---
+// CTA final da home: botão por SO + alternativas + versão (lida no build, fail-soft).
+import type { Copy } from "../../i18n/pt";
+import type { Locale } from "../../i18n/utils";
+import { localeUrl } from "../../i18n/utils";
+import { downloadAttrs } from "../../lib/download";
+import { formatDate, type ReleaseInfo } from "../../lib/release";
+import Icon from "../Icon.astro";
+
+interface Props {
+  t: Copy;
+  locale: Locale;
+  release: ReleaseInfo | null;
+}
+const { t, locale, release } = Astro.props;
+const c = t.home.cta;
+const h = t.home.hero;
+const dl = downloadAttrs(locale);
+const page = localeUrl(locale, "/download/");
+const dateLocale = { pt: "pt-PT", en: "en-GB", es: "es-ES" }[locale];
+const date = release ? formatDate(release.date, dateLocale) : null;
+const links = [
+  { href: `${page}#docker`, label: c.docker },
+  { href: `${page}#portable`, label: c.portable },
+  { href: localeUrl(locale, "/docs/"), label: c.guide },
+];
+---
+
+<section id="download" aria-labelledby="cta-title" class="relative isolate overflow-hidden border-t border-border bg-surface">
+  <div class="bg-tech-grid tech-grid-fade pointer-events-none absolute inset-0 -z-10" aria-hidden="true"></div>
+  <div class="mx-auto max-w-3xl px-4 py-20 text-center sm:px-6 sm:py-28">
+    <h2 id="cta-title" class="text-[clamp(1.875rem,3.6vw,2.5rem)] leading-[1.1] font-extrabold tracking-[-0.025em] text-balance text-text">
+      {c.title}
+    </h2>
+    <p class="mx-auto mt-4 max-w-xl text-pretty text-lg text-text-muted">{c.lead}</p>
+    <div class="mt-8 flex justify-center">
+      <a
+        {...dl}
+        class="inline-flex h-12 w-full items-center justify-center gap-2 rounded-md bg-primary px-6 text-md font-semibold text-on-primary shadow-sm transition-colors hover:bg-primary-hover sm:w-auto"
+      >
+        <Icon name="download" class="h-4 w-4" />
+        <span class="dl-v-win">{h.ctaWin}</span>
+        <span class="dl-v-desktop">{h.ctaDesktop}</span>
+        <span class="dl-v-mobile">{h.ctaMobile}</span>
+      </a>
+    </div>
+    {
+      release && (
+        <p class="mt-3 text-sm text-text-muted">
+          <span class="num font-mono text-text">{release.version}</span>
+          {date && <> · {c.published} {date}</>}
+        </p>
+      )
+    }
+    <ul role="list" class="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
+      {
+        links.map((l) => (
+          <li>
+            <a href={l.href} class="font-medium text-link underline decoration-border-strong underline-offset-4 transition-colors hover:text-primary-hover">
+              {l.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

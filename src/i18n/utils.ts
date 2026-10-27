@@ -40,6 +40,7 @@ export const PORTABLE_DOCS_URL = `${REPO_URL}/blob/main/scripts/portable/README.
 export const BACKUP_DOCS_URL = `${REPO_URL}#backups-e-teste-de-restore-sidecar-db-backup`;
 export const DOCS_REMOTE_URL = `${REPO_URL}/blob/main/docs/remote-access.md`;
 export const DOCS_MOBILE_URL = `${REPO_URL}/blob/main/docs/mobile-access.md`;
+export const DISCORD_URL = "https://discord.gg/secdgJYZNn";
 export const AUTHOR_NAME = "Pedro Povoas";
 export const AUTHOR_LINKEDIN_URL = "https://www.linkedin.com/in/pedropovoas/";
 

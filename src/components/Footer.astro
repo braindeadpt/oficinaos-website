@@ -42,7 +42,7 @@ const columns: { id: string; title: string; links: FLink[] }[] = [
     links: [
       { label: t.footer.guide, href: localeUrl(locale, "/docs/") },
       { label: t.footer.updates, href: localeUrl(locale, "/updates/") },
-      { label: t.footer.install, href: `${localeUrl(locale)}#install` },
+      { label: t.footer.install, href: localeUrl(locale, "/download/") },
       { label: t.footer.releases, href: RELEASES_URL, external: true },
       { label: t.hero.footerLabel, href: localeUrl(locale, "/software-reparacao-telemoveis/") },
     ],

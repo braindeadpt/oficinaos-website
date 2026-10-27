@@ -1,0 +1,197 @@
+/*
+ * Fase 2 — home e /download.
+ *  1. Fallback métrico da Manrope (CLS do hero)
+ *  2. Botões «Descarregar» por SO (rótulos por CSS, sem layout shift)
+ *  3. Hero: lista de reparações «viva» (só opacity/transform)
+ *  4. Tour do fluxo: sticky + crossfade em desktop (o momento «uau» da home)
+ *  5. Aviso SmartScreen recriado (/download)
+ * Regras de sempre: conteúdo visível sem JS, prefers-reduced-motion respeitado, sem style= inline.
+ */
+
+/* ───────────── 1 · Manrope: fallback com as mesmas métricas ─────────────
+   Enquanto a Manrope não chega, os títulos usam Arial (Liberation Sans no Linux) com
+   size-adjust/ascent/descent calculados a partir dos ficheiros (fontTools, texto dos títulos
+   PT/EN/ES): a troca deixa de mudar as quebras de linha do H1 → CLS ~0.
+   Regular calibrado com Manrope 400; Bold com Manrope 700–800 (pesos dos títulos). */
+@font-face {
+  font-family: "Manrope Fallback";
+  src: local("Arial"), local("ArialMT"), local("Liberation Sans"), local("LiberationSans");
+  font-weight: 100 500;
+  size-adjust: 102.9%;
+  ascent-override: 103.6%;
+  descent-override: 29.15%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Manrope Fallback";
+  src: local("Arial Bold"), local("Arial-BoldMT"), local("Liberation Sans Bold"), local("LiberationSans-Bold");
+  font-weight: 600 900;
+  size-adjust: 102%;
+  ascent-override: 104.5%;
+  descent-override: 29.4%;
+  line-gap-override: 0%;
+}
+:root {
+  --oos-font-display: "Manrope Variable", "Manrope Fallback", "Manrope", "Inter Variable", "Inter", system-ui, sans-serif;
+}
+
+/* ───────────── 2 · Descarregar por SO ─────────────
+   data-os vem do script do <head> (Base.astro). Sem JS: rótulo Windows (o produto é Windows)
+   e href para /download/. */
+.dl-v-desktop,
+.dl-v-mobile,
+.os-mobile-only {
+  display: none;
+}
+:root[data-os="desktop"] .dl-v-win,
+:root[data-os="mobile"] .dl-v-win {
+  display: none;
+}
+:root[data-os="desktop"] .dl-v-desktop,
+:root[data-os="mobile"] .dl-v-mobile {
+  display: revert;
+}
+:root[data-os="mobile"] .os-mobile-only {
+  display: block;
+}
+
+/* ───────────── 3 · Hero «vivo» ─────────────
+   A reparação do iPhone passa de «Em reparação» a «Pronto» e aparece o aviso ao cliente.
+   Os dois chips ocupam a mesma célula (inline-grid) → a largura não muda. Sem movimento: estado fixo. */
+.live-chip {
+  display: inline-grid;
+}
+.live-chip > * {
+  grid-area: 1 / 1;
+}
+.live-chip > .live-b {
+  opacity: 0;
+}
+.hero-toast {
+  display: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .live-chip > .live-a {
+    animation: oos-live-a 10s var(--ease-in-out) 1.5s infinite;
+  }
+  .live-chip > .live-b {
+    animation: oos-live-b 10s var(--ease-in-out) 1.5s infinite;
+  }
+  .hero-toast {
+    display: flex;
+    opacity: 0;
+    animation: oos-hero-toast 10s var(--ease-out) 1.5s infinite;
+  }
+}
+@keyframes oos-live-a {
+  0%, 40% { opacity: 1; }
+  46%, 94% { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes oos-live-b {
+  0%, 40% { opacity: 0; }
+  46%, 94% { opacity: 1; }
+  100% { opacity: 0; }
+}
+@keyframes oos-hero-toast {
+  0%, 44% { opacity: 0; transform: translateY(10px); }
+  50%, 86% { opacity: 1; transform: none; }
+  92%, 100% { opacity: 0; transform: translateY(10px); }
+}
+
+/* ───────────── 4 · Tour do fluxo ─────────────
+   Base (sem JS, móvel): cada passo com o seu ecrã por baixo.
+   Desktop sem JS: passo e ecrã lado a lado, linha a linha.
+   Desktop com JS (.is-live, src/components/home/FlowTour.astro): os ecrãs ficam todos na
+   mesma célula sticky e o passo ativo (o que está a meio do ecrã) escolhe qual aparece. */
+.tour-step + .tour-step {
+  margin-top: 3.5rem;
+}
+@media (min-width: 64rem) {
+  .tour {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    column-gap: 4rem;
+    row-gap: 4rem;
+  }
+  .tour-step {
+    display: contents;
+  }
+  .tour-text {
+    grid-column: 1;
+    align-self: center;
+  }
+  .tour-visual {
+    grid-column: 2;
+    min-width: 0;
+  }
+  .tour-step:nth-child(1) > * { grid-row: 1; }
+  .tour-step:nth-child(2) > * { grid-row: 2; }
+  .tour-step:nth-child(3) > * { grid-row: 3; }
+  .tour-step:nth-child(4) > * { grid-row: 4; }
+  .tour-step:nth-child(5) > * { grid-row: 5; }
+
+  .tour.is-live {
+    row-gap: 0;
+  }
+  .tour.is-live .tour-text {
+    min-height: 62vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0.45;
+    transition: opacity var(--dur-2) var(--ease-out);
+  }
+  .tour.is-live .tour-visual {
+    grid-row: 1 / span 5;
+    position: sticky;
+    top: max(6rem, calc(50vh - 13rem));
+    align-self: start;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px) scale(0.985);
+    transition:
+      opacity var(--dur-3) var(--ease-out),
+      transform var(--dur-3) var(--ease-out),
+      visibility 0s linear var(--dur-3);
+  }
+  .tour.is-live[data-active="0"] .tour-step:nth-child(1) > *,
+  .tour.is-live[data-active="1"] .tour-step:nth-child(2) > *,
+  .tour.is-live[data-active="2"] .tour-step:nth-child(3) > *,
+  .tour.is-live[data-active="3"] .tour-step:nth-child(4) > *,
+  .tour.is-live[data-active="4"] .tour-step:nth-child(5) > * {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition-delay: 0s;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tour.is-live .tour-visual {
+    transform: none;
+  }
+}
+
+/* ───────────── 5 · SmartScreen recriado ─────────────
+   Cores fixas (não seguem o tema): é uma janela do Windows. Branco sobre #0B5CAD ≈ 6,7:1. */
+.ss-win {
+  background-color: #0b5cad;
+  color: #ffffff;
+}
+.ss-muted {
+  color: rgb(255 255 255 / 0.9);
+}
+.ss-btn {
+  border: 1px solid rgb(255 255 255 / 0.85);
+  color: #ffffff;
+}
+.ss-btn-plain {
+  background-color: #e6e6e6;
+  border: 1px solid #e6e6e6;
+  color: #111111;
+}
+.ss-target {
+  outline: 3px solid #fbbf24;
+  outline-offset: 3px;
+  border-radius: 2px;
+}

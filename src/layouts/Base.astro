@@ -17,6 +17,8 @@ interface Props {
   title?: string;
   description?: string;
   jsonLd?: object[];
+  /** Pré-carrega a Manrope (títulos) — só nas páginas cujo LCP é um título grande. */
+  preloadDisplayFont?: boolean;
 }
 
 const { t, locale, langAttr, ogLocale } = Astro.props;
@@ -58,6 +60,23 @@ const ogImage = new URL(
         if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
       } catch (e) {}
     </script>
+    <script is:inline>
+      // SO para os botões «Descarregar» (ver src/lib/download.ts): data-os no <html> antes do
+      // primeiro paint (os rótulos trocam por CSS, sem layout shift) e, no clique, o href passa a
+      // data-dl-<os>. Sem JS fica o href por omissão (/download/).
+      (function () {
+        var n = navigator, u = n.userAgent || "", p = (n.userAgentData && n.userAgentData.platform) || n.platform || "", o;
+        if (/android|iphone|ipad|ipod/i.test(u) || (/mac/i.test(p) && n.maxTouchPoints > 1)) o = "mobile";
+        else if (/win/i.test(p) || /windows/i.test(u)) o = "win";
+        else if (/mac|linux|x11|cros/i.test(p + " " + u)) o = "desktop";
+        else return;
+        document.documentElement.setAttribute("data-os", o);
+        document.addEventListener("click", function (e) {
+          var a = e.target && e.target.closest && e.target.closest("a[data-dl-" + o + "]");
+          if (a) a.href = a.getAttribute("data-dl-" + o);
+        }, true);
+      })();
+    </script>
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" content="#F5F7FB" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#0B1120" media="(prefers-color-scheme: dark)" />
@@ -68,6 +87,17 @@ const ogImage = new URL(
       type="font/woff2"
       crossorigin
     />
+    {
+      Astro.props.preloadDisplayFont && (
+        <link
+          rel="preload"
+          href={`${import.meta.env.BASE_URL}fonts/manrope-latin.woff2`}
+          as="font"
+          type="font/woff2"
+          crossorigin
+        />
+      )
+    }
     <link rel="icon" type="image/svg+xml" href={favicon} />
     <link rel="icon" href={`${import.meta.env.BASE_URL}favicon.ico`} sizes="32x32" />
     <link rel="apple-touch-icon" href={`${import.meta.env.BASE_URL}apple-touch-icon.png`} />

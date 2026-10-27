@@ -15,8 +15,11 @@ interface Props {
   highlight?: number;
   /** Quantas linhas mostrar (máx. 5). */
   rows?: number;
+  /** Linha «viva»: o estado troca (só CSS, ver .live-chip em pages.css) para `liveTo`. */
+  liveRow?: number;
+  liveTo?: RepairStatus;
 }
-const { t, locale, highlight, rows: max = 5 } = Astro.props;
+const { t, locale, highlight, rows: max = 5, liveRow, liveTo } = Astro.props;
 const rl = t.ui.repairList;
 const langTag = locale === "pt" ? "pt-PT" : locale === "es" ? "es-ES" : "en-IE";
 const money = new Intl.NumberFormat(langTag, { style: "currency", currency: "EUR" });
@@ -81,7 +84,16 @@ const fmtImei = (v: string) =>
               {fmtImei(r.imei)}
             </td>
             <td class="px-3 py-2.5 align-top">
-              <StatusChip status={r.status as RepairStatus} label={t.ui.status[r.status as RepairStatus]} />
+              {i === liveRow && liveTo ? (
+                <span class="live-chip">
+                  <StatusChip class="live-a" status={r.status as RepairStatus} label={t.ui.status[r.status as RepairStatus]} />
+                  <span class="live-b" aria-hidden="true">
+                    <StatusChip status={liveTo} label={t.ui.status[liveTo]} />
+                  </span>
+                </span>
+              ) : (
+                <StatusChip status={r.status as RepairStatus} label={t.ui.status[r.status as RepairStatus]} />
+              )}
             </td>
             <td class="rl-col-total num px-4 py-2.5 text-right align-top font-medium whitespace-nowrap text-text">
               {money.format(r.total)}

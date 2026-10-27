@@ -1,0 +1,91 @@
+---
+// «Veja em ação»: poster + clicar para ver. O MP4 de 9 MB só é pedido depois do clique
+// (nada de autoplay nem preload). Sem JS, o poster é um link para o MP4 (o browser abre o leitor).
+// A apresentação narrada do YouTube fica como link de texto — sem iframe nem pedidos a terceiros.
+import type { Copy } from "../../i18n/pt";
+import Heading from "../ui/Heading.astro";
+import Icon from "../Icon.astro";
+
+interface Props {
+  t: Copy;
+}
+const { t } = Astro.props;
+const v = t.home.video;
+const base = import.meta.env.BASE_URL;
+const mp4 = `${base}video/oficinaos-demo.mp4`;
+const YT = "https://www.youtube.com/watch?v=y7WhY7DYLOk";
+---
+
+<section aria-labelledby="video-title">
+  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+    <div class="grid items-end gap-6 lg:grid-cols-[minmax(0,1fr)_auto]">
+      <Heading id="video-title" size="lg">
+        {v.title}
+        <Fragment slot="lead">{v.lead}</Fragment>
+      </Heading>
+      <a
+        href={YT}
+        target="_blank"
+        rel="noopener"
+        class="inline-flex items-center gap-1.5 text-sm font-medium text-link underline decoration-border-strong underline-offset-4 transition-colors hover:text-primary-hover"
+      >
+        {v.youtube}
+        <Icon name="external" class="h-3.5 w-3.5" />
+        <span class="sr-only">({t.footer.externalHint})</span>
+      </a>
+    </div>
+    <div class="js-video mt-8 overflow-hidden rounded-xl border border-border bg-surface-2 shadow-lg" data-src={mp4} data-label={t.screenshots.videoAria}>
+      <a href={mp4} class="group relative block aspect-video">
+        <picture class="block h-full w-full">
+          <source
+            type="image/avif"
+            srcset={`${base}video/oficinaos-demo-poster-640.avif 640w, ${base}video/oficinaos-demo-poster-1280.avif 1280w`}
+            sizes="(min-width: 72rem) 1104px, calc(100vw - 2rem)"
+          />
+          <source
+            type="image/webp"
+            srcset={`${base}video/oficinaos-demo-poster-640.webp 640w, ${base}video/oficinaos-demo-poster-1280.webp 1280w`}
+            sizes="(min-width: 72rem) 1104px, calc(100vw - 2rem)"
+          />
+          <img
+            src={`${base}video/oficinaos-demo-poster-1280.webp`}
+            alt=""
+            width="1280"
+            height="720"
+            loading="lazy"
+            decoding="async"
+            class="h-full w-full object-cover object-left-top"
+          />
+        </picture>
+        <span class="absolute inset-0 flex items-center justify-center bg-black/25 transition-colors group-hover:bg-black/15">
+          <span class="inline-flex items-center gap-3 rounded-full bg-primary py-3 pr-5 pl-4 text-md font-semibold text-on-primary shadow-xl transition-transform duration-[var(--dur-2)] group-hover:scale-[1.03] motion-reduce:transform-none">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.14v14l11-7z" /></svg>
+            {v.play}
+          </span>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  // Troca o poster pelo <video> só depois do clique (gesto do utilizador → pode tocar com som).
+  document.querySelectorAll(".js-video").forEach(function (wrap) {
+    var link = wrap.querySelector("a");
+    if (!link) return;
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      var v = document.createElement("video");
+      v.src = wrap.getAttribute("data-src");
+      v.controls = true;
+      v.playsInline = true;
+      v.preload = "auto";
+      v.className = "block aspect-video w-full bg-black";
+      v.setAttribute("aria-label", wrap.getAttribute("data-label") || "");
+      wrap.replaceChildren(v);
+      var p = v.play();
+      if (p && p.catch) p.catch(function () {});
+      v.focus();
+    });
+  });
+</script>
