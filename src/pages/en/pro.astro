@@ -1,0 +1,9 @@
+---
+import ProPage from "../../components/pro/ProPage.astro";
+import Base from "../../layouts/Base.astro";
+import { lang, locale, ogLocale, t } from "../../i18n/en";
+---
+
+<Base t={t} locale={locale} langAttr={lang} ogLocale={ogLocale} title={t.proPage.metaTitle} description={t.proPage.metaDesc} preloadDisplayFont>
+  <ProPage t={t} locale={locale} />
+</Base>

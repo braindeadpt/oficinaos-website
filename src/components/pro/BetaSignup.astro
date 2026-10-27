@@ -1,0 +1,168 @@
+---
+// Formulário do beta/piloto Pro (antes vivia na secção #pro da home; desde a fase 3 está em /pro).
+// POST nativo para a Cloud (PUBLIC_BETA_FORM_ENDPOINT pode substituí-lo no build); sem endpoint,
+// cai para mailto. A Cloud redireciona com ?beta=ok|invalid|rate e o script mostra o aviso.
+import type { Copy } from "../../i18n/pt";
+import type { Locale } from "../../i18n/utils";
+import { CLOUD_URL, CONTACT_EMAIL, DEFAULT_LOCALE } from "../../i18n/utils";
+
+interface Props {
+  t: Copy;
+  id?: string;
+  title?: string;
+  headingLevel?: 2 | 3;
+  class?: string;
+}
+const { t, id = "beta", title, headingLevel = 2, class: cls } = Astro.props;
+const H = `h${headingLevel}` as "h2" | "h3";
+const locale = (Astro.currentLocale ?? DEFAULT_LOCALE) as Locale;
+
+const FORM_ENDPOINT = (
+  import.meta.env.PUBLIC_BETA_FORM_ENDPOINT ??
+  "https://cloud.oficinaos.app/beta-signup"
+).trim();
+const MAILTO = `mailto:${CONTACT_EMAIL}`;
+const inputClass =
+  "h-12 w-full rounded-md border border-border-strong bg-surface px-3 text-md text-text placeholder:text-text-subtle outline-none transition focus:border-focus focus-visible:shadow-[0_0_0_3px_color-mix(in_srgb,var(--oos-color-focus)_28%,transparent)]";
+---
+
+<div id={id} class:list={["scroll-mt-24 rounded-xl border border-border bg-surface p-6 shadow-sm sm:p-8", cls]}>
+  <div class="text-center">
+    <H id={`${id}-title`} class="font-display text-xl font-bold tracking-[-0.015em] text-text sm:text-2xl">{title ?? t.pro.signup.title}</H>
+    <p class="mx-auto mt-2 max-w-xl text-sm text-text-muted">
+      {t.pro.signup.subtitle}
+    </p>
+  </div>
+  <p
+    id="beta-signup-result"
+    role="status"
+    hidden
+    class="mx-auto mt-6 max-w-2xl rounded-md px-4 py-3 text-sm font-medium"
+  ></p>
+  <form
+    id="beta-signup"
+    aria-labelledby={`${id}-title`}
+    action={FORM_ENDPOINT || MAILTO}
+    method="POST"
+    enctype={FORM_ENDPOINT ? "application/x-www-form-urlencoded" : "text/plain"}
+    data-mailto={FORM_ENDPOINT ? undefined : CONTACT_EMAIL}
+    data-sending={t.pro.signup.sending}
+    data-msg-success={t.pro.signup.success}
+    data-msg-invalid={t.pro.signup.errorInvalid}
+    data-msg-rate={t.pro.signup.errorRate}
+    data-subject={t.pro.signup.mailSubject}
+    data-label-email={t.pro.signup.email}
+    data-label-shop={t.pro.signup.shop}
+    data-label-city={t.pro.signup.city}
+    data-label-phone={t.pro.signup.phone}
+    data-label-language={t.pro.signup.languageLabel}
+    class="mx-auto mt-6 grid max-w-2xl gap-3 sm:grid-cols-2"
+  >
+    <input type="hidden" name="language" value={locale} />
+    <input type="hidden" name="_subject" value={t.pro.signup.mailSubject} />
+    <div class="hidden" aria-hidden="true">
+      <label>Leave empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label>
+    </div>
+    <label class="flex flex-col gap-1.5 text-left text-sm font-semibold text-text">
+      {t.pro.signup.email} *
+      <input type="email" name="email" required autocomplete="email" placeholder={t.pro.signup.emailPlaceholder} class={inputClass} />
+    </label>
+    <label class="flex flex-col gap-1.5 text-left text-sm font-semibold text-text">
+      {t.pro.signup.shop} *
+      <input type="text" name="shop" required maxlength="120" autocomplete="organization" placeholder={t.pro.signup.shopPlaceholder} class={inputClass} />
+    </label>
+    <label class="flex flex-col gap-1.5 text-left text-sm font-semibold text-text">
+      {t.pro.signup.city} *
+      <input type="text" name="city" required maxlength="80" autocomplete="address-level2" placeholder={t.pro.signup.cityPlaceholder} class={inputClass} />
+    </label>
+    <label class="flex flex-col gap-1.5 text-left text-sm font-semibold text-text">
+      {t.pro.signup.phone} ({t.pro.signup.optional})
+      <input type="tel" name="phone" maxlength="30" autocomplete="tel" placeholder={t.pro.signup.phonePlaceholder} class={inputClass} />
+    </label>
+    <div class="sm:col-span-2 mt-2 flex flex-col items-center gap-3">
+      <button
+        type="submit"
+        class="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-primary px-[18px] text-md font-semibold text-on-primary shadow-sm transition hover:bg-primary-hover"
+      >
+        {t.pro.signup.button}
+      </button>
+      <p class="text-center text-xs text-text-muted">
+        {FORM_ENDPOINT ? t.pro.signup.note : t.pro.signup.noteMailto}
+      </p>
+    </div>
+  </form>
+  <p class="mt-6 text-center text-xs text-text-muted">
+    {t.pro.signup.cloudText}{" "}
+    <a
+      href={CLOUD_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="text-link underline underline-offset-2 hover:text-primary-hover"
+      >{t.pro.signup.cloudLink}</a
+    >
+  </p>
+</div>
+
+<script>
+  // Feedback: the cloud redirects back with ?beta=ok|invalid|rate after a
+  // native form POST — surface it as an inline banner, then clean the URL.
+  const form = document.getElementById("beta-signup") as HTMLFormElement | null;
+  const result = document.getElementById("beta-signup-result");
+  if (form && result) {
+    const msgs: Record<string, string | undefined> = {
+      ok: form.dataset.msgSuccess,
+      invalid: form.dataset.msgInvalid,
+      rate: form.dataset.msgRate,
+    };
+    const status = new URLSearchParams(location.search).get("beta");
+    const msg = status ? msgs[status] : undefined;
+    if (status && msg) {
+      result.textContent = msg;
+      result.classList.toggle("bg-success-soft", status === "ok");
+      result.classList.toggle("text-on-success-soft", status === "ok");
+      result.classList.toggle("bg-danger-soft", status !== "ok");
+      result.classList.toggle("text-on-danger-soft", status !== "ok");
+      result.hidden = false;
+      const url = new URL(location.href);
+      url.searchParams.delete("beta");
+      history.replaceState(null, "", url);
+    }
+    // Loading state while the browser posts to the cloud — mailto mode keeps
+    // the button usable since the page never navigates.
+    if (!form.dataset.mailto) {
+      form.addEventListener("submit", () => {
+        if (!form.reportValidity()) return;
+        const btn = form.querySelector<HTMLButtonElement>("button[type=submit]");
+        if (btn && form.dataset.sending) {
+          btn.disabled = true;
+          btn.textContent = form.dataset.sending;
+        }
+      });
+    }
+  }
+
+  // Without a form endpoint, build a readable mailto: from the fields instead
+  // of the browser's raw text/plain form encoding.
+  const to = form?.dataset.mailto;
+  if (form && to) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+      const d = new FormData(form);
+      if (String(d.get("_gotcha") ?? "")) return;
+      const ds = form.dataset;
+      const line = (label: string | undefined, key: string) =>
+        `${label ?? key}: ${String(d.get(key) ?? "").trim() || "—"}`;
+      const body = [
+        line(ds.labelEmail, "email"),
+        line(ds.labelShop, "shop"),
+        line(ds.labelCity, "city"),
+        line(ds.labelPhone, "phone"),
+        line(ds.labelLanguage, "language"),
+      ].join("\n");
+      window.location.href = `mailto:${to}?subject=${encodeURIComponent(
+        ds.subject ?? "Beta OficinaOS Pro"
+      )}&body=${encodeURIComponent(body)}`;
+    });
+  }
+</script>

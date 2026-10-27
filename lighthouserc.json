@@ -6,7 +6,9 @@
         "http://localhost/",
         "http://localhost/en/",
         "http://localhost/docs/diag/",
-        "http://localhost/download/"
+        "http://localhost/download/",
+        "http://localhost/diag/",
+        "http://localhost/pro/"
       ],
       "numberOfRuns": 3,
       "settings": {

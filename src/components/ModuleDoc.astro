@@ -10,8 +10,10 @@ interface Props {
   t: Copy;
   locale: Locale;
   page: DocPage;
+  /** Página de produto correspondente (ex.: /diag/ a partir de /docs/diag/). */
+  productLink?: { href: string; label: string };
 }
-const { t, locale, page } = Astro.props;
+const { t, locale, page, productLink } = Astro.props;
 ---
 
 <Nav t={t} locale={locale} />
@@ -26,6 +28,15 @@ const { t, locale, page } = Astro.props;
     {page.title}
   </h1>
   <p class="mt-4 text-lg text-text-muted">{page.subtitle}</p>
+  {
+    productLink && (
+      <p class="mt-4">
+        <a href={productLink.href} class="inline-flex items-center gap-1.5 font-semibold text-link underline underline-offset-4 hover:text-primary-hover">
+          {productLink.label} <span aria-hidden="true">→</span>
+        </a>
+      </p>
+    )
+  }
 
   <div class="mt-12">
     <DocSections sections={page.sections} />

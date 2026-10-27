@@ -7,6 +7,8 @@
 @import "./foundations.css";
 /* Fase 2: home e /download (fallback da Manrope, botões por SO, hero vivo, tour, SmartScreen). */
 @import "./pages.css";
+/* Fase 3: páginas de produto (/diag, /pro). */
+@import "./products.css";
 @import "./components.css";
 
 /* Cor do símbolo da marca (quadrado + encaixe pentalobe): #1D4ED8 no claro e no escuro (§2.1). */

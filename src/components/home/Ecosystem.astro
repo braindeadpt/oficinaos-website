@@ -1,7 +1,7 @@
 ---
 // Bento do ecossistema: OficinaOS (azul, grande) · Diag (ciano) · Pro (âmbar, com a Cloud como
 // motor) · Trade (lima). Cada célula mostra um pedaço de produto, não um ícone.
-// Diag e Pro têm vt (morph para /diag e /pro quando existirem, fase 3).
+// Diag e Pro têm vt: morph para o hero de /diag e de /pro (fase 3).
 import type { Copy } from "../../i18n/pt";
 import type { Locale } from "../../i18n/utils";
 import { localeUrl } from "../../i18n/utils";
@@ -46,7 +46,7 @@ const pct = new Intl.NumberFormat(locale === "pt" ? "pt-PT" : locale, { style: "
           <span class="mt-2 block h-2 overflow-hidden rounded-full bg-border">
             <span class="block h-full w-[87%] rounded-full bg-product"></span>
           </span>
-          <p class="num mt-2 font-mono text-xs text-text-muted">412 {e.diag.cycles} · 3 279 mAh</p>
+          <p class="num mt-2 font-mono text-xs text-text-muted">412 {e.diag.cycles} · 2 808 / 3 227 mAh</p>
         </div>
       </BentoCell>
 

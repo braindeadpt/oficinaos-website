@@ -1,0 +1,104 @@
+---
+// Hero de /diag (fase 3) — o momento «uau» da página: telemóvel ligado → testes a encher-se →
+// relatório pronto. Só CSS (transform/opacity, products.css §1), corre uma vez. O estado final
+// (tudo completo) é o estado base: sem JS ou com prefers-reduced-motion vê-se o relatório pronto.
+// A janela leva vt-product-diag: morph a partir da célula Diag do bento da home.
+import type { Copy } from "../../i18n/pt";
+import type { Locale } from "../../i18n/utils";
+import { localeUrl } from "../../i18n/utils";
+import Icon from "../Icon.astro";
+import UiFrame from "../ui/UiFrame.astro";
+
+interface Props {
+  t: Copy;
+  locale: Locale;
+}
+const { t, locale } = Astro.props;
+const h = t.diagPage.hero;
+const check = '<path d="m5 13 4 4L19 7"/>';
+---
+
+<section data-product="diag" class="relative isolate overflow-x-clip" aria-labelledby="diag-hero-title">
+  <div class="bg-tech-grid tech-grid-fade pointer-events-none absolute inset-0 -z-10" aria-hidden="true"></div>
+  <div class="mx-auto grid max-w-7xl items-center gap-12 px-4 pt-10 pb-16 sm:px-6 sm:pt-16 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-14 lg:pt-20 lg:pb-24">
+    <div class="min-w-0">
+      <p class="flex items-center gap-2 text-sm font-semibold text-product">
+        <span class="h-2.5 w-2.5 rounded-[3px] bg-product" aria-hidden="true"></span>
+        {h.label}
+      </p>
+      <h1
+        id="diag-hero-title"
+        class="mt-3 text-[clamp(2.25rem,5.2vw,3.5rem)] leading-[1.05] font-extrabold tracking-[-0.03em] text-balance text-text"
+      >
+        {h.title}
+      </h1>
+      <p class="mt-5 max-w-xl text-pretty text-lg text-text-muted sm:text-xl">{h.subtitle}</p>
+      <div class="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:gap-5">
+        <a
+          href="#download"
+          class="inline-flex h-12 items-center justify-center gap-2 whitespace-nowrap rounded-md bg-product px-5 text-md font-semibold text-on-product shadow-sm transition-colors hover:bg-product-hover"
+        >
+          <Icon name="download" class="h-4 w-4" />
+          {h.cta}
+        </a>
+        <a
+          href="#report"
+          class="inline-flex h-12 items-center justify-center gap-1.5 whitespace-nowrap rounded-md px-2 text-md font-semibold text-link underline decoration-border-strong underline-offset-4 transition-colors hover:text-primary-hover sm:justify-start"
+        >
+          {h.ctaSecondary}
+        </a>
+      </div>
+      <p class="mt-3 text-sm text-text-muted">
+        {h.note} ·
+        <a href={localeUrl(locale, "/docs/diag/")} class="text-link underline underline-offset-2 hover:text-primary-hover">{t.diagPage.docsLink}</a>
+      </p>
+    </div>
+
+    <div class="min-w-0 xl:-mr-16">
+      <UiFrame appName="OficinaOS Diag" title={h.frameTitle} product="diag" caption={h.frameCaption} vt="vt-product-diag">
+        <div class="dg-scan p-4 text-sm sm:p-5" aria-hidden="true">
+          <div class="flex flex-wrap items-center gap-x-4 gap-y-2 rounded-lg border border-border bg-surface-2 p-3">
+            <span class="grid h-10 w-10 shrink-0 place-items-center rounded-md bg-product-soft text-on-product-soft">
+              <Icon name="smartphone" class="h-5 w-5" />
+            </span>
+            <span class="min-w-0 flex-1">
+              <span class="block font-semibold text-text">{h.device}</span>
+              <span class="block text-xs text-text-muted">{h.trusted}</span>
+            </span>
+            <span class="inline-flex items-center gap-1.5 rounded-full bg-success-soft px-2.5 py-1 text-xs font-semibold text-on-success-soft">
+              <span class="dg-dot h-2 w-2 rounded-full bg-current"></span>
+              {h.connected}
+            </span>
+          </div>
+
+          <ol role="list" class="mt-4 divide-y divide-border rounded-lg border border-border">
+            {
+              h.tests.map(([name, result]) => (
+                <li class="dg-test grid grid-cols-[1.25rem_minmax(0,1fr)] items-center gap-x-3 gap-y-1.5 px-3 py-2.5 sm:grid-cols-[1.25rem_minmax(0,11rem)_minmax(0,1fr)]">
+                  <span class="dg-ok grid h-5 w-5 place-items-center rounded-full bg-product text-on-product">
+                    <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" set:html={check} />
+                  </span>
+                  <span class="truncate font-medium text-text">{name}</span>
+                  <span class="col-start-2 min-w-0 sm:col-start-3">
+                    <span class="block h-1.5 overflow-hidden rounded-full bg-border">
+                      <span class="dg-fill block h-full w-full rounded-full bg-product" />
+                    </span>
+                    <span class="dg-res num mt-1 block truncate text-xs text-text-muted">{result}</span>
+                  </span>
+                </li>
+              ))
+            }
+          </ol>
+
+          <div class="dg-ready mt-4 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-product bg-product-soft px-3.5 py-3 text-on-product-soft">
+            <span class="inline-flex items-center gap-2 font-semibold">
+              <Icon name="clipboard" class="h-4 w-4" />
+              {h.reportReady}
+            </span>
+            <span class="text-xs font-semibold">{h.export}</span>
+          </div>
+        </div>
+      </UiFrame>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,85 @@
+/*
+ * Fase 3 — páginas de produto (/diag, /pro).
+ *  1. Hero do Diag: scan a completar-se (o momento «uau» de /diag)
+ *  2. <details> (FAQ e relatório de exemplo): marcador próprio
+ *  3. Esquema da Cloud (/pro): setas na vertical em ecrãs estreitos
+ * Regras de sempre: estado final visível por omissão (sem JS e com reduced motion), só
+ * transform/opacity, sem style= inline.
+ */
+
+/* ───────────── 1 · Diag: scan a completar-se ─────────────
+   Estado base = scan terminado (barras cheias, resultados e «Relatório pronto» visíveis).
+   Com movimento permitido, corre UMA vez: cada teste enche a barra (scaleX), mostra o
+   resultado e o visto; no fim aparece o relatório. */
+.dg-fill {
+  transform-origin: left center;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .dg-scan .dg-fill {
+    animation: dg-fill 0.75s var(--ease-out) both;
+  }
+  .dg-scan .dg-res,
+  .dg-scan .dg-ok {
+    animation: dg-in var(--dur-2) var(--ease-out) both;
+  }
+  .dg-scan .dg-ready {
+    animation: dg-ready var(--dur-3) var(--ease-out) both;
+    animation-delay: 5.1s;
+  }
+  .dg-scan .dg-dot {
+    animation: dg-pulse 1.6s var(--ease-in-out) 3;
+  }
+  .dg-test:nth-child(1) .dg-fill { animation-delay: 0.5s; }
+  .dg-test:nth-child(2) .dg-fill { animation-delay: 1.25s; }
+  .dg-test:nth-child(3) .dg-fill { animation-delay: 2s; }
+  .dg-test:nth-child(4) .dg-fill { animation-delay: 2.75s; }
+  .dg-test:nth-child(5) .dg-fill { animation-delay: 3.5s; }
+  .dg-test:nth-child(6) .dg-fill { animation-delay: 4.25s; }
+  .dg-test:nth-child(1) :is(.dg-res, .dg-ok) { animation-delay: 1.2s; }
+  .dg-test:nth-child(2) :is(.dg-res, .dg-ok) { animation-delay: 1.95s; }
+  .dg-test:nth-child(3) :is(.dg-res, .dg-ok) { animation-delay: 2.7s; }
+  .dg-test:nth-child(4) :is(.dg-res, .dg-ok) { animation-delay: 3.45s; }
+  .dg-test:nth-child(5) :is(.dg-res, .dg-ok) { animation-delay: 4.2s; }
+  .dg-test:nth-child(6) :is(.dg-res, .dg-ok) { animation-delay: 4.95s; }
+}
+@keyframes dg-fill {
+  from { transform: scaleX(0); }
+}
+@keyframes dg-in {
+  from { opacity: 0; transform: scale(0.9); }
+}
+@keyframes dg-ready {
+  from { opacity: 0; transform: translateY(8px); }
+}
+@keyframes dg-pulse {
+  50% { opacity: 0.35; }
+}
+
+/* ───────────── 2 · <details> ───────────── */
+.faq > summary::-webkit-details-marker,
+.rp > summary::-webkit-details-marker {
+  display: none;
+}
+.faq-v {
+  transition: opacity var(--dur-2) var(--ease-out);
+}
+.faq[open] .faq-v {
+  opacity: 0;
+}
+.rp-chev {
+  transition: transform var(--dur-2) var(--ease-out);
+}
+.rp[open] .rp-chev {
+  transform: rotate(180deg);
+}
+.faq > summary:hover,
+.rp > summary:hover {
+  color: var(--oos-color-link);
+}
+
+/* ───────────── 3 · Esquema da Cloud ───────────── */
+@media (max-width: 47.99rem) {
+  .cloud-arrow {
+    transform: rotate(90deg);
+  }
+}
