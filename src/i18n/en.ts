@@ -316,9 +316,30 @@ export const t: Copy = {
   docs: {
     title: "Full guide",
     subtitle:
-      "Install, daily use, backups and troubleshooting — step by step, no technical background needed.",
+      "For technicians, repair shops and resellers: install, daily use, backups and troubleshooting — step by step, no technical background needed.",
     toc: "In this guide",
     backToGuide: "Full guide",
+    ui: {
+      navLabel: "Documentation",
+      menu: "Documentation menu",
+      breadcrumb: "Breadcrumb",
+      groups: ["Get started", "Day to day", "Printing", "Pro modules", "Help"],
+      modules: "Module guides",
+      onThisPage: "On this page",
+      search: "Search the documentation",
+      searchShort: "Search",
+      searchPlaceholder: "Search the guide… (e.g. backups, printer, VAT)",
+      searchHint: "Type to search the titles and sections of every guide.",
+      searchEmpty: "No results for “{q}”. Try another word or fewer words.",
+      searchOne: "1 result",
+      searchMany: "{n} results",
+      searchError: "Search couldn't be loaded. Use the documentation menu instead.",
+      searchKeys: "↑ ↓ to choose · Enter to open · Esc to close",
+      close: "Close",
+      copy: "Copy",
+      copied: "Copied",
+      copyLabel: "Copy commands",
+    },
     sections: [
       {
         heading: "What's in the app (free, MIT)",
@@ -584,7 +605,7 @@ export const t: Copy = {
         heading: "Pricing",
         paragraphs: [
           "The full app is free and open source (MIT) — no limits, no accounts, no trial period. Forever.",
-          "Pro modules are in beta: during this period, pilot members use them for free while we measure the real value they bring to the counter. When prices are announced they'll be simple monthly subscriptions — no lock-in, no hidden costs.",
+          "Pro modules are in beta: during this period they're free while we measure the real value they bring to the counter. When prices are announced they'll be simple monthly subscriptions — no lock-in, no hidden costs.",
           "* WhatsApp note: replying to customers within the 24-hour window is free. Proactive notifications («it's ready») outside that window need Meta-approved templates, which carry small per-message fees — Meta's cost, not ours.",
         ],
         table: {
@@ -622,7 +643,7 @@ export const t: Copy = {
         heading: "WhatsApp bot (Pro)",
         paragraphs: [
           "The customer texts the shop's WhatsApp number and the bot replies with real job data — nobody picks up the phone. It works on the shop's own number (the WhatsApp Business app on the phone keeps working in parallel).",
-          "Honest notes: replies can take up to ~2 minutes (sync cycle); setup uses Meta's official WhatsApp Business Platform and we assist the first shop's onboarding.",
+          "Honest notes: replies can take up to ~2 minutes (sync cycle); setup uses Meta's official WhatsApp Business Platform and during the beta we help with the setup.",
         ],
         table: {
           head: ["Customer writes", "Bot replies"],
@@ -848,7 +869,7 @@ export const t: Copy = {
             "The module uses Meta's official WhatsApp Business Platform — no workarounds, no ban risk for the shop's number. Requirements:",
           ],
           list: [
-            "A Meta app (developers.facebook.com) with the WhatsApp product — our OficinaOS app already exists and is published",
+            "A Meta app (developers.facebook.com) with the WhatsApp product — the OficinaOS app already exists and is awaiting Meta's approval",
             "The shop's number on WhatsApp Business — coexistence keeps the phone app working while the API connects in parallel",
             "A permanent system-user token with whatsapp_business_messaging + whatsapp_business_management permissions",
             "The webhook pointed at OficinaOS Cloud — already configured on our side",
@@ -858,7 +879,7 @@ export const t: Copy = {
         {
           heading: "Setup in the app (per shop)",
           paragraphs: [
-            "After Meta onboarding (we assist the first shop), the app-side setup is 4 fields:",
+            "After Meta onboarding (during the beta we help with this step), the app-side setup is 4 fields:",
           ],
           list: [
             "Menu → Notifications → Setup → WhatsApp section",

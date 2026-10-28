@@ -331,9 +331,30 @@ export const t = {
   docs: {
     title: "Guia completo",
     subtitle:
-      "Instalação, dia a dia, backups e resolução de problemas — explicado passo a passo, sem precisar de perceber de tecnologia.",
+      "Para técnicos, lojas de reparação e revendedores: instalação, dia a dia, backups e resolução de problemas — explicado passo a passo, sem precisar de perceber de tecnologia.",
     toc: "Neste guia",
     backToGuide: "Guia completo",
+    ui: {
+      navLabel: "Documentação",
+      menu: "Menu da documentação",
+      breadcrumb: "Caminho",
+      groups: ["Começar", "Dia a dia", "Impressão", "Módulos Pro", "Ajuda"],
+      modules: "Guias dos módulos",
+      onThisPage: "Nesta página",
+      search: "Pesquisar na documentação",
+      searchShort: "Pesquisar",
+      searchPlaceholder: "Pesquisar no guia… (ex.: backups, impressora, IVA)",
+      searchHint: "Escreva para pesquisar nos títulos e secções de todos os guias.",
+      searchEmpty: "Sem resultados para «{q}». Experimente outra palavra ou menos palavras.",
+      searchOne: "1 resultado",
+      searchMany: "{n} resultados",
+      searchError: "Não foi possível carregar a pesquisa. Use o menu da documentação.",
+      searchKeys: "↑ ↓ para escolher · Enter para abrir · Esc para fechar",
+      close: "Fechar",
+      copy: "Copiar",
+      copied: "Copiado",
+      copyLabel: "Copiar comandos",
+    },
     sections: [
       {
         heading: "O que vem na app (grátis, MIT)",
@@ -601,7 +622,7 @@ export const t = {
         heading: "Preços",
         paragraphs: [
           "A app completa é gratuita e open source (MIT) — sem limites, sem contas, sem período de teste. Para sempre.",
-          "Os módulos Pro estão em beta: durante este período, quem está no piloto usa-os gratuitamente enquanto medimos o valor real que trazem ao balcão. Quando os preços forem anunciados serão subscrições mensais simples — sem fidelização e sem custos escondidos.",
+          "Os módulos Pro estão em beta: durante este período são gratuitos, enquanto medimos o valor real que trazem ao balcão. Quando os preços forem anunciados serão subscrições mensais simples — sem fidelização e sem custos escondidos.",
           "* Nota WhatsApp: responder a clientes dentro da janela de 24h é grátis. Para notificações proativas («está pronta») fora dessa janela, a Meta cobra pequenos valores por mensagem modelo — custo da Meta, não nosso.",
         ],
         table: {
@@ -639,7 +660,7 @@ export const t = {
         heading: "Bot de WhatsApp (Pro)",
         paragraphs: [
           "O cliente escreve para o número de WhatsApp da loja e o bot responde com dados reais da ficha — sem ninguém pegar no telemóvel. Funciona com o próprio número da loja (o WhatsApp Business do telemóvel continua a funcionar em paralelo).",
-          "Notas honestas: a resposta pode demorar até ~2 minutos (ciclo de sincronização); o setup usa a WhatsApp Business Platform oficial da Meta e é assistido por nós na primeira loja.",
+          "Notas honestas: a resposta pode demorar até ~2 minutos (ciclo de sincronização); o setup usa a WhatsApp Business Platform oficial da Meta e, durante o beta, ajudamos na configuração.",
         ],
         table: {
           head: ["O cliente escreve", "O bot responde"],
@@ -867,7 +888,7 @@ export const t = {
             "O módulo usa a WhatsApp Business Platform oficial da Meta — não há gambiarras nem risco de ban do número. Os requisitos:",
           ],
           list: [
-            "Uma app Meta (developers.facebook.com) com o produto WhatsApp — a nossa app OficinaOS já existe e está publicada",
+            "Uma app Meta (developers.facebook.com) com o produto WhatsApp — a app OficinaOS já existe e aguarda a aprovação da Meta",
             "O número da loja no WhatsApp Business — a coexistence permite manter a app no telemóvel e ligar a API ao mesmo tempo",
             "Um token permanente de system user com as permissões whatsapp_business_messaging + whatsapp_business_management",
             "O webhook apontado à OficinaOS Cloud — já configurado do nosso lado",
@@ -877,7 +898,7 @@ export const t = {
         {
           heading: "Configuração na app (por loja)",
           paragraphs: [
-            "Depois do onboarding Meta (assistido por nós na primeira loja), a configuração na app são 4 campos:",
+            "Depois do onboarding Meta (durante o beta, ajudamos nesse passo), a configuração na app são 4 campos:",
           ],
           list: [
             "Menu → Notificações → Setup → secção WhatsApp",

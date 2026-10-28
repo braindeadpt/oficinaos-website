@@ -1,10 +1,10 @@
 ---
+// /docs/<módulo>/ — guia de um módulo, no layout da documentação (fase 5). O acento segue o
+// produto (Diag ciano, módulos Pro âmbar, canal SMS do core azul) — ver DOC_MODULES.
 import type { Copy, DocPage } from "../i18n/pt";
 import type { Locale } from "../i18n/utils";
-import { localeUrl } from "../i18n/utils";
-import DocSections from "./DocSections.astro";
-import Footer from "./Footer.astro";
-import Nav from "./Nav.astro";
+import { DOC_MODULES } from "../lib/docs";
+import DocsShell from "./docs/DocsShell.astro";
 
 interface Props {
   t: Copy;
@@ -14,32 +14,16 @@ interface Props {
   productLink?: { href: string; label: string };
 }
 const { t, locale, page, productLink } = Astro.props;
+const mod = DOC_MODULES.find((m) => t.moduleDocs[m.key] === page);
 ---
 
-<Nav t={t} locale={locale} />
-<main id="main" tabindex="-1" class="mx-auto max-w-3xl px-6 py-16">
-  <a
-    href={localeUrl(locale, "/docs")}
-    class="text-sm font-medium text-text-muted transition hover:text-primary-hover"
-  >
-    ← {t.docs.backToGuide}
-  </a>
-  <h1 class="mt-4 text-2xl font-extrabold tracking-tight text-text sm:text-3xl">
-    {page.title}
-  </h1>
-  <p class="mt-4 text-lg text-text-muted">{page.subtitle}</p>
-  {
-    productLink && (
-      <p class="mt-4">
-        <a href={productLink.href} class="inline-flex items-center gap-1.5 font-semibold text-link underline underline-offset-4 hover:text-primary-hover">
-          {productLink.label} <span aria-hidden="true">→</span>
-        </a>
-      </p>
-    )
-  }
-
-  <div class="mt-12">
-    <DocSections sections={page.sections} />
-  </div>
-</main>
-<Footer t={t} locale={locale} />
+<DocsShell
+  t={t}
+  locale={locale}
+  current={mod?.slug ?? ""}
+  product={mod?.product ?? "os"}
+  title={page.title}
+  subtitle={page.subtitle}
+  sections={page.sections}
+  productLink={productLink}
+/>

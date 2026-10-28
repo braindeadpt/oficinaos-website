@@ -1,6 +1,11 @@
 ---
-// Tabela de dados com scroll horizontal (scroll-x) em ecrãs estreitos. A primeira coluna pode ser
-// cabeçalho de linha (th scope=row). Cabeçalho vazio → <td> (axe empty-table-header).
+// Tabela de dados responsiva. A primeira coluna pode ser cabeçalho de linha (th scope=row).
+// Cabeçalho vazio → <td> (axe empty-table-header).
+// Em ecrãs largos: scroll horizontal (scroll-x, com sombras nas margens como sinal de que há mais).
+// stack: abaixo de 40rem cada linha passa a cartão (rótulo da coluna ao lado de cada valor). Os
+// roles ARIA explícitos mantêm a semântica de tabela quando o CSS troca o display para block.
+// Opt-in (as docs ligam-no nas tabelas de 3+ colunas — as de 2 cabem a partir de 360 px);
+// /diag e /pro mantêm o scroll.
 interface Props {
   caption: string;
   head: string[];
@@ -8,40 +13,62 @@ interface Props {
   /** Rótulo da região com scroll (leitores de ecrã). */
   label: string;
   rowHeaders?: boolean;
+  stack?: boolean;
   class?: string;
 }
 const { caption, head, rows, label, rowHeaders = true, class: cls } = Astro.props;
+const stack = Astro.props.stack ?? false;
+const r = (role: string) => (stack ? role : undefined);
 ---
 
-<div class:list={["scroll-x scroll-region rounded-lg border border-border", cls]} role="region" aria-label={label} tabindex="0">
-  <table class="doc-table w-full text-sm">
+<div
+  class:list={["scroll-x scroll-region rounded-lg border border-border", stack && "dt-stack", cls]}
+  role="region"
+  aria-label={label}
+  tabindex="0"
+>
+  <table class="doc-table w-full text-sm" role={r("table")}>
     <caption class="sr-only">{caption}</caption>
-    <thead>
-      <tr class="border-b border-border bg-surface-2">
+    <thead role={r("rowgroup")}>
+      <tr class="border-b border-border bg-surface-2" role={r("row")}>
         {
           head.map((h) =>
             h.trim() ? (
-              <th scope="col" class="px-4 py-2.5 text-left text-caption font-semibold uppercase tracking-[0.06em] text-text-muted">
+              <th
+                scope="col"
+                role={r("columnheader")}
+                class="px-4 py-2.5 text-left text-caption font-semibold uppercase tracking-[0.06em] text-text-muted"
+              >
                 {h}
               </th>
             ) : (
-              <td class="px-4 py-2.5" />
+              <td class="px-4 py-2.5" role={r("cell")} />
             )
           )
         }
       </tr>
     </thead>
-    <tbody>
+    <tbody role={r("rowgroup")}>
       {
         rows.map((row) => (
-          <tr class="border-b border-border last:border-0">
+          <tr class="border-b border-border last:border-0" role={r("row")}>
             {row.map((cell, i) =>
               i === 0 && rowHeaders ? (
-                <th scope="row" class="px-4 py-2.5 text-left leading-relaxed font-semibold text-text">
+                <th
+                  scope="row"
+                  role={r("rowheader")}
+                  class="px-4 py-2.5 text-left leading-relaxed font-semibold text-text"
+                >
                   {cell}
                 </th>
               ) : (
-                <td class="px-4 py-2.5 leading-relaxed text-text-muted">{cell}</td>
+                <td
+                  role={r("cell")}
+                  data-label={stack && head[i]?.trim() ? head[i] : undefined}
+                  class="px-4 py-2.5 leading-relaxed text-text-muted"
+                >
+                  {cell}
+                </td>
               )
             )}
           </tr>

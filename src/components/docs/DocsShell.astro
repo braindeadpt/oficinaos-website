@@ -1,0 +1,199 @@
+---
+// Layout da documentação (fase 5): side-nav fixa no desktop, menu recolhível no móvel,
+// «Nesta página» (índice da página atual), pesquisa (DocsSearch) e corpo (DocSections).
+//  ≥ 64rem: [side-nav sticky] [conteúdo] · ≥ 80rem: + [Nesta página sticky]
+//  < 64rem: barra sticky por baixo do cabeçalho com «Menu da documentação» (<details>, painel
+//           sobreposto com scroll próprio — não empurra o conteúdo) e o botão de pesquisa.
+// JS (inline, ~3 KB, CSP por hash): pesquisa, copiar código, fechar o menu móvel ao escolher
+// um link e realçar a secção visível no índice. Sem JS tudo o resto funciona (os botões de
+// pesquisa ficam visíveis para não haver layout shift, mas sem efeito).
+import type { Copy, DocsSection } from "../../i18n/pt";
+import type { Locale } from "../../i18n/utils";
+import { localeUrl } from "../../i18n/utils";
+import { sectionIds } from "../../lib/docs";
+import type { ProductId } from "../../lib/products";
+import DocSections from "../DocSections.astro";
+import Footer from "../Footer.astro";
+import Nav from "../Nav.astro";
+import Heading from "../ui/Heading.astro";
+import DocsNav from "./DocsNav.astro";
+import DocsSearch from "./DocsSearch.astro";
+
+interface Props {
+  t: Copy;
+  locale: Locale;
+  current: string;
+  product?: ProductId;
+  title: string;
+  subtitle: string;
+  sections: DocsSection[];
+  /** Página de produto correspondente (ex.: /diag/ a partir de /docs/diag/). */
+  productLink?: { href: string; label: string };
+}
+const { t, locale, current, product = "os", title, subtitle, sections, productLink } = Astro.props;
+const ui = t.docs.ui;
+const isOverview = current === "overview";
+const ids = sectionIds(sections);
+const toc = sections.map((s, i) => ({ label: s.heading, id: ids[i] }));
+const kbd = "/";
+---
+
+<Nav t={t} locale={locale} />
+<div class="docs-shell mx-auto max-w-7xl px-4 sm:px-6" data-product={product}>
+  {/* Móvel / tablet: menu recolhível + pesquisa */}
+  <aside class="docs-mbar lg:hidden" aria-label={ui.menu}>
+    <details class="docs-mnav">
+      <summary class="docs-mnav-sum">
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M4 6h16" /><path d="M4 12h16" /><path d="M4 18h16" />
+        </svg>
+        <span class="truncate">{ui.menu}</span>
+        <svg class="docs-chev ml-auto h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="m6 9 6 6 6-6" />
+        </svg>
+      </summary>
+      <div class="docs-mnav-panel">
+        <DocsNav t={t} locale={locale} current={current} />
+      </div>
+    </details>
+    <button type="button" class="docs-search-btn docs-search-btn-icon" data-docs-search aria-haspopup="dialog" aria-keyshortcuts="/ Control+K Meta+K" aria-label={ui.search}>
+      <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" />
+      </svg>
+      <span class="hidden sm:inline">{ui.searchShort}</span>
+    </button>
+  </aside>
+
+  <div class="docs-grid" data-overview={isOverview ? "" : undefined}>
+    <aside class="docs-side hidden lg:block" aria-label={ui.navLabel}>
+      <div class="docs-side-inner">
+        <button type="button" class="docs-search-btn mb-4 w-full" data-docs-search aria-haspopup="dialog" aria-keyshortcuts="/ Control+K Meta+K">
+          <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" />
+          </svg>
+          <span class="mr-auto">{ui.searchShort}</span>
+          <kbd class="rounded border border-border px-1.5 font-mono text-[11px] leading-5 text-text-muted">{kbd}</kbd>
+        </button>
+        <DocsNav t={t} locale={locale} current={current} />
+      </div>
+    </aside>
+
+    <main id="main" tabindex="-1" class="docs-main min-w-0">
+      <nav aria-label={ui.breadcrumb} class="text-sm">
+        <ol class="flex flex-wrap items-center gap-x-2 gap-y-1 text-text-muted">
+          {
+            isOverview ? (
+              <li>
+                <a href={localeUrl(locale, "/docs/")} aria-current="page" class="font-medium text-text">{t.docs.title}</a>
+              </li>
+            ) : (
+              <>
+                <li>
+                  <a href={localeUrl(locale, "/docs/")} class="font-medium transition hover:text-primary-hover">{t.docs.title}</a>
+                </li>
+                <li aria-hidden="true">/</li>
+                <li>
+                  <span aria-current="page" class="font-medium text-text">{title}</span>
+                </li>
+              </>
+            )
+          }
+        </ol>
+      </nav>
+
+      <header class="mt-5 border-b border-border pb-8">
+        <span class="mb-5 block h-1 w-10 rounded-full bg-product" aria-hidden="true" />
+        <Heading level={1} size="xl">
+          {title}
+          <Fragment slot="lead">{subtitle}</Fragment>
+        </Heading>
+        {
+          productLink && (
+            <p class="mt-5">
+              <a href={productLink.href} class="inline-flex items-center gap-1.5 font-semibold text-link underline underline-offset-4 hover:text-primary-hover">
+                {productLink.label} <span aria-hidden="true">→</span>
+              </a>
+            </p>
+          )
+        }
+      </header>
+
+      {
+        !isOverview && toc.length > 2 && (
+          <nav aria-label={ui.onThisPage} class="docs-toc-inline mt-8 rounded-lg border border-border bg-surface p-5 xl:hidden">
+            <p class="docs-label docs-label-flush">{ui.onThisPage}</p>
+            <ul class="mt-2 grid gap-x-6 gap-y-1.5 text-sm sm:grid-cols-2">
+              {toc.map((l) => (
+                <li>
+                  <a href={`#${l.id}`} class="toc-link">{l.label}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )
+      }
+
+      <div class="mt-10">
+        <DocSections sections={sections} ui={ui} />
+      </div>
+    </main>
+
+    {
+      !isOverview && (
+        <aside class="docs-toc hidden xl:block" aria-label={ui.onThisPage}>
+          <nav aria-label={ui.onThisPage} class="docs-side-inner">
+            <p class="docs-label docs-label-flush">{ui.onThisPage}</p>
+            <ul class="mt-2 space-y-0.5 border-l border-border text-sm">
+              {toc.map((l) => (
+                <li>
+                  <a href={`#${l.id}`} class="toc-link toc-link-rail" data-toc={l.id}>{l.label}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </aside>
+      )
+    }
+  </div>
+</div>
+<DocsSearch t={t} locale={locale} />
+<Footer t={t} locale={locale} />
+
+<script is:inline>
+(()=>{
+const D=document,d=D.getElementById("docs-search");
+/* Copiar código */
+const cl=navigator.clipboard;
+D.querySelectorAll("[data-copy]").forEach(b=>{if(!cl)return;b.hidden=false;const s=b.querySelector(".copy-txt"),o=s.textContent;b.addEventListener("click",()=>{const c=b.parentElement.querySelector("code");cl.writeText(c.textContent.trim()).then(()=>{s.textContent=b.dataset.copied;setTimeout(()=>{s.textContent=o},1800)}).catch(()=>{})})});
+/* Menu móvel: fecha ao escolher um link */
+D.querySelectorAll(".docs-mnav a").forEach(a=>a.addEventListener("click",()=>{a.closest("details").open=false}));
+/* Secção visível realçada no índice lateral */
+const rail=D.querySelectorAll("[data-toc]");
+if(rail.length&&"IntersectionObserver"in window){const m=new Map();rail.forEach(a=>m.set(a.dataset.toc,a));let cur;const io=new IntersectionObserver(es=>{for(const e of es)if(e.isIntersecting){const a=m.get(e.target.id);if(a&&a!==cur){cur&&cur.removeAttribute("data-active");a.setAttribute("data-active","");cur=a}}},{rootMargin:"-15% 0px -70% 0px"});D.querySelectorAll(".doc-section[id]").forEach(s=>io.observe(s))}
+/* Pesquisa */
+if(!d||!d.showModal)return;
+const q=D.getElementById("docs-q"),L=D.getElementById("docs-results"),st=D.getElementById("docs-status"),ds=d.dataset;
+const N=s=>" "+s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g," ");
+let idx,ld,res=[],act=-1,last;
+const load=()=>ld||(ld=fetch(ds.index).then(r=>{if(!r.ok)throw 0;return r.json()}).then(j=>{idx=[];for(const p of j){idx.push({p:p.t,h:p.t,u:p.u,x:p.d,H:N(p.t),T:N(p.t),X:N(p.d)});for(const s of p.s)idx.push({p:p.t,h:s[0],u:p.u+"#"+s[1],x:s[2],H:N(s[0]),T:N(p.t),X:N(s[2]+" "+s[3])})}last=null;if(q.value)run()}).catch(()=>{ld=0;st.textContent=ds.error}));
+const setAct=i=>{const o=L.children;if(act>-1&&o[act])o[act].setAttribute("aria-selected","false");act=i;if(i>-1&&o[i]){o[i].setAttribute("aria-selected","true");q.setAttribute("aria-activedescendant",o[i].id);o[i].scrollIntoView({block:"nearest"})}else q.removeAttribute("aria-activedescendant")};
+const el=(t,c,x)=>{const e=D.createElement(t);e.className=c;e.textContent=x;return e};
+function run(){const v=q.value.trim();if(v===last&&idx)return;last=v;L.textContent="";res=[];act=-1;q.removeAttribute("aria-activedescendant");
+if(!v){q.setAttribute("aria-expanded","false");st.textContent=ds.hint;return}
+if(!idx){load();return}
+const w=N(v).split(" ").filter(Boolean).map(k=>" "+k);
+if(w.length)for(const e of idx){let sc=0,ok=true;for(const k of w){if(e.H.includes(k))sc+=e.H.startsWith(k)?6:4;else if(e.T.includes(k))sc+=2;else if(e.X.includes(k))sc+=1;else{ok=false;break}}if(ok)res.push([sc,e])}
+res.sort((a,b)=>b[0]-a[0]);res=res.slice(0,8).map(r=>r[1]);
+res.forEach((e,i)=>{const a=D.createElement("a");a.href=e.u;a.id="dsr-"+i;a.setAttribute("role","option");a.setAttribute("aria-selected","false");a.className="docs-result";if(e.h!==e.p)a.append(el("span","docs-result-page",e.p));a.append(el("span","docs-result-title",e.h));if(e.x)a.append(el("span","docs-result-text",e.x));L.append(a)});
+q.setAttribute("aria-expanded",res.length?"true":"false");
+st.textContent=res.length?(res.length===1?ds.one:ds.many.replace("{n}",res.length)):ds.empty.replace("{q}",v);
+if(res.length)setAct(0)}
+const open=()=>{if(d.open)return;d.showModal();q.focus();q.select();load()};
+D.querySelectorAll("[data-docs-search]").forEach(b=>b.addEventListener("click",open));
+d.querySelector("[data-close]").addEventListener("click",()=>d.close());
+d.addEventListener("click",e=>{if(e.target===d)d.close();else if(e.target.closest(".docs-result"))d.close()});
+q.addEventListener("input",run);
+q.addEventListener("keydown",e=>{const n=res.length;if(e.key==="ArrowDown"&&n){e.preventDefault();setAct((act+1)%n)}else if(e.key==="ArrowUp"&&n){e.preventDefault();setAct((act-1+n)%n)}else if(e.key==="Enter"){e.preventDefault();if(act>-1&&res[act]){d.close();location.href=res[act].u}}});
+D.addEventListener("keydown",e=>{const t=e.target,ed=t.isContentEditable||/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName);if((e.key==="k"||e.key==="K")&&(e.ctrlKey||e.metaKey)){e.preventDefault();open()}else if(e.key==="/"&&!ed&&!e.altKey&&!e.ctrlKey&&!e.metaKey){e.preventDefault();open()}});
+})();
+</script>
