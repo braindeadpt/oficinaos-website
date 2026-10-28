@@ -122,8 +122,15 @@ export function diagJsonLd(t: Copy, url: string): object[] {
   ];
 }
 
+/** Os 27 Estados-membros da UE — o Trade admite e é promovido em todos (ENABLED_COUNTRIES=EU). */
+const EU_COUNTRIES = [
+  "Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czechia", "Denmark", "Estonia", "Finland",
+  "France", "Germany", "Greece", "Hungary", "Ireland", "Italy", "Latvia", "Lithuania", "Luxembourg",
+  "Malta", "Netherlands", "Poland", "Portugal", "Romania", "Slovakia", "Slovenia", "Spain", "Sweden",
+];
+
 /** /trade: WebApplication do OficinaOS Trade — só factos do oficinaos-market: app web em
- *  trade.oficinaos.app, grátis no lançamento, disponível em Portugal e Espanha, PT/ES/EN. */
+ *  trade.oficinaos.app, grátis no lançamento, disponível nos 27 países da UE, PT/ES/EN. */
 export function tradeJsonLd(t: Copy, url: string): object[] {
   return [
     organization,
@@ -136,10 +143,7 @@ export function tradeJsonLd(t: Copy, url: string): object[] {
       browserRequirements: "Requires JavaScript",
       url: "https://trade.oficinaos.app/",
       mainEntityOfPage: url,
-      areaServed: [
-        { "@type": "Country", name: "Portugal" },
-        { "@type": "Country", name: "Spain" },
-      ],
+      areaServed: EU_COUNTRIES.map((name) => ({ "@type": "Country", name })),
       inLanguage: ["pt-PT", "es", "en"],
       audience: { "@type": "BusinessAudience" },
       offers: { "@type": "Offer", price: "0", priceCurrency: "EUR" },

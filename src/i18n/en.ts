@@ -2120,7 +2120,7 @@ export const t: Copy = {
   tradePage: {
     metaTitle: "OficinaOS Trade — parts and devices between professionals",
     metaDesc:
-      "B2B network where verified technicians, repair shops and resellers buy and sell phones, computers, parts and lots. No consumers, no minimums and no per-deal commission. Portugal and Spain.",
+      "B2B network where verified technicians, repair shops and resellers buy and sell phones, computers, parts and lots. No consumers, no minimums and no per-deal commission. Across the European Union.",
     hero: {
       label: "OficinaOS Trade",
       badge: "Free at launch",
@@ -2129,7 +2129,7 @@ export const t: Copy = {
         "The B2B network where verified technicians, repair shops and resellers buy and sell phones, computers, parts and lots with each other. No consumers, no minimum order and no per-deal commission.",
       cta: "Apply — it's free",
       ctaSecondary: "Browse the market",
-      note: "Verified businesses only · Portugal and Spain",
+      note: "Verified businesses only · Across the European Union",
       frameTitle: "Market",
       frameCaption:
         "Illustrative recreation of OficinaOS Trade search with sample data: the phrase «10 iPhone 13 screens in Porto, original» becomes filters (part, screen, original new, iPhone 13, Porto, stock of at least 10) and three matching listings appear, with the price reserved for verified members.",
@@ -2152,7 +2152,7 @@ export const t: Copy = {
       steps: [
         {
           title: "Apply with your business",
-          text: "In Portugal, your NIF and permanent-certificate code — or your start-of-activity proof if you're self-employed. In Spain, your VAT number checked against VIES plus your registration document. Some applications are approved straight away; the rest are reviewed by a person.",
+          text: "In Portugal, your NIF and permanent-certificate code — or your start-of-activity proof if you're self-employed. Elsewhere in the EU, your intra-community VAT number checked against VIES plus your company registration document. Some applications are approved straight away; the rest are reviewed by a person.",
         },
         {
           title: "List what you have, request what you need",
@@ -2234,7 +2234,7 @@ export const t: Copy = {
       title: "Frequently asked questions",
       items: [
         { q: "How much does it cost?", a: "Nothing during launch. After that there will be a free plan for verified members and a monthly Pro subscription. There is no per-deal commission." },
-        { q: "Where is it available?", a: "In Portugal and Spain, for businesses based in those two countries. The app is available in Portuguese, Spanish and English." },
+        { q: "Where is it available?", a: "Across the whole European Union: businesses based in any of the 27 EU countries can apply. The app is available in Portuguese, Spanish and English." },
         { q: "I'm self-employed. Can I join?", a: "Yes. Trade is for independent technicians, repair shops and resellers. In Portugal, sole traders use their start-of-activity proof instead of the permanent certificate." },
         { q: "Who sees my prices?", a: "Only verified members. Outsiders can see stock exists, never the price or the seller." },
         { q: "How does payment work?", a: "Directly between businesses — the platform never moves money. Trade records the offer and agreement with invoicing details, and reviews only count after delivery." },
@@ -2244,7 +2244,7 @@ export const t: Copy = {
     },
     cta: {
       title: "Join the network",
-      lead: "Free during launch for verified technicians, repair shops and resellers in Portugal and Spain.",
+      lead: "Free during launch for verified technicians, repair shops and resellers across the European Union.",
       primary: "Apply — it's free",
       secondary: "Browse the market",
       member: "Already a member?",
