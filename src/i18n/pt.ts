@@ -2140,7 +2140,7 @@ export const t = {
   tradePage: {
     metaTitle: "OficinaOS Trade — peças e equipamentos entre profissionais",
     metaDesc:
-      "Rede B2B onde técnicos, oficinas e revendedores verificados compram e vendem telemóveis, computadores, peças e lotes. Sem particulares, sem mínimos e sem comissão por negócio. Portugal e Espanha.",
+      "Rede B2B onde técnicos, oficinas e revendedores verificados compram e vendem telemóveis, computadores, peças e lotes. Sem particulares, sem mínimos e sem comissão por negócio. Em toda a União Europeia.",
     hero: {
       label: "OficinaOS Trade",
       badge: "Grátis no lançamento",
@@ -2149,7 +2149,7 @@ export const t = {
         "A rede B2B onde técnicos, oficinas e revendedores verificados compram e vendem telemóveis, computadores, peças e lotes entre si. Sem particulares, sem mínimos de compra e sem comissão por negócio.",
       cta: "Candidatar-me — é grátis",
       ctaSecondary: "Ver o mercado",
-      note: "Só empresas verificadas · Portugal e Espanha",
+      note: "Só empresas verificadas · Toda a União Europeia",
       frameTitle: "Mercado",
       frameCaption:
         "Recriação ilustrativa da pesquisa do OficinaOS Trade com dados de exemplo: a frase «10 ecrãs iPhone 13 no Porto, originais» é convertida em filtros (peça, ecrã, original nova, iPhone 13, Porto, stock de pelo menos 10) e aparecem três anúncios compatíveis, com o preço reservado a membros verificados.",
@@ -2172,7 +2172,7 @@ export const t = {
       steps: [
         {
           title: "Candidate-se com a sua empresa",
-          text: "Em Portugal, NIF e código da certidão permanente — ou o comprovativo de início de atividade, se trabalha por conta própria. Em Espanha, NIF-IVA confirmado no VIES e o documento de registo. Algumas candidaturas têm resposta imediata; as restantes são revistas por uma pessoa.",
+          text: "Em Portugal, NIF e código da certidão permanente — ou o comprovativo de início de atividade, se trabalha por conta própria. Nos restantes países da UE, número de IVA intracomunitário confirmado no VIES e o documento de registo da empresa. Algumas candidaturas têm resposta imediata; as restantes são revistas por uma pessoa.",
         },
         {
           title: "Publique o que tem, peça o que lhe falta",
@@ -2254,7 +2254,7 @@ export const t = {
       title: "Perguntas frequentes",
       items: [
         { q: "Quanto custa?", a: "Nada durante o lançamento. Depois haverá um plano grátis para membros verificados e um Pro por subscrição mensal. Não há comissão por negócio." },
-        { q: "Onde está disponível?", a: "Em Portugal e Espanha, para empresas desses dois países. A app está em português, espanhol e inglês." },
+        { q: "Onde está disponível?", a: "Em toda a União Europeia: podem candidatar-se empresas de qualquer um dos 27 países da UE. A app está em português, espanhol e inglês." },
         { q: "Trabalho por conta própria. Posso entrar?", a: "Sim. O Trade é para técnicos independentes, oficinas e revendedores. Em Portugal, quem trabalha como empresário em nome individual usa o comprovativo de início de atividade em vez da certidão permanente." },
         { q: "Quem vê os meus preços?", a: "Só membros verificados. Quem está de fora vê que existe stock, mas nunca o preço nem quem vende." },
         { q: "Como é o pagamento?", a: "Direto entre as empresas — a plataforma não move dinheiro. O Trade regista a proposta e o acordo com os dados para a fatura, e as avaliações só contam depois da receção." },
@@ -2264,7 +2264,7 @@ export const t = {
     },
     cta: {
       title: "Entre na rede",
-      lead: "Grátis durante o lançamento para técnicos, oficinas e revendedores verificados em Portugal e Espanha.",
+      lead: "Grátis durante o lançamento para técnicos, oficinas e revendedores verificados em toda a União Europeia.",
       primary: "Candidatar-me — é grátis",
       secondary: "Ver o mercado",
       member: "Já é membro?",

@@ -2125,7 +2125,7 @@ export const t: Copy = {
   tradePage: {
     metaTitle: "OficinaOS Trade — piezas y equipos entre profesionales",
     metaDesc:
-      "Red B2B donde técnicos, talleres y revendedores verificados compran y venden móviles, ordenadores, piezas y lotes. Sin particulares, sin mínimos y sin comisión por operación. Portugal y España.",
+      "Red B2B donde técnicos, talleres y revendedores verificados compran y venden móviles, ordenadores, piezas y lotes. Sin particulares, sin mínimos y sin comisión por operación. En toda la Unión Europea.",
     hero: {
       label: "OficinaOS Trade",
       badge: "Gratis en el lanzamiento",
@@ -2134,7 +2134,7 @@ export const t: Copy = {
         "La red B2B donde técnicos, talleres y revendedores verificados compran y venden móviles, ordenadores, piezas y lotes entre sí. Sin particulares, sin mínimo de compra y sin comisión por operación.",
       cta: "Solicitar acceso — es gratis",
       ctaSecondary: "Ver el mercado",
-      note: "Solo empresas verificadas · Portugal y España",
+      note: "Solo empresas verificadas · Toda la Unión Europea",
       frameTitle: "Mercado",
       frameCaption:
         "Recreación ilustrativa de la búsqueda de OficinaOS Trade con datos de ejemplo: la frase «10 pantallas iPhone 13 en Madrid, originales» se convierte en filtros (pieza, pantalla, original nueva, iPhone 13, Madrid, stock de al menos 10) y aparecen tres anuncios compatibles, con el precio reservado a miembros verificados.",
@@ -2157,7 +2157,7 @@ export const t: Copy = {
       steps: [
         {
           title: "Solicite acceso con su empresa",
-          text: "En España, el NIF-IVA comprobado en VIES y el documento de registro de la empresa. En Portugal, el NIF y el código de la certidão permanente, o el alta de actividad si trabaja por cuenta propia. Algunas solicitudes se aprueban al momento; el resto las revisa una persona.",
+          text: "En España y en el resto de la UE, el NIF-IVA intracomunitario comprobado en VIES y el documento de registro de la empresa. En Portugal, el NIF y el código de la certidão permanente, o el alta de actividad si trabaja por cuenta propia. Algunas solicitudes se aprueban al momento; el resto las revisa una persona.",
         },
         {
           title: "Publique lo que tiene, pida lo que le falta",
@@ -2239,7 +2239,7 @@ export const t: Copy = {
       title: "Preguntas frecuentes",
       items: [
         { q: "¿Cuánto cuesta?", a: "Nada durante el lanzamiento. Después habrá un plan gratis para miembros verificados y un Pro por suscripción mensual. No hay comisión por operación." },
-        { q: "¿Dónde está disponible?", a: "En Portugal y España, para empresas de esos dos países. La app está en portugués, español e inglés." },
+        { q: "¿Dónde está disponible?", a: "En toda la Unión Europea: pueden solicitarlo empresas de cualquiera de los 27 países de la UE. La app está en portugués, español e inglés." },
         { q: "Trabajo por cuenta propia. ¿Puedo entrar?", a: "Sí. Trade es para técnicos independientes, talleres y revendedores. En Portugal, quien trabaja como empresario individual usa el alta de actividad en lugar de la certidão permanente." },
         { q: "¿Quién ve mis precios?", a: "Solo los miembros verificados. Quien está fuera ve que hay stock, pero nunca el precio ni quién vende." },
         { q: "¿Cómo se paga?", a: "Directamente entre empresas — la plataforma no mueve dinero. Trade registra la propuesta y el acuerdo con los datos para la factura, y las valoraciones solo cuentan tras la recepción." },
@@ -2249,7 +2249,7 @@ export const t: Copy = {
     },
     cta: {
       title: "Entre en la red",
-      lead: "Gratis durante el lanzamiento para técnicos, talleres y revendedores verificados en Portugal y España.",
+      lead: "Gratis durante el lanzamiento para técnicos, talleres y revendedores verificados en toda la Unión Europea.",
       primary: "Solicitar acceso — es gratis",
       secondary: "Ver el mercado",
       member: "¿Ya es miembro?",
