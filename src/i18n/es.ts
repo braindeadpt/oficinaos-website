@@ -873,7 +873,7 @@ export const t: Copy = {
             "El módulo usa la WhatsApp Business Platform oficial de Meta — sin trucos ni riesgo de ban del número. Requisitos:",
           ],
           list: [
-            "Una app Meta (developers.facebook.com) con el producto WhatsApp — nuestra app OficinaOS ya existe y está publicada",
+            "Una app Meta (developers.facebook.com) con el producto WhatsApp — la app OficinaOS ya existe y está pendiente de aprobación por Meta",
             "El número de la tienda en WhatsApp Business — la coexistencia permite mantener la app en el móvil y conectar la API a la vez",
             "Un token permanente de system user con permisos whatsapp_business_messaging + whatsapp_business_management",
             "El webhook apuntado a OficinaOS Cloud — ya configurado de nuestro lado",
