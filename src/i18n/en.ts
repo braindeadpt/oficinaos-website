@@ -1034,7 +1034,7 @@ export const t: Copy = {
     sms: {
       title: "SMS channel",
       subtitle:
-        "Notifications and the automatic assistant over SMS, through an Android phone with a SIM in the shop — no Meta, no per-message cost.",
+        "Notifications and the automatic assistant over SMS — via an Android SIM in the shop, a provider of your choice, or managed via Cloud with BulkSMS.",
       sections: [
         {
           heading: "What the module does",
@@ -1056,7 +1056,22 @@ export const t: Copy = {
           links: [],
         },
         {
-          heading: "What you need",
+          heading: "Choosing the transport — three paths",
+          paragraphs: [
+            "In Settings → Notifications → SMS section, the «Transport» field chooses how SMS leave the shop. Each path has a different price — in money, features or responsibility.",
+          ],
+          table: {
+            head: ["Transport", "Cost", "Sending", "Customer replies", "Best for"],
+            rows: [
+              ["Android phone in the shop (free)", "The shop's SIM plan", "✅", "✅ — the assistant replies", "Most shops — instant start"],
+              ["Custom provider (free)", "The shop's provider account", "✅", "❌ — outbound only", "Shops that already have an SMS account elsewhere"],
+              ["Managed Cloud — BulkSMS (Pro)", "SMS module + BulkSMS credits (~2–3 cents/SMS in Portugal)", "✅", "✅ — replies and delivery reports via Cloud", "Shops without a spare Android or wanting confirmed delivery"],
+            ],
+          },
+          links: [],
+        },
+        {
+          heading: "Android transport — what you need",
           list: [
             "An Android phone — an old one is fine; it stays in the shop permanently",
             "An active SIM card — ideally with SMS bundled in the plan (message cost is the carrier's)",
@@ -1065,6 +1080,32 @@ export const t: Copy = {
             "Nothing else — the SMS channel is free and needs no Cloud account or modules",
           ],
           paragraphs: [],
+          links: [],
+        },
+        {
+          heading: "Custom provider — the shop describes its API",
+          paragraphs: [
+            "If you already have an account with an SMS provider that has an HTTP API (BulkSMS, Go4Mobility, national aggregators…), you can plug it in with no code: set the URL, the method (POST or GET), the body format (JSON or form), the auth headers and a template with the {{to}} and {{text}} placeholders — the app validates the template when you save.",
+            "Assumed limitation: this transport only sends. Customer replies and delivery reports can't be genericized — each provider has its own webhook format and none can call into the shop's LAN. To receive replies use the Android transport or Cloud.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Managed Cloud — BulkSMS (Pro)",
+          paragraphs: [
+            "With the SMS module active, choose the «Cloud» transport and fill in your BulkSMS account Token ID and Token Secret (created in their dashboard, under API tokens). On save, the app pushes the credentials to OficinaOS Cloud, which validates them with BulkSMS before accepting — from then on, sending goes through the Cloud and the secret field is deliberately empty.",
+            "For replies and delivery reports: after saving, the app shows a webhook URL unique to your shop. In the BulkSMS Web App (Webhooks) create two webhooks pointing at that URL — one with scope RECEIVED and one with scope SENT. This step is manual because the BulkSMS webhooks API requires the account password, not the token.",
+            "Rotating the token later is just as simple: paste the new Token ID and Secret in settings and save — the app pushes the new pair to the Cloud, which validates and replaces the old one. No deleting or manual «rotation» needed.",
+          ],
+          links: [
+            { label: "BulkSMS — create account", href: "https://www.bulksms.com" },
+          ],
+        },
+        {
+          heading: "Delivery reports (Cloud transport only)",
+          paragraphs: [
+            "With the webhooks registered, every SMS sent via Cloud gets a status report from BulkSMS — the notification outbox entry (Notifications → Outbox) moves from «Sent» to «Delivered», or to «Failed» with the carrier's reason. That's how you know the customer actually received the message.",
+          ],
           links: [],
         },
         {
@@ -1107,8 +1148,8 @@ export const t: Copy = {
         {
           heading: "Privacy — what leaves and what stays",
           paragraphs: [
-            "The conversation between the app and the phone happens entirely inside the shop network (LAN) — nothing goes through OficinaOS Cloud or external servers. The SMS itself travels over the carrier's mobile network, like any SMS.",
-            "The gateway password is stored encrypted (AES-256-GCM) and never shown again in the fields — you can only replace it.",
+            "On the Android and custom transports, the conversation between the app and the gateway/provider happens with no intermediaries — nothing goes through OficinaOS Cloud. The SMS itself travels over the carrier's mobile network, like any SMS.",
+            "On the Cloud transport, BulkSMS credentials and message text pass through OficinaOS Cloud (it is what sends and receives) — credentials are stored encrypted (AES-256-GCM) and message bodies are never logged. The gateway password and provider headers are stored encrypted in the app and never shown again in the fields — you can only replace them.",
           ],
           links: [],
         },
