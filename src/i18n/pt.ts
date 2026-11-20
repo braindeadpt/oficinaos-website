@@ -1014,7 +1014,7 @@ export const t = {
     sms: {
       title: "Canal SMS",
       subtitle:
-        "Notificações e assistente automático por SMS, através de um telemóvel Android com SIM na loja — sem Meta, sem custo por mensagem.",
+        "Notificações e assistente automático por SMS — por um Android com SIM na loja, por um provider seu à escolha, ou gerido via Cloud com BulkSMS.",
       sections: [
         {
           heading: "O que o módulo faz",
@@ -1036,7 +1036,22 @@ export const t = {
           links: [],
         },
         {
-          heading: "O que é preciso",
+          heading: "Escolher o transporte — três caminhos",
+          paragraphs: [
+            "Em Definições → Notificações → secção SMS, o campo «Transporte» escolhe como os SMS saem da loja. Cada caminho tem um preço diferente — em dinheiro, em funcionalidades ou em responsabilidade.",
+          ],
+          table: {
+            head: ["Transporte", "Custo", "Envio", "Respostas do cliente", "Para quem"],
+            rows: [
+              ["Telemóvel Android na loja (grátis)", "O tarifário do SIM da loja", "✅", "✅ — o assistente responde", "A maioria das lojas — começo imediato"],
+              ["Provider personalizado (grátis)", "A conta da loja no provider", "✅", "❌ — só envio", "Loja que já tem conta SMS noutro serviço"],
+              ["Cloud gerida — BulkSMS (Pro)", "Módulo SMS + créditos BulkSMS (~2–3 cêntimos/SMS em Portugal)", "✅", "✅ — respostas e relatórios de entrega via Cloud", "Lojas sem Android disponível ou que querem entrega confirmada"],
+            ],
+          },
+          links: [],
+        },
+        {
+          heading: "Transporte Android — o que é preciso",
           list: [
             "Um telemóvel Android — pode ser um equipamento antigo; fica sempre na loja",
             "Um cartão SIM ativo — idealmente com SMS incluídos no tarifário (o custo das mensagens é da operadora)",
@@ -1045,6 +1060,32 @@ export const t = {
             "Nada mais — o canal SMS é gratuito e não precisa de Cloud nem de módulos",
           ],
           paragraphs: [],
+          links: [],
+        },
+        {
+          heading: "Provider personalizado — a loja descreve a API",
+          paragraphs: [
+            "Se já tem conta num provider SMS com API HTTP (BulkSMS, Go4Mobility, agregadores nacionais…), pode ligá-la sem código: indique o URL, o método (POST ou GET), o formato do corpo (JSON ou formulário), os cabeçalhos de autenticação e um modelo com os marcadores {{to}} e {{text}} — a app valida o modelo ao gravar.",
+            "Limitação assumida: este transporte só envia. As respostas dos clientes e os relatórios de entrega não são genericizáveis — cada provider tem um formato de webhook próprio e nenhum consegue chamar a rede interna da loja. Para receber respostas use o transporte Android ou a Cloud.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Cloud gerida — BulkSMS (Pro)",
+          paragraphs: [
+            "Com o módulo SMS ativo, escolha o transporte «Cloud» e preencha o Token ID e o Token Secret da sua conta BulkSMS (criam-se no painel deles, em API tokens). Ao gravar, a app envia as credenciais para a OficinaOS Cloud, que as valida junto do BulkSMS antes de as aceitar — a partir daí, o envio passa a ser feito pela Cloud e o campo do secret fica vazio de propósito.",
+            "Para respostas e relatórios de entrega: depois de gravar, a app mostra um URL de webhook único da sua loja. Na Web App do BulkSMS (Webhooks) crie dois webhooks a apontar para esse URL — um com scope RECEIVED e outro com scope SENT. Este passo é manual porque a API de webhooks do BulkSMS exige a palavra-passe da conta, não o token.",
+            "Trocar de token mais tarde é igualmente simples: cole o novo Token ID e Secret nas definições e grave — a app volta a enviar o par à Cloud, que o valida e substitui o antigo. Não precisa de apagar nem de «rodar» nada manualmente.",
+          ],
+          links: [
+            { label: "BulkSMS — criar conta", href: "https://www.bulksms.com" },
+          ],
+        },
+        {
+          heading: "Relatórios de entrega (só transporte Cloud)",
+          paragraphs: [
+            "Com os webhooks registados, cada SMS enviado via Cloud recebe do BulkSMS um relatório de estado — a entrada na fila de notificações (Notificações → Outbox) passa de «Enviado» para «Entregue», ou para «Falhado» com o motivo da operadora. É a forma de saber que o cliente recebeu mesmo a mensagem.",
+          ],
           links: [],
         },
         {
@@ -1087,8 +1128,8 @@ export const t = {
         {
           heading: "Privacidade — o que sai e o que fica",
           paragraphs: [
-            "A conversa entre a app e o telemóvel acontece toda dentro da rede da loja (LAN) — nada passa pela OficinaOS Cloud nem por servidores externos. O SMS em si viaja pela rede móvel da operadora, como qualquer SMS.",
-            "A palavra-passe do gateway fica guardada na app encriptada (AES-256-GCM) e nunca volta a aparecer nos campos — só se substitui.",
+            "Nos transportes Android e personalizado, a conversa entre a app e o gateway/provider acontece sem intermediários — nada passa pela OficinaOS Cloud. O SMS em si viaja pela rede móvel da operadora, como qualquer SMS.",
+            "No transporte Cloud, as credenciais BulkSMS e o texto das mensagens passam pela OficinaOS Cloud (é ela que envia e recebe) — as credenciais ficam encriptadas (AES-256-GCM) e os corpos das mensagens nunca são registados. A palavra-passe do gateway e os headers do provider ficam encriptados na app e nunca voltam a aparecer nos campos — só se substituem.",
           ],
           links: [],
         },
