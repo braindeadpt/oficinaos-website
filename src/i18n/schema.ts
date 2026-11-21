@@ -23,7 +23,7 @@ const website = {
   url: `${SITE}/`,
   name: "OficinaOS",
   publisher: { "@id": `${SITE}/#org` },
-  inLanguage: ["pt-PT", "en", "es"],
+  inLanguage: ["pt-PT", "en", "es", "fr", "de", "it"],
 };
 
 /** Homepage: SoftwareApplication + Organization + WebSite.
@@ -47,7 +47,7 @@ const softwareApp = (t: Copy) => ({
         priceCurrency: "EUR",
       },
       publisher: { "@id": `${SITE}/#org` },
-      inLanguage: ["pt-PT", "en", "es"],
+      inLanguage: ["pt-PT", "en", "es", "fr", "de", "it"],
     });
 
 export function landingJsonLd(t: Copy): object[] {
@@ -146,7 +146,7 @@ export function tradeJsonLd(t: Copy, url: string): object[] {
       url: "https://trade.oficinaos.app/",
       mainEntityOfPage: url,
       areaServed: EU_COUNTRIES.map((name) => ({ "@type": "Country", name })),
-      inLanguage: ["pt-PT", "es", "en"],
+      inLanguage: ["pt-PT", "es", "en", "fr", "de", "it"],
       audience: { "@type": "BusinessAudience" },
       offers: { "@type": "Offer", price: "0", priceCurrency: "EUR" },
       publisher: { "@id": `${SITE}/#org` },
