@@ -2,10 +2,11 @@
   "name": "oficinaos-website",
   "compatibility_date": "2026-02-01",
   "assets": {
-    "directory": "./dist",
-    // Serve dist/404.html (trilingual, noindex) on unmatched paths instead
-    // of the generic Cloudflare 404.
-    "not_found_handling": "404-page"
+    "directory": "./dist"
+    // NOTA: "not_found_handling": "404-page" está intencionalmente fora —
+    // o wrangler da imagem de build do Workers Builds não reconhecia o
+    // campo e o deploy falhava. Enquanto não houver bump no builder, a
+    // 404 fica a genérica da Cloudflare (a 404.html continua no pacote).
   },
   "workers_dev": true,
   "routes": [
