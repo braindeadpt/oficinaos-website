@@ -2335,6 +2335,13 @@ export const seoPages = {
       "Descarga, instala en el PC de la tienda y haz la primera ficha hoy. Sin cuenta, sin tarjeta, sin cuotas mensuales.",
     ctaPrimary: "Descargar gratis",
     ctaSecondary: "Ver la guía de instalación",
+    answer: "OficinaOS es un programa gratis (licencia MIT) para gestionar un servicio técnico de móviles: fichas de reparación, presupuestos aprobados online, stock, caja y seguimiento por el cliente — corre en el PC de la tienda y funciona sin internet.",
+    faqTitle: "Preguntas frecuentes",
+    faqs: [
+      { q: "¿OficinaOS es realmente gratis?", a: "Sí. La licencia es MIT: el núcleo — reparaciones, presupuestos, stock, TPV y copias de seguridad — es gratuito para siempre, sin cuenta obligatoria. Los módulos Pro son suscripciones opcionales en beta." },
+      { q: "¿Funciona sin internet?", a: "Sí. La aplicación corre en un PC dentro de la tienda y sirve a los demás dispositivos por la red local. Si internet falla, la tienda sigue trabajando." },
+      { q: "¿Dónde quedan los datos de mis clientes?", a: "En el PC de tu tienda. No hay telemetría y nada sale de la red local a menos que actives un módulo Pro — lo que simplifica el cumplimiento del RGPD." },
+    ],
     sections: [
       {
         heading: "Lo que un servicio técnico necesita cada día",
@@ -2388,6 +2395,13 @@ export const seoPages = {
       "Instálalo en tu PC y haz la primera ficha hoy. Sin cuenta, sin tarjeta, sin cuotas mensuales.",
     ctaPrimary: "Descargar gratis",
     ctaSecondary: "Ver la guía de instalación",
+    answer: "Para un técnico de reparación independiente, OficinaOS da fichas de clientes, presupuestos y una página de seguimiento profesional — gratis, en un PC Windows, sin cuota mensual.",
+    faqTitle: "Preguntas frecuentes",
+    faqs: [
+      { q: "¿Funciona en un PC normal?", a: "Sí. Corre en un PC Windows — probablemente el que ya tienes en el banco. Los clientes no instalan nada: siguen el estado en el navegador del móvil." },
+      { q: "¿Cuánto cuesta para un técnico solo?", a: "Cero. La licencia es MIT y el uso diario es gratuito. Los módulos Pro opcionales se añaden solo cuando tengan sentido." },
+      { q: "¿Y si abro una tienda con empleados?", a: "No necesitas cambiar de programa: el mismo OficinaOS sirve varios puestos en la red local, con perfiles de permisos por persona." },
+    ],
     sections: [
       {
         heading: "Menos papel, menos llamadas",
@@ -2434,6 +2448,13 @@ export const seoPages = {
       "Instala OficinaOS en el PC de la tienda y haz la primera ficha hoy. Sin cuenta, sin tarjeta, sin cuotas mensuales.",
     ctaPrimary: "Descargar gratis",
     ctaSecondary: "Ver la guía de instalación",
+    answer: "Migrar del papel y del Excel a OficinaOS cuesta una tarde: se instala en el PC de la tienda y las fichas nuevas pasan a entrar en el programa. El cliente pasa a ver el estado de la reparación solo y el presupuesto queda aprobado con registro.",
+    faqTitle: "Preguntas frecuentes",
+    faqs: [
+      { q: "¿Tengo que importar los registros antiguos?", a: "No. No hay importación obligatoria — las fichas nuevas entran en el programa y los registros antiguos pueden quedar en papel." },
+      { q: "¿Los demás dispositivos de la tienda necesitan instalar algo?", a: "No. Móviles, tablets y el PC de recepción abren el programa en el navegador por la red local." },
+      { q: "¿Qué gano en el día a día?", a: "Fichas buscables por cliente, IMEI o fecha; presupuestos aprobados online con registro de la hora; y menos llamadas de «¿ya está listo?»." },
+    ],
     sections: [
       {
         heading: "Lo que el papel y el Excel no hacen",
@@ -2489,6 +2510,13 @@ export const seoPages = {
       "Descarga y pruébalo junto al programa actual. Sin cuenta, sin tarjeta, sin cuotas mensuales.",
     ctaPrimary: "Descargar gratis",
     ctaSecondary: "Ver la guía de instalación",
+    answer: "Un SaaS típico cobra 20–60 € al mes por puesto y guarda los datos en la nube del proveedor. OficinaOS es gratis (MIT), corre en el PC de la tienda y los datos de los clientes quedan ahí — los módulos Pro son opcionales.",
+    faqTitle: "Preguntas frecuentes",
+    faqs: [
+      { q: "¿Cuál es la diferencia de coste real?", a: "Los programas SaaS para talleres cuestan típicamente 20–60 €/mes por puesto, y las funciones de cara al cliente quedan en planes más caros. El núcleo de OficinaOS cuesta 0 €." },
+      { q: "¿Mis datos salen de la tienda?", a: "No. La base de datos queda en el PC de la tienda — sin telemetría y sin subcontratados, a menos que actives un módulo Pro." },
+      { q: "¿Y si internet falla?", a: "La tienda sigue trabajando: la aplicación corre localmente y sirve a los dispositivos por la red interna." },
+    ],
     sections: [
       {
         heading: "El modelo de coste",
@@ -2545,6 +2573,13 @@ export const seoPages = {
       "Descarga el instalador Windows o corre `docker compose up` en Linux. Primera ficha en minutos.",
     ctaPrimary: "Descargar gratis",
     ctaSecondary: "Ver la guía de instalación",
+    answer: "OficinaOS es un software de gestión de taller de reparación gratuito (licencia MIT): cada reparación tiene cliente, equipo, estado y presupuesto, con seguimiento en el móvil del cliente — offline-first y de código abierto.",
+    faqTitle: "Preguntas frecuentes",
+    faqs: [
+      { q: "¿Qué sustituye en el día a día?", a: "El cuaderno y el Excel: fichas buscables con fotos, IMEI, estado, presupuesto e historial del cliente, más ticket con QR y garantía." },
+      { q: "¿Sirve para varios puestos?", a: "Sí — varios puestos en la misma red local, con perfiles de permisos por persona." },
+      { q: "¿Es realmente gratuito?", a: "Sí, licencia MIT y código abierto, sin cuenta obligatoria ni telemetría. Los datos quedan en el PC de la tienda." },
+    ],
     sections: [
       {
         heading: "Lo que el programa hace por ti",
@@ -2586,6 +2621,13 @@ export const seoPages = {
     ctaPrimary: "Descargar gratis",
     ctaSecondary: "Cómo funciona el portal",
     ctaSecondaryHref: "/docs/portal",
+    answer: "Cada reparación gana una página de seguimiento con estado en tiempo real: el cliente la sigue por el QR del ticket o por el enlace, sin llamar a la tienda. Gratis en la red de la tienda; fuera de ella, con el módulo Pro.",
+    faqTitle: "Preguntas frecuentes",
+    faqs: [
+      { q: "¿El cliente necesita instalar alguna app?", a: "No. Abre la página de seguimiento en el navegador del móvil y ve el estado — recibida, en diagnóstico, en reparación, lista." },
+      { q: "¿La aprobación del presupuesto queda registrada?", a: "Sí. El cliente aprueba en la propia página y la ficha guarda la hora y el valor aprobado." },
+      { q: "¿Funciona fuera de la red de la tienda?", a: "En la red local es gratis; el acceso desde fuera exige el módulo Pro (portal del cliente en la nube)." },
+    ],
     sections: [
       {
         heading: "Cómo funciona",
@@ -2628,6 +2670,13 @@ export const seoPages = {
     ctaText: "Gratis y sin cuota mensual.",
     ctaPrimary: "Descargar gratis",
     ctaSecondary: "Ver la documentación",
+    answer: "Con OficinaOS, el cliente aprueba el presupuesto en la página de seguimiento — y la aprobación queda registrada en la ficha con hora y valor, en vez de una llamada sin registro.",
+    faqTitle: "Preguntas frecuentes",
+    faqs: [
+      { q: "¿Qué pasa si el precio cambia a mitad de la reparación?", a: "El presupuesto actualizado vuelve a la página y el cliente aprueba de nuevo — la nueva aprobación queda registrada con hora y valor." },
+      { q: "¿Hay registro para disputas?", a: "Sí. El ticket con QR y la garantía referencian la misma ficha donde se aprobó el presupuesto." },
+      { q: "¿Necesito internet en la tienda?", a: "La red local basta; la aprobación desde fuera de la tienda exige el módulo Pro." },
+    ],
     sections: [
       {
         heading: "Por qué «aprobado por teléfono» no basta",
@@ -2666,6 +2715,13 @@ export const seoPages = {
     ctaPrimary: "Descargar gratis",
     ctaSecondary: "Módulos Pro",
     ctaSecondaryHref: "/pro",
+    answer: "Herramientas como RepairDesk o Fixably parten de ~20–60 €/mes por puesto. OficinaOS cubre lo esencial — fichas, presupuestos y seguimiento — gratuitamente, con código abierto y datos en el PC de la tienda.",
+    faqTitle: "Preguntas frecuentes",
+    faqs: [
+      { q: "¿OficinaOS hace lo mismo que RepairDesk?", a: "En lo esencial sí: fichas, presupuestos, stock, TPV y seguimiento del cliente. Facturación certificada, tienda online y bot de WhatsApp son módulos Pro opcionales." },
+      { q: "¿Y el código?", a: "Es abierto (MIT) — puedes verlo, adaptarlo y no quedas preso a una suscripción." },
+      { q: "¿Cuándo compensa un SaaS?", a: "Si gestionas varias tiendas o necesitas un ERP con soporte dedicado. Para la mayoría de los talleres, lo esencial gratis basta." },
+    ],
     sections: [
       {
         heading: "Lo que cobra el mercado",

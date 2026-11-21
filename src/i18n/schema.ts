@@ -56,6 +56,17 @@ export function landingJsonLd(t: Copy): object[] {
     website,
     softwareApp(t),
     {
+      "@type": "HowTo",
+      name: t.install.title,
+      description: t.install.subtitle,
+      step: t.install.steps.map((s, i) => ({
+        "@type": "HowToStep",
+        position: i + 1,
+        name: s.title,
+        text: s.desc,
+      })),
+    },
+    {
       "@type": "VideoObject",
       name: `OficinaOS — ${t.screenshots.title}`,
       description: t.screenshots.subtitle,
@@ -196,9 +207,10 @@ export function contentPageJsonLd(
   locale: string,
   slug: string,
   pageTitle: string,
+  faqs?: readonly { q: string; a: string }[],
 ): object[] {
   const prefix = locale === "pt" ? "" : `${locale}/`;
-  return [
+  const out: object[] = [
     organization,
     website,
     softwareApp(t),
@@ -220,4 +232,15 @@ export function contentPageJsonLd(
       ],
     },
   ];
+  if (faqs?.length) {
+    out.push({
+      "@type": "FAQPage",
+      mainEntity: faqs.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    });
+  }
+  return out;
 }
