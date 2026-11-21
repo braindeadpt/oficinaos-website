@@ -70,8 +70,11 @@ const ogImage = new URL(
       // primeiro paint (os rótulos trocam por CSS, sem layout shift) e, no clique, o href passa a
       // data-dl-<os>. Sem JS fica o href por omissão (/download/).
       (function () {
-        var n = navigator, u = n.userAgent || "", p = (n.userAgentData && n.userAgentData.platform) || n.platform || "", o;
-        if (/android|iphone|ipad|ipod/i.test(u) || (/mac/i.test(p) && n.maxTouchPoints > 1)) o = "mobile";
+        var n = navigator, u = n.userAgent || "", p = (n.userAgentData && n.userAgentData.platform) || "", o;
+        // navigator.platform (deprecated) não é fallback: o iPad identifica-se
+        // como «Macintosh» + touch na userAgent, e o Chromium reduzido já dá
+        // userAgentData.platform.
+        if (/android|iphone|ipad|ipod/i.test(u) || (/mac/i.test(p + " " + u) && n.maxTouchPoints > 1)) o = "mobile";
         else if (/win/i.test(p) || /windows/i.test(u)) o = "win";
         else if (/mac|linux|x11|cros/i.test(p + " " + u)) o = "desktop";
         else return;

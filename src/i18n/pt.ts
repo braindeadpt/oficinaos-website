@@ -5,7 +5,6 @@ import {
   DOCS_MOBILE_URL,
   DOCS_REMOTE_URL,
   INSTALL_URL,
-  INSTALL_ZIP_URL,
   PORTABLE_DOCS_URL,
   PORTABLE_ZIP_URL,
   RELEASES_URL,
@@ -1547,6 +1546,9 @@ export const t = {
       "Descarregue, instale no PC da loja e faça o primeiro check-in hoje. Sem conta, sem cartão, sem mensalidades.",
     ctaPrimary: "Descarregar grátis",
     ctaSecondary: "Ver o guia de instalação",
+    // DocsSection[] explícito: sem anotação, Copy["seoPage"]["sections"] fica
+    // a união exata dos literais abaixo e qualquer página nova com outra
+    // combinação (table sem links, links sem list, …) rebenta o typecheck.
     sections: [
       {
         heading: "O que o programa faz",
@@ -1614,7 +1616,7 @@ export const t = {
           { label: "Novidades e versões", href: "/updates" },
         ],
       },
-    ],
+    ] as DocsSection[],
   },
   home: {
     hero: {
