@@ -1601,10 +1601,6 @@ export const t = {
           { label: "Para técnicos independentes", href: "/para-tecnicos-independentes" },
           { label: "Deixar o Excel e o papel", href: "/deixar-excel-papel" },
           { label: "Software pago vs OficinaOS", href: "/software-pago-vs-oficinaos" },
-          { label: "Software de gestão para oficina", href: "/software-de-gestao-para-oficina" },
-          { label: "Cliente acompanha a reparação", href: "/rastrear-reparacao-cliente" },
-          { label: "Orçamentos aprovados online", href: "/orcamentos-aprovados-online" },
-          { label: "Alternativas a software caro", href: "/alternativas-software-oficina" },
         ],
       },
       {
