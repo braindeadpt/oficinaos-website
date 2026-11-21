@@ -35,11 +35,20 @@ jobs:
           for i in $(seq 1 30); do curl -fsI http://localhost:8787/ >/dev/null 2>&1 && break; sleep 1; done
           # Cada página tem de receber UMA CSP — sem o `!` a regra /* fundia-se
           # com a específica e o browser aplicava as duas (menu/forms mortos).
-          [ "$(curl -sI http://localhost:8787/ | grep -ci 'content-security-policy')" = "1" ]
-          curl -sI http://localhost:8787/pro/ | grep -q "form-action 'self' https://cloud.oficinaos.app"
+          [ "$(curl -sI http://localhost:8787/ | grep -ci '^content-security-policy:')" = "1" ]
+          # O form-action esperado vem do build — cobre um endpoint configurado
+          # via PUBLIC_BETA_FORM_ENDPOINT, não só o destino predefinido.
+          ACTION=$(grep -o 'action="[^"]*"' dist/pro/index.html | head -1 | cut -d'"' -f2)
+          CSP_PRO=$(curl -sI http://localhost:8787/pro/ | grep -i '^content-security-policy:')
+          echo "form action: $ACTION"
+          case "$ACTION" in
+            http*|//* ) ORIGIN=$(echo "$ACTION" | sed -E 's#^(https?)://([^/]+).*#\1://\2#')
+                        echo "$CSP_PRO" | grep -qF "form-action 'self' $ORIGIN" ;;
+            * )         echo "$CSP_PRO" | grep -q "form-action 'self'" ;;
+          esac
           code=$(curl -s -o /dev/null -w '%{http_code}' http://localhost:8787/pagina-que-nao-existe)
           [ "$code" = "404" ]
-          curl -sI http://localhost:8787/pagina-que-nao-existe | grep -q "content-security-policy"
+          curl -sI http://localhost:8787/pagina-que-nao-existe | grep -qi '^content-security-policy:'
       - name: Lighthouse — recolher (3 execuções por página)
         run: bunx @lhci/cli@0.15.1 collect
       - name: Métricas por execução (FCP / LCP / TBT / CLS)
