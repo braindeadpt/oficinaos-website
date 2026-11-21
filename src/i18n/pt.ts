@@ -1596,6 +1596,16 @@ export const t = {
             ["Em português", "—", "Raramente", "Interface e ajuda em PT-PT"],
           ],
         },
+        links: [
+          { label: "Software para assistência técnica", href: "/software-assistencia-tecnica" },
+          { label: "Para técnicos independentes", href: "/para-tecnicos-independentes" },
+          { label: "Deixar o Excel e o papel", href: "/deixar-excel-papel" },
+          { label: "Software pago vs OficinaOS", href: "/software-pago-vs-oficinaos" },
+          { label: "Software de gestão para oficina", href: "/software-de-gestao-para-oficina" },
+          { label: "Cliente acompanha a reparação", href: "/rastrear-reparacao-cliente" },
+          { label: "Orçamentos aprovados online", href: "/orcamentos-aprovados-online" },
+          { label: "Alternativas a software caro", href: "/alternativas-software-oficina" },
+        ],
       },
       {
         heading: "Pronto numa tarde",
@@ -2546,6 +2556,168 @@ export const seoPages = {
         links: [
           { label: "Módulos Pro", href: "/pro" },
           { label: "Documentação", href: "/docs" },
+        ],
+      },
+    ],
+  },
+  softwareDeGestaoOficina: {
+    metaTitle: "Software de gestão para oficina — grátis e em português",
+    metaDesc:
+      "O OficinaOS é um programa de gestão de oficina grátis (MIT): fichas de reparação, clientes, orçamentos e acompanhamento na rede da loja, em PT-PT.",
+    badge: "Guia · Gestão de oficina",
+    title: "Um programa de gestão que não cobra por existir",
+    subtitle:
+      "O OficinaOS é o software de gestão da sua oficina de reparação: cada reparação com cliente, equipamento, estado e orçamento — grátis, offline-first e em português.",
+    ctaTitle: "Instale ainda hoje",
+    ctaText:
+      "Descarregue o instalador Windows ou corra `docker compose up` no Linux. Primeira ficha em minutos.",
+    ctaPrimary: "Descarregar grátis",
+    ctaSecondary: "Ver o guia de instalação",
+    sections: [
+      {
+        heading: "O que o programa faz por si",
+        paragraphs: [
+          "Uma oficina vive de fichas: quem entregou o quê, quando, por quanto. O OficinaOS substitui o caderno e o Excel por fichas pesquisáveis com fotos, IMEI, estado, orçamento e histórico do cliente.",
+        ],
+        list: [
+          "Ficha por reparação com cliente, equipamento e estado",
+          "Orçamento com aprovação do cliente registada",
+          "Talão com QR de acompanhamento e garantia",
+          "Vários postos na mesma rede local, com perfis de permissões",
+          "Acompanhamento da reparação no telemóvel do cliente — grátis na rede da loja",
+        ],
+      },
+      {
+        heading: "Grátis de verdade, sem asteriscos",
+        paragraphs: [
+          "Licença MIT, código aberto, sem conta obrigatória nem telemetria. Os dados ficam no PC da sua loja — não na cloud de um fornecedor que pode subir o preço amanhã.",
+          "Os módulos Pro opcionais (faturação certificada, bot de WhatsApp, loja online) acrescentam-se quando fizerem sentido — nunca para desbloquear o básico.",
+        ],
+        links: [
+          { label: "Software pago vs OficinaOS", href: "/software-pago-vs-oficinaos" },
+          { label: "Deixar o Excel e o papel", href: "/deixar-excel-papel" },
+          { label: "Documentação", href: "/docs" },
+        ],
+      },
+    ],
+  },
+  rastrearReparacaoCliente: {
+    metaTitle: "Cliente acompanha a reparação online — menos telefonemas",
+    metaDesc:
+      "Página de acompanhamento por reparação: o cliente vê o estado no telemóvel sem ligar à loja. Grátis na rede local com o OficinaOS.",
+    badge: "Caso de uso · Acompanhamento",
+    title: "«Já está pronto?» deixa de ser o seu telefone a tocar",
+    subtitle:
+      "Cada reparação ganha uma página de acompanhamento com estado em tempo real. O cliente segue pelo QR do talão ou pelo link — na rede da loja é grátis; fora dela, com o módulo Pro.",
+    ctaTitle: "Menos chamadas desde a primeira ficha",
+    ctaText: "Grátis, sem conta, sem cartão.",
+    ctaPrimary: "Descarregar grátis",
+    ctaSecondary: "Como funciona o portal",
+    sections: [
+      {
+        heading: "Como funciona",
+        paragraphs: [
+          "Ao criar a ficha, o programa gera um link e um QR de acompanhamento. O cliente abre a página no telemóvel e vê o estado da reparação — recebida, em diagnóstico, em reparação, pronta — sem instalar nada.",
+        ],
+        list: [
+          "QR no talão entregue na receção",
+          "Estado atualizado em tempo real por si na ficha",
+          "Aprovação de orçamento na própria página, com registo da hora",
+          "Na rede da loja é grátis; acesso de fora exige o módulo Pro",
+        ],
+        links: [{ label: "Guia do portal do cliente", href: "/docs" }],
+      },
+      {
+        heading: "O efeito na loja",
+        paragraphs: [
+          "Cada chamada «já está?» custa 2-3 minutos de bancada. Numa loja com 20 reparações abertas, são horas por semana. A página de acompanhamento responde antes de o cliente ligar.",
+        ],
+        table: {
+          head: ["", "Sem acompanhamento", "Com OficinaOS"],
+          rows: [
+            ["Cliente sabe o estado", "Liga à loja", "Vê no telemóvel"],
+            ["Aprovação de orçamento", "Chamada ou mensagem", "Botão na página, com registo"],
+            ["Confiança", "«Estou a tratar»", "Estado real visível"],
+          ],
+        },
+      },
+    ],
+  },
+  orcamentosAprovadosOnline: {
+    metaTitle: "Orçamentos aprovados online — com registo e hora",
+    metaDesc:
+      "Orçamentos de reparação aprovados pelo cliente na página de acompanhamento, com registo da hora e do valor. Sem chamadas nem prints de WhatsApp.",
+    badge: "Caso de uso · Orçamentos",
+    title: "Orçamento aprovado é orçamento registado",
+    subtitle:
+      "Em vez de «aprova por telefone e esquece», o cliente aprova o orçamento na página de acompanhamento — e a aprovação fica registada com hora e valor na ficha.",
+    ctaTitle: "Teste no próximo orçamento",
+    ctaText: "Grátis e sem mensalidade.",
+    ctaPrimary: "Descarregar grátis",
+    ctaSecondary: "Ver documentação",
+    sections: [
+      {
+        heading: "Porque «aprovado por telefone» não chega",
+        paragraphs: [
+          "Quando o preço muda — peça mais cara, problema maior — a aprovação verbal desaparece. Com o OficinaOS, o cliente vê o orçamento na página e carrega em aprovar: a ficha guarda a hora e o valor aprovado.",
+        ],
+        list: [
+          "Valor e descrição visíveis na página de acompanhamento",
+          "Aprovação com registo de hora na ficha",
+          "Histórico por cliente e por reparação",
+          "Funciona na rede da loja; de fora, com o módulo Pro",
+        ],
+      },
+      {
+        heading: "Menos disputas na entrega",
+        paragraphs: [
+          "O talão com QR e a garantia entregue no fim referencia a mesma ficha onde o orçamento foi aprovado. Se houver dúvida, ambos têm o mesmo registo.",
+        ],
+        links: [
+          { label: "Cliente acompanha a reparação", href: "/rastrear-reparacao-cliente" },
+          { label: "Software de assistência técnica", href: "/software-assistencia-tecnica" },
+        ],
+      },
+    ],
+  },
+  alternativasSoftwareOficina: {
+    metaTitle: "Alternativas a software caro para oficina de reparação",
+    metaDesc:
+      "RepairDesk, Fixably e outros programas cobram 20–150 €/mês. O OficinaOS dá o essencial grátis: fichas, orçamentos e acompanhamento — compare.",
+    badge: "Comparação · Alternativas",
+    title: "Antes de pagar uma mensalidade, compare",
+    subtitle:
+      "Os programas para oficinas de reparação cobram por posto e por mês. O OficinaOS cobra zero pelo essencial — e o código é aberto.",
+    ctaTitle: "Compare com o que tem hoje",
+    ctaText: "Descarregue e teste com as suas próprias reparações — grátis.",
+    ctaPrimary: "Descarregar grátis",
+    ctaSecondary: "Módulos Pro",
+    sections: [
+      {
+        heading: "O que custa o mercado",
+        paragraphs: [
+          "RepairDesk, Fixably e afins partem de ~20–60 €/mês por posto; funcionalidades como SMS e portais ficam em planos mais caros. Para uma loja pequena, são 240–720 € por ano antes de faturar um euro.",
+        ],
+        table: {
+          head: ["", "SaaS típico", "OficinaOS"],
+          rows: [
+            ["Preço do núcleo", "20–60 €/mês por posto", "0 € (MIT)"],
+            ["Onde ficam os dados", "Cloud do fornecedor", "PC da sua loja"],
+            ["Funciona sem internet", "Normalmente não", "Sim"],
+            ["Portal do cliente", "Plano pago", "Grátis na rede; fora com Pro"],
+            ["Em português", "Raramente", "PT-PT nativo"],
+          ],
+        },
+      },
+      {
+        heading: "Quando o pago faz sentido",
+        paragraphs: [
+          "Se precisa de faturação certificada, loja online, bot de WhatsApp ou portal do cliente acessível de fora da loja, os módulos Pro cobrem isso — opcionais, sem obrigar a trocar o núcleo grátis.",
+          "Se gerir várias lojas ou precisar de um ERP completo, um SaaS com suporte dedicado pode compensar. Para a maioria das oficinas portuguesas, o essencial grátis chega.",
+        ],
+        links: [
+          { label: "Software pago vs OficinaOS", href: "/software-pago-vs-oficinaos" },
+          { label: "Módulos Pro", href: "/pro" },
         ],
       },
     ],
