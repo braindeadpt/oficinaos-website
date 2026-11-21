@@ -43,7 +43,7 @@ export function landingJsonLd(t: Copy): object[] {
       url: `${SITE}/`,
       downloadUrl:
         "https://github.com/braindeadpt/OficinaOS/releases/latest",
-      softwareHelp: `${SITE}/docs`,
+      softwareHelp: `${SITE}/docs/`,
       license: "https://github.com/braindeadpt/OficinaOS/blob/main/LICENSE",
       offers: {
         "@type": "Offer",

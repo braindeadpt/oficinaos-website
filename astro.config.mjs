@@ -3,7 +3,7 @@ import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 
-// Deployed on GitHub Pages behind the custom domain:
+// Deployed on Cloudflare Workers behind the custom domain:
 //   https://oficinaos.app
 export default defineConfig({
   site: "https://oficinaos.app",

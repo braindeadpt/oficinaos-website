@@ -417,7 +417,7 @@ export const t: Copy = {
         heading: "Instalación — OficinaOS-Setup.exe (una vez, ~10 minutos)",
         paragraphs: [
           "Descarga OficinaOS-Setup.exe en la página de releases y haz doble clic. Si Windows Defender SmartScreen avisa: «Más información» → «Ejecutar de todas formas».",
-          "Pide administrador una sola vez (servicios, firewall y la tarea de copias) y lo hace todo solo. Al final el navegador se abre en http://localhost:4000. Primer acceso: usuario admin, contraseña braindead — la app obliga a cambiar ambos.",
+          "Pide administrador una sola vez (servicios, firewall y la tarea de copias) y lo hace todo solo. Al final el navegador se abre en http://localhost:4000. En el primer acceso la app muestra la pantalla de configuración inicial — creas el usuario administrador y la contraseña.",
           "Queda un icono en la bandeja junto al reloj: abrir la app, ver el estado, parar/arrancar, hacer una copia. En otros aparatos de la tienda: http://oficinaos.local:4000 — o el código QR en la página Ayuda.",
           "En Linux o macOS no hay instalador — se usa Docker directamente:",
         ],
@@ -1784,7 +1784,7 @@ export const t: Copy = {
       },
       {
         title: "Entra en la app",
-        text: "Al terminar se abre el navegador en http://localhost:4000. Primer acceso: usuario admin, contraseña braindead — la app obliga a cambiar los dos. En otros dispositivos de la red: http://oficinaos.local:4000.",
+        text: "Al terminar se abre el navegador en http://localhost:4000. En el primer acceso la app muestra la pantalla de configuración inicial — creas el usuario administrador y la contraseña. En otros dispositivos de la red: http://oficinaos.local:4000.",
       },
     ],
     smartscreen: {

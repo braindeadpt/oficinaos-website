@@ -139,7 +139,7 @@ const ogImage = new URL(
       Astro.props.jsonLd?.length ? (
         <script
           type="application/ld+json"
-          set:html={JSON.stringify({ "@context": "https://schema.org", "@graph": Astro.props.jsonLd })}
+          set:html={JSON.stringify({ "@context": "https://schema.org", "@graph": Astro.props.jsonLd }).replace(/</g, "\\u003c")}
         />
       ) : null
     }

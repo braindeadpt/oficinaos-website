@@ -18,7 +18,9 @@ interface Props {
 }
 const { caption, head, rows, label, rowHeaders = true, class: cls } = Astro.props;
 const stack = Astro.props.stack ?? false;
-const r = (role: string) => (stack ? role : undefined);
+const r = (
+  role: "table" | "rowgroup" | "row" | "columnheader" | "rowheader" | "cell"
+) => (stack ? role : undefined);
 ---
 
 <div

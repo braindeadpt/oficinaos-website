@@ -21,26 +21,23 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-      - run: npm ci
-      - run: npm run build
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install --frozen-lockfile
+      - run: bun run build
         env:
           # Só para ler as estrelas do repositório no build (evita o rate-limit anónimo).
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Lighthouse — recolher (3 execuções por página)
-        run: npx --yes @lhci/cli@0.15.1 collect
+        run: bunx @lhci/cli@0.15.1 collect
       - name: Métricas por execução (FCP / LCP / TBT / CLS)
         if: always()
         run: |
-          node tools/lhci-summary.mjs | tee -a "$GITHUB_STEP_SUMMARY"
+          bun tools/lhci-summary.mjs | tee -a "$GITHUB_STEP_SUMMARY"
       - name: Lighthouse — verificar limites (mediana ≥ 95)
-        run: npx --yes @lhci/cli@0.15.1 assert
+        run: bunx @lhci/cli@0.15.1 assert
       - name: Guardar relatórios HTML
         if: always()
-        run: npx --yes @lhci/cli@0.15.1 upload
+        run: bunx @lhci/cli@0.15.1 upload
       - uses: actions/upload-artifact@v4
         if: always()
         with:

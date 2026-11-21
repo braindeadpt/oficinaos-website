@@ -1,18 +1,12 @@
-name: Deploy to GitHub Pages
+name: Check
 
 on:
   push:
     branches: [main]
-  workflow_dispatch:
+  pull_request:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: true
 
 jobs:
   build:
@@ -20,7 +14,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
-      - run: bun install
+      - run: bun install --frozen-lockfile
+      - run: bun run check
+      # Build + gen-headers: garante que a CSP fica abaixo do limite de
+      # 2000 chars/linha da Cloudflare (o gen-headers falha se estourar).
       - run: bun run build
         env:
           # Beta sign-up form endpoint (e.g. Formspree). Set it under
@@ -30,15 +27,7 @@ jobs:
           # Cloudflare Web Analytics token — Cloudflare dashboard →
           # Web Analytics → add site. Cookieless; empty → no beacon.
           PUBLIC_CF_BEACON_TOKEN: ${{ vars.PUBLIC_CF_BEACON_TOKEN }}
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - uses: actions/deploy-pages@v4
-        id: deployment
+
+# Deploy é manual: `bun run build && bunx wrangler deploy` a partir de uma
+# máquina com a credencial Cloudflare (ver README). Não há wrangler-action
+# porque o token de conta ainda não está nos secrets do repo.

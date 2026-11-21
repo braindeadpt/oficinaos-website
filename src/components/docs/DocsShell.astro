@@ -164,7 +164,7 @@ const kbd = "/";
 const D=document,d=D.getElementById("docs-search");
 /* Copiar código */
 const cl=navigator.clipboard;
-D.querySelectorAll("[data-copy]").forEach(b=>{if(!cl)return;b.hidden=false;const s=b.querySelector(".copy-txt"),o=s.textContent;b.addEventListener("click",()=>{const c=b.parentElement.querySelector("code");cl.writeText(c.textContent.trim()).then(()=>{s.textContent=b.dataset.copied;setTimeout(()=>{s.textContent=o},1800)}).catch(()=>{})})});
+D.querySelectorAll("[data-copy]").forEach(b=>{if(!cl)return;b.hidden=false;const s=b.querySelector(".copy-txt"),o=s.textContent;b.addEventListener("click",()=>{const c=b.parentElement.querySelector("code");if(!c)return;cl.writeText(c.textContent.trim()).then(()=>{s.textContent=b.dataset.copied;setTimeout(()=>{s.textContent=o},1800)}).catch(()=>{})})});
 /* Menu móvel: fecha ao escolher um link */
 D.querySelectorAll(".docs-mnav a").forEach(a=>a.addEventListener("click",()=>{a.closest("details").open=false}));
 /* Secção visível realçada no índice lateral */

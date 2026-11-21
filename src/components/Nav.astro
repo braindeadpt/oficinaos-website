@@ -363,13 +363,12 @@ const chevron =
   </dialog>
 </header>
 
-<script>
+<script is:inline>
   // Tema: automático (sistema) → claro → escuro. Guardado em localStorage "oos-theme".
-  const themeBtns = document.querySelectorAll<HTMLButtonElement>(".js-theme-toggle");
+  const themeBtns = document.querySelectorAll(".js-theme-toggle");
   if (themeBtns.length) {
-    const order = ["system", "light", "dark"] as const;
-    type Mode = (typeof order)[number];
-    const read = (): Mode => {
+    const order = ["system", "light", "dark"];
+    const read = () => {
       try {
         const v = localStorage.getItem("oos-theme");
         return v === "light" || v === "dark" ? v : "system";
@@ -377,7 +376,7 @@ const chevron =
         return "system";
       }
     };
-    const apply = (mode: Mode) => {
+    const apply = (mode) => {
       const root = document.documentElement;
       if (mode === "system") delete root.dataset.theme;
       else root.dataset.theme = mode;
@@ -389,7 +388,7 @@ const chevron =
           b.setAttribute("aria-label", label);
           b.setAttribute("title", label);
         }
-        b.querySelectorAll<SVGElement>(".theme-icon").forEach((el) => {
+        b.querySelectorAll(".theme-icon").forEach((el) => {
           el.classList.toggle("hidden", !el.classList.contains(`theme-icon-${mode}`));
         });
       });
@@ -408,8 +407,8 @@ const chevron =
   }
 
   // Menu móvel em <dialog> modal: foco preso, Esc e fundo inerte vêm do browser.
-  const sheet = document.getElementById("nav-sheet") as HTMLDialogElement | null;
-  const opener = document.querySelector<HTMLButtonElement>(".js-sheet-open");
+  const sheet = document.getElementById("nav-sheet");
+  const opener = document.querySelector(".js-sheet-open");
   if (sheet && opener && typeof sheet.showModal === "function") {
     opener.addEventListener("click", () => {
       sheet.showModal();
@@ -418,7 +417,7 @@ const chevron =
     sheet.addEventListener("close", () => opener.setAttribute("aria-expanded", "false"));
     sheet.querySelector(".js-sheet-close")?.addEventListener("click", () => sheet.close());
     sheet.addEventListener("click", (e) => {
-      const target = e.target as Element;
+      const target = e.target;
       // Clique no fundo (fora do painel) ou num link → fecha.
       if (target === sheet || target.closest("a")) sheet.close();
     });

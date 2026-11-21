@@ -8,7 +8,7 @@
 // desde que uma página não acumule dezenas de scripts inline.
 //
 // O ficheiro segue o formato Cloudflare (_headers em dist/).
-// No GitHub Pages é ignorado sem efeito.
+// Fora da Cloudflare é ignorado sem efeito.
 import { createHash } from "node:crypto";
 import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join, relative } from "node:path";
@@ -44,26 +44,51 @@ for (const file of htmlFiles(DIST)) {
   )) {
     hashes.add(`'sha256-${sha256(m[1])}'`);
   }
-  perPage.set(urlFor(file), hashes);
+  // Form endpoints actually emitted on this page — the beta form posts
+  // natively to whatever PUBLIC_BETA_FORM_ENDPOINT pointed to at build,
+  // so form-action must allow that exact origin (or the POST 403s).
+  const formActions = new Set();
+  for (const m of html.matchAll(/<form[^>]*\baction="([^"]+)"/g)) {
+    try {
+      const u = new URL(m[1], "https://oficinaos.app");
+      if (u.protocol === "mailto:") formActions.add("mailto:");
+      else if (u.origin !== "https://oficinaos.app") formActions.add(u.origin);
+    } catch {
+      /* action relativo — coberto por 'self' */
+    }
+  }
+  perPage.set(urlFor(file), {
+    hashes,
+    beacon: html.includes("static.cloudflareinsights.com"),
+    formActions,
+  });
 }
 
-const cspFor = (hashes) =>
+const cspFor = ({ hashes, beacon, formActions }) =>
   [
     "default-src 'none'",
     "base-uri 'self'",
     "frame-ancestors 'self'",
     "object-src 'none'",
-    "form-action 'self' mailto: https://cloud.oficinaos.app",
+    `form-action 'self'${formActions.size ? ` ${[...formActions].sort().join(" ")}` : ""}`,
     "img-src 'self'",
     "media-src 'self'",
     "style-src 'self'",
     "font-src 'self'",
-    `script-src ${hashes.size ? [...hashes].sort().join(" ") : "'none'"}`,
-    "connect-src 'self' https://cloud.oficinaos.app",
-    "frame-src https://www.youtube-nocookie.com",
+    `script-src ${hashes.size ? [...hashes].sort().join(" ") : "'none'"}${
+      beacon ? " https://static.cloudflareinsights.com" : ""
+    }`,
+    `connect-src 'self'${beacon ? " https://cloudflareinsights.com" : ""}`,
     "manifest-src 'self'",
     "upgrade-insecure-requests",
   ].join("; ");
+
+// Paths without their own rule (arbitrary URLs → 404.html via
+// not_found_handling) still get a CSP: the one computed for the 404
+// page itself, so its inline language picker keeps working while
+// everything else stays fail-closed.
+const notFound = perPage.get("/404.html");
+const baseCsp = notFound ? cspFor(notFound) : "default-src 'none'";
 
 const BASE_HEADERS = `/*
   Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
@@ -74,10 +99,11 @@ const BASE_HEADERS = `/*
   Cross-Origin-Opener-Policy: same-origin
   Cross-Origin-Resource-Policy: same-origin
   X-Permitted-Cross-Domain-Policies: none
+  Content-Security-Policy: ${baseCsp}
 `;
 
 let headers = BASE_HEADERS;
-let longest = 0;
+let longest = baseCsp.length;
 for (const url of [...perPage.keys()].sort()) {
   const csp = cspFor(perPage.get(url));
   if (csp.length > longest) longest = csp.length;

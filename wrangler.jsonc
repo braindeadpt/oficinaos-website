@@ -2,7 +2,10 @@
   "name": "oficinaos-website",
   "compatibility_date": "2026-02-01",
   "assets": {
-    "directory": "./dist"
+    "directory": "./dist",
+    // Serve dist/404.html (trilingual, noindex) on unmatched paths instead
+    // of the generic Cloudflare 404.
+    "not_found_handling": "404-page"
   },
   "workers_dev": true,
   "routes": [

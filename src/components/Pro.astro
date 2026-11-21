@@ -56,10 +56,10 @@ const proUrl = localeUrl(locale, "/pro/");
   <span hidden data-pro-url={proUrl}></span>
 </section>
 
-<script>
+<script is:inline>
   // Resposta do formulário do beta: a Cloud volta para /<idioma>/?beta=…#pro → seguir para /pro/#beta.
   const status = new URLSearchParams(location.search).get("beta");
-  const target = document.querySelector<HTMLElement>("[data-pro-url]")?.dataset.proUrl;
+  const target = document.querySelector("[data-pro-url]")?.dataset.proUrl;
   if (status && target && /^(ok|invalid|rate([-_]?limit(ed)?)?)$/.test(status)) {
     location.replace(`${target}?beta=${status}#beta`);
   }
