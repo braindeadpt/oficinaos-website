@@ -3,7 +3,6 @@ import "../styles/global.css";
 import type { Copy } from "../i18n/pt";
 import {
   currentPagePath,
-  DEFAULT_LOCALE,
   localeUrl,
   LOCALES,
 } from "../i18n/utils";
@@ -120,7 +119,7 @@ const ogImage = new URL(
     <link
       rel="alternate"
       hreflang="x-default"
-      href={new URL(localeUrl(DEFAULT_LOCALE, pagePath), Astro.site)}
+      href={new URL(localeUrl("en", pagePath), Astro.site)}
     />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />

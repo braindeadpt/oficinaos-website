@@ -1,0 +1,20 @@
+---
+import SeoPage from "../../components/SeoPage.astro";
+import Base from "../../layouts/Base.astro";
+import { lang, locale, ogLocale, seoPages, t } from "../../i18n/es";
+import { contentPageJsonLd } from "../../i18n/schema";
+
+const page = seoPages.softwareAssistenciaTecnica;
+---
+
+<Base
+  t={t}
+  locale={locale}
+  langAttr={lang}
+  ogLocale={ogLocale}
+  title={page.metaTitle}
+  description={page.metaDesc}
+  jsonLd={contentPageJsonLd(t, locale, "software-assistencia-tecnica", page.metaTitle)}
+>
+  <SeoPage t={t} locale={locale} page={page} />
+</Base>
