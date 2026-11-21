@@ -17,7 +17,7 @@ Locales: `pt` (default, served at `/`), `en` (`/en/`), `es` (`/es/`).
 ## Commands
 
 ```bash
-bun install        # or: npm install
+bun install        # Bun only — bun.lock is the lockfile (no npm)
 bun run dev        # dev server
 bun run build      # static output → dist/
 bun run preview    # preview the production build

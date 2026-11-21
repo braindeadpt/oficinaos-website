@@ -102,17 +102,24 @@ const BASE_HEADERS = `/*
   Content-Security-Policy: ${baseCsp}
 `;
 
+const CSP_HEADER = "  Content-Security-Policy: ";
+
 let headers = BASE_HEADERS;
-let longest = baseCsp.length;
+// Cloudflare anexa os cabeçalhos de TODAS as regras que correspondem ao URL
+// (não substitui) e o browser aplica várias CSP cumulativamente. Sem o `!`,
+// a política base do `/*` (a da 404) fundir-se-ia com a da página e
+// bloqueava scripts/forms que só a regra específica autoriza.
+let longest = CSP_HEADER.length + baseCsp.length;
 for (const url of [...perPage.keys()].sort()) {
   const csp = cspFor(perPage.get(url));
-  if (csp.length > longest) longest = csp.length;
-  headers += `${url}\n  Content-Security-Policy: ${csp}\n`;
+  const line = CSP_HEADER + csp;
+  if (line.length > longest) longest = line.length;
+  headers += `${url}\n  ! Content-Security-Policy\n${line}\n`;
 }
 
 writeFileSync(join(DIST, "_headers"), headers);
 console.log(
-  `dist/_headers written — ${perPage.size} paths, CSP mais longa ${longest} chars (limite 2000)`,
+  `dist/_headers written — ${perPage.size} paths, linha CSP mais longa ${longest} chars (limite 2000)`,
 );
 if (longest >= 2000) {
   console.error("ERRO: ainda há uma linha CSP acima do limite da Cloudflare");
