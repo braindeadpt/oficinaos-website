@@ -18,6 +18,10 @@
 - [Software for repair shops (PT)](https://oficinaos.app/software-reparacao-telemoveis/): overview page — features, pricing model, privacy, install
 - [Software for repair shops (EN)](https://oficinaos.app/en/software-reparacao-telemoveis/)
 - [Software for repair shops (ES)](https://oficinaos.app/es/software-reparacao-telemoveis/)
+- [Software para assistência técnica (PT)](https://oficinaos.app/software-assistencia-tecnica/): página de conteúdo — gestão de assistência técnica de telemóveis
+- [Para técnicos independentes (PT)](https://oficinaos.app/para-tecnicos-independentes/): caso de uso — reparar sozinho com fichas, orçamentos e página de acompanhamento
+- [Do papel e do Excel para um programa (PT)](https://oficinaos.app/deixar-excel-papel/): comparação papel/Excel vs software de gestão
+- [Mensalidade vs grátis (PT)](https://oficinaos.app/software-pago-vs-oficinaos/): comparação SaaS pago vs OficinaOS grátis
 
 ## Pro module guides
 

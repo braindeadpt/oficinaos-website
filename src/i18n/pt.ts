@@ -2335,3 +2335,221 @@ export const t = {
 };
 
 export type Copy = typeof t;
+
+// Páginas de conteúdo SEO em pt (só existem no locale por omissão): casos de uso e
+// comparações, com a mesma estrutura de `t.seoPage`. Não fazem parte de `Copy` —
+// en/es não precisam de traduzi-las.
+export const seoPages = {
+  softwareAssistenciaTecnica: {
+    metaTitle: "Software para assistência técnica — grátis e em português",
+    metaDesc:
+      "Programa de gestão para assistência técnica de telemóveis: fichas de reparação, orçamentos, stock e caixa. Grátis, com os dados no PC da loja.",
+    badge: "Software livre · Feito em Portugal",
+    title: "Software para assistência técnica de telemóveis",
+    subtitle:
+      "Fichas de reparação, orçamentos que o cliente aprova no telemóvel, stock e caixa — num programa grátis que corre no PC da loja, mesmo sem internet.",
+    ctaTitle: "Pronto para experimentar?",
+    ctaText:
+      "Descarregue, instale no PC da loja e faça a primeira ficha hoje. Sem conta, sem cartão, sem mensalidades.",
+    ctaPrimary: "Descarregar grátis",
+    ctaSecondary: "Ver o guia de instalação",
+    sections: [
+      {
+        heading: "O que uma assistência técnica precisa todos os dias",
+        paragraphs: [
+          "Uma assistência técnica vive de ordens de trabalho: cada equipamento que entra precisa de ficha, orçamento, peças reservadas e um estado que o cliente consiga consultar. O OficinaOS cobre esse ciclo completo, da receção ao levantamento.",
+        ],
+        list: [
+          "Ficha de entrada com marca, modelo, IMEI, estado e acessórios, assinada pelo cliente",
+          "Orçamentos com peças e mão de obra, aprovados ou recusados na página de acompanhamento",
+          "Estados de reparação claros para quem está na bancada, com técnico atribuído",
+          "Stock com alertas de reposição e peças descontadas automaticamente",
+          "Caixa / POS para vender acessórios e registar MB Way, numerário e cartão",
+          "Talão com QR de acompanhamento e garantia; fatura certificada com o módulo Pro",
+          "SMS automáticos ao cliente quando a reparação fica pronta",
+        ],
+      },
+      {
+        heading: "Porque é diferente dos programas habituais",
+        paragraphs: [
+          "Os programas de assistência técnica mais conhecidos são serviços na cloud, com mensalidade por posto e os dados dos clientes nos servidores do fornecedor. O OficinaOS é software livre (licença MIT) instalado no PC da loja: grátis para sempre, sem telemetria, e os dados dos clientes ficam dentro da loja.",
+          "Os módulos Pro opcionais — portal do cliente na cloud, bot de WhatsApp, loja online, preços de mercado, multi-loja — são subscrições em beta. O núcleo diário nunca fica atrás de um pagamento.",
+        ],
+        links: [
+          { label: "Módulos Pro", href: "/pro" },
+          { label: "Política de privacidade", href: "/privacy" },
+        ],
+      },
+      {
+        heading: "Funciona sem internet",
+        paragraphs: [
+          "A aplicação corre num PC dentro da loja e serve os outros dispositivos pela rede local — telemóveis, tablets e o PC da receção abrem o endereço no browser sem instalar nada. Se a internet falhar, a loja continua a trabalhar.",
+          "No Windows 10/11 o instalador trata de tudo; há também pacote portátil para correr de uma pasta (ou pen USB) e imagem Docker para Linux e macOS.",
+        ],
+        links: [
+          { label: "Guia de instalação passo a passo", href: "/docs" },
+          { label: "Novidades e versões", href: "/updates" },
+        ],
+      },
+    ],
+  },
+  paraTecnicosIndependentes: {
+    metaTitle: "Software para técnico de reparação independente — grátis",
+    metaDesc:
+      "Para quem repara telemóveis sozinho: fichas de clientes, orçamentos e acompanhamento online, grátis e sem mensalidade. Corre num PC Windows.",
+    badge: "Caso de uso · Técnico independente",
+    title: "Reparar sozinho não tem de ser gerir sozinho",
+    subtitle:
+      "Se trabalha por conta própria — em casa, num espaço partilhado ou numa banca — o OficinaOS dá-lhe fichas, orçamentos e uma página de acompanhamento profissional, grátis.",
+    ctaTitle: "Experimente na próxima reparação",
+    ctaText:
+      "Instale no seu PC e faça a primeira ficha hoje. Sem conta, sem cartão, sem mensalidades.",
+    ctaPrimary: "Descarregar grátis",
+    ctaSecondary: "Ver o guia de instalação",
+    sections: [
+      {
+        heading: "Menos papel, menos telefonemas",
+        paragraphs: [
+          "Quem trabalha sozinho perde tempo a responder a «já está pronto?» e a procurar fichas em papel ou no WhatsApp. O OficinaOS guarda cada reparação com cliente, equipamento, estado e orçamento — e o cliente acompanha tudo numa página pública, sem lhe ligar.",
+        ],
+        list: [
+          "Ficha completa por reparação: cliente, IMEI, estado e acessórios",
+          "Orçamento aprovado pelo cliente na página de acompanhamento, com registo da hora",
+          "Página pública por reparação — o cliente vê o estado em tempo real",
+          "Histórico pesquisável: clientes habituais e reparações anteriores aparecem logo",
+          "Talão com QR de acompanhamento e garantia na entrega",
+        ],
+      },
+      {
+        heading: "Profissional sem custos fixos",
+        paragraphs: [
+          "Para um técnico independente, uma mensalidade de 20–60 € é uma fatia real da receita. O OficinaOS é grátis (licença MIT): tem as mesmas funcionalidades do dia a dia que os programas pagos, sem conta obrigatória nem telemetria.",
+          "Corre num PC Windows — o mesmo que provavelmente já tem na bancada — e os clientes não instalam nada: acompanham pelo browser do telemóvel.",
+        ],
+      },
+      {
+        heading: "Cresce quando crescer",
+        paragraphs: [
+          "Se amanhã abrir loja ou contratar alguém, não precisa de mudar de programa: o mesmo OficinaOS serve vários postos na rede local, com perfis de permissões para cada pessoa. E os módulos Pro opcionais — bot de WhatsApp, loja online, faturação certificada — acrescentam-se quando fizerem sentido.",
+        ],
+        links: [
+          { label: "Módulos Pro", href: "/pro" },
+          { label: "Documentação", href: "/docs" },
+        ],
+      },
+    ],
+  },
+  deixarExcelPapel: {
+    metaTitle: "Sair do Excel e do papel na sua oficina — como e porquê",
+    metaDesc:
+      "Comparado com papel e Excel, um programa de gestão dá à oficina fichas pesquisáveis, orçamentos aprovados online e menos telefonemas. O OficinaOS é grátis.",
+    badge: "Comparação · Papel/Excel vs programa",
+    title: "Do papel e do Excel para um programa de gestão",
+    subtitle:
+      "O papel não avisa o cliente, o Excel não guarda quem aprovou o orçamento, e ambos custam horas. Veja o que muda na prática — e quanto custa mudar (nada).",
+    ctaTitle: "Mude numa tarde",
+    ctaText:
+      "Instale o OficinaOS no PC da loja e faça a primeira ficha hoje. Sem conta, sem cartão, sem mensalidades.",
+    ctaPrimary: "Descarregar grátis",
+    ctaSecondary: "Ver o guia de instalação",
+    sections: [
+      {
+        heading: "O que o papel e o Excel não fazem",
+        paragraphs: [
+          "Papel e Excel «funcionam» porque não custam dinheiro — mas cobram em tempo e em erros. Estes são os pontos onde uma oficina perde mais:",
+        ],
+        list: [
+          "O cliente liga para perguntar o estado; cada chamada interrompe uma reparação",
+          "O orçamento fica aprovado «por telefone» — sem registo de quando e por quem",
+          "Fichas pesquisáveis por memória ou por pasta, não por cliente, IMEI ou data",
+          "O stock desce quando a peça é usada — mas ninguém o regista, e a reposição falha",
+          "Não há histórico fiável de margens, receitas ou tempo médio de reparação",
+        ],
+      },
+      {
+        heading: "Lado a lado",
+        paragraphs: [],
+        table: {
+          head: ["", "Papel / Excel", "OficinaOS"],
+          rows: [
+            ["Estado da reparação", "O cliente telefona", "Página pública que o cliente consulta sozinho"],
+            ["Aprovação do orçamento", "Verbal, sem registo", "Online, com data e hora registadas"],
+            ["Pesquisar uma ficha", "Folhear pastas", "Por cliente, equipamento, IMEI ou data"],
+            ["Stock de peças", "Recontar à mão", "Descontado na reparação, com alertas de reposição"],
+            ["Caixa do dia", "Contar ao fim do dia", "Registado no POS, por método de pagamento"],
+            ["Custo", "«Grátis», caro em tempo", "Grátis (MIT)"],
+          ],
+        },
+      },
+      {
+        heading: "A migração em prática",
+        paragraphs: [
+          "Não há importação obrigatória nem formação: instala-se no PC da loja em minutos e as fichas novas passam a entrar no programa. Os registos antigos podem ficar no papel — o que interessa é que as reparações de amanhã já nasçam organizadas.",
+          "Os outros dispositivos da loja (telemóveis, tablets, o PC da receção) abrem o programa no browser pela rede local, sem instalar nada — e funciona mesmo sem internet.",
+        ],
+        links: [
+          { label: "Guia de instalação passo a passo", href: "/docs" },
+          { label: "Software para assistência técnica", href: "/software-assistencia-tecnica" },
+        ],
+      },
+    ],
+  },
+  softwarePagoVsOficinaOS: {
+    metaTitle: "Programa com mensalidade ou OficinaOS grátis — comparação",
+    metaDesc:
+      "Software de gestão para oficinas: 20–60 €/mês na cloud vs OficinaOS grátis no seu PC. Compare custo, dados dos clientes e funcionamento sem internet.",
+    badge: "Comparação · Mensalidade vs grátis",
+    title: "Programa com mensalidade ou OficinaOS grátis?",
+    subtitle:
+      "A maioria dos programas para oficinas cobra por posto todos os meses. O OficinaOS é software livre instalado no seu PC. Compare as diferenças que contam.",
+    ctaTitle: "Compare com o que paga hoje",
+    ctaText:
+      "Descarregue e teste ao lado do programa atual. Sem conta, sem cartão, sem mensalidades.",
+    ctaPrimary: "Descarregar grátis",
+    ctaSecondary: "Ver o guia de instalação",
+    sections: [
+      {
+        heading: "O modelo de custo",
+        paragraphs: [
+          "Os programas habituais para assistência técnica são SaaS: mensalidade por posto ou por técnico, tipicamente 20–60 €/mês, e as funcionalidades de cliente — portal, notificações — entram em planos mais caros. Ao fim de um ano são centenas de euros, todos os anos.",
+          "O OficinaOS é licença MIT: a aplicação completa — reparações, orçamentos, stock, POS, backups — é gratuita para sempre, para um posto ou dez. Os módulos Pro (portal na cloud, bot de WhatsApp, loja online, multi-loja) são subscrições opcionais em beta para quem precisar deles.",
+        ],
+      },
+      {
+        heading: "Onde ficam os dados dos seus clientes",
+        paragraphs: [
+          "Num SaaS, os dados dos seus clientes vivem nos servidores do fornecedor — com subcontratantes e, muitas vezes, transferências fora da UE a declarar no RGPD. No OficinaOS, a base de dados está no PC da sua loja: não há telemetria e nada sai da rede local a menos que ative um módulo Pro.",
+          "Para a maioria das lojas isto simplifica a conformidade: menos subcontratantes, menos transferências, e a loja continua a funcionar se a internet falhar.",
+        ],
+        links: [{ label: "Política de privacidade", href: "/privacy" }],
+      },
+      {
+        heading: "Lado a lado",
+        paragraphs: [],
+        table: {
+          head: ["", "Programa SaaS típico", "OficinaOS"],
+          rows: [
+            ["Custo", "20–60 €/mês por posto", "Grátis (MIT); módulos Pro opcionais"],
+            ["Dados dos clientes", "Na cloud do fornecedor", "No PC da sua loja"],
+            ["Funciona sem internet", "Normalmente não", "Sim — serve a loja pela rede local"],
+            ["Acompanhar a reparação", "Às vezes, em planos caros", "Página pública incluída, grátis"],
+            ["Em português", "Raramente", "Interface e documentação em PT-PT"],
+            ["Fidelização", "Mensalidade contínua", "Código aberto — o programa é seu"],
+          ],
+        },
+      },
+      {
+        heading: "Quando o Pro faz sentido",
+        paragraphs: [
+          "Os módulos Pro acrescentam o que precisa mesmo de sair da loja: portal do cliente na cloud, bot de WhatsApp, faturação certificada InvoiceXpress (só Portugal), loja online, preços de mercado, multi-loja e remarketing. São opcionais e em beta — os beta testers têm 90 dias grátis quando o Pro arrancar.",
+        ],
+        links: [
+          { label: "Módulos Pro", href: "/pro" },
+          { label: "Documentação", href: "/docs" },
+        ],
+      },
+    ],
+  },
+};
+
+export type SeoPageCopy = Copy["seoPage"];

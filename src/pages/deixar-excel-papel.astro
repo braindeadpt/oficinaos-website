@@ -1,0 +1,20 @@
+---
+import SeoPage from "../components/SeoPage.astro";
+import Base from "../layouts/Base.astro";
+import { lang, locale, ogLocale, seoPages, t } from "../i18n/pt";
+import { landingJsonLd } from "../i18n/schema";
+
+const page = seoPages.deixarExcelPapel;
+---
+
+<Base
+  t={t}
+  locale={locale}
+  langAttr={lang}
+  ogLocale={ogLocale}
+  title={page.metaTitle}
+  description={page.metaDesc}
+  jsonLd={landingJsonLd(t)}
+>
+  <SeoPage t={t} locale={locale} page={page} />
+</Base>
