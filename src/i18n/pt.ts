@@ -2609,6 +2609,7 @@ export const seoPages = {
     ctaText: "Grátis, sem conta, sem cartão.",
     ctaPrimary: "Descarregar grátis",
     ctaSecondary: "Como funciona o portal",
+    ctaSecondaryHref: "/docs/portal",
     sections: [
       {
         heading: "Como funciona",
@@ -2688,6 +2689,7 @@ export const seoPages = {
     ctaText: "Descarregue e teste com as suas próprias reparações — grátis.",
     ctaPrimary: "Descarregar grátis",
     ctaSecondary: "Módulos Pro",
+    ctaSecondaryHref: "/pro",
     sections: [
       {
         heading: "O que custa o mercado",

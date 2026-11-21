@@ -22,6 +22,10 @@
 - [Para técnicos independentes (PT)](https://oficinaos.app/para-tecnicos-independentes/): caso de uso — reparar sozinho com fichas, orçamentos e página de acompanhamento
 - [Do papel e do Excel para um programa (PT)](https://oficinaos.app/deixar-excel-papel/): comparação papel/Excel vs software de gestão
 - [Mensalidade vs grátis (PT)](https://oficinaos.app/software-pago-vs-oficinaos/): comparação SaaS pago vs OficinaOS grátis
+- [Software de gestão para oficina (PT)](https://oficinaos.app/software-de-gestao-para-oficina/): programa de gestão de oficina grátis
+- [Cliente acompanha a reparação (PT)](https://oficinaos.app/rastrear-reparacao-cliente/): página de acompanhamento por reparação
+- [Orçamentos aprovados online (PT)](https://oficinaos.app/orcamentos-aprovados-online/): aprovação com registo na página
+- [Alternativas a software caro (PT)](https://oficinaos.app/alternativas-software-oficina/): comparação com SaaS pagos
 
 ## Pro module guides
 
