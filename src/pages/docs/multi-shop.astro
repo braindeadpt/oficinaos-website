@@ -1,9 +1,10 @@
 ---
 import ModuleDoc from "../../components/ModuleDoc.astro";
+import { moduleDocJsonLd } from "../../i18n/schema";
 import Base from "../../layouts/Base.astro";
 import { lang, locale, ogLocale, t } from "../../i18n/pt";
 ---
 
-<Base t={t} locale={locale} langAttr={lang} ogLocale={ogLocale} title={t.moduleDocs.multiShop.title + " — OficinaOS"} description={t.moduleDocs.multiShop.subtitle}>
+<Base t={t} locale={locale} langAttr={lang} ogLocale={ogLocale} title={t.moduleDocs.multiShop.title + " — OficinaOS"} jsonLd={moduleDocJsonLd(t, locale, "multi-shop", t.moduleDocs.multiShop.title)} description={t.moduleDocs.multiShop.subtitle}>
   <ModuleDoc t={t} locale={locale} page={t.moduleDocs.multiShop} />
 </Base>

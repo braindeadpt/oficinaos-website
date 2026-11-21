@@ -151,3 +151,38 @@ export function tradeJsonLd(t: Copy, url: string): object[] {
     },
   ];
 }
+
+/** /docs/<módulo>: BreadcrumbList Home → Docs → página (mesma estrutura do índice). */
+export function moduleDocJsonLd(
+  t: Copy,
+  locale: string,
+  slug: string,
+  pageTitle: string,
+): object[] {
+  const prefix = locale === "pt" ? "" : `${locale}/`;
+  return [
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "OficinaOS",
+          item: `${SITE}/${prefix}`,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: t.docs.title,
+          item: `${SITE}/${prefix}docs/`,
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: pageTitle,
+          item: `${SITE}/${prefix}docs/${slug}/`,
+        },
+      ],
+    },
+  ];
+}

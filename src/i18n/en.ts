@@ -195,7 +195,7 @@ export const t: Copy = {
     badge: "GDPR",
     title: "Your data stays in the shop.",
     subtitle:
-      "The app runs on a PC inside the shop and has no telemetry: by default, none of your customers' data leaves the shop. Only optional modules — including OficinaOS Cloud (Pro) — send data out, and each one is declared below.",
+      "The app runs on a PC inside the shop with no telemetry: by default, no customer data leaves the shop. Every optional module that sends data is declared below.",
     cards: [
       {
         title: "Everything local by default",
@@ -1840,7 +1840,7 @@ export const t: Copy = {
   diagPage: {
     metaTitle: "OficinaOS Diag — free phone diagnostics over USB",
     metaDesc:
-      "Free, open-source Windows app that reads Android and iPhone over USB: battery, screen, touch, sensors and storage, with an HTML/JSON report. No account, no internet.",
+      "Free, open-source Windows app that reads Android and iPhone over USB: battery, screen, touch and sensors, with an HTML/JSON report.",
     hero: {
       label: "OficinaOS Diag",
       title: "Plug in the cable. The report writes itself.",
@@ -2026,9 +2026,9 @@ export const t: Copy = {
     docsLink: "Full documentation",
   },
   proPage: {
-    metaTitle: "OficinaOS Pro — online modules for technicians, repair shops and resellers",
+    metaTitle: "OficinaOS Pro — online modules for technicians and shops",
     metaDesc:
-      "Customer portal, WhatsApp, certified invoicing, online storefront and more — optional modules on top of free OficinaOS, powered by OficinaOS Cloud. In beta.",
+      "Customer portal, WhatsApp, certified invoicing, online storefront and more — optional modules on top of free OficinaOS. In beta.",
     hero: {
       label: "OficinaOS Pro",
       title: "The app is free. Pro takes it beyond the counter.",
@@ -2161,7 +2161,7 @@ export const t: Copy = {
   tradePage: {
     metaTitle: "OficinaOS Trade — parts and devices between professionals",
     metaDesc:
-      "B2B network where verified technicians, repair shops and resellers buy and sell phones, computers, parts and lots. No consumers, no minimums and no per-deal commission. Across the European Union.",
+      "B2B network where verified technicians and shops buy and sell phones, parts and lots. No consumers, no commissions. Across the EU.",
     hero: {
       label: "OficinaOS Trade",
       badge: "Free at launch",

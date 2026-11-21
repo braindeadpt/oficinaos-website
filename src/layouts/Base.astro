@@ -19,6 +19,8 @@ interface Props {
   jsonLd?: object[];
   /** Pré-carrega a Manrope (títulos) — só nas páginas cujo LCP é um título grande. */
   preloadDisplayFont?: boolean;
+  /** `noindex` para páginas que nunca devem aparecer em motores de busca (404). */
+  noindex?: boolean;
 }
 
 const { t, locale, langAttr, ogLocale } = Astro.props;
@@ -53,6 +55,7 @@ const ogImage = new URL(
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {Astro.props.noindex && <meta name="robots" content="noindex" />}
     <script is:inline>
       // Tema escolhido no botão do cabeçalho (Automático · Claro · Escuro); evita o «flash».
       try {
@@ -127,7 +130,10 @@ const ogImage = new URL(
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={title} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={title} />
     <meta name="generator" content={Astro.generator} />
     {
       Astro.props.jsonLd?.length ? (

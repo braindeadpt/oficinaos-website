@@ -35,7 +35,7 @@ export const ogLocale = "pt_PT";
 
 export const t = {
   meta: {
-    title: "OficinaOS — Programa gratuito para lojas de reparação de telemóveis",
+    title: "OficinaOS — gestão grátis para oficinas de reparação",
     description:
       "Reparações, orçamentos, stock e caixa num só programa, grátis e no PC da loja. Sem mensalidades e sem os dados dos seus clientes saírem da loja.",
   },
@@ -210,7 +210,7 @@ export const t = {
     badge: "RGPD",
     title: "Os dados ficam na loja.",
     subtitle:
-      "A app corre num PC dentro da loja e não tem telemetria: por defeito, nenhum dado dos seus clientes sai da loja. Só os módulos opcionais — incluindo a OficinaOS Cloud (Pro) — enviam dados para fora, e cada um está declarado abaixo.",
+      "A app corre num PC dentro da loja e não tem telemetria: por defeito, nenhum dado sai da loja. Cada módulo opcional que envia dados está declarado abaixo.",
     cards: [
       {
         title: "Tudo local por defeito",
@@ -331,7 +331,7 @@ export const t = {
   docs: {
     title: "Guia completo",
     subtitle:
-      "Para técnicos, lojas de reparação e revendedores: instalação, dia a dia, backups e resolução de problemas — explicado passo a passo, sem precisar de perceber de tecnologia.",
+      "Para técnicos, lojas de reparação e revendedores: instalação, dia a dia, backups e resolução de problemas — passo a passo.",
     toc: "Neste guia",
     backToGuide: "Guia completo",
     ui: {
@@ -1535,9 +1535,9 @@ export const t = {
   },
   seoPage: {
     metaTitle:
-      "Software para loja de reparação de telemóveis — grátis, sem mensalidades",
+      "Software para lojas de reparação de telemóveis — grátis",
     metaDesc:
-      "Programa de gestão para oficinas de reparação de telemóveis: check-ins, orçamentos, aprovação no telemóvel do cliente, stock, POS e backups. Grátis, em português, com os dados no PC da loja.",
+      "Programa de gestão para oficinas de reparação de telemóveis: receções, orçamentos, stock, POS e backups. Grátis, com os dados na loja.",
     badge: "Software livre · Feito em Portugal",
     title: "Software de gestão para lojas de reparação de telemóveis",
     subtitle:
@@ -1767,7 +1767,7 @@ export const t = {
   download: {
     metaTitle: "Descarregar a OficinaOS — Windows e Docker",
     metaDesc:
-      "Descarregue a última versão da OficinaOS para Windows 10/11, confirme o SHA-256 e veja como passar o aviso do SmartScreen. Alternativa com Docker para Linux e macOS.",
+      "Descarregue a OficinaOS para Windows 10/11, confirme o SHA-256 e passe o aviso do SmartScreen. Docker para Linux e macOS.",
     title: "Descarregar a OficinaOS",
     lead: "Grátis e de código aberto. Instale num PC Windows ou num servidor com Docker — depois, a equipa abre a app no browser de qualquer PC, tablet ou telemóvel da rede.",
     latest: "Última versão",
@@ -1860,7 +1860,7 @@ export const t = {
   diagPage: {
     metaTitle: "OficinaOS Diag — diagnóstico de telemóveis por cabo, grátis",
     metaDesc:
-      "App Windows grátis e de código aberto que lê Android e iPhone por USB: bateria, ecrã, toque, sensores e armazenamento, com relatório HTML/JSON. Sem conta e sem internet.",
+      "App Windows grátis que lê Android e iPhone por USB: bateria, ecrã, toque e sensores, com relatório HTML/JSON. Sem conta nem internet.",
     hero: {
       label: "OficinaOS Diag",
       title: "Ligue o cabo. O relatório faz o resto.",
@@ -2046,9 +2046,9 @@ export const t = {
     docsLink: "Documentação completa",
   },
   proPage: {
-    metaTitle: "OficinaOS Pro — módulos online para técnicos, oficinas e revendedores",
+    metaTitle: "OficinaOS Pro — módulos online para técnicos e oficinas",
     metaDesc:
-      "Portal do cliente, WhatsApp, faturação certificada, montra online e mais — módulos opcionais por cima da OficinaOS grátis, com a OficinaOS Cloud como motor. Em beta.",
+      "Portal do cliente, WhatsApp, faturação certificada, montra online e mais — módulos opcionais sobre a OficinaOS grátis. Em beta.",
     hero: {
       label: "OficinaOS Pro",
       title: "O programa é grátis. O Pro leva-o para fora do balcão.",
@@ -2181,7 +2181,7 @@ export const t = {
   tradePage: {
     metaTitle: "OficinaOS Trade — peças e equipamentos entre profissionais",
     metaDesc:
-      "Rede B2B onde técnicos, oficinas e revendedores verificados compram e vendem telemóveis, computadores, peças e lotes. Sem particulares, sem mínimos e sem comissão por negócio. Em toda a União Europeia.",
+      "Rede B2B onde técnicos e lojas verificados compram e vendem telemóveis, peças e lotes. Sem particulares nem comissões. Em toda a UE.",
     hero: {
       label: "OficinaOS Trade",
       badge: "Grátis no lançamento",

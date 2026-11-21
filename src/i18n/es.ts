@@ -20,9 +20,9 @@ export const ogLocale = "es_ES";
 
 export const t: Copy = {
   meta: {
-    title: "OficinaOS — Programa gratuito para tiendas de reparación de móviles",
+    title: "OficinaOS — gestión gratis para talleres de reparación",
     description:
-      "Reparaciones, presupuestos, stock y caja en un solo programa, gratis y en el PC de tu tienda. Sin cuotas mensuales y sin que los datos de tus clientes salgan de la tienda.",
+      "Reparaciones, presupuestos, stock y caja en un solo programa gratis, en el PC de tu tienda. Los datos de tus clientes no salen de la tienda.",
   },
   nav: {
     features: "Funcionalidades",
@@ -195,7 +195,7 @@ export const t: Copy = {
     badge: "RGPD",
     title: "Los datos se quedan en la tienda.",
     subtitle:
-      "La app se ejecuta en un PC dentro de la tienda y no tiene telemetría: por defecto, ningún dato de tus clientes sale de la tienda. Solo los módulos opcionales — incluida OficinaOS Cloud (Pro) — envían datos fuera, y cada uno está declarado abajo.",
+      "La app corre en el PC de la tienda y no tiene telemetría: por defecto, ningún dato sale de la tienda. Cada módulo opcional que envía datos está declarado abajo.",
     cards: [
       {
         title: "Todo local por defecto",
@@ -316,7 +316,7 @@ export const t: Copy = {
   docs: {
     title: "Guía completa",
     subtitle:
-      "Para técnicos, tiendas de reparación y revendedores: instalación, uso diario, copias de seguridad y resolución de problemas — paso a paso, sin necesidad de saber de tecnología.",
+      "Para técnicos, tiendas de reparación y revendedores: instalación, uso diario, copias de seguridad y resolución de problemas.",
     toc: "En esta guía",
     backToGuide: "Guía completa",
     ui: {
@@ -1200,7 +1200,7 @@ export const t: Copy = {
     invoicing: {
       title: "Facturación certificada",
       subtitle:
-        "Solo para tiendas en Portugal: facturas y facturas-recibo legales emitidas directamente desde la venta o la reparación — vía InvoiceXpress, con la cuenta y la clave de la propia tienda.",
+        "Solo para tiendas en Portugal: facturas legales emitidas desde la venta o la reparación — vía InvoiceXpress, con la cuenta y la clave de la propia tienda.",
       sections: [
         {
           heading: "Solo para Portugal",
@@ -1520,9 +1520,9 @@ export const t: Copy = {
     pro: "Pro",
   },
   seoPage: {
-    metaTitle: "Software para tienda de reparación de móviles — gratis, sin cuotas",
+    metaTitle: "Software para tiendas de reparación de móviles — gratis",
     metaDesc:
-      "Programa de gestión para talleres de reparación de móviles: recepciones, presupuestos aprobados desde el móvil del cliente, stock, TPV y copias de seguridad. Gratis y con los datos en el PC de la tienda.",
+      "Programa de gestión para talleres de reparación de móviles: recepciones, presupuestos, stock, TPV y copias. Gratis y con los datos en la tienda.",
     badge: "Software libre · Hecho en Portugal",
     title: "Software de gestión para tiendas de reparación de móviles",
     subtitle:
@@ -1752,7 +1752,7 @@ export const t: Copy = {
   download: {
     metaTitle: "Descargar OficinaOS — Windows y Docker",
     metaDesc:
-      "Descarga la última versión de OficinaOS para Windows 10/11, comprueba el SHA-256 y mira cómo pasar el aviso de SmartScreen. Alternativa con Docker para Linux y macOS.",
+      "Descarga OficinaOS para Windows 10/11, comprueba el SHA-256 y pasa el aviso de SmartScreen. Docker para Linux y macOS.",
     title: "Descargar OficinaOS",
     lead: "Gratis y de código abierto. Instálalo en un PC con Windows o en un servidor con Docker — después, el equipo abre la app en el navegador de cualquier PC, tablet o móvil de la red.",
     latest: "Última versión",
@@ -1845,7 +1845,7 @@ export const t: Copy = {
   diagPage: {
     metaTitle: "OficinaOS Diag — diagnóstico de móviles por cable, gratis",
     metaDesc:
-      "App Windows gratuita y de código abierto que lee Android e iPhone por USB: batería, pantalla, táctil, sensores y almacenamiento, con informe HTML/JSON. Sin cuenta y sin internet.",
+      "App Windows gratuita que lee Android e iPhone por USB: batería, pantalla, táctil y sensores, con informe HTML/JSON. Sin cuenta ni internet.",
     hero: {
       label: "OficinaOS Diag",
       title: "Conecta el cable. El informe se escribe solo.",
@@ -2031,9 +2031,9 @@ export const t: Copy = {
     docsLink: "Documentación completa",
   },
   proPage: {
-    metaTitle: "OficinaOS Pro — módulos online para técnicos, talleres y revendedores",
+    metaTitle: "OficinaOS Pro — módulos online para técnicos y talleres",
     metaDesc:
-      "Portal del cliente, WhatsApp, facturación certificada, escaparate online y más — módulos opcionales sobre OficinaOS gratis, con OficinaOS Cloud como motor. En beta.",
+      "Portal del cliente, WhatsApp, facturación certificada, escaparate online y más — módulos opcionales sobre OficinaOS gratis. En beta.",
     hero: {
       label: "OficinaOS Pro",
       title: "El programa es gratis. El Pro lo lleva más allá del mostrador.",
@@ -2166,7 +2166,7 @@ export const t: Copy = {
   tradePage: {
     metaTitle: "OficinaOS Trade — piezas y equipos entre profesionales",
     metaDesc:
-      "Red B2B donde técnicos, talleres y revendedores verificados compran y venden móviles, ordenadores, piezas y lotes. Sin particulares, sin mínimos y sin comisión por operación. En toda la Unión Europea.",
+      "Red B2B donde técnicos y talleres verificados compran y venden móviles, piezas y lotes. Sin particulares ni comisiones. En toda la UE.",
     hero: {
       label: "OficinaOS Trade",
       badge: "Gratis en el lanzamiento",

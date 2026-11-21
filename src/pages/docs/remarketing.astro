@@ -1,9 +1,10 @@
 ---
 import ModuleDoc from "../../components/ModuleDoc.astro";
+import { moduleDocJsonLd } from "../../i18n/schema";
 import Base from "../../layouts/Base.astro";
 import { lang, locale, ogLocale, t } from "../../i18n/pt";
 ---
 
-<Base t={t} locale={locale} langAttr={lang} ogLocale={ogLocale} title={t.moduleDocs.remarketing.title + " — OficinaOS"} description={t.moduleDocs.remarketing.subtitle}>
+<Base t={t} locale={locale} langAttr={lang} ogLocale={ogLocale} title={t.moduleDocs.remarketing.title + " — OficinaOS"} jsonLd={moduleDocJsonLd(t, locale, "remarketing", t.moduleDocs.remarketing.title)} description={t.moduleDocs.remarketing.subtitle}>
   <ModuleDoc t={t} locale={locale} page={t.moduleDocs.remarketing} />
 </Base>
