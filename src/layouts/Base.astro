@@ -21,6 +21,9 @@ interface Props {
   preloadDisplayFont?: boolean;
   /** `noindex` para páginas que nunca devem aparecer em motores de busca (404). */
   noindex?: boolean;
+  /** Locales em que esta página existe — páginas pt-only passam `["pt"]` para não anunciar
+   *  alternates 404 em hreflang. */
+  pageLocales?: readonly Locale[];
 }
 
 const { t, locale, langAttr, ogLocale } = Astro.props;
@@ -106,7 +109,7 @@ const ogImage = new URL(
     <link rel="apple-touch-icon" href={`${import.meta.env.BASE_URL}apple-touch-icon.png`} />
     <link rel="canonical" href={canonical} />
     {
-      LOCALES.map((l) => (
+      (Astro.props.pageLocales ?? LOCALES).map((l) => (
         <link
           rel="alternate"
           hreflang={localeMap[l]}

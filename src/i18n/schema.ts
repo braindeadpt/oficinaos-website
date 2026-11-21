@@ -30,12 +30,8 @@ const website = {
  *  Only facts the site/repo actually support — price 0 (MIT core),
  *  Windows installer + Docker on Linux/macOS; no native Android app
  *  is claimed (phones use the browser/PWA). */
-export function landingJsonLd(t: Copy): object[] {
-  return [
-    organization,
-    website,
-    {
-      "@type": "SoftwareApplication",
+const softwareApp = (t: Copy) => ({
+      "@type": "SoftwareApplication" as const,
       name: "OficinaOS",
       description: t.meta.description,
       applicationCategory: "BusinessApplication",
@@ -52,7 +48,13 @@ export function landingJsonLd(t: Copy): object[] {
       },
       publisher: { "@id": `${SITE}/#org` },
       inLanguage: ["pt-PT", "en", "es"],
-    },
+    });
+
+export function landingJsonLd(t: Copy): object[] {
+  return [
+    organization,
+    website,
+    softwareApp(t),
     {
       "@type": "VideoObject",
       name: `OficinaOS — ${t.screenshots.title}`,
@@ -181,6 +183,39 @@ export function moduleDocJsonLd(
           position: 3,
           name: pageTitle,
           item: `${SITE}/${prefix}docs/${slug}/`,
+        },
+      ],
+    },
+  ];
+}
+
+/** Páginas de conteúdo (casos de uso / comparações): Organization + WebSite +
+ *  SoftwareApplication + BreadcrumbList — sem VideoObject (a página não mostra o vídeo). */
+export function contentPageJsonLd(
+  t: Copy,
+  locale: string,
+  slug: string,
+  pageTitle: string,
+): object[] {
+  const prefix = locale === "pt" ? "" : `${locale}/`;
+  return [
+    organization,
+    website,
+    softwareApp(t),
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "OficinaOS",
+          item: `${SITE}/${prefix}`,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: pageTitle,
+          item: `${SITE}/${prefix}${slug}/`,
         },
       ],
     },

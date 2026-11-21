@@ -22,10 +22,13 @@ import { downloadAttrs } from "../lib/download";
 interface Props {
   t: Copy;
   locale: Locale;
+  /** Locales em que a página existe (pt-only → só a opção atual aparece no seletor). */
+  pageLocales?: readonly Locale[];
 }
 const { t, locale } = Astro.props;
 const theme = t.nav.theme;
 // O seletor de idioma mantém o utilizador na mesma página, não na raiz do idioma.
+const navLocales = Astro.props.pageLocales ?? LOCALES;
 const pagePath = currentPagePath(Astro.url.pathname, locale);
 const items = products(t, locale);
 
@@ -223,7 +226,7 @@ const chevron =
   <div id="nav-lang" popover class="oos-popover nav-pop nav-pop-lang">
     <ul class="p-1.5" role="list" aria-label={t.nav.languageMenuLabel}>
       {
-        LOCALES.map((l) => (
+        navLocales.map((l) => (
           <li>
             <a
               href={localeUrl(l, pagePath)}
@@ -317,7 +320,7 @@ const chevron =
             <span class="text-sm text-text-muted" id="nav-sheet-lang">{t.nav.language}</span>
             <ul role="list" aria-labelledby="nav-sheet-lang" class="flex rounded-md border border-border bg-surface-2 p-0.5">
               {
-                LOCALES.map((l) => (
+                navLocales.map((l) => (
                   <li>
                     <a
                       href={localeUrl(l, pagePath)}
