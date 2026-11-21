@@ -2313,3 +2313,378 @@ export const t: Copy = {
     externalHint: "opens in a new tab",
   },
 };
+
+export const seoPages = {
+  softwareAssistenciaTecnica: {
+    metaTitle: "Repair service management software — free, no monthly fees",
+    metaDesc:
+      "Free management software for phone repair services: repair tickets, quotes, stock and till. Runs on the shop's own PC, even without internet.",
+    badge: "Open source · Made in Portugal",
+    title: "Management software for phone repair services",
+    subtitle:
+      "Repair tickets, quotes the customer approves on their phone, stock and till — in a free app that runs on the shop's PC, even without internet.",
+    ctaTitle: "Ready to try it?",
+    ctaText:
+      "Download, install on the shop PC and log your first ticket today. No account, no card, no monthly fees.",
+    ctaPrimary: "Download free",
+    ctaSecondary: "Read the install guide",
+    sections: [
+      {
+        heading: "What a repair service needs every day",
+        paragraphs: [
+          "A repair service runs on work orders: every device that comes in needs a ticket, a quote, reserved parts and a status the customer can check. OficinaOS covers that whole cycle, from drop-off to pick-up.",
+        ],
+        list: [
+          "Intake ticket with brand, model, IMEI, condition and accessories, signed by the customer",
+          "Quotes with parts and labour, approved or declined on the tracking page",
+          "Clear repair statuses for whoever is at the bench, with an assigned technician",
+          "Stock with reorder alerts and parts taken out automatically",
+          "POS / till to sell accessories and record MB Way, cash and card",
+          "Receipt with tracking QR and warranty; certified invoicing with the Pro module",
+          "Automatic SMS to the customer when the repair is ready",
+        ],
+      },
+      {
+        heading: "How it differs from the usual software",
+        paragraphs: [
+          "The best-known repair management tools are cloud services, with a monthly fee per seat and your customers' data on the vendor's servers. OficinaOS is open-source software (MIT licence) installed on the shop's PC: free forever, no telemetry, and customer data stays inside the shop.",
+          "The optional Pro modules — cloud customer portal, WhatsApp bot, online storefront, market prices, multi-shop — are beta subscriptions. The everyday core is never behind a paywall.",
+        ],
+        links: [
+          { label: "Pro modules", href: "/en/pro" },
+          { label: "Privacy policy", href: "/en/privacy" },
+        ],
+      },
+      {
+        heading: "Works without internet",
+        paragraphs: [
+          "The app runs on a PC inside the shop and serves the other devices over the local network — phones, tablets and the front-desk PC just open the address in a browser, nothing to install. If the internet goes down, the shop keeps working.",
+          "On Windows 10/11 the installer handles everything; there's also a portable package to run from a folder (or USB stick) and a Docker image for Linux and macOS.",
+        ],
+        links: [
+          { label: "Step-by-step install guide", href: "/en/docs" },
+          { label: "News and releases", href: "/en/updates" },
+        ],
+      },
+    ],
+  },
+  paraTecnicosIndependentes: {
+    metaTitle: "Software for independent repair technicians — free",
+    metaDesc:
+      "For anyone repairing phones solo: customer tickets, quotes and phone tracking, free with no monthly fee. Runs on a Windows PC.",
+    badge: "Use case · Independent technician",
+    title: "Repairing solo doesn't mean managing solo",
+    subtitle:
+      "If you work on your own — at home, in a shared space or at a stall — OficinaOS gives you tickets, quotes and a professional tracking page, free.",
+    ctaTitle: "Try it on your next repair",
+    ctaText:
+      "Install it on your PC and log your first ticket today. No account, no card, no monthly fees.",
+    ctaPrimary: "Download free",
+    ctaSecondary: "Read the install guide",
+    sections: [
+      {
+        heading: "Less paper, fewer phone calls",
+        paragraphs: [
+          "Working alone means losing time answering «is it ready yet?» and digging through paper or WhatsApp for tickets. OficinaOS keeps every repair with its customer, device, status and quote — and the customer follows it all on a public page without calling you.",
+        ],
+        list: [
+          "Full ticket per repair: customer, IMEI, condition and accessories",
+          "Quote approved by the customer on the tracking page, with a timestamp",
+          "A tracking page per repair — free on the shop network; from outside, with the Pro module",
+          "Searchable history: returning customers and past repairs show up instantly",
+          "Receipt with tracking QR and warranty at pick-up",
+        ],
+      },
+      {
+        heading: "Professional without fixed costs",
+        paragraphs: [
+          "For an independent technician, a €20–60 monthly fee is a real slice of revenue. OficinaOS is free (MIT licence): the same everyday features as paid software, no mandatory account, no telemetry.",
+          "It runs on a Windows PC — probably the same one already on your bench — and customers install nothing: they follow the repair in their phone's browser.",
+        ],
+      },
+      {
+        heading: "Grows when you grow",
+        paragraphs: [
+          "If you open a shop or hire someone tomorrow, there's no software to switch: the same OficinaOS serves several workstations on the local network, with permission profiles for each person. And the optional Pro modules — WhatsApp bot, online storefront, certified invoicing — can be added when they make sense.",
+        ],
+        links: [
+          { label: "Pro modules", href: "/en/pro" },
+          { label: "Documentation", href: "/en/docs" },
+        ],
+      },
+    ],
+  },
+  deixarExcelPapel: {
+    metaTitle: "Move your repair shop off paper and Excel — how and why",
+    metaDesc:
+      "Compared to paper and Excel, management software gives a repair shop searchable tickets, online quote approvals and fewer phone calls. OficinaOS is free.",
+    badge: "Comparison · Paper/Excel vs software",
+    title: "From paper and Excel to management software",
+    subtitle:
+      "Paper doesn't notify the customer, Excel doesn't record who approved the quote, and both cost you hours. See what changes in practice — and what switching costs (nothing).",
+    ctaTitle: "Switch in an afternoon",
+    ctaText:
+      "Install OficinaOS on the shop PC and log your first ticket today. No account, no card, no monthly fees.",
+    ctaPrimary: "Download free",
+    ctaSecondary: "Read the install guide",
+    sections: [
+      {
+        heading: "What paper and Excel can't do",
+        paragraphs: [
+          "Paper and Excel «work» because they cost no money — but they charge you in time and mistakes. These are the points where a repair shop loses the most:",
+        ],
+        list: [
+          "The customer calls to ask for status; every call interrupts a repair",
+          "The quote is approved «by phone» — with no record of when or by whom",
+          "Tickets searchable by memory or folder, not by customer, IMEI or date",
+          "Stock drops when a part is used — but nobody logs it, and restocking fails",
+          "No reliable history of margins, revenue or average repair time",
+        ],
+      },
+      {
+        heading: "Side by side",
+        paragraphs: [],
+        table: {
+          head: ["", "Paper / Excel", "OficinaOS"],
+          rows: [
+            ["Repair status", "The customer calls", "A public page the customer checks themselves"],
+            ["Quote approval", "Verbal, unrecorded", "Online, with date and time recorded"],
+            ["Finding a ticket", "Flipping through folders", "By customer, device, IMEI or date"],
+            ["Parts stock", "Manual recounting", "Deducted on the repair, with reorder alerts"],
+            ["Daily till", "Counted at closing time", "Recorded in the POS, by payment method"],
+            ["Cost", "«Free», expensive in time", "Free (MIT)"],
+          ],
+        },
+      },
+      {
+        heading: "The migration in practice",
+        paragraphs: [
+          "There's no mandatory import or training: it installs on the shop PC in minutes and new tickets start going into the app. Old records can stay on paper — what matters is that tomorrow's repairs are born organised.",
+          "The shop's other devices (phones, tablets, the front-desk PC) open the app in a browser over the local network, installing nothing — and it works even without internet.",
+        ],
+        links: [
+          { label: "Step-by-step install guide", href: "/en/docs" },
+          { label: "Repair service software", href: "/en/software-assistencia-tecnica" },
+        ],
+      },
+    ],
+  },
+  softwarePagoVsOficinaOS: {
+    metaTitle: "Paid shop software vs OficinaOS free — comparison",
+    metaDesc:
+      "Repair shop management software: €20–60/month cloud subscriptions vs free OficinaOS on your own PC. Compare cost, customer data and offline use.",
+    badge: "Comparison · Subscription vs free",
+    title: "Monthly-fee software or free OficinaOS?",
+    subtitle:
+      "Most repair shop software charges per seat every month. OficinaOS is open-source software installed on your PC. Compare the differences that matter.",
+    ctaTitle: "Compare it with what you pay today",
+    ctaText:
+      "Download and test it next to your current software. No account, no card, no monthly fees.",
+    ctaPrimary: "Download free",
+    ctaSecondary: "Read the install guide",
+    sections: [
+      {
+        heading: "The cost model",
+        paragraphs: [
+          "The usual repair shop tools are SaaS: a monthly fee per seat or per technician, typically €20–60/month, and customer-facing features — portal, notifications — land in pricier plans. After a year that's hundreds of euros, every year.",
+          "OficinaOS is MIT-licensed: the full app — repairs, quotes, stock, POS, backups — is free forever, for one workstation or ten. The Pro modules (cloud portal, WhatsApp bot, online storefront, multi-shop) are optional beta subscriptions for whoever needs them.",
+        ],
+      },
+      {
+        heading: "Where your customers' data lives",
+        paragraphs: [
+          "In a SaaS, your customers' data lives on the vendor's servers — with subprocessors and, often, transfers outside the EU to declare under GDPR. In OficinaOS, the database sits on your shop's PC: no telemetry, and nothing leaves the local network unless you enable a Pro module.",
+          "For most shops this simplifies compliance: fewer subprocessors, fewer transfers, and the shop keeps working if the internet fails.",
+        ],
+        links: [{ label: "Privacy policy", href: "/en/privacy" }],
+      },
+      {
+        heading: "Side by side",
+        paragraphs: [],
+        table: {
+          head: ["", "Typical SaaS software", "OficinaOS"],
+          rows: [
+            ["Cost", "€20–60/month per seat", "Free (MIT); optional Pro modules"],
+            ["Customer data", "In the vendor's cloud", "On your shop PC"],
+            ["Works without internet", "Usually not", "Yes — serves the shop over the local network"],
+            ["Repair tracking", "Sometimes, in expensive plans", "Public page included, free"],
+            ["In your language", "Rarely in Portuguese", "UI and docs in EN, PT-PT and ES"],
+            ["Lock-in", "Ongoing subscription", "Open source — the software is yours"],
+          ],
+        },
+      },
+      {
+        heading: "When Pro makes sense",
+        paragraphs: [
+          "The Pro modules add what genuinely needs to leave the shop: a cloud customer portal, WhatsApp bot, certified InvoiceXpress invoicing (Portugal only), online storefront, market prices, multi-shop and remarketing. They're optional and in beta — beta testers get 90 days free when Pro launches.",
+        ],
+        links: [
+          { label: "Pro modules", href: "/en/pro" },
+          { label: "Documentation", href: "/en/docs" },
+        ],
+      },
+    ],
+  },
+  softwareDeGestaoOficina: {
+    metaTitle: "Repair shop management software — free and open source",
+    metaDesc:
+      "OficinaOS is free repair shop management software (MIT): repair tickets, customers, quotes and tracking on the shop network, in English.",
+    badge: "Guide · Shop management",
+    title: "Management software that doesn't charge you for existing",
+    subtitle:
+      "OficinaOS is the management software for your repair shop: every repair with its customer, device, status and quote — free, offline-first and in your language.",
+    ctaTitle: "Install it today",
+    ctaText:
+      "Download the Windows installer or run `docker compose up` on Linux. First ticket in minutes.",
+    ctaPrimary: "Download free",
+    ctaSecondary: "Read the install guide",
+    sections: [
+      {
+        heading: "What the software does for you",
+        paragraphs: [
+          "A repair shop runs on tickets: who dropped off what, when, for how much. OficinaOS replaces the notebook and the spreadsheet with searchable tickets with photos, IMEI, status, quote and customer history.",
+        ],
+        list: [
+          "A ticket per repair with customer, device and status",
+          "Quote with the customer's approval recorded",
+          "Receipt with tracking QR and warranty",
+          "Several workstations on the same local network, with permission profiles",
+          "Repair tracking on the customer's phone — free on the shop network",
+        ],
+      },
+      {
+        heading: "Actually free, no asterisks",
+        paragraphs: [
+          "MIT licence, open source, no mandatory account, no telemetry. Your data stays on your shop's PC — not in a vendor's cloud that can raise prices tomorrow.",
+          "The optional Pro modules (certified invoicing, WhatsApp bot, online storefront) get added when they make sense — never to unlock the basics.",
+        ],
+        links: [
+          { label: "Paid software vs OficinaOS", href: "/en/software-pago-vs-oficinaos" },
+          { label: "Leave Excel and paper behind", href: "/en/deixar-excel-papel" },
+          { label: "Documentation", href: "/en/docs" },
+        ],
+      },
+    ],
+  },
+  rastrearReparacaoCliente: {
+    metaTitle: "Customer tracks their repair online — fewer phone calls",
+    metaDesc:
+      "A tracking page per repair: the customer sees live status on their phone without calling the shop. Free on the local network with OficinaOS.",
+    badge: "Use case · Tracking",
+    title: "«Is it ready yet?» stops being your phone ringing",
+    subtitle:
+      "Every repair gets a tracking page with real-time status. The customer follows it via the receipt QR or the link — free on the shop network; from outside, with the Pro module.",
+    ctaTitle: "Fewer calls from the very first ticket",
+    ctaText: "Free, no account, no card.",
+    ctaPrimary: "Download free",
+    ctaSecondary: "How the portal works",
+    sections: [
+      {
+        heading: "How it works",
+        paragraphs: [
+          "When you create the ticket, the app generates a link and a tracking QR. The customer opens the page on their phone and sees the repair status — received, in diagnostics, in repair, ready — without installing anything.",
+        ],
+        list: [
+          "QR on the receipt handed over at drop-off",
+          "Status updated in real time by you on the ticket",
+          "Quote approval on the page itself, with a timestamp",
+          "Free on the shop network; outside access requires the Pro module",
+        ],
+        links: [{ label: "Customer portal guide", href: "/en/docs" }],
+      },
+      {
+        heading: "The effect on the shop",
+        paragraphs: [
+          "Every «is it ready?» call costs 2–3 minutes of bench time. In a shop with 20 open repairs, that's hours per week. The tracking page answers before the customer calls.",
+        ],
+        table: {
+          head: ["", "Without tracking", "With OficinaOS"],
+          rows: [
+            ["Customer knows the status", "Calls the shop", "Sees it on their phone"],
+            ["Quote approval", "Call or message", "Button on the page, recorded"],
+            ["Trust", "«I'm on it»", "Real status, visible"],
+          ],
+        },
+      },
+    ],
+  },
+  orcamentosAprovadosOnline: {
+    metaTitle: "Repair quotes approved online — with timestamp and record",
+    metaDesc:
+      "Repair quotes approved by the customer on the tracking page, with time and amount recorded. No phone calls, no WhatsApp screenshots.",
+    badge: "Use case · Quotes",
+    title: "An approved quote is a recorded quote",
+    subtitle:
+      "Instead of «approved by phone and forgotten», the customer approves the quote on the tracking page — and the approval is logged with time and amount on the ticket.",
+    ctaTitle: "Try it on the next quote",
+    ctaText: "Free and no monthly fee.",
+    ctaPrimary: "Download free",
+    ctaSecondary: "Read the docs",
+    sections: [
+      {
+        heading: "Why «approved by phone» isn't enough",
+        paragraphs: [
+          "When the price changes — a pricier part, a bigger problem — the verbal approval disappears. With OficinaOS, the customer sees the quote on the page and taps approve: the ticket stores the time and the approved amount.",
+        ],
+        list: [
+          "Amount and description visible on the tracking page",
+          "Approval logged with a timestamp on the ticket",
+          "History per customer and per repair",
+          "Works on the shop network; from outside, with the Pro module",
+        ],
+      },
+      {
+        heading: "Fewer disputes at pick-up",
+        paragraphs: [
+          "The receipt with QR and the warranty handed over at the end reference the same ticket where the quote was approved. If there's any doubt, both sides have the same record.",
+        ],
+        links: [
+          { label: "Customer tracks the repair", href: "/en/rastrear-reparacao-cliente" },
+          { label: "Repair service software", href: "/en/software-assistencia-tecnica" },
+        ],
+      },
+    ],
+  },
+  alternativasSoftwareOficina: {
+    metaTitle: "Alternatives to expensive repair shop software",
+    metaDesc:
+      "RepairDesk, Fixably and similar tools charge €20–150/month. OficinaOS gives you the essentials free: tickets, quotes and tracking — compare.",
+    badge: "Comparison · Alternatives",
+    title: "Before paying a monthly fee, compare",
+    subtitle:
+      "Repair shop software charges per seat and per month. OficinaOS charges zero for the essentials — and the code is open.",
+    ctaTitle: "Compare it with what you have today",
+    ctaText: "Download and test it with your own repairs — free.",
+    ctaPrimary: "Download free",
+    ctaSecondary: "Pro modules",
+    sections: [
+      {
+        heading: "What the market costs",
+        paragraphs: [
+          "RepairDesk, Fixably and the like start at ~€20–60/month per seat; features like SMS and portals sit in pricier plans. For a small shop, that's €240–720 a year before earning a single euro.",
+        ],
+        table: {
+          head: ["", "Typical SaaS", "OficinaOS"],
+          rows: [
+            ["Core price", "€20–60/month per seat", "€0 (MIT)"],
+            ["Where data lives", "Vendor's cloud", "Your shop PC"],
+            ["Works without internet", "Usually not", "Yes"],
+            ["Customer portal", "Paid plan", "Free on the network; outside with Pro"],
+            ["In Portuguese", "Rarely", "Native PT-PT"],
+          ],
+        },
+      },
+      {
+        heading: "When paying makes sense",
+        paragraphs: [
+          "If you need certified invoicing, an online storefront, a WhatsApp bot or a customer portal reachable from outside the shop, the Pro modules cover that — optional, without forcing you to swap the free core.",
+          "If you manage several shops or need a full ERP, a SaaS with dedicated support may pay off. For most independent repair shops, the free essentials are enough.",
+        ],
+        links: [
+          { label: "Paid software vs OficinaOS", href: "/en/software-pago-vs-oficinaos" },
+          { label: "Pro modules", href: "/en/pro" },
+        ],
+      },
+    ],
+  },
+};
