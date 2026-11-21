@@ -2,6 +2,7 @@
 import DownloadPage from "../components/DownloadPage.astro";
 import Base from "../layouts/Base.astro";
 import { lang, locale, ogLocale, t } from "../i18n/pt";
+import { downloadJsonLd } from "../i18n/schema";
 ---
 
 <Base
@@ -11,6 +12,7 @@ import { lang, locale, ogLocale, t } from "../i18n/pt";
   ogLocale={ogLocale}
   title={t.download.metaTitle}
   description={t.download.metaDesc}
+  jsonLd={downloadJsonLd(t)}
   preloadDisplayFont
 >
   <DownloadPage t={t} locale={locale} />

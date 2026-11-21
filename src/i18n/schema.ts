@@ -56,17 +56,6 @@ export function landingJsonLd(t: Copy): object[] {
     website,
     softwareApp(t),
     {
-      "@type": "HowTo",
-      name: t.install.title,
-      description: t.install.subtitle,
-      step: t.install.steps.map((s, i) => ({
-        "@type": "HowToStep",
-        position: i + 1,
-        name: s.title,
-        text: s.desc,
-      })),
-    },
-    {
       "@type": "VideoObject",
       name: `OficinaOS — ${t.screenshots.title}`,
       description: t.screenshots.subtitle,
@@ -75,6 +64,25 @@ export function landingJsonLd(t: Copy): object[] {
       uploadDate: "2026-10-08",
       duration: "PT1M2S",
       publisher: { "@id": `${SITE}/#org` },
+    },
+  ];
+}
+
+/** Download page: HowTo built from the numbered steps the page renders
+ *  («Depois de descarregar»), so the markup matches visible content. */
+export function downloadJsonLd(t: Copy): object[] {
+  return [
+    organization,
+    website,
+    {
+      "@type": "HowTo",
+      name: t.download.stepsTitle,
+      step: t.download.steps.map((s, i) => ({
+        "@type": "HowToStep",
+        position: i + 1,
+        name: s.title,
+        text: s.text,
+      })),
     },
   ];
 }
