@@ -26,6 +26,22 @@
 - [Cliente acompanha a reparação (PT)](https://oficinaos.app/rastrear-reparacao-cliente/): página de acompanhamento por reparação
 - [Orçamentos aprovados online (PT)](https://oficinaos.app/orcamentos-aprovados-online/): aprovação com registo na página
 - [Alternativas a software caro (PT)](https://oficinaos.app/alternativas-software-oficina/): comparação com SaaS pagos
+- [Repair service software (EN)](https://oficinaos.app/en/software-assistencia-tecnica/): content page — managing a phone repair service
+- [Software for independent technicians (EN)](https://oficinaos.app/en/para-tecnicos-independentes/): use case — repairing solo
+- [Leaving Excel and paper (EN)](https://oficinaos.app/en/deixar-excel-papel/): paper/spreadsheets vs management software comparison
+- [Subscription vs free (EN)](https://oficinaos.app/en/software-pago-vs-oficinaos/): paid SaaS vs free OficinaOS comparison
+- [Repair shop management software (EN)](https://oficinaos.app/en/software-de-gestao-para-oficina/): free management software overview
+- [Customer tracks the repair (EN)](https://oficinaos.app/en/rastrear-reparacao-cliente/): per-repair tracking page
+- [Quotes approved online (EN)](https://oficinaos.app/en/orcamentos-aprovados-online/): logged approvals on the tracking page
+- [Alternatives to expensive software (EN)](https://oficinaos.app/en/alternativas-software-oficina/): comparison with paid SaaS
+- [Software para servicio técnico (ES)](https://oficinaos.app/es/software-assistencia-tecnica/): página de contenido — gestión de servicio técnico
+- [Para técnicos independientes (ES)](https://oficinaos.app/es/para-tecnicos-independentes/): caso de uso — reparar solo
+- [Dejar el Excel y el papel (ES)](https://oficinaos.app/es/deixar-excel-papel/): comparación papel/Excel vs software
+- [Cuota mensual vs gratis (ES)](https://oficinaos.app/es/software-pago-vs-oficinaos/): comparación SaaS de pago vs OficinaOS gratis
+- [Software de gestión para taller (ES)](https://oficinaos.app/es/software-de-gestao-para-oficina/): programa de gestión de taller gratis
+- [El cliente sigue la reparación (ES)](https://oficinaos.app/es/rastrear-reparacao-cliente/): página de seguimiento por reparación
+- [Presupuestos aprobados online (ES)](https://oficinaos.app/es/orcamentos-aprovados-online/): aprobación con registro en la página
+- [Alternativas a software caro (ES)](https://oficinaos.app/es/alternativas-software-oficina/): comparación con SaaS de pago
 
 ## Pro module guides
 
