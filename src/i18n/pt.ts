@@ -1590,7 +1590,7 @@ export const t = {
           head: ["", "Papel e Excel", "Software com mensalidade", "OficinaOS"],
           rows: [
             ["Custo", "«Grátis», mas caro em tempo perdido", "20–60 €/mês por posto", "Grátis (MIT)"],
-            ["O cliente acompanha a reparação?", "Não — telefona à loja", "Às vezes, pago", "Sim, página pública grátis"],
+            ["O cliente acompanha a reparação?", "Não — telefona à loja", "Às vezes, pago", "Sim — na loja grátis; fora dela com Pro"],
             ["Onde ficam os dados", "Na gaveta / num ficheiro", "Na cloud do fornecedor", "No PC da sua loja"],
             ["Funciona sem internet", "Sim", "Normalmente não", "Sim"],
             ["Em português", "—", "Raramente", "Interface e ajuda em PT-PT"],
@@ -2396,7 +2396,7 @@ export const seoPages = {
   paraTecnicosIndependentes: {
     metaTitle: "Software para técnico de reparação independente — grátis",
     metaDesc:
-      "Para quem repara telemóveis sozinho: fichas de clientes, orçamentos e acompanhamento online, grátis e sem mensalidade. Corre num PC Windows.",
+      "Para quem repara telemóveis sozinho: fichas de clientes, orçamentos e acompanhamento no telemóvel, grátis e sem mensalidade. Corre num PC Windows.",
     badge: "Caso de uso · Técnico independente",
     title: "Reparar sozinho não tem de ser gerir sozinho",
     subtitle:
@@ -2415,7 +2415,7 @@ export const seoPages = {
         list: [
           "Ficha completa por reparação: cliente, IMEI, estado e acessórios",
           "Orçamento aprovado pelo cliente na página de acompanhamento, com registo da hora",
-          "Página pública por reparação — o cliente vê o estado em tempo real",
+          "Página de acompanhamento por reparação — grátis na rede da loja; fora dela, com o módulo Pro",
           "Histórico pesquisável: clientes habituais e reparações anteriores aparecem logo",
           "Talão com QR de acompanhamento e garantia na entrega",
         ],

@@ -13,12 +13,14 @@ interface Props {
   locale: Locale;
   /** Conteúdo da página — `t.seoPage` ou uma entrada de `seoPages` (pt-only). */
   page: Copy["seoPage"];
+  /** Locales em que a página existe (páginas de conteúdo pt-only). */
+  pageLocales?: readonly Locale[];
 }
 const { t, locale } = Astro.props;
 const p = Astro.props.page;
 ---
 
-<Nav t={t} locale={locale} />
+<Nav t={t} locale={locale} pageLocales={Astro.props.pageLocales} />
 <main id="main" tabindex="-1" class="mx-auto max-w-3xl px-6 py-16">
   <span
     class="inline-flex items-center gap-2 rounded-full border border-primary-soft bg-primary-soft px-4 py-1.5 text-xs font-medium text-on-primary-soft"

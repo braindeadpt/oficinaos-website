@@ -2,7 +2,7 @@
 import SeoPage from "../components/SeoPage.astro";
 import Base from "../layouts/Base.astro";
 import { lang, locale, ogLocale, seoPages, t } from "../i18n/pt";
-import { landingJsonLd } from "../i18n/schema";
+import { contentPageJsonLd } from "../i18n/schema";
 
 const page = seoPages.paraTecnicosIndependentes;
 ---
@@ -14,7 +14,8 @@ const page = seoPages.paraTecnicosIndependentes;
   ogLocale={ogLocale}
   title={page.metaTitle}
   description={page.metaDesc}
-  jsonLd={landingJsonLd(t)}
+  pageLocales={["pt"]}
+  jsonLd={contentPageJsonLd(t, locale, "para-tecnicos-independentes", page.metaTitle)}
 >
-  <SeoPage t={t} locale={locale} page={page} />
+  <SeoPage t={t} locale={locale} page={page} pageLocales={["pt"]} />
 </Base>
