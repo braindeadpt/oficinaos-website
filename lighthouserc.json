@@ -11,7 +11,12 @@
         "http://localhost/download/",
         "http://localhost/diag/",
         "http://localhost/pro/",
-        "http://localhost/trade/"
+        "http://localhost/trade/",
+        "http://localhost/es/",
+        "http://localhost/privacy/",
+        "http://localhost/terms/",
+        "http://localhost/updates/",
+        "http://localhost/software-reparacao-telemoveis/"
       ],
       "numberOfRuns": 3,
       "settings": {

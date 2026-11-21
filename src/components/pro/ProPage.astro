@@ -33,9 +33,23 @@ const groupIdx = [
 ];
 const SMS = 2;
 const g = p.groups.items;
-const sale = g[1].ui;
+// As três UIs mock têm formas próprias — o tipo é uma união; fixa cada
+// uma localmente para os acessos a seguir.
+const wa = g[0].ui as { messages: string[][] };
+const sale = g[1].ui as {
+  lines: string[][];
+  total: string;
+  issued: string;
+  reservation: string;
+  reservationItem: string;
+};
 const saleTotal = sale.lines.reduce((s, [, v]) => s + Number(v), 0);
-const mkt = g[2].ui;
+const mkt = g[2].ui as {
+  head: string[];
+  rows: string[][];
+  shops?: string;
+  note?: string;
+};
 const check = '<path d="m5 13 4 4L19 7"/>';
 ---
 
@@ -171,7 +185,7 @@ const check = '<path d="m5 13 4 4L19 7"/>';
               <UiFrame title={grp.ui.title} product="pro" caption={grp.ui.caption} class="mx-auto max-w-lg">
                 {gi === 0 && (
                   <ol role="list" class="space-y-2.5 bg-surface-2 p-4 text-sm sm:p-5" aria-hidden="true">
-                    {g[0].ui.messages.map(([who, text]) => (
+                    {wa.messages.map(([who, text]) => (
                       <li class:list={["flex", who === "in" ? "justify-end" : "justify-start"]}>
                         <p
                           class:list={[

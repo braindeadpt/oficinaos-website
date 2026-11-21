@@ -34,7 +34,6 @@ export const REPO_URL = "https://github.com/braindeadpt/OficinaOS";
 export const INSTALL_URL = `${REPO_URL}/blob/main/INSTALL.md`;
 export const RELEASES_URL = `${REPO_URL}/releases`;
 export const SETUP_EXE_URL = `${REPO_URL}/releases/latest/download/OficinaOS-Setup.exe`;
-export const INSTALL_ZIP_URL = `${REPO_URL}/releases/latest/download/oficinaos-install.zip`;
 export const PORTABLE_ZIP_URL = `${REPO_URL}/releases/latest/download/oficinaos-portable.zip`;
 export const PORTABLE_DOCS_URL = `${REPO_URL}/blob/main/scripts/portable/README.md`;
 export const BACKUP_DOCS_URL = `${REPO_URL}#backups-e-teste-de-restore-sidecar-db-backup`;

@@ -6,7 +6,6 @@ import {
   DOCS_MOBILE_URL,
   DOCS_REMOTE_URL,
   INSTALL_URL,
-  INSTALL_ZIP_URL,
   PORTABLE_DOCS_URL,
   PORTABLE_ZIP_URL,
   RELEASES_URL,
@@ -417,7 +416,7 @@ export const t: Copy = {
         heading: "Install — OficinaOS-Setup.exe (once, ~10 minutes)",
         paragraphs: [
           "Download OficinaOS-Setup.exe from the releases page and double-click it. If Windows SmartScreen warns: «More info» → «Run anyway».",
-          "It asks for admin once (services, firewall and the backup task) and does everything by itself. At the end the browser opens at http://localhost:4000. First login: user admin, password braindead — the app forces you to change both.",
+          "It asks for admin once (services, firewall and the backup task) and does everything by itself. At the end the browser opens at http://localhost:4000. On first access the app shows the initial setup screen — you create the admin user and password.",
           "A tray icon stays next to the clock: open the app, check status, stop/start, run a backup. On other shop devices: http://oficinaos.local:4000 — or the QR code on the Help page.",
           "On Linux or macOS there's no installer — Docker is used directly:",
         ],
@@ -1779,7 +1778,7 @@ export const t: Copy = {
       },
       {
         title: "Sign in to the app",
-        text: "At the end your browser opens http://localhost:4000. First sign-in: user admin, password braindead — the app makes you change both. On other devices on the network: http://oficinaos.local:4000.",
+        text: "At the end your browser opens http://localhost:4000. On first access the app shows the initial setup screen — you create the admin user and password. On other devices on the network: http://oficinaos.local:4000.",
       },
     ],
     smartscreen: {

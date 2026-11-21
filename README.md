@@ -17,7 +17,7 @@ Locales: `pt` (default, served at `/`), `en` (`/en/`), `es` (`/es/`).
 ## Commands
 
 ```bash
-bun install        # or: npm install
+bun install        # Bun only — bun.lock is the lockfile (no npm)
 bun run dev        # dev server
 bun run build      # static output → dist/
 bun run preview    # preview the production build
@@ -48,9 +48,12 @@ files to update the site; keep the same filenames.
 
 ## Deploy
 
-GitHub Pages with the custom domain `oficinaos.app` — `public/CNAME` carries
-the domain and `.github/workflows/deploy.yml` builds + deploys on push to
-`main`. `site`/`base` in `astro.config.mjs` already point at the domain.
+Cloudflare Workers with the custom domain `oficinaos.app` — deploy is
+manual: `bun run build && bunx wrangler deploy` from a machine with the
+Cloudflare credential (wrangler.toml/jsonc carries the routes; the
+`assets.not_found_handling` serves the trilingual 404). The `Check`
+workflow builds + type-checks on every push/PR but does not deploy.
+`site`/`base` in `astro.config.mjs` already point at the domain.
 
 ## License
 

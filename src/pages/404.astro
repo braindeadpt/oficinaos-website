@@ -2,9 +2,9 @@
 import Base from "../layouts/Base.astro";
 import { lang, locale, ogLocale, t } from "../i18n/pt";
 
-// One static 404 for every locale — GitHub Pages serves this file for any
-// missing path, so the right language is picked client-side from the URL
-// prefix (/en/…, /es/…, otherwise pt).
+// One static 404 for every locale — Cloudflare Workers serves this file
+// for any missing path (assets.not_found_handling), so the right language
+// is picked client-side from the URL prefix (/en/…, /es/…, otherwise pt).
 const copy = {
   pt: {
     title: "Página não encontrada",

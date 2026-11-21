@@ -104,13 +104,13 @@ const inputClass =
   </p>
 </div>
 
-<script>
+<script is:inline>
   // Feedback: the cloud redirects back with ?beta=ok|invalid|rate after a
   // native form POST — surface it as an inline banner, then clean the URL.
-  const form = document.getElementById("beta-signup") as HTMLFormElement | null;
+  const form = document.getElementById("beta-signup");
   const result = document.getElementById("beta-signup-result");
   if (form && result) {
-    const msgs: Record<string, string | undefined> = {
+    const msgs = {
       ok: form.dataset.msgSuccess,
       invalid: form.dataset.msgInvalid,
       rate: form.dataset.msgRate,
@@ -138,7 +138,7 @@ const inputClass =
     if (!form.dataset.mailto) {
       form.addEventListener("submit", () => {
         if (!form.reportValidity()) return;
-        const btn = form.querySelector<HTMLButtonElement>("button[type=submit]");
+        const btn = form.querySelector("button[type=submit]");
         if (btn && form.dataset.sending) {
           btn.disabled = true;
           btn.textContent = form.dataset.sending;
@@ -157,7 +157,7 @@ const inputClass =
       const d = new FormData(form);
       if (String(d.get("_gotcha") ?? "")) return;
       const ds = form.dataset;
-      const line = (label: string | undefined, key: string) =>
+      const line = (label, key) =>
         `${label ?? key}: ${String(d.get(key) ?? "").trim() || "—"}`;
       const body = [
         line(ds.labelEmail, "email"),
