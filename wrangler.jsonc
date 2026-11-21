@@ -1,6 +1,11 @@
 {
   "name": "oficinaos-website",
   "compatibility_date": "2026-02-01",
+  // Workers Builds (integração GitHub da Cloudflare) — sem isto o builder
+  // tentava npm e falhava: o repo é Bun-only (bun.lock, sem package-lock).
+  "build": {
+    "command": "bun install --frozen-lockfile && bun run build"
+  },
   "assets": {
     "directory": "./dist",
     // Serve dist/404.html (trilingual, noindex) on unmatched paths instead
