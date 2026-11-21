@@ -1,10 +1,11 @@
 ---
 import ModuleDoc from "../../../components/ModuleDoc.astro";
+import { moduleDocJsonLd } from "../../../i18n/schema";
 import { localeUrl } from "../../../i18n/utils";
 import Base from "../../../layouts/Base.astro";
 import { lang, locale, ogLocale, t } from "../../../i18n/es";
 ---
 
-<Base t={t} locale={locale} langAttr={lang} ogLocale={ogLocale} title={t.moduleDocs.diag.title + " — OficinaOS"} description={t.moduleDocs.diag.subtitle}>
+<Base t={t} locale={locale} langAttr={lang} ogLocale={ogLocale} title={t.moduleDocs.diag.title + " — OficinaOS"} jsonLd={moduleDocJsonLd(t, locale, "diag", t.moduleDocs.diag.title)} description={t.moduleDocs.diag.subtitle}>
   <ModuleDoc t={t} locale={locale} page={t.moduleDocs.diag} productLink={{ href: localeUrl(locale, "/diag/"), label: t.diagPage.productLink }} />
 </Base>
