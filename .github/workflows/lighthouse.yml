@@ -41,10 +41,13 @@ jobs:
           ACTION=$(grep -o 'action="[^"]*"' dist/pro/index.html | head -1 | cut -d'"' -f2)
           CSP_PRO=$(curl -sI http://localhost:8787/pro/ | grep -i '^content-security-policy:')
           echo "form action: $ACTION"
+          # //host/x resolve com o esquema da página (https) — como o gen-headers.
+          case "$ACTION" in //* ) ACTION="https:$ACTION" ;; esac
           case "$ACTION" in
-            http*|//* ) ORIGIN=$(echo "$ACTION" | sed -E 's#^(https?)://([^/]+).*#\1://\2#')
-                        echo "$CSP_PRO" | grep -qF "form-action 'self' $ORIGIN" ;;
-            * )         echo "$CSP_PRO" | grep -q "form-action 'self'" ;;
+            http* )    ORIGIN=$(echo "$ACTION" | sed -E 's#^(https?)://([^/]+).*#\1://\2#')
+                       echo "$CSP_PRO" | grep -qF "form-action 'self' $ORIGIN" ;;
+            mailto:* ) echo "$CSP_PRO" | grep -qF "form-action 'self' mailto:" ;;
+            * )        echo "$CSP_PRO" | grep -q "form-action 'self'" ;;
           esac
           code=$(curl -s -o /dev/null -w '%{http_code}' http://localhost:8787/pagina-que-nao-existe)
           [ "$code" = "404" ]
