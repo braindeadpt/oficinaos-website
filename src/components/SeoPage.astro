@@ -12,7 +12,7 @@ interface Props {
   t: Copy;
   locale: Locale;
   /** Conteúdo da página — `t.seoPage` ou uma entrada de `seoPages` (pt-only). */
-  page: Copy["seoPage"];
+  page: Copy["seoPage"] & { ctaSecondaryHref?: string };
   /** Locales em que a página existe (páginas de conteúdo pt-only). */
   pageLocales?: readonly Locale[];
 }
@@ -44,7 +44,7 @@ const p = Astro.props.page;
       {p.ctaPrimary}
     </a>
     <a
-      href={localeUrl(locale, "/docs")}
+      href={localeUrl(locale, p.ctaSecondaryHref ?? "/docs")}
       class="inline-flex h-12 items-center justify-center gap-2 rounded-md border border-border-strong bg-surface px-[18px] text-md font-semibold text-text transition hover:bg-surface-2"
     >
       {p.ctaSecondary}
@@ -68,7 +68,7 @@ const p = Astro.props.page;
         {p.ctaPrimary}
       </a>
       <a
-        href={localeUrl(locale, "/docs")}
+        href={localeUrl(locale, p.ctaSecondaryHref ?? "/docs")}
         class="inline-flex h-12 items-center justify-center gap-2 rounded-md border border-border-strong bg-surface px-[18px] text-md font-semibold text-text transition hover:bg-surface-2"
       >
         {p.ctaSecondary}
