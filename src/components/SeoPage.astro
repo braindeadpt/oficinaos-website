@@ -11,12 +11,22 @@ import Nav from "./Nav.astro";
 interface Props {
   t: Copy;
   locale: Locale;
+  /** Conteúdo da página — `t.seoPage` ou uma entrada de `seoPages`. */
+  page: Copy["seoPage"] & {
+    ctaSecondaryHref?: string;
+    /** Resposta direta em 1-2 frases — extraível por LLMs — mostrada sob o subtítulo. */
+    answer?: string;
+    faqTitle?: string;
+    faqs?: { q: string; a: string }[];
+  };
+  /** Locales em que a página existe (páginas de conteúdo pt-only). */
+  pageLocales?: readonly Locale[];
 }
 const { t, locale } = Astro.props;
-const p = t.seoPage;
+const p = Astro.props.page;
 ---
 
-<Nav t={t} locale={locale} />
+<Nav t={t} locale={locale} pageLocales={Astro.props.pageLocales} />
 <main id="main" tabindex="-1" class="mx-auto max-w-3xl px-6 py-16">
   <span
     class="inline-flex items-center gap-2 rounded-full border border-primary-soft bg-primary-soft px-4 py-1.5 text-xs font-medium text-on-primary-soft"
@@ -30,6 +40,11 @@ const p = t.seoPage;
     {p.title}
   </h1>
   <p class="mt-5 text-lg text-text-muted">{p.subtitle}</p>
+  {
+    p.answer && (
+      <p class="mt-4 border-l-2 border-primary pl-4 text-md text-text">{p.answer}</p>
+    )
+  }
 
   <div class="mt-8 flex flex-col items-stretch gap-3 sm:flex-row">
     <a
@@ -40,7 +55,7 @@ const p = t.seoPage;
       {p.ctaPrimary}
     </a>
     <a
-      href={localeUrl(locale, "/docs")}
+      href={localeUrl(locale, p.ctaSecondaryHref ?? "/docs")}
       class="inline-flex h-12 items-center justify-center gap-2 rounded-md border border-border-strong bg-surface px-[18px] text-md font-semibold text-text transition hover:bg-surface-2"
     >
       {p.ctaSecondary}
@@ -51,6 +66,22 @@ const p = t.seoPage;
   <div class="mt-14">
     <DocSections sections={p.sections} ui={t.docs.ui} />
   </div>
+
+  {
+    p.faqs?.length ? (
+      <div class="mt-14">
+        <h2 class="text-xl font-bold text-text">{p.faqTitle}</h2>
+        <div class="mt-4 space-y-3">
+          {p.faqs!.map((f) => (
+            <details class="rounded-lg border border-border bg-surface p-4">
+              <summary class="cursor-pointer text-md font-semibold text-text">{f.q}</summary>
+              <p class="mt-2 text-md text-text-muted">{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    ) : null
+  }
 
   <div class="mt-16 rounded-lg border border-border bg-surface p-8 text-center">
     <h2 class="text-xl font-bold text-text">{p.ctaTitle}</h2>
@@ -64,7 +95,7 @@ const p = t.seoPage;
         {p.ctaPrimary}
       </a>
       <a
-        href={localeUrl(locale, "/docs")}
+        href={localeUrl(locale, p.ctaSecondaryHref ?? "/docs")}
         class="inline-flex h-12 items-center justify-center gap-2 rounded-md border border-border-strong bg-surface px-[18px] text-md font-semibold text-text transition hover:bg-surface-2"
       >
         {p.ctaSecondary}

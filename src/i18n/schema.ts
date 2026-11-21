@@ -30,12 +30,8 @@ const website = {
  *  Only facts the site/repo actually support — price 0 (MIT core),
  *  Windows installer + Docker on Linux/macOS; no native Android app
  *  is claimed (phones use the browser/PWA). */
-export function landingJsonLd(t: Copy): object[] {
-  return [
-    organization,
-    website,
-    {
-      "@type": "SoftwareApplication",
+const softwareApp = (t: Copy) => ({
+      "@type": "SoftwareApplication" as const,
       name: "OficinaOS",
       description: t.meta.description,
       applicationCategory: "BusinessApplication",
@@ -52,7 +48,13 @@ export function landingJsonLd(t: Copy): object[] {
       },
       publisher: { "@id": `${SITE}/#org` },
       inLanguage: ["pt-PT", "en", "es"],
-    },
+    });
+
+export function landingJsonLd(t: Copy): object[] {
+  return [
+    organization,
+    website,
+    softwareApp(t),
     {
       "@type": "VideoObject",
       name: `OficinaOS — ${t.screenshots.title}`,
@@ -62,6 +64,25 @@ export function landingJsonLd(t: Copy): object[] {
       uploadDate: "2026-10-08",
       duration: "PT1M2S",
       publisher: { "@id": `${SITE}/#org` },
+    },
+  ];
+}
+
+/** Download page: HowTo built from the numbered steps the page renders
+ *  («Depois de descarregar»), so the markup matches visible content. */
+export function downloadJsonLd(t: Copy): object[] {
+  return [
+    organization,
+    website,
+    {
+      "@type": "HowTo",
+      name: t.download.stepsTitle,
+      step: t.download.steps.map((s, i) => ({
+        "@type": "HowToStep",
+        position: i + 1,
+        name: s.title,
+        text: s.text,
+      })),
     },
   ];
 }
@@ -185,4 +206,49 @@ export function moduleDocJsonLd(
       ],
     },
   ];
+}
+
+/** Páginas de conteúdo (casos de uso / comparações): Organization + WebSite +
+ *  SoftwareApplication + BreadcrumbList — sem VideoObject (a página não mostra o vídeo). */
+export function contentPageJsonLd(
+  t: Copy,
+  locale: string,
+  slug: string,
+  pageTitle: string,
+  faqs?: readonly { q: string; a: string }[],
+): object[] {
+  const prefix = locale === "pt" ? "" : `${locale}/`;
+  const out: object[] = [
+    organization,
+    website,
+    softwareApp(t),
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "OficinaOS",
+          item: `${SITE}/${prefix}`,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: pageTitle,
+          item: `${SITE}/${prefix}${slug}/`,
+        },
+      ],
+    },
+  ];
+  if (faqs?.length) {
+    out.push({
+      "@type": "FAQPage",
+      mainEntity: faqs.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    });
+  }
+  return out;
 }

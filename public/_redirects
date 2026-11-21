@@ -1,0 +1,9 @@
+# Assets removidos que o Google ainda tem indexados (baseline GSC nov-2026)
+/screenshots/dashboard.png     /screenshots/dashboard.webp    301
+/screenshots/job-detail.png    /screenshots/job-detail.webp   301
+/screenshots/tracking.png      /screenshots/tracking.webp     301
+/brand/fb-cover.png            /brand/fb-cover-pt.png         301
+/video/oficinaos_16x9.mp4           /video/oficinaos-demo.mp4  301
+/video/oficinaos_16x9_legendas.mp4  /video/oficinaos-demo.mp4  301
+/video/oficinaos_9x16.mp4           /video/oficinaos-demo.mp4  301
+/video/oficinaos_9x16_legendas.mp4  /video/oficinaos-demo.mp4  301
