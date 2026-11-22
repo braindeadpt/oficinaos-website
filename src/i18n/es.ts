@@ -2183,7 +2183,7 @@ export const t: Copy = {
         { q: "¿OficinaOS va a dejar de ser gratis?", a: "No. El programa es de código abierto (MIT) y el núcleo nunca queda detrás de un pago. El Pro solo añade lo que necesita internet." },
         { q: "¿Necesito el Pro para usar OficinaOS?", a: "No. Reparaciones, presupuestos, clientes, stock, caja y el canal SMS funcionan sin Pro y sin internet." },
         { q: "¿El Pro es solo para tiendas?", a: "No. Es para quien repara, diagnostica o revende: técnicos independientes, talleres y revendedores. La facturación certificada es solo para Portugal." },
-        { q: "¿Qué pasa si desconecto la Cloud?", a: "La app sigue funcionando en la red local con todos tus datos; los módulos Pro dejan de aparecer. Desactivar la compartición de precios borra de la Cloud los precios enviados." },
+        { q: "¿Qué pasa si desconecto la Cloud?", a: "La app sigue funcionando en la red local con todos tus datos; los módulos Pro dejan de aparecer. Al desvincular, los datos de tu tienda guardados en la Cloud se borran — páginas del portal, informes recibidos y credenciales. Desactivar la compartición de precios borra de la Cloud los precios enviados." },
         { q: "¿Cómo entro en el piloto?", a: "Deja tus datos en el formulario. Te contactamos, te ayudamos a emparejar y activamos los módulos que tengan sentido." },
       ],
     },

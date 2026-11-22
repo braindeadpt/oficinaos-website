@@ -2178,7 +2178,7 @@ export const t: Copy = {
         { q: "Will OficinaOS stop being free?", a: "No. The app is open source (MIT) and the core never goes behind a paywall. Pro only adds what needs the internet." },
         { q: "Do I need Pro to use OficinaOS?", a: "No. Repairs, quotes, customers, stock, till and the SMS channel work without Pro and without internet." },
         { q: "Is Pro only for shops?", a: "No. It's for anyone who repairs, diagnoses or resells: independent technicians, repair shops and resellers. Certified invoicing is Portugal-only." },
-        { q: "What happens if I disconnect the Cloud?", a: "The app keeps working on the local network with all your data; the Pro modules stop appearing. Turning off price sharing deletes the prices you sent from the Cloud." },
+        { q: "What happens if I disconnect the Cloud?", a: "The app keeps working on the local network with all your data; the Pro modules stop appearing. Unpairing also deletes your shop's data stored in the Cloud — portal pages, received reports and credentials. Turning off price sharing deletes the prices you sent from the Cloud." },
         { q: "How do I join the pilot?", a: "Leave your details in the form. We'll get in touch, help you pair and switch on the modules that make sense." },
       ],
     },

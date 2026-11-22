@@ -2209,7 +2209,7 @@ export const t = {
         { q: "A OficinaOS vai deixar de ser grátis?", a: "Não. O programa é de código aberto (MIT) e o núcleo nunca fica atrás de um pagamento. O Pro só acrescenta o que precisa de internet." },
         { q: "Preciso do Pro para usar a OficinaOS?", a: "Não. Reparações, orçamentos, clientes, stock, caixa e o canal SMS funcionam sem Pro e sem internet." },
         { q: "O Pro é só para lojas?", a: "Não. É para quem repara, diagnostica ou revende: técnicos independentes, oficinas e revendedores. A faturação certificada é só para Portugal." },
-        { q: "O que acontece se desligar a Cloud?", a: "A app continua a funcionar na rede local com todos os seus dados; os módulos Pro deixam de aparecer. Desligar a partilha de preços apaga da Cloud os preços enviados." },
+        { q: "O que acontece se desligar a Cloud?", a: "A app continua a funcionar na rede local com todos os seus dados; os módulos Pro deixam de aparecer. Ao desligar (unpair), os dados da loja guardados na Cloud são apagados — páginas do portal, relatórios recebidos e credenciais. Desligar a partilha de preços apaga da Cloud os preços enviados." },
         { q: "Como entro no piloto?", a: "Deixe o contacto no formulário. Falamos consigo, ajudamos a emparelhar e ativamos os módulos que fizerem sentido." },
       ],
     },
