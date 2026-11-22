@@ -52,8 +52,10 @@ gap que as landing pages novas atacam; medir de novo em 2-4 semanas.
 
 ## Deploy / notas operacionais
 
-- O deploy é `wrangler deploy` (version_upload) — **não existe Workers
-  Builds**; o commit "retrigger cloudflare workers build" não tem efeito.
+- O deploy de produção é `wrangler deploy` (version_upload). **Workers
+  Builds está ativo** (integração GitHub↔Cloudflare): corre `wrangler
+  preview` por PR como check "Workers Builds" — exige o bloco `previews`
+  no `wrangler.jsonc` (wrangler ≥4.x falha sem ele).
 - `dist/_headers` é gerado por `tools/gen-headers.mjs` com CSP **por path**
   (cada página só com os seus hashes) — a linha global excedia o limite de
   2000 chars da Cloudflare (erro 100324) e fazia o deploy falhar.
