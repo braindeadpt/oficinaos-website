@@ -232,6 +232,11 @@ export const t: Copy = {
         what: "Nº de teléfono del cliente + texto del mensaje — transitan por Cloud sin quedar guardados ni registrados (logs solo con id, estado y teléfono enmascarado)",
       },
       {
+        name: "SMS y bot SMS (Pro)",
+        to: "OficinaOS Cloud → el móvil Android de la tienda",
+        what: "Credenciales del device + nº de teléfono del cliente + texto del mensaje — transitan por Cloud; los cuerpos de los mensajes no se registran",
+      },
+      {
         name: "Acceso remoto y enlaces al cliente",
         to: "Cloudflare",
         what: "El tráfico de las páginas en tránsito",
@@ -586,7 +591,7 @@ export const t: Copy = {
         heading: "Módulos Pro — cómo funcionan",
         paragraphs: [
           "Los módulos Pro son funciones que necesitan «llegar a internet». La app sigue siendo 100% local y gratuita; cuando la tienda quiere alcance remoto, empareja la app con OficinaOS Cloud — nuestro servicio que hace de puente entre la app de la tienda y el exterior, sin exponer el PC de la tienda.",
-          "La tienda crea una cuenta en Cloud y empareja la app con un código (una vez). Cada módulo se activa del lado del servidor — sin archivos de licencia. La app se sincroniza con Cloud cada ~2 minutos para enviar y recibir.",
+          "La tienda crea una cuenta en Cloud y empareja la app con un código (una vez). Cada módulo se activa del lado del servidor — sin archivos de licencia. La app se sincroniza con Cloud cada ~2 minutos para enviar y recibir — las colas de mensajes (WhatsApp/SMS) tienen un ciclo rápido propio de ~12 segundos, para que las respuestas del bot lleguen en segundos.",
           "Sin emparejamiento, todo sigue funcionando en la red local — los módulos Pro simplemente no aparecen.",
         ],
         table: {
@@ -1118,14 +1123,12 @@ export const t: Copy = {
           ],
         },
         {
-          heading: "Transporte BulkSMS (legado)",
+          heading: "Transporte BulkSMS (eliminado)",
+          id: "cloud-gestionada-bulksms-pro",
           paragraphs: [
-            "La primera versión del transporte Cloud usaba credenciales BulkSMS de la propia tienda — ese camino aún existe en la Cloud para instalaciones antiguas, pero se está retirando en favor del device Android conectado a Cloud (arriba), más barato y con enrutado de respuestas multi-tienda.",
-            "Cambiar de token más tarde es igual de simple: pega el nuevo Token ID y Secret en los ajustes y guarda — la app vuelve a enviar el par a la Cloud, que lo valida y sustituye el antiguo. No hace falta borrar ni «rotar» nada manualmente.",
+            "La primera versión del transporte Cloud usaba credenciales BulkSMS de la propia tienda. Ese camino se eliminó de la Cloud — las credenciales guardadas se borraron y ya no es posible enviar por ahí. Si tu instalación todavía lo usaba, conecta un móvil Android a la Cloud (arriba): es más barato, no necesita cuenta en otro proveedor y enruta respuestas multi-tienda.",
           ],
-          links: [
-            { label: "BulkSMS — crear cuenta", href: "https://www.bulksms.com" },
-          ],
+          links: [],
         },
         {
           heading: "Informes de entrega (solo transporte Cloud)",
@@ -2145,7 +2148,7 @@ export const t: Copy = {
       steps: [
         { title: "Empareja una vez", text: "Crea una cuenta en cloud.oficinaos.app (o recibe el código del equipo) y pega el código de emparejamiento en Ajustes → Cloud." },
         { title: "Activa solo lo que necesitas", text: "Cada módulo se activa en el servidor, sin archivos de licencia. En la beta, los activamos nosotros." },
-        { title: "La app se sincroniza sola", text: "Cada ~2 minutos envía y recibe lo que necesitan los módulos activos. El PC nunca queda expuesto a internet." },
+        { title: "La app se sincroniza sola", text: "Cada ~2 minutos envía y recibe lo que necesitan los módulos activos — los mensajes de los clientes siguen un ciclo rápido de ~12 segundos. El PC nunca queda expuesto a internet." },
       ],
       diagram: { pc: "OficinaOS en tu PC", cloud: "OficinaOS Cloud", out: "Clientes y servicios", sync: "cada ~2 min" },
       dataTitle: "Qué va a la Cloud",

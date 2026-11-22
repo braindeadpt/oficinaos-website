@@ -232,6 +232,11 @@ export const t: Copy = {
         what: "Customer phone number + message text — they transit through the Cloud without being stored or logged (logs only carry id, status and masked phone)",
       },
       {
+        name: "SMS & SMS bot (Pro)",
+        to: "OficinaOS Cloud → the shop's Android phone",
+        what: "Device credentials + customer phone number + message text — they transit through the Cloud; message bodies are not logged",
+      },
+      {
         name: "Remote access & customer links",
         to: "Cloudflare",
         what: "The pages' traffic in transit",
@@ -584,7 +589,7 @@ export const t: Copy = {
         heading: "Pro modules — how it works",
         paragraphs: [
           "Pro modules are features that need to reach the internet. The app stays 100% local and free; when a shop wants remote reach, it pairs the app with OficinaOS Cloud — our service that bridges the shop's app to the outside world without exposing the shop's computer.",
-          "The shop creates a Cloud account and pairs the app with a code (once). Each module is switched on server-side — no license files. The app syncs with the Cloud every ~2 minutes to send and receive.",
+          "The shop creates a Cloud account and pairs the app with a code (once). Each module is switched on server-side — no license files. The app syncs with the Cloud every ~2 minutes to send and receive — the message queues (WhatsApp/SMS) have their own fast ~12-second cycle, so bot replies arrive in seconds.",
           "Without pairing, everything keeps working on the local network — Pro modules simply don't appear.",
         ],
         table: {
@@ -1114,14 +1119,12 @@ export const t: Copy = {
           ],
         },
         {
-          heading: "BulkSMS transport (legacy)",
+          heading: "BulkSMS transport (removed)",
+          id: "managed-cloud-bulksms-pro",
           paragraphs: [
-            "The first version of the Cloud transport used the shop's own BulkSMS credentials — that path still exists in the Cloud for older installs, but it is being phased out in favour of the Cloud-attached Android device (above), which is cheaper and routes replies across multiple shops.",
-            "Rotating the token later is just as simple: paste the new Token ID and Secret in settings and save — the app pushes the new pair to the Cloud, which validates and replaces the old one. No deleting or manual «rotation» needed.",
+            "The first version of the Cloud transport used the shop's own BulkSMS credentials. That path was removed from the Cloud — stored credentials were deleted and sending through it is no longer possible. If your install still used it, attach an Android phone to the Cloud (above): it is cheaper, needs no third-party account and routes replies across multiple shops.",
           ],
-          links: [
-            { label: "BulkSMS — create account", href: "https://www.bulksms.com" },
-          ],
+          links: [],
         },
         {
           heading: "Delivery reports (Cloud transport only)",
@@ -2140,7 +2143,7 @@ export const t: Copy = {
       steps: [
         { title: "Pair once", text: "Create an account at cloud.oficinaos.app (or get a code from the team) and paste the pairing code in Settings → Cloud." },
         { title: "Switch on only what you need", text: "Each module is enabled on the server side, with no licence files. During the beta, we enable them for you." },
-        { title: "The app syncs by itself", text: "Every ~2 minutes it sends and receives what the active modules need. The PC is never exposed to the internet." },
+        { title: "The app syncs by itself", text: "Every ~2 minutes it sends and receives what the active modules need — customer messages follow a fast ~12-second cycle. The PC is never exposed to the internet." },
       ],
       diagram: { pc: "OficinaOS on your PC", cloud: "OficinaOS Cloud", out: "Customers and services", sync: "every ~2 min" },
       dataTitle: "What goes to the Cloud",

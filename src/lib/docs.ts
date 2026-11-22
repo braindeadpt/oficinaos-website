@@ -29,7 +29,7 @@ const OVERVIEW_GROUP_SIZES = [4, 7, 3, 8, 3];
 export function sectionIds(sections: DocsSection[]): string[] {
   const seen = new Map<string, number>();
   return sections.map((s) => {
-    const base = slugify(s.heading) || "seccao";
+    const base = s.id ?? (slugify(s.heading) || "seccao");
     const n = (seen.get(base) ?? 0) + 1;
     seen.set(base, n);
     return n === 1 ? base : `${base}-${n}`;

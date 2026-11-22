@@ -14,6 +14,8 @@ import {
 
 export type DocsSection = {
   heading: string;
+  /** Âncora estável — preserva links #antigos quando o slug do título muda. */
+  id?: string;
   paragraphs: string[];
   list?: string[];
   table?: { head: string[]; rows: string[][] };
@@ -245,6 +247,11 @@ export const t = {
         name: "Notificações e bot WhatsApp",
         to: "Meta, via relay da OficinaOS Cloud",
         what: "Nº de telefone do cliente + texto da mensagem — transitam pela Cloud sem ficarem guardados nem registados (logs só com id, estado e telefone mascarado)",
+      },
+      {
+        name: "SMS e bot SMS (Pro)",
+        to: "OficinaOS Cloud → telemóvel Android da loja",
+        what: "Credenciais do device + nº de telefone do cliente + texto da mensagem — transitam pela Cloud; corpos de mensagens não são registados",
       },
       {
         name: "Acesso remoto e links ao cliente",
@@ -601,7 +608,7 @@ export const t = {
         heading: "Módulos Pro — como funcionam",
         paragraphs: [
           "Os módulos Pro são funcionalidades que precisam de «chegar à internet». A app continua 100% local e gratuita; quando a loja quer alcance remoto, emparelha a app com a OficinaOS Cloud — o nosso serviço que faz de ponte entre a app da loja e o exterior, sem expor o PC da loja.",
-          "A loja cria uma conta na Cloud e emparelha a app com um código (uma vez). Cada módulo é ativado do lado do servidor — sem ficheiros de licença. A app sincroniza com a Cloud a cada ~2 minutos para enviar e receber.",
+          "A loja cria uma conta na Cloud e emparelha a app com um código (uma vez). Cada módulo é ativado do lado do servidor — sem ficheiros de licença. A app sincroniza com a Cloud a cada ~2 minutos para enviar e receber — as filas de mensagens (WhatsApp/SMS) têm um ciclo rápido próprio de ~12 segundos, para as respostas do bot chegarem em segundos.",
           "Sem emparelhamento, tudo continua a funcionar na rede local — os módulos Pro simplesmente não aparecem.",
         ],
         table: {
@@ -1140,9 +1147,10 @@ export const t = {
           links: [],
         },
         {
-          heading: "Transporte BulkSMS (legado)",
+          heading: "Transporte BulkSMS (removido)",
+          id: "cloud-gerida-bulksms-pro",
           paragraphs: [
-            "A primeira versão do transporte Cloud usava credenciais BulkSMS da própria loja — esse caminho ainda existe na Cloud para instalações antigas, mas está a ser descontinuado em favor do device Android ligado à Cloud (acima), que é mais barato e encaminha respostas multi-loja.",
+            "A primeira versão do transporte Cloud usava credenciais BulkSMS da própria loja. Esse caminho foi removido da Cloud — as credenciais guardadas foram apagadas e já não é possível enviar por aí. Se a sua instalação ainda o usava, ligue um telemóvel Android à Cloud (acima): é mais barato, não precisa de conta noutro provider e encaminha respostas multi-loja.",
           ],
           links: [],
         },
@@ -2166,7 +2174,7 @@ export const t = {
       steps: [
         { title: "Emparelhe uma vez", text: "Crie conta em cloud.oficinaos.app (ou receba o código da equipa) e cole o código de emparelhamento em Definições → Cloud." },
         { title: "Ative só o que precisa", text: "Cada módulo é ativado do lado do servidor, sem ficheiros de licença. No beta, ativamos nós." },
-        { title: "A app sincroniza sozinha", text: "A cada ~2 minutos envia e recebe o que os módulos ativos precisam. O PC nunca fica exposto à internet." },
+        { title: "A app sincroniza sozinha", text: "A cada ~2 minutos envia e recebe o que os módulos ativos precisam — as mensagens dos clientes seguem um ciclo rápido de ~12 segundos. O PC nunca fica exposto à internet." },
       ],
       diagram: { pc: "A OficinaOS no seu PC", cloud: "OficinaOS Cloud", out: "Clientes e serviços", sync: "a cada ~2 min" },
       dataTitle: "O que vai para a Cloud",
