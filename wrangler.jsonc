@@ -8,6 +8,9 @@
     "not_found_handling": "404-page"
   },
   "workers_dev": true,
+  // Exigido pelo `wrangler preview` (Workers Builds dispara-o como deploy
+  // command nos branches de preview). Vazio: assets/compat ficam no topo.
+  "previews": {},
   "routes": [
     { "pattern": "oficinaos.app", "custom_domain": true },
     { "pattern": "www.oficinaos.app", "custom_domain": true }
