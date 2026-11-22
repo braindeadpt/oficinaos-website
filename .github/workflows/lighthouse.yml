@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: oven-sh/setup-bun@v2
       - run: bun install --frozen-lockfile
       - run: bun run build
@@ -63,9 +63,12 @@ jobs:
       - name: Guardar relatórios HTML
         if: always()
         run: bunx @lhci/cli@0.15.1 upload
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: lighthouse-reports
           path: .lighthouseci/
+          # .lighthouseci é pasta hidden — sem isto o upload encontrava zero
+          # ficheiros ("No files were found with the provided path").
+          include-hidden-files: true
           retention-days: 14

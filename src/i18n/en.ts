@@ -232,6 +232,11 @@ export const t: Copy = {
         what: "Customer phone number + message text — they transit through the Cloud without being stored or logged (logs only carry id, status and masked phone)",
       },
       {
+        name: "SMS & SMS bot (Pro)",
+        to: "OficinaOS Cloud → the shop's Android phone",
+        what: "Device credentials + customer phone number + message text — they transit through the Cloud; message bodies are not logged",
+      },
+      {
         name: "Remote access & customer links",
         to: "Cloudflare",
         what: "The pages' traffic in transit",
@@ -267,6 +272,10 @@ export const t: Copy = {
       {
         heading: "Pro modules and OficinaOS Cloud",
         body: "The core is free forever. Pro modules are optional paid services, activated server-side through OficinaOS Cloud, and are governed by the terms shown at subscription. Turning off a module does not delete local data — it is yours.",
+      },
+      {
+        heading: "Third-party services, costs and fair use",
+        body: "Messaging rides networks and services we don't control: SIM/SMS tariffs, SMS providers, Meta (WhatsApp Business Platform) and unofficial gateways (Evolution API). Per-message costs — carrier SMS, provider credits, Meta template fees — always belong to the shop's own accounts and responsibility. The Evolution transport is unofficial: Meta may restrict or ban the number and that risk is entirely the shop's (the app requires accepting a dedicated disclaimer before enabling the bot). SIM/provider-backed features carry fair-use limits (e.g. per-number flood control) — they are for service notifications and replies, not bulk campaigns; abuse can breach the carrier/provider fair-use policy and suspend the module.",
       },
       {
         heading: "This website",
@@ -580,7 +589,7 @@ export const t: Copy = {
         heading: "Pro modules — how it works",
         paragraphs: [
           "Pro modules are features that need to reach the internet. The app stays 100% local and free; when a shop wants remote reach, it pairs the app with OficinaOS Cloud — our service that bridges the shop's app to the outside world without exposing the shop's computer.",
-          "The shop creates a Cloud account and pairs the app with a code (once). Each module is switched on server-side — no license files. The app syncs with the Cloud every ~2 minutes to send and receive.",
+          "The shop creates a Cloud account and pairs the app with a code (once). Each module is switched on server-side — no license files. The app syncs with the Cloud every ~2 minutes to send and receive — the message queues (WhatsApp/SMS) have their own fast ~12-second cycle, so bot replies arrive in seconds.",
           "Without pairing, everything keeps working on the local network — Pro modules simply don't appear.",
         ],
         table: {
@@ -631,7 +640,7 @@ export const t: Copy = {
         heading: "Customer portal (Pro)",
         paragraphs: [
           "With the module active, every repair gets a «Public link» button on its detail page. Clicking it publishes a redacted snapshot to the Cloud — status, device, quote, due date and timeline — and copies the link.",
-          "The link is a per-job secret (a random 16-character code): whoever has it sees the page. Send it to the customer by SMS, WhatsApp or print it on the intake slip. The page updates itself when the status changes in the app.",
+          "The link is a per-job secret (a random 32-character code): whoever has it sees the page. Send it to the customer by SMS, WhatsApp or print it on the intake slip. The page updates itself when the status changes in the app.",
           "If a quote is pending, the customer accepts or declines it right on the page — the answer flows into the app through the normal quote flow, with a staff notification.",
         ],
         links: [
@@ -642,7 +651,7 @@ export const t: Copy = {
         heading: "WhatsApp bot (Pro)",
         paragraphs: [
           "The customer texts the shop's WhatsApp number and the bot replies with real job data — nobody picks up the phone. It works on the shop's own number (the WhatsApp Business app on the phone keeps working in parallel).",
-          "Honest notes: replies can take up to ~2 minutes (sync cycle); setup uses Meta's official WhatsApp Business Platform and during the beta we help with the setup.",
+          "Honest notes: replies arrive in ~10–15 seconds (fast message poller); setup uses Meta's official WhatsApp Business Platform and during the beta we help with the setup. There's also the Evolution transport (unofficial, free to send, Pro for the bot) — see the guide.",
         ],
         table: {
           head: ["Customer writes", "Bot replies"],
@@ -790,7 +799,7 @@ export const t: Copy = {
           heading: "What never leaves the shop",
           paragraphs: [
             "The portal publishes a redacted snapshot — only what the customer needs to see. Never on the portal: internal costs and margins, staff-only notes, other customers' data, team contact details, or history of other repairs.",
-            "The link is a per-repair secret (a random 16-character code): whoever has it sees the page — so send it only to that repair's customer. Removing the link on the job card deletes the public page.",
+            "The link is a per-repair secret (a random 32-character code): whoever has it sees the page — so send it only to that repair's customer. Removing the link on the job card deletes the public page.",
           ],
           links: [],
         },
@@ -891,13 +900,22 @@ export const t: Copy = {
         {
           heading: "Honest limits",
           list: [
-            "Replies can take up to ~2 minutes (sync cycle) — not instant",
-            "Replying to customers is free; starting conversations («your repair is ready») needs Meta-approved templates with per-message fees",
+            "Bot replies arrive in ~10–15 seconds — the app polls the Cloud message queue on a fast poller, separate from the ~2-minute sync",
+            "Replying inside the 24-hour window is free; starting conversations («your repair is ready») outside it goes out as Meta-approved templates — the app creates and submits them automatically and shows each template's status (approved/in review/rejected) in settings; template sends carry Meta's per-message fee",
+            "When rules aren't enough, the bot can use AI (Pro): it only sees the customer's public job card (status, ETA, quote — never internal data or other customers) and message content is never logged in the Cloud. «PARAR»/«STOP» withdraws the customer's consent immediately",
             "Flood control: max 20 messages/hour per number — spam protection",
             "Audio and images aren't interpreted — they go to a human",
             "In test mode only Meta-verified numbers get replies — in production there's no such limit",
           ],
           paragraphs: [],
+          links: [],
+        },
+        {
+          heading: "Alternative: WhatsApp via Evolution (Pro)",
+          paragraphs: [
+            "For shops that don't want a Meta business account, the app can also talk to a local «Evolution API» gateway — an unofficial transport emulating WhatsApp Web. Sending is free; the reply bot is Pro and requires accepting its own disclaimer in settings.",
+            "Honest notes: being unofficial, Meta may suspend or ban the number — that risk is the shop's. So the Evolution bot is deliberately conservative: it ignores groups/broadcasts/non-text and numbers with no record, answers at most ~10 times/hour per number with a daily cap, waits 3–8 s showing «typing…» before replying, and suspends itself if the session gets blocked (the owner re-enables by re-accepting the disclaimer).",
+          ],
           links: [],
         },
         {
@@ -1033,7 +1051,7 @@ export const t: Copy = {
     sms: {
       title: "SMS channel",
       subtitle:
-        "Notifications and the automatic assistant over SMS — via an Android SIM in the shop, a provider of your choice, or managed via Cloud with BulkSMS.",
+        "Notifications and the automatic assistant over SMS — via an Android SIM in the shop, a provider of your choice, or an Android attached to OficinaOS Cloud (Pro).",
       sections: [
         {
           heading: "What the module does",
@@ -1064,7 +1082,7 @@ export const t: Copy = {
             rows: [
               ["Android phone in the shop (free)", "The shop's SIM plan", "✅", "✅ — the assistant replies", "Most shops — instant start"],
               ["Custom provider (free)", "The shop's provider account", "✅", "❌ — outbound only", "Shops that already have an SMS account elsewhere"],
-              ["Managed Cloud — BulkSMS (Pro)", "SMS module + BulkSMS credits (~2–3 cents/SMS in Portugal)", "✅", "✅ — replies and delivery reports via Cloud", "Shops without a spare Android or wanting confirmed delivery"],
+              ["Android attached to Cloud (Pro)", "SMS module + the shop SIM's tariff", "✅", "✅ — replies and reports via Cloud; one phone can serve several shops", "Shops whose PC isn't always on, or owners with several shops"],
             ],
           },
           links: [],
@@ -1090,20 +1108,28 @@ export const t: Copy = {
           links: [],
         },
         {
-          heading: "Managed Cloud — BulkSMS (Pro)",
+          heading: "Android attached to Cloud (Pro)",
           paragraphs: [
-            "With the SMS module active, choose the «Cloud» transport and fill in your BulkSMS account Token ID and Token Secret (created in their dashboard, under API tokens). On save, the app pushes the credentials to OficinaOS Cloud, which validates them with BulkSMS before accepting — from then on, sending goes through the Cloud and the secret field is deliberately empty.",
-            "For replies and delivery reports: after saving, the app shows a webhook URL unique to your shop. In the BulkSMS Web App (Webhooks) create two webhooks pointing at that URL — one with scope RECEIVED and one with scope SENT. This step is manual because the BulkSMS webhooks API requires the account password, not the token.",
-            "Rotating the token later is just as simple: paste the new Token ID and Secret in settings and save — the app pushes the new pair to the Cloud, which validates and replaces the old one. No deleting or manual «rotation» needed.",
+            "With the SMS module active, the same Android phone can attach to OficinaOS Cloud instead of the shop PC: in the «SMS Gateway for Android» app use Cloud/Private Server mode with the details the app shows in settings (server URL, device user and password). From then on the Cloud delivers outbound SMS straight to the phone — sending and customer replies keep working even with the shop PC off, and the app collects everything when it comes back (a ~12-second poller).",
+            "One device can serve several shops of the same owner: the Cloud keeps a routing table (SmsRoute) that decides which shop each reply belongs to — first by the REP-… code in the message, then by the shop that last messaged that number, and finally the default shop.",
+            "«Shop closed»: if the app has been offline for more than ~5 minutes when an SMS arrives, the Cloud auto-replies “We received your message. The shop will reply as soon as it opens.” (max. 1 per number every 12 h).",
           ],
           links: [
-            { label: "BulkSMS — create account", href: "https://www.bulksms.com" },
+            { label: "SMS Gateway for Android (official site)", href: "https://sms-gate.app" },
           ],
+        },
+        {
+          heading: "BulkSMS transport (removed)",
+          id: "managed-cloud-bulksms-pro",
+          paragraphs: [
+            "The first version of the Cloud transport used the shop's own BulkSMS credentials. That path was removed from the Cloud — stored credentials were deleted and sending through it is no longer possible. If your install still used it, attach an Android phone to the Cloud (above): it is cheaper, needs no third-party account and routes replies across multiple shops.",
+          ],
+          links: [],
         },
         {
           heading: "Delivery reports (Cloud transport only)",
           paragraphs: [
-            "With the webhooks registered, every SMS sent via Cloud gets a status report from BulkSMS — the notification outbox entry (Notifications → Outbox) moves from «Sent» to «Delivered», or to «Failed» with the carrier's reason. That's how you know the customer actually received the message.",
+            "Every SMS sent via Cloud gets a status event from the phone (sent/delivered/failed), which the Cloud forwards to the app — the notification outbox entry (Notifications → Outbox) moves from «Sent» to «Delivered», or to «Failed» with the carrier's reason. That's how you know the customer actually received the message.",
           ],
           links: [],
         },
@@ -1148,7 +1174,7 @@ export const t: Copy = {
           heading: "Privacy — what leaves and what stays",
           paragraphs: [
             "On the Android and custom transports, the conversation between the app and the gateway/provider happens with no intermediaries — nothing goes through OficinaOS Cloud. The SMS itself travels over the carrier's mobile network, like any SMS.",
-            "On the Cloud transport, BulkSMS credentials and message text pass through OficinaOS Cloud (it is what sends and receives) — credentials are stored encrypted (AES-256-GCM) and message bodies are never logged. The gateway password and provider headers are stored encrypted in the app and never shown again in the fields — you can only replace them.",
+            "On the Cloud transport, device credentials and message text pass through OficinaOS Cloud (it is what sends and receives) — credentials are stored encrypted (AES-256-GCM) and message bodies are never logged. The gateway password and provider headers are stored encrypted in the app and never shown again in the fields — you can only replace them.",
           ],
           links: [],
         },
@@ -1501,6 +1527,90 @@ export const t: Copy = {
             "The app must be running for the checks to happen",
           ],
           paragraphs: [],
+          links: [],
+        },
+      ],
+    },
+    aiAnalyst: {
+      title: "AI Analyst",
+      subtitle:
+        "Questions about your shop's data in natural language — the analyst answers by reading the local database, using the shop's own AI key.",
+      sections: [
+        {
+          heading: "What the analyst does",
+          paragraphs: [
+            "It's a chat inside the app: you write a question in everyday language and the analyst answers by querying the shop's database in real time. For data questions, the model generates read-only SQL and runs it against the local database — the answer comes from real numbers, not a stale summary.",
+            "Examples of what you can ask:",
+          ],
+          list: [
+            "\"How many repairs did we close this week and what's the average value?\"",
+            "\"Which parts are below minimum stock?\"",
+            "\"Show quotes pending for more than 5 days\"",
+            "\"Which technician has the most deliveries this month?\"",
+          ],
+          links: [],
+        },
+        {
+          heading: "What leaves the shop — and where it goes",
+          paragraphs: [
+            "The analyst isn't a Pro module — it's a core feature, free, and OficinaOS Cloud sees none of it. Your questions and the data needed to answer go straight from the app to the AI provider the shop configured (OpenAI, Google Gemini, Mistral or a custom endpoint). The API key belongs to the shop, is stored encrypted in the app and is never shown again.",
+            "Because answers can include customer data (names, phones, repair history), analyst access is restricted to the owner profile — other profiles don't see the module. For your GDPR records, the provider you choose is the sub-processor: for European data, an EU endpoint or one with adequate clauses is the easiest choice to justify.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Set up (once)",
+          paragraphs: [
+            "1. Get an API key from the chosen provider (OpenAI, Gemini, Mistral — or an OpenAI-compatible endpoint, such as a local instance).",
+            "2. In the app: Settings → AI Analyst. Pick the provider or \"Custom\" and enter the endpoint if needed.",
+            "3. Paste the API key and pick the model — small models (e.g. gpt-4o-mini) handle most questions and cost cents a month for a typical shop.",
+            "4. Enable the module. Only the owner profile can see and configure the analyst — if another profile needs it, that's your call and it lives in Permissions.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Day to day — chat, memories and instructions",
+          paragraphs: [
+            "Every conversation is saved to history and can be resumed or deleted (individually or in bulk). Two tools tune the behaviour without code:",
+          ],
+          list: [
+            "Memories (up to 20 active): facts the analyst should always remember — \"our VAT is 23%\", \"we work with these three brands\"",
+            "Instructions (up to 10 active): house rules — \"always answer in European Portuguese\", \"money values in euros with two decimals\"",
+          ],
+          links: [],
+        },
+        {
+          heading: "Privacy and security on the inside",
+          paragraphs: [
+            "The SQL the model generates doesn't run with the app's credentials: the app provisions a dedicated read-only Postgres role (analyst_ro_…) — a write attempt fails at the database, not just at validation. If the role isn't provisioned, the data tool refuses instead of falling back to a privileged connection.",
+            "In practice: the analyst reads, it doesn't write — it can't change repairs, prices or customers. Still, treat answers as a starting point: for numbers that drive decisions (cash closing, margins), confirm in Reports.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Honest limits",
+          list: [
+            "Read-only — it takes no actions and changes no data",
+            "Answer quality is data quality: incomplete records give incomplete answers",
+            "Small models get complex SQL wrong — very elaborate questions may need rephrasing",
+            "The cost is on the shop's key — the provider bills per use (check their pricing)",
+            "No internet, no analyst — the provider endpoint has to be reachable",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+        {
+          heading: "If the analyst doesn't answer",
+          paragraphs: [
+            "In order of likelihood:",
+          ],
+          list: [
+            "Module off — Settings → AI Analyst, check \"Enabled\"",
+            "Invalid or out-of-credit API key — the provider error shows in the chat; validate the key in the provider console",
+            "Wrong model name — under \"Custom\" the name must match the provider's exactly",
+            "Unreachable endpoint — on installs without internet or behind a restrictive firewall, the provider can't be reached",
+            "Read-only role not provisioned — the app log shows a provisioning warning; an app restart fixes most cases",
+          ],
           links: [],
         },
       ],
@@ -2117,7 +2227,7 @@ export const t: Copy = {
       steps: [
         { title: "Pair once", text: "Create an account at cloud.oficinaos.app (or get a code from the team) and paste the pairing code in Settings → Cloud." },
         { title: "Switch on only what you need", text: "Each module is enabled on the server side, with no licence files. During the beta, we enable them for you." },
-        { title: "The app syncs by itself", text: "Every ~2 minutes it sends and receives what the active modules need. The PC is never exposed to the internet." },
+        { title: "The app syncs by itself", text: "Every ~2 minutes it sends and receives what the active modules need — customer messages follow a fast ~12-second cycle. The PC is never exposed to the internet." },
       ],
       diagram: { pc: "OficinaOS on your PC", cloud: "OficinaOS Cloud", out: "Customers and services", sync: "every ~2 min" },
       dataTitle: "What goes to the Cloud",
@@ -2152,7 +2262,7 @@ export const t: Copy = {
         { q: "Will OficinaOS stop being free?", a: "No. The app is open source (MIT) and the core never goes behind a paywall. Pro only adds what needs the internet." },
         { q: "Do I need Pro to use OficinaOS?", a: "No. Repairs, quotes, customers, stock, till and the SMS channel work without Pro and without internet." },
         { q: "Is Pro only for shops?", a: "No. It's for anyone who repairs, diagnoses or resells: independent technicians, repair shops and resellers. Certified invoicing is Portugal-only." },
-        { q: "What happens if I disconnect the Cloud?", a: "The app keeps working on the local network with all your data; the Pro modules stop appearing. Turning off price sharing deletes the prices you sent from the Cloud." },
+        { q: "What happens if I disconnect the Cloud?", a: "The app keeps working on the local network with all your data; the Pro modules stop appearing. Unpairing also deletes your shop's data stored in the Cloud — portal pages, received reports and credentials. Turning off price sharing deletes the prices you sent from the Cloud." },
         { q: "How do I join the pilot?", a: "Leave your details in the form. We'll get in touch, help you pair and switch on the modules that make sense." },
       ],
     },

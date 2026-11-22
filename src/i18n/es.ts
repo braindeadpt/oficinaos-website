@@ -232,6 +232,11 @@ export const t: Copy = {
         what: "Nº de teléfono del cliente + texto del mensaje — transitan por Cloud sin quedar guardados ni registrados (logs solo con id, estado y teléfono enmascarado)",
       },
       {
+        name: "SMS y bot SMS (Pro)",
+        to: "OficinaOS Cloud → el móvil Android de la tienda",
+        what: "Credenciales del device + nº de teléfono del cliente + texto del mensaje — transitan por Cloud; los cuerpos de los mensajes no se registran",
+      },
+      {
         name: "Acceso remoto y enlaces al cliente",
         to: "Cloudflare",
         what: "El tráfico de las páginas en tránsito",
@@ -267,6 +272,10 @@ export const t: Copy = {
       {
         heading: "Módulos Pro y OficinaOS Cloud",
         body: "El núcleo es gratis para siempre. Los módulos Pro son servicios opcionales de pago, activados por servidor en OficinaOS Cloud, y se rigen por los términos mostrados en la suscripción. Desactivar un módulo no borra los datos locales — son suyos.",
+      },
+      {
+        heading: "Servicios de terceros, costes y uso razonable",
+        body: "La mensajería usa redes y servicios que no controlamos: tarifas de SIM/SMS, proveedores SMS, Meta (WhatsApp Business Platform) y pasarelas no oficiales (Evolution API). Los costes por mensaje — SMS de la operadora, créditos del proveedor, plantillas de Meta — son siempre de la cuenta y la responsabilidad de la tienda. El transporte Evolution es no oficial: Meta puede limitar o banear el número y ese riesgo es íntegramente de la tienda (la app exige aceptar un término propio antes de activar el bot). Las funciones que dependen de SIM/proveedor tienen límites de uso razonable (p. ej. control de flood por número) — son para notificaciones y respuestas de servicio, no para campañas masivas; el abuso puede violar el fair-use de la operadora/proveedor y suspender el módulo.",
       },
       {
         heading: "Este sitio web",
@@ -582,7 +591,7 @@ export const t: Copy = {
         heading: "Módulos Pro — cómo funcionan",
         paragraphs: [
           "Los módulos Pro son funciones que necesitan «llegar a internet». La app sigue siendo 100% local y gratuita; cuando la tienda quiere alcance remoto, empareja la app con OficinaOS Cloud — nuestro servicio que hace de puente entre la app de la tienda y el exterior, sin exponer el PC de la tienda.",
-          "La tienda crea una cuenta en Cloud y empareja la app con un código (una vez). Cada módulo se activa del lado del servidor — sin archivos de licencia. La app se sincroniza con Cloud cada ~2 minutos para enviar y recibir.",
+          "La tienda crea una cuenta en Cloud y empareja la app con un código (una vez). Cada módulo se activa del lado del servidor — sin archivos de licencia. La app se sincroniza con Cloud cada ~2 minutos para enviar y recibir — las colas de mensajes (WhatsApp/SMS) tienen un ciclo rápido propio de ~12 segundos, para que las respuestas del bot lleguen en segundos.",
           "Sin emparejamiento, todo sigue funcionando en la red local — los módulos Pro simplemente no aparecen.",
         ],
         table: {
@@ -633,7 +642,7 @@ export const t: Copy = {
         heading: "Portal del cliente (Pro)",
         paragraphs: [
           "Con el módulo activo, cada reparación gana un botón «Public link» en su página de detalle. Al pulsarlo, la app publica en Cloud una copia redactada del trabajo — estado, dispositivo, presupuesto, fecha prevista y línea de tiempo — y copia el enlace.",
-          "El enlace es un secreto por trabajo (un código aleatorio de 16 caracteres): quien lo tiene ve la página. Se envía al cliente por SMS, WhatsApp o impreso en el registro. La página se actualiza sola cuando cambia el estado en la app.",
+          "El enlace es un secreto por trabajo (un código aleatorio de 32 caracteres): quien lo tiene ve la página. Se envía al cliente por SMS, WhatsApp o impreso en el registro. La página se actualiza sola cuando cambia el estado en la app.",
           "Si hay un presupuesto pendiente, el cliente lo acepta o rechaza directamente en la página — la respuesta entra en la app por el flujo normal de presupuestos, con notificación al personal.",
         ],
         links: [
@@ -644,7 +653,7 @@ export const t: Copy = {
         heading: "Bot de WhatsApp (Pro)",
         paragraphs: [
           "El cliente escribe al número de WhatsApp de la tienda y el bot responde con datos reales de la ficha — sin que nadie coja el teléfono. Funciona con el propio número de la tienda (el WhatsApp Business del móvil sigue funcionando en paralelo).",
-          "Notas honestas: la respuesta puede tardar hasta ~2 minutos (ciclo de sincronización); el alta usa la WhatsApp Business Platform oficial de Meta y durante la beta te ayudamos con la configuración.",
+          "Notas honestas: la respuesta llega en ~10–15 segundos (poller rápido de mensajes); el alta usa la WhatsApp Business Platform oficial de Meta y durante la beta te ayudamos con la configuración. También existe el transporte Evolution (no oficial, gratis para enviar, Pro para el bot) — ver la guía.",
         ],
         table: {
           head: ["El cliente escribe", "El bot responde"],
@@ -794,7 +803,7 @@ export const t: Copy = {
           heading: "Lo que nunca sale de la tienda",
           paragraphs: [
             "El portal publica una copia redactada — solo lo que el cliente necesita ver. Nunca aparecen: costes internos y márgenes, notas internas del personal, datos de otros clientes, contactos del equipo ni el historial de otras reparaciones.",
-            "El enlace es un secreto por reparación (un código aleatorio de 16 caracteres): quien lo tiene ve la página — por eso se envía solo al cliente de esa reparación. Quitar el enlace en la ficha borra la página pública.",
+            "El enlace es un secreto por reparación (un código aleatorio de 32 caracteres): quien lo tiene ve la página — por eso se envía solo al cliente de esa reparación. Quitar el enlace en la ficha borra la página pública.",
           ],
           links: [],
         },
@@ -895,13 +904,22 @@ export const t: Copy = {
         {
           heading: "Límites honestos",
           list: [
-            "Las respuestas pueden tardar hasta ~2 minutos (ciclo de sincronización) — no es instantáneo",
-            "Responder a quien escribe es gratis; iniciar conversaciones («tu reparación está lista») requiere plantillas aprobadas en Meta con coste por mensaje",
+            "Las respuestas del bot llegan en ~10–15 segundos — la app consulta la cola de mensajes de Cloud en un poller rápido, separado de la sincronización de ~2 minutos",
+            "Responder dentro de la ventana de 24h es gratis; iniciar conversaciones («tu reparación está lista») fuera de ella sale por plantillas aprobadas en Meta — la app las crea y envía automáticamente y muestra el estado (aprobada/en revisión/rechazada) en ajustes; los envíos por plantilla tienen coste de Meta",
+            "Cuando las reglas no bastan, el bot puede usar IA (Pro): solo ve la ficha pública del cliente (estado, previsión, presupuesto — nunca datos internos ni de otros clientes) y el contenido no se registra en Cloud. «PARAR»/«STOP» retira el consentimiento del cliente al momento",
             "Control de flood: máximo 20 mensajes/hora por número — protección contra spam",
             "Audios e imágenes no se interpretan — van a un humano",
             "En modo prueba solo responde a números verificados en Meta — en producción no hay ese límite",
           ],
           paragraphs: [],
+          links: [],
+        },
+        {
+          heading: "Alternativa: WhatsApp vía Evolution (Pro)",
+          paragraphs: [
+            "Para tiendas que no quieren la cuenta empresarial de Meta, la app también habla con una pasarela «Evolution API» local — un transporte no oficial que emula WhatsApp Web. Enviar es gratis; el bot de respuesta es Pro y exige aceptar un término de responsabilidad propio en ajustes.",
+            "Sinceramente: al ser no oficial, Meta puede suspender/banear el número — ese riesgo es de la tienda. Por eso el bot Evolution es deliberadamente conservador: ignora grupos/broadcasts/mensajes no-texto y números sin ficha, responde como máximo ~10 veces/hora por número con tope diario, espera 3–8 s con «escribiendo…» antes de responder, y se suspende solo si la sesión es bloqueada (el dueño lo reactiva re-aceptando el término).",
+          ],
           links: [],
         },
         {
@@ -1037,7 +1055,7 @@ export const t: Copy = {
     sms: {
       title: "Canal SMS",
       subtitle:
-        "Notificaciones y asistente automático por SMS — por un móvil Android con SIM en la tienda, por un proveedor tuyo a elegir, o gestionado vía Cloud con BulkSMS.",
+        "Notificaciones y asistente automático por SMS — por un móvil Android con SIM en la tienda, por un proveedor tuyo a elegir, o por un Android conectado a OficinaOS Cloud (Pro).",
       sections: [
         {
           heading: "Qué hace el módulo",
@@ -1068,7 +1086,7 @@ export const t: Copy = {
             rows: [
               ["Móvil Android en la tienda (gratis)", "La tarifa del SIM de la tienda", "✅", "✅ — el asistente responde", "La mayoría de tiendas — inicio inmediato"],
               ["Proveedor personalizado (gratis)", "La cuenta de la tienda en el proveedor", "✅", "❌ — solo envío", "Tienda que ya tiene cuenta SMS en otro servicio"],
-              ["Cloud gestionada — BulkSMS (Pro)", "Módulo SMS + créditos BulkSMS (~2–3 céntimos/SMS en Portugal)", "✅", "✅ — respuestas e informes de entrega vía Cloud", "Tiendas sin Android disponible o que quieren entrega confirmada"],
+              ["Android conectado a Cloud (Pro)", "Módulo SMS + la tarifa del SIM de la tienda", "✅", "✅ — respuestas e informes vía Cloud; un móvil puede servir varias tiendas", "Tiendas cuyo PC no siempre está encendido, o dueños con varias tiendas"],
             ],
           },
           links: [],
@@ -1094,20 +1112,28 @@ export const t: Copy = {
           links: [],
         },
         {
-          heading: "Cloud gestionada — BulkSMS (Pro)",
+          heading: "Android conectado a Cloud (Pro)",
           paragraphs: [
-            "Con el módulo SMS activo, elige el transporte «Cloud» y rellena el Token ID y el Token Secret de tu cuenta BulkSMS (se crean en su panel, en API tokens). Al guardar, la app envía las credenciales a OficinaOS Cloud, que las valida con BulkSMS antes de aceptarlas — a partir de ahí, el envío pasa por la Cloud y el campo del secret queda vacío a propósito.",
-            "Para respuestas e informes de entrega: tras guardar, la app muestra una URL de webhook única de tu tienda. En la Web App de BulkSMS (Webhooks) crea dos webhooks apuntando a esa URL — uno con scope RECEIVED y otro con scope SENT. Este paso es manual porque la API de webhooks de BulkSMS exige la contraseña de la cuenta, no el token.",
-            "Cambiar de token más tarde es igual de simple: pega el nuevo Token ID y Secret en los ajustes y guarda — la app vuelve a enviar el par a la Cloud, que lo valida y sustituye el antiguo. No hace falta borrar ni «rotar» nada manualmente.",
+            "Con el módulo SMS activo, el mismo móvil Android puede conectarse a OficinaOS Cloud en lugar del PC de la tienda: en la app «SMS Gateway for Android» usa el modo Cloud/Private Server con los datos que la app muestra en ajustes (URL del servidor, usuario y contraseña del device). A partir de ahí la Cloud entrega los SMS a enviar directamente al móvil — los envíos y las respuestas de los clientes funcionan incluso con el PC apagado, y la app lo recoge todo al volver (poller de ~12 segundos).",
+            "Un device puede servir varias tiendas del mismo dueño: la Cloud mantiene una tabla de enrutado (SmsRoute) que decide de qué tienda es cada respuesta — primero por el código REP-… del mensaje, luego por la tienda que habló por última vez con ese número, y por último la tienda por defecto.",
+            "«Tienda cerrada»: si la app lleva más de ~5 minutos offline y llega un SMS, la Cloud responde automáticamente «Recibimos su mensaje. La tienda responderá en cuanto abra.» (máx. 1 por número cada 12 h).",
           ],
           links: [
-            { label: "BulkSMS — crear cuenta", href: "https://www.bulksms.com" },
+            { label: "SMS Gateway for Android (sitio oficial)", href: "https://sms-gate.app" },
           ],
+        },
+        {
+          heading: "Transporte BulkSMS (eliminado)",
+          id: "cloud-gestionada-bulksms-pro",
+          paragraphs: [
+            "La primera versión del transporte Cloud usaba credenciales BulkSMS de la propia tienda. Ese camino se eliminó de la Cloud — las credenciales guardadas se borraron y ya no es posible enviar por ahí. Si tu instalación todavía lo usaba, conecta un móvil Android a la Cloud (arriba): es más barato, no necesita cuenta en otro proveedor y enruta respuestas multi-tienda.",
+          ],
+          links: [],
         },
         {
           heading: "Informes de entrega (solo transporte Cloud)",
           paragraphs: [
-            "Con los webhooks registrados, cada SMS enviado vía Cloud recibe de BulkSMS un informe de estado — la entrada en la cola de notificaciones (Notificaciones → Outbox) pasa de «Enviado» a «Entregado», o a «Fallido» con el motivo del operador. Es la forma de saber que el cliente recibió de verdad el mensaje.",
+            "Cada SMS enviado vía Cloud recibe del móvil un evento de estado (enviado/entregado/fallido) que la Cloud reenvía a la app — la entrada en la cola de notificaciones (Notificaciones → Outbox) pasa de «Enviado» a «Entregado», o a «Fallido» con el motivo del operador. Es la forma de saber que el cliente recibió de verdad el mensaje.",
           ],
           links: [],
         },
@@ -1152,7 +1178,7 @@ export const t: Copy = {
           heading: "Privacidad — qué sale y qué se queda",
           paragraphs: [
             "En los transportes Android y personalizado, la conversación entre la app y la pasarela/proveedor ocurre sin intermediarios — nada pasa por OficinaOS Cloud. El SMS en sí viaja por la red móvil del operador, como cualquier SMS.",
-            "En el transporte Cloud, las credenciales BulkSMS y el texto de los mensajes pasan por OficinaOS Cloud (es ella quien envía y recibe) — las credenciales quedan cifradas (AES-256-GCM) y los cuerpos de los mensajes nunca se registran. La contraseña de la pasarela y las cabeceras del proveedor quedan cifradas en la app y nunca vuelven a aparecer en los campos — solo se sustituyen.",
+            "En el transporte Cloud, las credenciales del device y el texto de los mensajes pasan por OficinaOS Cloud (es ella quien envía y recibe) — las credenciales quedan cifradas (AES-256-GCM) y los cuerpos de los mensajes nunca se registran. La contraseña de la pasarela y las cabeceras del proveedor quedan cifradas en la app y nunca vuelven a aparecer en los campos — solo se sustituyen.",
           ],
           links: [],
         },
@@ -1506,6 +1532,90 @@ export const t: Copy = {
             "La app tiene que estar encendida para que se hagan las comprobaciones",
           ],
           paragraphs: [],
+          links: [],
+        },
+      ],
+    },
+    aiAnalyst: {
+      title: "Analista de IA",
+      subtitle:
+        "Preguntas sobre los datos de la tienda en lenguaje natural — el analista responde leyendo la base de datos local, con la clave de IA de la propia tienda.",
+      sections: [
+        {
+          heading: "Qué hace el analista",
+          paragraphs: [
+            "Es un chat dentro de la app: escribes una pregunta en lenguaje cotidiano y el analista responde consultando la base de datos de la tienda en tiempo real. Para preguntas de datos, el modelo genera SQL de solo lectura y lo ejecuta contra la base local — la respuesta viene de números reales, no de un resumen desactualizado.",
+            "Ejemplos de lo que puedes preguntar:",
+          ],
+          list: [
+            "«¿Cuántas reparaciones cerramos esta semana y cuál es el valor medio?»",
+            "«¿Qué piezas están por debajo del stock mínimo?»",
+            "«Muestra los presupuestos pendientes desde hace más de 5 días»",
+            "«¿Qué técnico tiene más entregas este mes?»",
+          ],
+          links: [],
+        },
+        {
+          heading: "Qué sale de la tienda — y adónde va",
+          paragraphs: [
+            "El analista no es un módulo Pro — es funcionalidad del núcleo, gratis, y OficinaOS Cloud no ve nada. Las preguntas y los datos necesarios para responder van directamente de la app al proveedor de IA que la tienda configure (OpenAI, Google Gemini, Mistral o un endpoint propio). La clave de API es de la tienda, queda encriptada en la app y nunca vuelve a mostrarse.",
+            "Como las respuestas pueden incluir datos de clientes (nombres, teléfonos, historial de reparaciones), el acceso al analista queda restringido al perfil de dueño — los demás perfiles no ven el módulo. Para el registro RGPD, el proveedor elegido es el subencargado: con datos europeos, un endpoint europeo o con cláusulas adecuadas es la opción más fácil de justificar.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Configurar (una vez)",
+          paragraphs: [
+            "1. Consigue una clave de API del proveedor elegido (OpenAI, Gemini, Mistral — o un endpoint compatible con la API de OpenAI, como una instancia local).",
+            "2. En la app: Configuración → Analista de IA. Elige el proveedor o «Personalizado» e indica el endpoint si hace falta.",
+            "3. Pega la clave de API y elige el modelo — los modelos pequeños (ej.: gpt-4o-mini) bastan para la mayoría de las preguntas y cuestan céntimos al mes en una tienda normal.",
+            "4. Activa el módulo. Solo el perfil de dueño puede ver y configurar el analista — si otro perfil lo necesita, esa decisión es tuya y se revisa en Permisos.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Día a día — chat, memorias e instrucciones",
+          paragraphs: [
+            "Cada conversación queda guardada en el historial y puede retomarse o borrarse (individual o en masa). Dos herramientas afinan el comportamiento sin código:",
+          ],
+          list: [
+            "Memorias (hasta 20 activas): hechos que el analista debe recordar siempre — «el IVA es 23%», «trabajamos con estas tres marcas»",
+            "Instrucciones (hasta 10 activas): reglas de la casa — «responde siempre en español», «valores monetarios en euros con dos decimales»",
+          ],
+          links: [],
+        },
+        {
+          heading: "Privacidad y seguridad por dentro",
+          paragraphs: [
+            "El SQL que genera el modelo no corre con las credenciales de la app: la app provisiona un rol Postgres dedicado de solo lectura (analyst_ro_…) — un intento de escritura falla en la base de datos, no solo en la validación. Si el rol no está provisionado, la herramienta de datos se niega en vez de caer a una conexión privilegiada.",
+            "En la práctica: el analista lee, no escribe — no puede cambiar reparaciones, precios ni clientes. Aun así, trata las respuestas como punto de partida: para valores que mueven decisiones (cierre de caja, márgenes), confirma en Informes.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Límites honestos",
+          list: [
+            "Solo lectura — no ejecuta acciones ni altera datos",
+            "La calidad de la respuesta es la calidad de los datos: fichas incompletas dan respuestas incompletas",
+            "Los modelos pequeños se equivocan en SQL complejo — preguntas muy elaboradas pueden necesitar reformulación",
+            "El coste es de la clave de la tienda — el proveedor cobra por uso (consulta sus precios)",
+            "Sin internet no funciona — el endpoint del proveedor tiene que estar accesible",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+        {
+          heading: "Si el analista no responde",
+          paragraphs: [
+            "Por orden de probabilidad:",
+          ],
+          list: [
+            "Módulo apagado — Configuración → Analista de IA, confirma «Activo»",
+            "Clave de API inválida o sin saldo — el error del proveedor aparece en el chat; valida la clave en la consola del proveedor",
+            "Nombre del modelo equivocado — en «Personalizado» el nombre tiene que ser el exacto del proveedor",
+            "Endpoint inaccesible — en instalaciones sin internet o con firewall restrictivo, el proveedor no es alcanzable",
+            "Rol de lectura no provisionado — en los logs de la app aparece un aviso de provisionamiento; reiniciar la app resuelve la mayoría de los casos",
+          ],
           links: [],
         },
       ],
@@ -2122,7 +2232,7 @@ export const t: Copy = {
       steps: [
         { title: "Empareja una vez", text: "Crea una cuenta en cloud.oficinaos.app (o recibe el código del equipo) y pega el código de emparejamiento en Ajustes → Cloud." },
         { title: "Activa solo lo que necesitas", text: "Cada módulo se activa en el servidor, sin archivos de licencia. En la beta, los activamos nosotros." },
-        { title: "La app se sincroniza sola", text: "Cada ~2 minutos envía y recibe lo que necesitan los módulos activos. El PC nunca queda expuesto a internet." },
+        { title: "La app se sincroniza sola", text: "Cada ~2 minutos envía y recibe lo que necesitan los módulos activos — los mensajes de los clientes siguen un ciclo rápido de ~12 segundos. El PC nunca queda expuesto a internet." },
       ],
       diagram: { pc: "OficinaOS en tu PC", cloud: "OficinaOS Cloud", out: "Clientes y servicios", sync: "cada ~2 min" },
       dataTitle: "Qué va a la Cloud",
@@ -2157,7 +2267,7 @@ export const t: Copy = {
         { q: "¿OficinaOS va a dejar de ser gratis?", a: "No. El programa es de código abierto (MIT) y el núcleo nunca queda detrás de un pago. El Pro solo añade lo que necesita internet." },
         { q: "¿Necesito el Pro para usar OficinaOS?", a: "No. Reparaciones, presupuestos, clientes, stock, caja y el canal SMS funcionan sin Pro y sin internet." },
         { q: "¿El Pro es solo para tiendas?", a: "No. Es para quien repara, diagnostica o revende: técnicos independientes, talleres y revendedores. La facturación certificada es solo para Portugal." },
-        { q: "¿Qué pasa si desconecto la Cloud?", a: "La app sigue funcionando en la red local con todos tus datos; los módulos Pro dejan de aparecer. Desactivar la compartición de precios borra de la Cloud los precios enviados." },
+        { q: "¿Qué pasa si desconecto la Cloud?", a: "La app sigue funcionando en la red local con todos tus datos; los módulos Pro dejan de aparecer. Al desvincular, los datos de tu tienda guardados en la Cloud se borran — páginas del portal, informes recibidos y credenciales. Desactivar la compartición de precios borra de la Cloud los precios enviados." },
         { q: "¿Cómo entro en el piloto?", a: "Deja tus datos en el formulario. Te contactamos, te ayudamos a emparejar y activamos los módulos que tengan sentido." },
       ],
     },
