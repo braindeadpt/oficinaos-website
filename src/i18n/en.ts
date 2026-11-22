@@ -1531,6 +1531,90 @@ export const t: Copy = {
         },
       ],
     },
+    aiAnalyst: {
+      title: "AI Analyst",
+      subtitle:
+        "Questions about your shop's data in natural language — the analyst answers by reading the local database, using the shop's own AI key.",
+      sections: [
+        {
+          heading: "What the analyst does",
+          paragraphs: [
+            "It's a chat inside the app: you write a question in everyday language and the analyst answers by querying the shop's database in real time. For data questions, the model generates read-only SQL and runs it against the local database — the answer comes from real numbers, not a stale summary.",
+            "Examples of what you can ask:",
+          ],
+          list: [
+            "\"How many repairs did we close this week and what's the average value?\"",
+            "\"Which parts are below minimum stock?\"",
+            "\"Show quotes pending for more than 5 days\"",
+            "\"Which technician has the most deliveries this month?\"",
+          ],
+          links: [],
+        },
+        {
+          heading: "What leaves the shop — and where it goes",
+          paragraphs: [
+            "The analyst isn't a Pro module — it's a core feature, free, and OficinaOS Cloud sees none of it. Your questions and the data needed to answer go straight from the app to the AI provider the shop configured (OpenAI, Google Gemini, Mistral or a custom endpoint). The API key belongs to the shop, is stored encrypted in the app and is never shown again.",
+            "Because answers can include customer data (names, phones, repair history), analyst access is restricted to the owner profile — other profiles don't see the module. For your GDPR records, the provider you choose is the sub-processor: for European data, an EU endpoint or one with adequate clauses is the easiest choice to justify.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Set up (once)",
+          paragraphs: [
+            "1. Get an API key from the chosen provider (OpenAI, Gemini, Mistral — or an OpenAI-compatible endpoint, such as a local instance).",
+            "2. In the app: Settings → AI Analyst. Pick the provider or \"Custom\" and enter the endpoint if needed.",
+            "3. Paste the API key and pick the model — small models (e.g. gpt-4o-mini) handle most questions and cost cents a month for a typical shop.",
+            "4. Enable the module. Only the owner profile can see and configure the analyst — if another profile needs it, that's your call and it lives in Permissions.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Day to day — chat, memories and instructions",
+          paragraphs: [
+            "Every conversation is saved to history and can be resumed or deleted (individually or in bulk). Two tools tune the behaviour without code:",
+          ],
+          list: [
+            "Memories (up to 20 active): facts the analyst should always remember — \"our VAT is 23%\", \"we work with these three brands\"",
+            "Instructions (up to 10 active): house rules — \"always answer in European Portuguese\", \"money values in euros with two decimals\"",
+          ],
+          links: [],
+        },
+        {
+          heading: "Privacy and security on the inside",
+          paragraphs: [
+            "The SQL the model generates doesn't run with the app's credentials: the app provisions a dedicated read-only Postgres role (analyst_ro_…) — a write attempt fails at the database, not just at validation. If the role isn't provisioned, the data tool refuses instead of falling back to a privileged connection.",
+            "In practice: the analyst reads, it doesn't write — it can't change repairs, prices or customers. Still, treat answers as a starting point: for numbers that drive decisions (cash closing, margins), confirm in Reports.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Honest limits",
+          list: [
+            "Read-only — it takes no actions and changes no data",
+            "Answer quality is data quality: incomplete records give incomplete answers",
+            "Small models get complex SQL wrong — very elaborate questions may need rephrasing",
+            "The cost is on the shop's key — the provider bills per use (check their pricing)",
+            "No internet, no analyst — the provider endpoint has to be reachable",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+        {
+          heading: "If the analyst doesn't answer",
+          paragraphs: [
+            "In order of likelihood:",
+          ],
+          list: [
+            "Module off — Settings → AI Analyst, check \"Enabled\"",
+            "Invalid or out-of-credit API key — the provider error shows in the chat; validate the key in the provider console",
+            "Wrong model name — under \"Custom\" the name must match the provider's exactly",
+            "Unreachable endpoint — on installs without internet or behind a restrictive firewall, the provider can't be reached",
+            "Read-only role not provisioned — the app log shows a provisioning warning; an app restart fixes most cases",
+          ],
+          links: [],
+        },
+      ],
+    },
   },
   updates: {
     title: "What's new",

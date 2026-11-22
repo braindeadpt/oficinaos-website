@@ -1552,6 +1552,90 @@ export const t = {
         },
       ],
     },
+    aiAnalyst: {
+      title: "Analista de IA",
+      subtitle:
+        "Perguntas sobre os dados da loja em linguagem natural — o analista responde lendo a base de dados local, com a chave de IA da própria loja.",
+      sections: [
+        {
+          heading: "O que o analista faz",
+          paragraphs: [
+            "É um chat dentro da app: escreve-se uma pergunta em linguagem corrente e o analista responde consultando a base de dados da loja em tempo real. Para perguntas de dados, o modelo gera SQL de leitura e corre-o contra a base local — a resposta vem dos números reais, não de um resumo desatualizado.",
+            "Exemplos do que pergunta:",
+          ],
+          list: [
+            "«Quantas reparações fechámos esta semana e qual o valor médio?»",
+            "«Que peças estão abaixo do stock mínimo?»",
+            "«Mostra os orçamentos pendentes há mais de 5 dias»",
+            "«Qual o técnico com mais entregas este mês?»",
+          ],
+          links: [],
+        },
+        {
+          heading: "O que sai da loja — e para onde",
+          paragraphs: [
+            "O analista não é um módulo Pro — é funcionalidade do núcleo, grátis, e a OficinaOS Cloud não vê nada. As perguntas e os dados necessários para responder vão diretamente da app para o fornecedor de IA que a loja configurar (OpenAI, Google Gemini, Mistral ou um endpoint próprio). A chave de API é da loja, fica encriptada na app e nunca volta a aparecer escrita no ecrã.",
+            "Como as respostas podem incluir dados de clientes (nomes, telefones, histórico de reparações), o acesso ao analista fica restrito ao perfil de dono — os outros perfis não veem o módulo. Para o registo RGPD, o fornecedor escolhido é o subcontratante: com dados europeus, um endpoint europeu ou com cláusulas adequadas é a escolha mais simples de justificar.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Configurar (uma vez)",
+          paragraphs: [
+            "1. Consiga uma chave de API do fornecedor escolhido (OpenAI, Gemini, Mistral — ou um endpoint compatível com a API da OpenAI, como uma instância local).",
+            "2. Na app: Definições → Analista de IA. Escolha o fornecedor ou «Personalizado» e indique o endpoint se for o caso.",
+            "3. Cole a chave de API e escolha o modelo — os modelos pequenos (ex.: gpt-4o-mini) chegam para a maioria das perguntas e custam cêntimos por mês numa loja normal.",
+            "4. Ative o módulo. Só o perfil de dono consegue ver e configurar o analista — se outro perfil precisar dele, essa decisão é sua e revê-se nas permissões.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Dia a dia — chat, memórias e instruções",
+          paragraphs: [
+            "Cada conversa fica guardada no histórico e pode ser retomada ou apagada (individualmente ou em massa). Duas ferramentas afinam o comportamento sem código:",
+          ],
+          list: [
+            "Memórias (até 20 ativas): factos que o analista deve lembrar sempre — «o IVA é 23%», «trabalhamos com estas três marcas»",
+            "Instruções (até 10 ativas): regras da casa — «responde sempre em pt-PT», «valores monetários em euros com duas casas»",
+          ],
+          links: [],
+        },
+        {
+          heading: "Privacidade e segurança por dentro",
+          paragraphs: [
+            "O SQL que o modelo gera não corre com as credenciais da app: a app provisiona um role Postgres dedicado só de leitura (analyst_ro_…) — uma tentativa de escrita falha na base de dados, não só na validação. Se o role não estiver provisionado, a ferramenta de dados recusa-se em vez de cair para uma ligação privilegiada.",
+            "Na prática: o analista lê, não escreve — não consegue alterar reparações, preços ou clientes. Ainda assim, trate as respostas como ponto de partida: para valores que movem decisões (fecho de caixa, margens), confirme nos Relatórios.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Limites honestos",
+          list: [
+            "Só leitura — não executa ações, não altera dados",
+            "A qualidade da resposta é a qualidade dos dados: fichas incompletas dão respostas incompletas",
+            "Modelos pequenos enganam-se em SQL complexo — perguntas muito elaboradas podem precisar de reformular",
+            "O custo é da chave da loja — o fornecedor cobra por utilização (consulte os preços dele)",
+            "Sem acesso à internet não funciona — o endpoint do fornecedor tem de estar alcançável",
+          ],
+          paragraphs: [],
+          links: [],
+        },
+        {
+          heading: "Se o analista não responder",
+          paragraphs: [
+            "Por ordem de probabilidade:",
+          ],
+          list: [
+            "Módulo desligado — Definições → Analista de IA, confirme «Ativo»",
+            "Chave de API inválida ou sem saldo — o erro do fornecedor aparece no chat; valide a chave na consola do fornecedor",
+            "Nome do modelo errado — em «Personalizado» o nome tem de ser o exato do fornecedor",
+            "Endpoint inacessível — em instalações sem internet ou com firewall restritiva, o fornecedor não é alcançável",
+            "Role de leitura por provisionar — nos logs da app aparece um aviso de provisionamento; um restart da app resolve a maioria dos casos",
+          ],
+          links: [],
+        },
+      ],
+    },
   },
   updates: {
     title: "Novidades",
