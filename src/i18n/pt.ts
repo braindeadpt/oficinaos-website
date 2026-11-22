@@ -659,7 +659,7 @@ export const t = {
         heading: "Portal do cliente (Pro)",
         paragraphs: [
           "Com o módulo ativo, cada reparação ganha um botão «Public link» na página de detalhe. Ao clicar, a app publica na Cloud um snapshot redigido do trabalho — estado, dispositivo, orçamento, prazo e timeline — e copia o link.",
-          "O link é segredo por trabalho (um código aleatório de 16 caracteres): quem o tem vê a página. Envia-se ao cliente por SMS, WhatsApp ou impresso no registo. A página atualiza sozinha quando o estado muda na app.",
+          "O link é segredo por trabalho (um código aleatório de 32 caracteres): quem o tem vê a página. Envia-se ao cliente por SMS, WhatsApp ou impresso no registo. A página atualiza sozinha quando o estado muda na app.",
           "Se houver um orçamento pendente, o cliente aceita ou recusa diretamente na página — a resposta entra na app pelo fluxo normal de orçamentos, com notificação ao staff.",
         ],
         links: [
@@ -820,7 +820,7 @@ export const t = {
           heading: "O que nunca sai da loja",
           paragraphs: [
             "O portal publica um snapshot redigido — só o que o cliente precisa de ver. Nunca aparecem no portal: custos internos e margens, notas internas do staff, dados de outros clientes, contactos da equipa, nem o histórico de outras reparações.",
-            "O link é um segredo por reparação (um código aleatório de 16 caracteres): quem o tem, vê a página — por isso envia-se apenas ao cliente dessa reparação. Remover o link na ficha apaga a página pública.",
+            "O link é um segredo por reparação (um código aleatório de 32 caracteres): quem o tem, vê a página — por isso envia-se apenas ao cliente dessa reparação. Remover o link na ficha apaga a página pública.",
           ],
           links: [],
         },

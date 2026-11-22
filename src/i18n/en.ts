@@ -640,7 +640,7 @@ export const t: Copy = {
         heading: "Customer portal (Pro)",
         paragraphs: [
           "With the module active, every repair gets a «Public link» button on its detail page. Clicking it publishes a redacted snapshot to the Cloud — status, device, quote, due date and timeline — and copies the link.",
-          "The link is a per-job secret (a random 16-character code): whoever has it sees the page. Send it to the customer by SMS, WhatsApp or print it on the intake slip. The page updates itself when the status changes in the app.",
+          "The link is a per-job secret (a random 32-character code): whoever has it sees the page. Send it to the customer by SMS, WhatsApp or print it on the intake slip. The page updates itself when the status changes in the app.",
           "If a quote is pending, the customer accepts or declines it right on the page — the answer flows into the app through the normal quote flow, with a staff notification.",
         ],
         links: [
@@ -799,7 +799,7 @@ export const t: Copy = {
           heading: "What never leaves the shop",
           paragraphs: [
             "The portal publishes a redacted snapshot — only what the customer needs to see. Never on the portal: internal costs and margins, staff-only notes, other customers' data, team contact details, or history of other repairs.",
-            "The link is a per-repair secret (a random 16-character code): whoever has it sees the page — so send it only to that repair's customer. Removing the link on the job card deletes the public page.",
+            "The link is a per-repair secret (a random 32-character code): whoever has it sees the page — so send it only to that repair's customer. Removing the link on the job card deletes the public page.",
           ],
           links: [],
         },
