@@ -269,6 +269,10 @@ export const t: Copy = {
         body: "The core is free forever. Pro modules are optional paid services, activated server-side through OficinaOS Cloud, and are governed by the terms shown at subscription. Turning off a module does not delete local data — it is yours.",
       },
       {
+        heading: "Third-party services, costs and fair use",
+        body: "Messaging rides networks and services we don't control: SIM/SMS tariffs, SMS providers, Meta (WhatsApp Business Platform) and unofficial gateways (Evolution API). Per-message costs — carrier SMS, provider credits, Meta template fees — always belong to the shop's own accounts and responsibility. The Evolution transport is unofficial: Meta may restrict or ban the number and that risk is entirely the shop's (the app requires accepting a dedicated disclaimer before enabling the bot). SIM/provider-backed features carry fair-use limits (e.g. per-number flood control) — they are for service notifications and replies, not bulk campaigns; abuse can breach the carrier/provider fair-use policy and suspend the module.",
+      },
+      {
         heading: "This website",
         body: "This site uses Cloudflare Web Analytics: visit statistics without cookies, without fingerprinting and without personal data — which is why there is no cookie banner.",
       },
@@ -642,7 +646,7 @@ export const t: Copy = {
         heading: "WhatsApp bot (Pro)",
         paragraphs: [
           "The customer texts the shop's WhatsApp number and the bot replies with real job data — nobody picks up the phone. It works on the shop's own number (the WhatsApp Business app on the phone keeps working in parallel).",
-          "Honest notes: replies can take up to ~2 minutes (sync cycle); setup uses Meta's official WhatsApp Business Platform and during the beta we help with the setup.",
+          "Honest notes: replies arrive in ~10–15 seconds (fast message poller); setup uses Meta's official WhatsApp Business Platform and during the beta we help with the setup. There's also the Evolution transport (unofficial, free to send, Pro for the bot) — see the guide.",
         ],
         table: {
           head: ["Customer writes", "Bot replies"],
@@ -891,13 +895,22 @@ export const t: Copy = {
         {
           heading: "Honest limits",
           list: [
-            "Replies can take up to ~2 minutes (sync cycle) — not instant",
-            "Replying to customers is free; starting conversations («your repair is ready») needs Meta-approved templates with per-message fees",
+            "Bot replies arrive in ~10–15 seconds — the app polls the Cloud message queue on a fast poller, separate from the ~2-minute sync",
+            "Replying inside the 24-hour window is free; starting conversations («your repair is ready») outside it goes out as Meta-approved templates — the app creates and submits them automatically and shows each template's status (approved/in review/rejected) in settings; template sends carry Meta's per-message fee",
+            "When rules aren't enough, the bot can use AI (Pro): it only sees the customer's public job card (status, ETA, quote — never internal data or other customers) and message content is never logged in the Cloud. «PARAR»/«STOP» withdraws the customer's consent immediately",
             "Flood control: max 20 messages/hour per number — spam protection",
             "Audio and images aren't interpreted — they go to a human",
             "In test mode only Meta-verified numbers get replies — in production there's no such limit",
           ],
           paragraphs: [],
+          links: [],
+        },
+        {
+          heading: "Alternative: WhatsApp via Evolution (Pro)",
+          paragraphs: [
+            "For shops that don't want a Meta business account, the app can also talk to a local «Evolution API» gateway — an unofficial transport emulating WhatsApp Web. Sending is free; the reply bot is Pro and requires accepting its own disclaimer in settings.",
+            "Honest notes: being unofficial, Meta may suspend or ban the number — that risk is the shop's. So the Evolution bot is deliberately conservative: it ignores groups/broadcasts/non-text and numbers with no record, answers at most ~10 times/hour per number with a daily cap, waits 3–8 s showing «typing…» before replying, and suspends itself if the session gets blocked (the owner re-enables by re-accepting the disclaimer).",
+          ],
           links: [],
         },
         {
@@ -1033,7 +1046,7 @@ export const t: Copy = {
     sms: {
       title: "SMS channel",
       subtitle:
-        "Notifications and the automatic assistant over SMS — via an Android SIM in the shop, a provider of your choice, or managed via Cloud with BulkSMS.",
+        "Notifications and the automatic assistant over SMS — via an Android SIM in the shop, a provider of your choice, or an Android attached to OficinaOS Cloud (Pro).",
       sections: [
         {
           heading: "What the module does",
@@ -1064,7 +1077,7 @@ export const t: Copy = {
             rows: [
               ["Android phone in the shop (free)", "The shop's SIM plan", "✅", "✅ — the assistant replies", "Most shops — instant start"],
               ["Custom provider (free)", "The shop's provider account", "✅", "❌ — outbound only", "Shops that already have an SMS account elsewhere"],
-              ["Managed Cloud — BulkSMS (Pro)", "SMS module + BulkSMS credits (~2–3 cents/SMS in Portugal)", "✅", "✅ — replies and delivery reports via Cloud", "Shops without a spare Android or wanting confirmed delivery"],
+              ["Android attached to Cloud (Pro)", "SMS module + the shop SIM's tariff", "✅", "✅ — replies and reports via Cloud; one phone can serve several shops", "Shops whose PC isn't always on, or owners with several shops"],
             ],
           },
           links: [],
@@ -1090,10 +1103,20 @@ export const t: Copy = {
           links: [],
         },
         {
-          heading: "Managed Cloud — BulkSMS (Pro)",
+          heading: "Android attached to Cloud (Pro)",
           paragraphs: [
-            "With the SMS module active, choose the «Cloud» transport and fill in your BulkSMS account Token ID and Token Secret (created in their dashboard, under API tokens). On save, the app pushes the credentials to OficinaOS Cloud, which validates them with BulkSMS before accepting — from then on, sending goes through the Cloud and the secret field is deliberately empty.",
-            "For replies and delivery reports: after saving, the app shows a webhook URL unique to your shop. In the BulkSMS Web App (Webhooks) create two webhooks pointing at that URL — one with scope RECEIVED and one with scope SENT. This step is manual because the BulkSMS webhooks API requires the account password, not the token.",
+            "With the SMS module active, the same Android phone can attach to OficinaOS Cloud instead of the shop PC: in the «SMS Gateway for Android» app use Cloud/Private Server mode with the details the app shows in settings (server URL, device user and password). From then on the Cloud delivers outbound SMS straight to the phone — sending and customer replies keep working even with the shop PC off, and the app collects everything when it comes back (a ~12-second poller).",
+            "One device can serve several shops of the same owner: the Cloud keeps a routing table (SmsRoute) that decides which shop each reply belongs to — first by the REP-… code in the message, then by the shop that last messaged that number, and finally the default shop.",
+            "«Shop closed»: if the app has been offline for more than ~5 minutes when an SMS arrives, the Cloud auto-replies “We received your message. The shop will reply as soon as it opens.” (max. 1 per number every 12 h).",
+          ],
+          links: [
+            { label: "SMS Gateway for Android (official site)", href: "https://sms-gate.app" },
+          ],
+        },
+        {
+          heading: "BulkSMS transport (legacy)",
+          paragraphs: [
+            "The first version of the Cloud transport used the shop's own BulkSMS credentials — that path still exists in the Cloud for older installs, but it is being phased out in favour of the Cloud-attached Android device (above), which is cheaper and routes replies across multiple shops.",
             "Rotating the token later is just as simple: paste the new Token ID and Secret in settings and save — the app pushes the new pair to the Cloud, which validates and replaces the old one. No deleting or manual «rotation» needed.",
           ],
           links: [
@@ -1103,7 +1126,7 @@ export const t: Copy = {
         {
           heading: "Delivery reports (Cloud transport only)",
           paragraphs: [
-            "With the webhooks registered, every SMS sent via Cloud gets a status report from BulkSMS — the notification outbox entry (Notifications → Outbox) moves from «Sent» to «Delivered», or to «Failed» with the carrier's reason. That's how you know the customer actually received the message.",
+            "Every SMS sent via Cloud gets a status event from the phone (sent/delivered/failed), which the Cloud forwards to the app — the notification outbox entry (Notifications → Outbox) moves from «Sent» to «Delivered», or to «Failed» with the carrier's reason. That's how you know the customer actually received the message.",
           ],
           links: [],
         },
@@ -1148,7 +1171,7 @@ export const t: Copy = {
           heading: "Privacy — what leaves and what stays",
           paragraphs: [
             "On the Android and custom transports, the conversation between the app and the gateway/provider happens with no intermediaries — nothing goes through OficinaOS Cloud. The SMS itself travels over the carrier's mobile network, like any SMS.",
-            "On the Cloud transport, BulkSMS credentials and message text pass through OficinaOS Cloud (it is what sends and receives) — credentials are stored encrypted (AES-256-GCM) and message bodies are never logged. The gateway password and provider headers are stored encrypted in the app and never shown again in the fields — you can only replace them.",
+            "On the Cloud transport, device credentials and message text pass through OficinaOS Cloud (it is what sends and receives) — credentials are stored encrypted (AES-256-GCM) and message bodies are never logged. The gateway password and provider headers are stored encrypted in the app and never shown again in the fields — you can only replace them.",
           ],
           links: [],
         },

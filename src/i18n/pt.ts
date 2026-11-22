@@ -284,6 +284,10 @@ export const t = {
         body: "O núcleo é grátis para sempre. Os módulos Pro são serviços opcionais pagos, ativados por servidor na OficinaOS Cloud, e regem-se pelos termos apresentados na subscrição. Desligar um módulo não apaga os dados locais — são seus.",
       },
       {
+        heading: "Serviços de terceiros, custos e uso razoável",
+        body: "As mensagens usam redes e serviços que não controlamos: tarifários de SMS/SIM, provider SMS, Meta (WhatsApp Business Platform) e gateways não-oficiais (Evolution API). Tarifas e custos por mensagem — SMS da operadora, créditos de provider, modelos Meta — são sempre da conta e da responsabilidade da loja. O transporte Evolution é não-oficial: a Meta pode limitar ou banir o número e esse risco é integralmente da loja (a app pede a aceitação de um termo próprio antes de ativar o bot). As funcionalidades que dependem de SIM/provider têm limites de uso razoável (ex.: flood control por número) — são para notificações e respostas de serviço, não para campanhas em massa; abuso pode violar o fair-use da operadora/provider e suspender o módulo.",
+      },
+      {
         heading: "Este site",
         body: "O site usa Cloudflare Web Analytics: estatísticas de visitas sem cookies, sem fingerprinting e sem dados pessoais — por isso não tem banner de cookies.",
       },
@@ -659,7 +663,7 @@ export const t = {
         heading: "Bot de WhatsApp (Pro)",
         paragraphs: [
           "O cliente escreve para o número de WhatsApp da loja e o bot responde com dados reais da ficha — sem ninguém pegar no telemóvel. Funciona com o próprio número da loja (o WhatsApp Business do telemóvel continua a funcionar em paralelo).",
-          "Notas honestas: a resposta pode demorar até ~2 minutos (ciclo de sincronização); o setup usa a WhatsApp Business Platform oficial da Meta e, durante o beta, ajudamos na configuração.",
+          "Notas honestas: a resposta chega em ~10–15 segundos (poller rápido de mensagens); o setup usa a WhatsApp Business Platform oficial da Meta e, durante o beta, ajudamos na configuração. Existe também o transporte Evolution (não-oficial, grátis para enviar, Pro para o bot) — ver o guia.",
         ],
         table: {
           head: ["O cliente escreve", "O bot responde"],
@@ -910,13 +914,22 @@ export const t = {
         {
           heading: "Limites honestos",
           list: [
-            "Respostas podem demorar até ~2 minutos (ciclo de sincronização) — não é instantâneo",
-            "Responder a quem escreve é grátis; iniciar conversas («a sua reparação está pronta») precisa de modelos aprovados na Meta e tem custo por mensagem",
+            "Respostas do bot chegam em ~10–15 segundos — a app consulta a fila de mensagens da Cloud num poller rápido, separado da sincronização de ~2 minutos",
+            "Responder a quem escreve dentro da janela de 24h é grátis; iniciar conversas («a sua reparação está pronta») fora dessa janela sai por modelos aprovados na Meta — a app cria e submete os modelos automaticamente e mostra o estado (aprovado/em revisão/rejeitado) nas definições; os envios por modelo têm custo da Meta",
+            "Quando as regras não chegam, o bot pode usar IA (Pro): só vê a ficha pública do cliente (estado, previsão, orçamento — nunca dados internos nem de outros clientes) e o conteúdo não é registado na Cloud. «PARAR»/«STOP» desliga o consentimento do cliente na hora",
             "Flood control: máximo 20 mensagens/hora por número — protege contra spam",
             "Áudios e imagens não são interpretados — vão para humano",
             "Em modo teste, só os números verificados na Meta recebem respostas — em produção não há esse limite",
           ],
           paragraphs: [],
+          links: [],
+        },
+        {
+          heading: "Alternativa: WhatsApp via Evolution (Pro)",
+          paragraphs: [
+            "Para lojas que não querem a conta empresarial da Meta, a app também fala com um gateway «Evolution API» local — um transporte não-oficial que emula o WhatsApp Web. O envio é grátis; o bot de resposta é Pro e exige aceitar um termo de responsabilidade próprio nas definições.",
+            "Honestamente: por ser não-oficial, a Meta pode suspender/banir o número — o risco é da loja. Por isso o bot Evolution é deliberadamente conservador: ignora grupos/broadcasts/mensagens não-texto e números sem ficha, responde no máximo ~10 vezes/hora por número com teto diário, espera 3–8 s com «a escrever…» antes de responder, e suspende-se sozinho se a sessão for bloqueada (o dono reativa re-aceitando o termo).",
+          ],
           links: [],
         },
         {
@@ -1052,7 +1065,7 @@ export const t = {
     sms: {
       title: "Canal SMS",
       subtitle:
-        "Notificações e assistente automático por SMS — por um Android com SIM na loja, por um provider seu à escolha, ou gerido via Cloud com BulkSMS.",
+        "Notificações e assistente automático por SMS — por um Android com SIM na loja, por um provider seu à escolha, ou por um Android ligado à OficinaOS Cloud (Pro).",
       sections: [
         {
           heading: "O que o módulo faz",
@@ -1083,7 +1096,7 @@ export const t = {
             rows: [
               ["Telemóvel Android na loja (grátis)", "O tarifário do SIM da loja", "✅", "✅ — o assistente responde", "A maioria das lojas — começo imediato"],
               ["Provider personalizado (grátis)", "A conta da loja no provider", "✅", "❌ — só envio", "Loja que já tem conta SMS noutro serviço"],
-              ["Cloud gerida — BulkSMS (Pro)", "Módulo SMS + créditos BulkSMS (~2–3 cêntimos/SMS em Portugal)", "✅", "✅ — respostas e relatórios de entrega via Cloud", "Lojas sem Android disponível ou que querem entrega confirmada"],
+              ["Android ligado à Cloud (Pro)", "Módulo SMS + tarifário do SIM da loja", "✅", "✅ — respostas e relatórios via Cloud; um telemóvel pode servir várias lojas", "Lojas cujo PC nem sempre está ligado, ou donos com várias lojas"],
             ],
           },
           links: [],
@@ -1109,20 +1122,27 @@ export const t = {
           links: [],
         },
         {
-          heading: "Cloud gerida — BulkSMS (Pro)",
+          heading: "Android ligado à Cloud (Pro)",
           paragraphs: [
-            "Com o módulo SMS ativo, escolha o transporte «Cloud» e preencha o Token ID e o Token Secret da sua conta BulkSMS (criam-se no painel deles, em API tokens). Ao gravar, a app envia as credenciais para a OficinaOS Cloud, que as valida junto do BulkSMS antes de as aceitar — a partir daí, o envio passa a ser feito pela Cloud e o campo do secret fica vazio de propósito.",
-            "Para respostas e relatórios de entrega: depois de gravar, a app mostra um URL de webhook único da sua loja. Na Web App do BulkSMS (Webhooks) crie dois webhooks a apontar para esse URL — um com scope RECEIVED e outro com scope SENT. Este passo é manual porque a API de webhooks do BulkSMS exige a palavra-passe da conta, não o token.",
-            "Trocar de token mais tarde é igualmente simples: cole o novo Token ID e Secret nas definições e grave — a app volta a enviar o par à Cloud, que o valida e substitui o antigo. Não precisa de apagar nem de «rodar» nada manualmente.",
+            "Com o módulo SMS ativo, o mesmo telemóvel Android pode ligar-se à OficinaOS Cloud em vez do PC da loja: na app «SMS Gateway for Android» use o modo Cloud/Private Server com os dados que a app mostra nas definições (URL do servidor, utilizador e palavra-passe do device). A partir daí a Cloud passa a entregar os SMS para envio diretamente ao telemóvel — os envios e as respostas dos clientes funcionam mesmo com o PC da loja desligado, e a app recolhe tudo quando volta a ligar (poller de ~12 segundos).",
+            "Um device pode servir várias lojas do mesmo dono: a Cloud mantém uma tabela de encaminhamento (SmsRoute) que decide de que loja é cada resposta — primeiro pelo código REP-… na mensagem, depois pela loja que falou por último com aquele número, e por fim a loja padrão.",
+            "«Loja fechada»: se a app estiver offline há mais de ~5 minutos e chegar um SMS, a Cloud responde automaticamente «Recebemos a sua mensagem. A loja responde assim que abrir.» (máx. 1 por número a cada 12 h).",
           ],
           links: [
-            { label: "BulkSMS — criar conta", href: "https://www.bulksms.com" },
+            { label: "SMS Gateway for Android (site oficial)", href: "https://sms-gate.app" },
           ],
         },
         {
           heading: "Relatórios de entrega (só transporte Cloud)",
           paragraphs: [
-            "Com os webhooks registados, cada SMS enviado via Cloud recebe do BulkSMS um relatório de estado — a entrada na fila de notificações (Notificações → Outbox) passa de «Enviado» para «Entregue», ou para «Falhado» com o motivo da operadora. É a forma de saber que o cliente recebeu mesmo a mensagem.",
+            "Cada SMS enviado via Cloud recebe do telemóvel um evento de estado (enviado/entregue/falhado) que a Cloud reencaminha à app — a entrada na fila de notificações (Notificações → Outbox) passa de «Enviado» para «Entregue», ou para «Falhado» com o motivo da operadora. É a forma de saber que o cliente recebeu mesmo a mensagem.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Transporte BulkSMS (legado)",
+          paragraphs: [
+            "A primeira versão do transporte Cloud usava credenciais BulkSMS da própria loja — esse caminho ainda existe na Cloud para instalações antigas, mas está a ser descontinuado em favor do device Android ligado à Cloud (acima), que é mais barato e encaminha respostas multi-loja.",
           ],
           links: [],
         },
@@ -1167,7 +1187,7 @@ export const t = {
           heading: "Privacidade — o que sai e o que fica",
           paragraphs: [
             "Nos transportes Android e personalizado, a conversa entre a app e o gateway/provider acontece sem intermediários — nada passa pela OficinaOS Cloud. O SMS em si viaja pela rede móvel da operadora, como qualquer SMS.",
-            "No transporte Cloud, as credenciais BulkSMS e o texto das mensagens passam pela OficinaOS Cloud (é ela que envia e recebe) — as credenciais ficam encriptadas (AES-256-GCM) e os corpos das mensagens nunca são registados. A palavra-passe do gateway e os headers do provider ficam encriptados na app e nunca voltam a aparecer nos campos — só se substituem.",
+            "No transporte Cloud, as credenciais do device e o texto das mensagens passam pela OficinaOS Cloud (é ela que envia e recebe) — as credenciais ficam encriptadas (AES-256-GCM) e os corpos das mensagens nunca são registados. A palavra-passe do gateway e os headers do provider ficam encriptados na app e nunca voltam a aparecer nos campos — só se substituem.",
           ],
           links: [],
         },
