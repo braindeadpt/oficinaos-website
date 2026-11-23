@@ -84,11 +84,26 @@ const cspFor = ({ hashes, beacon, formActions }) =>
   ].join("; ");
 
 // Paths without their own rule (arbitrary URLs → 404.html via
-// not_found_handling) still get a CSP: the one computed for the 404
-// page itself, so its inline language picker keeps working while
-// everything else stays fail-closed.
+// not_found_handling) still get a CSP. The base CSP must cover BOTH
+// the 404 page and the homepage: on `/` specifically the `!` unset is
+// ignored at the production edge (workers-sdk#11351 — confirmed CF
+// bug, open since nov-2025), so the /* rule arrives stacked on top of
+// the `/` rule and browsers enforce the intersection. If the base
+// allowed only the 404's scripts, every homepage inline script —
+// nav sheet, theme — would be blocked. The union stays fail-closed:
+// only hashes emitted by these two pages are ever allowed.
 const notFound = perPage.get("/404.html");
-const baseCsp = notFound ? cspFor(notFound) : "default-src 'none'";
+const home = perPage.get("/");
+const baseCsp = notFound
+  ? cspFor({
+      hashes: new Set([...(home?.hashes ?? []), ...notFound.hashes]),
+      beacon: Boolean(home?.beacon) || notFound.beacon,
+      formActions: new Set([
+        ...(home?.formActions ?? []),
+        ...notFound.formActions,
+      ]),
+    })
+  : "default-src 'none'";
 
 const BASE_HEADERS = `/*
   Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
