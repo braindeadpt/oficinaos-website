@@ -102,22 +102,6 @@ const baseFormActions = new Set([
   ...(home?.formActions ?? []),
   ...(notFound?.formActions ?? []),
 ]);
-// Guarda contra regressão: enquanto o edge empilhar `/*` sobre `/` a
-// base tem de admitir TODOS os scripts/form-actions da home. Se a união
-// for revertida ou enfraquecida, o build falha aqui em vez de o menu
-// móvel morrer silenciosamente em produção.
-if (home) {
-  const missingScripts = [...home.hashes].filter((h) => !baseHashes.has(h));
-  const missingActions = [...home.formActions].filter(
-    (a) => !baseFormActions.has(a),
-  );
-  if (missingScripts.length || missingActions.length) {
-    console.error(
-      `ERRO: CSP base não cobre a home — scripts: ${missingScripts.join(", ") || "ok"}, form-actions: ${missingActions.join(", ") || "ok"}`,
-    );
-    process.exit(1);
-  }
-}
 const baseCsp = notFound
   ? cspFor({
       hashes: baseHashes,
@@ -125,6 +109,27 @@ const baseCsp = notFound
       formActions: baseFormActions,
     })
   : "default-src 'none'";
+
+// Guarda contra regressão: enquanto o edge empilhar `/*` sobre `/` a
+// base tem de admitir TODOS os scripts/form-actions da home. Verifica a
+// política EMITIDA (não os sets) — apanha também um bug no cspFor. Se a
+// união for revertida ou enfraquecida, o build falha aqui em vez de o
+// menu móvel morrer silenciosamente em produção.
+if (home) {
+  const formActionTokens = (
+    baseCsp.match(/form-action ([^;]+)/)?.[1] ?? ""
+  ).split(/\s+/);
+  const missing = [
+    ...[...home.hashes].filter((h) => !baseCsp.includes(h)),
+    ...[...home.formActions].filter((a) => !formActionTokens.includes(a)),
+  ];
+  if (missing.length) {
+    console.error(
+      `ERRO: CSP base emitida não cobre a home — ${missing.join(", ")}`,
+    );
+    process.exit(1);
+  }
+}
 
 const BASE_HEADERS = `/*
   Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
