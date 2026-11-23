@@ -94,14 +94,35 @@ const cspFor = ({ hashes, beacon, formActions }) =>
 // only hashes emitted by these two pages are ever allowed.
 const notFound = perPage.get("/404.html");
 const home = perPage.get("/");
+const baseHashes = new Set([
+  ...(home?.hashes ?? []),
+  ...(notFound?.hashes ?? []),
+]);
+const baseFormActions = new Set([
+  ...(home?.formActions ?? []),
+  ...(notFound?.formActions ?? []),
+]);
+// Guarda contra regressão: enquanto o edge empilhar `/*` sobre `/` a
+// base tem de admitir TODOS os scripts/form-actions da home. Se a união
+// for revertida ou enfraquecida, o build falha aqui em vez de o menu
+// móvel morrer silenciosamente em produção.
+if (home) {
+  const missingScripts = [...home.hashes].filter((h) => !baseHashes.has(h));
+  const missingActions = [...home.formActions].filter(
+    (a) => !baseFormActions.has(a),
+  );
+  if (missingScripts.length || missingActions.length) {
+    console.error(
+      `ERRO: CSP base não cobre a home — scripts: ${missingScripts.join(", ") || "ok"}, form-actions: ${missingActions.join(", ") || "ok"}`,
+    );
+    process.exit(1);
+  }
+}
 const baseCsp = notFound
   ? cspFor({
-      hashes: new Set([...(home?.hashes ?? []), ...notFound.hashes]),
+      hashes: baseHashes,
       beacon: Boolean(home?.beacon) || notFound.beacon,
-      formActions: new Set([
-        ...(home?.formActions ?? []),
-        ...notFound.formActions,
-      ]),
+      formActions: baseFormActions,
     })
   : "default-src 'none'";
 
