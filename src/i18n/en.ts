@@ -94,7 +94,7 @@ export const t: Copy = {
       },
       {
         title: "Notifications",
-        desc: "In-app and WhatsApp notifications keep your team and your customers in the loop.",
+        desc: "In-app alerts — and WhatsApp/SMS messages to customers with the Pro modules.",
       },
       {
         title: "Multilingual interface",
@@ -140,6 +140,8 @@ export const t: Copy = {
       { title: "Market prices", desc: "Compare your prices with the anonymous median of other shops.", href: "/docs/market-prices/" },
       { title: "Multi-shop", desc: "Revenue and repairs from all your shops on one dashboard.", href: "/docs/multi-shop/" },
       { title: "WhatsApp remarketing", desc: "An automatic message to customers who haven't been back in a while.", href: "/docs/remarketing/" },
+      // TODO(owner): replace the placeholder with the ai-inbox module's commercial name and price once decided
+      { title: "{{AI_INBOX_NOME}}", desc: "A unified WhatsApp and SMS inbox with an AI assistant for the team — reads, summarises and drafts replies a human approves.", href: "/docs/" },
     ],
     signup: {
       title: "Join the Pro beta",
@@ -235,6 +237,11 @@ export const t: Copy = {
         name: "SMS & SMS bot (Pro)",
         to: "OficinaOS Cloud → the shop's Android phone",
         what: "Device credentials + customer phone number + message text — they transit through the Cloud; message bodies are not logged",
+      },
+      {
+        name: "{{AI_INBOX_NOME}} (Pro)",
+        to: "OficinaOS Cloud → the AI provider the shop chooses",
+        what: "Inbox tool results transit through the Cloud without being stored or logged; personal MCP tokens are kept as hashes only; the shop's AI key stays encrypted",
       },
       {
         name: "Remote access & customer links",
@@ -366,7 +373,7 @@ export const t: Copy = {
             ["Counter POS", "Sell parts and accessories, cash sessions, receipts and payment records"],
             ["Repair services", "Repair catalog with prices — the shop's price list"],
             ["Quotes", "Versioned quotes sent to the customer, approve/decline responses with dated record, full history"],
-            ["Notifications", "In-app alerts, editable message templates and WhatsApp/SMS send queue"],
+            ["Notifications", "In-app alerts, editable message templates and send queue — WhatsApp/SMS sending with a Pro module"],
             ["Reports", "Sales, repairs and margins per period — with an A4 print page"],
             ["Printing", "Configurable receipts and labels — 58/80 mm roll, A4, optional sections and direct printing to network thermal printers"],
             ["AI analyst", "Questions about the shop's data in plain language"],
@@ -591,12 +598,15 @@ export const t: Copy = {
           "Pro modules are features that need to reach the internet. The app stays 100% local and free; when a shop wants remote reach, it pairs the app with OficinaOS Cloud — our service that bridges the shop's app to the outside world without exposing the shop's computer.",
           "The shop creates a Cloud account and pairs the app with a code (once). Each module is switched on server-side — no license files. The app syncs with the Cloud every ~2 minutes to send and receive — the message queues (WhatsApp/SMS) have their own fast ~12-second cycle, so bot replies arrive in seconds.",
           "Without pairing, everything keeps working on the local network — Pro modules simply don't appear.",
+          "All messaging channels — SMS and WhatsApp, on any transport (local network or Cloud) — are Pro modules: the free app neither sends nor receives messages. The settings cards stay visible, but clicking them shows “This option only exists in OficinaOS Pro.”",
         ],
         table: {
           head: ["Module", "What the shop's customer gets"],
           rows: [
             ["Customer portal", "Public link with repair status and approve/decline quote buttons — no need to call the shop"],
             ["WhatsApp bot", "Messages the shop's WhatsApp and gets the repair status automatically; approves quotes with YES/NO"],
+            ["SMS channel", "The same assistant over SMS — an Android phone attached to the Cloud (works with the PC off and can serve several shops) or on the local network"],
+            ["{{AI_INBOX_NOME}}", "A unified WhatsApp and SMS inbox, with AI helping the team read, summarise and draft replies"],
             ["Remote diagnostics", "Runs the phone diagnostic at home (oficinaos-diag, free) and sends it to the shop with a code"],
             ["AI reports", "Diagnostic report written in plain language, ready to hand to the customer"],
             ["Certified invoicing", "Legal invoice or invoice-receipt issued straight from the repair or sale — via InvoiceXpress, on the shop's own account — Portugal only"],
@@ -623,7 +633,8 @@ export const t: Copy = {
             ["OficinaOS Diag (tool)", "Free forever", "€0"],
             ["Customer portal", "Available (beta)", "TBA — free during beta"],
             ["WhatsApp bot", "Available (beta)", "TBA — free during beta*"],
-            ["SMS channel (Android gateway)", "Included in core", "€0 — free"],
+            ["SMS channel (Android gateway)", "Available (beta)", "TBA — free during beta. The SIM plan is the shop's"],
+            ["{{AI_INBOX_NOME}}", "Beta", "{{AI_INBOX_PRECO}}"],
             ["Diagnostics intake", "Available (beta)", "TBA — free during beta"],
             ["AI reports", "Available (beta)", "TBA — per report"],
             ["Invoicing (InvoiceXpress)", "Available (beta)", "TBA — free during beta. The InvoiceXpress account is the shop's own and carries its own service cost"],
@@ -651,7 +662,7 @@ export const t: Copy = {
         heading: "WhatsApp bot (Pro)",
         paragraphs: [
           "The customer texts the shop's WhatsApp number and the bot replies with real job data — nobody picks up the phone. It works on the shop's own number (the WhatsApp Business app on the phone keeps working in parallel).",
-          "Honest notes: replies arrive in ~10–15 seconds (fast message poller); setup uses Meta's official WhatsApp Business Platform and during the beta we help with the setup. There's also the Evolution transport (unofficial, free to send, Pro for the bot) — see the guide.",
+          "Honest notes: replies arrive in ~10–15 seconds (fast message poller); setup uses Meta's official WhatsApp Business Platform and during the beta we help with the setup. There's also the Evolution transport (unofficial — sending and the bot are both Pro) — see the guide.",
         ],
         table: {
           head: ["Customer writes", "Bot replies"],
@@ -669,10 +680,10 @@ export const t: Copy = {
         ],
       },
       {
-        heading: "SMS channel (free in core)",
+        heading: "SMS channel (Pro)",
         paragraphs: [
-          "The same automatic assistant, but over SMS — for shops that don't want (or don't yet have) a Meta business account. An Android phone with a SIM stays in the shop acting as the bridge: the app sends and receives SMS through it, over the normal mobile network. It's free and needs no Cloud — everything happens on the shop network.",
-          "No Meta accounts, no template approvals, no per-message cost — only the shop SIM's plan (plans with bundled SMS make the marginal cost zero). Setup takes ~5 minutes and the guide walks through it step by step.",
+          "The same automatic assistant, but over SMS — for shops that don't want (or don't yet have) a Meta business account. An Android phone with a SIM acts as the bridge: attached to OficinaOS Cloud it sends and receives even with the PC off (and can serve several shops of the same owner); on the local network it stays as an alternative sending transport.",
+          "No Meta accounts, no template approvals, no per-message cost — only the shop SIM's plan (plans with bundled SMS make the marginal cost zero). It needs the SMS module (Pro): without it the app neither sends nor receives messages.",
         ],
         links: [
           { label: "Detailed SMS channel guide", href: "/en/docs/sms" },
@@ -863,6 +874,13 @@ export const t: Copy = {
           links: [],
         },
         {
+          heading: "Without the module",
+          paragraphs: [
+            "Without the whatsapp-bot module active, the app neither sends nor receives anything on WhatsApp — on any transport (Cloud relay, direct Meta or Evolution). The settings cards stay visible, but clicking them shows “This option only exists in OficinaOS Pro.”",
+          ],
+          links: [],
+        },
+        {
           heading: "How it picks the answer",
           paragraphs: [
             "The bot finds the customer record by the last 9 digits of the phone number — robust to +351 prefixes, spaces and different formats. With one active repair, context is obvious and it answers directly; with several, it lists the codes for the customer to pick.",
@@ -913,7 +931,7 @@ export const t: Copy = {
         {
           heading: "Alternative: WhatsApp via Evolution (Pro)",
           paragraphs: [
-            "For shops that don't want a Meta business account, the app can also talk to a local «Evolution API» gateway — an unofficial transport emulating WhatsApp Web. Sending is free; the reply bot is Pro and requires accepting its own disclaimer in settings.",
+            "For shops that don't want a Meta business account, the app can also talk to a local «Evolution API» gateway — an unofficial transport emulating WhatsApp Web. Sending and receiving are Pro; the reply bot also requires accepting its own disclaimer in settings.",
             "Honest notes: being unofficial, Meta may suspend or ban the number — that risk is the shop's. So the Evolution bot is deliberately conservative: it ignores groups/broadcasts/non-text and numbers with no record, answers at most ~10 times/hour per number with a daily cap, waits 3–8 s showing «typing…» before replying, and suspends itself if the session gets blocked (the owner re-enables by re-accepting the disclaimer).",
           ],
           links: [],
@@ -1051,13 +1069,14 @@ export const t: Copy = {
     sms: {
       title: "SMS channel",
       subtitle:
-        "Notifications and the automatic assistant over SMS — via an Android SIM in the shop, a provider of your choice, or an Android attached to OficinaOS Cloud (Pro).",
+        "Notifications and the automatic assistant over SMS (Pro module) — via an Android phone with a SIM attached to OficinaOS Cloud, or on the shop's local network.",
       sections: [
         {
           heading: "What the module does",
           paragraphs: [
             "With the SMS channel active, the app uses an Android phone in the shop as a «gateway»: customer notifications (repair ready, quote sent, reminders) go out as SMS over the normal mobile network — and customer replies come into the app and get an automatic answer.",
             "It's the same assistant as WhatsApp, with the same commands — the customer texts «status» and gets the repair progress, texts «quote» and gets the amount, replies YES or NO to approve or decline. The difference: no Meta account, no approved templates, and no internet needed on the customer's phone.",
+            "Without the SMS module active, the app neither sends nor receives anything on this channel — on any transport. The settings card stays visible, but clicking it shows “This option only exists in OficinaOS Pro.”",
           ],
           table: {
             head: ["Customer texts", "Bot replies"],
@@ -1073,16 +1092,15 @@ export const t: Copy = {
           links: [],
         },
         {
-          heading: "Choosing the transport — three paths",
+          heading: "Choosing the transport — two paths (both Pro)",
           paragraphs: [
-            "In Settings → Notifications → SMS section, the «Transport» field chooses how SMS leave the shop. Each path has a different price — in money, features or responsibility.",
+            "Both transports need the SMS module (Pro) — without it the app neither sends nor receives. The difference is the path the SMS take:",
           ],
           table: {
             head: ["Transport", "Cost", "Sending", "Customer replies", "Best for"],
             rows: [
-              ["Android phone in the shop (free)", "The shop's SIM plan", "✅", "✅ — the assistant replies", "Most shops — instant start"],
-              ["Custom provider (free)", "The shop's provider account", "✅", "❌ — outbound only", "Shops that already have an SMS account elsewhere"],
-              ["Android attached to Cloud (Pro)", "SMS module + the shop SIM's tariff", "✅", "✅ — replies and reports via Cloud; one phone can serve several shops", "Shops whose PC isn't always on, or owners with several shops"],
+              ["Android attached to Cloud", "SMS module + the shop SIM's tariff", "✅ — even with the PC off", "✅ — replies and reports via Cloud; one phone can serve several shops", "Most shops — and owners with several shops"],
+              ["Android on the local network (fallback)", "SMS module + the shop SIM's tariff", "✅ — through the shop PC", "Inbound via Cloud when configured", "Shops with no Cloud-attached phone, or as a backup"],
             ],
           },
           links: [],
@@ -1090,21 +1108,13 @@ export const t: Copy = {
         {
           heading: "Android transport — what you need",
           list: [
+            "The SMS module (Pro) active — without it the app neither sends nor receives messages",
             "An Android phone — an old one is fine; it stays in the shop permanently",
             "An active SIM card — ideally with SMS bundled in the plan (message cost is the carrier's)",
             "The free «SMS Gateway for Android» app (sms-gate.app), from the Play Store or the official site",
-            "The phone and the OficinaOS PC on the same Wi-Fi/LAN",
-            "Nothing else — the SMS channel is free and needs no Cloud account or modules",
+            "For the Cloud path: the phone with internet access; for the local path: the phone and the OficinaOS PC on the same Wi-Fi/LAN",
           ],
           paragraphs: [],
-          links: [],
-        },
-        {
-          heading: "Custom provider — the shop describes its API",
-          paragraphs: [
-            "If you already have an account with an SMS provider that has an HTTP API (BulkSMS, Go4Mobility, national aggregators…), you can plug it in with no code: set the URL, the method (POST or GET), the body format (JSON or form), the auth headers and a template with the {{to}} and {{text}} placeholders — the app validates the template when you save.",
-            "Assumed limitation: this transport only sends. Customer replies and delivery reports can't be genericized — each provider has its own webhook format and none can call into the shop's LAN. To receive replies use the Android transport or Cloud.",
-          ],
           links: [],
         },
         {
@@ -1119,14 +1129,6 @@ export const t: Copy = {
           ],
         },
         {
-          heading: "BulkSMS transport (removed)",
-          id: "managed-cloud-bulksms-pro",
-          paragraphs: [
-            "The first version of the Cloud transport used the shop's own BulkSMS credentials. That path was removed from the Cloud — stored credentials were deleted and sending through it is no longer possible. If your install still used it, attach an Android phone to the Cloud (above): it is cheaper, needs no third-party account and routes replies across multiple shops.",
-          ],
-          links: [],
-        },
-        {
           heading: "Delivery reports (Cloud transport only)",
           paragraphs: [
             "Every SMS sent via Cloud gets a status event from the phone (sent/delivered/failed), which the Cloud forwards to the app — the notification outbox entry (Notifications → Outbox) moves from «Sent» to «Delivered», or to «Failed» with the carrier's reason. That's how you know the customer actually received the message.",
@@ -1134,29 +1136,17 @@ export const t: Copy = {
           links: [],
         },
         {
-          heading: "Setup — step by step (~5 minutes)",
+          heading: "Setup — step by step",
           paragraphs: [
             "1. On the Android phone, install «SMS Gateway for Android» (sms-gate.app) from the Play Store or the official site.",
-            "2. Open the app and enable «Local Server» mode. The app shows three things: the local address (e.g. 192.168.1.50:8080), a username and a password.",
-            "3. Make sure the phone is on the same Wi-Fi network as the PC running OficinaOS.",
-            "4. On the PC, in the OficinaOS app: Menu → Notifications → Channels → SMS section.",
-            "5. In the «Gateway URL» field, type http:// followed by the address shown on the phone — e.g. http://192.168.1.50:8080.",
-            "6. Fill in the username and password exactly as shown on the phone, then save.",
-            "7. Press «Send test SMS», enter your own number and confirm the message arrives.",
-            "8. Finally, press «Register webhook on phone» — this tells the phone app where to forward SMS received from customers.",
+            "2. Cloud path (recommended — sending and receiving, even with the PC off): attach a device in your OficinaOS Cloud account and, on the phone app, use Cloud/Private Server mode with the details OficinaOS shows in Notifications → Channels → «SMS Pro» block — including the webhook URL to register in the phone app for customer replies.",
+            "3. Local network path (sending, as fallback): in the phone app enable «Local Server» — it shows the local address (e.g. 192.168.1.50:8080), a username and a password. The phone and the PC must be on the same Wi-Fi.",
+            "4. In the OficinaOS app: Menu → Notifications → Channels → SMS section — in local mode, fill the «Gateway URL» (http:// + address), the phone's username and password, and save.",
+            "5. Press «Send test SMS», enter your own number and confirm the message arrives.",
           ],
           links: [
             { label: "SMS Gateway for Android (official site)", href: "https://sms-gate.app" },
           ],
-        },
-        {
-          heading: "The webhook detail — why localhost won't work",
-          paragraphs: [
-            "The «Register webhook» button teaches the phone app where to forward incoming SMS — the shop PC. To do that, OficinaOS needs to know its own network address, which it discovers from the address you use in the browser.",
-            "If you open the app at http://localhost:4000, the webhook gets registered as «localhost» — which to the phone means itself, not the PC. Registration fails or points at the wrong place.",
-            "Open the app using the PC's network address (e.g. http://192.168.1.20:4000 — the same one you use on other shop devices) before pressing «Register webhook». The app warns you if you're on localhost.",
-          ],
-          links: [],
         },
         {
           heading: "Keeping the gateway reliable",
@@ -1173,8 +1163,8 @@ export const t: Copy = {
         {
           heading: "Privacy — what leaves and what stays",
           paragraphs: [
-            "On the Android and custom transports, the conversation between the app and the gateway/provider happens with no intermediaries — nothing goes through OficinaOS Cloud. The SMS itself travels over the carrier's mobile network, like any SMS.",
-            "On the Cloud transport, device credentials and message text pass through OficinaOS Cloud (it is what sends and receives) — credentials are stored encrypted (AES-256-GCM) and message bodies are never logged. The gateway password and provider headers are stored encrypted in the app and never shown again in the fields — you can only replace them.",
+            "On the local-network transport, the conversation between the app and the gateway happens with no intermediaries — nothing goes through OficinaOS Cloud. The SMS itself travels over the carrier's mobile network, like any SMS.",
+            "On the Cloud transport, device credentials and message text pass through OficinaOS Cloud (it is what sends and receives) — credentials are stored encrypted (AES-256-GCM) and message bodies are never logged. The local gateway password is stored encrypted in the app and never shown again in the fields — you can only replace it.",
           ],
           links: [],
         },
@@ -1198,7 +1188,7 @@ export const t: Copy = {
               ["Test SMS doesn't arrive", "Correct URL (http:// + IP:port)? Destination number with country code (e.g. +351…)? SMS credit on the SIM?"],
               ["«Gateway connection failed»", "Is the phone powered on and on the same Wi-Fi as the PC? Has its IP changed (check the phone app)?"],
               ["Authentication error", "Username and password exactly as shown in the phone app (it generates them, you don't choose them)"],
-              ["Customer replies and nothing happens", "Is the webhook registered? («Register webhook» button) — and was it registered with the app opened via the network IP, not localhost?"],
+              ["Customer replies and nothing happens", "On the Cloud path: is the webhook URL registered in the phone app? Does the device show as connected in the «SMS Pro» block? Is the SMS module active?"],
               ["It worked and stopped", "Did Android battery optimization suspend the app? Did the phone's IP change?"],
             ],
           },
@@ -1210,7 +1200,7 @@ export const t: Copy = {
           list: [
             "Never expose the gateway port (e.g. 8080) to the internet — it's for the shop's internal network only",
             "Keep the phone and PC on the shop's trusted network — not the customer/guest Wi-Fi",
-            "If you swap the phone or SIM, redo the configuration and register the webhook again",
+            "If you swap the phone or SIM, redo the configuration — on the Cloud path, also register the webhook URL in the new phone's app",
           ],
           paragraphs: [],
           links: [],
@@ -1649,7 +1639,7 @@ export const t: Copy = {
           "Stock management with reorder alerts and per-part history",
           "POS / till for accessories and payments (cash, card, MB Way)",
           "Revenue, margins and average repair time on a daily dashboard",
-          "Automatic SMS to the customer when the repair is ready (via an Android phone in the shop)",
+          "Automatic SMS to the customer when the repair is ready (Pro module, via an Android phone)",
           "Automatic daily database backups",
         ],
       },
@@ -2162,15 +2152,14 @@ export const t: Copy = {
         "Repairs, quotes, customers, stock and till",
         "On your PC, working without internet",
         "Open source, MIT licence",
-        "SMS channel with an Android phone in the shop — free, no Cloud",
+        "Public tracking page and quote replies",
         "OficinaOS Diag — cable diagnostics, free",
       ],
       link: "Download OficinaOS",
     },
     groups: {
       title: "Modules by what you want to solve",
-      lead: "Eleven modules in three groups. All optional, all in beta.",
-      smsNote: "free, in the core",
+      lead: "Twelve modules in three groups. All optional, all in beta.",
       more: "Guide",
       items: [
         {
@@ -2244,7 +2233,8 @@ export const t: Copy = {
       rows: [
         ["Full app (core)", "Free forever", "€0"],
         ["OficinaOS Diag", "Free forever", "€0"],
-        ["SMS channel (Android in the shop)", "In the core", "€0"],
+        ["SMS channel (Android in the shop or on the Cloud)", "Beta", "To be announced — free in the pilot"],
+        ["{{AI_INBOX_NOME}}", "Beta", "{{AI_INBOX_PRECO}}"],
         ["Pro modules (portal, WhatsApp, invoicing, storefront…)", "Beta", "To be announced — free in the pilot"],
         ["AI reports", "Beta", "To be announced — per report"],
       ],
@@ -2260,7 +2250,7 @@ export const t: Copy = {
       title: "Frequently asked questions",
       items: [
         { q: "Will OficinaOS stop being free?", a: "No. The app is open source (MIT) and the core never goes behind a paywall. Pro only adds what needs the internet." },
-        { q: "Do I need Pro to use OficinaOS?", a: "No. Repairs, quotes, customers, stock, till and the SMS channel work without Pro and without internet." },
+        { q: "Do I need Pro to use OficinaOS?", a: "No. Repairs, quotes, customers, stock, till and the tracking page work without Pro and without internet." },
         { q: "Is Pro only for shops?", a: "No. It's for anyone who repairs, diagnoses or resells: independent technicians, repair shops and resellers. Certified invoicing is Portugal-only." },
         { q: "What happens if I disconnect the Cloud?", a: "The app keeps working on the local network with all your data; the Pro modules stop appearing. Unpairing also deletes your shop's data stored in the Cloud — portal pages, received reports and credentials. Turning off price sharing deletes the prices you sent from the Cloud." },
         { q: "How do I join the pilot?", a: "Leave your details in the form. We'll get in touch, help you pair and switch on the modules that make sense." },
@@ -2459,7 +2449,7 @@ export const seoPages = {
           "Stock with reorder alerts and parts deducted automatically",
           "Till / POS for selling accessories, recording cash, card and MB Way",
           "Receipt with tracking QR and warranty; certified invoices with the Pro module",
-          "Automatic SMS to the customer when the repair is ready",
+          "Automatic SMS to the customer when the repair is ready (Pro module)",
         ],
       },
       {

@@ -94,7 +94,7 @@ export const t: Copy = {
       },
       {
         title: "Notificaciones",
-        desc: "Notificaciones en la app y por WhatsApp mantienen informados al equipo y a los clientes.",
+        desc: "Alertas en la app — y mensajes WhatsApp/SMS a los clientes con los módulos Pro.",
       },
       {
         title: "Interfaz multiidioma",
@@ -140,6 +140,8 @@ export const t: Copy = {
       { title: "Precios de mercado", desc: "Compara tus precios con la mediana anónima de otras tiendas.", href: "/docs/market-prices/" },
       { title: "Multitienda", desc: "Ingresos y reparaciones de todas tus tiendas en un solo panel.", href: "/docs/multi-shop/" },
       { title: "Remarketing por WhatsApp", desc: "Mensaje automático a clientes que llevan tiempo sin volver.", href: "/docs/remarketing/" },
+      // TODO(dono): substituir o marcador pelo nome comercial e preço do módulo ai-inbox quando forem decididos
+      { title: "{{AI_INBOX_NOME}}", desc: "Bandeja de entrada unificada de WhatsApp y SMS con un asistente de IA para el equipo — lee, resume y prepara respuestas que un humano aprueba.", href: "/docs/" },
     ],
     signup: {
       title: "Quiero entrar en la beta Pro",
@@ -235,6 +237,11 @@ export const t: Copy = {
         name: "SMS y bot SMS (Pro)",
         to: "OficinaOS Cloud → el móvil Android de la tienda",
         what: "Credenciales del device + nº de teléfono del cliente + texto del mensaje — transitan por Cloud; los cuerpos de los mensajes no se registran",
+      },
+      {
+        name: "{{AI_INBOX_NOME}} (Pro)",
+        to: "OficinaOS Cloud → el proveedor de IA que la tienda elija",
+        what: "Los resultados de las herramientas de la bandeja de entrada transitan por Cloud sin quedar guardados ni registrados; los tokens personales MCP se guardan solo como hash; la clave de IA de la tienda queda cifrada",
       },
       {
         name: "Acceso remoto y enlaces al cliente",
@@ -366,7 +373,7 @@ export const t: Copy = {
             ["TPV de mostrador", "Venta de piezas y accesorios, sesiones de caja, tickets y registro de pagos"],
             ["Servicios de reparación", "Catálogo de reparaciones con precios — la «tarifa» de la tienda"],
             ["Presupuestos", "Versiones enviadas al cliente, respuesta aceptar/rechazar con registro fechado, historial completo"],
-            ["Notificaciones", "Alertas en la app, plantillas de mensaje editables y cola de envío WhatsApp/SMS"],
+            ["Notificaciones", "Alertas en la app, plantillas de mensaje editables y cola de envío — envío WhatsApp/SMS con módulo Pro"],
             ["Informes", "Ventas, reparaciones y márgenes por periodo — con página de impresión A4"],
             ["Impresión", "Recibos y etiquetas configurables — rollo 58/80 mm, A4, secciones opcionales e impresión directa en térmicas de red"],
             ["Analista de IA", "Preguntas sobre los datos de la tienda en lenguaje natural"],
@@ -593,12 +600,15 @@ export const t: Copy = {
           "Los módulos Pro son funciones que necesitan «llegar a internet». La app sigue siendo 100% local y gratuita; cuando la tienda quiere alcance remoto, empareja la app con OficinaOS Cloud — nuestro servicio que hace de puente entre la app de la tienda y el exterior, sin exponer el PC de la tienda.",
           "La tienda crea una cuenta en Cloud y empareja la app con un código (una vez). Cada módulo se activa del lado del servidor — sin archivos de licencia. La app se sincroniza con Cloud cada ~2 minutos para enviar y recibir — las colas de mensajes (WhatsApp/SMS) tienen un ciclo rápido propio de ~12 segundos, para que las respuestas del bot lleguen en segundos.",
           "Sin emparejamiento, todo sigue funcionando en la red local — los módulos Pro simplemente no aparecen.",
+          "Todos los canales de mensajería — SMS y WhatsApp, en cualquier transporte (red local o Cloud) — son módulos Pro: la app gratuita ni envía ni recibe mensajes. Las tarjetas de los ajustes siguen visibles, pero al pulsar muestran «Esta opción solo existe en OficinaOS Pro.»",
         ],
         table: {
           head: ["Módulo", "Lo que gana el cliente de la tienda"],
           rows: [
             ["Portal del cliente", "Enlace público con el estado de la reparación y botones para aceptar/rechazar el presupuesto — sin llamar a la tienda"],
             ["Bot de WhatsApp", "Escribe al WhatsApp de la tienda y recibe el estado de la reparación automáticamente; aprueba presupuestos con SÍ/NO"],
+            ["Canal SMS", "El mismo asistente por SMS — un móvil Android conectado a Cloud (funciona con el PC apagado y puede servir a varias tiendas) o en la red local"],
+            ["{{AI_INBOX_NOME}}", "Bandeja de entrada unificada de WhatsApp y SMS, con IA ayudando al equipo a leer, resumir y preparar respuestas"],
             ["Diagnóstico a distancia", "Hace el diagnóstico del móvil en casa (oficinaos-diag, gratis) y lo envía a la tienda con un código"],
             ["Informes IA", "Informe del diagnóstico escrito en lenguaje sencillo, listo para entregar"],
             ["Facturación certificada", "Factura o factura-recibo legal emitida directamente desde la reparación o la venta — vía InvoiceXpress, con la cuenta de la propia tienda — solo Portugal"],
@@ -625,7 +635,8 @@ export const t: Copy = {
             ["OficinaOS Diag (herramienta)", "Gratis para siempre", "0 €"],
             ["Portal del cliente", "Disponible (beta)", "Por anunciar — gratis en beta"],
             ["Bot de WhatsApp", "Disponible (beta)", "Por anunciar — gratis en beta*"],
-            ["Canal SMS (pasarela Android)", "Incluido en el core", "0 € — gratis"],
+            ["Canal SMS (pasarela Android)", "Disponible (beta)", "Por anunciar — gratis en beta. La tarifa del SIM es de la tienda"],
+            ["{{AI_INBOX_NOME}}", "Beta", "{{AI_INBOX_PRECO}}"],
             ["Recepción de diagnósticos", "Disponible (beta)", "Por anunciar — gratis en beta"],
             ["Informes IA", "Disponible (beta)", "Por anunciar — por informe"],
             ["Facturación (InvoiceXpress)", "Disponible (beta)", "Por anunciar — gratis en beta. La cuenta de InvoiceXpress es de la tienda y tiene el coste propio del servicio"],
@@ -653,7 +664,7 @@ export const t: Copy = {
         heading: "Bot de WhatsApp (Pro)",
         paragraphs: [
           "El cliente escribe al número de WhatsApp de la tienda y el bot responde con datos reales de la ficha — sin que nadie coja el teléfono. Funciona con el propio número de la tienda (el WhatsApp Business del móvil sigue funcionando en paralelo).",
-          "Notas honestas: la respuesta llega en ~10–15 segundos (poller rápido de mensajes); el alta usa la WhatsApp Business Platform oficial de Meta y durante la beta te ayudamos con la configuración. También existe el transporte Evolution (no oficial, gratis para enviar, Pro para el bot) — ver la guía.",
+          "Notas honestas: la respuesta llega en ~10–15 segundos (poller rápido de mensajes); el alta usa la WhatsApp Business Platform oficial de Meta y durante la beta te ayudamos con la configuración. También existe el transporte Evolution (no oficial — envío y bot son Pro) — ver la guía.",
         ],
         table: {
           head: ["El cliente escribe", "El bot responde"],
@@ -671,10 +682,10 @@ export const t: Copy = {
         ],
       },
       {
-        heading: "Canal SMS (gratis en el core)",
+        heading: "Canal SMS (Pro)",
         paragraphs: [
-          "El mismo asistente automático, pero por SMS — para tiendas que no quieren (o aún no tienen) la cuenta empresarial de Meta. Un móvil Android con SIM se queda en la tienda haciendo de puente: la app envía y recibe SMS a través de él, por la red móvil normal. Es gratuito y no necesita Cloud — todo ocurre en la red de la tienda.",
-          "Sin cuentas Meta, sin aprobaciones de plantillas y sin coste por mensaje — solo la tarifa del SIM de la tienda (las tarifas con SMS incluidos hacen el coste marginal cero). La configuración tarda ~5 minutos y la guía la explica paso a paso.",
+          "El mismo asistente automático, pero por SMS — para tiendas que no quieren (o aún no tienen) la cuenta empresarial de Meta. Un móvil Android con SIM hace de puente: conectado a OficinaOS Cloud envía y recibe incluso con el PC apagado (y puede servir a varias tiendas del mismo dueño); en la red local queda como transporte alternativo de envío.",
+          "Sin cuentas Meta, sin aprobaciones de plantillas y sin coste por mensaje — solo la tarifa del SIM de la tienda (las tarifas con SMS incluidos hacen el coste marginal cero). Necesita el módulo SMS (Pro): sin él la app ni envía ni recibe mensajes.",
         ],
         links: [
           { label: "Guía detallada del canal SMS", href: "/es/docs/sms" },
@@ -867,6 +878,13 @@ export const t: Copy = {
           links: [],
         },
         {
+          heading: "Sin el módulo",
+          paragraphs: [
+            "Sin el módulo whatsapp-bot activo, la app ni envía ni recibe nada por WhatsApp — en ningún transporte (relay Cloud, Meta directo o Evolution). Las tarjetas de los ajustes siguen visibles, pero al pulsar muestran «Esta opción solo existe en OficinaOS Pro.»",
+          ],
+          links: [],
+        },
+        {
           heading: "Cómo decide la respuesta",
           paragraphs: [
             "El bot busca la ficha del cliente por los últimos 9 dígitos del número — robusto a prefijos +34/+351, espacios y formatos. Con una reparación activa el contexto es obvio y responde directamente; con varias, lista los códigos para que el cliente elija.",
@@ -917,7 +935,7 @@ export const t: Copy = {
         {
           heading: "Alternativa: WhatsApp vía Evolution (Pro)",
           paragraphs: [
-            "Para tiendas que no quieren la cuenta empresarial de Meta, la app también habla con una pasarela «Evolution API» local — un transporte no oficial que emula WhatsApp Web. Enviar es gratis; el bot de respuesta es Pro y exige aceptar un término de responsabilidad propio en ajustes.",
+            "Para tiendas que no quieren la cuenta empresarial de Meta, la app también habla con una pasarela «Evolution API» local — un transporte no oficial que emula WhatsApp Web. Enviar y recibir son Pro; el bot de respuesta exige además aceptar un término de responsabilidad propio en ajustes.",
             "Sinceramente: al ser no oficial, Meta puede suspender/banear el número — ese riesgo es de la tienda. Por eso el bot Evolution es deliberadamente conservador: ignora grupos/broadcasts/mensajes no-texto y números sin ficha, responde como máximo ~10 veces/hora por número con tope diario, espera 3–8 s con «escribiendo…» antes de responder, y se suspende solo si la sesión es bloqueada (el dueño lo reactiva re-aceptando el término).",
           ],
           links: [],
@@ -1055,13 +1073,14 @@ export const t: Copy = {
     sms: {
       title: "Canal SMS",
       subtitle:
-        "Notificaciones y asistente automático por SMS — por un móvil Android con SIM en la tienda, por un proveedor tuyo a elegir, o por un Android conectado a OficinaOS Cloud (Pro).",
+        "Notificaciones y asistente automático por SMS (módulo Pro) — por un móvil Android con SIM conectado a OficinaOS Cloud, o en la red local de la tienda.",
       sections: [
         {
           heading: "Qué hace el módulo",
           paragraphs: [
             "Con el canal SMS activo, la app usa un móvil Android en la tienda como «pasarela»: las notificaciones a clientes (reparación lista, presupuesto enviado, recordatorios) salen por SMS por la red móvil normal — y las respuestas de los clientes entran en la app y reciben respuesta automática.",
             "Es el mismo asistente del WhatsApp, con los mismos comandos — el cliente escribe «estado» y recibe el punto de la reparación, escribe «presupuesto» y recibe el importe, responde SÍ o NO para aprobar o rechazar. La diferencia: no necesita cuenta Meta, ni plantillas aprobadas, ni internet en el móvil del cliente.",
+            "Sin el módulo SMS activo, la app ni envía ni recibe nada por este canal — en ningún transporte. La tarjeta de los ajustes sigue visible, pero al pulsar muestra «Esta opción solo existe en OficinaOS Pro.»",
           ],
           table: {
             head: ["El cliente escribe", "El bot responde"],
@@ -1077,16 +1096,15 @@ export const t: Copy = {
           links: [],
         },
         {
-          heading: "Elegir el transporte — tres caminos",
+          heading: "Elegir el transporte — dos caminos (ambos Pro)",
           paragraphs: [
-            "En Ajustes → Notificaciones → sección SMS, el campo «Transporte» elige cómo salen los SMS de la tienda. Cada camino tiene un precio distinto — en dinero, funciones o responsabilidad.",
+            "Los dos transportes necesitan el módulo SMS (Pro) — sin él la app ni envía ni recibe. La diferencia está en el camino que hacen los SMS:",
           ],
           table: {
             head: ["Transporte", "Coste", "Envío", "Respuestas del cliente", "Para quién"],
             rows: [
-              ["Móvil Android en la tienda (gratis)", "La tarifa del SIM de la tienda", "✅", "✅ — el asistente responde", "La mayoría de tiendas — inicio inmediato"],
-              ["Proveedor personalizado (gratis)", "La cuenta de la tienda en el proveedor", "✅", "❌ — solo envío", "Tienda que ya tiene cuenta SMS en otro servicio"],
-              ["Android conectado a Cloud (Pro)", "Módulo SMS + la tarifa del SIM de la tienda", "✅", "✅ — respuestas e informes vía Cloud; un móvil puede servir varias tiendas", "Tiendas cuyo PC no siempre está encendido, o dueños con varias tiendas"],
+              ["Android conectado a Cloud", "Módulo SMS + la tarifa del SIM de la tienda", "✅ — incluso con el PC apagado", "✅ — respuestas e informes vía Cloud; un móvil puede servir varias tiendas", "La mayoría de tiendas — y dueños con varias tiendas"],
+              ["Android en la red local (fallback)", "Módulo SMS + la tarifa del SIM de la tienda", "✅ — por el PC de la tienda", "Recepción vía Cloud cuando está configurada", "Tienda sin móvil conectado a Cloud, o como reserva"],
             ],
           },
           links: [],
@@ -1094,21 +1112,13 @@ export const t: Copy = {
         {
           heading: "Transporte Android — qué se necesita",
           list: [
+            "El módulo SMS (Pro) activo — sin él la app ni envía ni recibe mensajes",
             "Un móvil Android — puede ser un equipo antiguo; se queda siempre en la tienda",
             "Una tarjeta SIM activa — idealmente con SMS incluidos en la tarifa (el coste de los mensajes es del operador)",
             "La app gratuita «SMS Gateway for Android» (sms-gate.app), de la Play Store o del sitio oficial",
-            "El móvil y el PC de OficinaOS en la misma red Wi-Fi/LAN",
-            "Nada más — el canal SMS es gratuito y no necesita cuenta Cloud ni módulos",
+            "Para el camino Cloud: el móvil con internet; para el camino local: el móvil y el PC de OficinaOS en la misma red Wi-Fi/LAN",
           ],
           paragraphs: [],
-          links: [],
-        },
-        {
-          heading: "Proveedor personalizado — la tienda describe la API",
-          paragraphs: [
-            "Si ya tienes cuenta en un proveedor SMS con API HTTP (BulkSMS, Go4Mobility, agregadores nacionales…), puedes conectarla sin código: indica la URL, el método (POST o GET), el formato del cuerpo (JSON o formulario), las cabeceras de autenticación y una plantilla con los marcadores {{to}} y {{text}} — la app valida la plantilla al guardar.",
-            "Limitación asumida: este transporte solo envía. Las respuestas de los clientes y los informes de entrega no son generalizables — cada proveedor tiene un formato de webhook propio y ninguno puede llamar a la red interna de la tienda. Para recibir respuestas usa el transporte Android o la Cloud.",
-          ],
           links: [],
         },
         {
@@ -1123,14 +1133,6 @@ export const t: Copy = {
           ],
         },
         {
-          heading: "Transporte BulkSMS (eliminado)",
-          id: "cloud-gestionada-bulksms-pro",
-          paragraphs: [
-            "La primera versión del transporte Cloud usaba credenciales BulkSMS de la propia tienda. Ese camino se eliminó de la Cloud — las credenciales guardadas se borraron y ya no es posible enviar por ahí. Si tu instalación todavía lo usaba, conecta un móvil Android a la Cloud (arriba): es más barato, no necesita cuenta en otro proveedor y enruta respuestas multi-tienda.",
-          ],
-          links: [],
-        },
-        {
           heading: "Informes de entrega (solo transporte Cloud)",
           paragraphs: [
             "Cada SMS enviado vía Cloud recibe del móvil un evento de estado (enviado/entregado/fallido) que la Cloud reenvía a la app — la entrada en la cola de notificaciones (Notificaciones → Outbox) pasa de «Enviado» a «Entregado», o a «Fallido» con el motivo del operador. Es la forma de saber que el cliente recibió de verdad el mensaje.",
@@ -1138,29 +1140,17 @@ export const t: Copy = {
           links: [],
         },
         {
-          heading: "Instalación — paso a paso (~5 minutos)",
+          heading: "Instalación — paso a paso",
           paragraphs: [
             "1. En el móvil Android, instala «SMS Gateway for Android» (sms-gate.app) desde la Play Store o el sitio oficial.",
-            "2. Abre la app y activa el modo «Local Server» (Servidor Local). La app muestra tres cosas: la dirección local (ej.: 192.168.1.50:8080), un nombre de usuario y una contraseña.",
-            "3. Confirma que el móvil está conectado a la misma red Wi-Fi que el PC donde corre OficinaOS.",
-            "4. En el PC, en la app OficinaOS: Menú → Notificaciones → Canales → sección SMS.",
-            "5. En el campo «URL de la pasarela», escribe http:// seguido de la dirección que muestra la app del móvil — por ejemplo http://192.168.1.50:8080.",
-            "6. Rellena el usuario y la contraseña exactamente como aparecen en el móvil y guarda.",
-            "7. Pulsa «Enviar SMS de prueba», pon tu propio número y confirma que llega el mensaje.",
-            "8. Por último, pulsa «Registrar webhook en el móvil» — esto le dice a la app del móvil a dónde enviar los SMS recibidos de los clientes.",
+            "2. Camino Cloud (recomendado — envío y recepción, incluso con el PC apagado): conecta un device en tu cuenta de OficinaOS Cloud y, en la app del móvil, usa el modo Cloud/Private Server con los datos que OficinaOS muestra en Notificaciones → Canales → bloque «SMS Pro» — incluida la URL del webhook a registrar en la app del móvil para las respuestas de los clientes.",
+            "3. Camino red local (envío, como fallback): en la app del móvil activa el modo «Local Server» — la app muestra la dirección local (ej.: 192.168.1.50:8080), un nombre de usuario y una contraseña. El móvil y el PC deben estar en la misma Wi-Fi.",
+            "4. En la app OficinaOS: Menú → Notificaciones → Canales → sección SMS — en modo local, rellena la «URL de la pasarela» (http:// + dirección), el usuario y la contraseña del móvil y guarda.",
+            "5. Pulsa «Enviar SMS de prueba», pon tu propio número y confirma que llega el mensaje.",
           ],
           links: [
             { label: "SMS Gateway for Android (sitio oficial)", href: "https://sms-gate.app" },
           ],
-        },
-        {
-          heading: "El detalle del webhook — por qué no puede ser localhost",
-          paragraphs: [
-            "El botón «Registrar webhook» le enseña a la app del móvil a reenviar los SMS recibidos al PC de la tienda. Para ello, OficinaOS necesita saber su propia dirección en la red — y la descubre a partir de la dirección que usas en el navegador.",
-            "Si abres la app en http://localhost:4000, el webhook queda registrado como «localhost» — que para el móvil significa él mismo, no el PC. El registro falla o apunta al sitio equivocado.",
-            "Abre la app por la dirección de red del PC (ej.: http://192.168.1.20:4000 — la misma que usas en otros dispositivos de la tienda) antes de pulsar «Registrar webhook». La app te avisa si estás en localhost.",
-          ],
-          links: [],
         },
         {
           heading: "Mantener la pasarela fiable",
@@ -1177,8 +1167,8 @@ export const t: Copy = {
         {
           heading: "Privacidad — qué sale y qué se queda",
           paragraphs: [
-            "En los transportes Android y personalizado, la conversación entre la app y la pasarela/proveedor ocurre sin intermediarios — nada pasa por OficinaOS Cloud. El SMS en sí viaja por la red móvil del operador, como cualquier SMS.",
-            "En el transporte Cloud, las credenciales del device y el texto de los mensajes pasan por OficinaOS Cloud (es ella quien envía y recibe) — las credenciales quedan cifradas (AES-256-GCM) y los cuerpos de los mensajes nunca se registran. La contraseña de la pasarela y las cabeceras del proveedor quedan cifradas en la app y nunca vuelven a aparecer en los campos — solo se sustituyen.",
+            "En el transporte de la red local, la conversación entre la app y la pasarela ocurre sin intermediarios — nada pasa por OficinaOS Cloud. El SMS en sí viaja por la red móvil del operador, como cualquier SMS.",
+            "En el transporte Cloud, las credenciales del device y el texto de los mensajes pasan por OficinaOS Cloud (es ella quien envía y recibe) — las credenciales quedan cifradas (AES-256-GCM) y los cuerpos de los mensajes nunca se registran. La contraseña de la pasarela local queda cifrada en la app y nunca vuelve a aparecer en los campos — solo se sustituye.",
           ],
           links: [],
         },
@@ -1202,7 +1192,7 @@ export const t: Copy = {
               ["El SMS de prueba no llega", "¿URL correcta (http:// + IP:puerto)? ¿Número de destino con prefijo (ej.: +34…)? ¿Saldo/SMS disponibles en el SIM?"],
               ["«Fallo de conexión con la pasarela»", "¿El móvil está encendido y en la misma Wi-Fi que el PC? ¿No ha cambiado su IP (ver en la app del móvil)?"],
               ["Error de autenticación", "Usuario y contraseña exactamente como en la app del móvil (los genera ella, no los eliges tú)"],
-              ["El cliente responde y no pasa nada", "¿Está registrado el webhook? (botón «Registrar webhook») — ¿y se registró con la app abierta por la IP de red, no localhost?"],
+              ["El cliente responde y no pasa nada", "En el camino Cloud: ¿la URL del webhook está registrada en la app del móvil? ¿El device aparece conectado en el bloque «SMS Pro»? ¿El módulo SMS está activo?"],
               ["Funcionaba y dejó de funcionar", "¿La optimización de batería de Android suspendió la app? ¿Cambió la IP del móvil?"],
 
             ],
@@ -1215,7 +1205,7 @@ export const t: Copy = {
           list: [
             "Nunca expongas el puerto de la pasarela (ej.: 8080) a internet — es solo para la red interna de la tienda",
             "Mantén el móvil y el PC en la red de confianza de la tienda — no en la Wi-Fi de clientes/invitados",
-            "Si cambias el móvil o el SIM, repite la configuración y registra el webhook otra vez",
+            "Si cambias el móvil o el SIM, repite la configuración — en el camino Cloud, registra también la URL del webhook en la app del nuevo móvil",
           ],
           paragraphs: [],
           links: [],
@@ -1654,7 +1644,7 @@ export const t: Copy = {
           "Gestión de stock con alertas de reposición e historial de piezas usadas",
           "TPV / caja para vender accesorios y registrar pagos en efectivo, tarjeta y MB Way",
           "Ingresos, márgenes y tiempo medio de reparación en un panel diario",
-          "SMS automáticos al cliente cuando la reparación está lista (con un móvil Android en la tienda)",
+          "SMS automáticos al cliente cuando la reparación está lista (módulo Pro, con un móvil Android)",
           "Copias de seguridad diarias automáticas de la base de datos",
         ],
       },
@@ -2167,15 +2157,14 @@ export const t: Copy = {
         "Reparaciones, presupuestos, clientes, stock y caja",
         "En tu PC, funcionando sin internet",
         "Código abierto, licencia MIT",
-        "Canal SMS con un Android en la tienda — gratis, sin Cloud",
+        "Página pública de seguimiento y respuesta a presupuestos",
         "OficinaOS Diag — diagnóstico por cable, gratis",
       ],
       link: "Descargar OficinaOS",
     },
     groups: {
       title: "Módulos según lo que quieres resolver",
-      lead: "Once módulos en tres grupos. Todos opcionales, todos en beta.",
-      smsNote: "gratis, en el núcleo",
+      lead: "Doce módulos en tres grupos. Todos opcionales, todos en beta.",
       more: "Guía",
       items: [
         {
@@ -2249,7 +2238,8 @@ export const t: Copy = {
       rows: [
         ["App completa (núcleo)", "Gratis para siempre", "0 €"],
         ["OficinaOS Diag", "Gratis para siempre", "0 €"],
-        ["Canal SMS (Android en la tienda)", "En el núcleo", "0 €"],
+        ["Canal SMS (Android en la tienda o en Cloud)", "Beta", "Por anunciar — gratis en el piloto"],
+        ["{{AI_INBOX_NOME}}", "Beta", "{{AI_INBOX_PRECO}}"],
         ["Módulos Pro (portal, WhatsApp, facturación, escaparate…)", "Beta", "Por anunciar — gratis en el piloto"],
         ["Informes IA", "Beta", "Por anunciar — por informe"],
       ],
@@ -2265,7 +2255,7 @@ export const t: Copy = {
       title: "Preguntas frecuentes",
       items: [
         { q: "¿OficinaOS va a dejar de ser gratis?", a: "No. El programa es de código abierto (MIT) y el núcleo nunca queda detrás de un pago. El Pro solo añade lo que necesita internet." },
-        { q: "¿Necesito el Pro para usar OficinaOS?", a: "No. Reparaciones, presupuestos, clientes, stock, caja y el canal SMS funcionan sin Pro y sin internet." },
+        { q: "¿Necesito el Pro para usar OficinaOS?", a: "No. Reparaciones, presupuestos, clientes, stock, caja y la página de seguimiento funcionan sin Pro y sin internet." },
         { q: "¿El Pro es solo para tiendas?", a: "No. Es para quien repara, diagnostica o revende: técnicos independientes, talleres y revendedores. La facturación certificada es solo para Portugal." },
         { q: "¿Qué pasa si desconecto la Cloud?", a: "La app sigue funcionando en la red local con todos tus datos; los módulos Pro dejan de aparecer. Al desvincular, los datos de tu tienda guardados en la Cloud se borran — páginas del portal, informes recibidos y credenciales. Desactivar la compartición de precios borra de la Cloud los precios enviados." },
         { q: "¿Cómo entro en el piloto?", a: "Deja tus datos en el formulario. Te contactamos, te ayudamos a emparejar y activamos los módulos que tengan sentido." },
@@ -2464,7 +2454,7 @@ export const seoPages = {
           "Stock con alertas de reposición y piezas descontadas automáticamente",
           "Caja / TPV para vender accesorios y registrar efectivo, tarjeta y Bizum",
           "Ticket con QR de seguimiento y garantía; factura certificada con el módulo Pro",
-          "SMS automáticos al cliente cuando la reparación está lista",
+          "SMS automáticos al cliente cuando la reparación está lista (módulo Pro)",
         ],
       },
       {
