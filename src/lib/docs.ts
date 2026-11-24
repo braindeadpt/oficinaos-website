@@ -20,11 +20,12 @@ export const DOC_MODULES: { slug: string; key: ModuleKey; product: ProductId }[]
   { slug: "market-prices", key: "marketPrices", product: "pro" },
   { slug: "multi-shop", key: "multiShop", product: "pro" },
   { slug: "remarketing", key: "remarketing", product: "pro" },
+  { slug: "ponto", key: "ponto", product: "pro" },
 ];
 
 /** Quantas secções do guia completo cabem em cada grupo da side-nav (rótulos em t.docs.ui.groups).
  *  Se o número de secções mudar e a soma deixar de bater, a side-nav cai para um grupo único. */
-const OVERVIEW_GROUP_SIZES = [4, 7, 3, 8, 3];
+const OVERVIEW_GROUP_SIZES = [4, 7, 3, 9, 3];
 
 /** Ids únicos por página: slug do título; repetidos ganham -2, -3… (o 1.º mantém o id de sempre). */
 export function sectionIds(sections: DocsSection[]): string[] {
