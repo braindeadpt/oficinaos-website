@@ -143,7 +143,7 @@ export const t: Copy = {
       // TODO(dono): substituir o marcador pelo nome comercial e preço do módulo ai-inbox quando forem decididos
       { title: "Balcão IA", desc: "Bandeja de entrada unificada de WhatsApp y SMS con un asistente de IA para el equipo — lee, resume y prepara respuestas que un humano aprueba.", href: "/docs/#modulos-pro-como-funcionan" },
       // TODO(dono): nombre/precio del módulo ponto
-      { title: "{{PONTO_NOME}}", desc: "Libro de horas por WhatsApp y SMS — QR fijo en la tienda, registro con prueba de localización y panel de horas para la inspección de trabajo.", href: "/docs/ponto/" },
+      { title: "Libro de horas", desc: "Libro de horas por WhatsApp y SMS — QR fijo en la tienda, registro con prueba de localización en WhatsApp y panel de horas para la inspección de trabajo.", href: "/docs/ponto/" },
     ],
     signup: {
       title: "Quiero entrar en la beta Pro",
@@ -246,7 +246,7 @@ export const t: Copy = {
         what: "Los resultados de las herramientas de la bandeja de entrada transitan por Cloud sin quedar guardados ni registrados; los tokens personales MCP se guardan solo como hash; la clave de IA de la tienda queda cifrada",
       },
       {
-        name: "{{PONTO_NOME}} (Pro)",
+        name: "Libro de horas (Pro)",
         to: "OficinaOS Cloud → canales Pro (WhatsApp/SMS)",
         what: "La localización en el momento del registro y las fotos de prueba de externos transitan por los canales de mensajería — Cloud no las guarda; el libro de horas queda en la app de la tienda",
       },
@@ -624,7 +624,7 @@ export const t: Copy = {
             ["Precios de mercado", "La mediana anónima de los precios de reparaciones y piezas de otras tiendas, para compararla con los tuyos"],
             ["Multitienda", "Ingresos y reparaciones de todas las tiendas del mismo dueño en un solo panel de OficinaOS Cloud"],
             ["Remarketing por WhatsApp", "Mensaje automático a clientes con consentimiento cuya última reparación fue hace tiempo"],
-            ["{{PONTO_NOME}}", "Libro de horas del equipo por WhatsApp y SMS — entrada, pausas y salida con prueba de localización; panel de horas y exportación para la inspección de trabajo"],
+            ["Libro de horas", "Libro de horas del equipo por WhatsApp y SMS — entrada, pausas y salida con prueba de localización en WhatsApp; panel de horas y exportación para la inspección de trabajo"],
           ],
         },
         links: [],
@@ -653,7 +653,7 @@ export const t: Copy = {
             ["Precios de mercado", "Disponible (beta)", "Por anunciar — gratis en beta"],
             ["Multitienda", "Disponible (beta)", "Por anunciar — gratis en beta"],
             ["Remarketing por WhatsApp", "Disponible (beta)", "Por anunciar — gratis en beta. Los mensajes plantilla tienen el coste de Meta*"],
-            ["{{PONTO_NOME}}", "Disponible (beta)", "{{PONTO_PRECO}}"],
+            ["Libro de horas", "Disponible (beta)", "Por anunciar — gratis en beta"],
           ],
         },
         links: [],
@@ -747,7 +747,7 @@ export const t: Copy = {
       {
         heading: "Libro de horas (Pro)",
         paragraphs: [
-          "El módulo {{PONTO_NOME}} convierte el WhatsApp o el SMS de la tienda en un libro de horas: un QR fijo en la entrada y comandos de entrada, pausa, regreso y salida con prueba de localización — con un panel de horas y exportación para la inspección de trabajo.",
+          "El módulo Libro de horas convierte el WhatsApp o el SMS de la tienda en un libro de horas: un QR fijo en la entrada y comandos de entrada, pausa, regreso y salida con prueba de localización en WhatsApp — con un panel de horas y exportación para la inspección de trabajo.",
           "Honestamente: ayuda a la tienda a cumplir la normativa laboral — la decisión y la responsabilidad legal son de la tienda.",
         ],
         links: [
@@ -1635,13 +1635,13 @@ export const t: Copy = {
     ponto: {
       title: "Libro de horas",
       subtitle:
-        "Registro de jornada del equipo por WhatsApp y SMS — un QR fijo en la tienda, comandos con prueba de localización y un panel de horas para la inspección de trabajo.",
+        "Registro de jornada del equipo por WhatsApp y SMS — un QR fijo en la tienda, comandos con prueba de localización en WhatsApp y un panel de horas para la inspección de trabajo.",
       sections: [
         {
           heading: "Cómo funciona",
           paragraphs: [
             "La tienda imprime un QR fijo (en Ajustes) y lo coloca en la entrada. El empleado lee el QR — abre una página con un código de un solo uso — y envía el mensaje por el WhatsApp de la tienda, el mismo número de los canales Pro. El bot pide la localización y registra el fichaje.",
-            "La hora es siempre la del servidor — nunca la escrita en el mensaje ni la del móvil. Sin localización no hay registro; por SMS (solo para empleados marcados «sin WhatsApp») el registro queda siempre por validar.",
+            "La hora es siempre la del servidor — nunca la escrita en el mensaje ni la del móvil. Por WhatsApp, sin localización no hay registro; por SMS (solo para empleados marcados «sin WhatsApp») el registro queda siempre por validar.",
           ],
           table: {
             head: ["El empleado escribe", "Lo que queda registrado"],
@@ -2343,7 +2343,7 @@ export const t: Copy = {
         ["OficinaOS Diag", "Gratis para siempre", "0 €"],
         ["Canal SMS (Android en la tienda o en Cloud)", "Beta", "Por anunciar — gratis en el piloto"],
         ["Balcão IA", "Beta", "19 €/mes — gratis en beta"],
-        ["{{PONTO_NOME}}", "Beta", "{{PONTO_PRECO}}"],
+        ["Libro de horas", "Beta", "Por anunciar — gratis en el piloto"],
         ["Módulos Pro (portal, WhatsApp, facturación, escaparate…)", "Beta", "Por anunciar — gratis en el piloto"],
         ["Informes IA", "Beta", "Por anunciar — por informe"],
       ],

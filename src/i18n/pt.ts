@@ -160,7 +160,7 @@ export const t = {
       // TODO(dono): substituir o marcador pelo nome comercial e preço do módulo ai-inbox quando forem decididos
       { title: "Balcão IA", desc: "Caixa de entrada unificada de WhatsApp e SMS com um assistente de IA para a equipa — lê, resume e prepara respostas que um humano aprova.", href: "/docs/#modulos-pro-como-funcionam" },
       // TODO(dono): nome/preço do módulo ponto
-      { title: "{{PONTO_NOME}}", desc: "Livro de ponto por WhatsApp e SMS — QR fixo na loja, registo com prova de localização e painel de horas para a ACT.", href: "/docs/ponto/" },
+      { title: "Livro de Ponto", desc: "Livro de ponto por WhatsApp e SMS — QR fixo na loja, registo com prova de localização no WhatsApp e painel de horas para a ACT.", href: "/docs/ponto/" },
     ],
     signup: {
       title: "Quero entrar no beta Pro",
@@ -263,7 +263,7 @@ export const t = {
         what: "Resultados das ferramentas da caixa de entrada transitam pela Cloud sem ficarem guardados nem registados; tokens pessoais MCP ficam só como hash; a chave de IA da loja fica cifrada",
       },
       {
-        name: "{{PONTO_NOME}} (Pro)",
+        name: "Livro de Ponto (Pro)",
         to: "OficinaOS Cloud → canais Pro (WhatsApp/SMS)",
         what: "Localização no momento do registo e fotos de prova de externos transitam pelos canais de mensagens — a Cloud não as guarda; o livro de ponto fica na app da loja",
       },
@@ -641,7 +641,7 @@ export const t = {
             ["Preços de mercado", "Mediana anónima dos preços de reparações e peças de outras lojas, para comparar com os seus"],
             ["Multi-loja", "Receita e reparações de todas as lojas do mesmo dono num só painel na OficinaOS Cloud"],
             ["Remarketing WhatsApp", "Mensagem automática a clientes com consentimento cuja última reparação já foi há algum tempo"],
-            ["{{PONTO_NOME}}", "Livro de ponto da equipa por WhatsApp e SMS — entrada, pausas e saída com prova de localização; painel de horas e exportação para a ACT"],
+            ["Livro de Ponto", "Livro de ponto da equipa por WhatsApp e SMS — entrada, pausas e saída com prova de localização no WhatsApp; painel de horas e exportação para a ACT"],
           ],
         },
         links: [],
@@ -670,7 +670,7 @@ export const t = {
             ["Preços de mercado", "Disponível (beta)", "A anunciar — grátis no beta"],
             ["Multi-loja", "Disponível (beta)", "A anunciar — grátis no beta"],
             ["Remarketing WhatsApp", "Disponível (beta)", "A anunciar — grátis no beta. As mensagens modelo têm o custo da Meta*"],
-            ["{{PONTO_NOME}}", "Disponível (beta)", "{{PONTO_PRECO}}"],
+            ["Livro de Ponto", "Disponível (beta)", "A anunciar — grátis no beta"],
           ],
         },
         links: [],
@@ -764,7 +764,7 @@ export const t = {
       {
         heading: "Livro de ponto (Pro)",
         paragraphs: [
-          "O módulo {{PONTO_NOME}} transforma o WhatsApp ou SMS da loja num livro de ponto: um QR fixo à entrada e comandos de entrada, pausa, regresso e saída com prova de localização — com um painel de horas e exportação para a ACT.",
+          "O módulo Livro de Ponto transforma o WhatsApp ou SMS da loja num livro de ponto: um QR fixo à entrada e comandos de entrada, pausa, regresso e saída com prova de localização no WhatsApp — com um painel de horas e exportação para a ACT.",
           "Honestamente: ajuda a loja a cumprir o Código do Trabalho — a decisão e a responsabilidade legal são da loja.",
         ],
         links: [
@@ -1651,13 +1651,13 @@ export const t = {
     ponto: {
       title: "Livro de ponto",
       subtitle:
-        "Registo de horas da equipa por WhatsApp e SMS — um QR fixo na loja, comandos com prova de localização e um painel de horas para a ACT.",
+        "Registo de horas da equipa por WhatsApp e SMS — um QR fixo na loja, comandos com prova de localização no WhatsApp e um painel de horas para a ACT.",
       sections: [
         {
           heading: "Como funciona",
           paragraphs: [
             "A loja imprime um QR fixo (nas Definições) e afixa-o à entrada. O funcionário lê o QR — abre uma página com um código de uso único — e envia a mensagem pelo WhatsApp da loja, o mesmo número dos canais Pro. O bot pede a localização e regista o ponto.",
-            "A hora é sempre a do servidor — nunca a que está escrita na mensagem nem a do telemóvel. Sem localização não há registo; por SMS (só para funcionários marcados «sem WhatsApp») o registo fica sempre por validar.",
+            "A hora é sempre a do servidor — nunca a que está escrita na mensagem nem a do telemóvel. Pelo WhatsApp, sem localização não há registo; por SMS (só para funcionários marcados «sem WhatsApp») o registo fica sempre por validar.",
           ],
           table: {
             head: ["O funcionário escreve", "O que fica registado"],
@@ -2369,7 +2369,7 @@ export const t = {
         ["OficinaOS Diag", "Grátis para sempre", "0 €"],
         ["Canal SMS (Android na loja ou na Cloud)", "Beta", "A anunciar — grátis no piloto"],
         ["Balcão IA", "Beta", "19 €/mês — grátis no beta"],
-        ["{{PONTO_NOME}}", "Beta", "{{PONTO_PRECO}}"],
+        ["Livro de Ponto", "Beta", "A anunciar — grátis no piloto"],
         ["Módulos Pro (portal, WhatsApp, faturação, montra…)", "Beta", "A anunciar — grátis no piloto"],
         ["Relatórios IA", "Beta", "A anunciar — por relatório"],
       ],

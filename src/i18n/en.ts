@@ -143,7 +143,7 @@ export const t: Copy = {
       // TODO(owner): replace the placeholder with the ai-inbox module's commercial name and price once decided
       { title: "Balcão IA", desc: "A unified WhatsApp and SMS inbox with an AI assistant for the team — reads, summarises and drafts replies a human approves.", href: "/docs/#pro-modules-how-it-works" },
       // TODO(owner): name/price of the ponto module
-      { title: "{{PONTO_NOME}}", desc: "Time clock over WhatsApp and SMS — fixed QR in the shop, location-proven records and an hours dashboard for labour inspections.", href: "/docs/ponto/" },
+      { title: "Time clock", desc: "Time clock over WhatsApp and SMS — fixed QR in the shop, location-proven records on WhatsApp and an hours dashboard for labour inspections.", href: "/docs/ponto/" },
     ],
     signup: {
       title: "Join the Pro beta",
@@ -246,7 +246,7 @@ export const t: Copy = {
         what: "Inbox tool results transit through the Cloud without being stored or logged; personal MCP tokens are kept as hashes only; the shop's AI key stays encrypted",
       },
       {
-        name: "{{PONTO_NOME}} (Pro)",
+        name: "Time clock (Pro)",
         to: "OficinaOS Cloud → Pro channels (WhatsApp/SMS)",
         what: "Location at the moment of recording and external proof photos transit the messaging channels — the Cloud doesn't store them; the time clock stays in the shop's app",
       },
@@ -622,7 +622,7 @@ export const t: Copy = {
             ["Market prices", "The anonymous median of other shops' repair and part prices, to compare with your own"],
             ["Multi-shop", "Revenue and repairs from every shop of the same owner on one OficinaOS Cloud dashboard"],
             ["WhatsApp remarketing", "An automatic message to consenting customers whose last repair was a while ago"],
-            ["{{PONTO_NOME}}", "Staff time clock over WhatsApp and SMS — clock-in, breaks and clock-out proven by location; hours dashboard and export for labour inspections"],
+            ["Time clock", "Staff time clock over WhatsApp and SMS — clock-in, breaks and clock-out proven by location on WhatsApp; hours dashboard and export for labour inspections"],
           ],
         },
         links: [],
@@ -651,7 +651,7 @@ export const t: Copy = {
             ["Market prices", "Available (beta)", "TBA — free during beta"],
             ["Multi-shop", "Available (beta)", "TBA — free during beta"],
             ["WhatsApp remarketing", "Available (beta)", "TBA — free during beta. Template messages carry Meta's cost*"],
-            ["{{PONTO_NOME}}", "Available (beta)", "{{PONTO_PRECO}}"],
+            ["Time clock", "Available (beta)", "TBA — free during beta"],
           ],
         },
         links: [],
@@ -745,7 +745,7 @@ export const t: Copy = {
       {
         heading: "Time clock (Pro)",
         paragraphs: [
-          "The {{PONTO_NOME}} module turns the shop's WhatsApp or SMS into a time clock: a fixed QR code by the door and clock-in, break, back and clock-out commands proven by location — with an hours dashboard and export for labour inspections.",
+          "The time clock module turns the shop's WhatsApp or SMS into a time clock: a fixed QR code by the door and clock-in, break, back and clock-out commands proven by location on WhatsApp — with an hours dashboard and export for labour inspections.",
           "Honestly: it helps the shop comply with labour law — the decision and the legal responsibility are the shop's.",
         ],
         links: [
@@ -1630,13 +1630,13 @@ export const t: Copy = {
     ponto: {
       title: "Time clock",
       subtitle:
-        "Staff hours tracking over WhatsApp and SMS — a fixed QR code in the shop, commands proven by location and an hours dashboard for labour inspections.",
+        "Staff hours tracking over WhatsApp and SMS — a fixed QR code in the shop, commands proven by location on WhatsApp and an hours dashboard for labour inspections.",
       sections: [
         {
           heading: "How it works",
           paragraphs: [
-            "The shop prints a fixed QR code (in Settings) and puts it by the door. The worker scans the QR — it opens a page with a single-use code — and sends the message from the shop's WhatsApp, the same number as the Pro channels. The bot asks for their location and records the punch.",
-            "The time is always the server's — never the one written in the message or the phone's. No location means no record; over SMS (only for workers marked «no WhatsApp») the record is always pending review.",
+            "The shop prints a fixed QR code (in Settings) and puts it by the door. The worker scans the QR — it opens a page with a single-use code — and sends the message to the shop's WhatsApp number, the same number as the Pro channels. The bot asks for their location and records the punch.",
+            "The time is always the server's — never the one written in the message or the phone's. Over WhatsApp, no location means no record; over SMS (only for workers marked «no WhatsApp») the record is always pending review.",
           ],
           table: {
             head: ["The worker writes", "What gets recorded"],
@@ -2338,7 +2338,7 @@ export const t: Copy = {
         ["OficinaOS Diag", "Free forever", "€0"],
         ["SMS channel (Android in the shop or on the Cloud)", "Beta", "To be announced — free in the pilot"],
         ["Balcão IA", "Beta", "€19/month — free during beta"],
-        ["{{PONTO_NOME}}", "Beta", "{{PONTO_PRECO}}"],
+        ["Time clock", "Beta", "To be announced — free in the pilot"],
         ["Pro modules (portal, WhatsApp, invoicing, storefront…)", "Beta", "To be announced — free in the pilot"],
         ["AI reports", "Beta", "To be announced — per report"],
       ],
