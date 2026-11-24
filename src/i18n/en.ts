@@ -623,7 +623,7 @@ export const t: Copy = {
         heading: "Pricing",
         paragraphs: [
           "The full app is free and open source (MIT) — no limits, no accounts, no trial period. Forever.",
-          "Pro modules are in beta: during this period they're free while we measure the real value they bring to the counter. When prices are announced they'll be simple monthly subscriptions — no lock-in, no hidden costs.",
+          "Pro modules are in beta: during this period they're free while we measure the real value they bring to the counter. The first announced price is Balcão IA — €19/month per shop, with the AI model included and a monthly usage cap; shops that bring their own AI key (BYOK) pay €9/month, a beta offer for beta testers. Remaining prices will be simple monthly subscriptions — no lock-in, no hidden costs.",
           "* WhatsApp note: replying to customers within the 24-hour window is free. Proactive notifications («it's ready») outside that window need Meta-approved templates, which carry small per-message fees — Meta's cost, not ours.",
         ],
         table: {
@@ -2230,7 +2230,7 @@ export const t: Copy = {
     },
     pricing: {
       title: "Pricing: where it really stands",
-      lead: "Pro is in beta. During the pilot, the modules are free while we measure the real value they bring. No prices have been announced yet — and we don't make them up here.",
+      lead: "Pro is in beta. During the pilot, the modules are free while we measure the real value they bring. The first announced price is Balcão IA: €19/month per shop, with the AI model included — the other modules have no price yet.",
       caption: "Status and price of each part of OficinaOS",
       head: ["What", "Status", "Price"],
       rows: [
@@ -2243,7 +2243,7 @@ export const t: Copy = {
       ],
       notes: [
         "When prices are announced, they'll be simple monthly subscriptions — no lock-in and no hidden costs.",
-        "Balcão IA: shops that bring their own AI key (BYOK) pay €9/month — a beta offer for beta testers.",
+        "Balcão IA: the €19/month includes the AI model with a monthly usage cap per shop. Shops that bring their own AI key (BYOK) pay €9/month instead of €19 — a beta offer for beta testers.",
         "Pilot members get 90 days of every module free when Pro launches.",
         "Third-party costs aren't ours: the InvoiceXpress account is yours; WhatsApp template messages outside the 24 h window are charged by Meta.",
       ],

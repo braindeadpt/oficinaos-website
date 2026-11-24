@@ -642,7 +642,7 @@ export const t = {
         heading: "Preços",
         paragraphs: [
           "A app completa é gratuita e open source (MIT) — sem limites, sem contas, sem período de teste. Para sempre.",
-          "Os módulos Pro estão em beta: durante este período são gratuitos, enquanto medimos o valor real que trazem ao balcão. Quando os preços forem anunciados serão subscrições mensais simples — sem fidelização e sem custos escondidos.",
+          "Os módulos Pro estão em beta: durante este período são gratuitos, enquanto medimos o valor real que trazem ao balcão. O primeiro preço anunciado é o do «Balcão IA» — 19 €/mês por loja, com o modelo de IA incluído e um limite mensal de utilizações; quem trouxer a própria chave de IA (BYOK) paga 9 €/mês, oferta de beta para beta testers. Os restantes preços serão subscrições mensais simples — sem fidelização e sem custos escondidos.",
           "* Nota WhatsApp: responder a clientes dentro da janela de 24h é grátis. Para notificações proativas («está pronta») fora dessa janela, a Meta cobra pequenos valores por mensagem modelo — custo da Meta, não nosso.",
         ],
         table: {
@@ -2261,7 +2261,7 @@ export const t = {
     },
     pricing: {
       title: "Preços: o estado real",
-      lead: "O Pro está em beta. Durante o piloto, os módulos são grátis enquanto medimos o valor real que trazem. Ainda não há preços anunciados — e não os inventamos aqui.",
+      lead: "O Pro está em beta. Durante o piloto, os módulos são grátis enquanto medimos o valor real que trazem. O primeiro preço anunciado é o do «Balcão IA»: 19 €/mês por loja, com o modelo de IA incluído — os restantes módulos ainda não têm preço.",
       caption: "Estado e preço de cada parte da OficinaOS",
       head: ["O quê", "Estado", "Preço"],
       rows: [
@@ -2274,7 +2274,7 @@ export const t = {
       ],
       notes: [
         "Quando os preços forem anunciados, serão subscrições mensais simples — sem fidelização e sem custos escondidos.",
-        "«Balcão IA»: quem trouxer a própria chave de IA (BYOK) paga 9 €/mês — oferta de beta para beta testers.",
+        "«Balcão IA»: os 19 €/mês incluem o modelo de IA com um limite mensal de utilizações por loja. Quem trouxer a própria chave de IA (BYOK) paga 9 €/mês em vez de 19 — oferta de beta para beta testers.",
         "Quem entrar no piloto tem 90 dias grátis de todos os módulos quando o Pro arrancar.",
         "Custos de terceiros não são nossos: a conta InvoiceXpress é sua; as mensagens modelo do WhatsApp fora da janela de 24 h são cobradas pela Meta.",
       ],
