@@ -142,6 +142,8 @@ export const t: Copy = {
       { title: "Remarketing por WhatsApp", desc: "Mensaje automático a clientes que llevan tiempo sin volver.", href: "/docs/remarketing/" },
       // TODO(dono): substituir o marcador pelo nome comercial e preço do módulo ai-inbox quando forem decididos
       { title: "Balcão IA", desc: "Bandeja de entrada unificada de WhatsApp y SMS con un asistente de IA para el equipo — lee, resume y prepara respuestas que un humano aprueba.", href: "/docs/#modulos-pro-como-funcionan" },
+      // TODO(dono): nombre/precio del módulo ponto
+      { title: "Libro de horas", desc: "Libro de horas por WhatsApp y SMS — QR fijo en la tienda, registro con prueba de localización en WhatsApp y panel de horas para la inspección de trabajo.", href: "/docs/ponto/" },
     ],
     signup: {
       title: "Quiero entrar en la beta Pro",
@@ -242,6 +244,11 @@ export const t: Copy = {
         name: "Balcão IA (Pro)",
         to: "OficinaOS Cloud → el proveedor de IA que la tienda elija",
         what: "Los resultados de las herramientas de la bandeja de entrada transitan por Cloud sin quedar guardados ni registrados; los tokens personales MCP se guardan solo como hash; la clave de IA de la tienda queda cifrada",
+      },
+      {
+        name: "Libro de horas (Pro)",
+        to: "OficinaOS Cloud → canales Pro (WhatsApp/SMS)",
+        what: "La localización en el momento del registro y las fotos de prueba de externos transitan por los canales de mensajería — Cloud no las guarda; el libro de horas queda en la app de la tienda",
       },
       {
         name: "Acceso remoto y enlaces al cliente",
@@ -617,6 +624,7 @@ export const t: Copy = {
             ["Precios de mercado", "La mediana anónima de los precios de reparaciones y piezas de otras tiendas, para compararla con los tuyos"],
             ["Multitienda", "Ingresos y reparaciones de todas las tiendas del mismo dueño en un solo panel de OficinaOS Cloud"],
             ["Remarketing por WhatsApp", "Mensaje automático a clientes con consentimiento cuya última reparación fue hace tiempo"],
+            ["Libro de horas", "Libro de horas del equipo por WhatsApp y SMS — entrada, pausas y salida con prueba de localización en WhatsApp; panel de horas y exportación para la inspección de trabajo"],
           ],
         },
         links: [],
@@ -645,6 +653,7 @@ export const t: Copy = {
             ["Precios de mercado", "Disponible (beta)", "Por anunciar — gratis en beta"],
             ["Multitienda", "Disponible (beta)", "Por anunciar — gratis en beta"],
             ["Remarketing por WhatsApp", "Disponible (beta)", "Por anunciar — gratis en beta. Los mensajes plantilla tienen el coste de Meta*"],
+            ["Libro de horas", "Disponible (beta)", "Por anunciar — gratis en beta"],
           ],
         },
         links: [],
@@ -733,6 +742,16 @@ export const t: Copy = {
           { label: "Guía de precios de mercado", href: "/es/docs/market-prices/" },
           { label: "Guía de multitienda", href: "/es/docs/multi-shop/" },
           { label: "Guía de remarketing", href: "/es/docs/remarketing/" },
+        ],
+      },
+      {
+        heading: "Libro de horas (Pro)",
+        paragraphs: [
+          "El módulo Libro de horas convierte el WhatsApp o el SMS de la tienda en un libro de horas: un QR fijo en la entrada y comandos de entrada, pausa, regreso y salida con prueba de localización en WhatsApp — con un panel de horas y exportación para la inspección de trabajo.",
+          "Honestamente: ayuda a la tienda a cumplir la normativa laboral — la decisión y la responsabilidad legal son de la tienda.",
+        ],
+        links: [
+          { label: "Guía del libro de horas", href: "/es/docs/ponto" },
         ],
       },
       {
@@ -1613,6 +1632,87 @@ export const t: Copy = {
         },
       ],
     },
+    ponto: {
+      title: "Libro de horas",
+      subtitle:
+        "Registro de jornada del equipo por WhatsApp y SMS — un QR fijo en la tienda, comandos con prueba de localización en WhatsApp y un panel de horas para la inspección de trabajo.",
+      sections: [
+        {
+          heading: "Cómo funciona",
+          paragraphs: [
+            "La tienda imprime un QR fijo (en Ajustes) y lo coloca en la entrada. El empleado lee el QR — abre una página con un código de un solo uso — y envía el mensaje por el WhatsApp de la tienda, el mismo número de los canales Pro. El bot pide la localización y registra el fichaje.",
+            "La hora es siempre la del servidor — nunca la escrita en el mensaje ni la del móvil. Por WhatsApp, sin localización no hay registro; por SMS (solo para empleados marcados «sin WhatsApp») el registro queda siempre por validar.",
+          ],
+          table: {
+            head: ["El empleado escribe", "Lo que queda registrado"],
+            rows: [
+              ["ENTRADA (tras el QR)", "Código válido + localización dentro del radio de la tienda (100 m por defecto, configurable) → aprobado; fuera del radio → por validar"],
+              ["PAUSA / VOLTEI / SAIDA", "Solo la localización — la entrada de ese día ya demostró quién es; fuera del radio → por validar"],
+              ["ESTADO", "Horas de hoy y de la semana, y los registros por validar de ese empleado"],
+              ["Externos (comerciales, técnicos a domicilio)", "Localización + foto, sin radio; aprobados automáticamente por defecto — la tienda puede pasar a «por validar»"],
+              ["SMS", "Los mismos comandos en texto; siempre por validar — el SMS no lleva localización"],
+            ],
+          },
+          links: [],
+        },
+        {
+          heading: "Qué hace falta",
+          list: [
+            "Al menos un canal Pro de recepción activo — WhatsApp (oficial o Evolution) o SMS; el libro de horas no recibe mensajes por sí solo",
+            "El módulo punto activo en la cuenta de OficinaOS Cloud (en la beta, lo activamos nosotros)",
+            "La app emparejada con Cloud (Ajustes → pestaña Cloud)",
+            "Cada empleado con su teléfono registrado en Ajustes — interno, externo o «sin WhatsApp»",
+          ],
+          paragraphs: [],
+          links: [
+            { label: "Guía del bot de WhatsApp", href: "/es/docs/whatsapp/" },
+            { label: "Guía del canal SMS", href: "/es/docs/sms/" },
+          ],
+        },
+        {
+          heading: "El panel — de «quién está» a las horas del mes",
+          paragraphs: [
+            "El menú «Libro de horas» muestra quién está trabajando y qué necesita atención:",
+          ],
+          list: [
+            "Ahora — quién está, quién está en pausa, quién salió",
+            "Por validar — cada registro con mapa, radio, foto, hora y motivo; aprobar o rechazar con nota",
+            "Horas — por día, semana y mes, con retrasos y horas extra",
+            "Olvidos — salidas sin fichar: el bot pregunta al empleado y, sin respuesta, avisa al responsable",
+            "Exportar — PDF u Excel por periodo y empleado, para el contable y la inspección de trabajo, con las correcciones a la vista",
+          ],
+          links: [],
+        },
+        {
+          heading: "Un registro que no se borra",
+          paragraphs: [
+            "Cada registro es una línea nueva que nunca se edita ni se borra — una corrección es otra línea que apunta a la original. El historial se guarda 5 años (Código del Trabajo portugués, art. 202), accesible y consultable por la inspección de trabajo, y el empleado puede pedir sus registros.",
+            "Las fotos de prueba de externos se borran automáticamente a los 90 días — el registro queda, marcado como «foto caducada».",
+          ],
+          links: [],
+        },
+        {
+          heading: "RGPD y derecho laboral — lo que la tienda debe hacer",
+          paragraphs: [
+            "El módulo ayuda a la tienda a cumplir la normativa laboral — no garantiza el cumplimiento: la decisión y la responsabilidad son de la tienda. En concreto:",
+          ],
+          list: [
+            "Informar a los empleados por escrito — los Ajustes tienen una plantilla imprimible para firmar",
+            "Localización solo en el momento del registro — nunca continua; sin biometría",
+            "Las fotos de externos se guardan 90 días; los registros, 5 años",
+            "Valorar la necesidad de una evaluación de impacto (AIPD) antes de activarlo — el seguimiento de la ubicación de empleados pide cuidado extra",
+          ],
+          links: [],
+        },
+        {
+          heading: "Ajustes — activar, QR y empleados",
+          paragraphs: [
+            "Todo se configura en Ajustes: activar el módulo, marcar la ubicación de la tienda en un mapa y el radio (100 m por defecto), imprimir el QR en PDF, registrar los teléfonos de los empleados y exponer el texto de información para ellos.",
+          ],
+          links: [],
+        },
+      ],
+    },
   },
   updates: {
     title: "Novedades",
@@ -2167,7 +2267,7 @@ export const t: Copy = {
     },
     groups: {
       title: "Módulos según lo que quieres resolver",
-      lead: "Doce módulos en tres grupos. Todos opcionales, todos en beta.",
+      lead: "Trece módulos en tres grupos. Todos opcionales, todos en beta.",
       more: "Guía",
       items: [
         {
@@ -2243,6 +2343,7 @@ export const t: Copy = {
         ["OficinaOS Diag", "Gratis para siempre", "0 €"],
         ["Canal SMS (Android en la tienda o en Cloud)", "Beta", "Por anunciar — gratis en el piloto"],
         ["Balcão IA", "Beta", "19 €/mes — gratis en beta"],
+        ["Libro de horas", "Beta", "Por anunciar — gratis en el piloto"],
         ["Módulos Pro (portal, WhatsApp, facturación, escaparate…)", "Beta", "Por anunciar — gratis en el piloto"],
         ["Informes IA", "Beta", "Por anunciar — por informe"],
       ],
