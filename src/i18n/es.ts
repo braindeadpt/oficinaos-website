@@ -1678,7 +1678,7 @@ export const t: Copy = {
             "Ahora — quién está, quién está en pausa, quién salió",
             "Por validar — cada registro con mapa, radio, foto, hora y motivo; aprobar o rechazar con nota",
             "Horas — por día, semana y mes, con retrasos y horas extra",
-            "Olvidos — salidas sin fichar: el bot pregunta al empleado y, sin respuesta, avisa al responsable",
+            "Olvidos — salidas sin fichar: el bot pregunta al empleado por WhatsApp o SMS; sin respuesta en 60 minutos, el responsable recibe un aviso en la app",
             "Exportar — PDF u Excel por periodo y empleado, para el contable y la inspección de trabajo, con las correcciones a la vista",
           ],
           links: [],
