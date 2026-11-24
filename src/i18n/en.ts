@@ -141,7 +141,7 @@ export const t: Copy = {
       { title: "Multi-shop", desc: "Revenue and repairs from all your shops on one dashboard.", href: "/docs/multi-shop/" },
       { title: "WhatsApp remarketing", desc: "An automatic message to customers who haven't been back in a while.", href: "/docs/remarketing/" },
       // TODO(owner): replace the placeholder with the ai-inbox module's commercial name and price once decided
-      { title: "{{AI_INBOX_NOME}}", desc: "A unified WhatsApp and SMS inbox with an AI assistant for the team — reads, summarises and drafts replies a human approves.", href: "/docs/" },
+      { title: "{{AI_INBOX_NOME}}", desc: "A unified WhatsApp and SMS inbox with an AI assistant for the team — reads, summarises and drafts replies a human approves.", href: "/docs/#pro-modules-how-it-works" },
     ],
     signup: {
       title: "Join the Pro beta",
@@ -681,6 +681,7 @@ export const t: Copy = {
       },
       {
         heading: "SMS channel (Pro)",
+        id: "sms-channel-free-in-core",
         paragraphs: [
           "The same automatic assistant, but over SMS — for shops that don't want (or don't yet have) a Meta business account. An Android phone with a SIM acts as the bridge: attached to OficinaOS Cloud it sends and receives even with the PC off (and can serve several shops of the same owner); on the local network it stays as an alternative sending transport.",
           "No Meta accounts, no template approvals, no per-message cost — only the shop SIM's plan (plans with bundled SMS make the marginal cost zero). It needs the SMS module (Pro): without it the app neither sends nor receives messages.",
@@ -1093,6 +1094,7 @@ export const t: Copy = {
         },
         {
           heading: "Choosing the transport — two paths (both Pro)",
+          id: "choosing-the-transport-three-paths",
           paragraphs: [
             "Both transports need the SMS module (Pro) — without it the app neither sends nor receives. The difference is the path the SMS take:",
           ],
@@ -1137,6 +1139,7 @@ export const t: Copy = {
         },
         {
           heading: "Setup — step by step",
+          id: "setup-step-by-step-5-minutes",
           paragraphs: [
             "1. On the Android phone, install «SMS Gateway for Android» (sms-gate.app) from the Play Store or the official site.",
             "2. Cloud path (recommended — sending and receiving, even with the PC off): attach a device in your OficinaOS Cloud account and, on the phone app, use Cloud/Private Server mode with the details OficinaOS shows in Notifications → Channels → «SMS Pro» block — including the webhook URL to register in the phone app for customer replies.",
@@ -1163,7 +1166,7 @@ export const t: Copy = {
         {
           heading: "Privacy — what leaves and what stays",
           paragraphs: [
-            "On the local-network transport, the conversation between the app and the gateway happens with no intermediaries — nothing goes through OficinaOS Cloud. The SMS itself travels over the carrier's mobile network, like any SMS.",
+            "On the local-network transport, sending is direct — the app talks to the phone gateway with no intermediaries. Customer replies are received through OficinaOS Cloud (the phone forwards the SMS it gets) — without that link this transport has no inbound. The SMS itself always travels over the carrier's mobile network, like any SMS.",
             "On the Cloud transport, device credentials and message text pass through OficinaOS Cloud (it is what sends and receives) — credentials are stored encrypted (AES-256-GCM) and message bodies are never logged. The local gateway password is stored encrypted in the app and never shown again in the fields — you can only replace it.",
           ],
           links: [],

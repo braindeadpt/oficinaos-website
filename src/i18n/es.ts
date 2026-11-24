@@ -141,7 +141,7 @@ export const t: Copy = {
       { title: "Multitienda", desc: "Ingresos y reparaciones de todas tus tiendas en un solo panel.", href: "/docs/multi-shop/" },
       { title: "Remarketing por WhatsApp", desc: "Mensaje automático a clientes que llevan tiempo sin volver.", href: "/docs/remarketing/" },
       // TODO(dono): substituir o marcador pelo nome comercial e preço do módulo ai-inbox quando forem decididos
-      { title: "{{AI_INBOX_NOME}}", desc: "Bandeja de entrada unificada de WhatsApp y SMS con un asistente de IA para el equipo — lee, resume y prepara respuestas que un humano aprueba.", href: "/docs/" },
+      { title: "{{AI_INBOX_NOME}}", desc: "Bandeja de entrada unificada de WhatsApp y SMS con un asistente de IA para el equipo — lee, resume y prepara respuestas que un humano aprueba.", href: "/docs/#modulos-pro-como-funcionan" },
     ],
     signup: {
       title: "Quiero entrar en la beta Pro",
@@ -683,6 +683,7 @@ export const t: Copy = {
       },
       {
         heading: "Canal SMS (Pro)",
+        id: "canal-sms-gratis-en-el-core",
         paragraphs: [
           "El mismo asistente automático, pero por SMS — para tiendas que no quieren (o aún no tienen) la cuenta empresarial de Meta. Un móvil Android con SIM hace de puente: conectado a OficinaOS Cloud envía y recibe incluso con el PC apagado (y puede servir a varias tiendas del mismo dueño); en la red local queda como transporte alternativo de envío.",
           "Sin cuentas Meta, sin aprobaciones de plantillas y sin coste por mensaje — solo la tarifa del SIM de la tienda (las tarifas con SMS incluidos hacen el coste marginal cero). Necesita el módulo SMS (Pro): sin él la app ni envía ni recibe mensajes.",
@@ -1097,6 +1098,7 @@ export const t: Copy = {
         },
         {
           heading: "Elegir el transporte — dos caminos (ambos Pro)",
+          id: "elegir-el-transporte-tres-caminhos",
           paragraphs: [
             "Los dos transportes necesitan el módulo SMS (Pro) — sin él la app ni envía ni recibe. La diferencia está en el camino que hacen los SMS:",
           ],
@@ -1141,6 +1143,7 @@ export const t: Copy = {
         },
         {
           heading: "Instalación — paso a paso",
+          id: "instalacion-paso-a-paso-5-minutos",
           paragraphs: [
             "1. En el móvil Android, instala «SMS Gateway for Android» (sms-gate.app) desde la Play Store o el sitio oficial.",
             "2. Camino Cloud (recomendado — envío y recepción, incluso con el PC apagado): conecta un device en tu cuenta de OficinaOS Cloud y, en la app del móvil, usa el modo Cloud/Private Server con los datos que OficinaOS muestra en Notificaciones → Canales → bloque «SMS Pro» — incluida la URL del webhook a registrar en la app del móvil para las respuestas de los clientes.",
@@ -1167,7 +1170,7 @@ export const t: Copy = {
         {
           heading: "Privacidad — qué sale y qué se queda",
           paragraphs: [
-            "En el transporte de la red local, la conversación entre la app y la pasarela ocurre sin intermediarios — nada pasa por OficinaOS Cloud. El SMS en sí viaja por la red móvil del operador, como cualquier SMS.",
+            "En el transporte de la red local, el envío es directo — la app habla con la pasarela del teléfono sin intermediarios. Las respuestas de los clientes se reciben a través de OficinaOS Cloud (el teléfono reenvía los SMS que recibe) — sin esa conexión este transporte no tiene entrada. El SMS en sí viaja siempre por la red móvil del operador, como cualquier SMS.",
             "En el transporte Cloud, las credenciales del device y el texto de los mensajes pasan por OficinaOS Cloud (es ella quien envía y recibe) — las credenciales quedan cifradas (AES-256-GCM) y los cuerpos de los mensajes nunca se registran. La contraseña de la pasarela local queda cifrada en la app y nunca vuelve a aparecer en los campos — solo se sustituye.",
           ],
           links: [],
