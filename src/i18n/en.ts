@@ -1673,7 +1673,7 @@ export const t: Copy = {
             "Now — who's in, who's on break, who's left",
             "Pending review — each record with map, radius, photo, time and reason; approve or reject with a note",
             "Hours — by day, week and month, with lateness and overtime",
-            "Missing punches — forgotten clock-outs: the bot asks the worker over WhatsApp or SMS; with no answer within 60 minutes, the manager gets an in-app alert",
+            "Missing punches — forgotten clock-outs: the bot asks the worker over WhatsApp or SMS; with no answer within 60 minutes, the owner and front desk get an in-app alert",
             "Export — PDF or Excel by period and worker, for the accountant and labour inspections, with corrections visible",
           ],
           links: [],

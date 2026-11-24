@@ -1694,7 +1694,7 @@ export const t = {
             "Agora — quem está, quem está em pausa, quem saiu",
             "Por validar — cada registo com mapa, raio, foto, hora e motivo; aprovar ou recusar com nota",
             "Horas — por dia, semana e mês, com atrasos e horas extra",
-            "Esquecimentos — saídas em falta: o bot pergunta ao trabalhador pelo WhatsApp ou SMS; sem resposta em 60 minutos, o responsável recebe um aviso na app",
+            "Esquecimentos — saídas em falta: o bot pergunta ao trabalhador pelo WhatsApp ou SMS; sem resposta em 60 minutos, o proprietário e a receção recebem um aviso na app",
             "Exportar — PDF ou Excel por período e funcionário, para o contabilista e a ACT, com as correções à vista",
           ],
           links: [],
