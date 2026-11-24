@@ -158,7 +158,7 @@ export const t = {
       { title: "Multi-loja", desc: "Receita e reparações de todas as suas lojas num só painel.", href: "/docs/multi-shop/" },
       { title: "Remarketing WhatsApp", desc: "Mensagem automática a clientes sem reparações há algum tempo.", href: "/docs/remarketing/" },
       // TODO(dono): substituir o marcador pelo nome comercial e preço do módulo ai-inbox quando forem decididos
-      { title: "{{AI_INBOX_NOME}}", desc: "Caixa de entrada unificada de WhatsApp e SMS com um assistente de IA para a equipa — lê, resume e prepara respostas que um humano aprova.", href: "/docs/#modulos-pro-como-funcionam" },
+      { title: "Balcão IA", desc: "Caixa de entrada unificada de WhatsApp e SMS com um assistente de IA para a equipa — lê, resume e prepara respostas que um humano aprova.", href: "/docs/#modulos-pro-como-funcionam" },
     ],
     signup: {
       title: "Quero entrar no beta Pro",
@@ -256,7 +256,7 @@ export const t = {
         what: "Credenciais do device + nº de telefone do cliente + texto da mensagem — transitam pela Cloud; corpos de mensagens não são registados",
       },
       {
-        name: "{{AI_INBOX_NOME}} (Pro)",
+        name: "Balcão IA (Pro)",
         to: "OficinaOS Cloud → fornecedor de IA que a loja escolher",
         what: "Resultados das ferramentas da caixa de entrada transitam pela Cloud sem ficarem guardados nem registados; tokens pessoais MCP ficam só como hash; a chave de IA da loja fica cifrada",
       },
@@ -625,7 +625,7 @@ export const t = {
             ["Portal do cliente", "Link público com o estado da reparação e botões para aceitar/recusar orçamento — sem ligar à loja"],
             ["Bot de WhatsApp", "Escreve para o WhatsApp da loja e recebe o estado da reparação automaticamente; aprova orçamentos com SIM/NÃO"],
             ["Canal SMS", "O mesmo assistente por SMS — telemóvel Android ligado à Cloud (funciona com o PC desligado e serve várias lojas) ou na rede local"],
-            ["{{AI_INBOX_NOME}}", "Caixa de entrada unificada de WhatsApp e SMS, com IA a ajudar a equipa a ler, resumir e preparar respostas"],
+            ["Balcão IA", "Caixa de entrada unificada de WhatsApp e SMS, com IA a ajudar a equipa a ler, resumir e preparar respostas"],
             ["Diagnóstico à distância", "Faz o diagnóstico do telemóvel em casa (oficinaos-diag, grátis) e envia à loja com um código"],
             ["Relatórios IA", "Relatório do diagnóstico escrito em linguagem simples, pronto a entregar"],
             ["Faturação certificada", "Fatura ou fatura-recibo legal emitida diretamente da reparação ou venda — via InvoiceXpress, com a conta da própria loja — só Portugal"],
@@ -642,7 +642,7 @@ export const t = {
         heading: "Preços",
         paragraphs: [
           "A app completa é gratuita e open source (MIT) — sem limites, sem contas, sem período de teste. Para sempre.",
-          "Os módulos Pro estão em beta: durante este período são gratuitos, enquanto medimos o valor real que trazem ao balcão. Quando os preços forem anunciados serão subscrições mensais simples — sem fidelização e sem custos escondidos.",
+          "Os módulos Pro estão em beta: durante este período são gratuitos, enquanto medimos o valor real que trazem ao balcão. O primeiro preço anunciado é o do «Balcão IA» — 19 €/mês por loja, com o modelo de IA incluído e um limite mensal de utilizações; quem trouxer a própria chave de IA (BYOK) paga 9 €/mês, oferta de beta para beta testers. Os restantes preços serão subscrições mensais simples — sem fidelização e sem custos escondidos.",
           "* Nota WhatsApp: responder a clientes dentro da janela de 24h é grátis. Para notificações proativas («está pronta») fora dessa janela, a Meta cobra pequenos valores por mensagem modelo — custo da Meta, não nosso.",
         ],
         table: {
@@ -653,7 +653,7 @@ export const t = {
             ["Portal do cliente", "Disponível (beta)", "A anunciar — grátis no beta"],
             ["Bot de WhatsApp", "Disponível (beta)", "A anunciar — grátis no beta*"],
             ["Canal SMS (gateway Android)", "Disponível (beta)", "A anunciar — grátis no beta. O tarifário do SIM é da loja"],
-            ["{{AI_INBOX_NOME}}", "Beta", "{{AI_INBOX_PRECO}}"],
+            ["Balcão IA", "Beta", "19 €/mês — grátis no beta"],
             ["Receção de diagnósticos", "Disponível (beta)", "A anunciar — grátis no beta"],
             ["Relatórios IA", "Disponível (beta)", "A anunciar — por relatório"],
             ["Faturação (InvoiceXpress)", "Disponível (beta)", "A anunciar — grátis no beta. A conta InvoiceXpress é da loja e tem o custo próprio do serviço deles"],
@@ -2261,19 +2261,20 @@ export const t = {
     },
     pricing: {
       title: "Preços: o estado real",
-      lead: "O Pro está em beta. Durante o piloto, os módulos são grátis enquanto medimos o valor real que trazem. Ainda não há preços anunciados — e não os inventamos aqui.",
+      lead: "O Pro está em beta. Durante o piloto, os módulos são grátis enquanto medimos o valor real que trazem. O primeiro preço anunciado é o do «Balcão IA»: 19 €/mês por loja, com o modelo de IA incluído — os restantes módulos ainda não têm preço.",
       caption: "Estado e preço de cada parte da OficinaOS",
       head: ["O quê", "Estado", "Preço"],
       rows: [
         ["App completa (núcleo)", "Grátis para sempre", "0 €"],
         ["OficinaOS Diag", "Grátis para sempre", "0 €"],
         ["Canal SMS (Android na loja ou na Cloud)", "Beta", "A anunciar — grátis no piloto"],
-        ["{{AI_INBOX_NOME}}", "Beta", "{{AI_INBOX_PRECO}}"],
+        ["Balcão IA", "Beta", "19 €/mês — grátis no beta"],
         ["Módulos Pro (portal, WhatsApp, faturação, montra…)", "Beta", "A anunciar — grátis no piloto"],
         ["Relatórios IA", "Beta", "A anunciar — por relatório"],
       ],
       notes: [
         "Quando os preços forem anunciados, serão subscrições mensais simples — sem fidelização e sem custos escondidos.",
+        "«Balcão IA»: os 19 €/mês incluem o modelo de IA com um limite mensal de utilizações por loja. Quem trouxer a própria chave de IA (BYOK) paga 9 €/mês em vez de 19 — oferta de beta para beta testers.",
         "Quem entrar no piloto tem 90 dias grátis de todos os módulos quando o Pro arrancar.",
         "Custos de terceiros não são nossos: a conta InvoiceXpress é sua; as mensagens modelo do WhatsApp fora da janela de 24 h são cobradas pela Meta.",
       ],

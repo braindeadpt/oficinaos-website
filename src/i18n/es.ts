@@ -141,7 +141,7 @@ export const t: Copy = {
       { title: "Multitienda", desc: "Ingresos y reparaciones de todas tus tiendas en un solo panel.", href: "/docs/multi-shop/" },
       { title: "Remarketing por WhatsApp", desc: "Mensaje automático a clientes que llevan tiempo sin volver.", href: "/docs/remarketing/" },
       // TODO(dono): substituir o marcador pelo nome comercial e preço do módulo ai-inbox quando forem decididos
-      { title: "{{AI_INBOX_NOME}}", desc: "Bandeja de entrada unificada de WhatsApp y SMS con un asistente de IA para el equipo — lee, resume y prepara respuestas que un humano aprueba.", href: "/docs/#modulos-pro-como-funcionan" },
+      { title: "Balcão IA", desc: "Bandeja de entrada unificada de WhatsApp y SMS con un asistente de IA para el equipo — lee, resume y prepara respuestas que un humano aprueba.", href: "/docs/#modulos-pro-como-funcionan" },
     ],
     signup: {
       title: "Quiero entrar en la beta Pro",
@@ -239,7 +239,7 @@ export const t: Copy = {
         what: "Credenciales del device + nº de teléfono del cliente + texto del mensaje — transitan por Cloud; los cuerpos de los mensajes no se registran",
       },
       {
-        name: "{{AI_INBOX_NOME}} (Pro)",
+        name: "Balcão IA (Pro)",
         to: "OficinaOS Cloud → el proveedor de IA que la tienda elija",
         what: "Los resultados de las herramientas de la bandeja de entrada transitan por Cloud sin quedar guardados ni registrados; los tokens personales MCP se guardan solo como hash; la clave de IA de la tienda queda cifrada",
       },
@@ -608,7 +608,7 @@ export const t: Copy = {
             ["Portal del cliente", "Enlace público con el estado de la reparación y botones para aceptar/rechazar el presupuesto — sin llamar a la tienda"],
             ["Bot de WhatsApp", "Escribe al WhatsApp de la tienda y recibe el estado de la reparación automáticamente; aprueba presupuestos con SÍ/NO"],
             ["Canal SMS", "El mismo asistente por SMS — un móvil Android conectado a Cloud (funciona con el PC apagado y puede servir a varias tiendas) o en la red local"],
-            ["{{AI_INBOX_NOME}}", "Bandeja de entrada unificada de WhatsApp y SMS, con IA ayudando al equipo a leer, resumir y preparar respuestas"],
+            ["Balcão IA", "Bandeja de entrada unificada de WhatsApp y SMS, con IA ayudando al equipo a leer, resumir y preparar respuestas"],
             ["Diagnóstico a distancia", "Hace el diagnóstico del móvil en casa (oficinaos-diag, gratis) y lo envía a la tienda con un código"],
             ["Informes IA", "Informe del diagnóstico escrito en lenguaje sencillo, listo para entregar"],
             ["Facturación certificada", "Factura o factura-recibo legal emitida directamente desde la reparación o la venta — vía InvoiceXpress, con la cuenta de la propia tienda — solo Portugal"],
@@ -625,7 +625,7 @@ export const t: Copy = {
         heading: "Precios",
         paragraphs: [
           "La app completa es gratuita y open source (MIT) — sin límites, sin cuentas, sin periodo de prueba. Para siempre.",
-          "Los módulos Pro están en beta: durante este periodo son gratis mientras medimos el valor real que aportan al mostrador. Cuando se anuncien los precios serán suscripciones mensuales sencillas — sin permanencia ni costes ocultos.",
+          "Los módulos Pro están en beta: durante este periodo son gratis mientras medimos el valor real que aportan al mostrador. El primer precio anunciado es el de «Balcão IA» — 19 €/mes por tienda, con el modelo de IA incluido y un límite mensual de uso; quien traiga su propia clave de IA (BYOK) paga 9 €/mes, oferta beta para beta testers. Los demás precios serán suscripciones mensuales sencillas — sin permanencia ni costes ocultos.",
           "* Nota WhatsApp: responder a clientes dentro de la ventana de 24h es gratis. Para notificaciones proactivas («está lista») fuera de esa ventana, Meta cobra pequeños importes por mensaje plantilla — coste de Meta, no nuestro.",
         ],
         table: {
@@ -636,7 +636,7 @@ export const t: Copy = {
             ["Portal del cliente", "Disponible (beta)", "Por anunciar — gratis en beta"],
             ["Bot de WhatsApp", "Disponible (beta)", "Por anunciar — gratis en beta*"],
             ["Canal SMS (pasarela Android)", "Disponible (beta)", "Por anunciar — gratis en beta. La tarifa del SIM es de la tienda"],
-            ["{{AI_INBOX_NOME}}", "Beta", "{{AI_INBOX_PRECO}}"],
+            ["Balcão IA", "Beta", "19 €/mes — gratis en beta"],
             ["Recepción de diagnósticos", "Disponible (beta)", "Por anunciar — gratis en beta"],
             ["Informes IA", "Disponible (beta)", "Por anunciar — por informe"],
             ["Facturación (InvoiceXpress)", "Disponible (beta)", "Por anunciar — gratis en beta. La cuenta de InvoiceXpress es de la tienda y tiene el coste propio del servicio"],
@@ -2235,19 +2235,20 @@ export const t: Copy = {
     },
     pricing: {
       title: "Precios: el estado real",
-      lead: "El Pro está en beta. Durante el piloto, los módulos son gratis mientras medimos el valor real que aportan. Aún no hay precios anunciados — y no nos los inventamos aquí.",
+      lead: "El Pro está en beta. Durante el piloto, los módulos son gratis mientras medimos el valor real que aportan. El primer precio anunciado es el de «Balcão IA»: 19 €/mes por tienda, con el modelo de IA incluido — los demás módulos aún no tienen precio.",
       caption: "Estado y precio de cada parte de OficinaOS",
       head: ["Qué", "Estado", "Precio"],
       rows: [
         ["App completa (núcleo)", "Gratis para siempre", "0 €"],
         ["OficinaOS Diag", "Gratis para siempre", "0 €"],
         ["Canal SMS (Android en la tienda o en Cloud)", "Beta", "Por anunciar — gratis en el piloto"],
-        ["{{AI_INBOX_NOME}}", "Beta", "{{AI_INBOX_PRECO}}"],
+        ["Balcão IA", "Beta", "19 €/mes — gratis en beta"],
         ["Módulos Pro (portal, WhatsApp, facturación, escaparate…)", "Beta", "Por anunciar — gratis en el piloto"],
         ["Informes IA", "Beta", "Por anunciar — por informe"],
       ],
       notes: [
         "Cuando se anuncien los precios, serán suscripciones mensuales sencillas — sin permanencia y sin costes ocultos.",
+        "Balcão IA: los 19 €/mes incluyen el modelo de IA con un límite mensual de uso por tienda. Quien traiga su propia clave de IA (BYOK) paga 9 €/mes en lugar de 19 — oferta beta para beta testers.",
         "Quien entre en el piloto tendrá 90 días gratis de todos los módulos cuando arranque el Pro.",
         "Los costes de terceros no son nuestros: la cuenta de InvoiceXpress es tuya; los mensajes de plantilla de WhatsApp fuera de la ventana de 24 h los cobra Meta.",
       ],

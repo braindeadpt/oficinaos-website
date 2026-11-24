@@ -141,7 +141,7 @@ export const t: Copy = {
       { title: "Multi-shop", desc: "Revenue and repairs from all your shops on one dashboard.", href: "/docs/multi-shop/" },
       { title: "WhatsApp remarketing", desc: "An automatic message to customers who haven't been back in a while.", href: "/docs/remarketing/" },
       // TODO(owner): replace the placeholder with the ai-inbox module's commercial name and price once decided
-      { title: "{{AI_INBOX_NOME}}", desc: "A unified WhatsApp and SMS inbox with an AI assistant for the team — reads, summarises and drafts replies a human approves.", href: "/docs/#pro-modules-how-it-works" },
+      { title: "Balcão IA", desc: "A unified WhatsApp and SMS inbox with an AI assistant for the team — reads, summarises and drafts replies a human approves.", href: "/docs/#pro-modules-how-it-works" },
     ],
     signup: {
       title: "Join the Pro beta",
@@ -239,7 +239,7 @@ export const t: Copy = {
         what: "Device credentials + customer phone number + message text — they transit through the Cloud; message bodies are not logged",
       },
       {
-        name: "{{AI_INBOX_NOME}} (Pro)",
+        name: "Balcão IA (Pro)",
         to: "OficinaOS Cloud → the AI provider the shop chooses",
         what: "Inbox tool results transit through the Cloud without being stored or logged; personal MCP tokens are kept as hashes only; the shop's AI key stays encrypted",
       },
@@ -606,7 +606,7 @@ export const t: Copy = {
             ["Customer portal", "Public link with repair status and approve/decline quote buttons — no need to call the shop"],
             ["WhatsApp bot", "Messages the shop's WhatsApp and gets the repair status automatically; approves quotes with YES/NO"],
             ["SMS channel", "The same assistant over SMS — an Android phone attached to the Cloud (works with the PC off and can serve several shops) or on the local network"],
-            ["{{AI_INBOX_NOME}}", "A unified WhatsApp and SMS inbox, with AI helping the team read, summarise and draft replies"],
+            ["Balcão IA", "A unified WhatsApp and SMS inbox, with AI helping the team read, summarise and draft replies"],
             ["Remote diagnostics", "Runs the phone diagnostic at home (oficinaos-diag, free) and sends it to the shop with a code"],
             ["AI reports", "Diagnostic report written in plain language, ready to hand to the customer"],
             ["Certified invoicing", "Legal invoice or invoice-receipt issued straight from the repair or sale — via InvoiceXpress, on the shop's own account — Portugal only"],
@@ -623,7 +623,7 @@ export const t: Copy = {
         heading: "Pricing",
         paragraphs: [
           "The full app is free and open source (MIT) — no limits, no accounts, no trial period. Forever.",
-          "Pro modules are in beta: during this period they're free while we measure the real value they bring to the counter. When prices are announced they'll be simple monthly subscriptions — no lock-in, no hidden costs.",
+          "Pro modules are in beta: during this period they're free while we measure the real value they bring to the counter. The first announced price is Balcão IA — €19/month per shop, with the AI model included and a monthly usage cap; shops that bring their own AI key (BYOK) pay €9/month, a beta offer for beta testers. Remaining prices will be simple monthly subscriptions — no lock-in, no hidden costs.",
           "* WhatsApp note: replying to customers within the 24-hour window is free. Proactive notifications («it's ready») outside that window need Meta-approved templates, which carry small per-message fees — Meta's cost, not ours.",
         ],
         table: {
@@ -634,7 +634,7 @@ export const t: Copy = {
             ["Customer portal", "Available (beta)", "TBA — free during beta"],
             ["WhatsApp bot", "Available (beta)", "TBA — free during beta*"],
             ["SMS channel (Android gateway)", "Available (beta)", "TBA — free during beta. The SIM plan is the shop's"],
-            ["{{AI_INBOX_NOME}}", "Beta", "{{AI_INBOX_PRECO}}"],
+            ["Balcão IA", "Beta", "€19/month — free during beta"],
             ["Diagnostics intake", "Available (beta)", "TBA — free during beta"],
             ["AI reports", "Available (beta)", "TBA — per report"],
             ["Invoicing (InvoiceXpress)", "Available (beta)", "TBA — free during beta. The InvoiceXpress account is the shop's own and carries its own service cost"],
@@ -2230,19 +2230,20 @@ export const t: Copy = {
     },
     pricing: {
       title: "Pricing: where it really stands",
-      lead: "Pro is in beta. During the pilot, the modules are free while we measure the real value they bring. No prices have been announced yet — and we don't make them up here.",
+      lead: "Pro is in beta. During the pilot, the modules are free while we measure the real value they bring. The first announced price is Balcão IA: €19/month per shop, with the AI model included — the other modules have no price yet.",
       caption: "Status and price of each part of OficinaOS",
       head: ["What", "Status", "Price"],
       rows: [
         ["Full app (core)", "Free forever", "€0"],
         ["OficinaOS Diag", "Free forever", "€0"],
         ["SMS channel (Android in the shop or on the Cloud)", "Beta", "To be announced — free in the pilot"],
-        ["{{AI_INBOX_NOME}}", "Beta", "{{AI_INBOX_PRECO}}"],
+        ["Balcão IA", "Beta", "€19/month — free during beta"],
         ["Pro modules (portal, WhatsApp, invoicing, storefront…)", "Beta", "To be announced — free in the pilot"],
         ["AI reports", "Beta", "To be announced — per report"],
       ],
       notes: [
         "When prices are announced, they'll be simple monthly subscriptions — no lock-in and no hidden costs.",
+        "Balcão IA: the €19/month includes the AI model with a monthly usage cap per shop. Shops that bring their own AI key (BYOK) pay €9/month instead of €19 — a beta offer for beta testers.",
         "Pilot members get 90 days of every module free when Pro launches.",
         "Third-party costs aren't ours: the InvoiceXpress account is yours; WhatsApp template messages outside the 24 h window are charged by Meta.",
       ],
