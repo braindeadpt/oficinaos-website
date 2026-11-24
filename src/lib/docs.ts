@@ -12,7 +12,7 @@ export const DOC_MODULES: { slug: string; key: ModuleKey; product: ProductId }[]
   { slug: "diag", key: "diag", product: "diag" },
   { slug: "portal", key: "portal", product: "pro" },
   { slug: "whatsapp", key: "whatsapp", product: "pro" },
-  { slug: "sms", key: "sms", product: "os" },
+  { slug: "sms", key: "sms", product: "pro" },
   { slug: "ai-analyst", key: "aiAnalyst", product: "os" },
   { slug: "invoicing", key: "invoicing", product: "pro" },
   { slug: "storefront", key: "storefront", product: "pro" },

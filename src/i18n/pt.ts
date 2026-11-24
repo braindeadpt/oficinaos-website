@@ -111,7 +111,7 @@ export const t = {
       },
       {
         title: "Notificações",
-        desc: "Notificações na app e por WhatsApp mantêm a equipa e os clientes informados.",
+        desc: "Alertas na app — e mensagens WhatsApp/SMS aos clientes com os módulos Pro.",
       },
       {
         title: "Interface multilingue",
@@ -157,6 +157,8 @@ export const t = {
       { title: "Preços de mercado", desc: "Compare os seus preços com a mediana anónima de outras lojas.", href: "/docs/market-prices/" },
       { title: "Multi-loja", desc: "Receita e reparações de todas as suas lojas num só painel.", href: "/docs/multi-shop/" },
       { title: "Remarketing WhatsApp", desc: "Mensagem automática a clientes sem reparações há algum tempo.", href: "/docs/remarketing/" },
+      // TODO(dono): substituir o marcador pelo nome comercial e preço do módulo ai-inbox quando forem decididos
+      { title: "{{AI_INBOX_NOME}}", desc: "Caixa de entrada unificada de WhatsApp e SMS com um assistente de IA para a equipa — lê, resume e prepara respostas que um humano aprova.", href: "/docs/#modulos-pro-como-funcionam" },
     ],
     signup: {
       title: "Quero entrar no beta Pro",
@@ -252,6 +254,11 @@ export const t = {
         name: "SMS e bot SMS (Pro)",
         to: "OficinaOS Cloud → telemóvel Android da loja",
         what: "Credenciais do device + nº de telefone do cliente + texto da mensagem — transitam pela Cloud; corpos de mensagens não são registados",
+      },
+      {
+        name: "{{AI_INBOX_NOME}} (Pro)",
+        to: "OficinaOS Cloud → fornecedor de IA que a loja escolher",
+        what: "Resultados das ferramentas da caixa de entrada transitam pela Cloud sem ficarem guardados nem registados; tokens pessoais MCP ficam só como hash; a chave de IA da loja fica cifrada",
       },
       {
         name: "Acesso remoto e links ao cliente",
@@ -383,7 +390,7 @@ export const t = {
             ["POS de balcão", "Venda de peças e acessórios, sessões de caixa, talões e registo de pagamentos"],
             ["Serviços de reparação", "Catálogo de reparações com preços — a «tabela de preços» da loja"],
             ["Orçamentos", "Versões enviadas ao cliente, resposta aceite/recusada com registo datado, histórico completo"],
-            ["Notificações", "Alertas na app, modelos de mensagem editáveis e fila de envio WhatsApp/SMS"],
+            ["Notificações", "Alertas na app, modelos de mensagem editáveis e fila de envio — envio WhatsApp/SMS com módulo Pro"],
             ["Relatórios", "Vendas, reparações e margens por período — com página de impressão A4"],
             ["Impressão", "Talões e etiquetas configuráveis — rolo 58/80 mm, A4, secções opcionais e impressão direta em térmicas de rede"],
             ["Analista de IA", "Perguntas sobre os dados da loja em linguagem natural"],
@@ -610,12 +617,15 @@ export const t = {
           "Os módulos Pro são funcionalidades que precisam de «chegar à internet». A app continua 100% local e gratuita; quando a loja quer alcance remoto, emparelha a app com a OficinaOS Cloud — o nosso serviço que faz de ponte entre a app da loja e o exterior, sem expor o PC da loja.",
           "A loja cria uma conta na Cloud e emparelha a app com um código (uma vez). Cada módulo é ativado do lado do servidor — sem ficheiros de licença. A app sincroniza com a Cloud a cada ~2 minutos para enviar e receber — as filas de mensagens (WhatsApp/SMS) têm um ciclo rápido próprio de ~12 segundos, para as respostas do bot chegarem em segundos.",
           "Sem emparelhamento, tudo continua a funcionar na rede local — os módulos Pro simplesmente não aparecem.",
+          "Todos os canais de mensagens — SMS e WhatsApp, em qualquer transporte (rede local ou Cloud) — são módulos Pro: a app gratuita não envia nem recebe mensagens. Os cartões das definições ficam visíveis, mas ao clicar mostram «Esta opção existe apenas no OficinaOS Pro.»",
         ],
         table: {
           head: ["Módulo", "O que o cliente da loja ganha"],
           rows: [
             ["Portal do cliente", "Link público com o estado da reparação e botões para aceitar/recusar orçamento — sem ligar à loja"],
             ["Bot de WhatsApp", "Escreve para o WhatsApp da loja e recebe o estado da reparação automaticamente; aprova orçamentos com SIM/NÃO"],
+            ["Canal SMS", "O mesmo assistente por SMS — telemóvel Android ligado à Cloud (funciona com o PC desligado e serve várias lojas) ou na rede local"],
+            ["{{AI_INBOX_NOME}}", "Caixa de entrada unificada de WhatsApp e SMS, com IA a ajudar a equipa a ler, resumir e preparar respostas"],
             ["Diagnóstico à distância", "Faz o diagnóstico do telemóvel em casa (oficinaos-diag, grátis) e envia à loja com um código"],
             ["Relatórios IA", "Relatório do diagnóstico escrito em linguagem simples, pronto a entregar"],
             ["Faturação certificada", "Fatura ou fatura-recibo legal emitida diretamente da reparação ou venda — via InvoiceXpress, com a conta da própria loja — só Portugal"],
@@ -642,7 +652,8 @@ export const t = {
             ["OficinaOS Diag (ferramenta)", "Grátis para sempre", "0 €"],
             ["Portal do cliente", "Disponível (beta)", "A anunciar — grátis no beta"],
             ["Bot de WhatsApp", "Disponível (beta)", "A anunciar — grátis no beta*"],
-            ["Canal SMS (gateway Android)", "Incluído no core", "0 € — grátis"],
+            ["Canal SMS (gateway Android)", "Disponível (beta)", "A anunciar — grátis no beta. O tarifário do SIM é da loja"],
+            ["{{AI_INBOX_NOME}}", "Beta", "{{AI_INBOX_PRECO}}"],
             ["Receção de diagnósticos", "Disponível (beta)", "A anunciar — grátis no beta"],
             ["Relatórios IA", "Disponível (beta)", "A anunciar — por relatório"],
             ["Faturação (InvoiceXpress)", "Disponível (beta)", "A anunciar — grátis no beta. A conta InvoiceXpress é da loja e tem o custo próprio do serviço deles"],
@@ -670,7 +681,7 @@ export const t = {
         heading: "Bot de WhatsApp (Pro)",
         paragraphs: [
           "O cliente escreve para o número de WhatsApp da loja e o bot responde com dados reais da ficha — sem ninguém pegar no telemóvel. Funciona com o próprio número da loja (o WhatsApp Business do telemóvel continua a funcionar em paralelo).",
-          "Notas honestas: a resposta chega em ~10–15 segundos (poller rápido de mensagens); o setup usa a WhatsApp Business Platform oficial da Meta e, durante o beta, ajudamos na configuração. Existe também o transporte Evolution (não-oficial, grátis para enviar, Pro para o bot) — ver o guia.",
+          "Notas honestas: a resposta chega em ~10–15 segundos (poller rápido de mensagens); o setup usa a WhatsApp Business Platform oficial da Meta e, durante o beta, ajudamos na configuração. Existe também o transporte Evolution (não-oficial — envio e bot são ambos Pro) — ver o guia.",
         ],
         table: {
           head: ["O cliente escreve", "O bot responde"],
@@ -688,10 +699,11 @@ export const t = {
         ],
       },
       {
-        heading: "Canal SMS (grátis no core)",
+        heading: "Canal SMS (Pro)",
+        id: "canal-sms-gratis-no-core",
         paragraphs: [
-          "O mesmo assistente automático, mas por SMS — para lojas que não querem (ou ainda não têm) a conta empresarial da Meta. Um telemóvel Android com SIM fica na loja a fazer de ponte: a app envia e recebe SMS através dele, pela rede móvel normal. É gratuito e não precisa de Cloud — tudo acontece na rede da loja.",
-          "Sem contas Meta, sem aprovações de modelos e sem custo por mensagem — só o tarifário do SIM da loja (cartões com SMS incluídos tornam o custo marginal zero). O setup são ~5 minutos e está explicado passo a passo no guia.",
+          "O mesmo assistente automático, mas por SMS — para lojas que não querem (ou ainda não têm) a conta empresarial da Meta. Um telemóvel Android com SIM faz de ponte: ligado à OficinaOS Cloud envia e recebe mesmo com o PC desligado (e pode servir várias lojas do mesmo dono); na rede local fica como transporte alternativo de envio.",
+          "Sem contas Meta, sem aprovações de modelos e sem custo por mensagem — só o tarifário do SIM da loja (cartões com SMS incluídos tornam o custo marginal zero). Precisa do módulo SMS (Pro): sem ele a app não envia nem recebe mensagens.",
         ],
         links: [
           { label: "Guia detalhado do canal SMS", href: "/docs/sms" },
@@ -884,6 +896,13 @@ export const t = {
           links: [],
         },
         {
+          heading: "Sem o módulo",
+          paragraphs: [
+            "Sem o módulo whatsapp-bot ativo, a app não envia nem recebe nada por WhatsApp — em nenhum transporte (relay Cloud, Meta direto ou Evolution). Os cartões das definições ficam visíveis, mas ao clicar mostram «Esta opção existe apenas no OficinaOS Pro.»",
+          ],
+          links: [],
+        },
+        {
           heading: "Como decide a resposta",
           paragraphs: [
             "O bot procura a ficha do cliente pelos últimos 9 dígitos do número — robusto a +351, espaços e formatos diferentes. Com uma reparação ativa, o contexto é óbvio e responde diretamente; com várias, lista os códigos para o cliente escolher.",
@@ -934,7 +953,7 @@ export const t = {
         {
           heading: "Alternativa: WhatsApp via Evolution (Pro)",
           paragraphs: [
-            "Para lojas que não querem a conta empresarial da Meta, a app também fala com um gateway «Evolution API» local — um transporte não-oficial que emula o WhatsApp Web. O envio é grátis; o bot de resposta é Pro e exige aceitar um termo de responsabilidade próprio nas definições.",
+            "Para lojas que não querem a conta empresarial da Meta, a app também fala com um gateway «Evolution API» local — um transporte não-oficial que emula o WhatsApp Web. Envio e receção são Pro; o bot de resposta exige ainda aceitar um termo de responsabilidade próprio nas definições.",
             "Honestamente: por ser não-oficial, a Meta pode suspender/banir o número — o risco é da loja. Por isso o bot Evolution é deliberadamente conservador: ignora grupos/broadcasts/mensagens não-texto e números sem ficha, responde no máximo ~10 vezes/hora por número com teto diário, espera 3–8 s com «a escrever…» antes de responder, e suspende-se sozinho se a sessão for bloqueada (o dono reativa re-aceitando o termo).",
           ],
           links: [],
@@ -1072,13 +1091,14 @@ export const t = {
     sms: {
       title: "Canal SMS",
       subtitle:
-        "Notificações e assistente automático por SMS — por um Android com SIM na loja, por um provider seu à escolha, ou por um Android ligado à OficinaOS Cloud (Pro).",
+        "Notificações e assistente automático por SMS (módulo Pro) — por um Android com SIM ligado à OficinaOS Cloud, ou na rede local da loja.",
       sections: [
         {
           heading: "O que o módulo faz",
           paragraphs: [
             "Com o canal SMS ativo, a app usa um telemóvel Android na loja como «gateway»: as notificações aos clientes (reparação pronta, orçamento enviado, lembretes) saem por SMS pela rede móvel normal — e as respostas dos clientes entram na app e recebem resposta automática.",
             "É o mesmo assistente do WhatsApp, com os mesmos comandos — o cliente escreve «estado» e recebe o ponto da reparação, escreve «orçamento» e recebe o valor, responde SIM ou NÃO para aprovar ou recusar. A diferença: não precisa de conta Meta, de modelos aprovados, nem de internet no telemóvel do cliente.",
+            "Sem o módulo SMS ativo, a app não envia nem recebe nada por este canal — em nenhum transporte. O cartão das definições fica visível, mas ao clicar mostra «Esta opção existe apenas no OficinaOS Pro.»",
           ],
           table: {
             head: ["O cliente escreve", "O bot responde"],
@@ -1094,16 +1114,16 @@ export const t = {
           links: [],
         },
         {
-          heading: "Escolher o transporte — três caminhos",
+          heading: "Escolher o transporte — dois caminhos (ambos Pro)",
+          id: "escolher-o-transporte-tres-caminhos",
           paragraphs: [
-            "Em Definições → Notificações → secção SMS, o campo «Transporte» escolhe como os SMS saem da loja. Cada caminho tem um preço diferente — em dinheiro, em funcionalidades ou em responsabilidade.",
+            "Os dois transportes precisam do módulo SMS (Pro) — sem ele a app não envia nem recebe. A diferença está no caminho que os SMS fazem:",
           ],
           table: {
             head: ["Transporte", "Custo", "Envio", "Respostas do cliente", "Para quem"],
             rows: [
-              ["Telemóvel Android na loja (grátis)", "O tarifário do SIM da loja", "✅", "✅ — o assistente responde", "A maioria das lojas — começo imediato"],
-              ["Provider personalizado (grátis)", "A conta da loja no provider", "✅", "❌ — só envio", "Loja que já tem conta SMS noutro serviço"],
-              ["Android ligado à Cloud (Pro)", "Módulo SMS + tarifário do SIM da loja", "✅", "✅ — respostas e relatórios via Cloud; um telemóvel pode servir várias lojas", "Lojas cujo PC nem sempre está ligado, ou donos com várias lojas"],
+              ["Android ligado à Cloud", "Módulo SMS + tarifário do SIM da loja", "✅ — mesmo com o PC desligado", "✅ — respostas e relatórios via Cloud; um telemóvel pode servir várias lojas", "A maioria das lojas — e donos com várias lojas"],
+              ["Android na rede local (fallback)", "Módulo SMS + tarifário do SIM da loja", "✅ — pelo PC da loja", "Receção via Cloud quando configurada", "Loja sem telemóvel ligado à Cloud, ou como reserva"],
             ],
           },
           links: [],
@@ -1111,21 +1131,13 @@ export const t = {
         {
           heading: "Transporte Android — o que é preciso",
           list: [
+            "O módulo SMS (Pro) ativo — sem ele a app não envia nem recebe mensagens",
             "Um telemóvel Android — pode ser um equipamento antigo; fica sempre na loja",
             "Um cartão SIM ativo — idealmente com SMS incluídos no tarifário (o custo das mensagens é da operadora)",
             "A app gratuita «SMS Gateway for Android» (sms-gate.app), da Play Store ou do site oficial",
-            "O telemóvel e o PC do OficinaOS na mesma rede Wi-Fi/LAN",
-            "Nada mais — o canal SMS é gratuito e não precisa de Cloud nem de módulos",
+            "Para o caminho Cloud: o telemóvel com internet; para o caminho local: o telemóvel e o PC do OficinaOS na mesma rede Wi-Fi/LAN",
           ],
           paragraphs: [],
-          links: [],
-        },
-        {
-          heading: "Provider personalizado — a loja descreve a API",
-          paragraphs: [
-            "Se já tem conta num provider SMS com API HTTP (BulkSMS, Go4Mobility, agregadores nacionais…), pode ligá-la sem código: indique o URL, o método (POST ou GET), o formato do corpo (JSON ou formulário), os cabeçalhos de autenticação e um modelo com os marcadores {{to}} e {{text}} — a app valida o modelo ao gravar.",
-            "Limitação assumida: este transporte só envia. As respostas dos clientes e os relatórios de entrega não são genericizáveis — cada provider tem um formato de webhook próprio e nenhum consegue chamar a rede interna da loja. Para receber respostas use o transporte Android ou a Cloud.",
-          ],
           links: [],
         },
         {
@@ -1147,37 +1159,18 @@ export const t = {
           links: [],
         },
         {
-          heading: "Transporte BulkSMS (removido)",
-          id: "cloud-gerida-bulksms-pro",
-          paragraphs: [
-            "A primeira versão do transporte Cloud usava credenciais BulkSMS da própria loja. Esse caminho foi removido da Cloud — as credenciais guardadas foram apagadas e já não é possível enviar por aí. Se a sua instalação ainda o usava, ligue um telemóvel Android à Cloud (acima): é mais barato, não precisa de conta noutro provider e encaminha respostas multi-loja.",
-          ],
-          links: [],
-        },
-        {
-          heading: "Instalação — passo a passo (~5 minutos)",
+          heading: "Instalação — passo a passo",
+          id: "instalacao-passo-a-passo-5-minutos",
           paragraphs: [
             "1. No telemóvel Android, instale «SMS Gateway for Android» (sms-gate.app) a partir da Play Store ou do site oficial.",
-            "2. Abra a app e ative o modo «Local Server» (Servidor Local). A app mostra três coisas: o endereço local (ex.: 192.168.1.50:8080), um nome de utilizador e uma palavra-passe.",
-            "3. Confirme que o telemóvel está ligado à mesma rede Wi-Fi do PC onde corre o OficinaOS.",
-            "4. No PC, na app OficinaOS: Menu → Notificações → Canais → secção SMS.",
-            "5. No campo «URL do gateway», escreva http:// seguido do endereço que a app do telemóvel mostra — por exemplo http://192.168.1.50:8080.",
-            "6. Preencha o utilizador e a palavra-passe exatamente como aparecem no telemóvel e guarda.",
-            "7. Carregue em «Enviar SMS de teste», indique o seu próprio número e confirme que a mensagem chega.",
-            "8. Por fim, carregue em «Registar webhook no telemóvel» — isto diz à app do telemóvel para onde enviar os SMS recebidos dos clientes.",
+            "2. Caminho Cloud (recomendado — envio e receção, mesmo com o PC desligado): ligue um device na sua conta OficinaOS Cloud e, na app do telemóvel, use o modo Cloud/Private Server com os dados que o OficinaOS mostra em Notificações → Canais → bloco «SMS Pro» — incluindo o webhook URL a registar na app do telemóvel para as respostas dos clientes.",
+            "3. Caminho rede local (envio, como fallback): na app do telemóvel ative o modo «Local Server» — a app mostra o endereço local (ex.: 192.168.1.50:8080), um nome de utilizador e uma palavra-passe. O telemóvel e o PC têm de estar na mesma rede Wi-Fi.",
+            "4. Na app OficinaOS: Menu → Notificações → Canais → secção SMS — no modo local, preencha o «URL do gateway» (http:// + endereço), o utilizador e a palavra-passe do telemóvel e guarde.",
+            "5. Carregue em «Enviar SMS de teste», indique o seu próprio número e confirme que a mensagem chega.",
           ],
           links: [
             { label: "SMS Gateway for Android (site oficial)", href: "https://sms-gate.app" },
           ],
-        },
-        {
-          heading: "O detalhe do webhook — porque não pode ser localhost",
-          paragraphs: [
-            "O botão «Registar webhook» ensina a app do telemóvel a reencaminhar os SMS recebidos para o PC da loja. Para isso, a OficinaOS precisa de saber o seu próprio endereço na rede — e descobre-o a partir do endereço que usa no browser.",
-            "Se abrir a app em http://localhost:4000, o webhook fica registado como «localhost» — que para o telemóvel significa ele próprio, não o PC. O registo falha ou fica a apontar para o sítio errado.",
-            "Abra a app pelo endereço de rede do PC (ex.: http://192.168.1.20:4000 — o mesmo que usa noutros dispositivos da loja) antes de carregar em «Registar webhook». A app avisa se estiver em localhost.",
-          ],
-          links: [],
         },
         {
           heading: "Manter o gateway fiável",
@@ -1194,8 +1187,8 @@ export const t = {
         {
           heading: "Privacidade — o que sai e o que fica",
           paragraphs: [
-            "Nos transportes Android e personalizado, a conversa entre a app e o gateway/provider acontece sem intermediários — nada passa pela OficinaOS Cloud. O SMS em si viaja pela rede móvel da operadora, como qualquer SMS.",
-            "No transporte Cloud, as credenciais do device e o texto das mensagens passam pela OficinaOS Cloud (é ela que envia e recebe) — as credenciais ficam encriptadas (AES-256-GCM) e os corpos das mensagens nunca são registados. A palavra-passe do gateway e os headers do provider ficam encriptados na app e nunca voltam a aparecer nos campos — só se substituem.",
+            "No transporte da rede local, o envio é direto — a app fala com o gateway do telemóvel sem intermediários. A receção das respostas dos clientes é feita pela OficinaOS Cloud (o telemóvel reencaminha os SMS que recebe) — sem essa ligação não há receção por este transporte. O SMS em si viaja sempre pela rede móvel da operadora, como qualquer SMS.",
+            "No transporte Cloud, as credenciais do device e o texto das mensagens passam pela OficinaOS Cloud (é ela que envia e recebe) — as credenciais ficam encriptadas (AES-256-GCM) e os corpos das mensagens nunca são registados. A palavra-passe do gateway local fica encriptada na app e nunca volta a aparecer nos campos — só se substitui.",
           ],
           links: [],
         },
@@ -1219,7 +1212,7 @@ export const t = {
               ["SMS de teste não chega", "URL correto (http:// + IP:porta)? Número de destino com indicativo (ex.: +351…)? Saldo/SMS disponíveis no SIM?"],
               ["«Falha na ligação ao gateway»", "O telemóvel está ligado e na mesma Wi-Fi do PC? O IP não mudou (ver na app do telemóvel)?"],
               ["Erro de autenticação", "Utilizador e palavra-passe exatamente como na app do telemóvel (são gerados por ela, não é o utilizador que os escolhe)"],
-              ["Cliente responde e nada acontece", "O webhook está registado? (botão «Registar webhook») — e foi registado com a app aberta pelo IP de rede, não localhost?"],
+              ["Cliente responde e nada acontece", "No caminho Cloud: o webhook URL está registado na app do telemóvel? O device aparece ligado no bloco «SMS Pro»? O módulo SMS está ativo?"],
               ["Funcionava e parou", "Otimização de bateria do Android suspendeu a app? O IP do telemóvel mudou?"],
             ],
           },
@@ -1231,7 +1224,7 @@ export const t = {
           list: [
             "Nunca exponha a porta do gateway (ex.: 8080) à internet — é só para a rede interna da loja",
             "Mantenha o telemóvel e o PC na rede de confiança da loja — não na Wi-Fi de clientes/convidados",
-            "Se trocar de telemóvel ou de SIM, repita a configuração e registe o webhook outra vez",
+            "Se trocar de telemóvel ou de SIM, repita a configuração — no caminho Cloud, registe também o webhook URL na app do novo telemóvel",
           ],
           paragraphs: [],
           links: [],
@@ -1674,7 +1667,7 @@ export const t = {
           "Gestão de stock com alertas de reposição e histórico de peças usadas",
           "Caixa / POS para vender acessórios e registar pagamentos MB Way, numerário e cartão",
           "Receitas, margens e tempo médio de reparação num painel diário",
-          "SMS automáticos ao cliente quando a reparação fica pronta (via telemóvel Android na loja)",
+          "SMS automáticos ao cliente quando a reparação fica pronta (módulo Pro, via telemóvel Android)",
           "Backups diários automáticos da base de dados",
         ],
       },
@@ -2193,15 +2186,14 @@ export const t = {
         "Reparações, orçamentos, clientes, stock e caixa",
         "No seu PC, a funcionar sem internet",
         "Código aberto, licença MIT",
-        "Canal SMS com um Android na loja — grátis, sem Cloud",
+        "Página pública de acompanhamento e resposta a orçamentos",
         "OficinaOS Diag — diagnóstico por cabo, grátis",
       ],
       link: "Descarregar a OficinaOS",
     },
     groups: {
       title: "Módulos pelo que quer resolver",
-      lead: "Onze módulos em três grupos. Todos opcionais, todos em beta.",
-      smsNote: "grátis, no núcleo",
+      lead: "Doze módulos em três grupos. Todos opcionais, todos em beta.",
       more: "Guia",
       items: [
         {
@@ -2275,7 +2267,8 @@ export const t = {
       rows: [
         ["App completa (núcleo)", "Grátis para sempre", "0 €"],
         ["OficinaOS Diag", "Grátis para sempre", "0 €"],
-        ["Canal SMS (Android na loja)", "No núcleo", "0 €"],
+        ["Canal SMS (Android na loja ou na Cloud)", "Beta", "A anunciar — grátis no piloto"],
+        ["{{AI_INBOX_NOME}}", "Beta", "{{AI_INBOX_PRECO}}"],
         ["Módulos Pro (portal, WhatsApp, faturação, montra…)", "Beta", "A anunciar — grátis no piloto"],
         ["Relatórios IA", "Beta", "A anunciar — por relatório"],
       ],
@@ -2291,7 +2284,7 @@ export const t = {
       title: "Perguntas frequentes",
       items: [
         { q: "A OficinaOS vai deixar de ser grátis?", a: "Não. O programa é de código aberto (MIT) e o núcleo nunca fica atrás de um pagamento. O Pro só acrescenta o que precisa de internet." },
-        { q: "Preciso do Pro para usar a OficinaOS?", a: "Não. Reparações, orçamentos, clientes, stock, caixa e o canal SMS funcionam sem Pro e sem internet." },
+        { q: "Preciso do Pro para usar a OficinaOS?", a: "Não. Reparações, orçamentos, clientes, stock, caixa e a página de acompanhamento funcionam sem Pro e sem internet." },
         { q: "O Pro é só para lojas?", a: "Não. É para quem repara, diagnostica ou revende: técnicos independentes, oficinas e revendedores. A faturação certificada é só para Portugal." },
         { q: "O que acontece se desligar a Cloud?", a: "A app continua a funcionar na rede local com todos os seus dados; os módulos Pro deixam de aparecer. Ao desligar (unpair), os dados da loja guardados na Cloud são apagados — páginas do portal, relatórios recebidos e credenciais. Desligar a partilha de preços apaga da Cloud os preços enviados." },
         { q: "Como entro no piloto?", a: "Deixe o contacto no formulário. Falamos consigo, ajudamos a emparelhar e ativamos os módulos que fizerem sentido." },
@@ -2493,7 +2486,7 @@ export const seoPages = {
           "Stock com alertas de reposição e peças descontadas automaticamente",
           "Caixa / POS para vender acessórios e registar MB Way, numerário e cartão",
           "Talão com QR de acompanhamento e garantia; fatura certificada com o módulo Pro",
-          "SMS automáticos ao cliente quando a reparação fica pronta",
+          "SMS automáticos ao cliente quando a reparação fica pronta (módulo Pro)",
         ],
       },
       {

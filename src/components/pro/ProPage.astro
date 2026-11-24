@@ -27,11 +27,10 @@ const money = new Intl.NumberFormat(langTag, { style: "currency", currency: "EUR
 const moneyInt = new Intl.NumberFormat(langTag, { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
 // Índices de t.pro.modules por grupo: falar com clientes · vender/faturar · gerir/crescer.
 const groupIdx = [
-  [0, 1, 2, 10],
+  [0, 1, 2, 10, 11],
   [5, 6, 7],
   [8, 9, 3, 4],
 ];
-const SMS = 2;
 const g = p.groups.items;
 // As três UIs mock têm formas próprias — o tipo é uma união; fixa cada
 // uma localmente para os acessos a seguir.
@@ -170,9 +169,7 @@ const check = '<path d="m5 13 4 4L19 7"/>';
                           {m.title}
                           <Icon name="arrow" class="h-3.5 w-3.5 text-text-subtle transition-colors group-hover:text-link" />
                         </a>
-                        {i === SMS && (
-                          <span class="rounded-full bg-success-soft px-2 py-0.5 text-xs font-semibold text-on-success-soft">{p.groups.smsNote}</span>
-                        )}
+
                       </p>
                       <p class="mt-0.5 text-sm text-text-muted">{m.desc}</p>
                     </li>
