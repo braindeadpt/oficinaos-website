@@ -11,6 +11,7 @@ import { fill, pricing, euro } from "../../lib/pricing";
 import Footer from "../Footer.astro";
 import Icon from "../Icon.astro";
 import Nav from "../Nav.astro";
+import PontoBody from "./PontoBody.astro";
 import PontoHero from "./PontoHero.astro";
 import BetaSignup from "../pro/BetaSignup.astro";
 import DataTable from "../ui/DataTable.astro";
@@ -105,6 +106,10 @@ const stepIcons = ["clipboard", "smartphone", "activity"] as const;
   </section>
   )}
 
+  {interest === "ponto" ? (
+    <PontoBody t={t} locale={locale} />
+  ) : (
+  <>
   <Section id="problema" tone="raised" width="narrow" labelledby="problem-title">
     <Heading id="problem-title">
       {m.problem.title}
@@ -239,9 +244,14 @@ const stepIcons = ["clipboard", "smartphone", "activity"] as const;
     <p class="mt-4 text-sm text-text-muted">{m.pricing.note}</p>
   </Section>
 
-  <Section width="default" product="pro" pad="md">
-    <BetaSignup t={t} title={m.waitlist.title} subtitle={m.waitlist.subtitle} button={m.waitlist.button} interest={interest} />
-  </Section>
+  </>
+  )}
+
+  <div class:list={[interest === "ponto" && "pb-wait"]}>
+    <Section width="default" product="pro" pad="md">
+      <BetaSignup t={t} title={m.waitlist.title} subtitle={m.waitlist.subtitle} button={m.waitlist.button} interest={interest} />
+    </Section>
+  </div>
 
   <Faq title={m.faq.title} items={m.faq.items} product="pro" />
 </main>

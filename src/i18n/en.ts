@@ -2476,6 +2476,147 @@ export const t: Copy = {
       ],
     },
   },
+  pontoPage: {
+    problem: {
+      eyebrow: "The problem",
+      title: "Recording working hours is mandatory. And it's usually a hassle.",
+      lead: "In Portugal, every company must record each worker's start, end and break times and keep those records for 5 years (Labour Code, art. 202). In practice, it ends up as one of these:",
+      items: [
+        { title: "Paper sheet", text: "Forgotten, scribbled over, lost. And hard to prove it wasn't changed." },
+        { title: "Time clock", text: "You have to buy or rent it, install it and maintain it. And it doesn't work for people who work off-site." },
+        { title: "Time-tracking apps", text: "Each employee installs an app, creates an account and remembers a password. Many end up not using it." },
+      ],
+    },
+    steps: {
+      eyebrow: "How it works",
+      title: "Three steps. The first check-in takes seconds.",
+      items: [
+        {
+          title: "Open your shop's link on any device",
+          text: "The counter computer, an old phone, a tablet or the TV: any device with internet you already have will do. A QR code appears and changes by itself every 30 seconds. Nothing to buy.",
+          note: "No device at all? Print the poster with the QR code and stick it by the door.",
+        },
+        {
+          title: "The employee scans the QR code and taps send",
+          text: "Point the camera, WhatsApp opens with the message already written, tap send. Done.",
+          note: "About 3 seconds.",
+        },
+        {
+          title: "You see everything on the dashboard",
+          text: "Who is in right now, everyone's hours, late arrivals and missed check-outs. At the end of the month, export to PDF or Excel for your accountant.",
+          note: "On your phone or computer.",
+        },
+      ],
+      devices: ["Counter computer", "Tablet", "Old phone", "TV"],
+      link: "oficinaos.app/p/central-workshop",
+      sent: "Sent",
+      dash: {
+        title: "In right now",
+        month: "November · today's hours",
+        export: ["PDF", "Excel"],
+        rows: [
+          ["Ana Costa", "08:56", "6 h 12"],
+          ["Bruno Sá", "08:58", "6 h 05"],
+          ["Rui Mendes", "09:02", "5 h 58"],
+        ],
+      },
+    },
+    employee: {
+      eyebrow: "What the employee sees",
+      title: "A normal conversation. No commands to memorise.",
+      lead: "On the company Wi-Fi, that's all. On mobile data, the system asks for the location with one tap.",
+      chat: [
+        ["in", "IN · Central Workshop · #K7Q2"],
+        ["out", "✅ Clocked in at 09:02, Rui. Have a good day!"],
+      ],
+      buttons: ["Break", "Out"],
+      tips: [
+        { title: "Breaks", text: "Tap «Break» and then «Back»." },
+        { title: "Clocking out", text: "Tap «Out» and get the day's total." },
+        { title: "Hours this week", text: "Type «hours»." },
+      ],
+      note: "Typing «I'm here» or «going to lunch» works too. No need for capital letters.",
+    },
+    sms: {
+      eyebrow: "SMS backup",
+      title: "No WhatsApp? Clocking in carries on by SMS.",
+      lead: "WhatsApp is the fastest way, but not the only one. A company Android phone with a SIM card receives check-ins by SMS. Nobody is left unable to clock in.",
+      points: [
+        { title: "For people who don't use WhatsApp", text: "Scan the QR code and send the code that appears by SMS. Works on any phone, even the simplest ones." },
+        { title: "Backup if WhatsApp fails", text: "If the company's WhatsApp goes down or gets blocked, employees keep clocking in by SMS. The number can be changed without losing records." },
+        { title: "Records to review", text: "SMS doesn't send a location, so these records are marked «to review». Confirm them with one click." },
+        { title: "No phone at all?", text: "On the shop screen, the employee picks their name and enters a personal PIN." },
+      ],
+      chat: [
+        ["in", "IN 4821"],
+        ["out", "Clocked in at 09:02, Carla. Marked to review (SMS has no location)."],
+      ],
+      phone: "SMS · Company phone",
+      cost: "SMS messages are sent from the company phone: the cost is that of your mobile plan.",
+    },
+    trust: {
+      eyebrow: "Records you can trust",
+      title: "Three proofs on every check-in. Without invading anyone's privacy.",
+      lead: "A time record is only worth something if cheating is hard.",
+      items: [
+        { title: "The QR code changes every 30 seconds", text: "A photo of the QR code is useless later, or at home." },
+        { title: "We know if the phone is on the company network", text: "On the company Wi-Fi, the record is confirmed automatically." },
+        { title: "Off the Wi-Fi, we ask for the location", text: "Only at that moment, never during the day, and only the phone's real location. More than 100 m from the company, the record is marked «to review» and you decide." },
+      ],
+      serverTime: "The time always comes from our server, not the phone. Nobody records «9:00» if they arrived at 9:40.",
+    },
+    benefits: {
+      eyebrow: "Benefits",
+      title: "Why it's different",
+      items: [
+        { title: "Nothing to install", text: "Uses the WhatsApp your employees already have. No accounts or passwords." },
+        { title: "No equipment to buy", text: "Use a device you already have, or a printed QR code." },
+        { title: "No phone? They can still clock in", text: "Pick the name on the screen and enter a PIN." },
+        { title: "Works without WhatsApp", text: "People who don't use WhatsApp clock in by SMS." },
+        { title: "Off-site work included", text: "Sales reps, technicians and site crews type «in», share their location and, if you want, a photo. It also serves as proof of a customer visit." },
+        { title: "Ready for inspections", text: "Records that can't be deleted or changed. Corrections in the history, with who and why. Kept 5 years, exported in one click." },
+        { title: "Automatic reminders", text: "Forgot to clock out? The system asks them at the time you set and records it with their confirmation." },
+      ],
+    },
+    privacy: {
+      title: "Your employees' privacy",
+      items: [
+        "We don't store photos: they stay in the company's WhatsApp, or in your Google Drive or OneDrive if you prefer.",
+        "Location only at the moment of the check-in. We never track anyone during the day.",
+        "No fingerprints or facial recognition.",
+        "Each employee can see their own records whenever they want.",
+        "Employee information sheet ready to print and sign, as GDPR requires.",
+      ],
+    },
+    needs: {
+      title: "What you need to get started",
+      items: [
+        { what: "A WhatsApp number for the company", level: "Required", why: "Employees send their check-ins to this number. It can be a phone with WhatsApp Business you already have." },
+        { what: "A device with internet in the shop", level: "Recommended", why: "To show the QR code that changes by itself. A computer, an old phone, a tablet or a TV will do. No device? Print the QR code." },
+        { what: "An Android phone with a SIM card", level: "SMS only", why: "For people without WhatsApp, and as a backup if WhatsApp fails." },
+      ],
+      note: "Employees only need their own phone, with WhatsApp or SMS. Anyone without a phone uses a PIN on the screen.",
+    },
+    compare: {
+      title: "Compared with the alternatives",
+      head: ["", "Paper", "Time clock", "Time apps", "Livro de Ponto"],
+      rows: [
+        ["Something to install", "Nothing", "Device on the wall", "App on every phone", "Nothing: uses a device you have"],
+        ["Off-site work", "Hard", "No", "Yes", "Yes"],
+        ["Proof of presence", "None", "Yes, on the device", "GPS", "QR changing every 30 s + company network"],
+        ["Works over WhatsApp", "No", "No", "Rarely, on pricey plans", "Yes, always"],
+        ["Works over SMS", "No", "No", "No", "Yes"],
+        ["Records for inspections", "Fragile", "Yes", "Yes", "Yes, unalterable"],
+      ],
+    },
+    forWhom: {
+      title: "Who it's for",
+      yesTitle: "Made for companies of 1 to 30 people",
+      yes: ["Restaurants, cafés and bakeries", "Workshops and repair shops", "Retail and shops", "Cleaning and maintenance", "Construction", "Clinics and salons", "Field sales and technicians"],
+      noTitle: "Maybe not for you",
+      no: "If you need full payroll, complex shifts for hundreds of people or integration with large HR systems, a full HR suite will serve you better.",
+    },
+  },
   modulePages: {
     ponto: {
       metaTitle: "Time clock over WhatsApp — no apps, no clocking machine, no paper | OficinaOS",

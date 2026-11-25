@@ -2481,6 +2481,147 @@ export const t: Copy = {
       ],
     },
   },
+  pontoPage: {
+    problem: {
+      eyebrow: "El problema",
+      title: "El registro horario es obligatorio. Y suele dar trabajo.",
+      lead: "Las empresas tienen que registrar las entradas, salidas y pausas de cada trabajador y conservar esos registros durante años. En la práctica, acaba en una de estas:",
+      items: [
+        { title: "Hoja de papel", text: "Se olvida, se tacha, se pierde. Y es difícil demostrar que no se ha modificado." },
+        { title: "Reloj de fichar", text: "Hay que comprarlo o alquilarlo, instalarlo y mantenerlo. Y no sirve para quien trabaja fuera." },
+        { title: "Apps de fichaje", text: "Cada empleado instala una app, crea una cuenta y recuerda la contraseña. Muchos acaban por no usarla." },
+      ],
+    },
+    steps: {
+      eyebrow: "Cómo funciona",
+      title: "Tres pasos. El primer fichaje tarda segundos.",
+      items: [
+        {
+          title: "Abre el enlace de tu tienda en cualquier aparato",
+          text: "El ordenador del mostrador, un móvil antiguo, una tablet o la tele: sirve cualquier aparato con internet que ya tengas. Aparece un QR que cambia solo cada 30 segundos. No hay que comprar nada.",
+          note: "¿No tienes ningún aparato? Imprime el cartel con el QR y pégalo en la puerta.",
+        },
+        {
+          title: "El empleado lee el QR y pulsa enviar",
+          text: "Apunta la cámara, WhatsApp se abre con el mensaje ya escrito y pulsa enviar. Listo.",
+          note: "Unos 3 segundos.",
+        },
+        {
+          title: "Tú lo ves todo en el panel",
+          text: "Quién está ahora en la empresa, las horas de cada uno, retrasos y olvidos. A final de mes, exportas en PDF o Excel para tu gestor.",
+          note: "En el móvil o en el ordenador.",
+        },
+      ],
+      devices: ["Ordenador del mostrador", "Tablet", "Móvil antiguo", "Tele"],
+      link: "oficinaos.app/p/taller-central",
+      sent: "Enviado",
+      dash: {
+        title: "Ahora en la empresa",
+        month: "Noviembre · horas de hoy",
+        export: ["PDF", "Excel"],
+        rows: [
+          ["Ana Costa", "08:56", "6 h 12"],
+          ["Bruno Sá", "08:58", "6 h 05"],
+          ["Rui Mendes", "09:02", "5 h 58"],
+        ],
+      },
+    },
+    employee: {
+      eyebrow: "Lo que ve el empleado",
+      title: "Una conversación normal. Sin comandos que memorizar.",
+      lead: "Conectado al Wi-Fi de la empresa, es solo esto. Con datos móviles, el sistema pide la ubicación con un toque.",
+      chat: [
+        ["in", "ENTRADA · Taller Central · #K7Q2"],
+        ["out", "✅ Entrada registrada a las 09:02, Rui. ¡Buen trabajo!"],
+      ],
+      buttons: ["Pausa", "Salida"],
+      tips: [
+        { title: "Pausas", text: "Toca «Pausa» y después «Vuelvo»." },
+        { title: "Salida", text: "Toca «Salida» y recibe el total del día." },
+        { title: "Horas de la semana", text: "Escribe «horas»." },
+      ],
+      note: "Si escribe «he llegado» o «voy a comer», el sistema lo entiende. No hace falta escribir en mayúsculas.",
+    },
+    sms: {
+      eyebrow: "Reserva por SMS",
+      title: "¿Sin WhatsApp? El fichaje sigue por SMS.",
+      lead: "WhatsApp es el camino más rápido, pero no el único. Un móvil Android de la empresa, con tarjeta SIM, recibe los fichajes por SMS. Nadie se queda sin fichar.",
+      points: [
+        { title: "Para quien no usa WhatsApp", text: "Lee el QR y envía por SMS el código que aparece. Funciona en cualquier móvil, incluso en los más sencillos." },
+        { title: "Reserva si WhatsApp falla", text: "Si el WhatsApp de la empresa se cae o se bloquea, los empleados siguen fichando por SMS. Se cambia el número sin perder registros." },
+        { title: "Registros por validar", text: "El SMS no envía ubicación, así que estos registros quedan «por validar». Los confirmas con un clic." },
+        { title: "¿Sin móvil?", text: "En la pantalla de la tienda, el empleado elige su nombre y escribe un PIN personal." },
+      ],
+      chat: [
+        ["in", "ENTRADA 4821"],
+        ["out", "Entrada registrada a las 09:02, Carla. Queda por validar (SMS sin ubicación)."],
+      ],
+      phone: "SMS · Móvil de la empresa",
+      cost: "Los SMS salen del móvil de la empresa: el coste es el de tu tarifa.",
+    },
+    trust: {
+      eyebrow: "Registros fiables",
+      title: "Tres pruebas en cada fichaje. Sin invadir la privacidad de nadie.",
+      lead: "Un registro horario solo vale si es difícil hacer trampa.",
+      items: [
+        { title: "El QR cambia cada 30 segundos", text: "Una foto del QR no sirve más tarde, ni desde casa." },
+        { title: "Sabemos si el móvil está en la red de la empresa", text: "Conectado al Wi-Fi de la empresa, el registro queda confirmado automáticamente." },
+        { title: "Fuera del Wi-Fi, pedimos la ubicación", text: "Solo en ese momento, nunca durante el día, y solo la ubicación real del móvil. A más de 100 m de la empresa, el registro queda «por validar» y tú decides." },
+      ],
+      serverTime: "La hora es siempre la de nuestro servidor, no la del móvil. Nadie ficha «a las 9» si llegó a las 9:40.",
+    },
+    benefits: {
+      eyebrow: "Ventajas",
+      title: "Por qué es diferente",
+      items: [
+        { title: "Sin instalar nada", text: "Usa el WhatsApp que tus empleados ya tienen. Sin cuentas ni contraseñas." },
+        { title: "Sin comprar equipos", text: "Usa un aparato que ya tienes, o un QR impreso." },
+        { title: "Quien no tiene móvil también ficha", text: "Elige su nombre en la pantalla y escribe un PIN." },
+        { title: "Funciona sin WhatsApp", text: "Quien no usa WhatsApp ficha por SMS." },
+        { title: "Trabajo fuera incluido", text: "Comerciales, técnicos y equipos de obra escriben «entrada», comparten la ubicación y, si quieres, una foto. También sirve como prueba de visita a clientes." },
+        { title: "Listo para inspecciones", text: "Registros que no se pueden borrar ni modificar. Correcciones en el historial, con quién y por qué. Guardados durante años y exportados con un clic." },
+        { title: "Avisos automáticos", text: "¿Olvidó fichar la salida? El sistema le pregunta a la hora que definas y lo registra con su confirmación." },
+      ],
+    },
+    privacy: {
+      title: "Privacidad de tus empleados",
+      items: [
+        "No guardamos fotos: se quedan en el WhatsApp de la empresa, o en tu Google Drive u OneDrive si lo prefieres.",
+        "Ubicación solo en el momento del fichaje. Nunca seguimos a nadie durante el día.",
+        "Sin huellas dactilares ni reconocimiento facial.",
+        "Cada empleado puede consultar sus registros cuando quiera.",
+        "Hoja informativa para los trabajadores lista para imprimir y firmar, como pide el RGPD.",
+      ],
+    },
+    needs: {
+      title: "Qué necesitas para empezar",
+      items: [
+        { what: "Un número de WhatsApp para la empresa", level: "Obligatorio", why: "Los empleados envían a ese número. Puede ser un móvil con WhatsApp Business que ya tengas." },
+        { what: "Un aparato con internet en la tienda", level: "Recomendado", why: "Para mostrar el QR que cambia solo. Sirve un ordenador, un móvil antiguo, una tablet o una tele. Sin aparato, imprimes el QR." },
+        { what: "Un móvil Android con tarjeta SIM", level: "Solo para SMS", why: "Para quien no tiene WhatsApp, y como reserva si WhatsApp falla." },
+      ],
+      note: "Los empleados solo necesitan su propio móvil, con WhatsApp o SMS. Quien no tiene móvil usa un PIN en la pantalla.",
+    },
+    compare: {
+      title: "Comparado con lo que existe",
+      head: ["", "Papel", "Reloj de fichar", "Apps de fichaje", "Livro de Ponto"],
+      rows: [
+        ["Instalar algo", "Nada", "Aparato en la pared", "App en cada móvil", "Nada: usa un aparato que ya tienes"],
+        ["Trabajo fuera", "Difícil", "No", "Sí", "Sí"],
+        ["Prueba de presencia", "Ninguna", "Sí, en el aparato", "GPS", "QR que cambia cada 30 s + red de la empresa"],
+        ["Funciona por WhatsApp", "No", "No", "Rara vez, en planes caros", "Sí, siempre"],
+        ["Funciona por SMS", "No", "No", "No", "Sí"],
+        ["Registros para inspección", "Frágiles", "Sí", "Sí", "Sí, inalterables"],
+      ],
+    },
+    forWhom: {
+      title: "Para quién es",
+      yesTitle: "Hecho para empresas de 1 a 30 personas",
+      yes: ["Restaurantes, cafeterías y pastelerías", "Talleres y tiendas de reparación", "Comercio y tiendas", "Limpieza y mantenimiento", "Construcción y obras", "Clínicas y salones", "Comerciales y técnicos en la calle"],
+      noTitle: "Quizá no sea para ti",
+      no: "Si necesitas gestión completa de nóminas, turnos complejos con cientos de personas o integración con grandes sistemas de RR. HH., un software de RR. HH. completo te servirá mejor.",
+    },
+  },
   modulePages: {
     ponto: {
       metaTitle: "Libro de horas por WhatsApp — sin apps, sin reloj, sin papel | OficinaOS",

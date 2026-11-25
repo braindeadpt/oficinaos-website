@@ -2507,6 +2507,147 @@ export const t = {
       ],
     },
   },
+  pontoPage: {
+    problem: {
+      eyebrow: "O problema",
+      title: "O registo de horas é obrigatório. E costuma dar trabalho.",
+      lead: "Em Portugal, todas as empresas têm de registar as entradas, saídas e intervalos de cada trabalhador e guardar esses registos durante 5 anos (Código do Trabalho, art. 202.º). Na prática, acaba numa destas:",
+      items: [
+        { title: "Folha de papel", text: "Esquece-se, rasura-se, perde-se. E é difícil provar que não foi alterada." },
+        { title: "Relógio de ponto", text: "É preciso comprá-lo ou alugá-lo, instalá-lo e mantê-lo. E não serve para quem trabalha fora." },
+        { title: "Apps de ponto", text: "Cada funcionário instala uma app, cria conta e lembra-se da password. Muitos acabam por não a usar." },
+      ],
+    },
+    steps: {
+      eyebrow: "Como funciona",
+      title: "Três passos. O primeiro registo demora segundos.",
+      items: [
+        {
+          title: "Abra o link da sua loja em qualquer aparelho",
+          text: "O computador do balcão, um telemóvel antigo, um tablet ou a TV: serve qualquer aparelho com internet que já tenha. Aparece um QR que muda sozinho a cada 30 segundos. Não precisa de comprar nada.",
+          note: "Não tem nenhum aparelho? Imprima o cartaz com o QR e cole-o à porta.",
+        },
+        {
+          title: "O funcionário lê o QR e carrega em enviar",
+          text: "Aponta a câmara, o WhatsApp abre com a mensagem já escrita e carrega em enviar. Pronto.",
+          note: "Cerca de 3 segundos.",
+        },
+        {
+          title: "Você vê tudo no painel",
+          text: "Quem está na empresa agora, as horas de cada um, atrasos e esquecimentos. No fim do mês, exporta em PDF ou Excel para o contabilista.",
+          note: "No telemóvel ou no computador.",
+        },
+      ],
+      devices: ["Computador do balcão", "Tablet", "Telemóvel antigo", "TV"],
+      link: "oficinaos.app/p/oficina-central",
+      sent: "Enviada",
+      dash: {
+        title: "Agora na empresa",
+        month: "Novembro · horas de hoje",
+        export: ["PDF", "Excel"],
+        rows: [
+          ["Ana Costa", "08:56", "6 h 12"],
+          ["Bruno Sá", "08:58", "6 h 05"],
+          ["Rui Mendes", "09:02", "5 h 58"],
+        ],
+      },
+    },
+    employee: {
+      eyebrow: "O que o funcionário vê",
+      title: "Uma conversa normal. Sem comandos para decorar.",
+      lead: "Ligado ao Wi-Fi da empresa, é só isto. Com dados móveis, o sistema pede a localização com um toque.",
+      chat: [
+        ["in", "ENTRADA · Oficina Central · #K7Q2"],
+        ["out", "✅ Entrada registada às 09:02, Rui. Bom trabalho!"],
+      ],
+      buttons: ["Pausa", "Saída"],
+      tips: [
+        { title: "Pausas", text: "Toca em «Pausa» e depois em «Voltei»." },
+        { title: "Saída", text: "Toca em «Saída» e recebe o total do dia." },
+        { title: "Horas da semana", text: "Escreve «horas»." },
+      ],
+      note: "Se escrever «cheguei» ou «vou almoçar», o sistema percebe. Não é preciso escrever em maiúsculas.",
+    },
+    sms: {
+      eyebrow: "Reserva por SMS",
+      title: "Sem WhatsApp? O ponto continua por SMS.",
+      lead: "O WhatsApp é o caminho mais rápido, mas não é o único. Um telemóvel Android da empresa, com cartão SIM, recebe as picagens por SMS. Ninguém fica sem registar.",
+      points: [
+        { title: "Para quem não usa WhatsApp", text: "Lê o QR e envia por SMS o código que aparece. Funciona em qualquer telemóvel, mesmo nos mais simples." },
+        { title: "Reserva se o WhatsApp falhar", text: "Se o WhatsApp da empresa cair ou for bloqueado, os funcionários continuam a picar por SMS. Troca-se o número sem perder registos." },
+        { title: "Registos para validar", text: "O SMS não envia localização, por isso estes registos ficam «por validar». Confirma-os com um clique." },
+        { title: "Sem telemóvel nenhum?", text: "No ecrã da loja, o funcionário escolhe o nome e escreve um PIN pessoal." },
+      ],
+      chat: [
+        ["in", "ENTRADA 4821"],
+        ["out", "Entrada registada às 09:02, Carla. Fica por validar (SMS sem localização)."],
+      ],
+      phone: "SMS · Telemóvel da empresa",
+      cost: "Os SMS saem do telemóvel da empresa: o custo é o do seu tarifário.",
+    },
+    trust: {
+      eyebrow: "Registos de confiança",
+      title: "Três provas em cada picagem. Sem invadir a privacidade de ninguém.",
+      lead: "Um registo de ponto só vale se for difícil fazer batota.",
+      items: [
+        { title: "O QR muda a cada 30 segundos", text: "Uma fotografia do QR não serve mais tarde, nem em casa." },
+        { title: "Sabemos se o telemóvel está na rede da empresa", text: "Ligado ao Wi-Fi da empresa, o registo fica confirmado automaticamente." },
+        { title: "Fora do Wi-Fi, pedimos a localização", text: "Só nesse momento, nunca durante o dia, e só a localização real do telemóvel. A mais de 100 m da empresa, o registo fica «por validar» e você decide." },
+      ],
+      serverTime: "A hora é sempre a do nosso servidor, não a do telemóvel. Ninguém regista «às 9h» se chegou às 9h40.",
+    },
+    benefits: {
+      eyebrow: "Vantagens",
+      title: "Porque é diferente",
+      items: [
+        { title: "Sem instalar nada", text: "Usa o WhatsApp que os funcionários já têm. Sem contas nem passwords." },
+        { title: "Sem comprar equipamento", text: "Usa um aparelho que já tem, ou um QR impresso." },
+        { title: "Quem não tem telemóvel também pica", text: "Escolhe o nome no ecrã e escreve um PIN." },
+        { title: "Funciona sem WhatsApp", text: "Quem não usa WhatsApp regista por SMS." },
+        { title: "Trabalho externo incluído", text: "Comerciais, técnicos e equipas de obra escrevem «entrada», partilham a localização e, se quiser, uma fotografia. Serve também de prova de visita a clientes." },
+        { title: "Pronto para inspeções", text: "Registos que não se podem apagar nem alterar. Correções no histórico, com quem e porquê. 5 anos guardados e exportação num clique." },
+        { title: "Avisos automáticos", text: "Esqueceu-se de registar a saída? O sistema pergunta-lhe à hora que definir e regista com a confirmação dele." },
+      ],
+    },
+    privacy: {
+      title: "Privacidade dos seus funcionários",
+      items: [
+        "Não guardamos fotografias: ficam no WhatsApp da empresa, ou no seu Google Drive ou OneDrive, se preferir.",
+        "Localização só no momento do registo. Nunca acompanhamos ninguém durante o dia.",
+        "Sem impressões digitais nem reconhecimento facial.",
+        "Cada funcionário pode consultar os seus registos quando quiser.",
+        "Folha de informação aos trabalhadores pronta a imprimir e assinar, como pede o RGPD.",
+      ],
+    },
+    needs: {
+      title: "O que precisa para começar",
+      items: [
+        { what: "Um número de WhatsApp para a empresa", level: "Obrigatório", why: "É para esse número que os funcionários enviam. Pode ser um telemóvel com WhatsApp Business que já tenha." },
+        { what: "Um aparelho com internet na loja", level: "Recomendado", why: "Para mostrar o QR que muda sozinho. Serve um computador, um telemóvel antigo, um tablet ou uma TV. Sem aparelho, imprime o QR." },
+        { what: "Um telemóvel Android com cartão SIM", level: "Só para SMS", why: "Para quem não tem WhatsApp, e como reserva se o WhatsApp falhar." },
+      ],
+      note: "Os funcionários só precisam do telemóvel deles, com WhatsApp ou SMS. Quem não tem telemóvel usa um PIN no ecrã.",
+    },
+    compare: {
+      title: "Comparado com o que existe",
+      head: ["", "Papel", "Relógio de ponto", "Apps de ponto", "Livro de Ponto"],
+      rows: [
+        ["Instalar alguma coisa", "Nada", "Aparelho na parede", "App em cada telemóvel", "Nada: usa um aparelho que já tem"],
+        ["Trabalho externo", "Difícil", "Não", "Sim", "Sim"],
+        ["Prova de presença", "Nenhuma", "Sim, no aparelho", "GPS", "QR que muda a cada 30 s + rede da empresa"],
+        ["Funciona por WhatsApp", "Não", "Não", "Raramente, em planos caros", "Sim, sempre"],
+        ["Funciona por SMS", "Não", "Não", "Não", "Sim"],
+        ["Registos para inspeção", "Frágeis", "Sim", "Sim", "Sim, inalteráveis"],
+      ],
+    },
+    forWhom: {
+      title: "Para quem é",
+      yesTitle: "Feito para empresas de 1 a 30 pessoas",
+      yes: ["Restaurantes, cafés e pastelarias", "Oficinas e lojas de reparação", "Comércio e lojas", "Limpezas e manutenção", "Construção e obras", "Clínicas e salões", "Comerciais e técnicos na rua"],
+      noTitle: "Talvez não seja para si",
+      no: "Se precisa de gestão completa de salários, turnos complexos com centenas de pessoas ou integração com grandes sistemas de RH, um software de RH completo serve-o melhor.",
+    },
+  },
   modulePages: {
     ponto: {
       metaTitle: "Livro de Ponto pelo WhatsApp — sem apps, sem relógio, sem papel | OficinaOS",
