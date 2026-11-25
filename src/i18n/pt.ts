@@ -165,7 +165,7 @@ export const t = {
     signup: {
       title: "Experimentar o OficinaOS Pro",
       subtitle:
-        "Deixe o seu contacto: ajudamos a emparelhar e ativamos os 14 dias grátis. Sem compromisso e sem cartão. Se quiser ser um dos fundadores, diga-nos na mensagem.",
+        "Deixe o seu contacto: ajudamos a emparelhar e ativamos os 14 dias grátis. Sem compromisso e sem cartão. Respondemos em breve.",
       email: "Email",
       emailPlaceholder: "voce@exemplo.pt",
       shop: "Nome do negócio",
@@ -176,6 +176,7 @@ export const t = {
       phonePlaceholder: "ex.: 912 345 678",
       optional: "opcional",
       languageLabel: "Idioma",
+      founderLabel: "Quero ser um dos fundadores (preço especial durante 12 meses)",
       button: "Pedir os 14 dias grátis",
       mailSubject: "OficinaOS Pro — pedido de experiência grátis",
       note: "Usamos estes dados só para o contactar sobre o OficinaOS Pro.",
@@ -2422,7 +2423,7 @@ export const t = {
         head: ["Extra", "Preço", "O que acrescenta"],
         rows: [
           ["Livro de Ponto", "{ponto1}/mês até {p1} funcionários · {ponto2} até {p2} · {ponto3} até {p3}", "Os funcionários picam o ponto pelo WhatsApp ou SMS; registos inalteráveis, prontos para a ACT."],
-          ["Balcão IA", "{balcaoAi}/mês com IA · {balcaoByok} com a sua chave", "Caixa de entrada única de WhatsApp e SMS, com um assistente de IA que resume e prepara respostas para a equipa aprovar."],
+          ["Balcão IA", "{balcaoAi}/mês com IA · {balcaoByok} com a sua chave (mesma opção de IA da base)", "Caixa de entrada única de WhatsApp e SMS, com um assistente de IA que resume e prepara respostas para a equipa aprovar."],
           ["WhatsApp oficial da Meta", "{waMonthly}/mês + {activation} de ativação", "Sem risco de bloqueio, botões nas mensagens e nome da empresa verificado."],
           ["Loja adicional (a partir da {nextShop}.ª)", "{extraShop}/mês", "Redes com mais de {shops} lojas."],
           ["Pacote de conversas", "{packPrice} por +{packConversations}", "Meses com muito movimento; vale só nesse mês."],
@@ -2770,7 +2771,7 @@ export const t = {
     faq: {
       title: "Perguntas sobre preços",
       items: [
-        { q: "Os preços incluem IVA?", a: "Não. Todos os preços são sem IVA, por mês e por conta (não por loja)." },
+        { q: "Os preços incluem IVA?", a: "Não. Todos os preços são sem IVA. As mensalidades são por conta (não por loja); os serviços (instalação, importação, horas) pagam-se uma vez ou à hora." },
         { q: "Há fidelização?", a: "Não. Cancela quando quiser. No plano anual escolhe uma oferta: a configuração feita por nós ou dois meses grátis." },
         { q: "Como pago?", a: "Durante o lançamento, ativamos o Pro consigo e enviamos a fatura. Os 14 dias grátis não pedem cartão." },
         { q: "E se precisar de algo diferente?", a: "Mais lojas, mais conversas, outra IA ou instalação no seu computador: fale connosco e fazemos uma proposta à medida." },

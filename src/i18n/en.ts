@@ -148,7 +148,7 @@ export const t: Copy = {
     signup: {
       title: "Try OficinaOS Pro",
       subtitle:
-        "Leave your details: we'll help you pair and start your 14 days free. No commitment and no card. If you'd like to be one of the founders, tell us in your message.",
+        "Leave your details: we'll help you pair and start your 14 days free. No commitment and no card. We'll get back to you shortly.",
       email: "Email",
       emailPlaceholder: "you@example.com",
       shop: "Business name",
@@ -159,6 +159,7 @@ export const t: Copy = {
       phonePlaceholder: "e.g. +351 912 345 678",
       optional: "optional",
       languageLabel: "Language",
+      founderLabel: "I want to be one of the founders (special price for 12 months)",
       button: "Get my 14 days free",
       mailSubject: "OficinaOS Pro — free trial request",
       note: "We only use these details to contact you about OficinaOS Pro.",
@@ -2391,7 +2392,7 @@ export const t: Copy = {
         head: ["Extra", "Price", "What it adds"],
         rows: [
           ["Time clock", "{ponto1}/month up to {p1} employees · {ponto2} up to {p2} · {ponto3} up to {p3}", "Staff clock in and out over WhatsApp or SMS; tamper-proof records, ready for the labour inspectorate (ACT)."],
-          ["Balcão IA", "{balcaoAi}/month with AI · {balcaoByok} with your own key", "A single WhatsApp and SMS inbox, with an AI assistant that summarises and drafts replies for the team to approve."],
+          ["Balcão IA", "{balcaoAi}/month with AI · {balcaoByok} with your own key (same AI option as the base)", "A single WhatsApp and SMS inbox, with an AI assistant that summarises and drafts replies for the team to approve."],
           ["Official Meta WhatsApp", "{waMonthly}/month + {activation} activation", "No risk of being blocked, buttons in messages and a verified business name."],
           ["Additional shop (from shop no. {nextShop})", "{extraShop}/month", "Chains with more than {shops} shops."],
           ["Conversation pack", "{packPrice} for +{packConversations}", "Very busy months; valid for that month only."],
@@ -2739,7 +2740,7 @@ export const t: Copy = {
     faq: {
       title: "Pricing questions",
       items: [
-        { q: "Do prices include VAT?", a: "No. All prices exclude VAT and are per month and per account (not per shop)." },
+        { q: "Do prices include VAT?", a: "No. All prices exclude VAT. Monthly fees are per account (not per shop); services (installation, data import, hours) are paid once or by the hour." },
         { q: "Is there a minimum term?", a: "No. Cancel whenever you like. On the annual plan you choose one offer: setup done by us or two months free." },
         { q: "How do I pay?", a: "During the launch, we activate Pro with you and send you the invoice. The 14 free days don't require a card." },
         { q: "What if I need something different?", a: "More shops, more conversations, a different AI or installation on your own computer: get in touch and we'll put together a tailored proposal." },
