@@ -2475,6 +2475,38 @@ export const t = {
       ],
     },
   },
+  pontoHero: {
+    titleA: "Picar o ponto pelo WhatsApp.",
+    titleB: "Sem apps, sem relógio, sem papel.",
+    proofs: ["QR que muda a cada 30 segundos", "Confirma a rede da loja", "Registos guardados 5 anos"],
+    caption: "Recriação ilustrativa com dados de exemplo: o ecrã de ponto da loja, a picagem no telemóvel e o painel do gestor.",
+    screen: {
+      shop: "Oficina Central",
+      title: "Ponto",
+      scan: "Aponte a câmara do telemóvel",
+      codeLabel: "Sem câmara? Código",
+      changesIn: "Muda em",
+      toast: "Rui Mendes · entrada registada",
+    },
+    phone: {
+      detected: "QR da loja reconhecido",
+      contact: "Oficina Central",
+      contactSub: "Livro de Ponto",
+      draft: "ENTRADA · Oficina Central · #4821",
+      reply: "Entrada registada às 09:02.",
+      replySub: "Bom trabalho, Rui. Para a pausa, escreva PAUSA.",
+      composer: "Mensagem",
+    },
+    panel: {
+      title: "Agora na empresa",
+      newRow: ["Rui Mendes", "Entrada 09:02", "Aprovado"],
+      rows: [
+        ["Ana Costa", "Entrada 08:56", "Aprovado"],
+        ["Bruno Sá", "Entrada 08:58", "Aprovado"],
+        ["Carla Dias", "Fora · 08:40", "Por validar"],
+      ],
+    },
+  },
   modulePages: {
     ponto: {
       metaTitle: "Livro de Ponto pelo WhatsApp — sem apps, sem relógio, sem papel | OficinaOS",

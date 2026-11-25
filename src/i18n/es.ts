@@ -2449,6 +2449,38 @@ export const t: Copy = {
       ],
     },
   },
+  pontoHero: {
+    titleA: "Fichar por WhatsApp.",
+    titleB: "Sin apps, sin reloj, sin papel.",
+    proofs: ["QR que cambia cada 30 segundos", "Confirma la red de la tienda", "Registros guardados 5 años"],
+    caption: "Recreación ilustrativa con datos de ejemplo: la pantalla de fichaje de la tienda, el fichaje en el móvil y el panel del responsable.",
+    screen: {
+      shop: "Taller Central",
+      title: "Fichaje",
+      scan: "Apunta la cámara del móvil",
+      codeLabel: "¿Sin cámara? Código",
+      changesIn: "Cambia en",
+      toast: "Rui Mendes · entrada registrada",
+    },
+    phone: {
+      detected: "QR de la tienda reconocido",
+      contact: "Taller Central",
+      contactSub: "Registro horario",
+      draft: "ENTRADA · Taller Central · #4821",
+      reply: "Entrada registrada a las 09:02.",
+      replySub: "Buen trabajo, Rui. Para la pausa, escribe PAUSA.",
+      composer: "Mensaje",
+    },
+    panel: {
+      title: "Ahora en la empresa",
+      newRow: ["Rui Mendes", "Entrada 09:02", "Aprobado"],
+      rows: [
+        ["Ana Costa", "Entrada 08:56", "Aprobado"],
+        ["Bruno Sá", "Entrada 08:58", "Aprobado"],
+        ["Carla Dias", "Fuera · 08:40", "Por validar"],
+      ],
+    },
+  },
   modulePages: {
     ponto: {
       metaTitle: "Libro de horas por WhatsApp — sin apps, sin reloj, sin papel | OficinaOS",

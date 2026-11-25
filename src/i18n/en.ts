@@ -2444,6 +2444,38 @@ export const t: Copy = {
       ],
     },
   },
+  pontoHero: {
+    titleA: "Clock in over WhatsApp.",
+    titleB: "No apps, no time clock, no paper.",
+    proofs: ["QR code that changes every 30 seconds", "Checks the shop's network", "Records kept for 5 years"],
+    caption: "Illustrative recreation with sample data: the shop's clock-in screen, the check-in on the phone and the manager's dashboard.",
+    screen: {
+      shop: "Central Workshop",
+      title: "Time clock",
+      scan: "Point your phone camera here",
+      codeLabel: "No camera? Code",
+      changesIn: "Changes in",
+      toast: "Rui Mendes · clocked in",
+    },
+    phone: {
+      detected: "Shop QR recognised",
+      contact: "Central Workshop",
+      contactSub: "Time clock",
+      draft: "IN · Central Workshop · #4821",
+      reply: "Clocked in at 09:02.",
+      replySub: "Have a good day, Rui. For your break, type BREAK.",
+      composer: "Message",
+    },
+    panel: {
+      title: "In right now",
+      newRow: ["Rui Mendes", "In 09:02", "Approved"],
+      rows: [
+        ["Ana Costa", "In 08:56", "Approved"],
+        ["Bruno Sá", "In 08:58", "Approved"],
+        ["Carla Dias", "Off-site · 08:40", "To review"],
+      ],
+    },
+  },
   modulePages: {
     ponto: {
       metaTitle: "Time clock over WhatsApp — no apps, no clocking machine, no paper | OficinaOS",
