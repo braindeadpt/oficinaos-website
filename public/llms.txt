@@ -2,15 +2,23 @@
 
 > Free, MIT-licensed, self-hosted management system for phone repair shops.
 > Runs on a PC inside the shop over the LAN — no telemetry, and customer data
-> never leaves by default. Optional "Pro" modules (in beta, gated server-side
-> via OficinaOS Cloud, no license files) send the data they need to OficinaOS
-> servers: customer portal, WhatsApp bot, SMS channel, diagnostics intake, AI
-> reports, InvoiceXpress invoicing (Portugal only), online storefront, parts
-> wanted board, market prices, multi-shop dashboard and WhatsApp remarketing.
+> never leaves by default.
+> OficinaOS Pro is one optional plan (EUR 49/month with AI included, EUR 39
+> with the customer's own AI key; up to 3 shops; 3,000 AI conversations/month;
+> 14-day free trial) that includes every module, gated server-side via OficinaOS
+> Cloud with no license files: WhatsApp and SMS with an AI assistant, customer
+> portal, AI staff inbox (Balcão IA), time clock (Livro de Ponto), diagnostics
+> intake, AI reports, InvoiceXpress invoicing (Portugal only), online storefront,
+> parts wanted board, market prices, multi-shop dashboard and remarketing. The
+> free app sends and receives no customer messages.
 > Windows installer: https://github.com/braindeadpt/OficinaOS/releases/latest/download/oficinaos-install.zip
 > Documentation in Portuguese (default), English and Spanish.
 
 ## Documentation
+
+- [OficinaOS Pro — plan, modules and pricing (PT)](https://oficinaos.app/pro/): everything included, prices, extras and services
+- [Time clock over WhatsApp (PT)](https://oficinaos.app/livro-de-ponto/): Livro de Ponto for any business — waiting list
+- [AI customer service on WhatsApp (PT)](https://oficinaos.app/atendimento-ia/): Atendimento IA for any business — waiting list
 
 - [Full guide (PT)](https://oficinaos.app/docs/): install (Docker/portable), daily use, backups, remote access, Pro modules, pricing, FAQ
 - [Full guide (EN)](https://oficinaos.app/en/docs/): same guide in English

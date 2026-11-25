@@ -28,12 +28,17 @@ const columns: { id: string; title: string; links: FLink[] }[] = [
   {
     id: "products",
     title: t.footer.columns.products,
-    links: products(t, locale).map((p) => ({
-      label: p.name,
-      href: p.href,
-      external: p.external,
-      product: p.id,
-    })),
+    links: [
+      ...products(t, locale).map((p) => ({
+        label: p.name,
+        href: p.href,
+        external: p.external,
+        product: p.id,
+      })),
+      // Módulos também vendidos a empresas fora das oficinas (lista de espera).
+      { label: t.modulePages.ponto.hero.label, href: localeUrl(locale, "/livro-de-ponto/") },
+      { label: t.modulePages.atendimento.hero.label, href: localeUrl(locale, "/atendimento-ia/") },
+    ],
   },
   {
     id: "resources",

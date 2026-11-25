@@ -1,0 +1,9 @@
+---
+import ModulePage from "../components/modules/ModulePage.astro";
+import Base from "../layouts/Base.astro";
+import { lang, locale, ogLocale, t } from "../i18n/pt";
+---
+
+<Base t={t} locale={locale} langAttr={lang} ogLocale={ogLocale} title={t.modulePages.ponto.metaTitle} description={t.modulePages.ponto.metaDesc} preloadDisplayFont>
+  <ModulePage t={t} locale={locale} m={t.modulePages.ponto} interest="ponto" />
+</Base>
