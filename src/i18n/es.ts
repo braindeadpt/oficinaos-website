@@ -2482,6 +2482,10 @@ export const t: Copy = {
     },
   },
   pontoPage: {
+    waitlist: {
+      note: "Solo usamos estos datos para contactarte sobre Livro de Ponto.",
+      shopPlaceholder: "ej.: Café Central",
+    },
     problem: {
       eyebrow: "El problema",
       title: "El registro horario es obligatorio. Y suele dar trabajo.",

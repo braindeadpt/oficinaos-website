@@ -2508,6 +2508,10 @@ export const t = {
     },
   },
   pontoPage: {
+    waitlist: {
+      note: "Usamos estes dados só para o contactar sobre o Livro de Ponto.",
+      shopPlaceholder: "ex.: Café Central",
+    },
     problem: {
       eyebrow: "O problema",
       title: "O registo de horas é obrigatório. E costuma dar trabalho.",

@@ -1461,6 +1461,84 @@ const problemIcons = [
     background: #101316;
   }
 
+  /* Perguntas frequentes (componente partilhado, <details> nativo): cartões na linguagem desta página. */
+  :global(.pb-faq) {
+    background: #ffffff;
+    --oos-color-text: #14171a;
+    --color-text: #14171a;
+    --oos-color-text-muted: #5b636b;
+    --color-text-muted: #5b636b;
+  }
+  :global(.pb-faq > section) {
+    background: transparent;
+  }
+  :global(.pb-faq h2) {
+    font-size: clamp(1.875rem, 3.6vw, 2.875rem);
+    letter-spacing: -0.035em;
+    font-weight: 750;
+  }
+  :global(.pb-faq .divide-y) {
+    border: 0;
+    display: grid;
+    gap: 0.625rem;
+  }
+  :global(.pb-faq .divide-y > details) {
+    border: 0;
+    border-radius: 1.125rem;
+    padding: 0 1.25rem;
+    background: #f6f6f3;
+    box-shadow: 0 0 0 1px rgb(20 23 26 / 0.07);
+    transition: box-shadow 0.2s;
+  }
+  :global(.pb-faq .divide-y > details[open]) {
+    background: #ffffff;
+    box-shadow: 0 0 0 1px rgb(20 23 26 / 0.12), 0 10px 30px -12px rgb(20 23 26 / 0.18);
+  }
+  :global(.pb-faq summary) {
+    font-size: 1.0625rem;
+    letter-spacing: -0.01em;
+    padding-block: 1.125rem;
+  }
+  :global(.pb-faq summary:focus-visible) {
+    outline: 2px solid #0b8f63;
+    outline-offset: 4px;
+    border-radius: 0.5rem;
+  }
+  :global(.pb-faq details p) {
+    padding-bottom: 1.25rem;
+    line-height: 1.65;
+  }
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme="light"]) .pb-faq) {
+      background: #171b1f;
+      --oos-color-text: #eef1f3;
+      --color-text: #eef1f3;
+      --oos-color-text-muted: #a3acb4;
+      --color-text-muted: #a3acb4;
+    }
+    :global(:root:not([data-theme="light"]) .pb-faq .divide-y > details) {
+      background: #101316;
+      box-shadow: 0 0 0 1px rgb(255 255 255 / 0.08);
+    }
+    :global(:root:not([data-theme="light"]) .pb-faq .divide-y > details[open]) {
+      background: #1d2125;
+    }
+  }
+  :global(:root[data-theme="dark"] .pb-faq) {
+    background: #171b1f;
+    --oos-color-text: #eef1f3;
+    --color-text: #eef1f3;
+    --oos-color-text-muted: #a3acb4;
+    --color-text-muted: #a3acb4;
+  }
+  :global(:root[data-theme="dark"] .pb-faq .divide-y > details) {
+    background: #101316;
+    box-shadow: 0 0 0 1px rgb(255 255 255 / 0.08);
+  }
+  :global(:root[data-theme="dark"] .pb-faq .divide-y > details[open]) {
+    background: #1d2125;
+  }
+
   /* entrada suave ao fazer scroll — só onde o browser a suporta; o resto vê tudo de imediato */
   @supports (animation-timeline: view()) {
     @media (prefers-reduced-motion: no-preference) {

@@ -2477,6 +2477,10 @@ export const t: Copy = {
     },
   },
   pontoPage: {
+    waitlist: {
+      note: "We only use these details to contact you about Livro de Ponto.",
+      shopPlaceholder: "e.g. Central Café",
+    },
     problem: {
       eyebrow: "The problem",
       title: "Recording working hours is mandatory. And it's usually a hassle.",

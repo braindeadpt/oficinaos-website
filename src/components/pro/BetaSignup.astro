@@ -19,8 +19,26 @@ interface Props {
   button?: string;
   /** Interesse enviado à Cloud num campo escondido (lista de espera de um módulo). */
   interest?: "pro" | "ponto" | "atendimento";
+  /** Nota de privacidade por baixo do botão (por omissão: a do Pro). */
+  note?: string;
+  /** Exemplo no campo do nome do negócio (por omissão: o do Pro, uma loja de reparações). */
+  shopPlaceholder?: string;
+  /** Mostra «Já tem conta na OficinaOS Cloud?» — escondido nas páginas para qualquer empresa. */
+  cloudLogin?: boolean;
 }
-const { t, id = "beta", title, headingLevel = 2, class: cls, subtitle, button, interest = "pro" } = Astro.props;
+const {
+  t,
+  id = "beta",
+  title,
+  headingLevel = 2,
+  class: cls,
+  subtitle,
+  button,
+  interest = "pro",
+  note,
+  shopPlaceholder,
+  cloudLogin = true,
+} = Astro.props;
 const H = `h${headingLevel}` as "h2" | "h3";
 const locale = (Astro.currentLocale ?? DEFAULT_LOCALE) as Locale;
 
@@ -86,7 +104,7 @@ const inputClass =
     </label>
     <label class="flex flex-col gap-1.5 text-left text-sm font-semibold text-text">
       {t.pro.signup.shop} *
-      <input type="text" name="shop" required maxlength="120" autocomplete="organization" placeholder={t.pro.signup.shopPlaceholder} class={inputClass} />
+      <input type="text" name="shop" required maxlength="120" autocomplete="organization" placeholder={shopPlaceholder ?? t.pro.signup.shopPlaceholder} class={inputClass} />
     </label>
     <label class="flex flex-col gap-1.5 text-left text-sm font-semibold text-text">
       {t.pro.signup.city} *
@@ -118,10 +136,11 @@ const inputClass =
         {button ?? t.pro.signup.button}
       </button>
       <p class="text-center text-xs text-text-muted">
-        {FORM_ENDPOINT ? t.pro.signup.note : t.pro.signup.noteMailto}
+        {FORM_ENDPOINT ? (note ?? t.pro.signup.note) : t.pro.signup.noteMailto}
       </p>
     </div>
   </form>
+  {cloudLogin && (
   <p class="mt-6 text-center text-xs text-text-muted">
     {t.pro.signup.cloudText}{" "}
     <a
@@ -132,6 +151,7 @@ const inputClass =
       >{t.pro.signup.cloudLink}</a
     >
   </p>
+  )}
 </div>
 
 <script is:inline>
