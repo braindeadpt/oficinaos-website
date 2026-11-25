@@ -23,6 +23,9 @@ interface Props {
   /** Locales em que esta página existe — páginas pt-only passam `["pt"]` para não anunciar
    *  alternates 404 em hreflang. */
   pageLocales?: readonly Locale[];
+  /** Imagem de partilha (Open Graph) desta página, relativa à raiz do site, p.ex. "og/ponto-pt.jpg".
+   *  Sem ela fica a capa genérica. */
+  ogImage?: string;
 }
 
 const { t, locale, langAttr, ogLocale } = Astro.props;
@@ -45,7 +48,7 @@ const favicon = `${import.meta.env.BASE_URL}favicon.svg`;
 // URL, so a renamed file forces a fresh scrape. og-cover.png stays as a
 // fallback for old links.
 const ogImage = new URL(
-  `${import.meta.env.BASE_URL}og-cover-2026.png`,
+  `${import.meta.env.BASE_URL}${Astro.props.ogImage ?? "og-cover-2026.png"}`,
   Astro.site
 );
 ---

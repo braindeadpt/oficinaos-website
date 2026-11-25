@@ -1,0 +1,49 @@
+<!doctype html>
+<!-- Modelo das imagens de partilha (public/og/*.jpg, 1200×630). Para gerar: copiar para public/_og.html,
+     abrir no dev server com ?label=&ta=&tb=&img=&pos=&cols=, capturar 1200×630 e apagar o _og.html. -->
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<title>og</title>
+<style>
+  @font-face { font-family: "Manrope Variable"; src: url("/fonts/manrope-latin.woff2") format("woff2"); font-weight: 100 900; }
+  @font-face { font-family: "Inter Variable"; src: url("/fonts/inter-latin.woff2") format("woff2"); font-weight: 100 900; }
+  html, body { margin: 0; }
+  body { width: 1200px; height: 630px; overflow: hidden; background: #f6f6f3; font-family: "Inter Variable", system-ui, sans-serif; color: #14171a; }
+  .card { position: relative; width: 1200px; height: 630px; display: grid; grid-template-columns: 500px 1fr; }
+  .text { padding: 64px 40px 56px 64px; display: flex; flex-direction: column; }
+  .eyebrow { display: flex; align-items: center; gap: 12px; font-size: 22px; font-weight: 650; }
+  .eyebrow i { width: 12px; height: 12px; border-radius: 50%; background: #0b8f63; box-shadow: 0 0 0 6px #dff5ea; }
+  h1 { margin: 28px 0 0; font-family: "Manrope Variable", sans-serif; font-weight: 800; font-size: 50px; line-height: 1.04; letter-spacing: -0.045em; }
+  h1 span { display: block; }
+  h1 .b { color: #8a929a; }
+  .foot { margin-top: auto; display: flex; align-items: center; gap: 12px; font-size: 22px; font-weight: 650; }
+  .logo { width: 34px; height: 34px; border-radius: 9px; background: #14171a; display: grid; place-items: center; }
+  .logo b { width: 14px; height: 14px; border-radius: 4px; border: 3px solid #fff; box-sizing: border-box; }
+  .foot small { margin-left: auto; color: #5b636b; font-weight: 500; font-size: 20px; }
+  .photo { position: relative; margin: 28px 28px 28px 0; border-radius: 28px; overflow: hidden; box-shadow: 0 30px 60px -30px rgb(20 23 26 / 0.35); }
+  .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="text">
+    <p class="eyebrow"><i></i><span id="label"></span></p>
+    <h1><span id="ta"></span><span class="b" id="tb"></span></h1>
+    <p class="foot"><span class="logo"><b></b></span>OficinaOS<small>oficinaos.app</small></p>
+  </div>
+  <div class="photo"><img id="img" alt=""></div>
+</div>
+<script>
+  // Página temporária só para gerar as imagens de partilha (apagada depois de gerar).
+  var q = new URLSearchParams(location.search);
+  document.getElementById("label").textContent = q.get("label");
+  document.getElementById("ta").textContent = q.get("ta");
+  document.getElementById("tb").textContent = q.get("tb");
+  document.getElementById("img").src = q.get("img");
+  if (q.get("pos")) document.getElementById("img").style.objectPosition = q.get("pos");
+  if ((q.get("ta") + q.get("tb")).length > 60) document.querySelector("h1").style.fontSize = "40px";
+  if (q.get("cols")) document.querySelector(".card").style.gridTemplateColumns = q.get("cols") + "px 1fr";
+</script>
+</body>
+</html>
