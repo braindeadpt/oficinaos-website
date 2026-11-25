@@ -1,0 +1,159 @@
+"""Gera as imagens de partilha simples (1200×630) para as páginas sem imagem própria.
+
+Uso (na raiz do site):
+    bun run build            # 1. gera dist/ (de onde se lê o título de cada página)
+    python tools/gen-og.py   # 2. escreve public/og/pages/<chave>.jpg
+    bun run build            # 3. o Base.astro passa a apontar cada página para a sua imagem
+
+A chave de cada página é o caminho sem barras nas pontas, com "/" trocado por "-" ("" → "home"):
+    /            → home.jpg       /en/docs/sms/ → en-docs-sms.jpg
+Páginas com imagem própria (ogImage no Base) e a 404 ficam de fora.
+Precisa de Pillow e fontTools (com brotli) para ler as fontes .woff2 do site.
+"""
+
+import html
+import io
+import re
+from pathlib import Path
+
+from fontTools.ttLib import TTFont
+from PIL import Image, ImageDraw, ImageFont
+
+ROOT = Path(__file__).resolve().parent.parent
+DIST = ROOT / "dist"
+OUT = ROOT / "public" / "og" / "pages"
+W, H = 1200, 630
+
+INK = (20, 23, 26)
+INK2 = (91, 99, 107)
+INK3 = (138, 146, 154)
+BG = (246, 246, 243)
+OK = (11, 143, 99)
+OK_SOFT = (223, 245, 234)
+DOT = (215, 217, 212)
+
+# páginas com imagem própria (ogImage) — não gerar
+SKIP = {"livro-de-ponto", "atendimento-ia"}
+
+EYEBROW = {
+    "docs": {"pt": "Guia", "en": "Guide", "es": "Guía"},
+    "precos": {"pt": "Preços", "en": "Pricing", "es": "Precios"},
+    "pro": {"pt": "OficinaOS Pro", "en": "OficinaOS Pro", "es": "OficinaOS Pro"},
+    "diag": {"pt": "OficinaOS Diag", "en": "OficinaOS Diag", "es": "OficinaOS Diag"},
+    "trade": {"pt": "OficinaOS Trade", "en": "OficinaOS Trade", "es": "OficinaOS Trade"},
+    "download": {"pt": "Descarregar", "en": "Download", "es": "Descargar"},
+    "updates": {"pt": "Novidades", "en": "What's new", "es": "Novedades"},
+    "privacy": {"pt": "Privacidade", "en": "Privacy", "es": "Privacidad"},
+    "terms": {"pt": "Termos", "en": "Terms", "es": "Términos"},
+}
+DEFAULT_EYEBROW = {
+    "pt": "Programa para lojas de reparação",
+    "en": "Software for repair shops",
+    "es": "Programa para talleres de reparación",
+}
+
+
+def font_from_woff2(name: str) -> Path:
+    """Converte uma fonte .woff2 do site para .ttf (o Pillow não lê woff2)."""
+    src = ROOT / "public" / "fonts" / f"{name}.woff2"
+    dst = ROOT / "node_modules" / ".cache" / "og-fonts" / f"{name}.ttf"
+    if not dst.exists():
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        f = TTFont(str(src))
+        f.flavor = None
+        f.save(str(dst))
+    return dst
+
+
+def load(name: str, size: int, weight: int) -> ImageFont.FreeTypeFont:
+    f = ImageFont.truetype(str(font_from_woff2(name)), size)
+    try:
+        f.set_variation_by_axes([weight])
+    except Exception:
+        pass
+    return f
+
+
+def wrap(draw: ImageDraw.ImageDraw, text: str, font, width: int) -> list[str]:
+    words, lines, cur = text.split(), [], ""
+    for w in words:
+        t = (cur + " " + w).strip()
+        if draw.textlength(t, font=font) <= width:
+            cur = t
+        else:
+            if cur:
+                lines.append(cur)
+            cur = w
+    if cur:
+        lines.append(cur)
+    return lines
+
+
+def page_text(path: Path) -> tuple[str, str]:
+    raw = path.read_text(encoding="utf-8")
+    lang = (re.search(r'<html[^>]*lang="([a-zA-Z-]+)"', raw) or [None, "pt"])[1][:2]
+    m = re.search(r"<h1[^>]*>(.*?)</h1>", raw, re.S)
+    if m:
+        title = re.sub(r"<[^>]+>", " ", m.group(1))
+    else:
+        title = re.search(r"<title>(.*?)</title>", raw, re.S).group(1).split("|")[0]
+    title = re.sub(r"\s+", " ", html.unescape(title)).strip()
+    return lang if lang in ("pt", "en", "es") else "pt", title
+
+
+def render(lang: str, eyebrow: str, title: str) -> Image.Image:
+    img = Image.new("RGB", (W, H), BG)
+    d = ImageDraw.Draw(img)
+    # grelha de pontos, discreta, à direita
+    for y in range(40, H, 28):
+        for x in range(760, W, 28):
+            d.ellipse((x - 1.2, y - 1.2, x + 1.2, y + 1.2), fill=DOT)
+    # marca
+    d.rounded_rectangle((64, 58, 106, 100), radius=11, fill=INK)
+    d.rounded_rectangle((77, 71, 93, 87), radius=4, outline=(255, 255, 255), width=3)
+    d.text((122, 79), "OficinaOS", font=load("inter-latin", 30, 650), fill=INK, anchor="lm")
+    # etiqueta
+    d.ellipse((64, 176, 78, 190), fill=OK)
+    d.ellipse((58, 170, 84, 196), outline=OK_SOFT, width=4)
+    d.text((98, 183), eyebrow, font=load("inter-latin", 28, 600), fill=INK2, anchor="lm")
+    # título (encolhe até caber em 4 linhas)
+    for size in (68, 62, 56, 50, 46, 42):
+        f = load("manrope-latin", size, 800)
+        lines = wrap(d, title, f, 1000)
+        if len(lines) <= 4:
+            break
+    lines = lines[:4]
+    y = 228
+    for ln in lines:
+        d.text((62, y), ln, font=f, fill=INK)
+        y += int(size * 1.08)
+    # rodapé
+    d.line((64, 548, 1136, 548), fill=(226, 227, 222), width=2)
+    d.text((64, 580), "oficinaos.app", font=load("inter-latin", 26, 600), fill=INK, anchor="lm")
+    return img
+
+
+def main() -> None:
+    OUT.mkdir(parents=True, exist_ok=True)
+    n = 0
+    for p in sorted(DIST.rglob("index.html")):
+        rel = p.parent.relative_to(DIST).as_posix()
+        if rel == ".":
+            rel = ""
+        parts = [x for x in rel.split("/") if x]
+        if parts and parts[0] in ("en", "es"):
+            section = parts[1] if len(parts) > 1 else ""
+        else:
+            section = parts[0] if parts else ""
+        if section in SKIP or section.startswith("["):
+            continue
+        key = "-".join(parts) or "home"
+        lang, title = page_text(p)
+        eyebrow = EYEBROW.get(section, DEFAULT_EYEBROW)[lang]
+        render(lang, eyebrow, title).save(OUT / f"{key}.jpg", quality=86, optimize=True, progressive=True)
+        n += 1
+    print(f"{n} imagens em {OUT.relative_to(ROOT)}")
+
+
+if __name__ == "__main__":
+    main()
