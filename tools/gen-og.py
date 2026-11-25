@@ -63,7 +63,7 @@ DEFAULT_EYEBROW = {
 
 TEMPLATE_VERSION = "1"  # subir quando o desenho das imagens mudar (força URLs novos)
 RETAIN_DAYS = 30  # imagens antigas ficam este tempo DEPOIS DA PUBLICAÇÃO: previsões em cache não dão 404
-RECOVER = "bun run build && python tools/gen-og.py && bun run build"
+RECOVER = "bun run og"  # escolhe o Python certo (tools/py.mjs) e faz build → gerar → build
 
 
 def font_from_woff2(name: str) -> Path:
