@@ -1,0 +1,579 @@
+---
+// Corpo da página do Atendimento IA (redesenho 2026-11, direção «Oficina limpa»), depois do herói.
+// Usa o sistema partilhado (styles/oficina-limpa.css, classes .pb-*) e alguns visuais próprios (.ab-*).
+// Ordem: problema → como funciona (3 passos com a interface) → o que o cliente vê → regras claras →
+// reserva por SMS → vantagens → privacidade e o que precisa → para quem → preço.
+import type { Copy } from "../../i18n/pt";
+import type { Locale } from "../../i18n/utils";
+import { localeUrl } from "../../i18n/utils";
+import { euro, fill, pricing } from "../../lib/pricing";
+import Icon from "../Icon.astro";
+import "../../styles/oficina-limpa.css";
+
+interface Props {
+  t: Copy;
+  locale: Locale;
+}
+const { t, locale } = Astro.props;
+const m = t.modulePages.atendimento;
+const a = t.atendimentoPage;
+const vars = {
+  proPrice: euro(locale, pricing.pro.monthlyByok),
+  days: pricing.pro.trialDays,
+};
+const problemIcons = [
+  '<path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/>',
+  '<path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3"/><path d="M18 3v4h-4M6 21v-4h4"/>',
+  '<path d="M4 5h16v11H8l-4 4z"/><path d="M9 10h6"/>',
+];
+const trustIcons = [
+  '<path d="M9 12l2 2 4-4"/><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/>',
+  '<path d="M16 11a4 4 0 1 0-8 0M4 20a8 8 0 0 1 16 0"/><path d="M19 4l2 2-2 2"/>',
+  '<circle cx="12" cy="12" r="9"/><path d="M8 12h8"/>',
+  '<rect x="4" y="4" width="16" height="16" rx="4"/><path d="M9 10h.01M15 10h.01M9 15c1.5 1 4.5 1 6 0"/>',
+];
+---
+
+<div class="pb" data-ab>
+  <!-- ============ O problema ============ -->
+  <section id="problema" class="pb-sec" aria-labelledby="ab-problem">
+    <div class="pb-wrap">
+      <header class="pb-head">
+        <p class="pb-eyebrow"><span></span>{a.eyebrows.problem}</p>
+        <h2 id="ab-problem" class="pb-h2">{m.problem.title}</h2>
+        <p class="pb-lead">{m.problem.lead}</p>
+      </header>
+      <ul class="pb-problems" role="list">
+        {
+          m.problem.items.map((it, i) => (
+            <li class="pb-card pb-rise">
+              <svg class="pb-prob-ico" viewBox="0 0 24 24" aria-hidden="true" set:html={problemIcons[i]} />
+              <h3>{it.title}</h3>
+              <p>{it.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ Como funciona ============ -->
+  <section id="como-funciona" class="pb-sec pb-white" aria-labelledby="ab-steps">
+    <div class="pb-wrap">
+      <header class="pb-head">
+        <p class="pb-eyebrow"><span></span>{a.eyebrows.steps}</p>
+        <h2 id="ab-steps" class="pb-h2">{m.steps.lead}</h2>
+      </header>
+
+      <ol class="pb-steps" role="list">
+        <!-- 1. ligar o WhatsApp -->
+        <li class="pb-step">
+          <div class="pb-step-text">
+            <span class="pb-num" aria-hidden="true">1</span>
+            <h3>{m.steps.items[0].title}</h3>
+            <p>{m.steps.items[0].text}</p>
+          </div>
+          <div class="pb-visual pb-rise" aria-hidden="true">
+            <div class="ab-connect">
+              <p class="ab-card-title">{a.connect.title}</p>
+              <div class="ab-connect-row">
+                <canvas class="ab-qr" width="174" height="174" data-qr-static></canvas>
+                <span class="ab-connect-text">
+                  <small>{a.connect.scan}</small>
+                  <span class="ab-ok"><i></i>{a.connect.status}</span>
+                  <b class="pb-mono">{a.connect.number}</b>
+                </span>
+              </div>
+              <p class="ab-official">{a.connect.official}</p>
+            </div>
+          </div>
+        </li>
+
+        <!-- 2. aprende a empresa -->
+        <li class="pb-step pb-step-rev">
+          <div class="pb-step-text">
+            <span class="pb-num" aria-hidden="true">2</span>
+            <h3>{m.steps.items[1].title}</h3>
+            <p>{m.steps.items[1].text}</p>
+          </div>
+          <div class="pb-visual pb-rise" aria-hidden="true">
+            <div class="ab-profile">
+              <p class="ab-card-title">{a.profile.title}</p>
+              <dl>
+                {
+                  a.profile.fields.map((f) => (
+                    <div>
+                      <dt>{f[0]}</dt>
+                      <dd>
+                        {f[1]}
+                        <span class="ab-source">
+                          <svg viewBox="0 0 16 16">
+                            <path d="m3.5 8.5 3 3 6-7" />
+                          </svg>
+                          {f[2]}
+                        </span>
+                      </dd>
+                    </div>
+                  ))
+                }
+              </dl>
+              <p class="ab-question">
+                <span>{a.profile.questionTag}</span>
+                {a.profile.question}
+              </p>
+              <span class="ab-approve">{a.profile.approve}</span>
+            </div>
+          </div>
+        </li>
+
+        <!-- 3. responde e passa à equipa -->
+        <li class="pb-step">
+          <div class="pb-step-text">
+            <span class="pb-num" aria-hidden="true">3</span>
+            <h3>{m.steps.items[2].title}</h3>
+            <p>{m.steps.items[2].text}</p>
+          </div>
+          <div class="pb-visual pb-rise" aria-hidden="true">
+            <div class="ab-notif">
+              <p class="ab-notif-top">
+                <span class="ab-notif-app">OC</span>
+                <span>{a.handoff.title}</span>
+                <small>{a.handoff.when}</small>
+              </p>
+              <p class="ab-notif-text"><b>{a.handoff.text}</b></p>
+              <p class="ab-notif-who">{a.handoff.who}</p>
+              <span class="ab-take">{a.handoff.take}</span>
+            </div>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ O que o cliente vê ============ -->
+  <section class="pb-sec" aria-labelledby="ab-example">
+    <div class="pb-wrap pb-split">
+      <div class="pb-visual pb-rise" aria-hidden="true">
+        <div class="pb-chatcard pb-chatcard-lg">
+          <div class="pb-chat-head">
+            <span class="pb-avatar">RS</span>
+            <span><b>{m.chat.title}</b><small>WhatsApp</small></span>
+          </div>
+          <div class="pb-chat-feed">
+            {m.chat.messages.map(([who, text]) => <p class:list={["pb-bub", who === "in" ? "pb-bub-out" : "pb-bub-in"]}>{text}</p>)}
+          </div>
+        </div>
+      </div>
+      <div class="pb-split-text">
+        <p class="pb-eyebrow"><span></span>{a.eyebrows.example}</p>
+        <h2 id="ab-example" class="pb-h2">{a.eyebrows.exampleTitle}</h2>
+        <p class="pb-lead">{m.chat.caption}</p>
+        <p class="pb-note">{m.chat.note}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Regras claras ============ -->
+  <section id="confianca" class="pb-sec pb-white" aria-labelledby="ab-trust">
+    <div class="pb-wrap">
+      <header class="pb-head">
+        <p class="pb-eyebrow"><span></span>{a.eyebrows.trust}</p>
+        <h2 id="ab-trust" class="pb-h2">{m.trust.title}</h2>
+        <p class="pb-lead">{m.trust.lead}</p>
+      </header>
+      <ul class="ab-rules" role="list">
+        {
+          m.trust.items.map((it, i) => (
+            <li class="pb-card pb-rise">
+              <span class="pb-proof-top">
+                <svg viewBox="0 0 24 24" aria-hidden="true" set:html={trustIcons[i]} />
+              </span>
+              <h3>{it.title}</h3>
+              <p>{it.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ Reserva por SMS ============ -->
+  <section class="pb-sec pb-dark" aria-labelledby="ab-sms">
+    <div class="pb-wrap pb-split pb-split-sms">
+      <div class="pb-split-text">
+        <p class="pb-eyebrow pb-eyebrow-dark"><span></span>{a.sms.eyebrow}</p>
+        <h2 id="ab-sms" class="pb-h2">{a.sms.title}</h2>
+        <p class="pb-lead">{a.sms.lead}</p>
+        <ul class="pb-sms-points" role="list">
+          {
+            a.sms.points.map((pt) => (
+              <li>
+                <h3>{pt.title}</h3>
+                <p>{pt.text}</p>
+              </li>
+            ))
+          }
+        </ul>
+        <p class="pb-note">{a.sms.cost}</p>
+      </div>
+      <div class="pb-visual pb-rise" aria-hidden="true">
+        <div class="pb-sms">
+          <p class="pb-sms-label">
+            <svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z"></path></svg>
+            {a.sms.phone}
+          </p>
+          <div class="pb-sms-feed">
+            {a.sms.chat.map(([who, text]) => <p class:list={["pb-sms-bub", who === "in" ? "ab-sms-in" : "pb-sms-out"]}>{text}</p>)}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Vantagens ============ -->
+  <section id="vantagens" class="pb-sec" aria-labelledby="ab-benefits">
+    <div class="pb-wrap">
+      <header class="pb-head">
+        <p class="pb-eyebrow"><span></span>{a.eyebrows.benefits}</p>
+        <h2 id="ab-benefits" class="pb-h2">{m.benefits.title}</h2>
+      </header>
+      <ul class="pb-benefits ab-benefits" role="list">
+        {
+          m.benefits.items.map((b) => (
+            <li class="pb-card pb-rise">
+              <svg class="pb-check" viewBox="0 0 16 16" aria-hidden="true">
+                <path d="m3.5 8.5 3 3 6-7" />
+              </svg>
+              <h3>{b.title}</h3>
+              <p>{b.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ Privacidade + o que precisa ============ -->
+  <section class="pb-sec pb-white" aria-labelledby="ab-needs">
+    <div class="pb-wrap pb-two">
+      <div class="pb-privacy pb-rise">
+        <h2 class="pb-h3">{m.privacy.title}</h2>
+        <ul role="list">
+          {
+            m.privacy.items.map((it) => (
+              <li>
+                <Icon name="shield" class="h-4 w-4" />
+                <span>{it}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div>
+        <h2 id="ab-needs" class="pb-h3">{m.needs.title}</h2>
+        <ul class="pb-needs" role="list">
+          {
+            m.needs.rows.map((r, i) => (
+              <li class="pb-rise">
+                <span class:list={["pb-level", i === 0 ? "pb-level-req" : i === 1 ? "pb-level-rec" : "pb-level-sms"]}>{r[1]}</span>
+                <h3>{r[0]}</h3>
+                <p>{r[2]}</p>
+              </li>
+            ))
+          }
+        </ul>
+        <p class="pb-note">{m.needs.note}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Para quem + preço ============ -->
+  <section id="para-quem" class="pb-sec" aria-labelledby="ab-who">
+    <div class="pb-wrap">
+      <header class="pb-head">
+        <h2 id="ab-who" class="pb-h2">{m.forWhom.title}</h2>
+        <p class="pb-lead">{m.forWhom.yesTitle}</p>
+      </header>
+      <ul class="pb-chips" role="list">
+        {m.forWhom.yes.map((y) => <li>{y}</li>)}
+      </ul>
+      <p class="pb-no"><b>{m.forWhom.noTitle}.</b> {m.forWhom.no}</p>
+
+      <div id="preco" class="pb-price">
+        <header class="pb-head">
+          <h2 class="pb-h2">{m.pricing.title}</h2>
+          <p class="pb-lead">{m.pricing.lead}</p>
+        </header>
+        <div class="pb-price-grid">
+          <div class="pb-card pb-rise">
+            <h3>{m.pricing.standaloneTitle}</h3>
+            <p>{m.pricing.standaloneText}</p>
+          </div>
+          <div class="pb-card pb-card-accent pb-rise">
+            <h3>{m.pricing.proTitle}</h3>
+            <p>{fill(m.pricing.proText, vars)}</p>
+            <a href={localeUrl(locale, "/pro/")} class="pb-link">
+              {m.pricing.proLink}
+              <Icon name="arrow" class="h-3.5 w-3.5" />
+            </a>
+          </div>
+        </div>
+        <p class="pb-note">{m.pricing.note}</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  /* visuais próprios do Atendimento; o resto vem de styles/oficina-limpa.css */
+  .ab-card-title {
+    font-size: 0.75rem;
+    font-weight: 650;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--pb-ink-3);
+  }
+
+  /* 1. ligar o WhatsApp */
+  .ab-connect {
+    width: min(21rem, 100%);
+    padding: 1.25rem;
+    border-radius: 1.25rem;
+    background: var(--pb-bg-2);
+    box-shadow: var(--pb-shadow), 0 0 0 1px var(--pb-line);
+  }
+  .ab-connect-row {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    align-items: center;
+  }
+  .ab-qr {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 0.35rem;
+    background: #fff;
+    box-shadow: 0 0 0 6px #fff, 0 0 0 7px var(--pb-line-2);
+  }
+  .ab-connect-text {
+    display: grid;
+    gap: 0.4rem;
+    min-width: 0;
+  }
+  .ab-connect-text small {
+    color: var(--pb-ink-2);
+    font-size: 0.8125rem;
+  }
+  .ab-ok {
+    justify-self: start;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    background: var(--pb-ok-soft);
+    color: var(--pb-ok);
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+  .ab-ok i {
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background: currentColor;
+  }
+  .ab-official {
+    margin-top: 1rem;
+    padding-top: 0.875rem;
+    border-top: 1px solid var(--pb-line);
+    font-size: 0.8125rem;
+    color: var(--pb-ink-2);
+  }
+
+  /* 2. ficha da empresa */
+  .ab-profile {
+    width: min(23rem, 100%);
+    padding: 1.25rem;
+    border-radius: 1.25rem;
+    background: var(--pb-bg-2);
+    box-shadow: var(--pb-shadow), 0 0 0 1px var(--pb-line);
+  }
+  .ab-profile dl {
+    margin-top: 0.75rem;
+    display: grid;
+  }
+  .ab-profile dl div {
+    padding: 0.6rem 0;
+    border-top: 1px solid var(--pb-line);
+  }
+  .ab-profile dt {
+    font-size: 0.75rem;
+    color: var(--pb-ink-3);
+  }
+  .ab-profile dd {
+    margin: 0.15rem 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.25rem 0.75rem;
+    font-weight: 600;
+    font-size: 0.9375rem;
+  }
+  .ab-source {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--pb-ok);
+  }
+  .ab-source svg {
+    width: 0.75rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .ab-question {
+    margin-top: 0.5rem;
+    padding: 0.75rem;
+    border-radius: 0.875rem;
+    background: var(--pb-warn-soft);
+    font-weight: 600;
+    font-size: 0.9375rem;
+  }
+  .ab-question span {
+    display: block;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    color: var(--pb-warn);
+    margin-bottom: 0.15rem;
+  }
+  .ab-approve {
+    margin-top: 0.875rem;
+    display: block;
+    text-align: center;
+    padding: 0.7rem;
+    border-radius: 999px;
+    background: var(--pb-ink);
+    color: var(--pb-bg-2);
+    font-weight: 650;
+    font-size: 0.875rem;
+  }
+
+  /* 3. aviso à equipa (notificação no telemóvel) */
+  .ab-notif {
+    width: min(21rem, 100%);
+    padding: 1rem 1.125rem;
+    border-radius: 1.375rem;
+    background: var(--pb-bg-2);
+    box-shadow: var(--pb-shadow), 0 0 0 1px var(--pb-line);
+  }
+  .ab-notif-top {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 0.5rem;
+    align-items: center;
+    font-size: 0.8125rem;
+    font-weight: 650;
+  }
+  .ab-notif-top small {
+    color: var(--pb-ink-3);
+    font-weight: 500;
+  }
+  .ab-notif-app {
+    display: grid;
+    place-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 0.45rem;
+    background: var(--pb-ink);
+    color: var(--pb-bg-2);
+    font-size: 0.5625rem;
+    font-weight: 700;
+  }
+  .ab-notif-text {
+    margin-top: 0.625rem;
+    font-size: 1.0625rem;
+  }
+  .ab-notif-who {
+    margin-top: 0.15rem;
+    font-size: 0.8125rem;
+    color: var(--pb-ink-2);
+  }
+  .ab-take {
+    margin-top: 0.875rem;
+    display: block;
+    text-align: center;
+    padding: 0.6rem;
+    border-radius: 999px;
+    background: var(--pb-ok);
+    color: #fff;
+    font-weight: 650;
+    font-size: 0.875rem;
+  }
+
+  /* regras: 4 cartões em 2×2 */
+  .ab-rules {
+    margin-top: 3rem;
+    display: grid;
+    gap: 1rem;
+  }
+  @media (min-width: 48rem) {
+    .ab-rules {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* vantagens: 6 cartões, 3×2 sem cartões largos */
+  @media (min-width: 64rem) {
+    .ab-benefits li:nth-child(5),
+    .ab-benefits li:nth-child(7) {
+      grid-column: auto;
+    }
+  }
+
+  /* SMS do cliente: texto normal (a mensagem do ponto era um código) */
+  .ab-sms-in {
+    justify-self: end;
+    background: #34c759;
+    color: #fff;
+  }
+</style>
+
+<script is:inline>
+  // QR de exemplo (estático) no passo «Ligar o WhatsApp»: marcadores de canto e módulos ao acaso.
+  (function () {
+    var c = document.querySelector("[data-qr-static]");
+    if (!c) return;
+    var x = c.getContext("2d");
+    var N = 29;
+    var s = c.width / N;
+    var seed = 20261125;
+    function r() {
+      seed = (seed * 1664525 + 1013904223) >>> 0;
+      return seed / 4294967296;
+    }
+    function f(ox, oy, px, py) {
+      return px >= ox - 1 && px <= ox + 7 && py >= oy - 1 && py <= oy + 7;
+    }
+    x.fillStyle = "#fff";
+    x.fillRect(0, 0, c.width, c.height);
+    x.fillStyle = "#14171a";
+    for (var py = 0; py < N; py++)
+      for (var px = 0; px < N; px++) {
+        if (f(0, 0, px, py) || f(N - 7, 0, px, py) || f(0, N - 7, px, py)) continue;
+        if (r() > 0.5) x.fillRect(px * s, py * s, s + 0.4, s + 0.4);
+      }
+    [[0, 0], [N - 7, 0], [0, N - 7]].forEach(function (p) {
+      x.fillStyle = "#14171a";
+      x.fillRect(p[0] * s, p[1] * s, 7 * s, 7 * s);
+      x.fillStyle = "#fff";
+      x.fillRect((p[0] + 1) * s, (p[1] + 1) * s, 5 * s, 5 * s);
+      x.fillStyle = "#14171a";
+      x.fillRect((p[0] + 2) * s, (p[1] + 2) * s, 3 * s, 3 * s);
+    });
+  })();
+</script>

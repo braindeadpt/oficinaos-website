@@ -2478,6 +2478,97 @@ export const t: Copy = {
       ],
     },
   },
+  atendimentoHero: {
+    titleA: "An assistant that answers your customers on WhatsApp.",
+    titleB: "Even when you're closed.",
+    proofs: ["Answers only with what you approved", "Hands over to a person when it doesn't know", "On the WhatsApp number you already use"],
+    caption: "Illustrative recreation with sample data: the conversation on the customer's phone and the business console at 22:41, with the shop closed.",
+    console: {
+      brand: "AI Customer Service",
+      shop: "Central Café",
+      status: "Closed · the assistant is answering",
+      inbox: "Conversations",
+      list: [
+        ["Marta S.", "Do you make birthday cakes…", "22:41"],
+        ["+351 912 …", "Any gluten-free options?", "21:58"],
+        ["João P.", "Thank you!", "19:12"],
+      ],
+      assistant: "Virtual assistant",
+      handoffTitle: "Request for the team",
+      handoff: "Cake order · Saturday · 12 people",
+      handoffTag: "Confirm tomorrow",
+    },
+    chat: [
+      ["in", "Hi! Are you open on Sundays?"],
+      ["out", "Hi! On Sundays we're open from 8am to 1pm. I'm Central Café's virtual assistant."],
+      ["in", "Do you make birthday cakes to order? It's for Saturday, 12 people."],
+      ["out", "We do! I've passed your request to the team, who'll confirm here tomorrow morning."],
+    ],
+    panel: {
+      title: "Today",
+      rows: [
+        ["Conversations", "23"],
+        ["Answered by the assistant", "19"],
+        ["Handed to the team", "4"],
+      ],
+    },
+  },
+  atendimentoPage: {
+    waitlist: {
+      note: "We only use these details to contact you about AI Customer Service.",
+      shopPlaceholder: "e.g. Central Café",
+    },
+    eyebrows: {
+      problem: "The problem",
+      steps: "How it works",
+      example: "What the customer sees",
+      exampleTitle: "Instant answers. Requests for the team.",
+      trust: "Clear rules",
+      benefits: "Benefits",
+    },
+    connect: {
+      title: "Connect WhatsApp",
+      scan: "Scan with the company phone",
+      status: "Connected",
+      number: "+351 912 345 678",
+      official: "Or Meta's official WhatsApp",
+    },
+    profile: {
+      title: "Business profile",
+      fields: [
+        ["Opening hours", "Mon–Sat 8am–7pm · Sun 8am–1pm", "from your website"],
+        ["Address", "Rua Direita, 12, Braga", "from your Google profile"],
+        ["Cakes to order", "48 h notice", "from the PDF menu"],
+      ],
+      question: "Do you deliver?",
+      questionTag: "Question for you",
+      approve: "Approve and activate",
+    },
+    handoff: {
+      title: "Request for the team",
+      text: "Table for 6 · Saturday 8:30pm",
+      who: "Ana R. · WhatsApp",
+      take: "Take over",
+      when: "now",
+    },
+    sms: {
+      eyebrow: "SMS backup",
+      title: "No WhatsApp? The assistant replies by SMS.",
+      lead: "Not every customer uses WhatsApp, and WhatsApp can fail. A company Android phone with a SIM card makes sure nobody is left without an answer.",
+      points: [
+        { title: "Customers without WhatsApp", text: "Anyone who sends an SMS gets the answer by SMS, with the same rules and the same profile." },
+        { title: "Backup if WhatsApp fails", text: "If the company's WhatsApp goes down or gets blocked, anyone who writes by SMS still gets an answer, and the notices the business sends to customers go out by SMS." },
+        { title: "Short replies", text: "By SMS, the assistant answers in a few lines, without emojis or unnecessary links." },
+        { title: "Alerts for the team", text: "Requests handed to a person reach the team by email or by WhatsApp on their phone." },
+      ],
+      chat: [
+        ["in", "Are you open tomorrow?"],
+        ["out", "Yes! Tomorrow, Saturday, we're open 8am–7pm. Central Café's virtual assistant."],
+      ],
+      phone: "SMS · Company phone",
+      cost: "SMS messages are sent from the company phone: the cost is that of your mobile plan.",
+    },
+  },
   pontoPage: {
     waitlist: {
       note: "We only use these details to contact you about Livro de Ponto.",
