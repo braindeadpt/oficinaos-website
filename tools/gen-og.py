@@ -56,6 +56,8 @@ DEFAULT_EYEBROW = {
 
 
 TEMPLATE_VERSION = "1"  # subir quando o desenho das imagens mudar (força URLs novos)
+RETAIN_DAYS = 30  # imagens antigas ficam este tempo: previsões em cache que guardaram o URL não dão 404
+RECOVER = "bun run build && python tools/gen-og.py && bun run build"
 
 
 def font_from_woff2(name: str) -> Path:
@@ -166,30 +168,58 @@ def digest(lang: str, eyebrow: str, title: str) -> str:
     return hashlib.sha256(f"{TEMPLATE_VERSION}|{lang}|{eyebrow}|{title}".encode()).hexdigest()[:10]
 
 
+def built_pages() -> list:
+    """Lista as páginas construídas; termina com erro se não houver build (nunca apaga nada às cegas)."""
+    if not DIST.exists():
+        sys.exit(f"Sem dist/: corre primeiro `bun run build` (recuperação completa: {RECOVER}).")
+    found = list(pages())
+    if not found:
+        sys.exit(f"dist/ não tem páginas elegíveis: corre `bun run build` (recuperação completa: {RECOVER}).")
+    return found
+
+
 def main() -> None:
+    import datetime
+
     manifest_path = OUT / "manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else {}
+    found = built_pages()
     if "--check" in sys.argv:
-        manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else {}
-        stale = [k for k, lang, eb, t in pages() if manifest.get(k, {}).get("hash") != digest(lang, eb, t)]
-        if stale:
-            print("Imagens de partilha desatualizadas (correr: python tools/gen-og.py):", ", ".join(stale))
+        bad = []
+        for k, lang, eb, t in found:
+            h = digest(lang, eb, t)
+            entry = manifest.get(k, {})
+            if entry.get("hash") != h or entry.get("file") != f"{k}-{h}.jpg" or not (OUT / f"{k}-{h}.jpg").is_file():
+                bad.append(k)
+        if bad:
+            print(f"Imagens de partilha desatualizadas ou em falta: {', '.join(bad)}. Corre: {RECOVER}")
             sys.exit(1)
         print("Imagens de partilha em dia.")
         return
     OUT.mkdir(parents=True, exist_ok=True)
-    manifest = {}
-    for key, lang, eyebrow, title in pages():
+    today = datetime.date.today()
+    retired = dict(manifest.get("_retired", {}))
+    new = {}
+    for key, lang, eyebrow, title in found:
         h = digest(lang, eyebrow, title)
         name = f"{key}-{h}.jpg"
         if not (OUT / name).exists():
             render(lang, eyebrow, title).save(OUT / name, quality=86, optimize=True, progressive=True)
-        manifest[key] = {"file": name, "hash": h, "title": title}
-    keep = {v["file"] for v in manifest.values()} | {"manifest.json"}
-    for f in OUT.iterdir():
-        if f.name not in keep:
+        new[key] = {"file": name, "hash": h, "title": title}
+        retired.pop(name, None)
+    live = {v["file"] for v in new.values()}
+    for f in OUT.glob("*.jpg"):
+        if f.name in live:
+            continue
+        since = retired.setdefault(f.name, today.isoformat())
+        if (today - datetime.date.fromisoformat(since)).days > RETAIN_DAYS:
             f.unlink()
-    manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=1, sort_keys=True), encoding="utf-8")
-    print(f"{len(manifest)} imagens em {OUT.relative_to(ROOT)}")
+            retired.pop(f.name)
+    retired = {k: v for k, v in retired.items() if (OUT / k).exists()}
+    if retired:
+        new["_retired"] = retired
+    manifest_path.write_text(json.dumps(new, ensure_ascii=False, indent=1, sort_keys=True), encoding="utf-8")
+    print(f"{len(live)} imagens em {OUT.relative_to(ROOT)} ({len(retired)} antigas retidas até {RETAIN_DAYS} dias)")
 
 
 if __name__ == "__main__":
