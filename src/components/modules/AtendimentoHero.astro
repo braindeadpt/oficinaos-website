@@ -157,7 +157,7 @@ const initials = (n: string) =>
         </div>
 
         <!-- Pausar/retomar a demonstração (WCAG 2.2.2): só aparece quando há animação -->
-        <button class="ah-pause" type="button" data-pause aria-pressed="false" aria-label={t.pontoHero.demoPause} data-label-pause={t.pontoHero.demoPause} data-label-play={t.pontoHero.demoPlay}>
+        <button class="ah-pause" type="button" data-pause aria-label={t.pontoHero.demoPause} data-label-pause={t.pontoHero.demoPause} data-label-play={t.pontoHero.demoPlay}>
           <svg class="ah-pause-i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.5v9M11 3.5v9"></path></svg>
           <svg class="ah-play-i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.2v9.6L12.5 8z"></path></svg>
         </button>
@@ -816,11 +816,11 @@ const initials = (n: string) =>
     stroke-linejoin: round;
   }
   .ah-play-i,
-  .ah-pause[aria-pressed="true"] .ah-pause-i,
+  .ah-pause[data-paused] .ah-pause-i,
   .ah[data-static] .ah-pause {
     display: none;
   }
-  .ah-pause[aria-pressed="true"] .ah-play-i {
+  .ah-pause[data-paused] .ah-play-i {
     display: block;
   }
 
@@ -917,9 +917,17 @@ const initials = (n: string) =>
     var base = stats.map(function (s) {
       return parseInt(s.textContent, 10);
     });
+    // Agendador que se pode pausar: cada passo guarda quando devia correr; ao retomar, só os
+    // passos que faltam voltam a ser agendados, com o tempo que lhes restava.
     var timers = [];
     function at(ms, fn) {
-      timers.push(setTimeout(fn, ms));
+      var t = { fn: fn, due: Date.now() + ms, left: ms };
+      t.id = setTimeout(function () {
+        var i = timers.indexOf(t);
+        if (i >= 0) timers.splice(i, 1);
+        fn();
+      }, ms);
+      timers.push(t);
     }
     function show(el, dy) {
       el.classList.add("is-on");
@@ -958,7 +966,9 @@ const initials = (n: string) =>
       stats[i].animate([{ transform: "translateY(-4px)", opacity: 0.2 }, { transform: "none", opacity: 1 }], { duration: 380, easing: E });
     }
     function reset() {
-      timers.forEach(clearTimeout);
+      timers.forEach(function (t) {
+        clearTimeout(t.id);
+      });
       timers = [];
       lmsg.concat(pmsg, [ltyping, ptyping, handoff]).forEach(function (n) {
         n.getAnimations().forEach(function (x) {
@@ -1010,20 +1020,33 @@ const initials = (n: string) =>
     }
     run();
 
-    /* ---------- pausar / retomar ---------- */
+    /* ---------- pausar / retomar (continua onde parou) ---------- */
     var pauseBtn = q("[data-pause]");
     var paused = false;
     pauseBtn.addEventListener("click", function () {
       paused = !paused;
-      pauseBtn.setAttribute("aria-pressed", String(paused));
+      pauseBtn.toggleAttribute("data-paused", paused);
       pauseBtn.setAttribute("aria-label", pauseBtn.getAttribute(paused ? "data-label-play" : "data-label-pause"));
+      var anims = root.getAnimations({ subtree: true });
       if (paused) {
-        timers.forEach(clearTimeout);
-        timers = [];
-        root.getAnimations({ subtree: true }).forEach(function (x) {
+        var now = Date.now();
+        timers.forEach(function (t) {
+          clearTimeout(t.id);
+          t.left = Math.max(0, t.due - now);
+        });
+        anims.forEach(function (x) {
           x.pause();
         });
-      } else run();
+      } else {
+        var pending = timers;
+        timers = [];
+        pending.forEach(function (t) {
+          at(t.left, t.fn);
+        });
+        anims.forEach(function (x) {
+          if (x.playState === "paused") x.play();
+        });
+      }
     });
   })();
 </script>
