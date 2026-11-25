@@ -1,0 +1,528 @@
+---
+// Corpo da página do Livro de Ponto (redesenho 2026-11, direção «Oficina limpa»), depois do herói.
+// Ordem: problema → como funciona (3 passos com a interface) → o que o funcionário vê → reserva por SMS
+// → provas → vantagens → privacidade e o que precisa → comparação → para quem → preço.
+// Visuais feitos com a interface verdadeira (HTML), o QR igual ao do herói (mesma janela de 30 s).
+// CSP: sem estilos inline no HTML; o único script é inline (hash).
+import type { Copy } from "../../i18n/pt";
+import type { Locale } from "../../i18n/utils";
+import { localeUrl } from "../../i18n/utils";
+import { euro, fill, pricing } from "../../lib/pricing";
+import Icon from "../Icon.astro";
+import "../../styles/oficina-limpa.css";
+
+interface Props {
+  t: Copy;
+  locale: Locale;
+}
+const { t, locale } = Astro.props;
+const p = t.pontoPage;
+const m = t.modulePages.ponto;
+const vars = {
+  proPrice: euro(locale, pricing.pro.monthlyByok),
+  days: pricing.pro.trialDays,
+  pontoFrom: euro(locale, pricing.addons.ponto[0].monthly),
+  pontoUpTo: pricing.addons.ponto[0].upTo,
+};
+const draftMatch = t.pontoHero.phone.draft.match(/^(.*#)(\d{4})$/);
+const draftHead = draftMatch ? draftMatch[1] : t.pontoHero.phone.draft;
+const draftCode = draftMatch ? draftMatch[2] : "";
+// QR estático (SVG) para quem não tem JavaScript; o script troca-o pelo QR vivo da janela de 30 s.
+function staticQrPath(seed: number): string {
+  const N = 29;
+  let s = seed >>> 0;
+  const rnd = () => {
+    s = (Math.imul(s, 1664525) + 1013904223) >>> 0;
+    return s / 4294967296;
+  };
+  const inFinder = (x: number, y: number) =>
+    [
+      [0, 0],
+      [N - 7, 0],
+      [0, N - 7],
+    ].some(([ox, oy]) => x >= ox - 1 && x <= ox + 7 && y >= oy - 1 && y <= oy + 7);
+  let d = "";
+  for (let y = 0; y < N; y++)
+    for (let x = 0; x < N; x++) if (!inFinder(x, y) && rnd() > 0.5) d += `M${x} ${y}h1v1h-1z`;
+  for (const [ox, oy] of [
+    [0, 0],
+    [N - 7, 0],
+    [0, N - 7],
+  ])
+    d += `M${ox} ${oy}h7v7h-7zM${ox + 1} ${oy + 1}v5h5v-5zM${ox + 2} ${oy + 2}h3v3h-3z`;
+  return d;
+}
+const qrPath = staticQrPath(17);
+const initials = (n: string) =>
+  n
+    .split(" ")
+    .map((x) => x[0])
+    .slice(0, 2)
+    .join("");
+const trustIcons = [
+  // QR
+  '<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M14 14h3v3h-3zM18 18h3v3h-3zM14 20h1M20 14h1"/>',
+  // Wi-Fi
+  '<path d="M2 9a15 15 0 0 1 20 0M5.5 12.5a10 10 0 0 1 13 0M9 16a5 5 0 0 1 6 0"/><circle cx="12" cy="19.5" r="1"/>',
+  // localização
+  '<path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/>',
+];
+const problemIcons = [
+  '<path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h5M10 16h5"/>',
+  '<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/>',
+  '<rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 18h2"/>',
+];
+---
+
+<div class="pb" data-pb>
+  <!-- ============ O problema ============ -->
+  <section id="problema" class="pb-sec" aria-labelledby="pb-problem">
+    <div class="pb-wrap">
+      <header class="pb-head">
+        <p class="pb-eyebrow"><span></span>{p.problem.eyebrow}</p>
+        <h2 id="pb-problem" class="pb-h2">{p.problem.title}</h2>
+        <p class="pb-lead">{p.problem.lead}</p>
+      </header>
+      <ul class="pb-problems" role="list">
+        {
+          p.problem.items.map((it, i) => (
+            <li class="pb-card pb-rise">
+              <svg class="pb-prob-ico" viewBox="0 0 24 24" aria-hidden="true" set:html={problemIcons[i]} />
+              <h3>{it.title}</h3>
+              <p>{it.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ Como funciona ============ -->
+  <section id="como-funciona" class="pb-sec pb-white" aria-labelledby="pb-steps">
+    <div class="pb-wrap">
+      <header class="pb-head">
+        <p class="pb-eyebrow"><span></span>{p.steps.eyebrow}</p>
+        <h2 id="pb-steps" class="pb-h2">{p.steps.title}</h2>
+      </header>
+
+      <ol class="pb-steps" role="list">
+        <!-- 1. o link da loja -->
+        <li class="pb-step">
+          <div class="pb-step-text">
+            <span class="pb-num" aria-hidden="true">1</span>
+            <h3>{p.steps.items[0].title}</h3>
+            <p>{p.steps.items[0].text}</p>
+            <p class="pb-note">{p.steps.items[0].note}</p>
+          </div>
+          <div class="pb-visual pb-rise" aria-hidden="true">
+            <div class="pb-browser">
+              <div class="pb-browser-bar">
+                <i></i><i></i><i></i>
+                <span class="pb-url">{p.steps.link}</span>
+              </div>
+              <div class="pb-browser-body">
+                <div class="pb-qrbox">
+                  <svg class="pb-ring" viewBox="0 0 120 120">
+                    <circle class="pb-ring-track" cx="60" cy="60" r="56"></circle>
+                    <circle class="pb-ring-prog" cx="60" cy="60" r="56" pathLength="100" data-ring-mini></circle>
+                  </svg>
+                  <svg class="pb-qr pb-qr-svg" viewBox="-1 -1 31 31" aria-hidden="true">
+                    <rect x="-1" y="-1" width="31" height="31" fill="#fff"></rect>
+                    <path d={qrPath} fill="#14171a" fill-rule="evenodd"></path>
+                  </svg>
+                  <canvas class="pb-qr pb-qr-live" width="232" height="232" data-qr-mini></canvas>
+                </div>
+                <p class="pb-qr-code"><span data-code-mini>4821</span></p>
+              </div>
+            </div>
+            <ul class="pb-devices" role="list">
+              {p.steps.devices.map((d) => <li>{d}</li>)}
+            </ul>
+          </div>
+        </li>
+
+        <!-- 2. ler e enviar -->
+        <li class="pb-step pb-step-rev">
+          <div class="pb-step-text">
+            <span class="pb-num" aria-hidden="true">2</span>
+            <h3>{p.steps.items[1].title}</h3>
+            <p>{p.steps.items[1].text}</p>
+            <p class="pb-badge-time">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"></circle><path d="M12 9v4l2.5 2.5M9 2h6"></path></svg>
+              {p.steps.items[1].note}
+            </p>
+          </div>
+          <div class="pb-visual pb-rise" aria-hidden="true">
+            <div class="pb-chatcard">
+              <div class="pb-chat-head">
+                <span class="pb-avatar">OC</span>
+                <span><b>{t.pontoHero.phone.contact}</b><small>{t.pontoHero.phone.contactSub}</small></span>
+              </div>
+              <div class="pb-chat-feed">
+                <p class="pb-bub pb-bub-out">
+                  {draftHead}<span data-code-draft>{draftCode}</span>
+                  <span class="pb-meta">09:02 · {p.steps.sent}</span>
+                </p>
+                <p class="pb-bub pb-bub-in"><b>{t.pontoHero.phone.reply}</b> {t.pontoHero.phone.replySub}</p>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <!-- 3. o painel -->
+        <li class="pb-step">
+          <div class="pb-step-text">
+            <span class="pb-num" aria-hidden="true">3</span>
+            <h3>{p.steps.items[2].title}</h3>
+            <p>{p.steps.items[2].text}</p>
+            <p class="pb-note">{p.steps.items[2].note}</p>
+          </div>
+          <div class="pb-visual pb-rise" aria-hidden="true">
+            <div class="pb-dash">
+              <div class="pb-dash-head">
+                <span><b>{p.steps.dash.title}</b><small>{p.steps.dash.month}</small></span>
+                <span class="pb-live"><i></i>3</span>
+              </div>
+              <ul class="pb-dash-rows" role="list">
+                {
+                  p.steps.dash.rows.map((r) => (
+                    <li>
+                      <span class="pb-ini">{initials(r[0])}</span>
+                      <span class="pb-who">{r[0]}</span>
+                      <span class="pb-mono">{r[1]}</span>
+                      <span class="pb-mono pb-strong">{r[2]}</span>
+                    </li>
+                  ))
+                }
+              </ul>
+              <div class="pb-dash-foot">
+                {
+                  p.steps.dash.export.map((e) => (
+                    <span class="pb-export">
+                      <svg viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14" /></svg>
+                      {e}
+                    </span>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ O que o funcionário vê ============ -->
+  <section class="pb-sec" aria-labelledby="pb-employee">
+    <div class="pb-wrap pb-split">
+      <div class="pb-visual pb-rise" aria-hidden="true">
+        <div class="pb-chatcard pb-chatcard-lg">
+          <div class="pb-chat-head">
+            <span class="pb-avatar">OC</span>
+            <span><b>{t.pontoHero.phone.contact}</b><small>{t.pontoHero.phone.contactSub}</small></span>
+          </div>
+          <div class="pb-chat-feed">
+            {p.employee.chat.map(([who, text]) => <p class:list={["pb-bub", who === "in" ? "pb-bub-out" : "pb-bub-in"]}>{text}</p>)}
+            <div class="pb-quick">
+              {p.employee.buttons.map((b) => <span>{b}</span>)}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pb-split-text">
+        <p class="pb-eyebrow"><span></span>{p.employee.eyebrow}</p>
+        <h2 id="pb-employee" class="pb-h2">{p.employee.title}</h2>
+        <p class="pb-lead">{p.employee.lead}</p>
+        <dl class="pb-tips">
+          {
+            p.employee.tips.map((tip) => (
+              <div>
+                <dt>{tip.title}</dt>
+                <dd>{tip.text}</dd>
+              </div>
+            ))
+          }
+        </dl>
+        <p class="pb-note">{p.employee.note}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Reserva por SMS ============ -->
+  <section class="pb-sec pb-dark" aria-labelledby="pb-sms">
+    <div class="pb-wrap pb-split pb-split-sms">
+      <div class="pb-split-text">
+        <p class="pb-eyebrow pb-eyebrow-dark"><span></span>{p.sms.eyebrow}</p>
+        <h2 id="pb-sms" class="pb-h2">{p.sms.title}</h2>
+        <p class="pb-lead">{p.sms.lead}</p>
+        <ul class="pb-sms-points" role="list">
+          {
+            p.sms.points.map((pt) => (
+              <li>
+                <h3>{pt.title}</h3>
+                <p>{pt.text}</p>
+              </li>
+            ))
+          }
+        </ul>
+        <p class="pb-note">{p.sms.cost}</p>
+      </div>
+      <div class="pb-visual pb-rise" aria-hidden="true">
+        <div class="pb-sms">
+          <p class="pb-sms-label">
+            <svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z"></path></svg>
+            {p.sms.phone}
+          </p>
+          <div class="pb-sms-feed">
+            {p.sms.chat.map(([who, text]) => <p class:list={["pb-sms-bub", who === "in" ? "pb-sms-in" : "pb-sms-out"]}>{text}</p>)}
+          </div>
+          <p class="pb-sms-chip">{t.pontoHero.panel.rows[2][2]}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Provas ============ -->
+  <section id="confianca" class="pb-sec pb-white" aria-labelledby="pb-trust">
+    <div class="pb-wrap">
+      <header class="pb-head">
+        <p class="pb-eyebrow"><span></span>{p.trust.eyebrow}</p>
+        <h2 id="pb-trust" class="pb-h2">{p.trust.title}</h2>
+        <p class="pb-lead">{p.trust.lead}</p>
+      </header>
+      <ol class="pb-proofs" role="list">
+        {
+          p.trust.items.map((it, i) => (
+            <li class="pb-card pb-rise">
+              <span class="pb-proof-top">
+                <svg viewBox="0 0 24 24" aria-hidden="true" set:html={trustIcons[i]} />
+                <span class="pb-proof-n">{i + 1}</span>
+              </span>
+              <h3>{it.title}</h3>
+              <p>{it.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+      <p class="pb-server">
+        <span class="pb-server-clock" aria-hidden="true">09:40</span>
+        {p.trust.serverTime}
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ Vantagens ============ -->
+  <section id="vantagens" class="pb-sec" aria-labelledby="pb-benefits">
+    <div class="pb-wrap">
+      <header class="pb-head">
+        <p class="pb-eyebrow"><span></span>{p.benefits.eyebrow}</p>
+        <h2 id="pb-benefits" class="pb-h2">{p.benefits.title}</h2>
+      </header>
+      <ul class="pb-benefits" role="list">
+        {
+          p.benefits.items.map((b) => (
+            <li class="pb-card pb-rise">
+              <svg class="pb-check" viewBox="0 0 16 16" aria-hidden="true">
+                <path d="m3.5 8.5 3 3 6-7" />
+              </svg>
+              <h3>{b.title}</h3>
+              <p>{b.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ Privacidade + o que precisa ============ -->
+  <section class="pb-sec pb-white" aria-labelledby="pb-needs">
+    <div class="pb-wrap pb-two">
+      <div class="pb-privacy pb-rise">
+        <h2 class="pb-h3">{p.privacy.title}</h2>
+        <ul role="list">
+          {
+            p.privacy.items.map((it) => (
+              <li>
+                <Icon name="shield" class="h-4 w-4" />
+                <span>{it}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div>
+        <h2 id="pb-needs" class="pb-h3">{p.needs.title}</h2>
+        <ul class="pb-needs" role="list">
+          {
+            p.needs.items.map((n, i) => (
+              <li class="pb-rise">
+                <span class:list={["pb-level", i === 0 ? "pb-level-req" : i === 1 ? "pb-level-rec" : "pb-level-sms"]}>{n.level}</span>
+                <h3>{n.what}</h3>
+                <p>{n.why}</p>
+              </li>
+            ))
+          }
+        </ul>
+        <p class="pb-note">{p.needs.note}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Comparação ============ -->
+  <section class="pb-sec" aria-labelledby="pb-compare">
+    <div class="pb-wrap">
+      <header class="pb-head">
+        <h2 id="pb-compare" class="pb-h2">{p.compare.title}</h2>
+      </header>
+      <div class="pb-table-wrap" tabindex="0" role="region" aria-labelledby="pb-compare">
+        <table class="pb-table" role="table">
+          <thead role="rowgroup">
+            <tr role="row">
+              {
+                p.compare.head.map((h, i) => (
+                  <th scope="col" role="columnheader" class:list={[i === p.compare.head.length - 1 && "pb-us"]}>
+                    {h}
+                  </th>
+                ))
+              }
+            </tr>
+          </thead>
+          <tbody role="rowgroup">
+            {
+              p.compare.rows.map((r) => (
+                <tr role="row">
+                  {r.map((c, i) =>
+                    i === 0 ? (
+                      <th scope="row" role="rowheader">
+                        {c}
+                      </th>
+                    ) : (
+                      <td role="cell" class:list={[i === r.length - 1 && "pb-us"]}>
+                        <span class="pb-td-label">{p.compare.head[i]}</span>
+                        <span>{c}</span>
+                      </td>
+                    )
+                  )}
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Para quem + preço ============ -->
+  <section id="para-quem" class="pb-sec pb-white" aria-labelledby="pb-who">
+    <div class="pb-wrap">
+      <header class="pb-head">
+        <h2 id="pb-who" class="pb-h2">{p.forWhom.title}</h2>
+        <p class="pb-lead">{p.forWhom.yesTitle}</p>
+      </header>
+      <ul class="pb-chips" role="list">
+        {p.forWhom.yes.map((y) => <li>{y}</li>)}
+      </ul>
+      <p class="pb-no"><b>{p.forWhom.noTitle}.</b> {p.forWhom.no}</p>
+
+      <div id="preco" class="pb-price">
+        <header class="pb-head">
+          <h2 class="pb-h2">{m.pricing.title}</h2>
+          <p class="pb-lead">{m.pricing.lead}</p>
+        </header>
+        <div class="pb-price-grid">
+          <div class="pb-card pb-rise">
+            <h3>{m.pricing.standaloneTitle}</h3>
+            <p>{m.pricing.standaloneText}</p>
+          </div>
+          <div class="pb-card pb-card-accent pb-rise">
+            <h3>{m.pricing.proTitle}</h3>
+            <p>{fill(m.pricing.proText, vars)}</p>
+            <a href={localeUrl(locale, "/pro/")} class="pb-link">
+              {m.pricing.proLink}
+              <Icon name="arrow" class="h-3.5 w-3.5" />
+            </a>
+          </div>
+        </div>
+        <p class="pb-note">{m.pricing.note}</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+
+<script is:inline>
+  (function () {
+    var canvases = Array.prototype.slice.call(document.querySelectorAll("[data-qr-mini]"));
+    if (!canvases.length) return;
+    var ring = document.querySelector("[data-ring-mini]");
+    var codeEl = document.querySelector("[data-code-mini]");
+    var N = 29;
+    function rnd(seed) {
+      return function () {
+        seed = (seed * 1664525 + 1013904223) >>> 0;
+        return seed / 4294967296;
+      };
+    }
+    // Mesmo desenho e mesma semente do herói: o QR destes passos é igual ao do tablet lá em cima.
+    function draw(canvas, seed) {
+      var ctx = canvas.getContext("2d");
+      var s = canvas.width / N;
+      var r = rnd(seed);
+      function reserved(x, y) {
+        function f(ox, oy) {
+          return x >= ox - 1 && x <= ox + 7 && y >= oy - 1 && y <= oy + 7;
+        }
+        return f(0, 0) || f(N - 7, 0) || f(0, N - 7) || (x >= 20 && x <= 24 && y >= 20 && y <= 24) || x === 6 || y === 6;
+      }
+      ctx.fillStyle = "#fff";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#14171a";
+      for (var y = 0; y < N; y++)
+        for (var x = 0; x < N; x++) if (!reserved(x, y) && r() > 0.5) ctx.fillRect(x * s, y * s, s + 0.4, s + 0.4);
+      for (var i = 8; i < N - 8; i += 2) {
+        ctx.fillRect(i * s, 6 * s, s, s);
+        ctx.fillRect(6 * s, i * s, s, s);
+      }
+      function finder(ox, oy) {
+        ctx.fillStyle = "#14171a";
+        ctx.fillRect(ox * s, oy * s, 7 * s, 7 * s);
+        ctx.fillStyle = "#fff";
+        ctx.fillRect((ox + 1) * s, (oy + 1) * s, 5 * s, 5 * s);
+        ctx.fillStyle = "#14171a";
+        ctx.fillRect((ox + 2) * s, (oy + 2) * s, 3 * s, 3 * s);
+      }
+      finder(0, 0);
+      finder(N - 7, 0);
+      finder(0, N - 7);
+      ctx.fillRect(20 * s, 20 * s, 5 * s, 5 * s);
+      ctx.fillStyle = "#fff";
+      ctx.fillRect(21 * s, 21 * s, 3 * s, 3 * s);
+      ctx.fillStyle = "#14171a";
+      ctx.fillRect(22 * s, 22 * s, s, s);
+    }
+    var last = -1;
+    function tick() {
+      var now = Date.now();
+      var win = Math.floor(now / 30000);
+      var left = 30 - ((now / 1000) % 30);
+      if (win !== last) {
+        canvases.forEach(function (c) {
+          draw(c, win * 7919 + 17);
+          if (c.parentNode && c.parentNode.classList) c.parentNode.classList.add("is-drawn");
+        });
+        var code = String((win * 7349 + 1234) % 10000).padStart(4, "0");
+        if (codeEl) codeEl.textContent = code;
+        // a mensagem do passo 2 leva o mesmo código que o QR do passo 1
+        document.querySelectorAll("[data-code-draft]").forEach(function (d) {
+          d.textContent = code;
+        });
+        last = win;
+      }
+      if (ring) ring.style.strokeDashoffset = String(100 - (left / 30) * 100);
+    }
+    tick();
+    // Com «reduzir movimento», o QR fica parado depois do primeiro desenho.
+    if (!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) setInterval(tick, 250);
+  })();
+</script>
