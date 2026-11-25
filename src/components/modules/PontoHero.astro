@@ -110,6 +110,7 @@ const base = import.meta.env.BASE_URL;
         <div class="ph-surface ph-pho" data-quad="601,310 694,309 486,572 602,569" aria-hidden="true">
           <div class="ph-cam" data-cam>
             <!-- o visor mostra o mesmo ecrã do tablet: QR e código copiados do original -->
+            <div class="ph-cam-fix" data-camfix>
             <div class="ph-cam-tab">
               <div class="ph-cam-qrbox">
                 <canvas class="ph-cam-qr" width="232" height="232" data-qr-cam></canvas>
@@ -117,6 +118,7 @@ const base = import.meta.env.BASE_URL;
               </div>
               <span class="ph-cam-line"></span>
               <span class="ph-cam-code" data-code-cam>4821</span>
+            </div>
             </div>
             <p class="ph-detected" data-detected>{h.phone.detected}</p>
           </div>
@@ -602,6 +604,10 @@ const base = import.meta.env.BASE_URL;
     place-items: center;
     perspective: 420px;
   }
+  /* o script desfaz aqui a inclinação do ecrã da foto: o QR do visor fica direito para quem vê */
+  .ph-cam-fix {
+    transform-origin: 50% 50%;
+  }
   .ph-cam-tab {
     display: grid;
     justify-items: center;
@@ -988,10 +994,26 @@ const base = import.meta.env.BASE_URL;
       var v = mv(adj(m), [p[6], p[7], 1]);
       return mm(m, [v[0], 0, 0, 0, v[1], 0, 0, 0, v[2]]);
     }
-    function project(src, dst) {
+    function homography(src, dst) {
       var t = mm(basis(dst), adj(basis(src)));
       for (var i = 0; i < 9; i++) t[i] = t[i] / t[8];
+      return t;
+    }
+    function css3d(t) {
       return "matrix3d(" + [t[0], t[3], 0, t[6], t[1], t[4], 0, t[7], 0, 0, 1, 0, t[2], t[5], 0, t[8]].join(",") + ")";
+    }
+    // Inverso local da perspetiva num ponto (x, y) da superfície, sem mudar a escala: aplicado a um
+    // elemento centrado nesse ponto, fá-lo aparecer direito no ecrã apesar da inclinação da foto.
+    function straighten(t, x, y) {
+      var w = t[6] * x + t[7] * y + t[8];
+      var X = (t[0] * x + t[1] * y + t[2]) / w;
+      var Y = (t[3] * x + t[4] * y + t[5]) / w;
+      var a = (t[0] - X * t[6]) / w, b = (t[1] - X * t[7]) / w;
+      var c = (t[3] - Y * t[6]) / w, d = (t[4] - Y * t[7]) / w;
+      var det = a * d - b * c;
+      var k = Math.sqrt(Math.abs(det));
+      var i00 = (d / det) * k, i01 = (-b / det) * k, i10 = (-c / det) * k, i11 = (a / det) * k;
+      return "matrix(" + [i00, i10, i01, i11, 0, 0].join(",") + ")";
     }
     var photo = q("[data-photo]");
     var surfaces = Array.prototype.slice.call(root.querySelectorAll("[data-quad]"));
@@ -1007,7 +1029,14 @@ const base = import.meta.env.BASE_URL;
             return parseFloat(n) * k;
           });
         });
-        el.style.transform = project([0, 0, w, 0, 0, h, w, h], [p[0][0], p[0][1], p[1][0], p[1][1], p[2][0], p[2][1], p[3][0], p[3][1]]);
+        var t = homography([0, 0, w, 0, 0, h, w, h], [p[0][0], p[0][1], p[1][0], p[1][1], p[2][0], p[2][1], p[3][0], p[3][1]]);
+        el.style.transform = css3d(t);
+        var fix = el.querySelector("[data-camfix]");
+        if (fix) {
+          var fx = fix.offsetLeft + fix.offsetWidth / 2;
+          var fy = fix.offsetTop + fix.offsetHeight / 2;
+          fix.style.transform = straighten(t, fx, fy);
+        }
       });
       photo.classList.add("is-mapped");
     }
