@@ -150,18 +150,51 @@ let headers = BASE_HEADERS;
 // (não substitui) e o browser aplica várias CSP cumulativamente. Sem o `!`,
 // a política base do `/*` (a da 404) fundir-se-ia com a da página e
 // bloqueava scripts/forms que só a regra específica autoriza.
+//
+// Limite da Cloudflare: no máximo 100 regras no _headers
+// (developers.cloudflare.com/workers/static-assets/headers/). Uma regra por
+// página estoura com ~100 páginas, por isso só se emite regra própria quando
+// a página precisa de algo que a base não autoriza. Sem regra, a página
+// recebe só a CSP do `/*`. Omite-se quando a CSP é igual à base, ou quando
+// a base já a cobre: todos os hashes, form-actions e beacon da página estão
+// na base (que só contém hashes de scripts da própria home e da 404, nunca
+// de terceiros). Páginas com um único hash ou form-action que a base não
+// tenha mantêm a sua regra com o `!` e a política exata.
+// Igualdade estrita não basta: a base é a união home+404, por isso nenhuma
+// página (nem a home) lhe é igual e o build ficava nas 101 regras.
+const covered = (page) =>
+  [...page.hashes].every((h) => baseHashes.has(h)) &&
+  [...page.formActions].every((a) => baseFormActions.has(a)) &&
+  page.beacon === (Boolean(home?.beacon) || Boolean(notFound?.beacon));
 let longest = CSP_HEADER.length + baseCsp.length;
+let rules = 1; // a regra global `/*`
+let skipped = 0;
 for (const url of [...perPage.keys()].sort()) {
-  const csp = cspFor(perPage.get(url));
+  const page = perPage.get(url);
+  const csp = cspFor(page);
+  if (notFound && (csp === baseCsp || covered(page))) {
+    skipped++;
+    continue;
+  }
   const line = CSP_HEADER + csp;
   if (line.length > longest) longest = line.length;
   headers += `${url}\n  ! Content-Security-Policy\n${line}\n`;
+  rules++;
 }
 
 writeFileSync(join(DIST, "_headers"), headers);
 console.log(
   `dist/_headers written — ${perPage.size} paths, linha CSP mais longa ${longest} chars (limite 2000)`,
 );
+console.log(
+  `dist/_headers — ${rules} regras (${skipped} páginas cobertas pela CSP base, sem regra própria; limite 100)`,
+);
+if (rules > 100) {
+  console.error(
+    `ERRO: _headers tem ${rules} regras — a Cloudflare aceita no máximo 100 (reduzir páginas com CSP própria)`,
+  );
+  process.exit(1);
+}
 if (longest >= 2000) {
   console.error("ERRO: ainda há uma linha CSP acima do limite da Cloudflare");
   process.exit(1);
