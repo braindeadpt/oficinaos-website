@@ -2418,6 +2418,7 @@ export const t: Copy = {
         ["Assisted onboarding, training and support", "{hourly}/hour", "Setup alongside you, team training or tailored help. In {block}-minute blocks, minimum {minimum} min."],
         ["Hosting on our VPS", "{hosting}", "EU server with updates, security and daily backups included."],
       ],
+      hostingPrice: "{withPro}/month with Pro · {withoutPro}/month without Pro",
       tbd: "to be announced",
       note: "Installation and services are also available if you only want the free OficinaOS installed.",
       scrollLabel: "Horizontally scrollable table",

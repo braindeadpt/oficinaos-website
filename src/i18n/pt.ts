@@ -2449,6 +2449,7 @@ export const t = {
         ["Arranque assistido, formação e suporte", "{hourly}/hora", "Configuração consigo, formação da equipa ou ajuda à medida. Em blocos de {block} min, mínimo {minimum} min."],
         ["Alojamento na nossa VPS", "{hosting}", "Servidor na UE com atualizações, segurança e cópias de segurança diárias incluídas."],
       ],
+      hostingPrice: "{withPro}/mês com o Pro · {withoutPro}/mês sem o Pro",
       tbd: "a anunciar",
       note: "A instalação e os serviços também se aplicam a quem só quer a OficinaOS grátis instalada.",
       scrollLabel: "Tabela com scroll horizontal",

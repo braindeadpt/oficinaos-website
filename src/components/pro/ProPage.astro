@@ -112,7 +112,7 @@ const serviceRows = svc.rows.map((r) =>
       hourly: eur(S.hourly),
       block: S.blockMinutes,
       minimum: S.minimumMinutes,
-      hosting: S.hostingMonthly === null ? svc.tbd : `${eur(S.hostingMonthly)}${pr.perMonth}`,
+      hosting: fill(svc.hostingPrice, { withPro: eur(S.hostingMonthly.withPro), withoutPro: eur(S.hostingMonthly.withoutPro) }),
     }),
   ),
 );

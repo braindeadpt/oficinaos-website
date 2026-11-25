@@ -55,8 +55,8 @@ export const pricing = {
     installationSupportHours: 1,
     installationSupportDays: 30,
     dataImportFrom: 50,
-    /** Alojamento na VPS da OficinaOS, com manutenção incluída — ainda por decidir. */
-    hostingMonthly: null as number | null,
+    /** Alojamento na VPS da OficinaOS, com manutenção incluída (por mês, decisão 2026-11-25). */
+    hostingMonthly: { withPro: 20, withoutPro: 30 },
   },
 } as const;
 

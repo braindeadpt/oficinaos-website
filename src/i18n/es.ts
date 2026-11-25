@@ -2423,6 +2423,7 @@ export const t: Copy = {
         ["Puesta en marcha asistida, formación y soporte", "{hourly}/hora", "Configuración contigo, formación del equipo o ayuda a medida. En bloques de {block} min, mínimo {minimum} min."],
         ["Alojamiento en nuestra VPS", "{hosting}", "Servidor en la UE con actualizaciones, seguridad y copias de seguridad diarias incluidas."],
       ],
+      hostingPrice: "{withPro}/mes con el Pro · {withoutPro}/mes sin el Pro",
       tbd: "por anunciar",
       note: "La instalación y los servicios también sirven para quien solo quiere OficinaOS gratis instalado.",
       scrollLabel: "Tabla con desplazamiento horizontal",
