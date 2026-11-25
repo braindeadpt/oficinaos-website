@@ -2575,6 +2575,24 @@ export const t: Copy = {
     },
   },
   pontoPage: {
+    external: {
+      eyebrow: "Trabajo fuera",
+      title: "Quien trabaja fuera también ficha.",
+      lead: "Comerciales, técnicos a domicilio, equipos de obra: escriben «entrada» en WhatsApp, comparten la ubicación y, si quieres, una foto del lugar. Queda registrado dónde y cuándo empezaron.",
+      points: [
+        { title: "Ubicación solo en ese momento", text: "El empleado comparte su ubicación actual con un toque. Nunca le seguimos durante el día." },
+        { title: "Foto del lugar, si la empresa la pide", text: "Una foto del sitio o del trabajo hecho. Se queda en el WhatsApp de la empresa, o en tu Google Drive u OneDrive: nosotros no la guardamos." },
+        { title: "Sirve de prueba de visita", text: "Hora, dirección y foto: el registro demuestra al cliente que la visita ocurrió, y a qué hora." },
+      ],
+      chat: {
+        entry: "entrada",
+        location: "Ubicación actual",
+        address: "Calle Mayor, 120, Madrid",
+        photo: "Foto del lugar",
+        reply: "Entrada registrada a las 09:14, Marco. Lugar: Calle Mayor, 120 (cliente: Silva e Hijos).",
+      },
+      badge: "Trabajo fuera",
+    },
     waitlist: {
       note: "Solo usamos estos datos para contactarte sobre Livro de Ponto.",
       shopPlaceholder: "ej.: Café Central",
