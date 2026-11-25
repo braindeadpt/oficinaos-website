@@ -1,4 +1,6 @@
 ---
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import "../styles/global.css";
 import type { Copy } from "../i18n/pt";
 import {
@@ -47,10 +49,14 @@ const favicon = `${import.meta.env.BASE_URL}favicon.svg`;
 // Versioned filename — X/Telegram/WhatsApp/Discord cache OG cards per image
 // URL, so a renamed file forces a fresh scrape. og-cover.png stays as a
 // fallback for old links.
-const ogImage = new URL(
-  `${import.meta.env.BASE_URL}${Astro.props.ogImage ?? "og-cover-2026.png"}`,
-  Astro.site
-);
+// Imagem de partilha: a própria da página (ogImage) → a gerada por tools/gen-og.py para este caminho
+// (public/og/pages/<caminho-com-hífenes>.jpg, "home" na raiz) → a capa genérica.
+const ogKey = Astro.url.pathname.replace(/^\/|\/$/g, "").replace(/\//g, "-") || "home";
+const ogGenerated = `og/pages/${ogKey}.jpg`;
+const ogPath =
+  Astro.props.ogImage ??
+  (existsSync(join(process.cwd(), "public", ogGenerated)) ? ogGenerated : "og-cover-2026.png");
+const ogImage = new URL(`${import.meta.env.BASE_URL}${ogPath}`, Astro.site);
 ---
 
 <!doctype html>
