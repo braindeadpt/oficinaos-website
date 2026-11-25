@@ -2601,6 +2601,24 @@ export const t = {
     },
   },
   pontoPage: {
+    external: {
+      eyebrow: "Trabalho externo",
+      title: "Quem trabalha fora também pica o ponto.",
+      lead: "Comerciais, técnicos ao domicílio, equipas de obra: escrevem «entrada» no WhatsApp, partilham a localização e, se quiser, uma fotografia do local. Fica registado onde e quando começaram.",
+      points: [
+        { title: "Localização só nesse momento", text: "O funcionário partilha a localização atual com um toque. Nunca o acompanhamos durante o dia." },
+        { title: "Fotografia do local, se a empresa pedir", text: "Uma foto do sítio ou do trabalho feito. Fica no WhatsApp da empresa, ou no seu Google Drive ou OneDrive: nós não a guardamos." },
+        { title: "Serve de prova de visita", text: "Hora, morada e foto: o registo mostra ao cliente que a visita aconteceu, e a que horas." },
+      ],
+      chat: {
+        entry: "entrada",
+        location: "Localização atual",
+        address: "Rua da Boavista, 120, Porto",
+        photo: "Foto do local",
+        reply: "Entrada registada às 09:14, Marco. Local: Rua da Boavista, 120 (cliente: Silva & Filhos).",
+      },
+      badge: "Trabalho externo",
+    },
     waitlist: {
       note: "Usamos estes dados só para o contactar sobre o Livro de Ponto.",
       shopPlaceholder: "ex.: Café Central",

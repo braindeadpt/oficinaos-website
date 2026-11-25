@@ -2570,6 +2570,24 @@ export const t: Copy = {
     },
   },
   pontoPage: {
+    external: {
+      eyebrow: "Off-site work",
+      title: "People who work off-site clock in too.",
+      lead: "Sales reps, home-visit technicians, site crews: they type «in» on WhatsApp, share their location and, if you want, a photo of the site. Where and when they started is recorded.",
+      points: [
+        { title: "Location only at that moment", text: "The employee shares their current location with one tap. We never track anyone during the day." },
+        { title: "Photo of the site, if the business asks", text: "A photo of the place or the work done. It stays in the company's WhatsApp, or in your Google Drive or OneDrive: we don't store it." },
+        { title: "Proof of a customer visit", text: "Time, address and photo: the record shows the customer the visit happened, and when." },
+      ],
+      chat: {
+        entry: "in",
+        location: "Current location",
+        address: "Rua da Boavista, 120, Porto",
+        photo: "Photo of the site",
+        reply: "Clocked in at 09:14, Marco. Location: Rua da Boavista, 120 (customer: Silva & Filhos).",
+      },
+      badge: "Off-site work",
+    },
     waitlist: {
       note: "We only use these details to contact you about Livro de Ponto.",
       shopPlaceholder: "e.g. Central Café",
