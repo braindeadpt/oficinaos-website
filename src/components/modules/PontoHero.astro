@@ -24,6 +24,10 @@ const initials = (name: string) =>
     .slice(0, 2)
     .join("");
 const base = import.meta.env.BASE_URL;
+// A mensagem leva o mesmo código que o ecrã mostra: o script troca-o a cada janela de 30 s.
+const draftMatch = h.phone.draft.match(/^(.*#)(\d{4})$/);
+const draftHead = draftMatch ? draftMatch[1] : h.phone.draft;
+const draftCode = draftMatch ? draftMatch[2] : "";
 ---
 
 <section class="ph" aria-labelledby="ph-title" data-ph data-static>
@@ -129,7 +133,7 @@ const base = import.meta.env.BASE_URL;
             </div>
             <div class="ph-chat-feed">
               <p class="ph-bubble ph-out" data-out>
-                {h.phone.draft}
+                {draftHead}<span data-draft-code>{draftCode}</span>
                 <span class="ph-meta" data-meta>09:02 <svg viewBox="0 0 20 12"><path d="m1 6 3.5 3.5L11 2M8 9.5 9 10.5 18 2"></path></svg></span>
               </p>
               <p class="ph-typing" data-typing><i></i><i></i><i></i></p>
@@ -1122,6 +1126,9 @@ const base = import.meta.env.BASE_URL;
       camCtx.drawImage(canvas, 0, 0, camCanvas.width, camCanvas.height);
       codeEl.textContent = code;
       codeCam.textContent = code;
+      root.querySelectorAll("[data-draft-code]").forEach(function (d) {
+        d.textContent = code;
+      });
     }
     var ring = q("[data-ring]");
     var secsEl = q("[data-secs]");
@@ -1144,8 +1151,9 @@ const base = import.meta.env.BASE_URL;
       }
       secsEl.textContent = String(Math.ceil(left));
       ring.style.strokeDashoffset = String(100 - (left / 30) * 100);
-      if (visible) requestAnimationFrame(tick);
+      if (visible && !reduce) requestAnimationFrame(tick);
     }
+    // Com «reduzir movimento», o QR é desenhado uma vez e fica parado (sem contagem nem troca).
     tick();
 
     if (reduce || !canAnimate) return;

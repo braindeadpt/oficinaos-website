@@ -2546,7 +2546,7 @@ export const t: Copy = {
       title: "No WhatsApp? Clocking in carries on by SMS.",
       lead: "WhatsApp is the fastest way, but not the only one. A company Android phone with a SIM card receives check-ins by SMS. Nobody is left unable to clock in.",
       points: [
-        { title: "For people who don't use WhatsApp", text: "Scan the QR code and send the code that appears by SMS. Works on any phone, even the simplest ones." },
+        { title: "For people who don't use WhatsApp", text: "Send by SMS the 4-digit code shown on the shop screen. Works on any phone, even the simplest ones." },
         { title: "Backup if WhatsApp fails", text: "If the company's WhatsApp goes down or gets blocked, employees keep clocking in by SMS. The number can be changed without losing records." },
         { title: "Records to review", text: "SMS doesn't send a location, so these records are marked «to review». Confirm them with one click." },
         { title: "No phone at all?", text: "On the shop screen, the employee picks their name and enters a personal PIN." },

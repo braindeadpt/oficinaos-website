@@ -2551,7 +2551,7 @@ export const t: Copy = {
       title: "¿Sin WhatsApp? El fichaje sigue por SMS.",
       lead: "WhatsApp es el camino más rápido, pero no el único. Un móvil Android de la empresa, con tarjeta SIM, recibe los fichajes por SMS. Nadie se queda sin fichar.",
       points: [
-        { title: "Para quien no usa WhatsApp", text: "Lee el QR y envía por SMS el código que aparece. Funciona en cualquier móvil, incluso en los más sencillos." },
+        { title: "Para quien no usa WhatsApp", text: "Envía por SMS el código de 4 cifras que aparece en la pantalla de la tienda. Funciona en cualquier móvil, incluso en los más sencillos." },
         { title: "Reserva si WhatsApp falla", text: "Si el WhatsApp de la empresa se cae o se bloquea, los empleados siguen fichando por SMS. Se cambia el número sin perder registros." },
         { title: "Registros por validar", text: "El SMS no envía ubicación, así que estos registros quedan «por validar». Los confirmas con un clic." },
         { title: "¿Sin móvil?", text: "En la pantalla de la tienda, el empleado elige su nombre y escribe un PIN personal." },

@@ -23,6 +23,9 @@ const vars = {
   pontoFrom: euro(locale, pricing.addons.ponto[0].monthly),
   pontoUpTo: pricing.addons.ponto[0].upTo,
 };
+const draftMatch = t.pontoHero.phone.draft.match(/^(.*#)(\d{4})$/);
+const draftHead = draftMatch ? draftMatch[1] : t.pontoHero.phone.draft;
+const draftCode = draftMatch ? draftMatch[2] : "";
 const initials = (n: string) =>
   n
     .split(" ")
@@ -126,7 +129,7 @@ const problemIcons = [
               </div>
               <div class="pb-chat-feed">
                 <p class="pb-bub pb-bub-out">
-                  {t.pontoHero.phone.draft}
+                  {draftHead}<span data-code-draft>{draftCode}</span>
                   <span class="pb-meta">09:02 · {p.steps.sent}</span>
                 </p>
                 <p class="pb-bub pb-bub-in"><b>{t.pontoHero.phone.reply}</b> {t.pontoHero.phone.replySub}</p>
@@ -341,19 +344,29 @@ const problemIcons = [
         <h2 id="pb-compare" class="pb-h2">{p.compare.title}</h2>
       </header>
       <div class="pb-table-wrap" tabindex="0" role="region" aria-labelledby="pb-compare">
-        <table class="pb-table">
-          <thead>
-            <tr>{p.compare.head.map((h, i) => <th scope="col" class:list={[i === p.compare.head.length - 1 && "pb-us"]}>{h}</th>)}</tr>
+        <table class="pb-table" role="table">
+          <thead role="rowgroup">
+            <tr role="row">
+              {
+                p.compare.head.map((h, i) => (
+                  <th scope="col" role="columnheader" class:list={[i === p.compare.head.length - 1 && "pb-us"]}>
+                    {h}
+                  </th>
+                ))
+              }
+            </tr>
           </thead>
-          <tbody>
+          <tbody role="rowgroup">
             {
               p.compare.rows.map((r) => (
-                <tr>
+                <tr role="row">
                   {r.map((c, i) =>
                     i === 0 ? (
-                      <th scope="row">{c}</th>
+                      <th scope="row" role="rowheader">
+                        {c}
+                      </th>
                     ) : (
-                      <td class:list={[i === r.length - 1 && "pb-us"]} data-label={p.compare.head[i]}>
+                      <td role="cell" class:list={[i === r.length - 1 && "pb-us"]} data-label={p.compare.head[i]}>
                         {c}
                       </td>
                     )
@@ -1620,12 +1633,18 @@ const problemIcons = [
         canvases.forEach(function (c) {
           draw(c, win * 7919 + 17);
         });
-        if (codeEl) codeEl.textContent = String((win * 7349 + 1234) % 10000).padStart(4, "0");
+        var code = String((win * 7349 + 1234) % 10000).padStart(4, "0");
+        if (codeEl) codeEl.textContent = code;
+        // a mensagem do passo 2 leva o mesmo código que o QR do passo 1
+        document.querySelectorAll("[data-code-draft]").forEach(function (d) {
+          d.textContent = code;
+        });
         last = win;
       }
       if (ring) ring.style.strokeDashoffset = String(100 - (left / 30) * 100);
     }
     tick();
-    setInterval(tick, 250);
+    // Com «reduzir movimento», o QR fica parado depois do primeiro desenho.
+    if (!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) setInterval(tick, 250);
   })();
 </script>

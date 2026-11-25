@@ -2577,7 +2577,7 @@ export const t = {
       title: "Sem WhatsApp? O ponto continua por SMS.",
       lead: "O WhatsApp é o caminho mais rápido, mas não é o único. Um telemóvel Android da empresa, com cartão SIM, recebe as picagens por SMS. Ninguém fica sem registar.",
       points: [
-        { title: "Para quem não usa WhatsApp", text: "Lê o QR e envia por SMS o código que aparece. Funciona em qualquer telemóvel, mesmo nos mais simples." },
+        { title: "Para quem não usa WhatsApp", text: "Envia por SMS o código de 4 dígitos que aparece no ecrã da loja. Funciona em qualquer telemóvel, mesmo nos mais simples." },
         { title: "Reserva se o WhatsApp falhar", text: "Se o WhatsApp da empresa cair ou for bloqueado, os funcionários continuam a picar por SMS. Troca-se o número sem perder registos." },
         { title: "Registos para validar", text: "O SMS não envia localização, por isso estes registos ficam «por validar». Confirma-os com um clique." },
         { title: "Sem telemóvel nenhum?", text: "No ecrã da loja, o funcionário escolhe o nome e escreve um PIN pessoal." },
