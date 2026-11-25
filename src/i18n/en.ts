@@ -2557,7 +2557,7 @@ export const t: Copy = {
       lead: "Not every customer uses WhatsApp, and WhatsApp can fail. A company Android phone with a SIM card makes sure nobody is left without an answer.",
       points: [
         { title: "Customers without WhatsApp", text: "Anyone who sends an SMS gets the answer by SMS, with the same rules and the same profile." },
-        { title: "Backup if WhatsApp fails", text: "If the company's WhatsApp goes down or gets blocked, notices and replies carry on by SMS." },
+        { title: "Backup if WhatsApp fails", text: "If the company's WhatsApp goes down or gets blocked, anyone who writes by SMS still gets an answer, and the notices the business sends to customers go out by SMS." },
         { title: "Short replies", text: "By SMS, the assistant answers in a few lines, without emojis or unnecessary links." },
         { title: "Alerts for the team", text: "Requests handed to a person reach the team by email or by WhatsApp on their phone." },
       ],

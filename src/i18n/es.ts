@@ -2562,7 +2562,7 @@ export const t: Copy = {
       lead: "No todos los clientes usan WhatsApp, y WhatsApp puede fallar. Un móvil Android de la empresa, con tarjeta SIM, garantiza que nadie se quede sin respuesta.",
       points: [
         { title: "Clientes sin WhatsApp", text: "Quien envía un SMS recibe la respuesta por SMS, con las mismas reglas y la misma ficha." },
-        { title: "Reserva si WhatsApp falla", text: "Si el WhatsApp de la empresa se cae o se bloquea, los avisos y las respuestas siguen por SMS." },
+        { title: "Reserva si WhatsApp falla", text: "Si el WhatsApp de la empresa se cae o se bloquea, quien escriba por SMS sigue teniendo respuesta, y los avisos que la empresa envía a los clientes salen por SMS." },
         { title: "Respuestas cortas", text: "Por SMS, el asistente responde en pocas líneas, sin emojis ni enlaces innecesarios." },
         { title: "Avisos al equipo", text: "Los pedidos que pasan a una persona llegan al equipo por email o por WhatsApp a su móvil." },
       ],

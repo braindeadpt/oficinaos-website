@@ -19,6 +19,9 @@ const m = t.modulePages.atendimento;
 const h = t.atendimentoHero;
 const c = h.console;
 const base = import.meta.env.BASE_URL;
+// A foto base já traz a conversa desenhada nos ecrãs (estado final, na língua da página): é o que
+// vê quem não tem JavaScript; as camadas vivas cobrem-na por cima.
+const img = locale === "pt" ? "atendimento-hero" : `atendimento-hero-${locale}`;
 const initials = (n: string) =>
   n
     .replace(/[^\p{L} ]/gu, "")
@@ -71,8 +74,8 @@ const initials = (n: string) =>
       <div class="ah-photo" data-photo>
         <img
           class="ah-img"
-          src={`${base}images/atendimento-hero.webp`}
-          srcset={`${base}images/atendimento-hero-800.webp 690w, ${base}images/atendimento-hero.webp 920w`}
+          src={`${base}images/${img}.webp`}
+          srcset={`${base}images/${img}-800.webp 690w, ${base}images/${img}.webp 920w`}
           sizes="(min-width: 64rem) 50vw, 100vw"
           width="920"
           height="570"
@@ -152,6 +155,12 @@ const initials = (n: string) =>
             <p class="ah-ptyping" data-ptyping><i></i><i></i><i></i></p>
           </div>
         </div>
+
+        <!-- Pausar/retomar a demonstração (WCAG 2.2.2): só aparece quando há animação -->
+        <button class="ah-pause" type="button" data-pause aria-pressed="false" aria-label={t.pontoHero.demoPause} data-label-pause={t.pontoHero.demoPause} data-label-play={t.pontoHero.demoPlay}>
+          <svg class="ah-pause-i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.5v9M11 3.5v9"></path></svg>
+          <svg class="ah-play-i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.2v9.6L12.5 8z"></path></svg>
+        </button>
 
         <!-- Resumo do dia -->
         <div class="ah-panel" aria-hidden="true">
@@ -768,6 +777,52 @@ const initials = (n: string) =>
   .ah[data-static] .ah-handoff {
     opacity: 1;
   }
+  /* durante a animação, o que ainda não apareceu sai do fluxo: senão empurrava a 1.ª mensagem para fora */
+  .ah:not([data-static]) .ah-msg:not(.is-on),
+  .ah:not([data-static]) .ah-pmsg:not(.is-on),
+  .ah-typing:not(.is-on),
+  .ah-ptyping:not(.is-on) {
+    display: none;
+  }
+
+  .ah-pause {
+    position: absolute;
+    right: 0.875rem;
+    top: 0.875rem;
+    z-index: 4;
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 0;
+    border-radius: 50%;
+    background: rgb(20 23 26 / 0.55);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #fff;
+    cursor: pointer;
+  }
+  .ah-pause:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+  }
+  .ah-pause svg {
+    width: 0.95rem;
+    height: 0.95rem;
+    fill: currentColor;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .ah-play-i,
+  .ah-pause[aria-pressed="true"] .ah-pause-i,
+  .ah[data-static] .ah-pause {
+    display: none;
+  }
+  .ah-pause[aria-pressed="true"] .ah-play-i {
+    display: block;
+  }
 
   @media (max-width: 40rem) {
     .ah-photo {
@@ -867,6 +922,7 @@ const initials = (n: string) =>
       timers.push(setTimeout(fn, ms));
     }
     function show(el, dy) {
+      el.classList.add("is-on");
       el.animate([{ opacity: 0, transform: "translateY(" + (dy || 8) + "px) scale(.97)" }, { opacity: 1, transform: "none" }], {
         duration: 480,
         easing: E,
@@ -885,7 +941,10 @@ const initials = (n: string) =>
           el.querySelectorAll("i").forEach(function (d, i) {
             d.animate([{ opacity: 0.35 }, { opacity: 1 }, { opacity: 0.35 }], { duration: 700, delay: i * 120, iterations: 2 });
           });
-        } else hide(el, 120);
+        } else {
+          hide(el, 120);
+          el.classList.remove("is-on");
+        }
       });
     }
     function setStats(d) {
@@ -905,6 +964,7 @@ const initials = (n: string) =>
         n.getAnimations().forEach(function (x) {
           x.cancel();
         });
+        n.classList.remove("is-on");
       });
       setStats([1, 2, 1]);
     }
@@ -949,5 +1009,21 @@ const initials = (n: string) =>
       at(12000, run);
     }
     run();
+
+    /* ---------- pausar / retomar ---------- */
+    var pauseBtn = q("[data-pause]");
+    var paused = false;
+    pauseBtn.addEventListener("click", function () {
+      paused = !paused;
+      pauseBtn.setAttribute("aria-pressed", String(paused));
+      pauseBtn.setAttribute("aria-label", pauseBtn.getAttribute(paused ? "data-label-play" : "data-label-pause"));
+      if (paused) {
+        timers.forEach(clearTimeout);
+        timers = [];
+        root.getAnimations({ subtree: true }).forEach(function (x) {
+          x.pause();
+        });
+      } else run();
+    });
   })();
 </script>

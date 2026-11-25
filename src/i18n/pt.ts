@@ -2588,7 +2588,7 @@ export const t = {
       lead: "Nem todos os clientes usam WhatsApp, e o WhatsApp pode falhar. Um telemóvel Android da empresa, com cartão SIM, garante que ninguém fica sem resposta.",
       points: [
         { title: "Clientes sem WhatsApp", text: "Quem envia um SMS recebe a resposta por SMS, com as mesmas regras e a mesma ficha." },
-        { title: "Reserva se o WhatsApp falhar", text: "Se o WhatsApp da empresa cair ou for bloqueado, os avisos e as respostas continuam por SMS." },
+        { title: "Reserva se o WhatsApp falhar", text: "Se o WhatsApp da empresa cair ou for bloqueado, quem escrever por SMS continua a ter resposta, e os avisos que a empresa envia aos clientes saem por SMS." },
         { title: "Respostas curtas", text: "No SMS, o assistente responde em poucas linhas, sem emojis nem ligações desnecessárias." },
         { title: "Avisos à equipa", text: "Os pedidos passados a uma pessoa chegam por email ou por WhatsApp ao telemóvel da equipa." },
       ],
