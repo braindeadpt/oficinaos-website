@@ -1,5 +1,5 @@
 ---
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import "../styles/global.css";
 import type { Copy } from "../i18n/pt";
@@ -51,11 +51,14 @@ const favicon = `${import.meta.env.BASE_URL}favicon.svg`;
 // fallback for old links.
 // Imagem de partilha: a própria da página (ogImage) → a gerada por tools/gen-og.py para este caminho
 // (public/og/pages/<caminho-com-hífenes>.jpg, "home" na raiz) → a capa genérica.
+// O nome do ficheiro leva um hash do conteúdo (manifest.json): quando o título muda, o URL muda.
 const ogKey = Astro.url.pathname.replace(/^\/|\/$/g, "").replace(/\//g, "-") || "home";
-const ogGenerated = `og/pages/${ogKey}.jpg`;
+const ogManifestPath = join(process.cwd(), "public", "og", "pages", "manifest.json");
+const ogManifest: Record<string, { file: string }> = existsSync(ogManifestPath)
+  ? JSON.parse(readFileSync(ogManifestPath, "utf-8"))
+  : {};
 const ogPath =
-  Astro.props.ogImage ??
-  (existsSync(join(process.cwd(), "public", ogGenerated)) ? ogGenerated : "og-cover-2026.png");
+  Astro.props.ogImage ?? (ogManifest[ogKey] ? `og/pages/${ogManifest[ogKey].file}` : "og-cover-2026.png");
 const ogImage = new URL(`${import.meta.env.BASE_URL}${ogPath}`, Astro.site);
 ---
 

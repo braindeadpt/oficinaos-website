@@ -1,23 +1,25 @@
 """Gera as imagens de partilha simples (1200×630) para as páginas sem imagem própria.
 
-Uso (na raiz do site):
-    bun run build            # 1. gera dist/ (de onde se lê o título de cada página)
-    python tools/gen-og.py   # 2. escreve public/og/pages/<chave>.jpg
-    bun run build            # 3. o Base.astro passa a apontar cada página para a sua imagem
+Uso (na raiz do site), sempre que um título mude ou haja páginas novas:
+    bun run build                    # 1. gera dist/ (de onde se lê o título de cada página)
+    python tools/gen-og.py           # 2. escreve public/og/pages/<chave>-<hash>.jpg e manifest.json
+    bun run build                    # 3. o Base.astro aponta cada página para a sua imagem
+    python tools/gen-og.py --check   # (a CI corre isto: falha se algum título mudou sem regenerar)
 
-A chave de cada página é o caminho sem barras nas pontas, com "/" trocado por "-" ("" → "home"):
-    /            → home.jpg       /en/docs/sms/ → en-docs-sms.jpg
+A chave de cada página é o caminho sem barras nas pontas, com "/" trocado por "-" ("" → "home").
+O nome do ficheiro leva um hash do conteúdo (título, etiqueta, língua, versão do modelo): quando o
+texto muda, o URL muda, e as plataformas (WhatsApp, Facebook, LinkedIn) não servem a imagem antiga
+da cache. O Base.astro lê o URL de public/og/pages/manifest.json.
 Páginas com imagem própria (ogImage no Base) e a 404 ficam de fora.
-Precisa de Pillow e fontTools (com brotli) para ler as fontes .woff2 do site.
+Gerar precisa de Pillow e fontTools (com brotli); o --check só precisa da biblioteca padrão.
 """
 
+import hashlib
 import html
-import io
+import json
 import re
+import sys
 from pathlib import Path
-
-from fontTools.ttLib import TTFont
-from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parent.parent
 DIST = ROOT / "dist"
@@ -53,11 +55,16 @@ DEFAULT_EYEBROW = {
 }
 
 
+TEMPLATE_VERSION = "1"  # subir quando o desenho das imagens mudar (força URLs novos)
+
+
 def font_from_woff2(name: str) -> Path:
     """Converte uma fonte .woff2 do site para .ttf (o Pillow não lê woff2)."""
     src = ROOT / "public" / "fonts" / f"{name}.woff2"
     dst = ROOT / "node_modules" / ".cache" / "og-fonts" / f"{name}.ttf"
     if not dst.exists():
+        from fontTools.ttLib import TTFont
+
         dst.parent.mkdir(parents=True, exist_ok=True)
         f = TTFont(str(src))
         f.flavor = None
@@ -65,7 +72,9 @@ def font_from_woff2(name: str) -> Path:
     return dst
 
 
-def load(name: str, size: int, weight: int) -> ImageFont.FreeTypeFont:
+def load(name: str, size: int, weight: int):
+    from PIL import ImageFont
+
     f = ImageFont.truetype(str(font_from_woff2(name)), size)
     try:
         f.set_variation_by_axes([weight])
@@ -74,7 +83,7 @@ def load(name: str, size: int, weight: int) -> ImageFont.FreeTypeFont:
     return f
 
 
-def wrap(draw: ImageDraw.ImageDraw, text: str, font, width: int) -> list[str]:
+def wrap(draw, text: str, font, width: int) -> list[str]:
     words, lines, cur = text.split(), [], ""
     for w in words:
         t = (cur + " " + w).strip()
@@ -101,7 +110,9 @@ def page_text(path: Path) -> tuple[str, str]:
     return lang if lang in ("pt", "en", "es") else "pt", title
 
 
-def render(lang: str, eyebrow: str, title: str) -> Image.Image:
+def render(lang: str, eyebrow: str, title: str):
+    from PIL import Image, ImageDraw
+
     img = Image.new("RGB", (W, H), BG)
     d = ImageDraw.Draw(img)
     # grelha de pontos, discreta, à direita
@@ -133,9 +144,8 @@ def render(lang: str, eyebrow: str, title: str) -> Image.Image:
     return img
 
 
-def main() -> None:
-    OUT.mkdir(parents=True, exist_ok=True)
-    n = 0
+def pages():
+    """(chave, língua, etiqueta, título) de cada página construída que leva imagem gerada."""
     for p in sorted(DIST.rglob("index.html")):
         rel = p.parent.relative_to(DIST).as_posix()
         if rel == ".":
@@ -149,10 +159,37 @@ def main() -> None:
             continue
         key = "-".join(parts) or "home"
         lang, title = page_text(p)
-        eyebrow = EYEBROW.get(section, DEFAULT_EYEBROW)[lang]
-        render(lang, eyebrow, title).save(OUT / f"{key}.jpg", quality=86, optimize=True, progressive=True)
-        n += 1
-    print(f"{n} imagens em {OUT.relative_to(ROOT)}")
+        yield key, lang, EYEBROW.get(section, DEFAULT_EYEBROW)[lang], title
+
+
+def digest(lang: str, eyebrow: str, title: str) -> str:
+    return hashlib.sha256(f"{TEMPLATE_VERSION}|{lang}|{eyebrow}|{title}".encode()).hexdigest()[:10]
+
+
+def main() -> None:
+    manifest_path = OUT / "manifest.json"
+    if "--check" in sys.argv:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else {}
+        stale = [k for k, lang, eb, t in pages() if manifest.get(k, {}).get("hash") != digest(lang, eb, t)]
+        if stale:
+            print("Imagens de partilha desatualizadas (correr: python tools/gen-og.py):", ", ".join(stale))
+            sys.exit(1)
+        print("Imagens de partilha em dia.")
+        return
+    OUT.mkdir(parents=True, exist_ok=True)
+    manifest = {}
+    for key, lang, eyebrow, title in pages():
+        h = digest(lang, eyebrow, title)
+        name = f"{key}-{h}.jpg"
+        if not (OUT / name).exists():
+            render(lang, eyebrow, title).save(OUT / name, quality=86, optimize=True, progressive=True)
+        manifest[key] = {"file": name, "hash": h, "title": title}
+    keep = {v["file"] for v in manifest.values()} | {"manifest.json"}
+    for f in OUT.iterdir():
+        if f.name not in keep:
+            f.unlink()
+    manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=1, sort_keys=True), encoding="utf-8")
+    print(f"{len(manifest)} imagens em {OUT.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":
