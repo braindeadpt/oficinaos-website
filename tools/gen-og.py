@@ -5,6 +5,11 @@ Uso (na raiz do site), sempre que um título mude ou haja páginas novas:
     python tools/gen-og.py           # 2. escreve public/og/pages/<chave>-<hash>.jpg e manifest.json
     bun run build                    # 3. o Base.astro aponta cada página para a sua imagem
     python tools/gen-og.py --check   # (a CI corre isto: falha se algum título mudou sem regenerar)
+    python tools/gen-og.py --published   # DEPOIS de publicar o site (bun run deploy já o faz)
+
+Retenção: uma imagem que deixa de estar em uso fica «pendente» em manifest._retired (sem data).
+A contagem dos 30 dias só começa quando se publica (--published marca a data) e só depois disso a
+imagem é apagada numa geração seguinte. Se ninguém marcar a publicação, nada é apagado.
 
 A chave de cada página é o caminho sem barras nas pontas, com "/" trocado por "-" ("" → "home").
 O nome do ficheiro leva um hash do conteúdo (título, etiqueta, língua, versão do modelo): quando o
@@ -56,7 +61,7 @@ DEFAULT_EYEBROW = {
 
 
 TEMPLATE_VERSION = "1"  # subir quando o desenho das imagens mudar (força URLs novos)
-RETAIN_DAYS = 30  # imagens antigas ficam este tempo: previsões em cache que guardaram o URL não dão 404
+RETAIN_DAYS = 30  # imagens antigas ficam este tempo DEPOIS DA PUBLICAÇÃO: previsões em cache não dão 404
 RECOVER = "bun run build && python tools/gen-og.py && bun run build"
 
 
@@ -183,6 +188,15 @@ def main() -> None:
 
     manifest_path = OUT / "manifest.json"
     manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else {}
+    if "--published" in sys.argv:
+        # marca a data de publicação nas imagens retiradas que ainda estavam pendentes
+        retired = manifest.get("_retired", {})
+        stamped = [k for k, v in retired.items() if not v]
+        for k in stamped:
+            retired[k] = datetime.date.today().isoformat()
+        manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=1, sort_keys=True), encoding="utf-8")
+        print(f"{len(stamped)} imagens antigas marcadas como publicadas (apagadas daqui a {RETAIN_DAYS} dias).")
+        return
     found = built_pages()
     if "--check" in sys.argv:
         bad = []
@@ -211,15 +225,17 @@ def main() -> None:
     for f in OUT.glob("*.jpg"):
         if f.name in live:
             continue
-        since = retired.setdefault(f.name, today.isoformat())
-        if (today - datetime.date.fromisoformat(since)).days > RETAIN_DAYS:
+        # nova retirada fica pendente (None) até se marcar a publicação; só depois conta o prazo
+        since = retired.setdefault(f.name, None)
+        if since and (today - datetime.date.fromisoformat(since)).days > RETAIN_DAYS:
             f.unlink()
             retired.pop(f.name)
     retired = {k: v for k, v in retired.items() if (OUT / k).exists()}
     if retired:
         new["_retired"] = retired
     manifest_path.write_text(json.dumps(new, ensure_ascii=False, indent=1, sort_keys=True), encoding="utf-8")
-    print(f"{len(live)} imagens em {OUT.relative_to(ROOT)} ({len(retired)} antigas retidas até {RETAIN_DAYS} dias)")
+    pending = sum(1 for v in retired.values() if not v)
+    print(f"{len(live)} imagens em {OUT.relative_to(ROOT)} ({len(retired)} antigas retidas, {pending} à espera da publicação)")
 
 
 if __name__ == "__main__":

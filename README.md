@@ -49,7 +49,7 @@ files to update the site; keep the same filenames.
 ## Deploy
 
 Cloudflare Workers with the custom domain `oficinaos.app` — deploy is
-manual: `bun run build && bunx wrangler deploy` from a machine with the
+manual: `bun run deploy` (build + share-image check + `wrangler deploy` + marks retired share images as published) from a machine with the
 Cloudflare credential (wrangler.toml/jsonc carries the routes; the
 `assets.not_found_handling` serves the trilingual 404). The `Check`
 workflow builds + type-checks on every push/PR but does not deploy.
