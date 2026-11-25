@@ -31,6 +31,11 @@ const theme = t.nav.theme;
 const navLocales = Astro.props.pageLocales ?? LOCALES;
 const pagePath = currentPagePath(Astro.url.pathname, locale);
 const items = products(t, locale);
+// Módulos também vendidos a qualquer empresa (lista de espera): segundo grupo do menu Produtos.
+const moduleLinks = [
+  { name: t.modulePages.ponto.hero.label, desc: t.nav.moduleItems.ponto, href: localeUrl(locale, "/livro-de-ponto/"), path: "/livro-de-ponto/" },
+  { name: t.modulePages.atendimento.hero.label, desc: t.nav.moduleItems.atendimento, href: localeUrl(locale, "/atendimento-ia/"), path: "/atendimento-ia/" },
+];
 
 const isDocs = pagePath.startsWith("/docs");
 const isUpdates = pagePath.startsWith("/updates");
@@ -219,6 +224,22 @@ const chevron =
         ))
       }
     </ul>
+    <p class="border-t border-border px-5 pt-3 pb-1 text-xs font-semibold tracking-wide text-text-subtle uppercase">{t.nav.forBusinesses}</p>
+    <ul class="grid grid-cols-2 gap-1 px-2 pb-2" role="list">
+      {
+        moduleLinks.map((m) => (
+          <li data-product="pro">
+            <a href={m.href} class="nav-product group flex h-full gap-3 rounded-lg p-3">
+              <span class="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full border-2 border-product" aria-hidden="true" />
+              <span class="min-w-0">
+                <span class="block text-base font-semibold text-text">{m.name}</span>
+                <span class="mt-0.5 block text-sm text-text-muted">{m.desc}</span>
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
     </nav>
   </div>
 
@@ -279,6 +300,23 @@ const chevron =
                       {p.external && <span class="sr-only">({t.footer.externalHint})</span>}
                     </span>
                     <span class="mt-0.5 block text-sm text-text-muted">{p.desc}</span>
+                  </span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+
+        <p class="mt-3 border-t border-border px-3 pt-4 pb-2 text-sm font-semibold text-text-subtle" id="nav-sheet-modules">{t.nav.forBusinesses}</p>
+        <ul role="list" aria-labelledby="nav-sheet-modules">
+          {
+            moduleLinks.map((m) => (
+              <li data-product="pro">
+                <a href={m.href} class="nav-product flex gap-3 rounded-lg px-3 py-3">
+                  <span class="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full border-2 border-product" aria-hidden="true" />
+                  <span class="min-w-0">
+                    <span class="block text-md font-semibold text-text">{m.name}</span>
+                    <span class="mt-0.5 block text-sm text-text-muted">{m.desc}</span>
                   </span>
                 </a>
               </li>

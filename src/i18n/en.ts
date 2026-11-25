@@ -39,6 +39,8 @@ export const t: Copy = {
     language: "Language",
     products: "Products",
     productsMenuLabel: "OficinaOS products",
+    forBusinesses: "For any business",
+    moduleItems: { ponto: "Clock in over WhatsApp, with a QR code at the door.", atendimento: "An AI assistant that answers customers on WhatsApp." },
     productItems: {
       os: { name: "OficinaOS", desc: "Repairs, customers, stock and till in one app. Free." },
       diag: { name: "Diag", desc: "Phone diagnostics over USB, with a report for the customer." },
@@ -2398,6 +2400,11 @@ export const t: Copy = {
       tbd: "to be announced",
       note: "Installation and services are also available if you only want the free OficinaOS installed.",
       scrollLabel: "Horizontally scrollable table",
+    },
+    otherBusinesses: {
+      title: "Not a repair shop?",
+      text: "Two Pro modules will also be available on their own for any business — restaurants, shops, clinics, services. You can join the waiting list now.",
+      more: "Learn more",
     },
     form: { title: "Start your {days} days free" },
     faq: {

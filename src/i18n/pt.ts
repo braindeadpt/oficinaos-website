@@ -56,6 +56,8 @@ export const t = {
     language: "Idioma",
     products: "Produtos",
     productsMenuLabel: "Produtos OficinaOS",
+    forBusinesses: "Para qualquer empresa",
+    moduleItems: { ponto: "Picar o ponto pelo WhatsApp, com QR à porta.", atendimento: "Assistente de IA que responde aos clientes no WhatsApp." },
     productItems: {
       os: { name: "OficinaOS", desc: "Reparações, clientes, stock e caixa num só programa. Grátis." },
       diag: { name: "Diag", desc: "Diagnóstico de telemóveis por cabo, com relatório para o cliente." },
@@ -2429,6 +2431,11 @@ export const t = {
       tbd: "a anunciar",
       note: "A instalação e os serviços também se aplicam a quem só quer a OficinaOS grátis instalada.",
       scrollLabel: "Tabela com scroll horizontal",
+    },
+    otherBusinesses: {
+      title: "Não tem uma oficina?",
+      text: "Dois módulos do Pro também vão estar disponíveis, sozinhos, para qualquer empresa — restaurantes, lojas, clínicas, serviços. Já pode entrar na lista de espera.",
+      more: "Saber mais",
     },
     form: { title: "Começar os {days} dias grátis" },
     faq: {
