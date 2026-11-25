@@ -109,8 +109,15 @@ const base = import.meta.env.BASE_URL;
         <!-- Ecrã do telemóvel -->
         <div class="ph-surface ph-pho" data-quad="601,310 694,309 486,572 602,569" aria-hidden="true">
           <div class="ph-cam" data-cam>
-            <span class="ph-cam-qr"></span>
-            <span class="ph-reticle"><i></i><i></i><i></i><i></i></span>
+            <!-- o visor mostra o mesmo ecrã do tablet: QR e código copiados do original -->
+            <div class="ph-cam-tab">
+              <div class="ph-cam-qrbox">
+                <canvas class="ph-cam-qr" width="232" height="232" data-qr-cam></canvas>
+                <span class="ph-reticle" data-reticle><i></i><i></i><i></i><i></i></span>
+              </div>
+              <span class="ph-cam-line"></span>
+              <span class="ph-cam-code" data-code-cam>4821</span>
+            </div>
             <p class="ph-detected" data-detected>{h.phone.detected}</p>
           </div>
           <div class="ph-chat" data-chat>
@@ -588,38 +595,67 @@ const base = import.meta.env.BASE_URL;
     position: absolute;
     inset: 0;
   }
+  /* visor da câmara: a parede da foto, e o tablet visto de lado com o mesmo QR */
   .ph-cam {
-    background:
-      radial-gradient(120% 70% at 60% 40%, #8d8a84, #5f5c57 70%),
-      #6b6863;
+    background: radial-gradient(120% 80% at 70% 35%, #d8d3cb, #b3aea6 75%);
     display: grid;
     place-items: center;
+    perspective: 420px;
+  }
+  .ph-cam-tab {
+    display: grid;
+    justify-items: center;
+    gap: 7px;
+    width: 128px;
+    padding: 12px 10px 14px;
+    border-radius: 10px;
+    background: #fbfbfa;
+    box-shadow:
+      0 0 0 6px #1c1f22,
+      0 14px 24px -8px rgb(20 23 26 / 0.45);
+    filter: saturate(0.95);
+  }
+  .ph-cam-qrbox {
+    position: relative;
+    width: 86px;
+    height: 86px;
   }
   .ph-cam-qr {
-    width: 96px;
-    height: 96px;
-    border-radius: 6px;
-    background:
-      linear-gradient(#f4f4f2, #f4f4f2) 50% 50% / 26% 26% no-repeat,
-      repeating-conic-gradient(#1d1f21 0 25%, #f4f4f2 0 50%) 0 0 / 18% 18%;
-    box-shadow: 0 0 0 10px #f4f4f2;
-    filter: blur(0.7px);
-    transform: perspective(300px) rotateY(18deg);
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    background: #fff;
+  }
+  .ph-cam-line {
+    width: 70%;
+    height: 7px;
+    border-radius: 4px;
+    background: #14171a;
+    opacity: 0.85;
+  }
+  .ph-cam-code {
+    font-family: var(--oos-font-mono);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    margin-right: -0.22em;
+    color: #14171a;
   }
   .ph-reticle {
     position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 132px;
-    height: 132px;
-    margin: -66px 0 0 -66px;
+    inset: -12px;
   }
   .ph-reticle i {
     position: absolute;
-    width: 26px;
-    height: 26px;
+    width: 22px;
+    height: 22px;
     border: 3px solid #fff;
     border-radius: 7px;
+    filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.35));
+    transition: border-color 0.25s;
+  }
+  .ph-reticle.is-locked i {
+    border-color: #3ddc97;
   }
   .ph-reticle i:nth-child(1) {
     top: 0;
@@ -647,7 +683,7 @@ const base = import.meta.env.BASE_URL;
   }
   .ph-detected {
     position: absolute;
-    top: 72px;
+    top: 64px;
     left: 50%;
     transform: translateX(-50%);
     padding: 5px 10px;
@@ -1024,6 +1060,15 @@ const base = import.meta.env.BASE_URL;
       ctx.fillStyle = "#14171a";
       ctx.fillRect(22 * s, 22 * s, s, s);
     }
+    var camCanvas = q("[data-qr-cam]");
+    var camCtx = camCanvas.getContext("2d");
+    var codeCam = q("[data-code-cam]");
+    function drawBoth(seed, code) {
+      drawQR(seed);
+      camCtx.drawImage(canvas, 0, 0, camCanvas.width, camCanvas.height);
+      codeEl.textContent = code;
+      codeCam.textContent = code;
+    }
     var ring = q("[data-ring]");
     var secsEl = q("[data-secs]");
     var codeEl = q("[data-code]");
@@ -1036,11 +1081,11 @@ const base = import.meta.env.BASE_URL;
       if (win !== lastWin) {
         if (lastWin !== -1 && canAnimate && !reduce) {
           canvas.animate([{ opacity: 1 }, { opacity: 0, offset: 0.45 }, { opacity: 0, offset: 0.55 }, { opacity: 1 }], { duration: 520 });
+          var code = String((win * 7349 + 1234) % 10000).padStart(4, "0");
           setTimeout(function () {
-            drawQR(win * 7919 + 17);
+            drawBoth(win * 7919 + 17, code);
           }, 250);
-        } else drawQR(win * 7919 + 17);
-        codeEl.textContent = String((win * 7349 + 1234) % 10000).padStart(4, "0");
+        } else drawBoth(win * 7919 + 17, String((win * 7349 + 1234) % 10000).padStart(4, "0"));
         lastWin = win;
       }
       secsEl.textContent = String(Math.ceil(left));
@@ -1066,7 +1111,8 @@ const base = import.meta.env.BASE_URL;
       cam: q("[data-cam]"),
       chat: q("[data-chat]"),
       detected: q("[data-detected]"),
-      reticle: q(".ph-reticle"),
+      reticle: q("[data-reticle]"),
+      camTab: q(".ph-cam-tab"),
       out: q("[data-out]"),
       inn: q("[data-in]"),
       typing: q("[data-typing]"),
@@ -1093,13 +1139,22 @@ const base = import.meta.env.BASE_URL;
         });
       });
       el.meta.classList.remove("is-read");
+      el.reticle.classList.remove("is-locked");
+      el.camTab.getAnimations().forEach(function (x) {
+        x.cancel();
+      });
       el.count.textContent = "3";
       el.clock.textContent = "09:01";
     }
     function run() {
       reset();
       // 1. a câmara do telemóvel enquadra o QR do tablet
-      a(el.reticle, [{ transform: "scale(1.18)", opacity: 0.3 }, { transform: "scale(1)", opacity: 1 }], { duration: 1000 });
+      // o telemóvel aproxima-se e o visor estabiliza no tablet
+      a(el.camTab, [{ transform: "translate(10px, 8px) scale(.88)", filter: "blur(1.5px)" }, { transform: "none", filter: "blur(0)" }], { duration: 1100 });
+      a(el.reticle, [{ transform: "scale(1.35)", opacity: 0 }, { transform: "scale(1)", opacity: 1 }], { duration: 1000, delay: 150 });
+      at(1100, function () {
+        el.reticle.classList.add("is-locked");
+      });
       at(1200, function () {
         a(el.detected, [{ opacity: 0, transform: "translate(-50%, 6px)" }, { opacity: 1, transform: "translate(-50%, 0)" }], { duration: 400 });
       });
