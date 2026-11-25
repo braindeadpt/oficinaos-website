@@ -2509,6 +2509,41 @@ export const t = {
       ],
     },
   },
+  atendimentoHero: {
+    titleA: "Um assistente que responde aos seus clientes no WhatsApp.",
+    titleB: "Mesmo quando está fechado.",
+    proofs: ["Responde só com o que a empresa aprovou", "Passa a uma pessoa quando não sabe", "No número de WhatsApp de sempre"],
+    caption: "Recriação ilustrativa com dados de exemplo: a conversa no telemóvel do cliente e a consola da empresa, às 22:41, com a loja fechada.",
+    console: {
+      brand: "Atendimento IA",
+      shop: "Café Central",
+      status: "Fechado · o assistente está a responder",
+      inbox: "Conversas",
+      list: [
+        ["Marta S.", "Fazem bolos de aniversário…", "22:41"],
+        ["+351 912 …", "Têm opções sem glúten?", "21:58"],
+        ["João P.", "Obrigado!", "19:12"],
+      ],
+      assistant: "Assistente virtual",
+      handoffTitle: "Pedido para a equipa",
+      handoff: "Encomenda de bolo · sábado · 12 pessoas",
+      handoffTag: "Confirmar amanhã",
+    },
+    chat: [
+      ["in", "Olá! Estão abertos ao domingo?"],
+      ["out", "Olá! Ao domingo abrimos das 8h às 13h. Sou o assistente virtual do Café Central."],
+      ["in", "Fazem bolos de aniversário por encomenda? É para sábado, 12 pessoas."],
+      ["out", "Fazemos! Já passei o pedido à equipa, que lhe confirma amanhã de manhã por aqui."],
+    ],
+    panel: {
+      title: "Hoje",
+      rows: [
+        ["Conversas", "23"],
+        ["Respondidas pelo assistente", "19"],
+        ["Passadas à equipa", "4"],
+      ],
+    },
+  },
   pontoPage: {
     waitlist: {
       note: "Usamos estes dados só para o contactar sobre o Livro de Ponto.",

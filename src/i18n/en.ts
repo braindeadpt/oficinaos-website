@@ -2478,6 +2478,41 @@ export const t: Copy = {
       ],
     },
   },
+  atendimentoHero: {
+    titleA: "An assistant that answers your customers on WhatsApp.",
+    titleB: "Even when you're closed.",
+    proofs: ["Answers only with what you approved", "Hands over to a person when it doesn't know", "On the WhatsApp number you already use"],
+    caption: "Illustrative recreation with sample data: the conversation on the customer's phone and the business console at 22:41, with the shop closed.",
+    console: {
+      brand: "AI Customer Service",
+      shop: "Central Café",
+      status: "Closed · the assistant is answering",
+      inbox: "Conversations",
+      list: [
+        ["Marta S.", "Do you make birthday cakes…", "22:41"],
+        ["+351 912 …", "Any gluten-free options?", "21:58"],
+        ["João P.", "Thank you!", "19:12"],
+      ],
+      assistant: "Virtual assistant",
+      handoffTitle: "Request for the team",
+      handoff: "Cake order · Saturday · 12 people",
+      handoffTag: "Confirm tomorrow",
+    },
+    chat: [
+      ["in", "Hi! Are you open on Sundays?"],
+      ["out", "Hi! On Sundays we're open from 8am to 1pm. I'm Central Café's virtual assistant."],
+      ["in", "Do you make birthday cakes to order? It's for Saturday, 12 people."],
+      ["out", "We do! I've passed your request to the team, who'll confirm here tomorrow morning."],
+    ],
+    panel: {
+      title: "Today",
+      rows: [
+        ["Conversations", "23"],
+        ["Answered by the assistant", "19"],
+        ["Handed to the team", "4"],
+      ],
+    },
+  },
   pontoPage: {
     waitlist: {
       note: "We only use these details to contact you about Livro de Ponto.",

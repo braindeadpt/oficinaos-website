@@ -12,6 +12,7 @@ import Footer from "../Footer.astro";
 import Icon from "../Icon.astro";
 import Nav from "../Nav.astro";
 import PontoBody from "./PontoBody.astro";
+import AtendimentoHero from "./AtendimentoHero.astro";
 import PontoHero from "./PontoHero.astro";
 import BetaSignup from "../pro/BetaSignup.astro";
 import DataTable from "../ui/DataTable.astro";
@@ -44,6 +45,8 @@ const stepIcons = ["clipboard", "smartphone", "activity"] as const;
 <main id="main" tabindex="-1" data-product="pro">
   {interest === "ponto" ? (
     <PontoHero t={t} locale={locale} />
+  ) : interest === "atendimento" ? (
+    <AtendimentoHero t={t} locale={locale} />
   ) : (
   <section class="relative isolate overflow-x-clip" aria-labelledby="mod-hero-title">
     <div class="bg-tech-grid tech-grid-fade pointer-events-none absolute inset-0 -z-10" aria-hidden="true"></div>

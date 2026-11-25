@@ -2483,6 +2483,41 @@ export const t: Copy = {
       ],
     },
   },
+  atendimentoHero: {
+    titleA: "Un asistente que responde a tus clientes en WhatsApp.",
+    titleB: "Incluso cuando está cerrado.",
+    proofs: ["Responde solo con lo que la empresa aprobó", "Pasa a una persona cuando no sabe", "En el número de WhatsApp de siempre"],
+    caption: "Recreación ilustrativa con datos de ejemplo: la conversación en el móvil del cliente y la consola de la empresa, a las 22:41, con la tienda cerrada.",
+    console: {
+      brand: "Atención con IA",
+      shop: "Café Central",
+      status: "Cerrado · el asistente está respondiendo",
+      inbox: "Conversaciones",
+      list: [
+        ["Marta S.", "¿Hacéis tartas de cumpleaños…", "22:41"],
+        ["+34 612 …", "¿Tenéis opciones sin gluten?", "21:58"],
+        ["João P.", "¡Gracias!", "19:12"],
+      ],
+      assistant: "Asistente virtual",
+      handoffTitle: "Pedido para el equipo",
+      handoff: "Encargo de tarta · sábado · 12 personas",
+      handoffTag: "Confirmar mañana",
+    },
+    chat: [
+      ["in", "¡Hola! ¿Abrís los domingos?"],
+      ["out", "¡Hola! Los domingos abrimos de 8 a 13 h. Soy el asistente virtual del Café Central."],
+      ["in", "¿Hacéis tartas de cumpleaños por encargo? Es para el sábado, 12 personas."],
+      ["out", "¡Sí! Ya he pasado el pedido al equipo, que te lo confirma mañana por la mañana por aquí."],
+    ],
+    panel: {
+      title: "Hoy",
+      rows: [
+        ["Conversaciones", "23"],
+        ["Respondidas por el asistente", "19"],
+        ["Pasadas al equipo", "4"],
+      ],
+    },
+  },
   pontoPage: {
     waitlist: {
       note: "Solo usamos estos datos para contactarte sobre Livro de Ponto.",
