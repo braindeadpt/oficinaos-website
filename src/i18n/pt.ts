@@ -2476,6 +2476,8 @@ export const t = {
     },
   },
   pontoHero: {
+    demoPause: "Pausar a demonstração",
+    demoPlay: "Retomar a demonstração",
     titleA: "Picar o ponto pelo WhatsApp.",
     titleB: "Sem apps, sem relógio, sem papel.",
     proofs: ["QR que muda a cada 30 segundos", "Confirma a rede da loja", "Registos guardados 5 anos"],

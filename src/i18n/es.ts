@@ -2450,6 +2450,8 @@ export const t: Copy = {
     },
   },
   pontoHero: {
+    demoPause: "Pausar la demostración",
+    demoPlay: "Reanudar la demostración",
     titleA: "Fichar por WhatsApp.",
     titleB: "Sin apps, sin reloj, sin papel.",
     proofs: ["QR que cambia cada 30 segundos", "Confirma la red de la tienda", "Registros guardados 5 años"],

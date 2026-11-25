@@ -24,6 +24,9 @@ const initials = (name: string) =>
     .slice(0, 2)
     .join("");
 const base = import.meta.env.BASE_URL;
+// A foto base já traz a interface desenhada nos ecrãs (estado final, na língua da página): é o que
+// vê quem não tem JavaScript e o primeiro frame de toda a gente; as camadas vivas cobrem-na por cima.
+const img = locale === "pt" ? "ponto-hero" : `ponto-hero-${locale}`;
 // A mensagem leva o mesmo código que o ecrã mostra: o script troca-o a cada janela de 30 s.
 const draftMatch = h.phone.draft.match(/^(.*#)(\d{4})$/);
 const draftHead = draftMatch ? draftMatch[1] : h.phone.draft;
@@ -75,8 +78,8 @@ const draftCode = draftMatch ? draftMatch[2] : "";
       <div class="ph-photo" data-photo>
         <img
           class="ph-img"
-          src={`${base}images/ponto-hero.webp`}
-          srcset={`${base}images/ponto-hero-800.webp 800w, ${base}images/ponto-hero.webp 1200w`}
+          src={`${base}images/${img}.webp`}
+          srcset={`${base}images/${img}-800.webp 800w, ${base}images/${img}.webp 1200w`}
           sizes="(min-width: 64rem) 50vw, 100vw"
           width="1200"
           height="896"
@@ -148,6 +151,12 @@ const draftCode = draftMatch ? draftMatch[2] : "";
             </div>
           </div>
         </div>
+
+        <!-- Pausar/retomar a demonstração (WCAG 2.2.2): só aparece quando há animação -->
+        <button class="ph-pause" type="button" data-pause aria-pressed="false" aria-label={h.demoPause} data-label-pause={h.demoPause} data-label-play={h.demoPlay}>
+          <svg class="ph-pause-i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.5v9M11 3.5v9"></path></svg>
+          <svg class="ph-play-i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.2v9.6L12.5 8z"></path></svg>
+        </button>
 
         <!-- Painel do gestor -->
         <div class="ph-panel" aria-hidden="true">
@@ -968,6 +977,53 @@ const draftCode = draftMatch ? draftMatch[2] : "";
     }
   }
 
+  .ph-pause {
+    position: absolute;
+    right: 0.875rem;
+    top: 0.875rem;
+    z-index: 4;
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 0;
+    border-radius: 50%;
+    background: rgb(20 23 26 / 0.55);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #fff;
+    cursor: pointer;
+  }
+  .ph-pause:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+  }
+  .ph-pause svg {
+    width: 0.95rem;
+    height: 0.95rem;
+    fill: currentColor;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .ph-play-i,
+  .ph-pause[aria-pressed="true"] .ph-pause-i,
+  .ph[data-static] .ph-pause {
+    display: none;
+  }
+  .ph-pause[aria-pressed="true"] .ph-play-i {
+    display: block;
+  }
+
+  /* com «reduzir movimento» o QR não muda: não se anuncia contagem nenhuma */
+  @media (prefers-reduced-motion: reduce) {
+    .ph-changes,
+    .ph-ring-prog {
+      display: none;
+    }
+  }
+
   @supports (animation-timeline: view()) {
     @media (prefers-reduced-motion: no-preference) {
       .ph-panel {
@@ -1126,8 +1182,11 @@ const draftCode = draftMatch ? draftMatch[2] : "";
       camCtx.drawImage(canvas, 0, 0, camCanvas.width, camCanvas.height);
       codeEl.textContent = code;
       codeCam.textContent = code;
+    }
+    // A mensagem leva o código lido no início de cada ciclo e mantém-no até ao fim do ciclo.
+    function setDraft() {
       root.querySelectorAll("[data-draft-code]").forEach(function (d) {
-        d.textContent = code;
+        d.textContent = codeEl.textContent;
       });
     }
     var ring = q("[data-ring]");
@@ -1135,6 +1194,7 @@ const draftCode = draftMatch ? draftMatch[2] : "";
     var codeEl = q("[data-code]");
     var lastWin = -1;
     var visible = true;
+    var paused = false;
     function tick() {
       var now = Date.now();
       var win = Math.floor(now / 30000);
@@ -1149,12 +1209,15 @@ const draftCode = draftMatch ? draftMatch[2] : "";
         } else drawBoth(win * 7919 + 17, String((win * 7349 + 1234) % 10000).padStart(4, "0"));
         lastWin = win;
       }
-      secsEl.textContent = String(Math.ceil(left));
-      ring.style.strokeDashoffset = String(100 - (left / 30) * 100);
+      if (!paused) {
+        secsEl.textContent = String(Math.ceil(left));
+        ring.style.strokeDashoffset = String(100 - (left / 30) * 100);
+      }
       if (visible && !reduce) requestAnimationFrame(tick);
     }
     // Com «reduzir movimento», o QR é desenhado uma vez e fica parado (sem contagem nem troca).
     tick();
+    setDraft();
 
     if (reduce || !canAnimate) return;
     root.removeAttribute("data-static");
@@ -1210,6 +1273,7 @@ const draftCode = draftMatch ? draftMatch[2] : "";
     }
     function run() {
       reset();
+      setDraft();
       // 1. a câmara do telemóvel enquadra o QR do tablet
       // o telemóvel aproxima-se e o visor estabiliza no tablet
       a(el.camTab, [{ transform: "translate(10px, 8px) scale(.88)", filter: "blur(1.5px)" }, { transform: "none", filter: "blur(0)" }], { duration: 1100 });
@@ -1264,5 +1328,20 @@ const draftCode = draftMatch ? draftMatch[2] : "";
       at(11000, run);
     }
     run();
+
+    /* ---------- pausar / retomar ---------- */
+    var pauseBtn = q("[data-pause]");
+    pauseBtn.addEventListener("click", function () {
+      paused = !paused;
+      pauseBtn.setAttribute("aria-pressed", String(paused));
+      pauseBtn.setAttribute("aria-label", pauseBtn.getAttribute(paused ? "data-label-play" : "data-label-pause"));
+      if (paused) {
+        timers.forEach(clearTimeout);
+        timers = [];
+        root.getAnimations({ subtree: true }).forEach(function (x) {
+          x.pause();
+        });
+      } else run();
+    });
   })();
 </script>

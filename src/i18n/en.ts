@@ -2445,6 +2445,8 @@ export const t: Copy = {
     },
   },
   pontoHero: {
+    demoPause: "Pause the demo",
+    demoPlay: "Resume the demo",
     titleA: "Clock in over WhatsApp.",
     titleB: "No apps, no time clock, no paper.",
     proofs: ["QR code that changes every 30 seconds", "Checks the shop's network", "Records kept for 5 years"],

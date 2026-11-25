@@ -26,6 +26,32 @@ const vars = {
 const draftMatch = t.pontoHero.phone.draft.match(/^(.*#)(\d{4})$/);
 const draftHead = draftMatch ? draftMatch[1] : t.pontoHero.phone.draft;
 const draftCode = draftMatch ? draftMatch[2] : "";
+// QR estático (SVG) para quem não tem JavaScript; o script troca-o pelo QR vivo da janela de 30 s.
+function staticQrPath(seed: number): string {
+  const N = 29;
+  let s = seed >>> 0;
+  const rnd = () => {
+    s = (Math.imul(s, 1664525) + 1013904223) >>> 0;
+    return s / 4294967296;
+  };
+  const inFinder = (x: number, y: number) =>
+    [
+      [0, 0],
+      [N - 7, 0],
+      [0, N - 7],
+    ].some(([ox, oy]) => x >= ox - 1 && x <= ox + 7 && y >= oy - 1 && y <= oy + 7);
+  let d = "";
+  for (let y = 0; y < N; y++)
+    for (let x = 0; x < N; x++) if (!inFinder(x, y) && rnd() > 0.5) d += `M${x} ${y}h1v1h-1z`;
+  for (const [ox, oy] of [
+    [0, 0],
+    [N - 7, 0],
+    [0, N - 7],
+  ])
+    d += `M${ox} ${oy}h7v7h-7zM${ox + 1} ${oy + 1}v5h5v-5zM${ox + 2} ${oy + 2}h3v3h-3z`;
+  return d;
+}
+const qrPath = staticQrPath(17);
 const initials = (n: string) =>
   n
     .split(" ")
@@ -49,7 +75,7 @@ const problemIcons = [
 
 <div class="pb" data-pb>
   <!-- ============ O problema ============ -->
-  <section class="pb-sec" aria-labelledby="pb-problem">
+  <section id="problema" class="pb-sec" aria-labelledby="pb-problem">
     <div class="pb-wrap">
       <header class="pb-head">
         <p class="pb-eyebrow"><span></span>{p.problem.eyebrow}</p>
@@ -99,7 +125,11 @@ const problemIcons = [
                     <circle class="pb-ring-track" cx="60" cy="60" r="56"></circle>
                     <circle class="pb-ring-prog" cx="60" cy="60" r="56" pathLength="100" data-ring-mini></circle>
                   </svg>
-                  <canvas class="pb-qr" width="232" height="232" data-qr-mini></canvas>
+                  <svg class="pb-qr pb-qr-svg" viewBox="-1 -1 31 31" aria-hidden="true">
+                    <rect x="-1" y="-1" width="31" height="31" fill="#fff"></rect>
+                    <path d={qrPath} fill="#14171a" fill-rule="evenodd"></path>
+                  </svg>
+                  <canvas class="pb-qr pb-qr-live" width="232" height="232" data-qr-mini></canvas>
                 </div>
                 <p class="pb-qr-code"><span data-code-mini>4821</span></p>
               </div>
@@ -252,7 +282,7 @@ const problemIcons = [
   </section>
 
   <!-- ============ Provas ============ -->
-  <section class="pb-sec pb-white" aria-labelledby="pb-trust">
+  <section id="confianca" class="pb-sec pb-white" aria-labelledby="pb-trust">
     <div class="pb-wrap">
       <header class="pb-head">
         <p class="pb-eyebrow"><span></span>{p.trust.eyebrow}</p>
@@ -281,7 +311,7 @@ const problemIcons = [
   </section>
 
   <!-- ============ Vantagens ============ -->
-  <section class="pb-sec" aria-labelledby="pb-benefits">
+  <section id="vantagens" class="pb-sec" aria-labelledby="pb-benefits">
     <div class="pb-wrap">
       <header class="pb-head">
         <p class="pb-eyebrow"><span></span>{p.benefits.eyebrow}</p>
@@ -366,8 +396,9 @@ const problemIcons = [
                         {c}
                       </th>
                     ) : (
-                      <td role="cell" class:list={[i === r.length - 1 && "pb-us"]} data-label={p.compare.head[i]}>
-                        {c}
+                      <td role="cell" class:list={[i === r.length - 1 && "pb-us"]}>
+                        <span class="pb-td-label">{p.compare.head[i]}</span>
+                        <span>{c}</span>
                       </td>
                     )
                   )}
@@ -381,7 +412,7 @@ const problemIcons = [
   </section>
 
   <!-- ============ Para quem + preço ============ -->
-  <section class="pb-sec pb-white" aria-labelledby="pb-who">
+  <section id="para-quem" class="pb-sec pb-white" aria-labelledby="pb-who">
     <div class="pb-wrap">
       <header class="pb-head">
         <h2 id="pb-who" class="pb-h2">{p.forWhom.title}</h2>
@@ -724,6 +755,23 @@ const problemIcons = [
     justify-items: center;
     gap: 0.75rem;
     padding: 1.5rem 1rem 1.25rem;
+  }
+  .pb-td-label {
+    display: none;
+  }
+  .pb-qr-live {
+    display: none;
+  }
+  .pb-qrbox.is-drawn .pb-qr-live {
+    display: block;
+  }
+  .pb-qrbox.is-drawn .pb-qr-svg {
+    display: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pb-ring-prog {
+      display: none;
+    }
   }
   .pb-qrbox {
     position: relative;
@@ -1362,12 +1410,13 @@ const problemIcons = [
       gap: 0.75rem;
       padding-block: 0.55rem;
     }
-    .pb-table td::before {
-      content: attr(data-label);
+    /* rótulo em texto real (o leitor de ecrã anuncia-o; no computador são os cabeçalhos da tabela) */
+    .pb-table .pb-td-label {
+      display: block;
       color: var(--pb-ink-3);
       font-weight: 500;
     }
-    .pb-table td.pb-us::before {
+    .pb-table td.pb-us .pb-td-label {
       color: var(--pb-ok);
       font-weight: 700;
     }
@@ -1632,6 +1681,7 @@ const problemIcons = [
       if (win !== last) {
         canvases.forEach(function (c) {
           draw(c, win * 7919 + 17);
+          if (c.parentNode && c.parentNode.classList) c.parentNode.classList.add("is-drawn");
         });
         var code = String((win * 7349 + 1234) % 10000).padStart(4, "0");
         if (codeEl) codeEl.textContent = code;
