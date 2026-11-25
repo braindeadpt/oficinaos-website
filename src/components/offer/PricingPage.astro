@@ -1,0 +1,332 @@
+---
+// /precos: todos os preços num só sítio + calculadora. Números só de src/lib/pricing.ts.
+// A calculadora é um <script is:inline> (CSP com hash automático, sem fetch, sem estilos inline):
+// lê os preços de data-prices e escreve o total. Sem JS, a página continua completa (tabelas).
+import type { Copy } from "../../i18n/pt";
+import type { Locale } from "../../i18n/utils";
+import { localeUrl } from "../../i18n/utils";
+import { euro, fill, num, pricing } from "../../lib/pricing";
+import Footer from "../Footer.astro";
+import Icon from "../Icon.astro";
+import Nav from "../Nav.astro";
+import DataTable from "../ui/DataTable.astro";
+import Faq from "../ui/Faq.astro";
+import Heading from "../ui/Heading.astro";
+import Section from "../ui/Section.astro";
+
+interface Props {
+  t: Copy;
+  locale: Locale;
+}
+const { t, locale } = Astro.props;
+const c = t.pricingPage;
+const pr = t.proPage.pricing;
+const svc = t.proPage.services;
+const P = pricing.pro;
+const A = pricing.addons;
+const E = pricing.extras;
+const S = pricing.services;
+const eur = (v: number) => euro(locale, v);
+const langTag = locale === "pt" ? "pt-PT" : locale === "es" ? "es-ES" : "en-IE";
+
+const extrasRows = pr.extras.rows.map((r) =>
+  r.map((x) =>
+    fill(x, {
+      nextShop: P.shopsIncluded + 1,
+      shops: P.shopsIncluded,
+      extraShop: eur(P.extraShopMonthly),
+      packPrice: eur(E.conversationPack.price),
+      packConversations: num(locale, E.conversationPack.conversations),
+      activation: eur(A.whatsappOfficial.activation),
+      waMonthly: eur(A.whatsappOfficial.monthly),
+      ponto1: eur(A.ponto[0].monthly),
+      ponto2: eur(A.ponto[1].monthly),
+      ponto3: eur(A.ponto[2].monthly),
+      p1: A.ponto[0].upTo,
+      p2: A.ponto[1].upTo,
+      p3: A.ponto[2].upTo,
+      balcaoAi: eur(A.balcaoIa.monthlyAiIncluded),
+      balcaoByok: eur(A.balcaoIa.monthlyByok),
+    }),
+  ),
+);
+const serviceRows = svc.rows.map((r) =>
+  r.map((x) =>
+    fill(x, {
+      installation: eur(S.installation),
+      supportHours: S.installationSupportHours,
+      supportDays: S.installationSupportDays,
+      importFrom: eur(S.dataImportFrom),
+      hourly: eur(S.hourly),
+      block: S.blockMinutes,
+      minimum: S.minimumMinutes,
+      hosting: S.hostingMonthly === null ? svc.tbd : `${eur(S.hostingMonthly)}${pr.perMonth}`,
+    }),
+  ),
+);
+const planRows = c.plans.rows.map((r) =>
+  r.map((x) => fill(x, { proAi: eur(P.monthlyAiIncluded), proByok: eur(P.monthlyByok), bundle: eur(A.bundleComplete.monthly) })),
+);
+
+// Dados para a calculadora (só números e rótulos; o script formata no idioma da página).
+const prices = {
+  lang: langTag,
+  base: { ai: P.monthlyAiIncluded, own: P.monthlyByok },
+  shopsIncluded: P.shopsIncluded,
+  extraShop: P.extraShopMonthly,
+  ponto: A.ponto,
+  balcao: { ai: A.balcaoIa.monthlyAiIncluded, own: A.balcaoIa.monthlyByok },
+  wa: A.whatsappOfficial,
+  bundle: A.bundleComplete,
+  labels: c.calc.lines,
+  perMonth: pr.perMonth,
+};
+const jump = [
+  { href: "#calculadora", label: c.jump.calc },
+  { href: "#oficinaos", label: c.jump.plans },
+  { href: "#extras", label: c.jump.extras },
+  { href: "#servicos", label: c.jump.services },
+  { href: "#modulos", label: c.jump.modules },
+];
+const inputBox = "rounded-lg border border-border bg-bg p-4";
+const labelCls = "text-sm font-semibold text-text";
+const selectCls =
+  "mt-2 h-11 w-full rounded-md border border-border-strong bg-surface px-3 text-md text-text outline-none focus:border-focus";
+---
+
+<Nav t={t} locale={locale} />
+<main id="main" tabindex="-1" data-product="pro">
+  <section class="relative isolate overflow-x-clip" aria-labelledby="pricing-hero-title">
+    <div class="bg-tech-grid tech-grid-fade pointer-events-none absolute inset-0 -z-10" aria-hidden="true"></div>
+    <div class="mx-auto max-w-6xl px-4 pt-10 pb-10 text-center sm:px-6 sm:pt-16">
+      <h1 id="pricing-hero-title" class="mx-auto max-w-3xl text-[clamp(2.25rem,5vw,3.25rem)] leading-[1.05] font-extrabold tracking-[-0.03em] text-balance text-text">
+        {c.hero.title}
+      </h1>
+      <p class="mx-auto mt-5 max-w-2xl text-pretty text-lg text-text-muted">{c.hero.lead}</p>
+      <nav aria-label={c.jump.label} class="mt-8">
+        <ul role="list" class="flex flex-wrap justify-center gap-2">
+          {jump.map((j) => <li><a href={j.href} class="seg-item inline-flex rounded-full border border-border px-3.5 py-1.5 text-sm font-semibold">{j.label}</a></li>)}
+        </ul>
+      </nav>
+    </div>
+  </section>
+
+  <Section id="calculadora" tone="raised" product="pro" labelledby="calc-title">
+    <Heading id="calc-title">
+      {c.calc.title}
+      <Fragment slot="lead">{c.calc.lead}</Fragment>
+    </Heading>
+
+    <div id="calc" class="mt-10 grid gap-6 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]" data-prices={JSON.stringify(prices)}>
+      <form class="grid gap-4" aria-label={c.calc.title}>
+        <fieldset class={inputBox}>
+          <legend class={labelCls}>{c.calc.typeLabel}</legend>
+          <div class="mt-2 grid gap-2 sm:grid-cols-2">
+            <label class="flex items-center gap-2 text-base text-text"><input type="radio" name="type" value="shop" checked /> {c.calc.typeShop}</label>
+            <label class="flex items-center gap-2 text-base text-text"><input type="radio" name="type" value="other" /> {c.calc.typeOther}</label>
+          </div>
+        </fieldset>
+
+        <div class="grid gap-4" data-shop-only>
+          <fieldset class={inputBox}>
+            <legend class={labelCls}>{c.calc.aiLabel}</legend>
+            <div class="mt-2 grid gap-2 sm:grid-cols-2">
+              <label class="flex items-center gap-2 text-base text-text"><input type="radio" name="ai" value="ai" checked /> {pr.optionAi.title}</label>
+              <label class="flex items-center gap-2 text-base text-text"><input type="radio" name="ai" value="own" /> {pr.optionByok.title}</label>
+            </div>
+          </fieldset>
+
+          <div class="grid gap-4 sm:grid-cols-2">
+            <label class:list={[inputBox, labelCls, "block"]}>
+              {c.calc.shopsLabel}
+              <select name="shops" class={selectCls}>
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => <option value={n}>{n}</option>)}
+              </select>
+            </label>
+            <label class:list={[inputBox, labelCls, "block"]}>
+              {c.calc.pontoLabel}
+              <select name="ponto" class={selectCls}>
+                <option value="0">{c.calc.pontoNone}</option>
+                {A.ponto.map((tier, i) => <option value={i + 1}>{fill(c.calc.pontoTier, { n: tier.upTo })}</option>)}
+              </select>
+            </label>
+          </div>
+
+          <fieldset class={inputBox}>
+            <legend class={labelCls}>{c.calc.extrasLabel}</legend>
+            <div class="mt-2 grid gap-2">
+              <label class="flex items-start gap-2 text-base text-text"><input type="checkbox" name="balcao" class="mt-1.5" /> <span>{c.calc.balcaoLabel}</span></label>
+              <label class="flex items-start gap-2 text-base text-text"><input type="checkbox" name="wa" class="mt-1.5" /> <span>{c.calc.waLabel}</span></label>
+            </div>
+          </fieldset>
+        </div>
+      </form>
+
+      <div class="rounded-xl border-2 border-product bg-bg p-6 shadow-md lg:sticky lg:top-24 lg:self-start" aria-live="polite">
+        <div data-shop-only>
+          <p class="text-sm font-semibold text-text-muted">{c.calc.monthlyLabel}</p>
+          <p class="mt-1 flex items-baseline gap-1">
+            <span id="calc-monthly" class="num font-display text-5xl font-extrabold tracking-[-0.02em] text-text">{eur(P.monthlyAiIncluded)}</span>
+            <span class="text-sm text-text-muted">{pr.perMonth}</span>
+          </p>
+          <p class="mt-1 text-xs text-text-muted">{pr.vat}</p>
+          <p id="calc-bundle" hidden class="mt-3 inline-flex rounded-full bg-product-soft px-2.5 py-0.5 text-xs font-semibold text-on-product-soft">{c.calc.bundleApplied}</p>
+          <ul id="calc-lines" role="list" class="mt-5 space-y-1.5 border-t border-border pt-4 text-sm"></ul>
+          <p id="calc-first-wrap" hidden class="mt-4 rounded-md bg-surface-2 px-3 py-2 text-sm text-text">
+            {c.calc.firstMonthLabel} <strong id="calc-first" class="num"></strong>
+          </p>
+          <a href={`${localeUrl(locale, "/pro/")}#beta`} class="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-md bg-product px-5 text-md font-semibold text-on-product shadow-sm transition-colors hover:bg-product-hover">
+            {fill(pr.cta, { days: P.trialDays })}
+            <Icon name="arrow" class="h-4 w-4" />
+          </a>
+          <noscript><p class="mt-3 text-xs text-text-muted">{c.calc.noscript}</p></noscript>
+        </div>
+        <div data-other-only hidden>
+          <p class="font-display text-lg font-bold text-text">{c.calc.otherTitle}</p>
+          <p class="mt-2 text-base text-text-muted">{c.calc.otherText}</p>
+          <div class="mt-4 grid gap-2">
+            <a href={localeUrl(locale, "/livro-de-ponto/")} class="inline-flex items-center gap-1.5 font-semibold text-link underline underline-offset-4 hover:text-primary-hover">{t.modulePages.ponto.hero.label}<Icon name="arrow" class="h-3.5 w-3.5" /></a>
+            <a href={localeUrl(locale, "/atendimento-ia/")} class="inline-flex items-center gap-1.5 font-semibold text-link underline underline-offset-4 hover:text-primary-hover">{t.modulePages.atendimento.hero.label}<Icon name="arrow" class="h-3.5 w-3.5" /></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="oficinaos" product="pro" labelledby="plans-title">
+    <Heading id="plans-title">
+      {c.plans.title}
+      <Fragment slot="lead">{c.plans.lead}</Fragment>
+    </Heading>
+    <DataTable class="mt-8" caption={c.plans.title} label={`${c.plans.title} — ${pr.scrollLabel}`} head={c.plans.head} rows={planRows} stack />
+    <a href={localeUrl(locale, "/pro/")} class="mt-5 inline-flex items-center gap-1.5 font-semibold text-link underline underline-offset-4 hover:text-primary-hover">
+      {c.plans.more}
+      <Icon name="arrow" class="h-4 w-4" />
+    </a>
+  </Section>
+
+  <Section id="extras" tone="raised" product="pro" labelledby="extras-title">
+    <Heading id="extras-title">{pr.extras.title}</Heading>
+    <DataTable class="mt-8" caption={pr.extras.caption} label={`${pr.extras.title} — ${pr.scrollLabel}`} head={pr.extras.head} rows={extrasRows} stack />
+    <p class="mt-4 max-w-prose text-sm text-text-muted">{fill(pr.extras.metaNote, { metaFree: num(locale, E.metaFreeServiceMessages) })}</p>
+  </Section>
+
+  <Section id="servicos" product="pro" labelledby="svc-title">
+    <Heading id="svc-title">
+      {svc.title}
+      <Fragment slot="lead">{svc.lead}</Fragment>
+    </Heading>
+    <DataTable class="mt-8" caption={svc.caption} label={`${svc.title} — ${svc.scrollLabel}`} head={svc.head} rows={serviceRows} stack />
+    <p class="mt-4 text-sm text-text-muted">{svc.note}</p>
+  </Section>
+
+  <Section id="modulos" tone="raised" product="pro" labelledby="mods-title">
+    <Heading id="mods-title">
+      {t.proPage.otherBusinesses.title}
+      <Fragment slot="lead">{t.proPage.otherBusinesses.text}</Fragment>
+    </Heading>
+    <ul role="list" class="mt-8 grid gap-4 sm:grid-cols-2">
+      {
+        [
+          { m: t.modulePages.ponto, desc: t.nav.moduleItems.ponto, href: localeUrl(locale, "/livro-de-ponto/") },
+          { m: t.modulePages.atendimento, desc: t.nav.moduleItems.atendimento, href: localeUrl(locale, "/atendimento-ia/") },
+        ].map(({ m, desc, href }) => (
+          <li>
+            <a href={href} class="group flex h-full flex-col rounded-lg border border-border bg-bg p-5 transition-colors hover:border-product">
+              <span class="inline-flex w-fit rounded-full bg-product-soft px-2.5 py-0.5 text-xs font-semibold text-on-product-soft">{m.hero.badge}</span>
+              <span class="mt-3 font-display text-lg font-bold text-text">{m.hero.label}</span>
+              <span class="mt-1 text-sm text-text-muted">{desc}</span>
+              <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-link">{t.proPage.otherBusinesses.more}<Icon name="arrow" class="h-3.5 w-3.5" /></span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+
+  <Faq title={c.faq.title} items={c.faq.items} product="pro" />
+</main>
+<Footer t={t} locale={locale} />
+
+<script is:inline>
+  (() => {
+    const root = document.getElementById("calc");
+    if (!root) return;
+    const P = JSON.parse(root.dataset.prices || "{}");
+    const fmt = (v) => new Intl.NumberFormat(P.lang, { style: "currency", currency: "EUR", minimumFractionDigits: Number.isInteger(v) ? 0 : 2, maximumFractionDigits: 2 }).format(v);
+    const form = root.querySelector("form");
+    const linesEl = document.getElementById("calc-lines");
+    const monthlyEl = document.getElementById("calc-monthly");
+    const bundleEl = document.getElementById("calc-bundle");
+    const firstWrap = document.getElementById("calc-first-wrap");
+    const firstEl = document.getElementById("calc-first");
+    const L = P.labels;
+    const round = (v) => Math.round(v * 100) / 100;
+
+    function line(label, value) {
+      const li = document.createElement("li");
+      li.className = "flex justify-between gap-3";
+      const a = document.createElement("span");
+      a.className = "text-text-muted";
+      a.textContent = label;
+      const b = document.createElement("span");
+      b.className = "num font-semibold text-text";
+      b.textContent = fmt(value);
+      li.append(a, b);
+      return li;
+    }
+
+    function render() {
+      const d = new FormData(form);
+      const isShop = d.get("type") === "shop";
+      root.querySelectorAll("[data-shop-only]").forEach((el) => (el.hidden = !isShop));
+      root.querySelectorAll("[data-other-only]").forEach((el) => (el.hidden = isShop));
+      if (!isShop) return;
+
+      const withAi = d.get("ai") === "ai";
+      const shops = Number(d.get("shops") || 1);
+      const pontoTier = Number(d.get("ponto") || 0);
+      const balcao = d.get("balcao") === "on";
+      const wa = d.get("wa") === "on";
+
+      const items = [];
+      const base = withAi ? P.base.ai : P.base.own;
+      items.push([withAi ? L.baseAi : L.baseOwn, base]);
+      const extraShops = Math.max(0, shops - P.shopsIncluded);
+      if (extraShops) items.push([L.shops.replace("{n}", String(extraShops)), extraShops * P.extraShop]);
+      let ponto = 0;
+      if (pontoTier) {
+        ponto = P.ponto[pontoTier - 1].monthly;
+        items.push([L.ponto.replace("{n}", String(P.ponto[pontoTier - 1].upTo)), ponto]);
+      }
+      let balcaoPrice = 0;
+      if (balcao) {
+        balcaoPrice = withAi ? P.balcao.ai : P.balcao.own;
+        items.push([L.balcao, balcaoPrice]);
+      }
+      if (wa) items.push([L.wa, P.wa.monthly]);
+
+      let total = items.reduce((s, [, v]) => s + v, 0);
+      // Pacote Pro Completo: base com IA + ponto (1.º escalão) + Balcão IA com IA.
+      const bundleOk = withAi && pontoTier === 1 && balcao;
+      if (bundleOk) {
+        const parts = P.base.ai + P.ponto[0].monthly + P.balcao.ai;
+        const saving = round(parts - P.bundle.monthly);
+        if (saving > 0) {
+          items.push([L.bundle, -saving]);
+          total -= saving;
+        }
+      }
+      bundleEl.hidden = !bundleOk;
+      total = round(total);
+
+      linesEl.replaceChildren(...items.map(([l, v]) => line(l, round(v))));
+      monthlyEl.textContent = fmt(total);
+      firstWrap.hidden = !wa;
+      if (wa) firstEl.textContent = fmt(round(total + P.wa.activation));
+    }
+
+    form.addEventListener("change", render);
+    render();
+  })();
+</script>

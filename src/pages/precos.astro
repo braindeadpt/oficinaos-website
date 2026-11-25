@@ -1,0 +1,9 @@
+---
+import PricingPage from "../components/offer/PricingPage.astro";
+import Base from "../layouts/Base.astro";
+import { lang, locale, ogLocale, t } from "../i18n/pt";
+---
+
+<Base t={t} locale={locale} langAttr={lang} ogLocale={ogLocale} title={t.pricingPage.metaTitle} description={t.pricingPage.metaDesc} preloadDisplayFont>
+  <PricingPage t={t} locale={locale} />
+</Base>

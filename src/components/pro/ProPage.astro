@@ -57,13 +57,18 @@ const P = pricing.pro;
 const E = pricing.extras;
 const S = pricing.services;
 const eur = (v: number) => euro(locale, v);
+const A = pricing.addons;
 const moduleCount = t.pro.modules.length;
+// Índices de t.pro.modules que são EXTRAS do Pro (Balcão IA, Livro de Ponto); o resto vem na base.
+const extraIdx = new Set([11, 12]);
+const includedCount = moduleCount - extraIdx.size;
 const vars = {
   price: eur(P.monthlyByok),
   shops: P.shopsIncluded,
   days: P.trialDays,
   count: moduleCount,
-  rest: moduleCount - h.modules.length,
+  included: includedCount,
+  rest: includedCount - h.modules.length,
   conversations: num(locale, P.conversationsIncluded),
   slots: P.founder.slots,
   months: P.founder.months,
@@ -77,10 +82,25 @@ const extrasRows = pr.extras.rows.map((r) =>
       extraShop: eur(P.extraShopMonthly),
       packPrice: eur(E.conversationPack.price),
       packConversations: num(locale, E.conversationPack.conversations),
-      activation: eur(E.whatsappOfficialActivation),
+      activation: eur(A.whatsappOfficial.activation),
+      waMonthly: eur(A.whatsappOfficial.monthly),
+      ponto1: eur(A.ponto[0].monthly),
+      ponto2: eur(A.ponto[1].monthly),
+      ponto3: eur(A.ponto[2].monthly),
+      p1: A.ponto[0].upTo,
+      p2: A.ponto[1].upTo,
+      p3: A.ponto[2].upTo,
+      balcaoAi: eur(A.balcaoIa.monthlyAiIncluded),
+      balcaoByok: eur(A.balcaoIa.monthlyByok),
     }),
   ),
 );
+const bundleFull = P.monthlyAiIncluded + A.ponto[0].monthly + A.balcaoIa.monthlyAiIncluded;
+const bundleVars = {
+  saving: eur(Math.round((bundleFull - A.bundleComplete.monthly) * 100) / 100),
+  full: eur(Math.round(bundleFull * 100) / 100),
+  pontoUpTo: A.bundleComplete.pontoUpTo,
+};
 const svc = p.services;
 const serviceRows = svc.rows.map((r) =>
   r.map((c) =>
@@ -245,6 +265,9 @@ const benefitIcons = ["message", "clipboard", "bell", "activity", "badge", "glob
                           {m.title}
                           <Icon name="arrow" class="h-3.5 w-3.5 text-text-subtle transition-colors group-hover:text-link" />
                         </a>
+                        {extraIdx.has(i) && (
+                          <span class="rounded-full border border-product px-2 py-0.5 text-xs font-semibold text-product">{p.groups.extraBadge}</span>
+                        )}
 
                       </p>
                       <p class="mt-0.5 text-sm text-text-muted">{m.desc}</p>
@@ -471,6 +494,25 @@ const benefitIcons = ["message", "clipboard", "bell", "activity", "badge", "glob
     <p class="mt-4 max-w-prose border-l-2 border-border pl-3 text-sm text-text-muted">
       {fill(pr.extras.metaNote, { metaFree: num(locale, E.metaFreeServiceMessages) })}
     </p>
+
+    <div class="reveal mt-10 flex flex-col gap-6 rounded-xl border-2 border-product bg-product-soft p-6 text-on-product-soft sm:flex-row sm:items-center sm:justify-between sm:p-8">
+      <div class="min-w-0">
+        <span class="inline-flex rounded-full bg-product px-2.5 py-0.5 text-xs font-semibold text-on-product">{fill(pr.bundle.badge, bundleVars)}</span>
+        <h3 class="mt-3 font-display text-2xl font-extrabold tracking-[-0.02em]">{pr.bundle.title}</h3>
+        <p class="mt-1.5 max-w-xl text-base">{fill(pr.bundle.text, bundleVars)}</p>
+      </div>
+      <div class="shrink-0 sm:text-right">
+        <p class="flex items-baseline gap-1 sm:justify-end">
+          <span class="num font-display text-4xl font-extrabold tracking-[-0.02em]">{eur(A.bundleComplete.monthly)}</span>
+          <span class="text-sm">{pr.perMonth}</span>
+        </p>
+        <p class="text-sm line-through decoration-1 opacity-80">{fill(pr.bundle.instead, bundleVars)}</p>
+        <a href="#beta" class="mt-3 inline-flex h-11 items-center justify-center gap-2 rounded-md bg-product px-4 text-sm font-semibold text-on-product shadow-sm transition-colors hover:bg-product-hover">
+          {pr.bundle.cta}
+          <Icon name="arrow" class="h-4 w-4" />
+        </a>
+      </div>
+    </div>
   </Section>
 
   <Section id="services" product="pro" labelledby="services-title">

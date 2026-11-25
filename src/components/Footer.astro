@@ -44,6 +44,7 @@ const columns: { id: string; title: string; links: FLink[] }[] = [
     id: "resources",
     title: t.footer.columns.resources,
     links: [
+      { label: t.pricingPage.navLabel, href: localeUrl(locale, "/precos/") },
       { label: t.footer.guide, href: localeUrl(locale, "/docs/") },
       { label: t.footer.updates, href: localeUrl(locale, "/updates/") },
       { label: t.footer.install, href: localeUrl(locale, "/download/") },

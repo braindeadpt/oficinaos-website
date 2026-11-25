@@ -29,7 +29,12 @@ interface Props {
 }
 const { t, locale, m, interest } = Astro.props;
 const check = '<path d="m5 13 4 4L19 7"/>';
-const vars = { proPrice: euro(locale, pricing.pro.monthlyByok), days: pricing.pro.trialDays };
+const vars = {
+  proPrice: euro(locale, pricing.pro.monthlyByok),
+  days: pricing.pro.trialDays,
+  pontoFrom: euro(locale, pricing.addons.ponto[0].monthly),
+  pontoUpTo: pricing.addons.ponto[0].upTo,
+};
 const stepIcons = ["clipboard", "smartphone", "activity"] as const;
 ---
 

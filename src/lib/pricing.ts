@@ -7,7 +7,7 @@ export const pricing = {
   pro: {
     /** Mensalidade por conta (multi-loja), com o modelo de IA incluído. */
     monthlyAiIncluded: 49,
-    /** Mensalidade por conta com a chave de IA do próprio cliente (BYOK). */
+    /** Mensalidade por conta sem IA incluída (chave de IA do próprio cliente, ou sem IA). */
     monthlyByok: 39,
     shopsIncluded: 3,
     extraShopMonthly: 9.9,
@@ -25,6 +25,19 @@ export const pricing = {
       freeMonths: 2,
       setupHoursOffered: 3,
     },
+  },
+  /** Extras pagos à parte por clientes Pro (modelo «Pro base + extras», 2026-11-25). */
+  addons: {
+    /** Livro de Ponto por escalão de funcionários. */
+    ponto: [
+      { upTo: 5, monthly: 9.9 },
+      { upTo: 15, monthly: 19.9 },
+      { upTo: 30, monthly: 29.9 },
+    ],
+    balcaoIa: { monthlyAiIncluded: 19, monthlyByok: 9 },
+    whatsappOfficial: { activation: 149, monthly: 10 },
+    /** Pro base com IA + Livro de Ponto (até 5) + Balcão IA. */
+    bundleComplete: { monthly: 69, pontoUpTo: 5 },
   },
   extras: {
     conversationPack: { conversations: 1000, price: 9 },

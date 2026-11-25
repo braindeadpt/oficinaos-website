@@ -44,7 +44,7 @@ export const t: Copy = {
     productItems: {
       os: { name: "OficinaOS", desc: "Reparaciones, clientes, stock y caja en un solo programa. Gratis." },
       diag: { name: "Diag", desc: "Diagnóstico de móviles por cable, con informe para el cliente." },
-      pro: { name: "Pro", desc: "Un plan con todo: WhatsApp y SMS con IA, portal, registro de jornada y facturación." },
+      pro: { name: "Pro", desc: "WhatsApp y SMS con IA, portal del cliente, facturación y más. Extras a tu medida." },
       trade: { name: "Trade", desc: "Compraventa de piezas y equipos entre profesionales." },
     },
     openSource: "Código abierto",
@@ -122,10 +122,10 @@ export const t: Copy = {
     badge: "Nuevo · 14 días gratis",
     title: "OficinaOS Pro",
     subtitle:
-      "El programa que descargas es y será siempre gratuito y open source (licencia MIT) — nunca será de pago. El Pro es un plan opcional, con todos los módulos incluidos, para lo que necesita «llegar a internet» a través de OficinaOS Cloud: mensajes a los clientes, portal, IA, registro de jornada y facturación.",
+      "El programa que descargas es y será siempre gratuito y open source (licencia MIT) — nunca será de pago. El Pro es un plan opcional para lo que necesita «llegar a internet» a través de OficinaOS Cloud: mensajes a los clientes, portal, IA y facturación — y, como extras, el libro de horas y Balcão IA.",
     statusLabel: "Pro",
     teaser:
-      "WhatsApp y SMS con asistente de IA, portal del cliente, Balcão IA, libro de horas, facturación certificada y escaparate online — todo en un solo plan, sobre el programa gratis.",
+      "WhatsApp y SMS con asistente de IA, portal del cliente, facturación certificada, escaparate online e informes IA en un solo plan — con el libro de horas y Balcão IA como extras, sobre el programa gratis.",
     more: "Conocer el Pro",
     ctaBeta: "Probar 14 días gratis",
     groups: ["Hablar con clientes", "Vender y facturar", "Gestionar y crecer"],
@@ -633,7 +633,7 @@ export const t: Copy = {
         heading: "Precios",
         paragraphs: [
           "La app completa es gratuita y open source (MIT) — sin límites, sin cuentas, sin periodo de prueba. Para siempre.",
-          "El Pro es un solo plan, OficinaOS Pro, con todos los módulos incluidos — no hay módulos que elegir ni que pagar aparte. Hay dos cuotas mensuales, según la IA venga incluida o uses tu propia clave de IA, y 14 días gratis. Precios, extras y servicios están en la página de OficinaOS Pro. Sin permanencia ni costes ocultos.",
+          "El Pro es un plan, OficinaOS Pro, con una base que ya incluye casi todos los módulos y dos cuotas mensuales (con o sin IA incluida), con 14 días gratis. El Libro de horas, Balcão IA y el WhatsApp oficial son extras. Precios, extras y servicios están en la página de OficinaOS Pro. Sin permanencia ni costes ocultos.",
           "* Nota WhatsApp: la conexión rápida por QR no tiene coste por mensaje. En el WhatsApp oficial de Meta (extra), Meta cobra los mensajes directamente a la tienda, con 1.000 respuestas gratis al mes por número — coste de Meta, no nuestro.",
         ],
         table: {
@@ -644,7 +644,7 @@ export const t: Copy = {
             ["Portal del cliente", "Disponible", "Incluido en el Pro"],
             ["Bot de WhatsApp", "Disponible", "Incluido en el Pro*"],
             ["Canal SMS (pasarela Android)", "Disponible", "Incluido en el Pro. La tarifa del SIM es de la tienda"],
-            ["Balcão IA", "Disponible", "Incluido en el Pro"],
+            ["Balcão IA", "Disponible", "Extra del Pro"],
             ["Recepción de diagnósticos", "Disponible", "Incluido en el Pro"],
             ["Informes IA", "Disponible", "Incluido en el Pro"],
             ["Facturación (InvoiceXpress)", "Disponible", "Incluido en el Pro. La cuenta de InvoiceXpress es de la tienda y tiene el coste propio del servicio"],
@@ -653,7 +653,7 @@ export const t: Copy = {
             ["Precios de mercado", "Disponible", "Incluido en el Pro"],
             ["Multitienda", "Disponible", "Incluido en el Pro (hasta 3 tiendas; tiendas adicionales con coste mensual)"],
             ["Remarketing por WhatsApp", "Disponible", "Incluido en el Pro*"],
-            ["Libro de horas", "Disponible", "Incluido en el Pro"],
+            ["Libro de horas", "Disponible", "Extra del Pro"],
           ],
         },
         links: [],
@@ -724,7 +724,7 @@ export const t: Copy = {
       {
         heading: "Escaparate, busco pieza, precios, multitienda y remarketing (Pro)",
         paragraphs: [
-          "Cinco módulos Pro más, todos incluidos en el plan y activados en la cuenta de OficinaOS Cloud. Cada uno tiene una guía breve:",
+          "Cinco módulos Pro más, incluidos en el plan base y activados en la cuenta de OficinaOS Cloud. Cada uno tiene una guía breve:",
         ],
         table: {
           head: ["Módulo", "Para qué"],
@@ -786,7 +786,7 @@ export const t: Copy = {
             ["¿Los datos de los clientes van a algún servidor?", "No por defecto — la app no tiene telemetría. Con módulos Pro, OficinaOS Cloud recibe solo los datos que necesita cada módulo (por ejemplo, páginas del portal, mensajes, reservas y diagnósticos enviados), nunca costes internos ni notas internas. El detalle está en la política de privacidad de la Cloud (cloud.oficinaos.app/privacy)."],
             ["¿Funciona en el móvil?", "Sí — en el Wi-Fi de la tienda cualquier aparato lo abre en el navegador; fuera de la tienda con el acceso remoto (Cloudflare Tunnel)."],
             ["¿El cliente tiene que instalar algo?", "No — el portal abre como un enlace en su navegador; el bot responde en su WhatsApp normal."],
-            ["¿Cuánto cuesta?", "La app completa es gratuita (licencia MIT). OficinaOS Pro es un plan opcional, con todos los módulos incluidos y 14 días gratis."],
+            ["¿Cuánto cuesta?", "La app completa es gratuita (licencia MIT). OficinaOS Pro es un plan opcional, con 14 días gratis."],
             ["¿Varias tiendas / sucursales?", "Cada tienda tiene su propia instalación. Con el módulo Pro Multitienda, el dueño ve los ingresos y las reparaciones de todas las tiendas en un solo panel de OficinaOS Cloud."],
             ["¿Y si el PC se estropea?", "Copias de seguridad diarias automáticas; restaurar en otro PC es copiar la copia y volver a ejecutar el instalador."],
             ["¿Mac o Linux?", "Sí, con Docker manual — el instalador automático es solo Windows."],
@@ -1755,7 +1755,7 @@ export const t: Copy = {
         heading: "Gratis, sin asteriscos",
         paragraphs: [
           "La mayoría de los programas para talleres cobra cuotas mensuales por puesto o por técnico. OficinaOS es software libre (licencia MIT): la aplicación completa — reparaciones, presupuestos, stock, TPV, copias de seguridad — es gratuita para siempre, para una tienda o para diez puestos.",
-          "Los módulos Pro opcionales (portal del cliente en la nube, bot de WhatsApp, tienda online, precios de mercado, multi-tienda) forman parte de OficinaOS Pro, un plan opcional con todo incluido, para quien los necesite. El núcleo que usas cada día nunca queda detrás de un pago.",
+          "Los módulos Pro opcionales (portal del cliente en la nube, bot de WhatsApp, tienda online, precios de mercado, multi-tienda) forman parte de OficinaOS Pro, un plan opcional, para quien los necesite. El núcleo que usas cada día nunca queda detrás de un pago.",
         ],
         links: [
           { label: "Código fuente en GitHub", href: "https://github.com/braindeadpt/OficinaOS" },
@@ -1798,6 +1798,17 @@ export const t: Copy = {
     ],
   },
   home: {
+    fork: {
+      title: "¿Tienes un taller o una tienda de reparación?",
+      yesLabel: "Sí, tengo un taller",
+      yesTitle: "OficinaOS: el programa gratis para tu tienda",
+      yesText: "Reparaciones, presupuestos, clientes, stock y caja en un solo programa, gratis. Y, cuando quieras, OficinaOS Pro te conecta con tus clientes por WhatsApp y SMS.",
+      yesCta: "Ver cómo funciona",
+      yesPro: "Conocer OficinaOS Pro",
+      noLabel: "No, tengo otro negocio",
+      noTitle: "Módulos para cualquier empresa",
+      noNote: "Próximamente para todas las empresas — ya puedes apuntarte a la lista de espera.",
+    },
     hero: {
       title: "Cada reparación organizada, de la entrada a la entrega.",
       subtitle:
@@ -2233,14 +2244,14 @@ export const t: Copy = {
     docsLink: "Documentación completa",
   },
   proPage: {
-    metaTitle: "OficinaOS Pro — todo incluido en un solo plan, desde 39 €/mes",
+    metaTitle: "OficinaOS Pro — WhatsApp, SMS, portal e IA para talleres, desde 39 €/mes",
     metaDesc:
-      "WhatsApp y SMS con asistente de IA, portal del cliente, Balcão IA, libro de horas, facturación y escaparate online — todos los módulos en un solo plan, hasta 3 tiendas. 14 días gratis.",
+      "WhatsApp y SMS con asistente de IA, portal del cliente, facturación, escaparate online e informes IA en el plan base, hasta 3 tiendas. Libro de horas y Balcão IA como extras. 14 días gratis.",
     hero: {
       label: "OficinaOS Pro",
-      title: "Todo lo que tu taller necesita más allá del mostrador. En un solo plan.",
+      title: "Todo lo que tu taller necesita más allá del mostrador.",
       subtitle:
-        "El programa sigue siendo gratis. El Pro lo conecta a internet: responde a los clientes por WhatsApp y SMS, muestra el estado de las reparaciones, registra la jornada del equipo y factura — todo incluido, sin elegir módulos.",
+        "El programa sigue siendo gratis. El Pro lo conecta a internet: responde a los clientes por WhatsApp y SMS, muestra el estado de las reparaciones y factura. ¿Necesitas el registro de jornada del equipo o una bandeja de entrada con IA? Añade solo esos extras.",
       priceLine: "Desde {price}/mes · hasta {shops} tiendas · {days} días gratis",
       cta: "Probar {days} días gratis",
       ctaSecondary: "Ver qué está incluido",
@@ -2250,7 +2261,7 @@ export const t: Copy = {
       status: "Conectado a OficinaOS Cloud · Plan Pro",
       sync: "Última sincronización: hace 1 min",
       modulesTitle: "Incluido en tu plan",
-      modules: ["WhatsApp y SMS con IA", "Portal del cliente", "Balcão IA", "Libro de horas", "Facturación certificada"],
+      modules: ["WhatsApp y SMS con IA", "Portal del cliente", "Informes IA del Diag", "Facturación certificada", "Escaparate online"],
       more: "+ {rest} módulos",
       active: "Activo",
       offline: "Sin internet, todo lo demás sigue funcionando en la red de la tienda.",
@@ -2274,15 +2285,16 @@ export const t: Copy = {
       items: [
         { title: "Se acabaron los «¿ya está listo?»", text: "El cliente pregunta por WhatsApp o SMS y el asistente responde al momento con el estado real de la reparación — incluso con la tienda cerrada." },
         { title: "Presupuestos aprobados más rápido", text: "El cliente aprueba con un «SÍ» o en un enlace, a cualquier hora. La aprobación entra en la app con fecha y hora." },
-        { title: "No se pierde ningún mensaje", text: "WhatsApp y SMS en una sola bandeja de entrada. Balcão IA resume y prepara respuestas; una persona las aprueba antes de enviarlas." },
-        { title: "Registro de jornada sin papel", text: "Los empleados fichan por WhatsApp. Registros inalterables durante 5 años, listos para la inspección de trabajo (ACT)." },
+        { title: "No se pierde ningún mensaje", text: "Con el extra Balcão IA, WhatsApp y SMS quedan en una sola bandeja de entrada: la IA resume y prepara respuestas, y una persona las aprueba antes de enviarlas." },
+        { title: "Registro de jornada sin papel", text: "Con el extra Libro de horas, los empleados fichan por WhatsApp. Registros inalterables durante 5 años, listos para la inspección de trabajo (ACT)." },
         { title: "Factura certificada al terminar la reparación", text: "De la venta o la reparación a la factura de InvoiceXpress, sin escribirlo todo dos veces. Solo Portugal." },
         { title: "Clientes que vuelven", text: "Escaparate online con reservas, recordatorios de recogida y mensajes a clientes que hace tiempo que no aparecen." },
       ],
     },
     groups: {
       title: "Todo lo que está incluido",
-      lead: "{count} módulos en tres grupos — todos incluidos en el plan Pro. No hay módulos que elegir ni que pagar aparte.",
+      lead: "{included} módulos incluidos en el plan base, en tres grupos. Solo el Libro de horas y Balcão IA son extras.",
+      extraBadge: "Extra",
       more: "Guía",
       items: [
         {
@@ -2338,7 +2350,7 @@ export const t: Copy = {
       lead: "OficinaOS Cloud es el puente entre la app de tu PC y el exterior. No es otro programa que aprender: se conecta una vez y trabaja entre bastidores.",
       steps: [
         { title: "Empareja una vez", text: "Crea una cuenta en cloud.oficinaos.app y pega el código de emparejamiento en Ajustes → Cloud." },
-        { title: "El plan lo activa todo", text: "Con el Pro activo, todos los módulos quedan disponibles en el servidor — sin archivos de licencia ni claves que instalar." },
+        { title: "El plan activa los módulos", text: "Con el Pro activo, los módulos del plan (y los extras que elijas) quedan disponibles en el servidor — sin archivos de licencia ni claves que instalar." },
         { title: "La app se sincroniza sola", text: "Cada ~2 minutos envía y recibe lo que necesitan los módulos — los mensajes de los clientes siguen un ciclo rápido de ~12 segundos. El PC nunca queda expuesto a internet." },
       ],
       diagram: { pc: "OficinaOS en tu PC", cloud: "OficinaOS Cloud", out: "Clientes y servicios", sync: "cada ~2 min" },
@@ -2349,28 +2361,28 @@ export const t: Copy = {
       login: "¿Ya tienes cuenta? Entrar en OficinaOS Cloud",
     },
     pricing: {
-      title: "Un plan. Todo incluido.",
-      lead: "Solo eliges cómo quieres la inteligencia artificial: incluida por nosotros o con tu propia clave. Todo lo demás es igual.",
-      planName: "OficinaOS Pro",
+      title: "Una base completa. Extras solo si los necesitas.",
+      lead: "La base ya trae casi todo. Solo eliges si quieres la inteligencia artificial incluida — y añades los extras que te hagan falta.",
+      planName: "OficinaOS Pro base",
       perMonth: "/mes",
       vat: "+ IVA · por cuenta, no por tienda",
       optionAi: { title: "Con IA incluida", text: "Nosotros nos encargamos del modelo de IA. No necesitas cuenta en ningún sitio." },
-      optionByok: { title: "Con tu propia clave de IA", text: "Conecta tu cuenta de OpenAI, Anthropic o Gemini y paga la IA directamente al proveedor." },
+      optionByok: { title: "Sin IA incluida", text: "Conecta tu propia clave de IA (OpenAI, Anthropic, Gemini…) y págala al proveedor — o usa el Pro sin IA." },
       recommended: "Más sencillo",
-      includedTitle: "Incluido en ambos",
+      includedTitle: "Incluido en la base",
       included: [
-        "Los {count} módulos Pro",
+        "{included} módulos: mensajes, portal, facturación, escaparate y más",
+        "SMS y WhatsApp con envío y respuesta (conexión rápida por QR)",
+        "Informes IA de OficinaOS Diag",
         "Hasta {shops} tiendas en la misma cuenta",
-        "{conversations} conversaciones con IA al mes, compartidas entre las tiendas",
-        "WhatsApp y SMS (conexión rápida por QR y el móvil Android de la tienda)",
-        "Soporte en portugués",
+        "{conversations} conversaciones con IA al mes (con IA incluida)",
         "Sin permanencia — cancela cuando quieras",
       ],
       cta: "Probar {days} días gratis",
       conversationNote: "Una conversación son todos los mensajes de un cliente durante 24 horas: diez mensajes del mismo cliente la misma noche cuentan como una.",
       founder: {
         title: "Precio de fundador",
-        text: "Los primeros {slots} clientes pagan {price}/mes con IA incluida durante {months} meses.",
+        text: "Los primeros {slots} clientes pagan {price}/mes por la base con IA incluida durante {months} meses.",
         cta: "Quiero ser fundador",
       },
       annual: {
@@ -2380,14 +2392,23 @@ export const t: Copy = {
       },
       extras: {
         title: "Extras, solo si los necesitas",
-        caption: "Extras opcionales del plan Pro",
-        head: ["Extra", "Precio", "Para qué"],
+        caption: "Extras del plan OficinaOS Pro",
+        head: ["Extra", "Precio", "Qué añade"],
         rows: [
-          ["Tienda adicional (a partir de la {nextShop}.ª)", "{extraShop}/mes", "Cadenas con más de {shops} tiendas"],
-          ["Paquete de conversaciones", "{packPrice} por +{packConversations}", "Meses con mucho movimiento; vale solo ese mes"],
-          ["WhatsApp oficial de Meta", "{activation} de activación", "Sin riesgo de bloqueo, botones en los mensajes y nombre verificado"],
+          ["Libro de horas", "{ponto1}/mes hasta {p1} empleados · {ponto2} hasta {p2} · {ponto3} hasta {p3}", "Los empleados fichan por WhatsApp o SMS; registros inalterables, listos para la inspección de trabajo (ACT)."],
+          ["Balcão IA", "{balcaoAi}/mes con IA · {balcaoByok} con tu propia clave", "Bandeja de entrada única de WhatsApp y SMS, con un asistente de IA que resume y prepara respuestas para que el equipo las apruebe."],
+          ["WhatsApp oficial de Meta", "{waMonthly}/mes + {activation} de activación", "Sin riesgo de bloqueo, botones en los mensajes y nombre de empresa verificado."],
+          ["Tienda adicional (a partir de la {nextShop}.ª)", "{extraShop}/mes", "Cadenas con más de {shops} tiendas."],
+          ["Paquete de conversaciones", "{packPrice} por +{packConversations}", "Meses con mucho movimiento; vale solo ese mes."],
         ],
         metaNote: "En el WhatsApp oficial, Meta cobra los mensajes directamente a tu empresa, en tu tarjeta. Incluye {metaFree} respuestas gratis al mes por número — una tienda pequeña rara vez pasa de ahí. Nosotros no cobramos nada encima.",
+      },
+      bundle: {
+        badge: "Ahorras {saving} al mes",
+        title: "Pro Completo",
+        text: "Base con IA incluida + Libro de horas (hasta {pontoUpTo} empleados) + Balcão IA.",
+        instead: "en vez de {full}",
+        cta: "Quiero el Pro Completo",
       },
       scrollLabel: "Tabla con desplazamiento horizontal",
     },
@@ -2416,8 +2437,8 @@ export const t: Copy = {
       title: "Preguntas frecuentes",
       items: [
         { q: "¿OficinaOS va a dejar de ser gratis?", a: "No. El programa es de código abierto (MIT) y el núcleo nunca queda detrás de un pago. El Pro añade lo que necesita internet: mensajes, portal, IA, registro de jornada y facturación." },
-        { q: "¿Tengo que elegir módulos?", a: "No. El plan Pro incluye todos los módulos. Usa los que te hagan falta; los demás quedan ahí para cuando los necesites." },
-        { q: "¿Qué es «con tu propia clave de IA»?", a: "Si ya tienes cuenta en un proveedor de IA (OpenAI, Anthropic, Gemini…), puedes conectarla y pagas la IA directamente a ese proveedor. Por eso el plan sale más barato. Si no sabes qué es esto, elige «con IA incluida»." },
+        { q: "¿Qué está incluido y qué es extra?", a: "La base incluye casi todo: mensajes por SMS y WhatsApp, portal del cliente, facturación, escaparate online, informes IA y más. Solo tres cosas son extras: el Libro de horas, Balcão IA y el WhatsApp oficial de Meta. Si quieres los dos primeros, el paquete Pro Completo sale más barato." },
+        { q: "¿Qué es «sin IA incluida»?", a: "Puedes conectar tu propia cuenta de IA (OpenAI, Anthropic, Gemini…) y pagar la IA directamente a ese proveedor — o usar el Pro sin IA: el asistente responde solo con reglas (estado de la reparación, presupuestos, códigos). Si no sabes qué elegir, elige «con IA incluida»." },
         { q: "¿Y si paso de las conversaciones incluidas?", a: "El asistente sigue pasando los mensajes al equipo, sin responder con IA. Puedes comprar un paquete de conversaciones para ese mes o hablar con nosotros para un plan a medida." },
         { q: "¿Necesito el WhatsApp oficial de Meta?", a: "No. Por defecto conectamos el WhatsApp de la tienda por QR, sin coste por mensaje. Es una conexión no oficial, con un pequeño riesgo de bloqueo que te explicamos antes. Si no quieres ningún riesgo, activa el WhatsApp oficial (extra), y el SMS queda siempre como reserva." },
         { q: "Tengo varias tiendas. ¿Pago por cada una?", a: "No. El plan es por cuenta e incluye hasta 3 tiendas. A partir de la 4.ª, cada tienda adicional tiene un pequeño coste mensual." },
@@ -2439,7 +2460,7 @@ export const t: Copy = {
           "El empleado escanea un QR en la puerta y envía el mensaje que ya viene escrito. Tú ves en el móvil o en el ordenador quién ha llegado, a qué hora y dónde estaba.",
         cta: "Apuntarme a la lista de espera",
         ctaSecondary: "Ver cómo funciona",
-        proNote: "¿Tienes un taller de reparación? El Libro de horas ya está incluido en",
+        proNote: "¿Tienes un taller de reparación? El Libro de horas ya está disponible como extra de",
         proLink: "OficinaOS Pro.",
       },
       chat: {
@@ -2526,7 +2547,7 @@ export const t: Copy = {
         standaloneTitle: "Para cualquier empresa",
         standaloneText: "Precio por anunciar en el lanzamiento. Quien se apunte a la lista de espera recibe primero las condiciones de lanzamiento.",
         proTitle: "Para talleres de reparación",
-        proText: "Ya incluido en OficinaOS Pro, desde {proPrice}/mes, con {days} días gratis.",
+        proText: "Extra de OficinaOS Pro, desde {pontoFrom}/mes hasta {pontoUpTo} empleados. El Pro base cuesta desde {proPrice}/mes, con {days} días gratis.",
         proLink: "Conocer OficinaOS Pro",
         note: "Los SMS salen del móvil de la empresa: el coste es el de tu tarifa.",
       },
@@ -2543,7 +2564,7 @@ export const t: Copy = {
           { q: "¿Qué WhatsApp se usa?", a: "Por defecto, conectamos el WhatsApp de la empresa como WhatsApp Web, escaneando un QR — sin coste por mensaje. Es una conexión no oficial: en el fichaje el riesgo de bloqueo es bajo, porque son tus empleados quienes escriben. Si ocurre, se cambia de número sin perder registros y el fichaje sigue por SMS. También puedes usar el WhatsApp Business oficial de Meta." },
           { q: "¿Puedo corregir un registro?", a: "Sí. La corrección queda como una línea nueva, con quién la hizo y por qué. El registro original nunca se borra — eso es lo que le da valor al registro en una inspección." },
           { q: "¿Los empleados pueden hacer trampa?", a: "Es muy difícil: el código caduca y solo sirve una vez, la ubicación se comprueba y la hora es la del servidor. Lo que no podemos confirmar queda marcado para validar." },
-          { q: "Ya uso OficinaOS. ¿Cómo lo activo?", a: "Está incluido en OficinaOS Pro: no necesitas la lista de espera. Consulta la guía del Libro de horas." },
+          { q: "Ya uso OficinaOS. ¿Cómo lo activo?", a: "Es un extra de OficinaOS Pro: no necesitas la lista de espera. Consulta la guía del Libro de horas." },
         ],
       },
     },
@@ -2665,6 +2686,68 @@ export const t: Copy = {
           { q: "Tengo un taller. ¿Necesito esto?", a: "No: OficinaOS Pro ya incluye el asistente de WhatsApp y SMS, y ese conoce el estado de cada reparación." },
         ],
       },
+    },
+  },
+  pricingPage: {
+    navLabel: "Precios",
+    metaTitle: "Precios — OficinaOS gratis, OficinaOS Pro desde 39 €/mes, extras y servicios",
+    metaDesc:
+      "Todos los precios de OficinaOS en un solo lugar: programa gratis, OficinaOS Pro con o sin IA incluida, extras (Libro de horas, Balcão IA, WhatsApp oficial), servicios y calculadora.",
+    hero: {
+      title: "Precios sencillos, sin sorpresas",
+      lead: "El programa es gratis. OficinaOS Pro tiene una base con casi todo y extras solo para quien los necesita. Haz las cuentas con la calculadora.",
+    },
+    jump: { label: "Ir a", calc: "Calculadora", plans: "OficinaOS y Pro", extras: "Extras", services: "Servicios", modules: "Otras empresas" },
+    calc: {
+      title: "Calcula tu precio",
+      lead: "Elige lo que necesitas. El total se actualiza al momento.",
+      typeLabel: "Tu negocio",
+      typeShop: "Taller o tienda de reparación",
+      typeOther: "Otro tipo de empresa",
+      aiLabel: "Inteligencia artificial",
+      shopsLabel: "Número de tiendas",
+      pontoLabel: "Libro de horas",
+      pontoNone: "No lo necesito",
+      pontoTier: "Hasta {n} empleados",
+      extrasLabel: "Otros extras",
+      balcaoLabel: "Balcão IA — bandeja de entrada con asistente de IA para el equipo",
+      waLabel: "WhatsApp oficial de Meta — sin riesgo de bloqueo",
+      monthlyLabel: "Total al mes",
+      firstMonthLabel: "El primer mes, con la activación del WhatsApp oficial:",
+      bundleApplied: "Paquete Pro Completo aplicado",
+      noscript: "Activa JavaScript para usar la calculadora; los precios están en las tablas de abajo.",
+      otherTitle: "Para tu empresa: lista de espera",
+      otherText: "El Libro de horas y la Atención IA estarán disponibles, por separado, para cualquier empresa. Los precios se anunciarán en el lanzamiento — apúntate a la lista de espera para recibirlos primero.",
+      lines: {
+        baseAi: "OficinaOS Pro base (con IA)",
+        baseOwn: "OficinaOS Pro base (sin IA incluida)",
+        shops: "Tiendas adicionales ({n})",
+        ponto: "Libro de horas (hasta {n} empleados)",
+        balcao: "Balcão IA",
+        wa: "WhatsApp oficial",
+        bundle: "Descuento Pro Completo",
+      },
+    },
+    plans: {
+      title: "OficinaOS y OficinaOS Pro",
+      lead: "El programa es gratis para siempre. Pro añade lo que necesita internet.",
+      head: ["Plan", "Precio/mes", "Para quién"],
+      rows: [
+        ["OficinaOS", "0 €", "Cualquier taller: reparaciones, presupuestos, stock y caja, en tu PC. Sin mensajes a los clientes."],
+        ["OficinaOS Pro base — sin IA incluida", "{proByok}", "Mensajes, portal, facturación y más, con tu propia clave de IA o sin IA."],
+        ["OficinaOS Pro base — con IA incluida", "{proAi}", "Lo mismo, con el asistente de IA incluido (3.000 conversaciones al mes)."],
+        ["Pro Completo", "{bundle}", "Base con IA + Libro de horas (hasta 5 empleados) + Balcão IA."],
+      ],
+      more: "Ver todo lo que incluye Pro",
+    },
+    faq: {
+      title: "Preguntas sobre precios",
+      items: [
+        { q: "¿Los precios incluyen IVA?", a: "No. Todos los precios son sin IVA, al mes y por cuenta (no por tienda)." },
+        { q: "¿Hay permanencia?", a: "No. Cancelas cuando quieras. En el plan anual eliges una oferta: la configuración hecha por nosotros o dos meses gratis." },
+        { q: "¿Cómo pago?", a: "Durante el lanzamiento, activamos Pro contigo y te enviamos la factura. Los 14 días gratis no piden tarjeta." },
+        { q: "¿Y si necesito algo diferente?", a: "Más tiendas, más conversaciones, otra IA o instalación en tu ordenador: escríbenos y te hacemos una propuesta a medida." },
+      ],
     },
   },
   tradePage: {
@@ -2842,7 +2925,7 @@ export const seoPages = {
     answer: "OficinaOS es un programa gratis (licencia MIT) para gestionar un servicio técnico de móviles: fichas de reparación, presupuestos aprobados online, stock, caja y seguimiento por el cliente — corre en el PC de la tienda y funciona sin internet.",
     faqTitle: "Preguntas frecuentes",
     faqs: [
-      { q: "¿OficinaOS es realmente gratis?", a: "Sí. La licencia es MIT: el núcleo — reparaciones, presupuestos, stock, TPV y copias de seguridad — es gratuito para siempre, sin cuenta obligatoria. OficinaOS Pro es un plan opcional con todos los módulos incluidos." },
+      { q: "¿OficinaOS es realmente gratis?", a: "Sí. La licencia es MIT: el núcleo — reparaciones, presupuestos, stock, TPV y copias de seguridad — es gratuito para siempre, sin cuenta obligatoria. OficinaOS Pro es un plan opcional." },
       { q: "¿Funciona sin internet?", a: "Sí. La aplicación corre en un PC dentro de la tienda y sirve a los demás dispositivos por la red local. Si internet falla, la tienda sigue trabajando." },
       { q: "¿Dónde quedan los datos de mis clientes?", a: "En el PC de tu tienda. No hay telemetría y nada sale de la red local a menos que actives un módulo Pro — lo que simplifica el cumplimiento del RGPD." },
     ],
@@ -2866,7 +2949,7 @@ export const seoPages = {
         heading: "Por qué es diferente de los programas habituales",
         paragraphs: [
           "Los programas de servicio técnico más conocidos son servicios en la nube, con cuota mensual por puesto y los datos de los clientes en los servidores del proveedor. OficinaOS es software libre (licencia MIT) instalado en el PC de la tienda: gratis para siempre, sin telemetría, y los datos de los clientes quedan dentro de la tienda.",
-          "Los módulos Pro opcionales — portal del cliente en la nube, bot de WhatsApp, tienda online, precios de mercado, multi-tienda — forman parte de OficinaOS Pro, un plan opcional con todo incluido. El núcleo diario nunca queda detrás de un pago.",
+          "Los módulos Pro opcionales — portal del cliente en la nube, bot de WhatsApp, tienda online, precios de mercado, multi-tienda — forman parte de OficinaOS Pro, un plan opcional. El núcleo diario nunca queda detrás de un pago.",
         ],
         links: [
           { label: "Módulos Pro", href: "/es/pro" },
@@ -3026,7 +3109,7 @@ export const seoPages = {
         heading: "El modelo de coste",
         paragraphs: [
           "Los programas habituales para servicio técnico son SaaS: cuota mensual por puesto o por técnico, típicamente 20–60 €/mes, y las funciones de cara al cliente — portal, notificaciones — entran en planes más caros. Al cabo de un año son cientos de euros, todos los años.",
-          "OficinaOS es licencia MIT: la aplicación completa — reparaciones, presupuestos, stock, TPV, copias de seguridad — es gratuita para siempre, para un puesto o diez. Los módulos Pro (portal en la nube, bot de WhatsApp, tienda online, multi-tienda) forman parte de OficinaOS Pro, un plan opcional con todo incluido, para quien los necesite.",
+          "OficinaOS es licencia MIT: la aplicación completa — reparaciones, presupuestos, stock, TPV, copias de seguridad — es gratuita para siempre, para un puesto o diez. Los módulos Pro (portal en la nube, bot de WhatsApp, tienda online, multi-tienda) forman parte de OficinaOS Pro, un plan opcional, para quien los necesite.",
         ],
       },
       {
@@ -3055,7 +3138,7 @@ export const seoPages = {
       {
         heading: "Cuándo el Pro tiene sentido",
         paragraphs: [
-          "Los módulos Pro añaden lo que realmente necesita salir de la tienda: portal del cliente en la nube, bot de WhatsApp, facturación certificada (solo Portugal), tienda online, precios de mercado, multi-tienda y remarketing. Están todos incluidos en OficinaOS Pro, un plan opcional con 14 días gratis.",
+          "Los módulos Pro añaden lo que realmente necesita salir de la tienda: portal del cliente en la nube, bot de WhatsApp, facturación certificada (solo Portugal), tienda online, precios de mercado, multi-tienda y remarketing. Están incluidos en OficinaOS Pro, un plan opcional con 14 días gratis.",
         ],
         links: [
           { label: "Módulos Pro", href: "/es/pro" },
