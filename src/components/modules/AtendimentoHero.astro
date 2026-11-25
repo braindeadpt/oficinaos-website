@@ -921,7 +921,7 @@ const initials = (n: string) =>
     // passos que faltam voltam a ser agendados, com o tempo que lhes restava.
     var timers = [];
     function at(ms, fn) {
-      var t = { fn: fn, due: Date.now() + ms, left: ms };
+      var t = { fn: fn, due: performance.now() + ms, left: ms };
       t.id = setTimeout(function () {
         var i = timers.indexOf(t);
         if (i >= 0) timers.splice(i, 1);
@@ -1029,7 +1029,7 @@ const initials = (n: string) =>
       pauseBtn.setAttribute("aria-label", pauseBtn.getAttribute(paused ? "data-label-play" : "data-label-pause"));
       var anims = root.getAnimations({ subtree: true });
       if (paused) {
-        var now = Date.now();
+        var now = performance.now();
         timers.forEach(function (t) {
           clearTimeout(t.id);
           t.left = Math.max(0, t.due - now);
