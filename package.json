@@ -9,8 +9,8 @@
     "check": "astro check",
     "preview": "astro preview",
     "astro": "astro",
-    "og": "bun run build && python tools/gen-og.py && bun run build",
-    "deploy": "bun run build && python tools/gen-og.py --check && bunx wrangler deploy && python tools/gen-og.py --published"
+    "og": "bun run build && bun tools/py.mjs tools/gen-og.py && bun run build",
+    "deploy": "bun run build && bun tools/py.mjs tools/gen-og.py --check && bunx wrangler deploy && bun tools/py.mjs tools/gen-og.py --published"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.4.0",

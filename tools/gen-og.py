@@ -1,6 +1,7 @@
 """Gera as imagens de partilha simples (1200×630) para as páginas sem imagem própria.
 
 Uso (na raiz do site), sempre que um título mude ou haja páginas novas:
+    (atalho: bun run og — faz os passos 1 a 3)
     bun run build                    # 1. gera dist/ (de onde se lê o título de cada página)
     python tools/gen-og.py           # 2. escreve public/og/pages/<chave>-<hash>.jpg e manifest.json
     bun run build                    # 3. o Base.astro aponta cada página para a sua imagem
