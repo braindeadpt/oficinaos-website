@@ -1,8 +1,8 @@
 ---
 // Herói do Livro de Ponto (redesenho 2026-11, direção «Oficina limpa»).
 // Fotografia (gerada por IA, ecrãs vazios) com a interface verdadeira colada nos ecrãs em
-// perspetiva: o QR da loja muda a cada 30 s no tablet e a picagem acontece no telemóvel. A mão
-// é uma camada recortada por cima do ecrã do telemóvel. As perspetivas são calculadas no script
+// mapeamento: o QR da loja muda a cada 30 s no tablet e a picagem acontece no telemóvel. Os ecrãs
+// da foto estão de frente; o mapeamento é calculado no script
 // (homografia → matrix3d) a partir dos cantos medidos na foto. CSP: sem estilos inline no HTML;
 // o script entra por hash. Sem JS ou com «reduzir movimento» fica o estado final, sem animação.
 import type { Copy } from "../../i18n/pt";
@@ -82,7 +82,7 @@ const base = import.meta.env.BASE_URL;
         />
 
         <!-- Ecrã do tablet (mapeado em perspetiva sobre o ecrã da foto) -->
-        <div class="ph-surface ph-tab" data-quad="781.7,190.8 959.4,152.5 780.5,581.5 952.8,636.9" aria-hidden="true">
+        <div class="ph-surface ph-tab" data-quad="672,177 1051.8,177 672,720 1049.3,720" aria-hidden="true">
           <header class="ph-tab-head">
             <span class="ph-shop"><span class="ph-shop-mark"></span>{h.screen.shop}</span>
             <span class="ph-clock" data-clock>09:02</span>
@@ -107,7 +107,7 @@ const base = import.meta.env.BASE_URL;
         </div>
 
         <!-- Ecrã do telemóvel -->
-        <div class="ph-surface ph-pho" data-quad="601,310 694,309 486,572 602,569" aria-hidden="true">
+        <div class="ph-surface ph-pho" data-quad="373,285 539.4,285 372.4,644 541.8,644" aria-hidden="true">
           <div class="ph-cam" data-cam>
             <!-- o visor mostra o mesmo ecrã do tablet: QR e código copiados do original -->
             <div class="ph-cam-fix" data-camfix>
@@ -138,11 +138,12 @@ const base = import.meta.env.BASE_URL;
                 <span>{h.phone.replySub}</span>
               </p>
             </div>
+            <div class="ph-composer">
+              <span class="ph-input">{h.phone.composer}</span>
+              <span class="ph-send"><svg viewBox="0 0 16 16"><path d="M2 8h11M9 3.5 13.5 8 9 12.5"></path></svg></span>
+            </div>
           </div>
         </div>
-
-        <!-- A mão fica por cima do ecrã do telemóvel -->
-        <img class="ph-hand" src={`${base}images/ponto-hero-hand.png`} width="217" height="272" alt="" aria-hidden="true" decoding="async" />
 
         <!-- Painel do gestor -->
         <div class="ph-panel" aria-hidden="true">
@@ -401,7 +402,7 @@ const base = import.meta.env.BASE_URL;
     object-fit: cover;
   }
   .ph-caption {
-    margin-top: 3.25rem;
+    margin-top: 4.5rem;
     font-size: 0.75rem;
     color: var(--ph-ink-3);
     text-align: center;
@@ -419,23 +420,10 @@ const base = import.meta.env.BASE_URL;
   .ph-photo.is-mapped .ph-surface {
     visibility: visible;
   }
-  .ph-hand {
-    position: absolute;
-    left: calc(482 / 1200 * 100%);
-    top: calc(305 / 896 * 100%);
-    width: calc(217 / 1200 * 100%);
-    height: auto;
-    pointer-events: none;
-    visibility: hidden;
-  }
-  .ph-photo.is-mapped .ph-hand {
-    visibility: visible;
-  }
-
-  /* ecrã do tablet: 300×400 (3:4) antes da perspetiva */
+  /* ecrã do tablet: 300×429 (proporção do ecrã da foto) antes do mapeamento */
   .ph-tab {
     width: 300px;
-    height: 400px;
+    height: 429px;
     border-radius: 10px;
     background: #fbfbfa;
     color: #14171a;
@@ -583,10 +571,10 @@ const base = import.meta.env.BASE_URL;
     stroke-linejoin: round;
   }
 
-  /* ecrã do telemóvel: 180×390 antes da perspetiva */
+  /* ecrã do telemóvel: 180×385 (proporção do ecrã da foto) antes do mapeamento */
   .ph-pho {
     width: 180px;
-    height: 390px;
+    height: 385px;
     border-radius: 18px;
     background: #f1f2ef;
     color: #14171a;
@@ -735,12 +723,45 @@ const base = import.meta.env.BASE_URL;
     font-size: 9px;
     color: #8a929a;
   }
-  /* A conversa fica na parte de cima: a mão tapa o fundo do ecrã na fotografia. */
   .ph-chat-feed {
+    flex: 1;
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
     gap: 7px;
     padding: 12px 10px;
+  }
+  .ph-composer {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 9px 14px;
+    background: #fff;
+    border-top: 1px solid rgb(20 23 26 / 0.07);
+  }
+  .ph-input {
+    flex: 1;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: #f1f2ef;
+    font-size: 10px;
+    color: #8a929a;
+  }
+  .ph-send {
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #0b8f63;
+  }
+  .ph-send svg {
+    width: 11px;
+    fill: none;
+    stroke: #fff;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
   .ph-bubble {
     max-width: 90%;
@@ -809,9 +830,9 @@ const base = import.meta.env.BASE_URL;
   /* painel do gestor, em vidro, sobre o canto da fotografia */
   .ph-panel {
     position: absolute;
-    left: -1.5rem;
-    bottom: -2rem;
-    width: min(19rem, 52%);
+    left: -2.75rem;
+    bottom: -3rem;
+    width: min(15rem, 46%);
     padding: 0.875rem;
     border-radius: 1.125rem;
     background: var(--ph-glass);
@@ -896,6 +917,10 @@ const base = import.meta.env.BASE_URL;
     border-top: 0;
     display: none;
   }
+  /* no máximo 3 linhas: quando o Rui entra, a última sai */
+  .ph-row:nth-child(n + 4) {
+    display: none;
+  }
   .ph-row-new .ph-ini {
     background: var(--ph-ok);
     color: #fff;
@@ -923,19 +948,19 @@ const base = import.meta.env.BASE_URL;
     .ph-photo {
       border-radius: 1rem;
     }
-    /* no telemóvel o painel vai para o canto direito, livre da mão e do telemóvel da foto */
+    /* no telemóvel o painel fica no canto direito, por baixo do tablet (só parede) */
     .ph-panel {
       left: auto;
       right: 0.5rem;
-      bottom: -1.75rem;
-      width: 54%;
+      bottom: -5.5rem;
+      width: 60%;
       padding: 0.5rem;
     }
     .ph-row:nth-child(n + 3) {
       display: none;
     }
     .ph-caption {
-      margin-top: 2.75rem;
+      margin-top: 6.75rem;
     }
   }
 
