@@ -2544,6 +2544,62 @@ export const t = {
       ],
     },
   },
+  atendimentoPage: {
+    waitlist: {
+      note: "Usamos estes dados só para o contactar sobre o Atendimento IA.",
+      shopPlaceholder: "ex.: Café Central",
+    },
+    eyebrows: {
+      problem: "O problema",
+      steps: "Como funciona",
+      example: "O que o cliente vê",
+      exampleTitle: "Respostas na hora. Pedidos para a equipa.",
+      trust: "Regras claras",
+      benefits: "Vantagens",
+    },
+    connect: {
+      title: "Ligar o WhatsApp",
+      scan: "Leia com o telemóvel da empresa",
+      status: "Ligado",
+      number: "+351 912 345 678",
+      official: "Ou o WhatsApp oficial da Meta",
+    },
+    profile: {
+      title: "Ficha da empresa",
+      fields: [
+        ["Horário", "Seg a sáb 8h–19h · dom 8h–13h", "do seu site"],
+        ["Morada", "Rua Direita, 12, Braga", "do perfil no Google"],
+        ["Bolos por encomenda", "Com 48 h de antecedência", "do menu em PDF"],
+      ],
+      question: "Fazem entregas ao domicílio?",
+      questionTag: "Pergunta para si",
+      approve: "Aprovar e ativar",
+    },
+    handoff: {
+      title: "Pedido para a equipa",
+      text: "Mesa para 6 · sábado 20h30",
+      who: "Ana R. · WhatsApp",
+      take: "Assumir conversa",
+      when: "agora",
+    },
+    sms: {
+      eyebrow: "Reserva por SMS",
+      title: "Sem WhatsApp? O assistente responde por SMS.",
+      lead: "Nem todos os clientes usam WhatsApp, e o WhatsApp pode falhar. Um telemóvel Android da empresa, com cartão SIM, garante que ninguém fica sem resposta.",
+      points: [
+        { title: "Clientes sem WhatsApp", text: "Quem envia um SMS recebe a resposta por SMS, com as mesmas regras e a mesma ficha." },
+        { title: "Reserva se o WhatsApp falhar", text: "Se o WhatsApp da empresa cair ou for bloqueado, os avisos e as respostas continuam por SMS." },
+        { title: "Respostas curtas", text: "No SMS, o assistente responde em poucas linhas, sem emojis nem ligações desnecessárias." },
+        { title: "Avisos à equipa", text: "Os pedidos passados a uma pessoa chegam por email ou por WhatsApp ao telemóvel da equipa." },
+      ],
+      chat: [
+        ["in", "Estão abertos amanhã?"],
+        ["out", "Sim! Amanhã, sábado, abrimos das 8h às 19h. Assistente virtual do Café Central."],
+      ],
+      phone: "SMS · Telemóvel da empresa",
+      cost: "Os SMS saem do telemóvel da empresa: o custo é o do seu tarifário.",
+    },
+  },
   pontoPage: {
     waitlist: {
       note: "Usamos estes dados só para o contactar sobre o Livro de Ponto.",

@@ -12,6 +12,7 @@ import Footer from "../Footer.astro";
 import Icon from "../Icon.astro";
 import Nav from "../Nav.astro";
 import PontoBody from "./PontoBody.astro";
+import AtendimentoBody from "./AtendimentoBody.astro";
 import AtendimentoHero from "./AtendimentoHero.astro";
 import PontoHero from "./PontoHero.astro";
 import BetaSignup from "../pro/BetaSignup.astro";
@@ -111,6 +112,8 @@ const stepIcons = ["clipboard", "smartphone", "activity"] as const;
 
   {interest === "ponto" ? (
     <PontoBody t={t} locale={locale} />
+  ) : interest === "atendimento" ? (
+    <AtendimentoBody t={t} locale={locale} />
   ) : (
   <>
   <Section id="problema" tone="raised" width="narrow" labelledby="problem-title">
@@ -250,7 +253,7 @@ const stepIcons = ["clipboard", "smartphone", "activity"] as const;
   </>
   )}
 
-  <div class:list={[interest === "ponto" && "pb-wait"]}>
+  <div class="pb-wait">
     <Section width="default" product="pro" pad="md">
       <BetaSignup
         t={t}
@@ -258,14 +261,14 @@ const stepIcons = ["clipboard", "smartphone", "activity"] as const;
         subtitle={m.waitlist.subtitle}
         button={m.waitlist.button}
         interest={interest}
-        {...(interest === "ponto"
-          ? { note: t.pontoPage.waitlist.note, shopPlaceholder: t.pontoPage.waitlist.shopPlaceholder, cloudLogin: false }
-          : {})}
+        note={interest === "ponto" ? t.pontoPage.waitlist.note : t.atendimentoPage.waitlist.note}
+        shopPlaceholder={interest === "ponto" ? t.pontoPage.waitlist.shopPlaceholder : t.atendimentoPage.waitlist.shopPlaceholder}
+        cloudLogin={false}
       />
     </Section>
   </div>
 
-  <div class:list={[interest === "ponto" && "pb-faq"]}>
+  <div class="pb-faq">
     <Faq title={m.faq.title} items={m.faq.items} product="pro" />
   </div>
 </main>

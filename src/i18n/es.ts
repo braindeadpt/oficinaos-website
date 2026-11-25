@@ -2518,6 +2518,62 @@ export const t: Copy = {
       ],
     },
   },
+  atendimentoPage: {
+    waitlist: {
+      note: "Solo usamos estos datos para contactarte sobre la Atención con IA.",
+      shopPlaceholder: "ej.: Café Central",
+    },
+    eyebrows: {
+      problem: "El problema",
+      steps: "Cómo funciona",
+      example: "Lo que ve el cliente",
+      exampleTitle: "Respuestas al momento. Pedidos para el equipo.",
+      trust: "Reglas claras",
+      benefits: "Ventajas",
+    },
+    connect: {
+      title: "Conectar WhatsApp",
+      scan: "Léelo con el móvil de la empresa",
+      status: "Conectado",
+      number: "+34 612 345 678",
+      official: "O el WhatsApp oficial de Meta",
+    },
+    profile: {
+      title: "Ficha de la empresa",
+      fields: [
+        ["Horario", "L–S 8–19 h · D 8–13 h", "de tu web"],
+        ["Dirección", "Calle Mayor, 12, Madrid", "de tu perfil de Google"],
+        ["Tartas por encargo", "Con 48 h de antelación", "del menú en PDF"],
+      ],
+      question: "¿Hacéis entregas a domicilio?",
+      questionTag: "Pregunta para ti",
+      approve: "Aprobar y activar",
+    },
+    handoff: {
+      title: "Pedido para el equipo",
+      text: "Mesa para 6 · sábado 20:30",
+      who: "Ana R. · WhatsApp",
+      take: "Tomar la conversación",
+      when: "ahora",
+    },
+    sms: {
+      eyebrow: "Reserva por SMS",
+      title: "¿Sin WhatsApp? El asistente responde por SMS.",
+      lead: "No todos los clientes usan WhatsApp, y WhatsApp puede fallar. Un móvil Android de la empresa, con tarjeta SIM, garantiza que nadie se quede sin respuesta.",
+      points: [
+        { title: "Clientes sin WhatsApp", text: "Quien envía un SMS recibe la respuesta por SMS, con las mismas reglas y la misma ficha." },
+        { title: "Reserva si WhatsApp falla", text: "Si el WhatsApp de la empresa se cae o se bloquea, los avisos y las respuestas siguen por SMS." },
+        { title: "Respuestas cortas", text: "Por SMS, el asistente responde en pocas líneas, sin emojis ni enlaces innecesarios." },
+        { title: "Avisos al equipo", text: "Los pedidos que pasan a una persona llegan al equipo por email o por WhatsApp a su móvil." },
+      ],
+      chat: [
+        ["in", "¿Abrís mañana?"],
+        ["out", "¡Sí! Mañana, sábado, abrimos de 8 a 19 h. Asistente virtual del Café Central."],
+      ],
+      phone: "SMS · Móvil de la empresa",
+      cost: "Los SMS salen del móvil de la empresa: el coste es el de tu tarifa.",
+    },
+  },
   pontoPage: {
     waitlist: {
       note: "Solo usamos estos datos para contactarte sobre Livro de Ponto.",
