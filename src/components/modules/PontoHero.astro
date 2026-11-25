@@ -153,7 +153,7 @@ const draftCode = draftMatch ? draftMatch[2] : "";
         </div>
 
         <!-- Pausar/retomar a demonstração (WCAG 2.2.2): só aparece quando há animação -->
-        <button class="ph-pause" type="button" data-pause aria-pressed="false" aria-label={h.demoPause} data-label-pause={h.demoPause} data-label-play={h.demoPlay}>
+        <button class="ph-pause" type="button" data-pause aria-label={h.demoPause} data-label-pause={h.demoPause} data-label-play={h.demoPlay}>
           <svg class="ph-pause-i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.5v9M11 3.5v9"></path></svg>
           <svg class="ph-play-i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.2v9.6L12.5 8z"></path></svg>
         </button>
@@ -1008,11 +1008,11 @@ const draftCode = draftMatch ? draftMatch[2] : "";
     stroke-linejoin: round;
   }
   .ph-play-i,
-  .ph-pause[aria-pressed="true"] .ph-pause-i,
+  .ph-pause[data-paused] .ph-pause-i,
   .ph[data-static] .ph-pause {
     display: none;
   }
-  .ph-pause[aria-pressed="true"] .ph-play-i {
+  .ph-pause[data-paused] .ph-play-i {
     display: block;
   }
 
@@ -1250,12 +1250,22 @@ const draftCode = draftMatch ? draftMatch[2] : "";
     function a(node, frames, opts) {
       return node.animate(frames, Object.assign({ fill: "forwards", easing: E }, opts));
     }
+    // Agendador que se pode pausar: cada passo guarda quando devia correr; ao retomar, só os
+    // passos que faltam voltam a ser agendados, com o tempo que lhes restava.
     var timers = [];
     function at(ms, fn) {
-      timers.push(setTimeout(fn, ms));
+      var t = { fn: fn, due: Date.now() + ms, left: ms };
+      t.id = setTimeout(function () {
+        var i = timers.indexOf(t);
+        if (i >= 0) timers.splice(i, 1);
+        fn();
+      }, ms);
+      timers.push(t);
     }
     function reset() {
-      timers.forEach(clearTimeout);
+      timers.forEach(function (t) {
+        clearTimeout(t.id);
+      });
       timers = [];
       root.removeAttribute("data-state");
       [el.cam, el.chat, el.detected, el.reticle, el.out, el.inn, el.typing, el.toast].forEach(function (n) {
@@ -1329,19 +1339,32 @@ const draftCode = draftMatch ? draftMatch[2] : "";
     }
     run();
 
-    /* ---------- pausar / retomar ---------- */
+    /* ---------- pausar / retomar (continua onde parou) ---------- */
     var pauseBtn = q("[data-pause]");
     pauseBtn.addEventListener("click", function () {
       paused = !paused;
-      pauseBtn.setAttribute("aria-pressed", String(paused));
+      pauseBtn.toggleAttribute("data-paused", paused);
       pauseBtn.setAttribute("aria-label", pauseBtn.getAttribute(paused ? "data-label-play" : "data-label-pause"));
+      var anims = root.getAnimations({ subtree: true });
       if (paused) {
-        timers.forEach(clearTimeout);
-        timers = [];
-        root.getAnimations({ subtree: true }).forEach(function (x) {
+        var now = Date.now();
+        timers.forEach(function (t) {
+          clearTimeout(t.id);
+          t.left = Math.max(0, t.due - now);
+        });
+        anims.forEach(function (x) {
           x.pause();
         });
-      } else run();
+      } else {
+        var pending = timers;
+        timers = [];
+        pending.forEach(function (t) {
+          at(t.left, t.fn);
+        });
+        anims.forEach(function (x) {
+          if (x.playState === "paused") x.play();
+        });
+      }
     });
   })();
 </script>
