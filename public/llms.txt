@@ -2,15 +2,27 @@
 
 > Free, MIT-licensed, self-hosted management system for phone repair shops.
 > Runs on a PC inside the shop over the LAN — no telemetry, and customer data
-> never leaves by default. Optional "Pro" modules (in beta, gated server-side
-> via OficinaOS Cloud, no license files) send the data they need to OficinaOS
-> servers: customer portal, WhatsApp bot, SMS channel, diagnostics intake, AI
-> reports, InvoiceXpress invoicing (Portugal only), online storefront, parts
-> wanted board, market prices, multi-shop dashboard and WhatsApp remarketing.
+> never leaves by default.
+> OficinaOS Pro is one optional plan, gated server-side via OficinaOS Cloud
+> with no license files. Pro BASE: EUR 39/month without AI included (customer's
+> own AI key) or EUR 49/month with AI included (3,000 AI conversations/month);
+> up to 3 shops; 14-day free trial. The base includes WhatsApp and SMS with an
+> AI assistant, customer portal, diagnostics intake, AI reports, InvoiceXpress
+> invoicing (Portugal only), online storefront, parts wanted board, market
+> prices, multi-shop dashboard, remarketing and remote signature. EXTRAS (paid
+> on top of the base): time clock (Livro de Ponto) from EUR 9.90/month; AI staff
+> inbox (Balcão IA) EUR 19/month (EUR 9 with own AI key); official Meta WhatsApp
+> EUR 10/month + EUR 149 one-time activation. Bundle "Pro Completo": EUR 69/month
+> (base with AI + time clock for up to 5 staff + Balcão IA). Prices exclude VAT. The
+> free app sends and receives no customer messages.
 > Windows installer: https://github.com/braindeadpt/OficinaOS/releases/latest/download/oficinaos-install.zip
 > Documentation in Portuguese (default), English and Spanish.
 
 ## Documentation
+
+- [OficinaOS Pro — plan, modules and pricing (PT)](https://oficinaos.app/pro/): base plan, extras, prices and services
+- [Time clock over WhatsApp (PT)](https://oficinaos.app/livro-de-ponto/): Livro de Ponto for any business — waiting list
+- [AI customer service on WhatsApp (PT)](https://oficinaos.app/atendimento-ia/): Atendimento IA for any business — waiting list
 
 - [Full guide (PT)](https://oficinaos.app/docs/): install (Docker/portable), daily use, backups, remote access, Pro modules, pricing, FAQ
 - [Full guide (EN)](https://oficinaos.app/en/docs/): same guide in English

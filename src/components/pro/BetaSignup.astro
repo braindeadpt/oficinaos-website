@@ -13,8 +13,14 @@ interface Props {
   title?: string;
   headingLevel?: 2 | 3;
   class?: string;
+  /** Texto por baixo do título (por omissão: o do formulário Pro). */
+  subtitle?: string;
+  /** Texto do botão (por omissão: o do formulário Pro). */
+  button?: string;
+  /** Interesse enviado à Cloud num campo escondido (lista de espera de um módulo). */
+  interest?: "pro" | "ponto" | "atendimento";
 }
-const { t, id = "beta", title, headingLevel = 2, class: cls } = Astro.props;
+const { t, id = "beta", title, headingLevel = 2, class: cls, subtitle, button, interest = "pro" } = Astro.props;
 const H = `h${headingLevel}` as "h2" | "h3";
 const locale = (Astro.currentLocale ?? DEFAULT_LOCALE) as Locale;
 
@@ -23,6 +29,13 @@ const FORM_ENDPOINT = (
   "https://cloud.oficinaos.app/beta-signup"
 ).trim();
 const MAILTO = `mailto:${CONTACT_EMAIL}`;
+// Rótulo humano do interesse, para o assunto/corpo do mailto (o POST envia o código).
+const interestLabel =
+  interest === "ponto"
+    ? t.modulePages.ponto.hero.label
+    : interest === "atendimento"
+      ? t.modulePages.atendimento.hero.label
+      : "OficinaOS Pro";
 const inputClass =
   "h-12 w-full rounded-md border border-border-strong bg-surface px-3 text-md text-text placeholder:text-text-subtle outline-none transition focus:border-focus focus-visible:shadow-[0_0_0_3px_color-mix(in_srgb,var(--oos-color-focus)_28%,transparent)]";
 ---
@@ -31,7 +44,7 @@ const inputClass =
   <div class="text-center">
     <H id={`${id}-title`} class="font-display text-xl font-bold tracking-[-0.015em] text-text sm:text-2xl">{title ?? t.pro.signup.title}</H>
     <p class="mx-auto mt-2 max-w-xl text-sm text-text-muted">
-      {t.pro.signup.subtitle}
+      {subtitle ?? t.pro.signup.subtitle}
     </p>
   </div>
   <p
@@ -57,9 +70,12 @@ const inputClass =
     data-label-city={t.pro.signup.city}
     data-label-phone={t.pro.signup.phone}
     data-label-language={t.pro.signup.languageLabel}
+    data-interest-label={interestLabel}
+    data-label-founder={interest === "pro" ? t.pro.signup.founderLabel : undefined}
     class="mx-auto mt-6 grid max-w-2xl gap-3 sm:grid-cols-2"
   >
     <input type="hidden" name="language" value={locale} />
+    <input type="hidden" name="interest" value={interest} />
     <input type="hidden" name="_subject" value={t.pro.signup.mailSubject} />
     <div class="hidden" aria-hidden="true">
       <label>Leave empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label>
@@ -80,12 +96,26 @@ const inputClass =
       {t.pro.signup.phone} ({t.pro.signup.optional})
       <input type="tel" name="phone" maxlength="30" autocomplete="tel" placeholder={t.pro.signup.phonePlaceholder} class={inputClass} />
     </label>
+    {
+      interest === "pro" && (
+        <label class="sm:col-span-2 flex items-start gap-2.5 text-left text-sm text-text">
+          <input
+            id="beta-signup-founder"
+            type="checkbox"
+            name="founder"
+            value="1"
+            class="mt-0.5 size-4 shrink-0 accent-primary"
+          />
+          <span>{t.pro.signup.founderLabel}</span>
+        </label>
+      )
+    }
     <div class="sm:col-span-2 mt-2 flex flex-col items-center gap-3">
       <button
         type="submit"
         class="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-primary px-[18px] text-md font-semibold text-on-primary shadow-sm transition hover:bg-primary-hover"
       >
-        {t.pro.signup.button}
+        {button ?? t.pro.signup.button}
       </button>
       <p class="text-center text-xs text-text-muted">
         {FORM_ENDPOINT ? t.pro.signup.note : t.pro.signup.noteMailto}
@@ -133,6 +163,11 @@ const inputClass =
       url.searchParams.delete("beta");
       history.replaceState(null, "", url);
     }
+    // O cartão «Quero ser fundador» aponta para ?fundador=1#beta: pré-marca a caixa.
+    const founderBox = document.getElementById("beta-signup-founder");
+    if (founderBox && new URLSearchParams(location.search).get("fundador") === "1") {
+      founderBox.checked = true;
+    }
     // Loading state while the browser posts to the cloud — mailto mode keeps
     // the button usable since the page never navigates.
     if (!form.dataset.mailto) {
@@ -165,9 +200,14 @@ const inputClass =
         line(ds.labelCity, "city"),
         line(ds.labelPhone, "phone"),
         line(ds.labelLanguage, "language"),
+        `interest: ${ds.interestLabel ?? String(d.get("interest") ?? "")}`,
+        ...(d.get("founder") === "1" ? ["founder: yes"] : []),
       ].join("\n");
+      const subject = `${ds.subject ?? "Beta OficinaOS Pro"}${
+        ds.interestLabel ? ` [${ds.interestLabel}]` : ""
+      }`;
       window.location.href = `mailto:${to}?subject=${encodeURIComponent(
-        ds.subject ?? "Beta OficinaOS Pro"
+        subject
       )}&body=${encodeURIComponent(body)}`;
     });
   }
