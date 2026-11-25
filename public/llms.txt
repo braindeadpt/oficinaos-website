@@ -13,7 +13,7 @@
 > on top of the base): time clock (Livro de Ponto) from EUR 9.90/month; AI staff
 > inbox (Balcão IA) EUR 19/month (EUR 9 with own AI key); official Meta WhatsApp
 > EUR 10/month + EUR 149 one-time activation. Bundle "Pro Completo": EUR 69/month
-> (base with AI + time clock + Balcão IA). Prices exclude VAT. The
+> (base with AI + time clock for up to 5 staff + Balcão IA). Prices exclude VAT. The
 > free app sends and receives no customer messages.
 > Windows installer: https://github.com/braindeadpt/OficinaOS/releases/latest/download/oficinaos-install.zip
 > Documentation in Portuguese (default), English and Spanish.
