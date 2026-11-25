@@ -2439,7 +2439,7 @@ export const t: Copy = {
         { q: "Do I need the official Meta WhatsApp?", a: "No. By default we connect the shop's WhatsApp by QR code, with no per-message costs. It's an unofficial connection, with a small risk of being blocked that we explain beforehand. If you want no risk at all, switch on official WhatsApp (extra), and SMS always stays as a fallback." },
         { q: "I have several shops. Do I pay for each one?", a: "No. The plan is per account and includes up to 3 shops. From the 4th shop on, each additional shop has a small monthly cost." },
         { q: "What happens if I disconnect the Cloud?", a: "The app keeps working on the local network with all your data; the Pro modules stop appearing. When you disconnect, your shop's data stored in the Cloud is deleted. Time clock records remain available in the app, as the law requires." },
-        { q: "I'm already in the pilot. What changes?", a: "Nothing for now: pilot members keep their 90 days free on every module when Pro launches." },
+        { q: "I'm already in the pilot. What changes?", a: "Beta testers who joined the pilot keep 3 months of OficinaOS Pro base free. Extras (time clock, Balcão IA, official WhatsApp) are paid separately. New customers get 14 days free." },
       ],
     },
   },

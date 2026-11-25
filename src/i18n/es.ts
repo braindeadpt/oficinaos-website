@@ -2444,7 +2444,7 @@ export const t: Copy = {
         { q: "¿Necesito el WhatsApp oficial de Meta?", a: "No. Por defecto conectamos el WhatsApp de la tienda por QR, sin coste por mensaje. Es una conexión no oficial, con un pequeño riesgo de bloqueo que te explicamos antes. Si no quieres ningún riesgo, activa el WhatsApp oficial (extra), y el SMS queda siempre como reserva." },
         { q: "Tengo varias tiendas. ¿Pago por cada una?", a: "No. El plan es por cuenta e incluye hasta 3 tiendas. A partir de la 4.ª, cada tienda adicional tiene un pequeño coste mensual." },
         { q: "¿Qué pasa si desconecto la Cloud?", a: "La app sigue funcionando en la red local con todos tus datos; los módulos Pro dejan de aparecer. Al desconectar, los datos de tu tienda guardados en la Cloud se borran. Los registros del libro de horas siguen disponibles en la app, como exige la ley." },
-        { q: "Ya estoy en el piloto. ¿Qué cambia?", a: "Nada por ahora: quien entró en el piloto mantiene los 90 días gratis de todos los módulos cuando arranque el Pro." },
+        { q: "Ya estoy en el piloto. ¿Qué cambia?", a: "Quien entró en el piloto como beta tester mantiene 3 meses gratis del OficinaOS Pro base. Los extras (libro de horas, Balcão IA, WhatsApp oficial) se pagan aparte. Quien llega ahora tiene 14 días gratis." },
       ],
     },
   },

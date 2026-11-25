@@ -2470,7 +2470,7 @@ export const t = {
         { q: "Preciso do WhatsApp oficial da Meta?", a: "Não. Por defeito ligamos o WhatsApp da loja por QR, sem custos por mensagem. É uma ligação não oficial, com um pequeno risco de bloqueio que explicamos antes. Se não quer risco nenhum, ative o WhatsApp oficial (extra), e o SMS fica sempre como reserva." },
         { q: "Tenho várias lojas. Pago por cada uma?", a: "Não. O plano é por conta e inclui até 3 lojas. A partir da 4.ª, cada loja adicional tem um custo mensal pequeno." },
         { q: "O que acontece se desligar a Cloud?", a: "A app continua a funcionar na rede local com todos os seus dados; os módulos Pro deixam de aparecer. Ao desligar, os dados da loja guardados na Cloud são apagados. Os registos do livro de ponto continuam consultáveis na app, como a lei exige." },
-        { q: "Já estou no piloto. O que muda?", a: "Nada para já: quem entrou no piloto mantém os 90 dias grátis de todos os módulos quando o Pro arrancar." },
+        { q: "Já estou no piloto. O que muda?", a: "Quem entrou no piloto como beta tester mantém 3 meses grátis do OficinaOS Pro base. Os extras (Livro de Ponto, Balcão IA, WhatsApp oficial) pagam-se à parte. Quem chega agora tem 14 dias grátis." },
       ],
     },
   },
