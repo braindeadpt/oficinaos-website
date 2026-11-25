@@ -565,7 +565,7 @@ const initials = (n: string) =>
     flex-direction: column;
     justify-content: flex-end;
     gap: 5px;
-    padding: 8px 10px 50px;
+    padding: 8px 10px 6px;
   }
   .ah-msg {
     max-width: 86%;
@@ -609,11 +609,11 @@ const initials = (n: string) =>
     background: #0b8f63;
     opacity: 0.6;
   }
+  /* rodapé da conversa, no fluxo: o espaço fica reservado mesmo antes de aparecer (opacidade 0),
+     e a resposta mais recente fica sempre por cima dele, nunca por baixo */
   .ah-handoff {
-    position: absolute;
-    left: 10px;
-    right: 10px;
-    bottom: 8px;
+    flex: none;
+    margin: 0 10px 8px;
     display: grid;
     grid-template-columns: auto 1fr auto;
     align-items: center;
