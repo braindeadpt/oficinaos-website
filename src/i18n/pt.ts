@@ -250,7 +250,7 @@ export const t = {
       },
       {
         name: "Notificações e bot WhatsApp",
-        to: "Meta, normalmente via relay da OficinaOS Cloud; durante a migração de 30 dias uma falha do relay pode usar envio direto app→Meta como fallback auditado",
+        to: "Meta — durante a transição pode ser envio direto app→Meta até o upload ser confirmado; depois disso é normalmente via relay da OficinaOS Cloud, com fallback direto auditado só em falha temporária do relay",
         what: "Nº de telefone do cliente + texto da mensagem — no relay transitam pela Cloud sem ficarem guardados nem registados (logs só com id, estado e telefone mascarado). Depois do prazo, o envio oficial sai pelo relay ou não sai",
       },
       {
@@ -954,15 +954,15 @@ export const t = {
             "Business ID + Phone Number ID — fornecidos no onboarding",
             "API Token — o token permanente do system user; ao gravar fica cifrado localmente e não volta a aparecer",
             "Consentimento Cloud — a caixa explícita autoriza a app a enviar o token + phone_number_id uma vez para a Cloud; a Cloud valida o par na Meta e guarda o token cifrado (AES-256-GCM) para enviar pelo relay",
-            "Enabled ligado — depois do consentimento e do upload validado, o bot fica ativo; o mesmo ecrã permite revogar as credenciais Cloud (apaga a cópia da Cloud, a cópia local e o consentimento)",
+            "Enabled ligado — depois do consentimento e do upload validado, o bot fica ativo; o mesmo ecrã permite revogar as credenciais Cloud. A revogação termina quando a app confirma que as credenciais foram eliminadas da Cloud; sem essa confirmação, a cópia local e o consentimento não são limpos",
           ],
           links: [],
         },
         {
           heading: "Migração do envio direto (30 dias)",
           paragraphs: [
-            "Instalações antigas podem usar o token local apenas como fallback auditado durante 30 dias, quando o relay Cloud falha por erro temporário do servidor (5xx) ou falha clara de ligação. Um timeout não faz fallback — evita mensagens duplicadas.",
-            "No fim do prazo o envio direto app→Meta termina. Tokens antigos são apagados com evento de auditoria; um token introduzido depois do prazo fica só até a Cloud confirmar o upload consentido e nunca envia diretamente.",
+            "A contagem dos 30 dias começa no primeiro arranque da versão da app que introduz esta migração — mesmo antes de abrir o setup — e o ecrã WhatsApp mostra quantos dias faltam. Durante esse período, uma loja cujo upload consentido ainda não foi confirmado pode continuar a enviar diretamente com o token local.",
+            "Depois de a Cloud confirmar as credenciais, o envio passa pelo relay. O token local retido serve apenas como fallback auditado quando o relay falha por erro temporário do servidor (5xx) ou falha clara de ligação. Um timeout não faz fallback — evita mensagens duplicadas. No fim do prazo o envio direto app→Meta termina; tokens antigos são apagados com evento de auditoria e um token introduzido depois do prazo fica só até a Cloud confirmar o upload consentido, sem nunca enviar diretamente.",
             "Quem já tinha credenciais na Cloud antes deste consentimento tem de autorizar explicitamente o relay ou revogar as credenciais quando a transição terminar.",
           ],
           links: [],

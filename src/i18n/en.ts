@@ -233,7 +233,7 @@ export const t: Copy = {
       },
       {
         name: "WhatsApp notifications & bot",
-        to: "Meta, normally via the OficinaOS Cloud relay; during the 30-day migration a relay failure can use direct app→Meta sending as an audited fallback",
+        to: "Meta — during the transition sending can be direct app→Meta until the upload is confirmed; after that it is normally via the OficinaOS Cloud relay, with audited direct fallback only on a temporary relay failure",
         what: "Customer phone number + message text — on the relay they transit through the Cloud without being stored or logged (logs only carry id, status and masked phone). After the deadline, official sending either uses the relay or does not happen",
       },
       {
@@ -933,15 +933,15 @@ export const t: Copy = {
             "Business ID + Phone Number ID — provided during onboarding",
             "API Token — the permanent system-user token; saving stores it encrypted locally and never shows it again",
             "Cloud consent — the explicit checkbox authorizes the app to upload the token + phone_number_id once to the Cloud; the Cloud validates the pair with Meta and stores the token encrypted (AES-256-GCM) to send through the relay",
-            "Enable — after consent and the validated upload, the bot goes live; the same screen can revoke the Cloud credentials (deleting the Cloud copy, the local copy and the consent)",
+            "Enable — after consent and the validated upload, the bot goes live; the same screen can revoke the Cloud credentials. Revocation is complete when the app confirms the credentials were deleted from the Cloud; without that confirmation, the local copy and consent are not cleared",
           ],
           links: [],
         },
         {
           heading: "Direct-send migration (30 days)",
           paragraphs: [
-            "Older installations can use the local token only as an audited fallback for 30 days, when the Cloud relay fails with a temporary server error (5xx) or a clear connection failure. A timeout does not fall back — this avoids duplicate messages.",
-            "When the deadline ends, direct app→Meta sending stops. Legacy tokens are wiped with an audit event; a token entered after the deadline is kept only until the Cloud confirms the consented upload and can never send directly.",
+            "The 30-day countdown starts on the first boot of the app version that introduces this migration — even before setup is opened — and the WhatsApp screen shows how many days are left. During this period, a shop whose consented upload has not yet been confirmed can keep sending directly with the local token.",
+            "After the Cloud confirms the credentials, sending moves to the relay. The retained local token is only an audited fallback when the relay fails with a temporary server error (5xx) or a clear connection failure. A timeout does not fall back — this avoids duplicate messages. When the deadline ends, direct app→Meta sending stops; legacy tokens are wiped with an audit event and a token entered after the deadline is kept only until the Cloud confirms the consented upload, never sending directly.",
             "Shops that already had Cloud credentials before this consent step must explicitly authorize the relay or revoke the credentials when the transition ends.",
           ],
           links: [],
