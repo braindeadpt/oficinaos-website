@@ -3011,6 +3011,7 @@ export const t: Copy = {
     metaTitle: "Pricing — OficinaOS free, OficinaOS Pro from €39/month, extras and services",
     metaDesc:
       "All OficinaOS prices in one place: free software, OficinaOS Pro with or without AI included, extras (Time clock, Balcão IA, official WhatsApp), services and calculator.",
+    cards: { freeBadge: "Free forever", eyebrow: "Pricing", calcEyebrow: "Calculator" },
     hero: {
       title: "Simple pricing, no surprises",
       lead: "The software is free. OficinaOS Pro has a base with almost everything and extras only for those who need them. Do the maths with the calculator.",
