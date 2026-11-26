@@ -1,0 +1,551 @@
+---
+// Herói do Pro (redesenho 2026-11, direção «Oficina limpa»): «a loja fechou, o Pro continua a responder».
+// Fotografia gerada por IA (o mesmo balcão ao fim do dia, ecrãs de frente e vazios) com a interface
+// verdadeira nos ecrãs. Estrutura e estilo base partilhados com a página inicial (styles/photo-hero.css);
+// aqui ficam só as posições dos ecrãs desta foto e as duas interfaces (o WhatsApp da cliente e as mensagens da loja).
+// A história corre uma vez, em menos de 5 s, em animações CSS: a cliente pergunta às 22:41, o assistente
+// escreve e responde com o estado verdadeiro, nos dois ecrãs ao mesmo tempo. Um script pequeno (melhoria
+// progressiva) põe-nas em pausa até a fotografia estar à vista; sem JavaScript começam ao carregar.
+// «Reduzir movimento» mostra o estado final. CSP: sem estilos inline; o script entra por hash.
+import type { Copy } from "../../i18n/pt";
+import type { Locale } from "../../i18n/utils";
+import Icon from "../Icon.astro";
+import "../../styles/photo-hero.css";
+
+interface Props {
+  t: Copy;
+  locale: Locale;
+  /** Linha de preço já preenchida («Desde 39 €/mês · até 3 lojas · 14 dias grátis»). */
+  priceLine: string;
+  /** Texto do botão principal, já preenchido. */
+  cta: string;
+}
+const { t, priceLine, cta } = Astro.props;
+const h = t.proPage.hero;
+const ph = t.proHero;
+const shop = t.homeHero.shop;
+const base = import.meta.env.BASE_URL;
+const initials = (n: string) =>
+  n
+    .split(" ")
+    .map((x) => x[0])
+    .slice(0, 2)
+    .join("");
+---
+
+<section class="hh hh-pro" aria-labelledby="pro-hero-title" data-hh>
+  <div class="hh-inner">
+    <div class="hh-copy">
+      <p class="hh-eyebrow"><span aria-hidden="true"></span>{h.label} · {t.pro.badge}</p>
+      <h1 id="pro-hero-title" class="hh-title">
+        <span>{ph.titleA}</span>
+        <span class="hh-title-b">{ph.titleB}</span>
+      </h1>
+      <p class="hh-lead">{h.subtitle}</p>
+      <div class="hh-ctas">
+        <a href="#beta" class="hh-btn hh-btn-primary">
+          {cta}
+          <Icon name="arrow" class="h-4 w-4" />
+        </a>
+        <a href="#modules" class="hh-btn hh-btn-ghost">{h.ctaSecondary}</a>
+      </div>
+      <p class="hp-price">{priceLine}</p>
+    </div>
+
+    <figure class="hh-stage">
+      <div class="hh-photo">
+        <div class="hh-frame">
+          <img
+            class="hh-img"
+            src={`${base}images/pro-hero.webp`}
+            srcset={`${base}images/pro-hero-800.webp 800w, ${base}images/pro-hero.webp 1264w`}
+            sizes="(min-width: 80rem) 76rem, 100vw"
+            width="1264"
+            height="848"
+            alt={ph.caption}
+            fetchpriority="high"
+            decoding="async"
+          />
+
+          <!-- Portátil: mensagens do WhatsApp da loja (vista do plano base; a caixa única WhatsApp+SMS é o extra Balcão IA) -->
+          <div class="hh-lap" aria-hidden="true">
+            <div class="hp-app">
+              <div class="hp-bar">
+                <b>{ph.inbox}</b>
+                <span class="hp-closed"><i></i>{ph.closed}</span>
+              </div>
+              <div class="hp-body">
+                <ul class="hp-list" role="list">
+                  <li class="hp-item is-on">
+                    <span class="hp-ini">{initials(ph.customer)}</span>
+                    <span class="hp-item-text">
+                      <b>{ph.customer}</b>
+                      <small>{ph.ask}</small>
+                    </span>
+                    <span class="hp-dot"></span>
+                  </li>
+                  {
+                    ph.others.map(([name, channel, last]) => (
+                      <li class="hp-item">
+                        <span class="hp-ini">{initials(name)}</span>
+                        <span class="hp-item-text">
+                          <b>{name}</b>
+                          <small>
+                            {channel} · {last}
+                          </small>
+                        </span>
+                      </li>
+                    ))
+                  }
+                </ul>
+                <div class="hp-thread">
+                  <p class="hp-thread-head">
+                    <b>{ph.customer}</b>
+                    <small>WhatsApp</small>
+                  </p>
+                  <div class="hp-msgs">
+                    <p class="hp-msg hp-msg-in hp-ask">{ph.ask}<small>{ph.time}</small></p>
+                    <p class="hp-typing hp-typing-lap"><i></i><i></i><i></i></p>
+                    <div class="hp-reply">
+                      <p class="hp-msg hp-msg-out">{ph.reply}<small>{ph.time} ✓✓</small></p>
+                      <p class="hp-by">{ph.answered}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Telemóvel: a conversa vista pela cliente -->
+          <div class="hh-pho" aria-hidden="true">
+            <div class="hp-wa">
+              <p class="hp-wa-head"><span></span>{shop}</p>
+              <div class="hp-wa-feed">
+                <p class="hp-wb hp-wb-out hp-ask">{ph.ask}</p>
+                <p class="hp-typing hp-typing-pho"><i></i><i></i><i></i></p>
+                <p class="hp-wb hp-wb-in hp-reply">{ph.reply}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ecrãs estreitos: a conversa em texto legível (os ecrãs desenhados ficam pequenos demais).
+             Também é lida pelos leitores de ecrã: traz o que a legenda resume (referência, hora, preço).
+             Nos ecrãs largos fica com display:none e não é lida. -->
+        <div class="hp-transcript">
+          <p class="hp-tr hp-tr-in"><small>{ph.customer} · {ph.time}</small>{ph.ask}</p>
+          <p class="hp-tr hp-tr-out"><small>{ph.answered}</small>{ph.reply}</p>
+        </div>
+
+        <!-- Aviso: respondido com a loja fechada -->
+        <div class="hh-notice" aria-hidden="true">
+          <span class="hh-notice-ico">
+            <svg viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"></path></svg>
+          </span>
+          <span class="hh-notice-text">
+            <small>{ph.notice}</small>
+            <b>{ph.noticeText}</b>
+          </span>
+        </div>
+      </div>
+      <figcaption class="hh-caption">{ph.caption}</figcaption>
+    </figure>
+  </div>
+</section>
+
+<script is:inline>
+  // A história só começa quando a fotografia está à vista: se a página abre com a foto abaixo da dobra
+  // (ecrã baixo), as animações ficam em pausa até ela entrar no ecrã. Sem JS, correm logo ao carregar.
+  (function () {
+    // O alvo é o ecrã do portátil (onde a história acontece), não o topo da fotografia.
+    var s = document.querySelector("[data-hh]");
+    var target = s && s.querySelector(".hh-lap");
+    if (!target || !("IntersectionObserver" in window)) return;
+    var r = target.getBoundingClientRect();
+    if (r.top >= 0 && r.bottom <= innerHeight) return; // ecrã já todo à vista: corre já
+    s.classList.add("hh-wait");
+    var io = new IntersectionObserver(
+      function (es) {
+        if (es[0].intersectionRatio >= 0.6) {
+          s.classList.remove("hh-wait");
+          io.disconnect();
+        }
+      },
+      { threshold: [0, 0.6, 1] },
+    );
+    io.observe(target);
+  })();
+</script>
+
+<style>
+  .hp-price {
+    margin-top: 1rem;
+    display: inline-flex;
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    background: var(--hh-bg-2);
+    box-shadow: 0 0 0 1px var(--hh-line-2);
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  /* Ecrãs desta foto (1264×848): portátil 645,348 → 969,557; telemóvel 484,409 → 569,541. */
+  .hh-pro :global(.hh-lap) {
+    left: 51.03%;
+    top: 41.04%;
+    width: 25.63%;
+    height: 24.65%;
+  }
+  .hh-pro :global(.hh-pho) {
+    left: 38.29%;
+    top: 48.23%;
+    width: 6.72%;
+    height: 15.57%;
+  }
+  /* Ecrãs estreitos: zoom sobre os ecrãs (~33–82 % da largura, ~30–75 % da altura). */
+  @media (max-width: 40rem) {
+    .hh-pro :global(.hh-frame) {
+      width: 204%;
+      margin-left: -67%;
+      margin-top: -41%;
+      margin-bottom: -34%;
+    }
+  }
+  .hh-pro :global(.hh-notice-ico svg) {
+    fill: #fff;
+  }
+
+  /* ---- conversa em texto, só em ecrãs estreitos ---- */
+  .hp-transcript {
+    display: none;
+  }
+  @media (max-width: 40rem) {
+    .hp-transcript {
+      position: relative; /* por cima da parte recortada da fotografia (o invólucro tem margem negativa) */
+      z-index: 1;
+      display: grid;
+      gap: 0.5rem;
+      padding: 0.875rem 0.875rem 0.25rem;
+      background: var(--hh-bg-2);
+    }
+  }
+  .hp-tr {
+    max-width: 88%;
+    padding: 0.6rem 0.8rem;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+    line-height: 1.4;
+  }
+  .hp-tr small {
+    display: block;
+    margin-bottom: 0.15rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--hh-ink-2);
+  }
+  .hp-tr-in {
+    justify-self: start;
+    background: var(--hh-bg);
+    box-shadow: 0 0 0 1px var(--hh-line);
+    border-bottom-left-radius: 0.3rem;
+  }
+  .hp-tr-out {
+    justify-self: end;
+    background: var(--hh-ok-soft);
+    border-bottom-right-radius: 0.3rem;
+  }
+
+  /* ---- portátil: mensagens do WhatsApp (100cqi = largura do ecrã) ---- */
+  .hp-app {
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    font-size: 2.3cqi;
+    line-height: 1.3;
+    color: #14171a;
+    background: #f7f7f5;
+  }
+  .hp-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2cqi;
+    padding: 2.4cqi 3cqi;
+    background: #14171a;
+    color: #fff;
+  }
+  .hp-bar b {
+    font-size: 3.2cqi;
+    letter-spacing: -0.02em;
+  }
+  .hp-closed {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.2cqi;
+    padding: 0.8cqi 2cqi;
+    border-radius: 99cqi;
+    background: rgb(255 255 255 / 0.12);
+    font-size: 1.9cqi;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .hp-closed i {
+    width: 1.5cqi;
+    height: 1.5cqi;
+    border-radius: 50%;
+    background: #3ddc97;
+    box-shadow: 0 0 0 0.6cqi rgb(61 220 151 / 0.25);
+  }
+  .hp-body {
+    min-height: 0;
+    display: grid;
+    grid-template-columns: 37cqi 1fr;
+  }
+  .hp-list {
+    border-right: 0.25cqi solid rgb(20 23 26 / 0.08);
+    background: #fff;
+  }
+  .hp-item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 1.6cqi;
+    padding: 1.9cqi 2.2cqi;
+    border-bottom: 0.2cqi solid rgb(20 23 26 / 0.07);
+  }
+  .hp-item.is-on {
+    background: #eef8f3;
+  }
+  .hp-ini {
+    display: grid;
+    place-items: center;
+    width: 4.6cqi;
+    height: 4.6cqi;
+    border-radius: 50%;
+    background: #e9e9e4;
+    font-size: 1.7cqi;
+    font-weight: 700;
+  }
+  .hp-item.is-on .hp-ini {
+    background: #0b8f63;
+    color: #fff;
+  }
+  .hp-item-text {
+    display: grid;
+    min-width: 0;
+  }
+  .hp-item-text b {
+    font-size: 2.1cqi;
+  }
+  .hp-item-text small {
+    font-size: 1.75cqi;
+    color: #8a929a;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .hp-dot {
+    width: 1.5cqi;
+    height: 1.5cqi;
+    border-radius: 50%;
+    background: #0b8f63;
+  }
+  .hp-thread {
+    min-width: 0;
+    display: grid;
+    grid-template-rows: auto 1fr;
+  }
+  .hp-thread-head {
+    display: flex;
+    align-items: baseline;
+    gap: 1.4cqi;
+    padding: 1.9cqi 3cqi;
+    background: #fff;
+    border-bottom: 0.2cqi solid rgb(20 23 26 / 0.07);
+  }
+  .hp-thread-head b {
+    font-size: 2.3cqi;
+  }
+  .hp-thread-head small {
+    font-size: 1.75cqi;
+    color: #8a929a;
+  }
+  .hp-msgs {
+    display: grid;
+    align-content: start;
+    gap: 1.6cqi;
+    padding: 2.6cqi 3cqi;
+  }
+  .hp-msgs > * {
+    min-width: 0;
+  }
+  .hp-msg {
+    max-width: 82%;
+    padding: 1.4cqi 2cqi;
+    border-radius: 2cqi;
+    font-size: 2cqi;
+  }
+  .hp-msg small {
+    display: block;
+    margin-top: 0.5cqi;
+    font-size: 1.5cqi;
+    color: #8a929a;
+    text-align: right;
+  }
+  .hp-msg-in {
+    justify-self: start;
+    background: #fff;
+    box-shadow: 0 0 0 0.2cqi rgb(20 23 26 / 0.08);
+    border-bottom-left-radius: 0.6cqi;
+  }
+  .hp-msg-out {
+    justify-self: end;
+    margin-left: auto;
+    background: #dff5ea;
+    border-bottom-right-radius: 0.6cqi;
+  }
+  .hp-reply {
+    display: grid;
+    justify-items: end;
+    gap: 0.8cqi;
+  }
+  .hp-by {
+    display: inline-flex;
+    padding: 0.5cqi 1.4cqi;
+    border-radius: 99cqi;
+    background: #14171a;
+    color: #fff;
+    font-size: 1.6cqi;
+    font-weight: 650;
+  }
+  .hp-typing {
+    display: inline-flex;
+    gap: 0.9cqi;
+    padding: 1.6cqi 2cqi;
+    border-radius: 2cqi;
+    background: #fff;
+    box-shadow: 0 0 0 0.2cqi rgb(20 23 26 / 0.08);
+  }
+  .hp-typing-lap {
+    justify-self: end;
+    background: #dff5ea;
+    box-shadow: none;
+  }
+  .hp-typing i {
+    width: 1.2cqi;
+    height: 1.2cqi;
+    border-radius: 50%;
+    background: #8a929a;
+  }
+
+  /* ---- telemóvel: WhatsApp da cliente (100cqi = largura do ecrã do telemóvel) ---- */
+  .hp-wa {
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    line-height: 1.25;
+    color: #14171a;
+    background: #efeae2;
+  }
+  .hp-wa-head {
+    display: flex;
+    align-items: center;
+    gap: 3cqi;
+    padding: 9cqi 6cqi 5cqi;
+    background: #fff;
+    font-size: 7cqi;
+    font-weight: 700;
+  }
+  .hp-wa-head span {
+    width: 9cqi;
+    height: 9cqi;
+    border-radius: 50%;
+    background: #14171a;
+  }
+  .hp-wa-feed {
+    display: grid;
+    align-content: start;
+    gap: 4cqi;
+    padding: 6cqi 5cqi;
+  }
+  .hp-wb {
+    max-width: 88%;
+    padding: 4cqi 5cqi;
+    border-radius: 5cqi;
+    font-size: 5.6cqi;
+  }
+  .hp-wb-out {
+    justify-self: end;
+    background: #d9fdd3;
+    border-bottom-right-radius: 1.5cqi;
+  }
+  .hp-wb-in {
+    justify-self: start;
+    background: #fff;
+    border-bottom-left-radius: 1.5cqi;
+  }
+  .hp-typing-pho {
+    justify-self: start;
+    gap: 2.4cqi;
+    padding: 4cqi 5cqi;
+    border-radius: 5cqi;
+    box-shadow: none;
+  }
+  .hp-typing-pho i {
+    width: 3cqi;
+    height: 3cqi;
+  }
+
+  /* ---- a história (uma vez, < 5 s) ---- */
+  .hp-ask {
+    animation: hp-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.8s both;
+  }
+  .hp-typing {
+    animation: hp-typing 1.1s ease 1.4s both;
+  }
+  .hp-reply {
+    animation: hp-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) 2.5s both;
+  }
+  .hp-dot {
+    animation: hp-in 0.3s ease 0.8s both;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .hh-pro :global(.hh-notice) {
+      animation-delay: 3.3s;
+    }
+  }
+  @keyframes hp-in {
+    from {
+      opacity: 0;
+      transform: translateY(0.6em) scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  /* Os pontos de «a escrever…» aparecem e desaparecem antes da resposta (sem ocupar espaço depois). */
+  @keyframes hp-typing {
+    0% {
+      opacity: 0;
+      display: inline-flex;
+    }
+    15%,
+    85% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      display: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hp-ask,
+    .hp-reply,
+    .hp-dot,
+    .hp-typing {
+      animation-duration: 1ms;
+      animation-delay: 0s;
+    }
+  }
+</style>
