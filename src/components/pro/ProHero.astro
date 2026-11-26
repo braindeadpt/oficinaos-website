@@ -59,7 +59,7 @@ const initials = (n: string) =>
             class="hh-img"
             src={`${base}images/pro-hero.webp`}
             srcset={`${base}images/pro-hero-800.webp 800w, ${base}images/pro-hero.webp 1264w`}
-            sizes="(max-width: 40rem) 204vw, (min-width: 80rem) 76rem, 100vw"
+            sizes="(max-width: 40rem) calc((100vw - 2rem) * 2.04), (max-width: 64rem) calc(100vw - 2rem), (min-width: 80rem) 76rem, calc(100vw - 4rem)"
             width="1264"
             height="848"
             alt={ph.caption}
@@ -230,7 +230,7 @@ const initials = (n: string) =>
   .hp-more {
     display: none;
   }
-  @media (min-width: 64.0625rem) {
+  @media (width > 64rem) {
     .hp-more {
       display: block;
       max-width: 76rem;
