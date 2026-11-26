@@ -53,13 +53,13 @@ const initials = (n: string) =>
     </div>
 
     <figure class="hh-stage">
-      <div class="hh-photo">
+      <div class="hh-photo vt-product-pro">
         <div class="hh-frame">
           <img
             class="hh-img"
             src={`${base}images/pro-hero.webp`}
             srcset={`${base}images/pro-hero-800.webp 800w, ${base}images/pro-hero.webp 1264w`}
-            sizes="(min-width: 80rem) 76rem, 100vw"
+            sizes="(max-width: 40rem) 204vw, (min-width: 80rem) 76rem, 100vw"
             width="1264"
             height="848"
             alt={ph.caption}
@@ -129,9 +129,9 @@ const initials = (n: string) =>
           </div>
         </div>
 
-        <!-- Ecrãs estreitos: a conversa em texto legível (os ecrãs desenhados ficam pequenos demais).
-             Também é lida pelos leitores de ecrã: traz o que a legenda resume (referência, hora, preço).
-             Nos ecrãs largos fica com display:none e não é lida. -->
+        <!-- Até 64rem: a conversa em texto legível por baixo da foto (os ecrãs desenhados ficam pequenos
+             demais). Também é lida pelos leitores de ecrã: traz o que a legenda resume (referência, hora,
+             preço). Acima de 64rem fica escondida e a mesma conversa está no <details> por baixo da figura. -->
         <div class="hp-transcript">
           <p class="hp-tr hp-tr-in"><small>{ph.customer} · {ph.time}</small>{ph.ask}</p>
           <p class="hp-tr hp-tr-out"><small>{ph.answered}</small>{ph.reply}</p>
@@ -150,6 +150,14 @@ const initials = (n: string) =>
       </div>
       <figcaption class="hh-caption">{ph.caption}</figcaption>
     </figure>
+    <!-- Ecrãs largos: a mesma conversa em texto, sob pedido (teclado e leitores de ecrã). -->
+    <details class="hp-more">
+      <summary>{ph.readConversation}</summary>
+      <div class="hp-more-body">
+        <p class="hp-tr hp-tr-in"><small>{ph.customer} · {ph.time}</small>{ph.ask}</p>
+        <p class="hp-tr hp-tr-out"><small>{ph.answered}</small>{ph.reply}</p>
+      </div>
+    </details>
   </div>
 </section>
 
@@ -215,11 +223,44 @@ const initials = (n: string) =>
     fill: #fff;
   }
 
-  /* ---- conversa em texto, só em ecrãs estreitos ---- */
+  /* ---- conversa em texto: por baixo da foto até 64rem; acima, no <details> ---- */
   .hp-transcript {
     display: none;
   }
-  @media (max-width: 40rem) {
+  .hp-more {
+    display: none;
+  }
+  @media (min-width: 64.0625rem) {
+    .hp-more {
+      display: block;
+      max-width: 76rem;
+      margin: 1rem auto 0;
+      font-size: 0.9375rem;
+    }
+    .hp-more summary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--hh-ink-2);
+      text-decoration: underline;
+      text-decoration-color: var(--hh-line-2);
+      text-underline-offset: 4px;
+    }
+    .hp-more summary:focus-visible {
+      outline: 2px solid var(--hh-ok);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+    .hp-more-body {
+      display: grid;
+      gap: 0.5rem;
+      max-width: 40rem;
+      margin-top: 0.75rem;
+    }
+  }
+  @media (max-width: 64rem) {
     .hp-transcript {
       position: relative; /* por cima da parte recortada da fotografia (o invólucro tem margem negativa) */
       z-index: 1;

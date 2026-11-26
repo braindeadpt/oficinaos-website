@@ -679,8 +679,11 @@
 }
 /* Em pausa até a fotografia entrar no ecrã (classe posta pelo script acima). */
 /* Especificidade 0,3,0: ganha aos «animation:» das interfaces de cada herói (estilos do componente). */
-.hh.hh-wait .hh-stage * {
-  animation-play-state: paused;
+/* Só com movimento normal: com «reduzir movimento» as animações de 1 ms terminam logo no carregamento. */
+@media (prefers-reduced-motion: no-preference) {
+  .hh.hh-wait .hh-stage * {
+    animation-play-state: paused;
+  }
 }
 /* Reduzir movimento: estado final logo à partida. */
 @media (prefers-reduced-motion: reduce) {

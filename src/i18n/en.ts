@@ -2267,6 +2267,7 @@ export const t: Copy = {
       ["João Pires", "WhatsApp", "What time do you close?"],
     ],
     notice: "WhatsApp · Ana Marques",
+    readConversation: "Read the conversation",
     noticeText: "Answered at 22:41, with the shop closed",
     caption:
       "A repair shop counter in the evening, already closed. On the phone, a customer asks on WhatsApp whether her iPhone 13 is ready and the Pro assistant replies with the real status. On the laptop, the same conversation in the shop's WhatsApp messages.",

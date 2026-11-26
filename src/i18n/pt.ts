@@ -2298,6 +2298,7 @@ export const t = {
       ["João Pires", "WhatsApp", "A que horas fecham?"],
     ],
     notice: "WhatsApp · Ana Marques",
+    readConversation: "Ler a conversa",
     noticeText: "Respondido às 22:41, com a loja fechada",
     caption:
       "Balcão de uma loja de reparações ao fim do dia, já fechada. No telemóvel, uma cliente pergunta no WhatsApp se o iPhone 13 está pronto e o assistente do Pro responde com o estado verdadeiro. No portátil, a mesma conversa nas mensagens do WhatsApp da loja.",
