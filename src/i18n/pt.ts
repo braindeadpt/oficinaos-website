@@ -235,7 +235,7 @@ export const t = {
     table: [
       {
         name: "OficinaOS Cloud (módulos Pro)",
-        to: "Servidores OficinaOS",
+        to: "Servidores OficinaOS (Oracle Cloud, Japão — país reconhecido pela UE com proteção de dados adequada)",
         what: "Conta e emparelhamento; dados de cada módulo ativo — páginas do portal (com nome do cliente), mensagens WhatsApp recebidas, reservas da montra, diagnósticos enviados, totais diários (multi-loja) e preços partilhados. O token Meta da loja fica cifrado na Cloud para o envio de WhatsApp",
       },
       {
@@ -245,7 +245,7 @@ export const t = {
       },
       {
         name: "Envio de log do Diag",
-        to: "Servidores OficinaOS",
+        to: "Servidores OficinaOS (Oracle Cloud, Japão — país reconhecido pela UE com proteção de dados adequada)",
         what: "Só quando se carrega em «Enviar log»: o fim do ficheiro diag.log",
       },
       {
@@ -2481,7 +2481,7 @@ export const t = {
         ["Instalação no seu PC ou na sua VPS", "{installation}", "Instalação + {supportHours} h de suporte dedicado nos primeiros {supportDays} dias. Presencial: deslocação à parte. A VPS é paga por si ao seu fornecedor."],
         ["Importação de dados de outro programa", "desde {importFrom}", "Clientes e reparações de Excel/CSV ({importFrom}) ou de outro programa (sob análise). Primeiro fazemos um teste grátis com uma amostra."],
         ["Arranque assistido, formação e suporte", "{hourly}/hora", "Configuração consigo, formação da equipa ou ajuda à medida. Em blocos de {block} min, mínimo {minimum} min."],
-        ["Alojamento na nossa VPS", "{hosting}", "Servidor na UE com atualizações, segurança e cópias de segurança diárias incluídas."],
+        ["Alojamento na nossa VPS", "{hosting}", "Servidor dedicado com atualizações, segurança e cópias de segurança diárias cifradas incluídas."],
       ],
       hostingPrice: "{withPro}/mês com o Pro · {withoutPro}/mês sem o Pro",
       tbd: "a anunciar",
@@ -2987,7 +2987,7 @@ export const t = {
         items: [
           "A IA só vê a ficha da empresa e a conversa com aquele cliente.",
           "As conversas não são usadas para treinar modelos de IA.",
-          "Servidores na União Europeia, separados por empresa.",
+          "Dados separados por empresa, com cópias de segurança cifradas.",
           "Pode rever todas as conversas no painel e assumir qualquer uma.",
         ],
       },
