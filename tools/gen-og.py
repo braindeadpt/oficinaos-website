@@ -17,8 +17,10 @@ O nome do ficheiro leva um hash do conteúdo (título, etiqueta, língua, versã
 texto muda, o URL muda, e as plataformas (WhatsApp, Facebook, LinkedIn) não servem a imagem antiga
 da cache. O Base.astro lê o URL de public/og/pages/manifest.json.
 Páginas com imagem própria (ogImage no Base) e a 404 ficam de fora.
-Gerar precisa de Pillow e fontTools (com brotli); o --check só precisa da biblioteca padrão.
+Python 3.9+. Gerar precisa de Pillow e fontTools (com brotli ou brotlicffi); o --check só precisa da biblioteca padrão.
 """
+
+from __future__ import annotations  # anotações não avaliadas: carrega mesmo em Python antigo
 
 import hashlib
 import html

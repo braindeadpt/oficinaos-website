@@ -1,6 +1,6 @@
 // Corre um script Python com o interpretador certo, em qualquer máquina:
 //   1. o do ambiente virtual ativo (VIRTUAL_ENV), se houver;
-//   2. senão, python3, python ou py — só os que forem mesmo Python 3.
+//   2. senão, python3, python ou py — só os que forem Python 3.9 ou mais recente.
 // Para gerar imagens (sem --check/--published) prefere um interpretador que tenha o Pillow e o
 // fontTools; a verificação e a marcação só precisam da biblioteca padrão.
 // O código de saída do script é devolvido tal como está (não se repete noutro interpretador).
@@ -25,17 +25,19 @@ const ok = (cmd, code) => {
   const r = spawnSync(cmd, ["-c", code], { stdio: "ignore" });
   return !r.error && r.status === 0;
 };
-const isPy3 = (cmd) => ok(cmd, "import sys; sys.exit(0 if sys.version_info[0] == 3 else 1)");
-const hasImaging = (cmd) => ok(cmd, "import PIL, fontTools, brotli");
+const isPy3 = (cmd) => ok(cmd, "import sys; sys.exit(0 if (3, 9) <= sys.version_info[:2] < (4, 0) else 1)");
+// o fontTools lê WOFF2 com brotli ou brotlicffi
+const hasImaging = (cmd) =>
+  ok(cmd, ["import PIL, fontTools", "try:", " import brotli", "except ImportError:", " import brotlicffi"].join("\n"));
 
 const py3 = candidates.filter(isPy3);
 if (!py3.length) {
-  console.error("Python 3 não encontrado (ambiente virtual, python3, python ou py). Instala o Python 3.");
+  console.error("Python 3.9 ou mais recente não encontrado (ambiente virtual, python3, python ou py). Instala o Python 3.9+.");
   process.exit(1);
 }
 const chosen = needsImaging ? (py3.find(hasImaging) ?? py3[0]) : py3[0];
 if (needsImaging && !hasImaging(chosen)) {
-  console.error(`Aviso: ${chosen} não tem Pillow/fontTools/brotli. Instala com: ${chosen} -m pip install pillow fonttools brotli`);
+  console.error(`Aviso: ${chosen} não tem Pillow/fontTools/brotli(cffi). Instala com: ${chosen} -m pip install pillow fonttools brotli`);
 }
 const run = spawnSync(chosen, args, { stdio: "inherit" });
 process.exit(run.status ?? 1);
