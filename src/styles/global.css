@@ -12,6 +12,8 @@
 @import "./components.css";
 /* Redesenho 2026-11: identidade «Oficina limpa» no site inteiro (sobrepõe os tokens acima). */
 @import "./limpa-tokens.css";
+/* Evolução «Vidro & Luz»: Liquid Glass, tema claro luminoso e navegação flutuante. */
+@import "./glass-theme.css";
 
 /* Cor do símbolo da marca: --oos-logo-mark, definida em limpa-tokens.css (grafite; claro no escuro). */
 
@@ -32,7 +34,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+  scroll-padding-top: 5.75rem;
   background-color: var(--oos-color-bg);
   -webkit-text-size-adjust: 100%;
 }

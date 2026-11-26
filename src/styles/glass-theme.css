@@ -1,0 +1,582 @@
+/*
+ * Evolução visual «Vidro & Luz» (PR 1 — Fundações Liquid Glass).
+ * Referências: Mercury (claro luminoso e arejado) · Linear (rigor e hairlines) ·
+ * Ramp (energia limpa) · Nothing (micro-pontos e precisão mono) · macOS/iOS Liquid Glass.
+ *
+ * Regras:
+ * - Tema claro por omissão (<html data-theme="light">); escuro quando escolhido ou sistema.
+ * - Zero estilos inline (CSP style-src 'self').
+ * - Contraste WCAG AA (≥ 4,5:1) garantido em todas as superfícies translúcidas.
+ * - prefers-reduced-motion respeitado em todas as transições e efeitos.
+ */
+
+/* ───────────────────── 1 · Tokens Luminosos & Vidro ───────────────────── */
+:root {
+  --oos-color-bg: #f7f9fc;
+  --oos-color-surface: #ffffff;
+  --oos-color-surface-2: #eef2f7;
+  --oos-color-surface-3: #e4eaf3;
+  --oos-color-border: rgb(15 23 42 / 0.085);
+  --oos-color-border-strong: #7d899c;
+  --oos-color-text: #0f172a;
+  --oos-color-text-muted: #475569;
+  --oos-color-text-subtle: #5a6678;
+  --oos-color-primary: #0f172a;
+  --oos-color-primary-hover: #1e293b;
+  --oos-color-on-primary: #ffffff;
+  --oos-color-primary-soft: #e8effa;
+  --oos-color-on-primary-soft: #0f172a;
+  --oos-color-accent: #047857;
+  --oos-color-focus: #2563eb;
+  --oos-color-link: #0f172a;
+  --oos-color-selection: rgb(37 99 235 / 0.16);
+  --oos-color-inverse: #0f172a;
+  --oos-color-on-inverse: #f7f9fc;
+  --oos-logo-mark: #0f172a;
+
+  /* Liquid Glass — claro */
+  --glass-bg: rgb(255 255 255 / 0.72);
+  --glass-bg-strong: rgb(255 255 255 / 0.86);
+  --glass-bg-subtle: rgb(255 255 255 / 0.56);
+  --glass-border: rgb(255 255 255 / 0.8);
+  --glass-rim: rgb(15 23 42 / 0.085);
+  --glass-specular:
+    inset 0 1px 0 rgb(255 255 255 / 0.92),
+    inset 0 -1px 0 rgb(15 23 42 / 0.03);
+  --glass-shadow:
+    0 1px 2px rgb(15 23 42 / 0.04),
+    0 8px 24px -6px rgb(15 23 42 / 0.08),
+    0 24px 48px -18px rgb(37 99 235 / 0.08);
+  --glass-shadow-lg:
+    0 2px 4px rgb(15 23 42 / 0.05),
+    0 18px 42px -10px rgb(15 23 42 / 0.14),
+    0 36px 72px -22px rgb(37 99 235 / 0.12);
+  --glass-blur: blur(22px) saturate(180%);
+  --glass-blur-sm: blur(14px) saturate(160%);
+
+  /* Luz ambiente (Mercury) + micro-pontos (Nothing) */
+  --aurora-a: rgb(59 130 246 / 0.13);
+  --aurora-b: rgb(16 185 129 / 0.11);
+  --aurora-c: rgb(99 102 241 / 0.09);
+  --dot-color: rgb(15 23 42 / 0.08);
+
+  /* Curvas fluidas estilo Apple */
+  --ease-fluid: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.22, 1.15, 0.36, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not(.light) {
+    --oos-color-bg: #0a0e17;
+    --oos-color-surface: #111827;
+    --oos-color-surface-2: #182132;
+    --oos-color-surface-3: #202b40;
+    --oos-color-border: rgb(255 255 255 / 0.09);
+    --oos-color-border-strong: #7b889b;
+    --oos-color-text: #eef2f7;
+    --oos-color-text-muted: #9aa7b8;
+    --oos-color-text-subtle: #8b98aa;
+    --oos-color-primary: #eef2f7;
+    --oos-color-primary-hover: #ffffff;
+    --oos-color-on-primary: #0a0e17;
+    --oos-color-primary-soft: #1b263b;
+    --oos-color-on-primary-soft: #eef2f7;
+    --oos-color-accent: #34d399;
+    --oos-color-focus: #60a5fa;
+    --oos-color-link: #eef2f7;
+    --oos-color-selection: rgb(96 165 250 / 0.26);
+    --oos-logo-mark: #334155;
+
+    --glass-bg: rgb(17 24 39 / 0.72);
+    --glass-bg-strong: rgb(17 24 39 / 0.88);
+    --glass-bg-subtle: rgb(17 24 39 / 0.56);
+    --glass-border: rgb(255 255 255 / 0.12);
+    --glass-rim: rgb(255 255 255 / 0.09);
+    --glass-specular:
+      inset 0 1px 0 rgb(255 255 255 / 0.14),
+      inset 0 -1px 0 rgb(0 0 0 / 0.25);
+    --glass-shadow:
+      0 1px 2px rgb(0 0 0 / 0.35),
+      0 10px 28px -8px rgb(0 0 0 / 0.5),
+      0 24px 48px -18px rgb(59 130 246 / 0.12);
+    --glass-shadow-lg:
+      0 2px 6px rgb(0 0 0 / 0.45),
+      0 20px 46px -12px rgb(0 0 0 / 0.65),
+      0 36px 72px -20px rgb(59 130 246 / 0.16);
+
+    --aurora-a: rgb(59 130 246 / 0.16);
+    --aurora-b: rgb(16 185 129 / 0.12);
+    --aurora-c: rgb(99 102 241 / 0.12);
+    --dot-color: rgb(255 255 255 / 0.065);
+  }
+}
+
+:root[data-theme="dark"],
+:root.dark {
+  --oos-color-bg: #0a0e17;
+  --oos-color-surface: #111827;
+  --oos-color-surface-2: #182132;
+  --oos-color-surface-3: #202b40;
+  --oos-color-border: rgb(255 255 255 / 0.09);
+  --oos-color-border-strong: #7b889b;
+  --oos-color-text: #eef2f7;
+  --oos-color-text-muted: #9aa7b8;
+  --oos-color-text-subtle: #8b98aa;
+  --oos-color-primary: #eef2f7;
+  --oos-color-primary-hover: #ffffff;
+  --oos-color-on-primary: #0a0e17;
+  --oos-color-primary-soft: #1b263b;
+  --oos-color-on-primary-soft: #eef2f7;
+  --oos-color-accent: #34d399;
+  --oos-color-focus: #60a5fa;
+  --oos-color-link: #eef2f7;
+  --oos-color-selection: rgb(96 165 250 / 0.26);
+  --oos-logo-mark: #334155;
+
+  --glass-bg: rgb(17 24 39 / 0.72);
+  --glass-bg-strong: rgb(17 24 39 / 0.88);
+  --glass-bg-subtle: rgb(17 24 39 / 0.56);
+  --glass-border: rgb(255 255 255 / 0.12);
+  --glass-rim: rgb(255 255 255 / 0.09);
+  --glass-specular:
+    inset 0 1px 0 rgb(255 255 255 / 0.14),
+    inset 0 -1px 0 rgb(0 0 0 / 0.25);
+  --glass-shadow:
+    0 1px 2px rgb(0 0 0 / 0.35),
+    0 10px 28px -8px rgb(0 0 0 / 0.5),
+    0 24px 48px -18px rgb(59 130 246 / 0.12);
+  --glass-shadow-lg:
+    0 2px 6px rgb(0 0 0 / 0.45),
+    0 20px 46px -12px rgb(0 0 0 / 0.65),
+    0 36px 72px -20px rgb(59 130 246 / 0.16);
+
+  --aurora-a: rgb(59 130 246 / 0.16);
+  --aurora-b: rgb(16 185 129 / 0.12);
+  --aurora-c: rgb(99 102 241 / 0.12);
+  --dot-color: rgb(255 255 255 / 0.065);
+}
+
+/* Sincroniza os blocos «Oficina limpa» (.hh e .pb) com a nova paleta luminosa.
+   Usa :root para ganhar em especificidade sobre photo-hero.css / oficina-limpa.css
+   importados por página/componente. */
+:root .hh,
+:root:not([data-theme="light"]) .hh,
+:root[data-theme="dark"] .hh {
+  --hh-bg: var(--oos-color-bg);
+  --hh-bg-2: var(--oos-color-surface);
+  --hh-ink: var(--oos-color-text);
+  --hh-ink-2: var(--oos-color-text-muted);
+  --hh-ink-3: var(--oos-color-text-subtle);
+  --hh-line: var(--oos-color-border);
+  --hh-line-2: var(--oos-color-border-strong);
+  --hh-ok: var(--oos-color-accent);
+  --hh-glass: var(--glass-bg-strong);
+  --hh-shadow: var(--glass-shadow-lg);
+}
+
+:root .pb,
+:root:not([data-theme="light"]) .pb,
+:root[data-theme="dark"] .pb {
+  --pb-bg: var(--oos-color-bg);
+  --pb-bg-2: var(--oos-color-surface);
+  --pb-ink: var(--oos-color-text);
+  --pb-ink-2: var(--oos-color-text-muted);
+  --pb-ink-3: var(--oos-color-text-subtle);
+  --pb-line: var(--oos-color-border);
+  --pb-line-2: var(--oos-color-border-strong);
+  --pb-ok: var(--oos-color-accent);
+  --pb-shadow: var(--glass-shadow);
+}
+
+/* ───────────────────── 2 · Luz Ambiente & Micro-pontos ───────────────────── */
+/* Substitui a grelha milimétrica pesada por uma matriz de micro-pontos subtil (Nothing). */
+.bg-tech-grid,
+.bg-dot-matrix {
+  background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: 0 0;
+}
+
+/* Luz ambiente suave por trás do herói (Mercury + Liquid Glass). */
+.hh::before {
+  content: "";
+  position: absolute;
+  inset: -6rem 0 auto;
+  height: min(46rem, 90%);
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 52% 48% at 22% 18%, var(--aurora-a), transparent 72%),
+    radial-gradient(ellipse 46% 42% at 78% 22%, var(--aurora-b), transparent 72%),
+    radial-gradient(ellipse 42% 38% at 52% 6%, var(--aurora-c), transparent 70%);
+}
+
+.hh::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: radial-gradient(ellipse 75% 58% at 50% 24%, #000 15%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 75% 58% at 50% 24%, #000 15%, transparent 80%);
+}
+
+/* Superfície reutilizável de vidro líquido. */
+.glass-surface {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-rim);
+  box-shadow: var(--glass-specular), var(--glass-shadow);
+}
+
+/* ───────────────────── 3 · Cabeçalho Cápsula Flutuante ───────────────────── */
+.site-header {
+  padding: 0.625rem 0.75rem 0;
+  pointer-events: none;
+}
+
+.site-header > .nav-pop,
+.site-header > .nav-sheet {
+  pointer-events: auto;
+}
+
+@media (min-width: 64rem) {
+  .site-header {
+    padding: 0.875rem 1.25rem 0;
+  }
+}
+
+.nav-capsule {
+  pointer-events: auto;
+  margin-inline: auto;
+  max-width: 74rem;
+  border-radius: 1.25rem;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-rim);
+  box-shadow: var(--glass-specular), var(--glass-shadow);
+  transition:
+    background-color var(--dur-2) var(--ease-fluid),
+    box-shadow var(--dur-2) var(--ease-fluid),
+    border-color var(--dur-2) var(--ease-fluid),
+    transform var(--dur-2) var(--ease-fluid);
+}
+
+@media (min-width: 64rem) {
+  .nav-capsule {
+    border-radius: 9999px;
+  }
+}
+
+/* Aprofunda subtilmente o vidro ao fazer scroll (CSS nativo, zero JS). */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: scroll()) {
+    .nav-capsule {
+      animation: oos-nav-elevate linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0px 96px;
+    }
+  }
+}
+
+@keyframes oos-nav-elevate {
+  from {
+    background: var(--glass-bg-subtle);
+    box-shadow: var(--glass-specular), 0 4px 16px -6px rgb(15 23 42 / 0.06);
+  }
+  to {
+    background: var(--glass-bg-strong);
+    box-shadow: var(--glass-specular), var(--glass-shadow-lg);
+  }
+}
+
+/* Links da navegação em pílula fluida (sem corte inferior quadrado). */
+.site-header .nav-link {
+  border-radius: 9999px;
+  transition:
+    color var(--dur-1) var(--ease-fluid),
+    background-color var(--dur-1) var(--ease-fluid),
+    transform var(--dur-1) var(--ease-spring);
+}
+
+.site-header .nav-link:hover {
+  background-color: color-mix(in oklab, var(--oos-color-text) 6%, transparent);
+}
+
+.site-header .nav-link[aria-current="page"],
+.site-header .nav-link[data-active="true"] {
+  color: var(--oos-color-text);
+  background-color: color-mix(in oklab, var(--oos-color-text) 8%, transparent);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.4);
+  border-radius: 9999px;
+}
+
+.site-header .nav-icon-btn {
+  border-radius: 9999px;
+  transition:
+    color var(--dur-1) var(--ease-fluid),
+    background-color var(--dur-1) var(--ease-fluid),
+    transform var(--dur-1) var(--ease-spring);
+}
+
+.site-header .nav-icon-btn:hover {
+  background-color: color-mix(in oklab, var(--oos-color-text) 7%, transparent);
+}
+
+.site-header .nav-icon-btn:active {
+  transform: scale(0.94);
+}
+
+.site-header .nav-cta {
+  border-radius: 9999px;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.22),
+    0 4px 14px -4px rgb(15 23 42 / 0.35);
+  transition:
+    background-color var(--dur-1) var(--ease-fluid),
+    transform var(--dur-2) var(--ease-spring),
+    box-shadow var(--dur-2) var(--ease-fluid);
+}
+
+.site-header .nav-cta:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.28),
+    0 8px 20px -6px rgb(15 23 42 / 0.42);
+}
+
+.site-header .nav-cta:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Popovers da barra em Liquid Glass com entrada spring. */
+.nav-pop {
+  top: 5.25rem;
+  border: 1px solid var(--glass-rim);
+  border-radius: 1.375rem;
+  background: var(--glass-bg-strong);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-specular), var(--glass-shadow-lg);
+}
+
+@supports (anchor-name: --a) {
+  .nav-pop-products {
+    top: calc(anchor(bottom) + 0.875rem);
+  }
+  .nav-pop-lang {
+    top: calc(anchor(bottom) + 0.875rem);
+  }
+}
+
+.oos-popover {
+  transition:
+    opacity var(--dur-2) var(--ease-fluid),
+    transform var(--dur-2) var(--ease-spring),
+    overlay var(--dur-2) allow-discrete,
+    display var(--dur-2) allow-discrete;
+}
+
+.oos-popover:not(:popover-open) {
+  opacity: 0;
+  transform: translateY(-6px) scale(0.97);
+}
+
+@starting-style {
+  .oos-popover:popover-open {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.97);
+  }
+}
+
+.nav-product {
+  border-radius: 0.875rem;
+  transition:
+    background-color var(--dur-1) var(--ease-fluid),
+    transform var(--dur-1) var(--ease-spring);
+}
+
+.nav-product:hover {
+  background-color: color-mix(in oklab, var(--oos-color-text) 5%, transparent);
+}
+
+.nav-lang-item {
+  border-radius: 0.75rem;
+}
+
+/* Menu móvel: gaveta translúcida com backdrop desfocado. */
+.nav-sheet {
+  border-left: 1px solid var(--glass-rim);
+  background: var(--glass-bg-strong);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-specular), var(--glass-shadow-lg);
+}
+
+.oos-sheet::backdrop {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Barra móvel das docs desce ligeiramente para respirar abaixo da cápsula. */
+.docs-mbar {
+  top: 4.75rem;
+  background-color: var(--glass-bg-strong);
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+}
+
+/* ───────────────────── 4 · UiFrame (Janela Minimalista Vidro) ───────────────────── */
+.ui-frame {
+  border-radius: 1.375rem;
+  border-color: var(--glass-rim);
+  background: var(--glass-bg-strong);
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  box-shadow: var(--glass-specular);
+}
+
+.ui-frame.shadow-lg {
+  box-shadow: var(--glass-specular), var(--glass-shadow-lg);
+}
+
+.ui-frame-bar {
+  background: color-mix(in oklab, var(--oos-color-surface-2) 72%, transparent);
+  border-bottom: 1px solid var(--oos-color-border);
+}
+
+.ui-frame-dot {
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 9999px;
+  background: color-mix(in oklab, var(--oos-color-text) 16%, transparent);
+  transition: background-color var(--dur-2) var(--ease-fluid);
+}
+
+.ui-frame:hover .ui-frame-dot-close {
+  background: #ff5f57;
+}
+
+.ui-frame:hover .ui-frame-dot-min {
+  background: #febc2e;
+}
+
+.ui-frame:hover .ui-frame-dot-max {
+  background: #28c840;
+}
+
+/* ───────────────────── 5 · Elevação Tátil de Cartões & Botões ───────────────────── */
+:root .hh-eyebrow {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  box-shadow: var(--glass-specular), 0 0 0 1px var(--glass-rim), 0 4px 12px -4px rgb(15 23 42 / 0.08);
+}
+
+:root .hh-btn-primary {
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.22),
+    0 10px 24px -8px rgb(15 23 42 / 0.42);
+  transition:
+    transform var(--dur-2) var(--ease-spring),
+    box-shadow var(--dur-2) var(--ease-fluid),
+    background-color var(--dur-1) var(--ease-fluid);
+}
+
+:root .hh-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.28),
+    0 14px 30px -8px rgb(15 23 42 / 0.48);
+}
+
+:root .hh-btn-ghost {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  box-shadow: var(--glass-specular), 0 2px 8px -2px rgb(15 23 42 / 0.06);
+  transition:
+    transform var(--dur-2) var(--ease-spring),
+    border-color var(--dur-1) var(--ease-fluid),
+    background-color var(--dur-1) var(--ease-fluid);
+}
+
+:root .hh-btn-ghost:hover {
+  transform: translateY(-1px);
+  background: var(--glass-bg-strong);
+}
+
+:root .hh-warn {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  box-shadow: var(--glass-specular), 0 0 0 1px var(--glass-rim);
+}
+
+:root .hh-notice {
+  background: var(--glass-bg-strong);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-specular), var(--glass-shadow-lg), 0 0 0 1px var(--glass-rim);
+}
+
+:root .pb-card,
+:root .hb-win,
+:root .bento-cell {
+  border-radius: 1.375rem;
+  box-shadow: var(--glass-specular), var(--glass-shadow), 0 0 0 1px var(--glass-rim);
+  transition:
+    transform var(--dur-2) var(--ease-spring),
+    box-shadow var(--dur-2) var(--ease-fluid),
+    border-color var(--dur-1) var(--ease-fluid);
+}
+
+:root .bento-cell:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--glass-specular), var(--glass-shadow-lg), 0 0 0 1px color-mix(in oklab, var(--oos-product) 40%, var(--glass-rim));
+}
+
+/* Modal de pesquisa com vidro líquido. */
+.docs-search {
+  border: 1px solid var(--glass-rim);
+  border-radius: 1.375rem;
+  background-color: var(--glass-bg-strong);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-specular), var(--glass-shadow-lg);
+}
+
+.docs-search::backdrop {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* View transitions mais fluidas entre páginas. */
+::view-transition-group(*) {
+  animation-duration: 260ms;
+  animation-timing-function: var(--ease-fluid);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-capsule {
+    animation: none;
+  }
+  .oos-popover:not(:popover-open),
+  :root .bento-cell:hover,
+  :root .hh-btn-primary:hover,
+  :root .hh-btn-ghost:hover,
+  :root .site-header .nav-cta:hover,
+  :root .site-header .nav-cta:active,
+  :root .site-header .nav-icon-btn:active {
+    transform: none;
+  }
+  @starting-style {
+    .oos-popover:popover-open {
+      transform: none;
+    }
+  }
+}
