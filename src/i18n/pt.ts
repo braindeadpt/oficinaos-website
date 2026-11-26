@@ -961,7 +961,7 @@ export const t = {
         {
           heading: "Migração do envio direto (30 dias)",
           paragraphs: [
-            "A contagem dos 30 dias começa no primeiro arranque da versão da app que introduz esta migração — mesmo antes de abrir o setup — e o ecrã WhatsApp mostra quantos dias faltam. Durante esse período, uma loja cujo upload consentido ainda não foi confirmado pode continuar a enviar diretamente com o token local.",
+            "A contagem dos 30 dias começa no primeiro arranque da versão da app que introduz esta migração — mesmo antes de abrir o setup. Às lojas que ainda não autorizaram a Cloud, o ecrã WhatsApp mostra quantos dias faltam. Durante esse período, uma loja cujo upload consentido ainda não foi confirmado pode continuar a enviar diretamente com o token local.",
             "Depois de a Cloud confirmar as credenciais, o envio passa pelo relay. O token local retido serve apenas como fallback auditado quando o relay falha por erro temporário do servidor (5xx) ou falha clara de ligação. Um timeout não faz fallback — evita mensagens duplicadas. No fim do prazo o envio direto app→Meta termina; tokens antigos são apagados com evento de auditoria e um token introduzido depois do prazo fica só até a Cloud confirmar o upload consentido, sem nunca enviar diretamente.",
             "Quem já tinha credenciais na Cloud antes deste consentimento tem de autorizar explicitamente o relay ou revogar as credenciais quando a transição terminar.",
           ],

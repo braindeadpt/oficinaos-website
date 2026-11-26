@@ -940,7 +940,7 @@ export const t: Copy = {
         {
           heading: "Direct-send migration (30 days)",
           paragraphs: [
-            "The 30-day countdown starts on the first boot of the app version that introduces this migration — even before setup is opened — and the WhatsApp screen shows how many days are left. During this period, a shop whose consented upload has not yet been confirmed can keep sending directly with the local token.",
+            "The 30-day countdown starts on the first boot of the app version that introduces this migration — even before setup is opened. Shops that have not yet authorized the Cloud see how many days are left on the WhatsApp screen. During this period, a shop whose consented upload has not yet been confirmed can keep sending directly with the local token.",
             "After the Cloud confirms the credentials, sending moves to the relay. The retained local token is only an audited fallback when the relay fails with a temporary server error (5xx) or a clear connection failure. A timeout does not fall back — this avoids duplicate messages. When the deadline ends, direct app→Meta sending stops; legacy tokens are wiped with an audit event and a token entered after the deadline is kept only until the Cloud confirms the consented upload, never sending directly.",
             "Shops that already had Cloud credentials before this consent step must explicitly authorize the relay or revoke the credentials when the transition ends.",
           ],

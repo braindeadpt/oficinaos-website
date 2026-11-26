@@ -944,7 +944,7 @@ export const t: Copy = {
         {
           heading: "Migración del envío directo (30 días)",
           paragraphs: [
-            "La cuenta de los 30 días empieza en el primer arranque de la versión de la app que introduce esta migración — incluso antes de abrir la configuración — y la pantalla de WhatsApp muestra cuántos días quedan. Durante ese período, una tienda cuya subida consentida aún no se ha confirmado puede seguir enviando directamente con el token local.",
+            "La cuenta de los 30 días empieza en el primer arranque de la versión de la app que introduce esta migración — incluso antes de abrir la configuración. Las tiendas que aún no han autorizado Cloud ven cuántos días quedan en la pantalla de WhatsApp. Durante ese período, una tienda cuya subida consentida aún no se ha confirmado puede seguir enviando directamente con el token local.",
             "Cuando Cloud confirma las credenciales, el envío pasa al relay. El token local retenido sirve solo como fallback auditado cuando el relay falla por un error temporal del servidor (5xx) o un fallo claro de conexión. Un timeout no hace fallback — evita mensajes duplicados. Al terminar el plazo, el envío directo app→Meta termina; los tokens antiguos se borran con evento de auditoría y un token introducido después del plazo se conserva solo hasta que Cloud confirme la subida consentida, sin enviar nunca directamente.",
             "Quien ya tenía credenciales en Cloud antes de este consentimiento tiene que autorizar explícitamente el relay o revocar las credenciales cuando termine la transición.",
           ],
