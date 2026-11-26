@@ -1,0 +1,449 @@
+/*
+ * PR 2 — Herói interativo, entrada coreografada e profundidade Liquid Glass (.hh-home).
+ * - Controlo segmentado em vidro acima do palco sincroniza portátil + telemóvel + aviso.
+ * - Entrada suave sem esconder o LCP (H1 e fotografia mantêm opacity: 1 no primeiro paint).
+ * - Halo ambiente por trás do palco reage ao estado escolhido.
+ * - Zero estilos inline (CSP style-src 'self'), WCAG AA, prefers-reduced-motion respeitado.
+ */
+
+/* ─────────────── 1 · Entrada suave & pulso do eyebrow ─────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .hh-home .hh-eyebrow span {
+    animation: hh-beacon 3.2s ease-in-out infinite;
+  }
+  .hh-home .hh-eyebrow {
+    animation: hh-glide 0.45s var(--ease-fluid) both;
+  }
+  .hh-home .hh-title {
+    animation: hh-glide-soft 0.55s var(--ease-fluid) 0.04s both;
+  }
+  .hh-home .hh-lead {
+    animation: hh-glide 0.55s var(--ease-fluid) 0.09s both;
+  }
+  .hh-home .hh-ctas {
+    animation: hh-glide 0.55s var(--ease-fluid) 0.14s both;
+  }
+  .hh-home .hh-dock {
+    animation: hh-glide 0.6s var(--ease-fluid) 0.18s both;
+  }
+}
+
+@keyframes hh-beacon {
+  0%,
+  100% {
+    box-shadow: 0 0 0 3px var(--hh-ok-soft);
+  }
+  50% {
+    box-shadow: 0 0 0 6px color-mix(in oklab, var(--hh-ok) 18%, transparent);
+  }
+}
+
+@keyframes hh-glide {
+  from {
+    transform: translateY(10px);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes hh-glide-soft {
+  from {
+    transform: translateY(6px);
+  }
+  to {
+    transform: none;
+  }
+}
+
+/* Subtítulo da segunda linha do H1 com nuance subtil azulada (Mercury/Linear). */
+.hh-home .hh-title-b {
+  color: var(--oos-color-text-muted);
+}
+
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+  .hh-home .hh-title-b {
+    background: linear-gradient(110deg, #475569 0%, #334155 48%, #1d4ed8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  :root[data-theme="dark"] .hh-home .hh-title-b {
+    background: linear-gradient(110deg, #cbd5e1 0%, #94a3b8 50%, #60a5fa 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .hh-home .hh-title-b {
+      background: linear-gradient(110deg, #cbd5e1 0%, #94a3b8 50%, #60a5fa 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+  }
+}
+
+/* ─────────────── 2 · Dock interativo Liquid Glass ─────────────── */
+.hh-dock {
+  margin: 0 auto 1.25rem;
+  width: fit-content;
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem 0.75rem;
+  padding: 0.375rem 0.4375rem 0.375rem 0.875rem;
+  border-radius: 9999px;
+  background: var(--glass-bg-strong);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-rim);
+  box-shadow: var(--glass-specular), var(--glass-shadow);
+}
+
+@media (max-width: 36rem) {
+  .hh-dock {
+    border-radius: 1.25rem;
+    padding: 0.5rem 0.625rem;
+  }
+}
+
+/* Sem JavaScript: esconde os controlos interativos (não mostra botões mortos). */
+@media (scripting: none) {
+  .hh-dock {
+    display: none;
+  }
+}
+
+.hh-dock-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--oos-color-text-muted);
+  white-space: nowrap;
+}
+
+.hh-dock-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 9999px;
+  background: var(--oos-color-accent);
+  box-shadow: 0 0 0 3px var(--hh-ok-soft);
+}
+
+.hh-dock-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0.2rem;
+  border-radius: 9999px;
+  background: color-mix(in oklab, var(--oos-color-text) 5%, transparent);
+}
+
+.hh-dock-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  height: 2.125rem;
+  padding: 0 0.875rem;
+  border: 0;
+  border-radius: 9999px;
+  background: transparent;
+  color: var(--oos-color-text-muted);
+  font-size: 0.8125rem;
+  font-weight: 650;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background-color var(--dur-2) var(--ease-fluid),
+    color var(--dur-2) var(--ease-fluid),
+    transform var(--dur-1) var(--ease-spring),
+    box-shadow var(--dur-2) var(--ease-fluid);
+}
+
+.hh-dock-btn:hover {
+  color: var(--oos-color-text);
+  background: color-mix(in oklab, var(--oos-color-surface) 75%, transparent);
+}
+
+.hh-dock-btn:active {
+  transform: scale(0.97);
+}
+
+.hh-dock-btn:focus-visible {
+  outline: 2px solid var(--oos-color-focus);
+  outline-offset: 2px;
+}
+
+.hh-dock-pip {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 9999px;
+  background: currentColor;
+  opacity: 0.55;
+  transition: opacity var(--dur-1) var(--ease-fluid), background-color var(--dur-1) var(--ease-fluid);
+}
+
+/* Estados ativos com contraste verificado WCAG AA (≥ 5,2:1 claro e ≥ 10:1 escuro). */
+.hh-dock-btn[aria-pressed="true"] {
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.24),
+    0 4px 12px -4px rgb(15 23 42 / 0.32);
+}
+
+.hh-dock-btn[aria-pressed="true"] .hh-dock-pip {
+  opacity: 1;
+}
+
+.hh-dock-btn[data-set-state="intake"][aria-pressed="true"] {
+  background: #0f172a;
+  color: #ffffff;
+}
+
+.hh-dock-btn[data-set-state="in-repair"][aria-pressed="true"] {
+  background: #1d4ed8;
+  color: #ffffff;
+}
+
+.hh-dock-btn[data-set-state="done"][aria-pressed="true"] {
+  background: #047857;
+  color: #ffffff;
+}
+
+:root[data-theme="dark"] .hh-dock-btn[data-set-state="intake"][aria-pressed="true"] {
+  background: #eef2f7;
+  color: #0a0e17;
+}
+
+:root[data-theme="dark"] .hh-dock-btn[data-set-state="in-repair"][aria-pressed="true"] {
+  background: #93c5fd;
+  color: #0a0e17;
+}
+
+:root[data-theme="dark"] .hh-dock-btn[data-set-state="done"][aria-pressed="true"] {
+  background: #34d399;
+  color: #0a0e17;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .hh-dock-btn[data-set-state="intake"][aria-pressed="true"] {
+    background: #eef2f7;
+    color: #0a0e17;
+  }
+  :root:not([data-theme="light"]) .hh-dock-btn[data-set-state="in-repair"][aria-pressed="true"] {
+    background: #93c5fd;
+    color: #0a0e17;
+  }
+  :root:not([data-theme="light"]) .hh-dock-btn[data-set-state="done"][aria-pressed="true"] {
+    background: #34d399;
+    color: #0a0e17;
+  }
+}
+
+/* ─────────────── 3 · Halo ambiente e profundidade do palco ─────────────── */
+.hh-home .hh-stage {
+  position: relative;
+}
+
+.hh-home .hh-stage::before {
+  content: "";
+  position: absolute;
+  inset: 2.5rem -1.5rem -1rem;
+  z-index: -1;
+  border-radius: 2.5rem;
+  pointer-events: none;
+  background: radial-gradient(ellipse 65% 55% at 50% 45%, rgb(16 185 129 / 0.14), transparent 72%);
+  filter: blur(28px);
+  transition: background 0.5s var(--ease-fluid), opacity 0.5s var(--ease-fluid);
+}
+
+.hh-home[data-state="intake"] .hh-stage::before {
+  background: radial-gradient(ellipse 65% 55% at 50% 45%, rgb(100 116 139 / 0.14), transparent 72%);
+}
+
+.hh-home[data-state="in-repair"] .hh-stage::before {
+  background: radial-gradient(ellipse 65% 55% at 50% 45%, rgb(37 99 235 / 0.16), transparent 72%);
+}
+
+.hh-home[data-state="done"] .hh-stage::before {
+  background: radial-gradient(ellipse 65% 55% at 50% 45%, rgb(16 185 129 / 0.17), transparent 72%);
+}
+
+.hh-home .hh-photo {
+  box-shadow: var(--glass-specular), var(--glass-shadow-lg), 0 0 0 1px var(--glass-rim);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .hh-home .hh-photo {
+      animation: hh-stage-depth linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 26%;
+    }
+  }
+}
+
+@keyframes hh-stage-depth {
+  from {
+    transform: translateY(14px) scale(0.988);
+  }
+  to {
+    transform: none;
+  }
+}
+
+/* ─────────────── 4 · Terceiro estado (Receção) nos ecrãs ─────────────── */
+.hh-chip-intake {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.hh-state-intake {
+  display: grid;
+  gap: 1.5cqi;
+  align-self: start;
+  padding: 4.5cqi 5cqi;
+  border-radius: 5cqi;
+  background: #f1f5f9;
+  color: #334155;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.hh-state-intake b {
+  font-size: 6.6cqi;
+  line-height: 1.1;
+}
+
+.hh-state-intake small {
+  font-size: 4.8cqi;
+  color: #64748b;
+}
+
+/* ─────────────── 5 · Modo interativo (.hh-live) ─────────────── */
+/* Quando o utilizador clica num estado, desliga as animações one-shot e transiciona
+   fluidamente entre «intake», «in-repair» e «done». */
+.hh-home.hh-live .hh-from,
+.hh-home.hh-live .hh-to,
+.hh-home.hh-live .hh-chip-intake,
+.hh-home.hh-live .hh-row-live,
+.hh-home.hh-live .hh-state-from,
+.hh-home.hh-live .hh-state-to,
+.hh-home.hh-live .hh-state-intake,
+.hh-home.hh-live .hh-step-mid,
+.hh-home.hh-live .hh-step-last,
+.hh-home.hh-live .hh-toast,
+.hh-home.hh-live .hh-notice {
+  animation: none;
+  transition:
+    opacity 0.34s var(--ease-fluid),
+    transform 0.38s var(--ease-spring),
+    border-top-color 0.3s var(--ease-fluid),
+    color 0.3s var(--ease-fluid),
+    background-color 0.3s var(--ease-fluid);
+}
+
+/* Estado base oculto para os elementos alternáveis no modo interativo */
+.hh-home.hh-live .hh-chip-intake,
+.hh-home.hh-live .hh-from,
+.hh-home.hh-live .hh-to,
+.hh-home.hh-live .hh-state-intake,
+.hh-home.hh-live .hh-state-from,
+.hh-home.hh-live .hh-state-to {
+  opacity: 0;
+  transform: translateY(22%) scale(0.96);
+}
+
+.hh-home.hh-live .hh-toast,
+.hh-home.hh-live .hh-notice {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(0.75rem) scale(0.96);
+  pointer-events: none;
+}
+
+/* Receção (intake) */
+.hh-home.hh-live[data-state="intake"] .hh-chip-intake,
+.hh-home.hh-live[data-state="intake"] .hh-state-intake {
+  opacity: 1;
+  transform: none;
+}
+
+.hh-home.hh-live[data-state="intake"] .hh-step-mid,
+.hh-home.hh-live[data-state="intake"] .hh-step-last {
+  border-top-color: #e6e6e1;
+  color: #8a929a;
+}
+
+/* Em reparação (in-repair) */
+.hh-home.hh-live[data-state="in-repair"] .hh-from,
+.hh-home.hh-live[data-state="in-repair"] .hh-state-from {
+  opacity: 1;
+  transform: none;
+}
+
+.hh-home.hh-live[data-state="in-repair"] .hh-step-mid {
+  border-top-color: #2563eb;
+  color: #14171a;
+}
+
+.hh-home.hh-live[data-state="in-repair"] .hh-step-last {
+  border-top-color: #e6e6e1;
+  color: #8a929a;
+}
+
+/* Pronto (done) */
+.hh-home.hh-live[data-state="done"] .hh-to,
+.hh-home.hh-live[data-state="done"] .hh-state-to,
+.hh-home.hh-live[data-state="done"] .hh-toast,
+.hh-home.hh-live[data-state="done"] .hh-notice {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  pointer-events: auto;
+}
+
+.hh-home.hh-live[data-state="done"] .hh-step-mid,
+.hh-home.hh-live[data-state="done"] .hh-step-last {
+  border-top-color: #0b8f63;
+  color: #14171a;
+}
+
+.hh-home.hh-live[data-state="done"] .hh-row-live {
+  background: #f2fbf7;
+}
+
+/* Linha viva clicável no portátil para alternar estado rapidamente. */
+.hh-home .hh-row-live {
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hh-home .hh-eyebrow span,
+  .hh-home .hh-eyebrow,
+  .hh-home .hh-title,
+  .hh-home .hh-lead,
+  .hh-home .hh-ctas,
+  .hh-home .hh-dock,
+  .hh-home .hh-photo {
+    animation: none;
+  }
+  .hh-home.hh-live .hh-from,
+  .hh-home.hh-live .hh-to,
+  .hh-home.hh-live .hh-chip-intake,
+  .hh-home.hh-live .hh-state-from,
+  .hh-home.hh-live .hh-state-to,
+  .hh-home.hh-live .hh-state-intake,
+  .hh-home.hh-live .hh-toast,
+  .hh-home.hh-live .hh-notice,
+  .hh-dock-btn:active {
+    transform: none;
+    transition-duration: 120ms;
+  }
+}

@@ -15,6 +15,7 @@ import { downloadAttrs } from "../../lib/download";
 import type { ReleaseInfo } from "../../lib/release";
 import Icon from "../Icon.astro";
 import "../../styles/photo-hero.css";
+import "../../styles/hero-interactive.css";
 
 interface Props {
   t: Copy;
@@ -110,6 +111,28 @@ const noticeText = h.toast.replace(/^[^:]*:\s*/, "");
     </div>
 
     <figure class="hh-stage">
+      <div class="hh-dock">
+        <span class="hh-dock-label" id="hh-dock-label">
+          <span class="hh-dock-dot" aria-hidden="true"></span>
+          {hh.tryLabel}
+        </span>
+        <div class="hh-dock-group" role="group" aria-labelledby="hh-dock-label">
+          <button type="button" class="hh-dock-btn" data-set-state="intake" aria-pressed="false">
+            <span class="hh-dock-pip" aria-hidden="true"></span>
+            {st.intake}
+          </button>
+          <button type="button" class="hh-dock-btn" data-set-state="in-repair" aria-pressed="false">
+            <span class="hh-dock-pip" aria-hidden="true"></span>
+            {st["in-repair"]}
+          </button>
+          <button type="button" class="hh-dock-btn" data-set-state="done" aria-pressed="true">
+            <span class="hh-dock-pip" aria-hidden="true"></span>
+            {st.done}
+          </button>
+        </div>
+        <span class="sr-only" aria-live="polite" data-hh-live-announce></span>
+      </div>
+
       <div class="hh-photo">
         <div class="hh-frame">
         <img
@@ -149,6 +172,7 @@ const noticeText = h.toast.replace(/^[^:]*:\s*/, "");
                       <span class="hh-cust">{r.customer}</span>
                       {i === 0 ? (
                         <span class="hh-chips">
+                          <span class="hh-chip hh-chip-info hh-chip-intake">{st.intake}</span>
                           <span class="hh-chip hh-chip-work hh-from">{st["in-repair"]}</span>
                           <span class="hh-chip hh-chip-ok hh-to">{st.done}</span>
                         </span>
@@ -176,9 +200,13 @@ const noticeText = h.toast.replace(/^[^:]*:\s*/, "");
             <p class="hh-track-dev">{first.device}</p>
             <p class="hh-track-id">{first.id}</p>
             <ol class="hh-steps">
-              {hh.steps.map((s, i) => <li class:list={[i < 2 && "is-done", i === 2 && "hh-step-last"]}>{s}</li>)}
+              {hh.steps.map((s, i) => <li class:list={[i < 2 && "is-done", i === 1 && "hh-step-mid", i === 2 && "hh-step-last"]}>{s}</li>)}
             </ol>
             <div class="hh-state">
+              <p class="hh-state-intake">
+                <b>{hh.received}</b>
+                <small>{hh.receivedSub}</small>
+              </p>
               <p class="hh-state-from">{hh.repairing}</p>
               <p class="hh-state-to">
                 <b>{hh.ready}</b>
@@ -207,21 +235,65 @@ const noticeText = h.toast.replace(/^[^:]*:\s*/, "");
 </section>
 
 <script is:inline>
-  // A história só começa quando a fotografia está à vista: se a página abre com a foto abaixo da dobra
-  // (ecrã baixo), as animações ficam em pausa até ela entrar no ecrã. Sem JS, correm logo ao carregar.
+  // 1) A história inicial só arranca quando o portátil está à vista (IntersectionObserver).
+  // 2) O dock Liquid Glass (e o clique na linha viva) permite alternar entre Receção, Em reparação e Pronto.
   (function () {
-    // O alvo é o ecrã do portátil (onde a história acontece), não o topo da fotografia.
     var s = document.querySelector("[data-hh]");
-    var target = s && s.querySelector(".hh-lap");
+    if (!s) return;
+    var btns = s.querySelectorAll("[data-set-state]");
+    var announce = s.querySelector("[data-hh-live-announce]");
+    var order = ["intake", "in-repair", "done"];
+    var current = "done";
+    var io = null;
+
+    function setState(next, interactive) {
+      current = next;
+      if (interactive) {
+        if (io) {
+          io.disconnect();
+          io = null;
+        }
+        s.classList.remove("hh-wait");
+        s.classList.add("hh-live");
+      }
+      s.setAttribute("data-state", next);
+      btns.forEach(function (b) {
+        var active = b.getAttribute("data-set-state") === next;
+        b.setAttribute("aria-pressed", active ? "true" : "false");
+        if (active && interactive && announce) {
+          announce.textContent = b.textContent ? b.textContent.trim() : "";
+        }
+      });
+    }
+
+    btns.forEach(function (b) {
+      b.addEventListener("click", function () {
+        var next = b.getAttribute("data-set-state");
+        if (next) setState(next, true);
+      });
+    });
+
+    var liveRow = s.querySelector(".hh-row-live");
+    if (liveRow) {
+      liveRow.addEventListener("click", function () {
+        var next = order[(order.indexOf(current) + 1) % order.length];
+        setState(next, true);
+      });
+    }
+
+    var target = s.querySelector(".hh-lap");
     if (!target || !("IntersectionObserver" in window)) return;
     var r = target.getBoundingClientRect();
-    if (r.top >= 0 && r.bottom <= innerHeight) return; // ecrã já todo à vista: corre já
+    if (r.top >= 0 && r.bottom <= innerHeight) return;
     s.classList.add("hh-wait");
-    var io = new IntersectionObserver(
+    io = new IntersectionObserver(
       function (es) {
         if (es[0].intersectionRatio >= 0.6) {
           s.classList.remove("hh-wait");
-          io.disconnect();
+          if (io) {
+            io.disconnect();
+            io = null;
+          }
         }
       },
       { threshold: [0, 0.6, 1] },

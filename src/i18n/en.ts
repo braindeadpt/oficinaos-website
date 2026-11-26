@@ -1812,9 +1812,12 @@ export const t: Copy = {
     shop: "Rui's Repairs",
     track: "Track your repair",
     steps: ["Received", "Repairing", "Ready"],
+    received: "Checked in at shop",
+    receivedSub: "Diagnostics in progress",
     repairing: "In repair",
     ready: "Ready for pick-up",
     readySub: "Today until 19:00",
+    tryLabel: "Try the live status",
     notice: "Message sent to Ana Marques",
     caption:
       "A repair shop counter. On the laptop, the OficinaOS repair list: Ana's iPhone 13 changes to «Ready». On the phone, the page the customer sees updates at the same time, and she gets notified.",
