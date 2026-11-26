@@ -130,8 +130,9 @@ const initials = (n: string) =>
         </div>
 
         <!-- Ecrãs estreitos: a conversa em texto legível (os ecrãs desenhados ficam pequenos demais).
-             aria-hidden: a legenda da figura já diz o mesmo aos leitores de ecrã. -->
-        <div class="hp-transcript" aria-hidden="true">
+             Também é lida pelos leitores de ecrã: traz o que a legenda resume (referência, hora, preço).
+             Nos ecrãs largos fica com display:none e não é lida. -->
+        <div class="hp-transcript">
           <p class="hp-tr hp-tr-in"><small>{ph.customer} · {ph.time}</small>{ph.ask}</p>
           <p class="hp-tr hp-tr-out"><small>{ph.answered}</small>{ph.reply}</p>
         </div>
