@@ -219,7 +219,7 @@ export const t: Copy = {
       {
         name: "OficinaOS Cloud (módulos Pro)",
         to: "Servidores de OficinaOS (Oracle Cloud, Japón — transferencia amparada por la decisión de adecuación de la UE 2019/419)",
-        what: "Cuenta y emparejamiento; datos de cada módulo activo — páginas del portal (con el nombre del cliente), mensajes de WhatsApp recibidos, reservas del escaparate, diagnósticos enviados, totales diarios (multitienda) y precios compartidos. El token Meta de la tienda queda cifrado en Cloud para enviar WhatsApp en su nombre",
+        what: "Cuenta y emparejamiento; datos de cada módulo activo — páginas del portal (con el nombre del cliente), mensajes de WhatsApp recibidos, reservas del escaparate, diagnósticos enviados, totales diarios (multitienda) y precios compartidos. En las configuraciones nuevas, el token Meta de la tienda solo se guarda cifrado en Cloud tras autorización explícita, para enviar WhatsApp en su nombre; las tiendas migradas antes de ese paso son avisadas para autorizar o revocar al final de la transición. Una revocación confirmada borra la copia de Cloud y la copia local",
       },
       {
         name: "Informes IA (Pro)",
@@ -233,8 +233,8 @@ export const t: Copy = {
       },
       {
         name: "Notificaciones y bot WhatsApp",
-        to: "Meta, vía el relay de OficinaOS Cloud",
-        what: "Nº de teléfono del cliente + texto del mensaje — transitan por Cloud sin quedar guardados ni registrados (logs solo con id, estado y teléfono enmascarado)",
+        to: "Meta — durante la transición el envío puede ser directo app→Meta hasta confirmarse la subida; después es normalmente vía el relay de OficinaOS Cloud, con fallback directo auditado solo ante un fallo temporal del relay",
+        what: "Nº de teléfono del cliente + texto del mensaje — en el relay transitan por Cloud sin quedar guardados ni registrados (logs solo con id, estado y teléfono enmascarado). Pasado el plazo, el envío oficial sale por el relay o no sale",
       },
       {
         name: "SMS y bot SMS (Pro)",
@@ -901,7 +901,7 @@ export const t: Copy = {
         {
           heading: "Sin el módulo",
           paragraphs: [
-            "Sin el módulo whatsapp-bot activo, la app ni envía ni recibe nada por WhatsApp — en ningún transporte (relay Cloud, Meta directo o Evolution). Las tarjetas de los ajustes siguen visibles, pero al pulsar muestran «Esta opción solo existe en OficinaOS Pro.»",
+            "Sin el módulo whatsapp-bot activo, la app ni envía ni recibe nada por WhatsApp — en ningún transporte (relay Cloud, Meta directo durante la transición o Evolution). Las tarjetas de los ajustes siguen visibles, pero al pulsar muestran «Esta opción solo existe en OficinaOS Pro.»",
           ],
           links: [],
         },
@@ -930,13 +930,23 @@ export const t: Copy = {
         {
           heading: "Configuración en la app (por tienda)",
           paragraphs: [
-            "Tras el alta en Meta (durante la beta te ayudamos en este paso), la configuración en la app son 4 campos:",
+            "Tras el alta en Meta (durante la beta te ayudamos en este paso), la configuración en la app son 4 campos y un consentimiento explícito:",
           ],
           list: [
             "Menú → Notificaciones → Setup → sección WhatsApp",
             "Business ID + Phone Number ID — facilitados en el alta",
-            "API Token — el token permanente del system user (la app lo sube una vez a la Cloud, donde queda cifrado — los envíos salen por el relay y el token no se vuelve a pedir)",
-            "Enabled activado — la app registra el phone_number_id y las credenciales en Cloud sola y el bot queda activo",
+            "API Token — el token permanente del system user; al guardarlo queda cifrado localmente y no vuelve a mostrarse",
+            "Consentimiento Cloud — la casilla explícita autoriza a la app a subir el token + phone_number_id una vez a Cloud; Cloud valida el par en Meta y guarda el token cifrado (AES-256-GCM) para enviar por el relay",
+            "Enabled activado — después del consentimiento y de la subida validada, el bot queda activo; la misma pantalla permite revocar las credenciales Cloud. La revocación termina cuando la app confirma que las credenciales fueron eliminadas de Cloud; sin esa confirmación, la copia local y el consentimiento no se limpian",
+          ],
+          links: [],
+        },
+        {
+          heading: "Migración del envío directo (30 días)",
+          paragraphs: [
+            "La cuenta de los 30 días empieza en el primer arranque de la versión de la app que introduce esta migración — incluso antes de abrir la configuración. Las tiendas que aún no han autorizado Cloud ven cuántos días quedan en la pantalla de WhatsApp. Durante ese período, una tienda cuya subida consentida aún no se ha confirmado puede seguir enviando directamente con el token local.",
+            "Cuando Cloud confirma las credenciales, el envío pasa al relay. El token local retenido sirve solo como fallback auditado cuando el relay falla por un error temporal del servidor (5xx) o un fallo claro de conexión. Un timeout no hace fallback — evita mensajes duplicados. Al terminar el plazo, el envío directo app→Meta termina; los tokens antiguos se borran con evento de auditoría y un token introducido después del plazo se conserva solo hasta que Cloud confirme la subida consentida, sin enviar nunca directamente.",
+            "Quien ya tenía credenciales en Cloud antes de este consentimiento tiene que autorizar explícitamente el relay o revocar las credenciales cuando termine la transición.",
           ],
           links: [],
         },

@@ -219,7 +219,7 @@ export const t: Copy = {
       {
         name: "OficinaOS Cloud (Pro modules)",
         to: "OficinaOS servers (Oracle Cloud, Japan — transfer covered by EU adequacy decision 2019/419)",
-        what: "Account and pairing; each active module's data — portal pages (with the customer's name), incoming WhatsApp messages, storefront reservations, submitted diagnostics, daily totals (multi-shop) and shared prices. The shop's Meta token is stored encrypted on the Cloud to send WhatsApp on its behalf",
+        what: "Account and pairing; each active module's data — portal pages (with the customer's name), incoming WhatsApp messages, storefront reservations, submitted diagnostics, daily totals (multi-shop) and shared prices. For new setups, the shop's Meta token is stored encrypted on the Cloud only after explicit authorization, to send WhatsApp on its behalf; shops migrated before that step are notified to authorize or revoke when the transition ends. A confirmed revocation deletes the Cloud copy and the local copy",
       },
       {
         name: "AI reports (Pro)",
@@ -233,8 +233,8 @@ export const t: Copy = {
       },
       {
         name: "WhatsApp notifications & bot",
-        to: "Meta, via the OficinaOS Cloud relay",
-        what: "Customer phone number + message text — they transit through the Cloud without being stored or logged (logs only carry id, status and masked phone)",
+        to: "Meta — during the transition sending can be direct app→Meta until the upload is confirmed; after that it is normally via the OficinaOS Cloud relay, with audited direct fallback only on a temporary relay failure",
+        what: "Customer phone number + message text — on the relay they transit through the Cloud without being stored or logged (logs only carry id, status and masked phone). After the deadline, official sending either uses the relay or does not happen",
       },
       {
         name: "SMS & SMS bot (Pro)",
@@ -897,7 +897,7 @@ export const t: Copy = {
         {
           heading: "Without the module",
           paragraphs: [
-            "Without the whatsapp-bot module active, the app neither sends nor receives anything on WhatsApp — on any transport (Cloud relay, direct Meta or Evolution). The settings cards stay visible, but clicking them shows “This option only exists in OficinaOS Pro.”",
+            "Without the whatsapp-bot module active, the app neither sends nor receives anything on WhatsApp — on any transport (Cloud relay, direct Meta during the transition or Evolution). The settings cards stay visible, but clicking them shows “This option only exists in OficinaOS Pro.”",
           ],
           links: [],
         },
@@ -926,13 +926,23 @@ export const t: Copy = {
         {
           heading: "Setup in the app (per shop)",
           paragraphs: [
-            "After Meta onboarding (during the beta we help with this step), the app-side setup is 4 fields:",
+            "After Meta onboarding (during the beta we help with this step), the app-side setup is 4 fields plus explicit consent:",
           ],
           list: [
             "Menu → Notifications → Setup → WhatsApp section",
             "Business ID + Phone Number ID — provided during onboarding",
-            "API Token — the permanent system-user token (the app uploads it once to the Cloud, where it's stored encrypted — sends then go through the relay and the token is never asked for again)",
-            "Enable — the app registers the phone_number_id and credentials with the Cloud by itself and the bot goes live",
+            "API Token — the permanent system-user token; saving stores it encrypted locally and never shows it again",
+            "Cloud consent — the explicit checkbox authorizes the app to upload the token + phone_number_id once to the Cloud; the Cloud validates the pair with Meta and stores the token encrypted (AES-256-GCM) to send through the relay",
+            "Enable — after consent and the validated upload, the bot goes live; the same screen can revoke the Cloud credentials. Revocation is complete when the app confirms the credentials were deleted from the Cloud; without that confirmation, the local copy and consent are not cleared",
+          ],
+          links: [],
+        },
+        {
+          heading: "Direct-send migration (30 days)",
+          paragraphs: [
+            "The 30-day countdown starts on the first boot of the app version that introduces this migration — even before setup is opened. Shops that have not yet authorized the Cloud see how many days are left on the WhatsApp screen. During this period, a shop whose consented upload has not yet been confirmed can keep sending directly with the local token.",
+            "After the Cloud confirms the credentials, sending moves to the relay. The retained local token is only an audited fallback when the relay fails with a temporary server error (5xx) or a clear connection failure. A timeout does not fall back — this avoids duplicate messages. When the deadline ends, direct app→Meta sending stops; legacy tokens are wiped with an audit event and a token entered after the deadline is kept only until the Cloud confirms the consented upload, never sending directly.",
+            "Shops that already had Cloud credentials before this consent step must explicitly authorize the relay or revoke the credentials when the transition ends.",
           ],
           links: [],
         },
