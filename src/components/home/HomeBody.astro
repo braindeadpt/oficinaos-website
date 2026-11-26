@@ -369,11 +369,11 @@ const check = '<path d="m3.5 8.5 3 3 6-7"/>';
           <a class="hb-btn hb-btn-dark" href={`${proUrl}#beta`}>{t.pro.ctaBeta}</a>
         </div>
       </div>
-      <div class="hb-pro-visual pb-rise" aria-hidden="true">
+      <div class="hb-pro-visual pb-rise">
         <ul class="hb-pro-groups" role="list">
           {t.pro.groups.map((g) => <li>{g}</li>)}
         </ul>
-        <div class="pb-chatcard">
+        <div class="pb-chatcard" aria-hidden="true">
           <div class="pb-chat-head">
             <span class="pb-avatar">LR</span>
             <span>
@@ -394,7 +394,7 @@ const check = '<path d="m3.5 8.5 3 3 6-7"/>';
   </section>
 
   <!-- ============ Privacidade ============ -->
-  <section class="pb-sec" aria-labelledby="hb-privacy">
+  <section id="dados" class="pb-sec" aria-labelledby="hb-privacy">
     <div class="pb-wrap">
       <header class="pb-head">
         <h2 id="hb-privacy" class="pb-h2">{pv.title}</h2>

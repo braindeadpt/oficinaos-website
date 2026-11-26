@@ -45,7 +45,7 @@ const chipClass: Record<string, string> = {
 const noticeText = h.toast.replace(/^[^:]*:\s*/, "");
 ---
 
-<section class="hh" aria-labelledby="hero-title">
+<section class="hh" aria-labelledby="hero-title" data-hh>
   <div class="hh-inner">
     <div class="hh-copy">
       <p class="hh-eyebrow"><span aria-hidden="true"></span>{hh.eyebrow}</p>
@@ -190,13 +190,35 @@ const noticeText = h.toast.replace(/^[^:]*:\s*/, "");
   </div>
 </section>
 
+<script is:inline>
+  // A história só começa quando a fotografia está à vista: se a página abre com a foto abaixo da dobra
+  // (ecrã baixo), as animações ficam em pausa até ela entrar no ecrã. Sem JS, correm logo ao carregar.
+  (function () {
+    var s = document.querySelector("[data-hh]");
+    var stage = s && s.querySelector(".hh-stage");
+    if (!stage || !("IntersectionObserver" in window)) return;
+    if (stage.getBoundingClientRect().top < innerHeight * 0.7) return;
+    s.classList.add("hh-wait");
+    var io = new IntersectionObserver(
+      function (es) {
+        if (es[0].isIntersecting) {
+          s.classList.remove("hh-wait");
+          io.disconnect();
+        }
+      },
+      { threshold: 0.35 },
+    );
+    io.observe(stage);
+  })();
+</script>
+
 <style>
   .hh {
     --hh-bg: #f6f6f3;
     --hh-bg-2: #ffffff;
     --hh-ink: #14171a;
     --hh-ink-2: #5b636b;
-    --hh-ink-3: #8a929a;
+    --hh-ink-3: #646c74; /* 4,9:1 em #f6f6f3 */
     --hh-line: rgb(20 23 26 / 0.09);
     --hh-line-2: rgb(20 23 26 / 0.16);
     --hh-ok: #0b8f63;
@@ -865,6 +887,10 @@ const noticeText = h.toast.replace(/^[^:]*:\s*/, "");
       opacity: 1;
       transform: none;
     }
+  }
+  /* Em pausa até a fotografia entrar no ecrã (classe posta pelo script acima). */
+  .hh-wait .hh-stage * {
+    animation-play-state: paused;
   }
   /* Reduzir movimento: estado final logo à partida. */
   @media (prefers-reduced-motion: reduce) {
