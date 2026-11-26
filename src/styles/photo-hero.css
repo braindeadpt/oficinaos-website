@@ -1,7 +1,7 @@
 /* Herói com fotografia (direção «Oficina limpa»): partilhado pela página inicial (.hh-home) e pelo Pro (.hh-pro).
    Fotografia gerada por IA com os ecrãs de frente; a interface verdadeira é posicionada em percentagem sobre os
-   ecrãs e escala com a caixa (container queries, cqi). A história corre uma vez, em menos de 5 s, só com CSS,
-   e fica em pausa (.hh-wait) até a fotografia entrar no ecrã. */
+   ecrãs e escala com a caixa (container queries, cqi). A história corre uma vez, em menos de 5 s, em animações CSS;
+   um script pequeno (melhoria progressiva) põe-nas em pausa (.hh-wait) até a fotografia entrar no ecrã. */
 .hh {
   --hh-bg: #f6f6f3;
   --hh-bg-2: #ffffff;

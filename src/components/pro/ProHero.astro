@@ -3,9 +3,10 @@
 // Fotografia gerada por IA (o mesmo balcão ao fim do dia, ecrãs de frente e vazios) com a interface
 // verdadeira nos ecrãs. Estrutura e estilo base partilhados com a página inicial (styles/photo-hero.css);
 // aqui ficam só as posições dos ecrãs desta foto e as duas interfaces (WhatsApp e caixa de entrada).
-// A história corre uma vez, em menos de 5 s, só com CSS: a cliente pergunta às 22:41, o assistente
-// escreve e responde com o estado verdadeiro, nos dois ecrãs ao mesmo tempo. «Reduzir movimento»
-// mostra o estado final. CSP: sem estilos inline no HTML.
+// A história corre uma vez, em menos de 5 s, em animações CSS: a cliente pergunta às 22:41, o assistente
+// escreve e responde com o estado verdadeiro, nos dois ecrãs ao mesmo tempo. Um script pequeno (melhoria
+// progressiva) põe-nas em pausa até a fotografia estar à vista; sem JavaScript começam ao carregar.
+// «Reduzir movimento» mostra o estado final. CSP: sem estilos inline; o script entra por hash.
 import type { Copy } from "../../i18n/pt";
 import type { Locale } from "../../i18n/utils";
 import Icon from "../Icon.astro";
