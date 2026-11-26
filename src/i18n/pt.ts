@@ -236,7 +236,7 @@ export const t = {
       {
         name: "OficinaOS Cloud (módulos Pro)",
         to: "Servidores OficinaOS (Oracle Cloud, Japão — transferência ao abrigo da decisão de adequação da UE 2019/419)",
-        what: "Conta e emparelhamento; dados de cada módulo ativo — páginas do portal (com nome do cliente), mensagens WhatsApp recebidas, reservas da montra, diagnósticos enviados, totais diários (multi-loja) e preços partilhados. O token Meta da loja fica cifrado na Cloud para o envio de WhatsApp",
+        what: "Conta e emparelhamento; dados de cada módulo ativo — páginas do portal (com nome do cliente), mensagens WhatsApp recebidas, reservas da montra, diagnósticos enviados, totais diários (multi-loja) e preços partilhados. Nas configurações novas, o token Meta da loja só é guardado cifrado na Cloud depois de autorização explícita, para o envio de WhatsApp; lojas migradas antes desse passo são avisadas para autorizar ou revogar no fim da transição. Uma revogação confirmada apaga a cópia da Cloud e a cópia local",
       },
       {
         name: "Relatórios IA (Pro)",
@@ -250,8 +250,8 @@ export const t = {
       },
       {
         name: "Notificações e bot WhatsApp",
-        to: "Meta, via relay da OficinaOS Cloud",
-        what: "Nº de telefone do cliente + texto da mensagem — transitam pela Cloud sem ficarem guardados nem registados (logs só com id, estado e telefone mascarado)",
+        to: "Meta, normalmente via relay da OficinaOS Cloud; durante a migração de 30 dias uma falha do relay pode usar envio direto app→Meta como fallback auditado",
+        what: "Nº de telefone do cliente + texto da mensagem — no relay transitam pela Cloud sem ficarem guardados nem registados (logs só com id, estado e telefone mascarado). Depois do prazo, o envio oficial sai pelo relay ou não sai",
       },
       {
         name: "SMS e bot SMS (Pro)",
@@ -918,7 +918,7 @@ export const t = {
         {
           heading: "Sem o módulo",
           paragraphs: [
-            "Sem o módulo whatsapp-bot ativo, a app não envia nem recebe nada por WhatsApp — em nenhum transporte (relay Cloud, Meta direto ou Evolution). Os cartões das definições ficam visíveis, mas ao clicar mostram «Esta opção existe apenas no OficinaOS Pro.»",
+            "Sem o módulo whatsapp-bot ativo, a app não envia nem recebe nada por WhatsApp — em nenhum transporte (relay Cloud, Meta direto durante a transição ou Evolution). Os cartões das definições ficam visíveis, mas ao clicar mostram «Esta opção existe apenas no OficinaOS Pro.»",
           ],
           links: [],
         },
@@ -947,13 +947,23 @@ export const t = {
         {
           heading: "Configuração na app (por loja)",
           paragraphs: [
-            "Depois do onboarding Meta (durante o beta, ajudamos nesse passo), a configuração na app são 4 campos:",
+            "Depois do onboarding Meta (durante o beta, ajudamos nesse passo), a configuração na app são 4 campos e um consentimento explícito:",
           ],
           list: [
             "Menu → Notificações → Setup → secção WhatsApp",
             "Business ID + Phone Number ID — fornecidos no onboarding",
-            "API Token — o token permanente do system user (a app envia-o uma vez para a Cloud, onde fica cifrado — os envios saem pelo relay e o token não volta a ser pedido)",
-            "Enabled ligado — a app regista o phone_number_id e as credenciais na Cloud sozinha e o bot fica ativo",
+            "API Token — o token permanente do system user; ao gravar fica cifrado localmente e não volta a aparecer",
+            "Consentimento Cloud — a caixa explícita autoriza a app a enviar o token + phone_number_id uma vez para a Cloud; a Cloud valida o par na Meta e guarda o token cifrado (AES-256-GCM) para enviar pelo relay",
+            "Enabled ligado — depois do consentimento e do upload validado, o bot fica ativo; o mesmo ecrã permite revogar as credenciais Cloud (apaga a cópia da Cloud, a cópia local e o consentimento)",
+          ],
+          links: [],
+        },
+        {
+          heading: "Migração do envio direto (30 dias)",
+          paragraphs: [
+            "Instalações antigas podem usar o token local apenas como fallback auditado durante 30 dias, quando o relay Cloud falha por erro temporário do servidor (5xx) ou falha clara de ligação. Um timeout não faz fallback — evita mensagens duplicadas.",
+            "No fim do prazo o envio direto app→Meta termina. Tokens antigos são apagados com evento de auditoria; um token introduzido depois do prazo fica só até a Cloud confirmar o upload consentido e nunca envia diretamente.",
+            "Quem já tinha credenciais na Cloud antes deste consentimento tem de autorizar explicitamente o relay ou revogar as credenciais quando a transição terminar.",
           ],
           links: [],
         },
