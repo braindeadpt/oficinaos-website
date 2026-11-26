@@ -2289,18 +2289,18 @@ export const t = {
     customer: "Ana Marques",
     ask: "Boa noite! O meu iPhone 13 já está pronto?",
     reply: "Olá Ana! Sim, o iPhone 13 (R-2614) está pronto. Pode levantar amanhã a partir das 9:30. Total: 129,00 €.",
-    inbox: "Caixa de entrada",
+    inbox: "Mensagens",
     closed: "Loja fechada · o assistente responde",
     answered: "Respondido pelo assistente",
     others: [
-      ["Rui Teixeira", "SMS", "Obrigado, até amanhã!"],
+      ["Rui Teixeira", "WhatsApp", "Obrigado, até amanhã!"],
       ["Marta Lopes", "WhatsApp", "Aprovo o orçamento."],
       ["João Pires", "WhatsApp", "A que horas fecham?"],
     ],
     notice: "WhatsApp · Ana Marques",
     noticeText: "Respondido às 22:41, com a loja fechada",
     caption:
-      "Balcão de uma loja de reparações ao fim do dia, já fechada. No telemóvel, uma cliente pergunta no WhatsApp se o iPhone 13 está pronto e o assistente do Pro responde com o estado verdadeiro. No portátil, a mesma conversa na caixa de entrada da loja.",
+      "Balcão de uma loja de reparações ao fim do dia, já fechada. No telemóvel, uma cliente pergunta no WhatsApp se o iPhone 13 está pronto e o assistente do Pro responde com o estado verdadeiro. No portátil, a mesma conversa nas mensagens do WhatsApp da loja.",
   },
   proPage: {
     metaTitle: "OficinaOS Pro — WhatsApp, SMS, portal e IA para oficinas, desde 39 €/mês",

@@ -196,20 +196,22 @@ const noticeText = h.toast.replace(/^[^:]*:\s*/, "");
   // A história só começa quando a fotografia está à vista: se a página abre com a foto abaixo da dobra
   // (ecrã baixo), as animações ficam em pausa até ela entrar no ecrã. Sem JS, correm logo ao carregar.
   (function () {
+    // O alvo é o ecrã do portátil (onde a história acontece), não o topo da fotografia.
     var s = document.querySelector("[data-hh]");
-    var stage = s && s.querySelector(".hh-stage");
-    if (!stage || !("IntersectionObserver" in window)) return;
-    if (stage.getBoundingClientRect().top < innerHeight * 0.7) return;
+    var target = s && s.querySelector(".hh-lap");
+    if (!target || !("IntersectionObserver" in window)) return;
+    var r = target.getBoundingClientRect();
+    if (r.top >= 0 && r.bottom <= innerHeight) return; // ecrã já todo à vista: corre já
     s.classList.add("hh-wait");
     var io = new IntersectionObserver(
       function (es) {
-        if (es[0].isIntersecting) {
+        if (es[0].intersectionRatio >= 0.6) {
           s.classList.remove("hh-wait");
           io.disconnect();
         }
       },
-      { threshold: 0.35 },
+      { threshold: [0, 0.6, 1] },
     );
-    io.observe(stage);
+    io.observe(target);
   })();
 </script>

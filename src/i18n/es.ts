@@ -2263,18 +2263,18 @@ export const t: Copy = {
     customer: "Ana Marques",
     ask: "¡Buenas noches! ¿Mi iPhone 13 ya está listo?",
     reply: "¡Hola Ana! Sí, tu iPhone 13 (R-2614) está listo. Puedes recogerlo mañana desde las 9:30. Total: 129,00 €.",
-    inbox: "Bandeja de entrada",
+    inbox: "Mensajes",
     closed: "Tienda cerrada · el asistente responde",
     answered: "Respondido por el asistente",
     others: [
-      ["Rui Teixeira", "SMS", "¡Gracias, hasta mañana!"],
+      ["Rui Teixeira", "WhatsApp", "¡Gracias, hasta mañana!"],
       ["Marta Lopes", "WhatsApp", "Apruebo el presupuesto."],
       ["João Pires", "WhatsApp", "¿A qué hora cerráis?"],
     ],
     notice: "WhatsApp · Ana Marques",
     noticeText: "Respondido a las 22:41, con la tienda cerrada",
     caption:
-      "Mostrador de un taller de reparaciones al final del día, ya cerrado. En el móvil, una clienta pregunta por WhatsApp si su iPhone 13 está listo y el asistente de Pro responde con el estado real. En el portátil, la misma conversación en la bandeja de entrada del taller.",
+      "Mostrador de un taller de reparaciones al final del día, ya cerrado. En el móvil, una clienta pregunta por WhatsApp si su iPhone 13 está listo y el asistente de Pro responde con el estado real. En el portátil, la misma conversación en los mensajes de WhatsApp del taller.",
   },
   proPage: {
     metaTitle: "OficinaOS Pro — WhatsApp, SMS, portal e IA para talleres, desde 39 €/mes",

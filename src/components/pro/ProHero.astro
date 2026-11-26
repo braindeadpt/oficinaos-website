@@ -2,7 +2,7 @@
 // Herói do Pro (redesenho 2026-11, direção «Oficina limpa»): «a loja fechou, o Pro continua a responder».
 // Fotografia gerada por IA (o mesmo balcão ao fim do dia, ecrãs de frente e vazios) com a interface
 // verdadeira nos ecrãs. Estrutura e estilo base partilhados com a página inicial (styles/photo-hero.css);
-// aqui ficam só as posições dos ecrãs desta foto e as duas interfaces (WhatsApp e caixa de entrada).
+// aqui ficam só as posições dos ecrãs desta foto e as duas interfaces (o WhatsApp da cliente e as mensagens da loja).
 // A história corre uma vez, em menos de 5 s, em animações CSS: a cliente pergunta às 22:41, o assistente
 // escreve e responde com o estado verdadeiro, nos dois ecrãs ao mesmo tempo. Um script pequeno (melhoria
 // progressiva) põe-nas em pausa até a fotografia estar à vista; sem JavaScript começam ao carregar.
@@ -67,7 +67,7 @@ const initials = (n: string) =>
             decoding="async"
           />
 
-          <!-- Portátil: caixa de entrada da loja -->
+          <!-- Portátil: mensagens do WhatsApp da loja (vista do plano base; a caixa única WhatsApp+SMS é o extra Balcão IA) -->
           <div class="hh-lap" aria-hidden="true">
             <div class="hp-app">
               <div class="hp-bar">
@@ -129,6 +129,13 @@ const initials = (n: string) =>
           </div>
         </div>
 
+        <!-- Ecrãs estreitos: a conversa em texto legível (os ecrãs desenhados ficam pequenos demais).
+             aria-hidden: a legenda da figura já diz o mesmo aos leitores de ecrã. -->
+        <div class="hp-transcript" aria-hidden="true">
+          <p class="hp-tr hp-tr-in"><small>{ph.customer} · {ph.time}</small>{ph.ask}</p>
+          <p class="hp-tr hp-tr-out"><small>{ph.answered}</small>{ph.reply}</p>
+        </div>
+
         <!-- Aviso: respondido com a loja fechada -->
         <div class="hh-notice" aria-hidden="true">
           <span class="hh-notice-ico">
@@ -149,21 +156,23 @@ const initials = (n: string) =>
   // A história só começa quando a fotografia está à vista: se a página abre com a foto abaixo da dobra
   // (ecrã baixo), as animações ficam em pausa até ela entrar no ecrã. Sem JS, correm logo ao carregar.
   (function () {
+    // O alvo é o ecrã do portátil (onde a história acontece), não o topo da fotografia.
     var s = document.querySelector("[data-hh]");
-    var stage = s && s.querySelector(".hh-stage");
-    if (!stage || !("IntersectionObserver" in window)) return;
-    if (stage.getBoundingClientRect().top < innerHeight * 0.7) return;
+    var target = s && s.querySelector(".hh-lap");
+    if (!target || !("IntersectionObserver" in window)) return;
+    var r = target.getBoundingClientRect();
+    if (r.top >= 0 && r.bottom <= innerHeight) return; // ecrã já todo à vista: corre já
     s.classList.add("hh-wait");
     var io = new IntersectionObserver(
       function (es) {
-        if (es[0].isIntersecting) {
+        if (es[0].intersectionRatio >= 0.6) {
           s.classList.remove("hh-wait");
           io.disconnect();
         }
       },
-      { threshold: 0.35 },
+      { threshold: [0, 0.6, 1] },
     );
-    io.observe(stage);
+    io.observe(target);
   })();
 </script>
 
@@ -205,7 +214,47 @@ const initials = (n: string) =>
     fill: #fff;
   }
 
-  /* ---- portátil: caixa de entrada (100cqi = largura do ecrã) ---- */
+  /* ---- conversa em texto, só em ecrãs estreitos ---- */
+  .hp-transcript {
+    display: none;
+  }
+  @media (max-width: 40rem) {
+    .hp-transcript {
+      position: relative; /* por cima da parte recortada da fotografia (o invólucro tem margem negativa) */
+      z-index: 1;
+      display: grid;
+      gap: 0.5rem;
+      padding: 0.875rem 0.875rem 0.25rem;
+      background: var(--hh-bg-2);
+    }
+  }
+  .hp-tr {
+    max-width: 88%;
+    padding: 0.6rem 0.8rem;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+    line-height: 1.4;
+  }
+  .hp-tr small {
+    display: block;
+    margin-bottom: 0.15rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--hh-ink-2);
+  }
+  .hp-tr-in {
+    justify-self: start;
+    background: var(--hh-bg);
+    box-shadow: 0 0 0 1px var(--hh-line);
+    border-bottom-left-radius: 0.3rem;
+  }
+  .hp-tr-out {
+    justify-self: end;
+    background: var(--hh-ok-soft);
+    border-bottom-right-radius: 0.3rem;
+  }
+
+  /* ---- portátil: mensagens do WhatsApp (100cqi = largura do ecrã) ---- */
   .hp-app {
     height: 100%;
     display: grid;
@@ -459,8 +508,10 @@ const initials = (n: string) =>
   .hp-dot {
     animation: hp-in 0.3s ease 0.8s both;
   }
-  .hh-pro :global(.hh-notice) {
-    animation-delay: 3.3s;
+  @media (prefers-reduced-motion: no-preference) {
+    .hh-pro :global(.hh-notice) {
+      animation-delay: 3.3s;
+    }
   }
   @keyframes hp-in {
     from {

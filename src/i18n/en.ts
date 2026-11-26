@@ -2258,18 +2258,18 @@ export const t: Copy = {
     customer: "Ana Marques",
     ask: "Hi! Is my iPhone 13 ready yet?",
     reply: "Hi Ana! Yes, your iPhone 13 (R-2614) is ready. You can pick it up tomorrow from 9:30. Total: €129.00.",
-    inbox: "Inbox",
+    inbox: "Messages",
     closed: "Shop closed · the assistant replies",
     answered: "Answered by the assistant",
     others: [
-      ["Rui Teixeira", "SMS", "Thanks, see you tomorrow!"],
+      ["Rui Teixeira", "WhatsApp", "Thanks, see you tomorrow!"],
       ["Marta Lopes", "WhatsApp", "I approve the quote."],
       ["João Pires", "WhatsApp", "What time do you close?"],
     ],
     notice: "WhatsApp · Ana Marques",
     noticeText: "Answered at 22:41, with the shop closed",
     caption:
-      "A repair shop counter in the evening, already closed. On the phone, a customer asks on WhatsApp whether her iPhone 13 is ready and the Pro assistant replies with the real status. On the laptop, the same conversation in the shop's inbox.",
+      "A repair shop counter in the evening, already closed. On the phone, a customer asks on WhatsApp whether her iPhone 13 is ready and the Pro assistant replies with the real status. On the laptop, the same conversation in the shop's WhatsApp messages.",
   },
   proPage: {
     metaTitle: "OficinaOS Pro — WhatsApp, SMS, portal and AI for repair shops, from €39/month",

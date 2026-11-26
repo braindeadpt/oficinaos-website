@@ -678,7 +678,8 @@
   }
 }
 /* Em pausa até a fotografia entrar no ecrã (classe posta pelo script acima). */
-.hh-wait .hh-stage * {
+/* Especificidade 0,3,0: ganha aos «animation:» das interfaces de cada herói (estilos do componente). */
+.hh.hh-wait .hh-stage * {
   animation-play-state: paused;
 }
 /* Reduzir movimento: estado final logo à partida. */
