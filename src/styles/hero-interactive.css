@@ -8,8 +8,9 @@
 
 /* ─────────────── 1 · Entrada suave & pulso do eyebrow ─────────────── */
 @media (prefers-reduced-motion: no-preference) {
+  /* Pulso finito (< 5 s, WCAG 2.2.2): chama a atenção na entrada e estabiliza. */
   .hh-home .hh-eyebrow span {
-    animation: hh-beacon 3.2s ease-in-out infinite;
+    animation: hh-beacon 1.8s ease-in-out 2;
   }
   .hh-home .hh-eyebrow {
     animation: hh-glide 0.45s var(--ease-fluid) both;

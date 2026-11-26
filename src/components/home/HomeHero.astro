@@ -46,6 +46,9 @@ const chipClass: Record<string, string> = {
 };
 // Texto do aviso sem o prefixo («Cliente avisado: …»).
 const noticeText = h.toast.replace(/^[^:]*:\s*/, "");
+const announceIntake = `${st.intake} — ${hh.received}: ${hh.receivedSub}.`;
+const announceRepair = `${st["in-repair"]} — ${first.device}: ${hh.repairing}.`;
+const announceDone = `${st.done} — ${hh.ready} (${hh.readySub}). ${hh.notice}: ${noticeText}`;
 ---
 
 <section class="hh hh-home" aria-labelledby="hero-title" data-hh>
@@ -117,15 +120,15 @@ const noticeText = h.toast.replace(/^[^:]*:\s*/, "");
           {hh.tryLabel}
         </span>
         <div class="hh-dock-group" role="group" aria-labelledby="hh-dock-label">
-          <button type="button" class="hh-dock-btn" data-set-state="intake" aria-pressed="false">
+          <button type="button" class="hh-dock-btn" data-set-state="intake" data-announce={announceIntake} aria-pressed="false">
             <span class="hh-dock-pip" aria-hidden="true"></span>
             {st.intake}
           </button>
-          <button type="button" class="hh-dock-btn" data-set-state="in-repair" aria-pressed="false">
+          <button type="button" class="hh-dock-btn" data-set-state="in-repair" data-announce={announceRepair} aria-pressed="true">
             <span class="hh-dock-pip" aria-hidden="true"></span>
             {st["in-repair"]}
           </button>
-          <button type="button" class="hh-dock-btn" data-set-state="done" aria-pressed="true">
+          <button type="button" class="hh-dock-btn" data-set-state="done" data-announce={announceDone} aria-pressed="false">
             <span class="hh-dock-pip" aria-hidden="true"></span>
             {st.done}
           </button>
@@ -243,12 +246,21 @@ const noticeText = h.toast.replace(/^[^:]*:\s*/, "");
     var btns = s.querySelectorAll("[data-set-state]");
     var announce = s.querySelector("[data-hh-live-announce]");
     var order = ["intake", "in-repair", "done"];
-    var current = "done";
+    var current = "in-repair";
     var io = null;
+    var syncTimer = null;
+
+    function clearSync() {
+      if (syncTimer) {
+        clearTimeout(syncTimer);
+        syncTimer = null;
+      }
+    }
 
     function setState(next, interactive) {
       current = next;
       if (interactive) {
+        clearSync();
         if (io) {
           io.disconnect();
           io = null;
@@ -261,9 +273,23 @@ const noticeText = h.toast.replace(/^[^:]*:\s*/, "");
         var active = b.getAttribute("data-set-state") === next;
         b.setAttribute("aria-pressed", active ? "true" : "false");
         if (active && interactive && announce) {
-          announce.textContent = b.textContent ? b.textContent.trim() : "";
+          announce.textContent = b.getAttribute("data-announce") || (b.textContent ? b.textContent.trim() : "");
         }
       });
+    }
+
+    function startStorySync() {
+      if (s.classList.contains("hh-live")) return;
+      if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        setState("done", false);
+        return;
+      }
+      setState("in-repair", false);
+      clearSync();
+      // Sincroniza o botão ativo com o momento em que o chip passa a «Pronto» (1,45 s).
+      syncTimer = setTimeout(function () {
+        if (!s.classList.contains("hh-live")) setState("done", false);
+      }, 1450);
     }
 
     btns.forEach(function (b) {
@@ -282,14 +308,26 @@ const noticeText = h.toast.replace(/^[^:]*:\s*/, "");
     }
 
     var target = s.querySelector(".hh-lap");
-    if (!target || !("IntersectionObserver" in window)) return;
+    if (!target || !("IntersectionObserver" in window)) {
+      startStorySync();
+      return;
+    }
     var r = target.getBoundingClientRect();
-    if (r.top >= 0 && r.bottom <= innerHeight) return;
+    if (r.top >= 0 && r.bottom <= innerHeight) {
+      startStorySync();
+      return;
+    }
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setState("done", false);
+      return;
+    }
+    setState("in-repair", false);
     s.classList.add("hh-wait");
     io = new IntersectionObserver(
       function (es) {
         if (es[0].intersectionRatio >= 0.6) {
           s.classList.remove("hh-wait");
+          startStorySync();
           if (io) {
             io.disconnect();
             io = null;
