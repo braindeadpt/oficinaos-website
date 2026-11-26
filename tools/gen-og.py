@@ -42,8 +42,8 @@ OK = (11, 143, 99)
 OK_SOFT = (223, 245, 234)
 DOT = (215, 217, 212)
 
-# páginas com imagem própria (ogImage) — não gerar
-SKIP = {"livro-de-ponto", "atendimento-ia"}
+# páginas com imagem própria (ogImage) — não gerar. "" = página inicial (de cada língua).
+SKIP = {"", "livro-de-ponto", "atendimento-ia", "pro"}
 
 EYEBROW = {
     "docs": {"pt": "Guia", "en": "Guide", "es": "Guía"},

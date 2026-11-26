@@ -1,4 +1,12 @@
 {
+ "_retired": {
+  "en-7f5b508f31.jpg": null,
+  "en-pro-0a0fdccc33.jpg": null,
+  "es-99f21df2cc.jpg": null,
+  "es-pro-26aca3c395.jpg": null,
+  "home-5ec677cf91.jpg": null,
+  "pro-a1315a7ccd.jpg": null
+ },
  "alternativas-software-oficina": {
   "file": "alternativas-software-oficina-1097b6f7cb.jpg",
   "hash": "1097b6f7cb",
@@ -83,11 +91,6 @@
   "file": "download-74b704c0eb.jpg",
   "hash": "74b704c0eb",
   "title": "Descarregar a OficinaOS"
- },
- "en": {
-  "file": "en-7f5b508f31.jpg",
-  "hash": "7f5b508f31",
-  "title": "Every repair organised, from drop-off to pick-up."
  },
  "en-alternativas-software-oficina": {
   "file": "en-alternativas-software-oficina-f9acb5b516.jpg",
@@ -194,11 +197,6 @@
   "hash": "23398fe4b8",
   "title": "Your data stays in the shop."
  },
- "en-pro": {
-  "file": "en-pro-0a0fdccc33.jpg",
-  "hash": "0a0fdccc33",
-  "title": "Everything your shop needs beyond the counter."
- },
  "en-rastrear-reparacao-cliente": {
   "file": "en-rastrear-reparacao-cliente-1d5e9e2c54.jpg",
   "hash": "1d5e9e2c54",
@@ -238,11 +236,6 @@
   "file": "en-updates-901d1183ae.jpg",
   "hash": "901d1183ae",
   "title": "What's new"
- },
- "es": {
-  "file": "es-99f21df2cc.jpg",
-  "hash": "99f21df2cc",
-  "title": "Cada reparación organizada, de la entrada a la entrega."
  },
  "es-alternativas-software-oficina": {
   "file": "es-alternativas-software-oficina-49f0dc8f1b.jpg",
@@ -349,11 +342,6 @@
   "hash": "dd3087cec3",
   "title": "Los datos se quedan en la tienda."
  },
- "es-pro": {
-  "file": "es-pro-26aca3c395.jpg",
-  "hash": "26aca3c395",
-  "title": "Todo lo que tu taller necesita más allá del mostrador."
- },
  "es-rastrear-reparacao-cliente": {
   "file": "es-rastrear-reparacao-cliente-447d3d3e6f.jpg",
   "hash": "447d3d3e6f",
@@ -394,11 +382,6 @@
   "hash": "e7d7dc118d",
   "title": "Novedades"
  },
- "home": {
-  "file": "home-5ec677cf91.jpg",
-  "hash": "5ec677cf91",
-  "title": "Cada reparação organizada, da entrada à entrega."
- },
  "orcamentos-aprovados-online": {
   "file": "orcamentos-aprovados-online-84e0c32a4c.jpg",
   "hash": "84e0c32a4c",
@@ -418,11 +401,6 @@
   "file": "privacy-916e2ff3c5.jpg",
   "hash": "916e2ff3c5",
   "title": "Os dados ficam na loja."
- },
- "pro": {
-  "file": "pro-a1315a7ccd.jpg",
-  "hash": "a1315a7ccd",
-  "title": "Tudo o que a sua oficina precisa fora do balcão."
  },
  "rastrear-reparacao-cliente": {
   "file": "rastrear-reparacao-cliente-cd92ff2b70.jpg",
