@@ -10,19 +10,10 @@
 /* Fase 3: páginas de produto (/diag, /pro). */
 @import "./products.css";
 @import "./components.css";
+/* Redesenho 2026-11: identidade «Oficina limpa» no site inteiro (sobrepõe os tokens acima). */
+@import "./limpa-tokens.css";
 
-/* Cor do símbolo da marca (quadrado + encaixe pentalobe): #1D4ED8 no claro e no escuro (§2.1). */
-:root {
-  --oos-logo-mark: #1d4ed8;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --oos-logo-mark: #1d4ed8;
-  }
-}
-:root[data-theme="dark"] {
-  --oos-logo-mark: #1d4ed8;
-}
+/* Cor do símbolo da marca: --oos-logo-mark, definida em limpa-tokens.css (grafite; claro no escuro). */
 
 /* Cores do lockup SVG inline — substituem atributos style= para a CSP poder
    servir style-src 'self' sem unsafe-inline. */

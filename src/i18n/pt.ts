@@ -1824,6 +1824,18 @@ export const t = {
       },
     ] as DocsSection[],
   },
+  homeHero: {
+    eyebrow: "Programa grátis para lojas de reparação",
+    shop: "Loja do Rui",
+    track: "Acompanhar reparação",
+    steps: ["Recebido", "A reparar", "Pronto"],
+    repairing: "Em reparação",
+    ready: "Pronto para levantar",
+    readySub: "Hoje até às 19:00",
+    notice: "Mensagem enviada a Ana Marques",
+    caption:
+      "Balcão de uma loja de reparações. No portátil, a lista de reparações da OficinaOS: o iPhone 13 da Ana passa a «Pronto». No telemóvel, a página que a cliente vê muda ao mesmo tempo, e ela recebe o aviso.",
+  },
   home: {
     fork: {
       title: "Tem uma oficina ou loja de reparação?",

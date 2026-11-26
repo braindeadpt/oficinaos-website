@@ -1,0 +1,541 @@
+---
+// Corpo da página inicial (redesenho 2026-11, direção «Oficina limpa»), depois do herói.
+// Ordem: para quem (oficina / outro negócio) → como funciona (5 passos com a interface) → vídeo →
+// produtos → Pro (banda escura) → privacidade → novidades → descarregar.
+// Textos: os mesmos de t.home (PT/EN/ES). Âncoras mantidas: #tour, #produtos, #pro, #novidades, #download.
+// CSP: sem estilos inline no HTML; os scripts são inline (hash).
+import { UPDATES } from "../../data/updates";
+import type { Copy } from "../../i18n/pt";
+import type { Locale } from "../../i18n/utils";
+import { localeUrl } from "../../i18n/utils";
+import { downloadAttrs } from "../../lib/download";
+import { productHref } from "../../lib/products";
+import { formatDate, type ReleaseInfo } from "../../lib/release";
+import Icon from "../Icon.astro";
+import "../../styles/oficina-limpa.css";
+import "../../styles/home-limpa.css";
+
+interface Props {
+  t: Copy;
+  locale: Locale;
+  release: ReleaseInfo | null;
+}
+const { t, locale, release } = Astro.props;
+const home = t.home;
+const f = home.fork;
+const tour = home.tour;
+const ui = tour.ui;
+const e = home.ecosystem;
+const pv = home.privacy;
+const c = home.cta;
+const st = t.ui.status;
+const names = t.nav.productItems;
+const base = import.meta.env.BASE_URL;
+const dl = downloadAttrs(locale);
+const langTag = locale === "pt" ? "pt-PT" : locale === "es" ? "es-ES" : "en-IE";
+const money = new Intl.NumberFormat(langTag, { style: "currency", currency: "EUR" });
+const quoteTotal = ui.quote.lines.reduce((sum, [, v]) => sum + Number(v), 0);
+const imei = "356938108542176";
+const imeiFmt = `${imei.slice(0, 2)} ${imei.slice(2, 8)} ${imei.slice(8, 14)} ${imei.slice(14)}`;
+const proUrl = localeUrl(locale, "/pro/");
+const modules = [
+  { name: t.modulePages.ponto.hero.label, desc: t.nav.moduleItems.ponto, href: localeUrl(locale, "/livro-de-ponto/") },
+  { name: t.modulePages.atendimento.hero.label, desc: t.nav.moduleItems.atendimento, href: localeUrl(locale, "/atendimento-ia/") },
+];
+const dateFmt = new Intl.DateTimeFormat(langTag, { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
+const tierLabel = { free: t.updates.free, pro: t.updates.pro, diag: "Diag" } as const;
+const latest = UPDATES.slice(0, 4);
+const relDate = release ? formatDate(release.date, langTag) : null;
+const check = '<path d="m3.5 8.5 3 3 6-7"/>';
+---
+
+<div class="pb hb">
+  <!-- ============ Para quem ============ -->
+  <section class="pb-sec hb-fork-sec" aria-labelledby="hb-fork">
+    <div class="pb-wrap">
+      <h2 id="hb-fork" class="pb-h2 hb-center">{f.title}</h2>
+      <div class="hb-fork">
+        <div class="pb-card hb-fork-card hb-fork-yes pb-rise">
+          <p class="hb-tag"><span></span>{f.yesLabel}</p>
+          <h3>{f.yesTitle}</h3>
+          <p>{f.yesText}</p>
+          <div class="hb-links">
+            <a class="pb-link" href="#tour">{f.yesCta} <Icon name="arrow" class="h-3.5 w-3.5" /></a>
+            <a class="pb-link" href={proUrl}>{f.yesPro} <Icon name="arrow" class="h-3.5 w-3.5" /></a>
+          </div>
+        </div>
+        <div class="pb-card hb-fork-card pb-rise">
+          <p class="hb-tag hb-tag-alt"><span></span>{f.noLabel}</p>
+          <h3>{f.noTitle}</h3>
+          <ul class="hb-mods" role="list">
+            {
+              modules.map((m) => (
+                <li>
+                  <a href={m.href}>
+                    <span>
+                      <b>{m.name}</b>
+                      <small>{m.desc}</small>
+                    </span>
+                    <Icon name="arrow" class="h-4 w-4" />
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+          <p class="pb-note">{f.noNote}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Como funciona ============ -->
+  <section id="tour" class="pb-sec pb-white" aria-labelledby="hb-tour">
+    <div class="pb-wrap">
+      <header class="pb-head">
+        <h2 id="hb-tour" class="pb-h2">{tour.title}</h2>
+        <p class="pb-lead">{tour.lead}</p>
+      </header>
+
+      <ol class="pb-steps" role="list">
+        {
+          tour.steps.map((step, i) => (
+            <li class:list={["pb-step", i % 2 === 1 && "pb-step-rev"]}>
+              <div class="pb-step-text">
+                <span class="pb-num" aria-hidden="true">{i + 1}</span>
+                <h3>
+                  <span class="sr-only">{tour.stepLabel} {i + 1}: </span>
+                  {step.title}
+                </h3>
+                <p>{step.text}</p>
+              </div>
+              <div class="pb-visual pb-rise" aria-hidden="true">
+                {i === 0 && (
+                  <div class="hb-win">
+                    <p class="hb-win-title">{ui.intake.title}</p>
+                    <div class="hb-fields">
+                      {ui.intake.fields.map(([label, value], j) => (
+                        <p class:list={["hb-field", j === 3 && "is-focus"]}>
+                          <small>{label}</small>
+                          <span>{value}</span>
+                        </p>
+                      ))}
+                    </div>
+                    <p class="hb-hint">
+                      <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="8" r="4" />
+                        <path d="M4 21a8 8 0 0 1 16 0" />
+                      </svg>
+                      {ui.intake.hint}
+                    </p>
+                  </div>
+                )}
+                {i === 1 && (
+                  <div class="hb-win">
+                    <p class="hb-win-title">R-2614 · iPhone 13</p>
+                    <p class="hb-field">
+                      <small>{ui.device.imeiLabel}</small>
+                      <span class="pb-mono hb-imei">{imeiFmt}</span>
+                    </p>
+                    <div class="hb-two">
+                      <p class="hb-field hb-plain">
+                        <small>{ui.device.accessoriesLabel}</small>
+                        <span class="hb-pills">
+                          {ui.device.accessories.map((a) => (
+                            <i>{a}</i>
+                          ))}
+                        </span>
+                      </p>
+                      <p class="hb-field hb-plain">
+                        <small>{ui.device.conditionLabel}</small>
+                        <span>{ui.device.condition}</span>
+                      </p>
+                    </div>
+                    <div class="hb-sign">
+                      <svg viewBox="0 0 144 40">
+                        <path d="M4 30c8-14 14-22 18-18s-6 20 0 18 10-16 16-14-2 14 4 13 8-9 14-9 4 8 10 7 10-5 16-6 12 2 18 1 14-3 20-4" />
+                      </svg>
+                      <span class="hb-okline">
+                        <svg viewBox="0 0 16 16" set:html={check} />
+                        {ui.device.signature}
+                      </span>
+                    </div>
+                  </div>
+                )}
+                {i === 2 && (
+                  <div class="pb-chatcard hb-quote">
+                    <div class="pb-chat-head">
+                      <span class="pb-avatar">LR</span>
+                      <span>
+                        <b>{ui.quote.title}</b>
+                        <small>R-2614 · iPhone 13</small>
+                      </span>
+                    </div>
+                    <div class="hb-quote-body">
+                      {ui.quote.lines.map(([label, value]) => (
+                        <p class="hb-line">
+                          <span>{label}</span>
+                          <span class="pb-mono">{money.format(Number(value))}</span>
+                        </p>
+                      ))}
+                      <p class="hb-line hb-total">
+                        <span>{ui.quote.total}</span>
+                        <span class="pb-mono">{money.format(quoteTotal)}</span>
+                      </p>
+                      <p class="hb-approved">
+                        <span class="hb-okdot">
+                          <svg viewBox="0 0 16 16" set:html={check} />
+                        </span>
+                        <span>
+                          <b>{ui.quote.approved}</b>
+                          <small>{ui.quote.when}</small>
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                )}
+                {i === 3 && (
+                  <div class="hb-win">
+                    <p class="hb-win-title">R-2614 · iPhone 13</p>
+                    <ol class="hb-timeline">
+                      {(["intake", "in-repair", "done"] as const).map((s, j) => (
+                        <li class:list={[j === 2 && "is-now"]}>
+                          <span class="hb-tl-dot" />
+                          <b>{st[s]}</b>
+                          <span class="pb-mono">{ui.repair.times[j]}</span>
+                        </li>
+                      ))}
+                    </ol>
+                    <div class="hb-two hb-sep">
+                      <p class="hb-field hb-plain">
+                        <small>{ui.repair.tech}</small>
+                        <span class="hb-tech">
+                          <i>R</i>
+                          {ui.repair.techName}
+                        </span>
+                      </p>
+                      <p class="hb-field hb-plain">
+                        <small>{ui.repair.stockLabel}</small>
+                        <span class="pb-mono">
+                          <s>3</s> → <b>2</b> {ui.repair.stockUnit}
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                )}
+                {i === 4 && (
+                  <div class="hb-receipt-wrap">
+                    <div class="hb-receipt">
+                      <p class="hb-receipt-title">{ui.receipt.title}</p>
+                      <p class="hb-line">
+                        <span>{ui.receipt.line}</span>
+                        <span>{money.format(quoteTotal)}</span>
+                      </p>
+                      <p class="hb-receipt-paid">{ui.receipt.paid}</p>
+                      <div class="hb-receipt-qr">
+                        <svg viewBox="0 0 21 21" shape-rendering="crispEdges">
+                          <path d="M0 0h7v7H0zM1 1v5h5V1zM2 2h3v3H2zM14 0h7v7h-7zM15 1v5h5V1zM16 2h3v3h-3zM0 14h7v7H0zM1 15v5h5v-5zM2 16h3v3H2zM8 0h2v2H8zM11 1h2v3h-2zM8 4h2v4H8zM9 9h3v2H9zM13 8h2v3h-2zM16 9h3v2h-3zM8 12h2v3H8zM11 13h3v2h-3zM15 12h2v2h-2zM18 13h3v2h-3zM8 16h3v2H8zM12 17h2v4h-2zM15 16h3v2h-3zM19 17h2v4h-2zM9 19h2v2H9zM16 19h2v2h-2zM0 8h2v2H0zM3 9h3v2H3z" />
+                        </svg>
+                        <span>{ui.receipt.warranty}</span>
+                      </div>
+                    </div>
+                    <p class="hb-chipline">
+                      <span class="hb-chip hb-chip-mute">{st.delivered}</span>
+                      <span class="hb-chip hb-chip-pro">{ui.receipt.invoice}</span>
+                    </p>
+                  </div>
+                )}
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ Vídeo ============ -->
+  <section class="pb-sec hb-video-sec" aria-labelledby="hb-video">
+    <div class="pb-wrap">
+      <header class="pb-head hb-row-head">
+        <div>
+          <h2 id="hb-video" class="pb-h2">{home.video.title}</h2>
+          <p class="pb-lead">{home.video.lead}</p>
+        </div>
+        <a class="pb-link" href="https://www.youtube.com/watch?v=y7WhY7DYLOk" target="_blank" rel="noopener">
+          {home.video.youtube}
+          <Icon name="external" class="h-3.5 w-3.5" />
+          <span class="sr-only">({t.footer.externalHint})</span>
+        </a>
+      </header>
+      <div class="js-video hb-video pb-rise" data-src={`${base}video/oficinaos-demo.mp4`} data-label={t.screenshots.videoAria}>
+        <a href={`${base}video/oficinaos-demo.mp4`}>
+          <picture>
+            <source
+              type="image/avif"
+              srcset={`${base}video/oficinaos-demo-poster-640.avif 640w, ${base}video/oficinaos-demo-poster-1280.avif 1280w`}
+              sizes="(min-width: 76rem) 1152px, calc(100vw - 2rem)"
+            />
+            <source
+              type="image/webp"
+              srcset={`${base}video/oficinaos-demo-poster-640.webp 640w, ${base}video/oficinaos-demo-poster-1280.webp 1280w`}
+              sizes="(min-width: 76rem) 1152px, calc(100vw - 2rem)"
+            />
+            <img src={`${base}video/oficinaos-demo-poster-1280.webp`} alt="" width="1280" height="720" loading="lazy" decoding="async" />
+          </picture>
+          <span class="hb-play">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.14v14l11-7z"></path></svg>
+            {home.video.play}
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Produtos ============ -->
+  <section id="produtos" class="pb-sec pb-white" aria-labelledby="hb-eco">
+    <div class="pb-wrap">
+      <header class="pb-head">
+        <h2 id="hb-eco" class="pb-h2">{e.title}</h2>
+        <p class="pb-lead">{e.lead}</p>
+      </header>
+      <ul class="hb-bento" role="list" aria-label={e.listLabel}>
+        <li class="hb-cell hb-cell-wide pb-rise">
+          <a href={localeUrl(locale, "/docs/")}>
+            <p class="hb-cell-name">{names.os.name}</p>
+            <h3>{e.os.title}</h3>
+            <p>{e.os.text}</p>
+            <span class="hb-chips" aria-hidden="true">
+              {(["intake", "waiting-for-parts", "in-repair", "done", "delivered"] as const).map((s) => (
+                <i class={`hb-st-${s}`}>{st[s]}</i>
+              ))}
+            </span>
+          </a>
+        </li>
+        <li class="hb-cell pb-rise">
+          <a href={productHref("diag", locale)}>
+            <p class="hb-cell-name">{names.diag.name}</p>
+            <h3>{e.diag.title}</h3>
+            <p>{e.diag.text}</p>
+            <span class="hb-meter" aria-hidden="true">
+              <small>{e.diag.battery}</small>
+              <b>91%</b>
+              <i><span></span></i>
+              <small>412 {e.diag.cycles}</small>
+            </span>
+          </a>
+        </li>
+        <li class="hb-cell pb-rise">
+          <a href={proUrl}>
+            <p class="hb-cell-name">{names.pro.name}</p>
+            <h3>{e.pro.title}</h3>
+            <p>{e.pro.text}</p>
+            <span class="hb-bubble" aria-hidden="true">
+              {e.pro.bubble}
+              <small>{e.pro.via}</small>
+            </span>
+          </a>
+        </li>
+        <li class="hb-cell hb-cell-wide pb-rise">
+          <a href={productHref("trade", locale)}>
+            <p class="hb-cell-name">{names.trade.name}</p>
+            <h3>{e.trade.title}</h3>
+            <p>{e.trade.text}</p>
+            <span class="hb-trade" aria-hidden="true">
+              {e.trade.rows.map(([item, city]) => (
+                <span>
+                  <b>{item}</b>
+                  <small>{city}</small>
+                </span>
+              ))}
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ Pro ============ -->
+  <section id="pro" class="pb-sec pb-dark hb-pro" aria-labelledby="hb-pro">
+    <div class="pb-wrap pb-split">
+      <div class="pb-split-text">
+        <p class="pb-eyebrow pb-eyebrow-dark"><span></span>OficinaOS Pro · {t.pro.badge}</p>
+        <h2 id="hb-pro" class="pb-h2">{t.pro.title}</h2>
+        <p class="pb-lead">{t.pro.teaser}</p>
+        <p class="pb-note">{t.pro.cloudEngine}</p>
+        <div class="hb-pro-ctas">
+          <a class="hb-btn hb-btn-light" href={proUrl}>
+            {t.pro.more}
+            <Icon name="arrow" class="h-4 w-4" />
+          </a>
+          <a class="hb-btn hb-btn-dark" href={`${proUrl}#beta`}>{t.pro.ctaBeta}</a>
+        </div>
+      </div>
+      <div class="hb-pro-visual pb-rise">
+        <ul class="hb-pro-groups" role="list">
+          {t.pro.groups.map((g) => <li>{g}</li>)}
+        </ul>
+        <div class="pb-chatcard" aria-hidden="true">
+          <div class="pb-chat-head">
+            <span class="pb-avatar">LR</span>
+            <span>
+              <b>{t.homeHero.shop}</b>
+              <small>WhatsApp</small>
+            </span>
+          </div>
+          <div class="pb-chat-feed">
+            <p class="pb-bub pb-bub-in">
+              {e.pro.bubble}
+              <span class="pb-meta">18:02</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <span hidden data-pro-url={proUrl}></span>
+  </section>
+
+  <!-- ============ Privacidade ============ -->
+  <section id="dados" class="pb-sec" aria-labelledby="hb-privacy">
+    <div class="pb-wrap">
+      <header class="pb-head">
+        <h2 id="hb-privacy" class="pb-h2">{pv.title}</h2>
+        <p class="pb-lead">{pv.lead}</p>
+      </header>
+      <div class="hb-data pb-rise">
+        <div class="pb-card hb-data-card">
+          <h3>{pv.localTitle}</h3>
+          <ul role="list">
+            {
+              pv.local.map((x) => (
+                <li>
+                  <svg viewBox="0 0 16 16" aria-hidden="true" set:html={check} />
+                  {x}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div class="pb-card hb-data-card hb-data-opt">
+          <h3>{pv.optionalTitle}</h3>
+          <ul role="list">
+            {
+              pv.optional.map((x) => (
+                <li>
+                  <svg viewBox="0 0 16 16" aria-hidden="true">
+                    <path d="M8 3v10M3 8h10" />
+                  </svg>
+                  {x}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+      <ul class="hb-points" role="list">
+        {
+          pv.points.map(([title, text]) => (
+            <li>
+              <h3>{title}</h3>
+              <p>{text}</p>
+            </li>
+          ))
+        }
+      </ul>
+      <a class="pb-link hb-more" href={localeUrl(locale, "/privacy/")}>
+        {pv.link}
+        <Icon name="arrow" class="h-3.5 w-3.5" />
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ Novidades ============ -->
+  <section id="novidades" class="pb-sec pb-white" aria-labelledby="hb-changelog">
+    <div class="pb-wrap hb-changelog">
+      <div>
+        <h2 id="hb-changelog" class="pb-h2">{home.changelog.title}</h2>
+        <p class="pb-lead">{home.changelog.lead}</p>
+        <a class="pb-link hb-more" href={localeUrl(locale, "/updates/")}>
+          {home.changelog.all}
+          <Icon name="arrow" class="h-3.5 w-3.5" />
+        </a>
+      </div>
+      <ol class="hb-updates" role="list">
+        {
+          latest.map((u) => (
+            <li>
+              <p class="hb-upd-meta">
+                <time datetime={u.date}>{dateFmt.format(new Date(u.date))}</time>
+                <span class={`hb-tier hb-tier-${u.tier}`}>
+                  {tierLabel[u.tier]} · {u.area[locale]}
+                </span>
+              </p>
+              <div>
+                <h3>{u.title[locale]}</h3>
+                <p>{u.desc[locale]}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ Descarregar ============ -->
+  <section id="download" class="pb-sec hb-cta" aria-labelledby="hb-cta">
+    <div class="pb-wrap hb-center">
+      <h2 id="hb-cta" class="pb-h2">{c.title}</h2>
+      <p class="pb-lead">{c.lead}</p>
+      <div class="hb-cta-btn">
+        <a {...dl} class="hb-btn hb-btn-ink">
+          <Icon name="download" class="h-4 w-4" />
+          <span class="dl-v-win">{home.hero.ctaWin}</span>
+          <span class="dl-v-desktop">{home.hero.ctaDesktop}</span>
+          <span class="dl-v-mobile">{home.hero.ctaMobile}</span>
+        </a>
+      </div>
+      {
+        release && (
+          <p class="pb-note">
+            <span class="pb-mono">{release.version}</span>
+            {relDate && ` · ${c.published} ${relDate}`}
+          </p>
+        )
+      }
+      <ul class="hb-cta-links" role="list">
+        <li><a href={`${localeUrl(locale, "/download/")}#docker`}>{c.docker}</a></li>
+        <li><a href={`${localeUrl(locale, "/download/")}#portable`}>{c.portable}</a></li>
+        <li><a href={localeUrl(locale, "/docs/")}>{c.guide}</a></li>
+      </ul>
+    </div>
+  </section>
+</div>
+
+<script is:inline>
+  // Vídeo: troca o poster pelo <video> só depois do clique (nada de autoplay nem preload).
+  document.querySelectorAll(".js-video").forEach(function (wrap) {
+    var link = wrap.querySelector("a");
+    if (!link) return;
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      var v = document.createElement("video");
+      v.src = wrap.getAttribute("data-src");
+      v.controls = true;
+      v.playsInline = true;
+      v.preload = "auto";
+      v.className = "hb-video-el";
+      v.setAttribute("aria-label", wrap.getAttribute("data-label") || "");
+      wrap.replaceChildren(v);
+      var p = v.play();
+      if (p && p.catch) p.catch(function () {});
+      v.focus();
+    });
+  });
+  // Resposta do formulário do beta: a Cloud volta para /<idioma>/?beta=…#pro → seguir para /pro/#beta.
+  (function () {
+    var status = new URLSearchParams(location.search).get("beta");
+    var el = document.querySelector("[data-pro-url]");
+    var target = el && el.getAttribute("data-pro-url");
+    if (status && target && /^(ok|invalid|rate([-_]?limit(ed)?)?)$/.test(status)) {
+      location.replace(target + "?beta=" + status + "#beta");
+    }
+  })();
+</script>
