@@ -2601,6 +2601,24 @@ export const t = {
     },
   },
   pontoPage: {
+    external: {
+      eyebrow: "Trabalho externo",
+      title: "Quem trabalha fora também pica o ponto.",
+      lead: "Comerciais, técnicos ao domicílio, equipas de obra: escrevem «entrada» no WhatsApp, partilham a localização e, se quiser, uma fotografia do local. Fica registado onde e quando começaram.",
+      points: [
+        { title: "Localização só nesse momento, sem limite de distância", text: "O funcionário partilha a localização atual com um toque; nunca o acompanhamos durante o dia. Quem está marcado como trabalho externo não tem o limite do raio da empresa: o registo fica aprovado com a morada, e a empresa pode preferir que fique «por validar»." },
+        { title: "Fotografia do local, se a empresa pedir", text: "Uma foto do sítio ou do trabalho feito. Fica no WhatsApp da empresa, ou no seu Google Drive ou OneDrive: nós não a guardamos." },
+        { title: "Serve de prova de visita", text: "Hora, morada e foto: o registo mostra ao cliente que a visita aconteceu, e a que horas." },
+      ],
+      chat: {
+        entry: "entrada",
+        location: "Localização atual",
+        address: "Rua da Boavista, 120, Porto",
+        photo: "Foto do local",
+        reply: "Entrada registada às 09:14, Marco. Local: Rua da Boavista, 120 (cliente: Silva & Filhos).",
+      },
+      badge: "Trabalho externo",
+    },
     waitlist: {
       note: "Usamos estes dados só para o contactar sobre o Livro de Ponto.",
       shopPlaceholder: "ex.: Café Central",
@@ -2689,7 +2707,7 @@ export const t = {
       items: [
         { title: "O QR muda a cada 30 segundos", text: "Uma fotografia do QR não serve mais tarde, nem em casa." },
         { title: "Sabemos se o telemóvel está na rede da empresa", text: "Ligado ao Wi-Fi da empresa, o registo fica confirmado automaticamente." },
-        { title: "Fora do Wi-Fi, pedimos a localização", text: "Só nesse momento, nunca durante o dia, e só a localização real do telemóvel. A mais de 100 m da empresa, o registo fica «por validar» e você decide." },
+        { title: "Fora do Wi-Fi, pedimos a localização", text: "Só nesse momento, nunca durante o dia, e só a localização real do telemóvel. Fora do raio da empresa (100 m por defeito, configurável), o registo fica «por validar» e você decide. A exceção é o trabalho externo (ver acima)." },
       ],
       serverTime: "A hora é sempre a do nosso servidor, não a do telemóvel. Ninguém regista «às 9h» se chegou às 9h40.",
     },

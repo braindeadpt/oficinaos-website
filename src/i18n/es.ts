@@ -2575,6 +2575,24 @@ export const t: Copy = {
     },
   },
   pontoPage: {
+    external: {
+      eyebrow: "Trabajo fuera",
+      title: "Quien trabaja fuera también ficha.",
+      lead: "Comerciales, técnicos a domicilio, equipos de obra: escriben «entrada» en WhatsApp, comparten la ubicación y, si quieres, una foto del lugar. Queda registrado dónde y cuándo empezaron.",
+      points: [
+        { title: "Ubicación solo en ese momento, sin límite de distancia", text: "El empleado comparte su ubicación actual con un toque; nunca le seguimos durante el día. Quien está marcado como trabajo fuera no tiene el límite del radio de la empresa: el registro queda aprobado con la dirección, y la empresa puede preferir que quede «por validar»." },
+        { title: "Foto del lugar, si la empresa la pide", text: "Una foto del sitio o del trabajo hecho. Se queda en el WhatsApp de la empresa, o en tu Google Drive u OneDrive: nosotros no la guardamos." },
+        { title: "Sirve de prueba de visita", text: "Hora, dirección y foto: el registro demuestra al cliente que la visita ocurrió, y a qué hora." },
+      ],
+      chat: {
+        entry: "entrada",
+        location: "Ubicación actual",
+        address: "Calle Mayor, 120, Madrid",
+        photo: "Foto del lugar",
+        reply: "Entrada registrada a las 09:14, Marco. Lugar: Calle Mayor, 120 (cliente: Silva e Hijos).",
+      },
+      badge: "Trabajo fuera",
+    },
     waitlist: {
       note: "Solo usamos estos datos para contactarte sobre Livro de Ponto.",
       shopPlaceholder: "ej.: Café Central",
@@ -2663,7 +2681,7 @@ export const t: Copy = {
       items: [
         { title: "El QR cambia cada 30 segundos", text: "Una foto del QR no sirve más tarde, ni desde casa." },
         { title: "Sabemos si el móvil está en la red de la empresa", text: "Conectado al Wi-Fi de la empresa, el registro queda confirmado automáticamente." },
-        { title: "Fuera del Wi-Fi, pedimos la ubicación", text: "Solo en ese momento, nunca durante el día, y solo la ubicación real del móvil. A más de 100 m de la empresa, el registro queda «por validar» y tú decides." },
+        { title: "Fuera del Wi-Fi, pedimos la ubicación", text: "Solo en ese momento, nunca durante el día, y solo la ubicación real del móvil. Fuera del radio de la empresa (100 m por defecto, configurable), el registro queda «por validar» y tú decides. La excepción es el trabajo fuera (ver arriba)." },
       ],
       serverTime: "La hora es siempre la de nuestro servidor, no la del móvil. Nadie ficha «a las 9» si llegó a las 9:40.",
     },

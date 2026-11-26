@@ -248,6 +248,54 @@ const problemIcons = [
     </div>
   </section>
 
+  <!-- ============ Trabalho externo ============ -->
+  <section id="trabalho-externo" class="pb-sec pb-white" aria-labelledby="pb-external">
+    <div class="pb-wrap pb-split">
+      <div class="pb-split-text">
+        <p class="pb-eyebrow"><span></span>{p.external.eyebrow}</p>
+        <h2 id="pb-external" class="pb-h2">{p.external.title}</h2>
+        <p class="pb-lead">{p.external.lead}</p>
+        <ul class="pb-ext-points" role="list">
+          {
+            p.external.points.map((pt) => (
+              <li>
+                <h3>{pt.title}</h3>
+                <p>{pt.text}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div class="pb-visual pb-rise" aria-hidden="true">
+        <div class="pb-chatcard pb-chatcard-lg">
+          <div class="pb-chat-head">
+            <span class="pb-avatar">OC</span>
+            <span><b>{t.pontoHero.phone.contact}</b><small>{t.pontoHero.phone.contactSub}</small></span>
+          </div>
+          <div class="pb-chat-feed">
+            <p class="pb-bub pb-bub-out">{p.external.chat.entry}</p>
+            <div class="pb-bub pb-bub-out pb-ext-media">
+              <svg class="pb-ext-map" viewBox="0 0 200 96">
+                <rect width="200" height="96" fill="#e9efe9"></rect>
+                <path d="M0 62 L200 48 M70 0 L88 96 M140 0 L124 96 M0 20 L200 30" stroke="#ffffff" stroke-width="7" fill="none"></path>
+                <path d="M0 62 L200 48 M70 0 L88 96" stroke="#d7dfd8" stroke-width="1" fill="none"></path>
+                <path d="M106 18c-9 0-16 7-16 16 0 12 16 28 16 28s16-16 16-28c0-9-7-16-16-16Z" fill="#0b8f63"></path>
+                <circle cx="106" cy="34" r="5.5" fill="#ffffff"></circle>
+              </svg>
+              <span class="pb-ext-cap"><b>{p.external.chat.location}</b>{p.external.chat.address}</span>
+            </div>
+            <div class="pb-bub pb-bub-out pb-ext-media">
+              <img class="pb-ext-photo" src={`${import.meta.env.BASE_URL}images/ponto-externo-foto.webp`} width="432" height="432" alt="" loading="lazy" decoding="async" />
+              <span class="pb-ext-cap"><b>{p.external.chat.photo}</b>09:14</span>
+            </div>
+            <p class="pb-bub pb-bub-in"><b>✓</b> {p.external.chat.reply}</p>
+            <p class="pb-ext-badge">{p.external.badge}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ Reserva por SMS ============ -->
   <section class="pb-sec pb-dark" aria-labelledby="pb-sms">
     <div class="pb-wrap pb-split pb-split-sms">

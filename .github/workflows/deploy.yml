@@ -28,6 +28,9 @@ jobs:
           # Web Analytics → add site. Cookieless; empty → no beacon.
           PUBLIC_CF_BEACON_TOKEN: ${{ vars.PUBLIC_CF_BEACON_TOKEN }}
 
-# Deploy é manual: `bun run build && bunx wrangler deploy` a partir de uma
+      - name: Imagens de partilha em dia (títulos ↔ public/og/pages)
+        run: python3 tools/gen-og.py --check
+# Deploy é manual: `bun run deploy` (build, verificação das imagens de partilha, wrangler deploy e
+# marcação da publicação para a retenção das imagens antigas) a partir de uma
 # máquina com a credencial Cloudflare (ver README). Não há wrangler-action
 # porque o token de conta ainda não está nos secrets do repo.

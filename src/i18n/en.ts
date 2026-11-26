@@ -2570,6 +2570,24 @@ export const t: Copy = {
     },
   },
   pontoPage: {
+    external: {
+      eyebrow: "Off-site work",
+      title: "People who work off-site clock in too.",
+      lead: "Sales reps, home-visit technicians, site crews: they type «in» on WhatsApp, share their location and, if you want, a photo of the site. Where and when they started is recorded.",
+      points: [
+        { title: "Location only at that moment, no distance limit", text: "The employee shares their current location with one tap; we never track anyone during the day. Anyone marked as off-site work has no limit from the company's radius: the record is approved with the address, and the business can choose to mark it «to review» instead." },
+        { title: "Photo of the site, if the business asks", text: "A photo of the place or the work done. It stays in the company's WhatsApp, or in your Google Drive or OneDrive: we don't store it." },
+        { title: "Proof of a customer visit", text: "Time, address and photo: the record shows the customer the visit happened, and when." },
+      ],
+      chat: {
+        entry: "in",
+        location: "Current location",
+        address: "Rua da Boavista, 120, Porto",
+        photo: "Photo of the site",
+        reply: "Clocked in at 09:14, Marco. Location: Rua da Boavista, 120 (customer: Silva & Filhos).",
+      },
+      badge: "Off-site work",
+    },
     waitlist: {
       note: "We only use these details to contact you about Livro de Ponto.",
       shopPlaceholder: "e.g. Central Café",
@@ -2658,7 +2676,7 @@ export const t: Copy = {
       items: [
         { title: "The QR code changes every 30 seconds", text: "A photo of the QR code is useless later, or at home." },
         { title: "We know if the phone is on the company network", text: "On the company Wi-Fi, the record is confirmed automatically." },
-        { title: "Off the Wi-Fi, we ask for the location", text: "Only at that moment, never during the day, and only the phone's real location. More than 100 m from the company, the record is marked «to review» and you decide." },
+        { title: "Off the Wi-Fi, we ask for the location", text: "Only at that moment, never during the day, and only the phone's real location. Outside the company's radius (100 m by default, configurable), the record is marked «to review» and you decide. The exception is off-site work (see above)." },
       ],
       serverTime: "The time always comes from our server, not the phone. Nobody records «9:00» if they arrived at 9:40.",
     },
