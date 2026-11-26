@@ -2251,6 +2251,27 @@ export const t: Copy = {
     productLink: "About OficinaOS Diag",
     docsLink: "Full documentation",
   },
+  proHero: {
+    titleA: "Everything your shop needs",
+    titleB: "beyond the counter.",
+    time: "22:41",
+    customer: "Ana Marques",
+    ask: "Hi! Is my iPhone 13 ready yet?",
+    reply: "Hi Ana! Yes, your iPhone 13 (R-2614) is ready. You can pick it up tomorrow from 9:30. Total: €129.00.",
+    inbox: "Messages",
+    closed: "Shop closed · the assistant replies",
+    answered: "Answered by the assistant",
+    others: [
+      ["Rui Teixeira", "WhatsApp", "Thanks, see you tomorrow!"],
+      ["Marta Lopes", "WhatsApp", "I approve the quote."],
+      ["João Pires", "WhatsApp", "What time do you close?"],
+    ],
+    notice: "WhatsApp · Ana Marques",
+    readConversation: "Read the conversation",
+    noticeText: "Answered at 22:41, with the shop closed",
+    caption:
+      "A repair shop counter in the evening, already closed. On the phone, a customer asks on WhatsApp whether her iPhone 13 is ready and the Pro assistant replies with the real status. On the laptop, the same conversation in the shop's WhatsApp messages.",
+  },
   proPage: {
     metaTitle: "OficinaOS Pro — WhatsApp, SMS, portal and AI for repair shops, from €39/month",
     metaDesc:
