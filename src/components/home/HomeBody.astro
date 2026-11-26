@@ -14,6 +14,7 @@ import { formatDate, type ReleaseInfo } from "../../lib/release";
 import Icon from "../Icon.astro";
 import "../../styles/oficina-limpa.css";
 import "../../styles/home-limpa.css";
+import "../../styles/home-fluid.css";
 
 interface Props {
   t: Copy;
@@ -89,17 +90,43 @@ const check = '<path d="m3.5 8.5 3 3 6-7"/>';
   </section>
 
   <!-- ============ Como funciona ============ -->
-  <section id="tour" class="pb-sec pb-white" aria-labelledby="hb-tour">
+  <section id="tour" class="pb-sec pb-white" aria-labelledby="hb-tour" data-hb-tour>
     <div class="pb-wrap">
       <header class="pb-head">
         <h2 id="hb-tour" class="pb-h2">{tour.title}</h2>
         <p class="pb-lead">{tour.lead}</p>
       </header>
 
-      <ol class="pb-steps" role="list">
+      <div class="hb-tour-nav" role="tablist" aria-label={tour.title}>
         {
           tour.steps.map((step, i) => (
-            <li class:list={["pb-step", i % 2 === 1 && "pb-step-rev"]}>
+            <button
+              type="button"
+              role="tab"
+              id={`hb-tour-tab-${i}`}
+              aria-selected={i === 0 ? "true" : "false"}
+              aria-controls={`hb-tour-panel-${i}`}
+              tabindex={i === 0 ? 0 : -1}
+              class="hb-tour-tab"
+              data-tour-tab={i}
+            >
+              <span class="hb-tour-tab-num" aria-hidden="true">{i + 1}</span>
+              <span>{step.title}</span>
+            </button>
+          ))
+        }
+      </div>
+
+      <div class="pb-steps">
+        {
+          tour.steps.map((step, i) => (
+            <div
+              id={`hb-tour-panel-${i}`}
+              role="tabpanel"
+              data-tour-panel={i}
+              aria-labelledby={`hb-tour-tab-${i}`}
+              class:list={["pb-step", i % 2 === 1 && "pb-step-rev"]}
+            >
               <div class="pb-step-text">
                 <span class="pb-num" aria-hidden="true">{i + 1}</span>
                 <h3>
@@ -245,10 +272,10 @@ const check = '<path d="m3.5 8.5 3 3 6-7"/>';
                   </div>
                 )}
               </div>
-            </li>
+            </div>
           ))
         }
-      </ol>
+      </div>
     </div>
   </section>
 
@@ -298,9 +325,12 @@ const check = '<path d="m3.5 8.5 3 3 6-7"/>';
         <p class="pb-lead">{e.lead}</p>
       </header>
       <ul class="hb-bento" role="list" aria-label={e.listLabel}>
-        <li class="hb-cell hb-cell-wide pb-rise">
+        <li class="hb-cell hb-cell-wide pb-rise" data-product="os">
           <a href={localeUrl(locale, "/docs/")}>
-            <p class="hb-cell-name">{names.os.name}</p>
+            <span class="hb-cell-head">
+              <span class="hb-cell-name"><span class="hb-cell-dot" aria-hidden="true"></span>{names.os.name}</span>
+              <Icon name="arrow" class="hb-cell-arrow" />
+            </span>
             <h3>{e.os.title}</h3>
             <p>{e.os.text}</p>
             <span class="hb-chips" aria-hidden="true">
@@ -310,9 +340,12 @@ const check = '<path d="m3.5 8.5 3 3 6-7"/>';
             </span>
           </a>
         </li>
-        <li class="hb-cell pb-rise">
+        <li class="hb-cell pb-rise" data-product="diag">
           <a href={productHref("diag", locale)}>
-            <p class="hb-cell-name">{names.diag.name}</p>
+            <span class="hb-cell-head">
+              <span class="hb-cell-name"><span class="hb-cell-dot" aria-hidden="true"></span>{names.diag.name}</span>
+              <Icon name="arrow" class="hb-cell-arrow" />
+            </span>
             <h3>{e.diag.title}</h3>
             <p>{e.diag.text}</p>
             <span class="hb-meter" aria-hidden="true">
@@ -323,9 +356,12 @@ const check = '<path d="m3.5 8.5 3 3 6-7"/>';
             </span>
           </a>
         </li>
-        <li class="hb-cell pb-rise">
+        <li class="hb-cell pb-rise" data-product="pro">
           <a href={proUrl}>
-            <p class="hb-cell-name">{names.pro.name}</p>
+            <span class="hb-cell-head">
+              <span class="hb-cell-name"><span class="hb-cell-dot" aria-hidden="true"></span>{names.pro.name}</span>
+              <Icon name="arrow" class="hb-cell-arrow" />
+            </span>
             <h3>{e.pro.title}</h3>
             <p>{e.pro.text}</p>
             <span class="hb-bubble" aria-hidden="true">
@@ -334,9 +370,12 @@ const check = '<path d="m3.5 8.5 3 3 6-7"/>';
             </span>
           </a>
         </li>
-        <li class="hb-cell hb-cell-wide pb-rise">
+        <li class="hb-cell hb-cell-wide pb-rise" data-product="trade">
           <a href={productHref("trade", locale)}>
-            <p class="hb-cell-name">{names.trade.name}</p>
+            <span class="hb-cell-head">
+              <span class="hb-cell-name"><span class="hb-cell-dot" aria-hidden="true"></span>{names.trade.name}</span>
+              <Icon name="arrow" class="hb-cell-arrow" />
+            </span>
             <h3>{e.trade.title}</h3>
             <p>{e.trade.text}</p>
             <span class="hb-trade" aria-hidden="true">
@@ -510,6 +549,43 @@ const check = '<path d="m3.5 8.5 3 3 6-7"/>';
 </div>
 
 <script is:inline>
+  // Tour interativo de 5 passos (WAI-ARIA tabs com teclas de seta; sem JS ficam os 5 passos empilhados).
+  (function () {
+    var root = document.querySelector("[data-hb-tour]");
+    if (!root) return;
+    var tabs = Array.prototype.slice.call(root.querySelectorAll("[data-tour-tab]"));
+    var panels = Array.prototype.slice.call(root.querySelectorAll("[data-tour-panel]"));
+    if (!tabs.length || tabs.length !== panels.length) return;
+    root.classList.add("hb-tour-live");
+    function select(idx, focusTab) {
+      tabs.forEach(function (tab, i) {
+        var active = i === idx;
+        tab.setAttribute("aria-selected", active ? "true" : "false");
+        tab.setAttribute("tabindex", active ? "0" : "-1");
+        if (active && focusTab) tab.focus();
+      });
+      panels.forEach(function (panel, i) {
+        panel.hidden = i !== idx;
+      });
+    }
+    select(0, false);
+    tabs.forEach(function (tab, i) {
+      tab.addEventListener("click", function () {
+        select(i, false);
+      });
+      tab.addEventListener("keydown", function (e) {
+        var next = null;
+        if (e.key === "ArrowRight") next = (i + 1) % tabs.length;
+        else if (e.key === "ArrowLeft") next = (i - 1 + tabs.length) % tabs.length;
+        else if (e.key === "Home") next = 0;
+        else if (e.key === "End") next = tabs.length - 1;
+        if (next !== null) {
+          e.preventDefault();
+          select(next, true);
+        }
+      });
+    });
+  })();
   // Vídeo: troca o poster pelo <video> só depois do clique (nada de autoplay nem preload).
   document.querySelectorAll(".js-video").forEach(function (wrap) {
     var link = wrap.querySelector("a");
