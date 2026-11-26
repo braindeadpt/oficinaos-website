@@ -218,7 +218,7 @@ export const t: Copy = {
     table: [
       {
         name: "OficinaOS Cloud (Pro modules)",
-        to: "OficinaOS servers",
+        to: "OficinaOS servers (Oracle Cloud, Japan — transfer covered by EU adequacy decision 2019/419)",
         what: "Account and pairing; each active module's data — portal pages (with the customer's name), incoming WhatsApp messages, storefront reservations, submitted diagnostics, daily totals (multi-shop) and shared prices. The shop's Meta token is stored encrypted on the Cloud to send WhatsApp on its behalf",
       },
       {
@@ -228,7 +228,7 @@ export const t: Copy = {
       },
       {
         name: "Diag log upload",
-        to: "OficinaOS servers",
+        to: "OficinaOS servers (Oracle Cloud, Japan — transfer covered by EU adequacy decision 2019/419)",
         what: "Only when you press “Send log”: the tail of the diag.log file",
       },
       {
@@ -2450,7 +2450,7 @@ export const t: Copy = {
         ["Installation on your PC or your VPS", "{installation}", "Installation + {supportHours} h of dedicated support in the first {supportDays} days. On-site: travel charged separately. You pay your VPS provider directly."],
         ["Data import from another program", "from {importFrom}", "Customers and repairs from Excel/CSV ({importFrom}) or from another program (subject to review). We start with a free test on a sample."],
         ["Assisted onboarding, training and support", "{hourly}/hour", "Setup alongside you, team training or tailored help. In {block}-minute blocks, minimum {minimum} min."],
-        ["Hosting on our VPS", "{hosting}", "EU server with updates, security and daily backups included."],
+        ["Hosting on our VPS", "{hosting}", "Installed on our server, with updates, security and encrypted daily backups included."],
       ],
       hostingPrice: "{withPro}/month with Pro · {withoutPro}/month without Pro",
       tbd: "to be announced",
@@ -2956,7 +2956,7 @@ export const t: Copy = {
         items: [
           "The AI only sees the business profile and the conversation with that customer.",
           "Conversations aren't used to train AI models.",
-          "Servers in the European Union, kept separate for each business.",
+          "Data kept separate for each business, with encrypted backups.",
           "You can review every conversation in the dashboard and take over any of them.",
         ],
       },

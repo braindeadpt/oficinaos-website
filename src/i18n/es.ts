@@ -218,7 +218,7 @@ export const t: Copy = {
     table: [
       {
         name: "OficinaOS Cloud (módulos Pro)",
-        to: "Servidores de OficinaOS",
+        to: "Servidores de OficinaOS (Oracle Cloud, Japón — transferencia amparada por la decisión de adecuación de la UE 2019/419)",
         what: "Cuenta y emparejamiento; datos de cada módulo activo — páginas del portal (con el nombre del cliente), mensajes de WhatsApp recibidos, reservas del escaparate, diagnósticos enviados, totales diarios (multitienda) y precios compartidos. El token Meta de la tienda queda cifrado en Cloud para enviar WhatsApp en su nombre",
       },
       {
@@ -228,7 +228,7 @@ export const t: Copy = {
       },
       {
         name: "Envío de log del Diag",
-        to: "Servidores de OficinaOS",
+        to: "Servidores de OficinaOS (Oracle Cloud, Japón — transferencia amparada por la decisión de adecuación de la UE 2019/419)",
         what: "Solo al pulsar «Enviar log»: el final del archivo diag.log",
       },
       {
@@ -2455,7 +2455,7 @@ export const t: Copy = {
         ["Instalación en tu PC o en tu VPS", "{installation}", "Instalación + {supportHours} h de soporte dedicado en los primeros {supportDays} días. Presencial: desplazamiento aparte. La VPS la pagas tú a tu proveedor."],
         ["Importación de datos de otro programa", "desde {importFrom}", "Clientes y reparaciones desde Excel/CSV ({importFrom}) o desde otro programa (previo análisis). Primero hacemos una prueba gratis con una muestra."],
         ["Puesta en marcha asistida, formación y soporte", "{hourly}/hora", "Configuración contigo, formación del equipo o ayuda a medida. En bloques de {block} min, mínimo {minimum} min."],
-        ["Alojamiento en nuestra VPS", "{hosting}", "Servidor en la UE con actualizaciones, seguridad y copias de seguridad diarias incluidas."],
+        ["Alojamiento en nuestra VPS", "{hosting}", "Instalación en nuestro servidor, con actualizaciones, seguridad y copias de seguridad diarias cifradas incluidas."],
       ],
       hostingPrice: "{withPro}/mes con el Pro · {withoutPro}/mes sin el Pro",
       tbd: "por anunciar",
@@ -2961,7 +2961,7 @@ export const t: Copy = {
         items: [
           "La IA solo ve la ficha de la empresa y la conversación con ese cliente.",
           "Las conversaciones no se usan para entrenar modelos de IA.",
-          "Servidores en la Unión Europea, separados por empresa.",
+          "Datos separados por empresa, con copias de seguridad cifradas.",
           "Puedes revisar todas las conversaciones en el panel y tomar el control de cualquiera.",
         ],
       },
