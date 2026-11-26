@@ -3042,6 +3042,7 @@ export const t = {
     metaTitle: "Preços — OficinaOS grátis, OficinaOS Pro desde 39 €/mês, extras e serviços",
     metaDesc:
       "Todos os preços da OficinaOS num só sítio: programa grátis, OficinaOS Pro com ou sem IA incluída, extras (Livro de Ponto, Balcão IA, WhatsApp oficial), serviços e calculadora.",
+    cards: { freeBadge: "Grátis para sempre", eyebrow: "Preços", calcEyebrow: "Calculadora" },
     hero: {
       title: "Preços simples, sem surpresas",
       lead: "O programa é grátis. O OficinaOS Pro tem uma base com quase tudo e extras só para quem precisa. Faça as contas na calculadora.",

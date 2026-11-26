@@ -1,7 +1,9 @@
 ---
-// /precos: todos os preços num só sítio + calculadora. Números só de src/lib/pricing.ts.
-// A calculadora é um <script is:inline> (CSP com hash automático, sem fetch, sem estilos inline):
-// lê os preços de data-prices e escreve o total. Sem JS, a página continua completa (tabelas).
+// /precos (redesenho 2026-11, direção «Oficina limpa»): cabeçalho → 3 planos em cartões (grátis, Pro sem
+// IA, Pro com IA) + Pro Completo e preço de fundador → calculadora → extras → serviços → outras empresas
+// → FAQ. Números só de src/lib/pricing.ts; textos de t.pricingPage e t.proPage.pricing (PT/EN/ES).
+// A calculadora é um <script is:inline> (CSP com hash, sem fetch, sem estilos inline): lê os preços de
+// data-prices e escreve o total. Sem JS, a página continua completa (cartões e tabelas).
 import type { Copy } from "../../i18n/pt";
 import type { Locale } from "../../i18n/utils";
 import { localeUrl } from "../../i18n/utils";
@@ -11,8 +13,8 @@ import Icon from "../Icon.astro";
 import Nav from "../Nav.astro";
 import DataTable from "../ui/DataTable.astro";
 import Faq from "../ui/Faq.astro";
-import Heading from "../ui/Heading.astro";
-import Section from "../ui/Section.astro";
+import "../../styles/oficina-limpa.css";
+import "../../styles/precos-limpa.css";
 
 interface Props {
   t: Copy;
@@ -28,6 +30,25 @@ const E = pricing.extras;
 const S = pricing.services;
 const eur = (v: number) => euro(locale, v);
 const langTag = locale === "pt" ? "pt-PT" : locale === "es" ? "es-ES" : "en-IE";
+const proUrl = localeUrl(locale, "/pro/");
+
+// Índices de t.pro.modules que são extras (Balcão IA, Livro de Ponto): o resto vem na base.
+const includedCount = t.pro.modules.length - 2;
+const vars = {
+  included: includedCount,
+  shops: P.shopsIncluded,
+  conversations: num(locale, P.conversationsIncluded),
+  days: P.trialDays,
+};
+const included = pr.included.map((x) => fill(x, vars));
+const bundleFull = P.monthlyAiIncluded + A.ponto[0].monthly + A.balcaoIa.monthlyAiIncluded;
+const bundleVars = {
+  saving: eur(Math.round((bundleFull - A.bundleComplete.monthly) * 100) / 100),
+  full: eur(Math.round(bundleFull * 100) / 100),
+  pontoUpTo: A.bundleComplete.pontoUpTo,
+};
+// Linha do plano grátis da tabela de planos (nome, preço, para quem) — reaproveitada no cartão.
+const freeRow = c.plans.rows[0];
 
 const extrasRows = pr.extras.rows.map((r) =>
   r.map((x) =>
@@ -64,9 +85,6 @@ const serviceRows = svc.rows.map((r) =>
     }),
   ),
 );
-const planRows = c.plans.rows.map((r) =>
-  r.map((x) => fill(x, { proAi: eur(P.monthlyAiIncluded), proByok: eur(P.monthlyByok), bundle: eur(A.bundleComplete.monthly) })),
-);
 
 // Dados para a calculadora (só números e rótulos; o script formata no idioma da página).
 const prices = {
@@ -82,169 +100,273 @@ const prices = {
   perMonth: pr.perMonth,
 };
 const jump = [
+  { href: "#planos", label: c.jump.plans },
   { href: "#calculadora", label: c.jump.calc },
-  { href: "#oficinaos", label: c.jump.plans },
   { href: "#extras", label: c.jump.extras },
   { href: "#servicos", label: c.jump.services },
   { href: "#modulos", label: c.jump.modules },
 ];
-const inputBox = "rounded-lg border border-border bg-bg p-4";
-const labelCls = "text-sm font-semibold text-text";
-const selectCls =
-  "mt-2 h-11 w-full rounded-md border border-border-strong bg-surface px-3 text-md text-text outline-none focus:border-focus";
+const check = '<path d="m3.5 8.5 3 3 6-7"/>';
 ---
 
 <Nav t={t} locale={locale} />
-<main id="main" tabindex="-1" data-product="pro">
-  <section class="relative isolate overflow-x-clip" aria-labelledby="pricing-hero-title">
-    <div class="bg-tech-grid tech-grid-fade pointer-events-none absolute inset-0 -z-10" aria-hidden="true"></div>
-    <div class="mx-auto max-w-6xl px-4 pt-10 pb-10 text-center sm:px-6 sm:pt-16">
-      <h1 id="pricing-hero-title" class="mx-auto max-w-3xl text-[clamp(2.25rem,5vw,3.25rem)] leading-[1.05] font-extrabold tracking-[-0.03em] text-balance text-text">
-        {c.hero.title}
-      </h1>
-      <p class="mx-auto mt-5 max-w-2xl text-pretty text-lg text-text-muted">{c.hero.lead}</p>
-      <nav aria-label={c.jump.label} class="mt-8">
-        <ul role="list" class="flex flex-wrap justify-center gap-2">
-          {jump.map((j) => <li><a href={j.href} class="seg-item inline-flex rounded-full border border-border px-3.5 py-1.5 text-sm font-semibold">{j.label}</a></li>)}
+<main id="main" tabindex="-1" class="pb pc">
+  <!-- ============ Cabeçalho ============ -->
+  <section class="pc-hero" aria-labelledby="pricing-hero-title">
+    <div class="pb-wrap pc-hero-inner">
+      <p class="pc-eyebrow"><span aria-hidden="true"></span>{c.cards.eyebrow}</p>
+      <h1 id="pricing-hero-title" class="pc-title">{c.hero.title}</h1>
+      <p class="pc-lead">{c.hero.lead}</p>
+      <nav aria-label={c.jump.label} class="pc-jump">
+        <ul role="list">
+          {jump.map((j) => <li><a href={j.href}>{j.label}</a></li>)}
         </ul>
       </nav>
     </div>
   </section>
 
-  <Section id="calculadora" tone="raised" product="pro" labelledby="calc-title">
-    <Heading id="calc-title">
-      {c.calc.title}
-      <Fragment slot="lead">{c.calc.lead}</Fragment>
-    </Heading>
+  <!-- ============ Planos (cartões) ============ -->
+  <section id="planos" class="pc-plans-sec" aria-labelledby="plans-title">
+    <span id="oficinaos" class="pc-anchor" aria-hidden="true"></span>
+    <div class="pb-wrap">
+      <h2 id="plans-title" class="sr-only">{c.plans.title}</h2>
+      <ul class="pc-plans" role="list">
+        <li class="pc-plan">
+          <p class="pc-plan-tag">{c.cards.freeBadge}</p>
+          <h3>{freeRow[0]}</h3>
+          <p class="pc-price"><b>{freeRow[1]}</b></p>
+          <p class="pc-plan-for">{freeRow[2]}</p>
+          <ul class="pc-feats" role="list">
+            {
+              t.proPage.core.items.map((x) => (
+                <li>
+                  <svg viewBox="0 0 16 16" aria-hidden="true" set:html={check} />
+                  {x}
+                </li>
+              ))
+            }
+          </ul>
+          <a class="pc-btn pc-btn-ghost" href={localeUrl(locale, "/download/")}>{t.proPage.core.link}</a>
+        </li>
 
-    <div id="calc" class="mt-10 grid gap-6 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]" data-prices={JSON.stringify(prices)}>
-      <form class="grid gap-4" aria-label={c.calc.title}>
-        <fieldset class={inputBox}>
-          <legend class={labelCls}>{c.calc.typeLabel}</legend>
-          <div class="mt-2 grid gap-2 sm:grid-cols-2">
-            <label class="flex items-center gap-2 text-base text-text"><input type="radio" name="type" value="shop" checked /> {c.calc.typeShop}</label>
-            <label class="flex items-center gap-2 text-base text-text"><input type="radio" name="type" value="other" /> {c.calc.typeOther}</label>
-          </div>
-        </fieldset>
+        <li class="pc-plan">
+          <p class="pc-plan-tag">{pr.planName}</p>
+          <h3>{pr.optionByok.title}</h3>
+          <p class="pc-price"><b>{eur(P.monthlyByok)}</b><span>{pr.perMonth}</span></p>
+          <p class="pc-vat">{pr.vat}</p>
+          <p class="pc-plan-for">{pr.optionByok.text}</p>
+          <ul class="pc-feats" role="list">
+            {
+              included
+                .filter((_, i) => i !== 4)
+                .map((x) => (
+                  <li>
+                    <svg viewBox="0 0 16 16" aria-hidden="true" set:html={check} />
+                    {x}
+                  </li>
+                ))
+            }
+          </ul>
+          <a class="pc-btn pc-btn-ghost" href={`${proUrl}#beta`}>{fill(pr.cta, vars)}</a>
+        </li>
 
-        <div class="grid gap-4" data-shop-only>
-          <fieldset class={inputBox}>
-            <legend class={labelCls}>{c.calc.aiLabel}</legend>
-            <div class="mt-2 grid gap-2 sm:grid-cols-2">
-              <label class="flex items-center gap-2 text-base text-text"><input type="radio" name="ai" value="ai" checked /> {pr.optionAi.title}</label>
-              <label class="flex items-center gap-2 text-base text-text"><input type="radio" name="ai" value="own" /> {pr.optionByok.title}</label>
-            </div>
-          </fieldset>
-
-          <div class="grid gap-4 sm:grid-cols-2">
-            <label class:list={[inputBox, labelCls, "block"]}>
-              {c.calc.shopsLabel}
-              <select name="shops" class={selectCls}>
-                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => <option value={n}>{n}</option>)}
-              </select>
-            </label>
-            <label class:list={[inputBox, labelCls, "block"]}>
-              {c.calc.pontoLabel}
-              <select name="ponto" class={selectCls}>
-                <option value="0">{c.calc.pontoNone}</option>
-                {A.ponto.map((tier, i) => <option value={i + 1}>{fill(c.calc.pontoTier, { n: tier.upTo })}</option>)}
-              </select>
-            </label>
-          </div>
-
-          <fieldset class={inputBox}>
-            <legend class={labelCls}>{c.calc.extrasLabel}</legend>
-            <div class="mt-2 grid gap-2">
-              <label class="flex items-start gap-2 text-base text-text"><input type="checkbox" name="balcao" class="mt-1.5" /> <span>{c.calc.balcaoLabel}</span></label>
-              <label class="flex items-start gap-2 text-base text-text"><input type="checkbox" name="wa" class="mt-1.5" /> <span>{c.calc.waLabel}</span></label>
-            </div>
-          </fieldset>
-        </div>
-      </form>
-
-      <div class="rounded-xl border-2 border-product bg-bg p-6 shadow-md lg:sticky lg:top-24 lg:self-start" aria-live="polite">
-        <div data-shop-only>
-          <p class="text-sm font-semibold text-text-muted">{c.calc.monthlyLabel}</p>
-          <p class="mt-1 flex items-baseline gap-1">
-            <span id="calc-monthly" class="num font-display text-5xl font-extrabold tracking-[-0.02em] text-text">{eur(P.monthlyAiIncluded)}</span>
-            <span class="text-sm text-text-muted">{pr.perMonth}</span>
-          </p>
-          <p class="mt-1 text-xs text-text-muted">{pr.vat}</p>
-          <p id="calc-bundle" hidden class="mt-3 inline-flex rounded-full bg-product-soft px-2.5 py-0.5 text-xs font-semibold text-on-product-soft">{c.calc.bundleApplied}</p>
-          <ul id="calc-lines" role="list" class="mt-5 space-y-1.5 border-t border-border pt-4 text-sm"></ul>
-          <p id="calc-first-wrap" hidden class="mt-4 rounded-md bg-surface-2 px-3 py-2 text-sm text-text">
-            {c.calc.firstMonthLabel} <strong id="calc-first" class="num"></strong>
-          </p>
-          <a href={`${localeUrl(locale, "/pro/")}#beta`} class="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-md bg-product px-5 text-md font-semibold text-on-product shadow-sm transition-colors hover:bg-product-hover">
-            {fill(pr.cta, { days: P.trialDays })}
+        <li class="pc-plan pc-plan-rec">
+          <p class="pc-plan-tag"><span class="pc-rec">{pr.recommended}</span>{pr.planName}</p>
+          <h3>{pr.optionAi.title}</h3>
+          <p class="pc-price"><b>{eur(P.monthlyAiIncluded)}</b><span>{pr.perMonth}</span></p>
+          <p class="pc-vat">{pr.vat}</p>
+          <p class="pc-plan-for">{pr.optionAi.text}</p>
+          <ul class="pc-feats" role="list">
+            {
+              included.map((x) => (
+                <li>
+                  <svg viewBox="0 0 16 16" aria-hidden="true" set:html={check} />
+                  {x}
+                </li>
+              ))
+            }
+          </ul>
+          <a class="pc-btn pc-btn-ink" href={`${proUrl}#beta`}>
+            {fill(pr.cta, vars)}
             <Icon name="arrow" class="h-4 w-4" />
           </a>
-          <noscript><p class="mt-3 text-xs text-text-muted">{c.calc.noscript}</p></noscript>
+        </li>
+      </ul>
+      <p class="pc-note">{pr.conversationNote}</p>
+
+      <!-- Pro Completo + fundador -->
+      <div class="pc-offers">
+        <div class="pc-offer pc-offer-dark">
+          <p class="pc-offer-badge">{fill(pr.bundle.badge, bundleVars)}</p>
+          <h3>{pr.bundle.title}</h3>
+          <p>{fill(pr.bundle.text, bundleVars)}</p>
+          <p class="pc-price pc-price-inv">
+            <b>{eur(A.bundleComplete.monthly)}</b><span>{pr.perMonth}</span>
+            <s>{fill(pr.bundle.instead, bundleVars)}</s>
+          </p>
+          <a class="pc-btn pc-btn-light" href={`${proUrl}#beta`}>
+            {pr.bundle.cta}
+            <Icon name="arrow" class="h-4 w-4" />
+          </a>
         </div>
-        <div data-other-only hidden>
-          <p class="font-display text-lg font-bold text-text">{c.calc.otherTitle}</p>
-          <p class="mt-2 text-base text-text-muted">{c.calc.otherText}</p>
-          <div class="mt-4 grid gap-2">
-            <a href={localeUrl(locale, "/livro-de-ponto/")} class="inline-flex items-center gap-1.5 font-semibold text-link underline underline-offset-4 hover:text-primary-hover">{t.modulePages.ponto.hero.label}<Icon name="arrow" class="h-3.5 w-3.5" /></a>
-            <a href={localeUrl(locale, "/atendimento-ia/")} class="inline-flex items-center gap-1.5 font-semibold text-link underline underline-offset-4 hover:text-primary-hover">{t.modulePages.atendimento.hero.label}<Icon name="arrow" class="h-3.5 w-3.5" /></a>
+        <div class="pc-offer">
+          <p class="pc-offer-badge pc-offer-badge-ok">{pr.founder.title}</p>
+          <p class="pc-offer-text">
+            {fill(pr.founder.text, { slots: P.founder.slots, price: eur(P.founder.monthly), months: P.founder.months })}
+          </p>
+          <a class="pc-link" href={`${proUrl}#beta`}>
+            {pr.founder.cta}
+            <Icon name="arrow" class="h-3.5 w-3.5" />
+          </a>
+        </div>
+      </div>
+      <a class="pb-link" href={proUrl}>
+        {c.plans.more}
+        <Icon name="arrow" class="h-4 w-4" />
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ Calculadora ============ -->
+  <section id="calculadora" class="pb-sec pb-white" aria-labelledby="calc-title">
+    <div class="pb-wrap">
+      <header class="pb-head">
+        <p class="pb-eyebrow"><span></span>{c.cards.calcEyebrow}</p>
+        <h2 id="calc-title" class="pb-h2">{c.calc.title}</h2>
+        <p class="pb-lead">{c.calc.lead}</p>
+      </header>
+
+      <div id="calc" class="pc-calc" data-prices={JSON.stringify(prices)}>
+        <form class="pc-form" aria-label={c.calc.title}>
+          <fieldset class="pc-field">
+            <legend>{c.calc.typeLabel}</legend>
+            <div class="pc-choices">
+              <label class="pc-choice"><input type="radio" name="type" value="shop" checked /><span>{c.calc.typeShop}</span></label>
+              <label class="pc-choice"><input type="radio" name="type" value="other" /><span>{c.calc.typeOther}</span></label>
+            </div>
+          </fieldset>
+
+          <div class="pc-form" data-shop-only>
+            <fieldset class="pc-field">
+              <legend>{c.calc.aiLabel}</legend>
+              <div class="pc-choices">
+                <label class="pc-choice"><input type="radio" name="ai" value="ai" checked /><span>{pr.optionAi.title}</span></label>
+                <label class="pc-choice"><input type="radio" name="ai" value="own" /><span>{pr.optionByok.title}</span></label>
+              </div>
+            </fieldset>
+
+            <div class="pc-two">
+              <label class="pc-field pc-select">
+                <span>{c.calc.shopsLabel}</span>
+                <select name="shops">
+                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => <option value={n}>{n}</option>)}
+                </select>
+              </label>
+              <label class="pc-field pc-select">
+                <span>{c.calc.pontoLabel}</span>
+                <select name="ponto">
+                  <option value="0">{c.calc.pontoNone}</option>
+                  {A.ponto.map((tier, i) => <option value={i + 1}>{fill(c.calc.pontoTier, { n: tier.upTo })}</option>)}
+                </select>
+              </label>
+            </div>
+
+            <fieldset class="pc-field">
+              <legend>{c.calc.extrasLabel}</legend>
+              <div class="pc-checks">
+                <label class="pc-check"><input type="checkbox" name="balcao" /><span>{c.calc.balcaoLabel}</span></label>
+                <label class="pc-check"><input type="checkbox" name="wa" /><span>{c.calc.waLabel}</span></label>
+              </div>
+            </fieldset>
+          </div>
+        </form>
+
+        <div class="pc-total" aria-live="polite">
+          <div data-shop-only>
+            <p class="pc-total-label">{c.calc.monthlyLabel}</p>
+            <p class="pc-total-num">
+              <span id="calc-monthly">{eur(P.monthlyAiIncluded)}</span>
+              <small>{pr.perMonth}</small>
+            </p>
+            <p class="pc-vat">{pr.vat}</p>
+            <p id="calc-bundle" hidden class="pc-bundle-chip">{c.calc.bundleApplied}</p>
+            <ul id="calc-lines" role="list" class="pc-lines"></ul>
+            <p id="calc-first-wrap" hidden class="pc-first">
+              {c.calc.firstMonthLabel} <strong id="calc-first"></strong>
+            </p>
+            <a href={`${proUrl}#beta`} class="pc-btn pc-btn-ink pc-btn-block">
+              {fill(pr.cta, { days: P.trialDays })}
+              <Icon name="arrow" class="h-4 w-4" />
+            </a>
+            <noscript><p class="pc-vat">{c.calc.noscript}</p></noscript>
+          </div>
+          <div data-other-only hidden>
+            <p class="pc-other-title">{c.calc.otherTitle}</p>
+            <p class="pc-other-text">{c.calc.otherText}</p>
+            <div class="pc-other-links">
+              <a class="pc-link" href={localeUrl(locale, "/livro-de-ponto/")}>{t.modulePages.ponto.hero.label}<Icon name="arrow" class="h-3.5 w-3.5" /></a>
+              <a class="pc-link" href={localeUrl(locale, "/atendimento-ia/")}>{t.modulePages.atendimento.hero.label}<Icon name="arrow" class="h-3.5 w-3.5" /></a>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </Section>
+  </section>
 
-  <Section id="oficinaos" product="pro" labelledby="plans-title">
-    <Heading id="plans-title">
-      {c.plans.title}
-      <Fragment slot="lead">{c.plans.lead}</Fragment>
-    </Heading>
-    <DataTable class="mt-8" caption={c.plans.title} label={`${c.plans.title} — ${pr.scrollLabel}`} head={c.plans.head} rows={planRows} stack />
-    <a href={localeUrl(locale, "/pro/")} class="mt-5 inline-flex items-center gap-1.5 font-semibold text-link underline underline-offset-4 hover:text-primary-hover">
-      {c.plans.more}
-      <Icon name="arrow" class="h-4 w-4" />
-    </a>
-  </Section>
+  <!-- ============ Extras ============ -->
+  <section id="extras" class="pb-sec" aria-labelledby="extras-title">
+    <div class="pb-wrap">
+      <header class="pb-head">
+        <h2 id="extras-title" class="pb-h2">{pr.extras.title}</h2>
+      </header>
+      <DataTable class="pc-table" caption={pr.extras.caption} label={`${pr.extras.title} — ${pr.scrollLabel}`} head={pr.extras.head} rows={extrasRows} stack />
+      <p class="pb-note">{fill(pr.extras.metaNote, { metaFree: num(locale, E.metaFreeServiceMessages) })}</p>
+    </div>
+  </section>
 
-  <Section id="extras" tone="raised" product="pro" labelledby="extras-title">
-    <Heading id="extras-title">{pr.extras.title}</Heading>
-    <DataTable class="mt-8" caption={pr.extras.caption} label={`${pr.extras.title} — ${pr.scrollLabel}`} head={pr.extras.head} rows={extrasRows} stack />
-    <p class="mt-4 max-w-prose text-sm text-text-muted">{fill(pr.extras.metaNote, { metaFree: num(locale, E.metaFreeServiceMessages) })}</p>
-  </Section>
+  <!-- ============ Serviços ============ -->
+  <section id="servicos" class="pb-sec pb-white" aria-labelledby="svc-title">
+    <div class="pb-wrap">
+      <header class="pb-head">
+        <h2 id="svc-title" class="pb-h2">{svc.title}</h2>
+        <p class="pb-lead">{svc.lead}</p>
+      </header>
+      <DataTable class="pc-table" caption={svc.caption} label={`${svc.title} — ${svc.scrollLabel}`} head={svc.head} rows={serviceRows} stack />
+      <p class="pb-note">{svc.note}</p>
+    </div>
+  </section>
 
-  <Section id="servicos" product="pro" labelledby="svc-title">
-    <Heading id="svc-title">
-      {svc.title}
-      <Fragment slot="lead">{svc.lead}</Fragment>
-    </Heading>
-    <DataTable class="mt-8" caption={svc.caption} label={`${svc.title} — ${svc.scrollLabel}`} head={svc.head} rows={serviceRows} stack />
-    <p class="mt-4 text-sm text-text-muted">{svc.note}</p>
-  </Section>
+  <!-- ============ Outras empresas ============ -->
+  <section id="modulos" class="pb-sec" aria-labelledby="mods-title">
+    <div class="pb-wrap">
+      <header class="pb-head">
+        <h2 id="mods-title" class="pb-h2">{t.proPage.otherBusinesses.title}</h2>
+        <p class="pb-lead">{t.proPage.otherBusinesses.text}</p>
+      </header>
+      <ul role="list" class="pc-mods">
+        {
+          [
+            { m: t.modulePages.ponto, desc: t.nav.moduleItems.ponto, href: localeUrl(locale, "/livro-de-ponto/") },
+            { m: t.modulePages.atendimento, desc: t.nav.moduleItems.atendimento, href: localeUrl(locale, "/atendimento-ia/") },
+          ].map(({ m, desc, href }) => (
+            <li>
+              <a href={href}>
+                <span class="pc-mod-badge">{m.hero.badge}</span>
+                <b>{m.hero.label}</b>
+                <small>{desc}</small>
+                <span class="pc-link">
+                  {t.proPage.otherBusinesses.more}
+                  <Icon name="arrow" class="h-3.5 w-3.5" />
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
 
-  <Section id="modulos" tone="raised" product="pro" labelledby="mods-title">
-    <Heading id="mods-title">
-      {t.proPage.otherBusinesses.title}
-      <Fragment slot="lead">{t.proPage.otherBusinesses.text}</Fragment>
-    </Heading>
-    <ul role="list" class="mt-8 grid gap-4 sm:grid-cols-2">
-      {
-        [
-          { m: t.modulePages.ponto, desc: t.nav.moduleItems.ponto, href: localeUrl(locale, "/livro-de-ponto/") },
-          { m: t.modulePages.atendimento, desc: t.nav.moduleItems.atendimento, href: localeUrl(locale, "/atendimento-ia/") },
-        ].map(({ m, desc, href }) => (
-          <li>
-            <a href={href} class="group flex h-full flex-col rounded-lg border border-border bg-bg p-5 transition-colors hover:border-product">
-              <span class="inline-flex w-fit rounded-full bg-product-soft px-2.5 py-0.5 text-xs font-semibold text-on-product-soft">{m.hero.badge}</span>
-              <span class="mt-3 font-display text-lg font-bold text-text">{m.hero.label}</span>
-              <span class="mt-1 text-sm text-text-muted">{desc}</span>
-              <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-link">{t.proPage.otherBusinesses.more}<Icon name="arrow" class="h-3.5 w-3.5" /></span>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-  </Section>
-
-  <Faq title={c.faq.title} items={c.faq.items} product="pro" />
+  <Faq title={c.faq.title} items={c.faq.items} />
 </main>
 <Footer t={t} locale={locale} />
 
@@ -265,13 +387,11 @@ const selectCls =
 
     function line(label, value) {
       const li = document.createElement("li");
-      li.className = "flex justify-between gap-3";
       const a = document.createElement("span");
-      a.className = "text-text-muted";
       a.textContent = label;
-      const b = document.createElement("span");
-      b.className = "num font-semibold text-text";
+      const b = document.createElement("b");
       b.textContent = fmt(value);
+      if (value < 0) li.className = "is-discount";
       li.append(a, b);
       return li;
     }
@@ -294,16 +414,10 @@ const selectCls =
       items.push([withAi ? L.baseAi : L.baseOwn, base]);
       const extraShops = Math.max(0, shops - P.shopsIncluded);
       if (extraShops) items.push([L.shops.replace("{n}", String(extraShops)), extraShops * P.extraShop]);
-      let ponto = 0;
       if (pontoTier) {
-        ponto = P.ponto[pontoTier - 1].monthly;
-        items.push([L.ponto.replace("{n}", String(P.ponto[pontoTier - 1].upTo)), ponto]);
+        items.push([L.ponto.replace("{n}", String(P.ponto[pontoTier - 1].upTo)), P.ponto[pontoTier - 1].monthly]);
       }
-      let balcaoPrice = 0;
-      if (balcao) {
-        balcaoPrice = withAi ? P.balcao.ai : P.balcao.own;
-        items.push([L.balcao, balcaoPrice]);
-      }
+      if (balcao) items.push([L.balcao, withAi ? P.balcao.ai : P.balcao.own]);
       if (wa) items.push([L.wa, P.wa.monthly]);
 
       let total = items.reduce((s, [, v]) => s + v, 0);
