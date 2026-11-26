@@ -1,0 +1,105 @@
+/*
+ * Identidade «Oficina limpa» (redesenho 2026-11) aplicada ao site inteiro.
+ * Sobrepõe os tokens do Parafuso (tokens.css): branco quente, tinta grafite como cor principal e um
+ * verde de "aprovado" como único acento. Os estados das reparações e os acentos do Diag/Pro/Trade
+ * ficam como estavam. Mesmo padrão duplo de escuro (sistema + data-theme forçado).
+ * Contraste (WCAG 2.x, texto normal ≥ 4,5:1): tinta #14171a em #f6f6f3 ≈ 16:1; texto secundário
+ * #5b636b em #f6f6f3 ≈ 5,6:1; verde #0b7a55 em branco ≈ 5,4:1. Escuro: #eef1f3 em #101316 ≈ 16:1;
+ * #a3acb4 em #101316 ≈ 8:1.
+ */
+:root {
+  --oos-color-bg: #f6f6f3;
+  --oos-color-surface: #ffffff;
+  --oos-color-surface-2: #efefeb;
+  --oos-color-border: #e2e2dd;
+  --oos-color-border-strong: #8a929a;
+  --oos-color-text: #14171a;
+  --oos-color-text-muted: #5b636b;
+  --oos-color-text-subtle: #646c74;
+  --oos-color-primary: #14171a;
+  --oos-color-primary-hover: #2a2f34;
+  --oos-color-on-primary: #ffffff;
+  --oos-color-primary-soft: #ebebe6;
+  --oos-color-on-primary-soft: #14171a;
+  --oos-color-accent: #0b7a55;
+  --oos-color-focus: #0b8f63;
+  --oos-color-link: #14171a;
+  --oos-color-selection: rgb(11 143 99 / 0.18);
+  --oos-color-inverse: #14171a;
+  --oos-color-on-inverse: #f6f6f3;
+  --oos-product-os: #14171a;
+  --oos-product-os-hover: #2a2f34;
+  --oos-product-os-on: #ffffff;
+  --oos-product-os-soft: #ebebe6;
+  --oos-product-os-on-soft: #14171a;
+  --oos-logo-mark: #14171a;
+  --oos-grid-minor: rgb(20 23 26 / 0.035);
+  --oos-grid-major: rgb(20 23 26 / 0.055);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not(.light) {
+    --oos-color-bg: #101316;
+    --oos-color-surface: #171b1f;
+    --oos-color-surface-2: #1d2125;
+    --oos-color-border: #2a3036;
+    --oos-color-border-strong: #78828b;
+    --oos-color-text: #eef1f3;
+    --oos-color-text-muted: #a3acb4;
+    --oos-color-text-subtle: #959ea7;
+    --oos-color-primary: #eef1f3;
+    --oos-color-primary-hover: #ffffff;
+    --oos-color-on-primary: #101316;
+    --oos-color-primary-soft: #23282d;
+    --oos-color-on-primary-soft: #eef1f3;
+    --oos-color-accent: #3ddc97;
+    --oos-color-focus: #3ddc97;
+    --oos-color-link: #eef1f3;
+    --oos-color-selection: rgb(61 220 151 / 0.24);
+    --oos-color-inverse: #eef1f3;
+    --oos-color-on-inverse: #101316;
+    --oos-product-os: #eef1f3;
+    --oos-product-os-hover: #ffffff;
+    --oos-product-os-on: #101316;
+    --oos-product-os-soft: #23282d;
+    --oos-product-os-on-soft: #eef1f3;
+    --oos-logo-mark: #3a4148; /* o símbolo tem um círculo branco: não pode ficar claro */
+    --oos-grid-minor: rgb(255 255 255 / 0.03);
+    --oos-grid-major: rgb(255 255 255 / 0.05);
+  }
+}
+:root[data-theme="dark"],
+:root.dark {
+  --oos-color-bg: #101316;
+  --oos-color-surface: #171b1f;
+  --oos-color-surface-2: #1d2125;
+  --oos-color-border: #2a3036;
+  --oos-color-border-strong: #78828b;
+  --oos-color-text: #eef1f3;
+  --oos-color-text-muted: #a3acb4;
+  --oos-color-text-subtle: #959ea7;
+  --oos-color-primary: #eef1f3;
+  --oos-color-primary-hover: #ffffff;
+  --oos-color-on-primary: #101316;
+  --oos-color-primary-soft: #23282d;
+  --oos-color-on-primary-soft: #eef1f3;
+  --oos-color-accent: #3ddc97;
+  --oos-color-focus: #3ddc97;
+  --oos-color-link: #eef1f3;
+  --oos-color-selection: rgb(61 220 151 / 0.24);
+  --oos-color-inverse: #eef1f3;
+  --oos-color-on-inverse: #101316;
+  --oos-product-os: #eef1f3;
+  --oos-product-os-hover: #ffffff;
+  --oos-product-os-on: #101316;
+  --oos-product-os-soft: #23282d;
+  --oos-product-os-on-soft: #eef1f3;
+  --oos-logo-mark: #3a4148; /* o símbolo tem um círculo branco: não pode ficar claro */
+  --oos-grid-minor: rgb(255 255 255 / 0.03);
+  --oos-grid-major: rgb(255 255 255 / 0.05);
+}
+
+/* Botões principais em pílula, como nas páginas novas. */
+.site-header a.bg-primary,
+.site-header .bg-primary {
+  border-radius: 999px;
+}

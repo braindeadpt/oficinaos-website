@@ -1,20 +1,13 @@
 ---
-// Home (fase 2): hero com UI viva → tour do fluxo (momento «uau») → vídeo (clicar para ver) →
-// ecossistema (bento) → Pro (#pro, curto, leva a /pro) → dados → novidades → descarregar.
+// Página inicial (redesenho 2026-11, «Oficina limpa»): herói com fotografia e interface viva →
+// corpo (para quem, como funciona, vídeo, produtos, Pro, dados, novidades, descarregar).
 import type { Copy } from "../i18n/pt";
 import type { Locale } from "../i18n/utils";
 import { getLatestRelease } from "../lib/release";
 import Footer from "./Footer.astro";
 import Nav from "./Nav.astro";
-import Pro from "./Pro.astro";
-import HomeFork from "./offer/HomeFork.astro";
-import Changelog from "./home/Changelog.astro";
-import DemoVideo from "./home/DemoVideo.astro";
-import DownloadCta from "./home/DownloadCta.astro";
-import Ecosystem from "./home/Ecosystem.astro";
-import FlowTour from "./home/FlowTour.astro";
+import HomeBody from "./home/HomeBody.astro";
 import HomeHero from "./home/HomeHero.astro";
-import HomePrivacy from "./home/HomePrivacy.astro";
 
 interface Props {
   t: Copy;
@@ -27,13 +20,6 @@ const release = await getLatestRelease();
 <Nav t={t} locale={locale} />
 <main id="main" tabindex="-1">
   <HomeHero t={t} locale={locale} release={release} />
-  <HomeFork t={t} locale={locale} />
-  <FlowTour t={t} locale={locale} />
-  <DemoVideo t={t} />
-  <Ecosystem t={t} locale={locale} />
-  <Pro t={t} />
-  <HomePrivacy t={t} locale={locale} />
-  <Changelog t={t} locale={locale} />
-  <DownloadCta t={t} locale={locale} release={release} />
+  <HomeBody t={t} locale={locale} release={release} />
 </main>
 <Footer t={t} locale={locale} />

@@ -1798,6 +1798,18 @@ export const t: Copy = {
       },
     ],
   },
+  homeHero: {
+    eyebrow: "Programa gratis para talleres de reparación",
+    shop: "Taller de Rui",
+    track: "Seguir la reparación",
+    steps: ["Recibido", "Reparando", "Listo"],
+    repairing: "En reparación",
+    ready: "Listo para recoger",
+    readySub: "Hoy hasta las 19:00",
+    notice: "Mensaje enviado a Ana Marques",
+    caption:
+      "Mostrador de un taller de reparaciones. En el portátil, la lista de reparaciones de OficinaOS: el iPhone 13 de Ana pasa a «Listo». En el móvil, la página que ve la clienta cambia a la vez, y ella recibe el aviso.",
+  },
   home: {
     fork: {
       title: "¿Tienes un taller o una tienda de reparación?",

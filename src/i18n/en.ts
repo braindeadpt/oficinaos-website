@@ -1793,6 +1793,18 @@ export const t: Copy = {
       },
     ],
   },
+  homeHero: {
+    eyebrow: "Free software for repair shops",
+    shop: "Rui's Repairs",
+    track: "Track your repair",
+    steps: ["Received", "Repairing", "Ready"],
+    repairing: "In repair",
+    ready: "Ready for pick-up",
+    readySub: "Today until 19:00",
+    notice: "Message sent to Ana Marques",
+    caption:
+      "A repair shop counter. On the laptop, the OficinaOS repair list: Ana's iPhone 13 changes to «Ready». On the phone, the page the customer sees updates at the same time, and she gets notified.",
+  },
   home: {
     fork: {
       title: "Do you run a repair shop?",
