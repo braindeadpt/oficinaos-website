@@ -211,6 +211,15 @@ def main() -> None:
         if bad:
             print(f"Imagens de partilha desatualizadas ou em falta: {', '.join(bad)}. Corre: {RECOVER}")
             sys.exit(1)
+        # Todas as páginas (incluindo as que têm imagem própria, ogImage): o og:image tem de existir em dist/.
+        missing = []
+        for p in sorted(DIST.rglob("index.html")):
+            m = re.search(r'<meta property="og:image" content="https?://[^/]+/([^"]+)"', p.read_text(encoding="utf-8"))
+            if m and not (DIST / m.group(1)).is_file():
+                missing.append(f"{p.parent.relative_to(DIST).as_posix() or '/'} -> {m.group(1)}")
+        if missing:
+            print("og:image aponta para ficheiros que não existem: " + "; ".join(missing))
+            sys.exit(1)
         print("Imagens de partilha em dia.")
         return
     OUT.mkdir(parents=True, exist_ok=True)

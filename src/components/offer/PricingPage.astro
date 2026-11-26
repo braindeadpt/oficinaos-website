@@ -214,7 +214,7 @@ const check = '<path d="m3.5 8.5 3 3 6-7"/>';
           <p class="pc-offer-text">
             {fill(pr.founder.text, { slots: P.founder.slots, price: eur(P.founder.monthly), months: P.founder.months })}
           </p>
-          <a class="pc-link" href={`${proUrl}#beta`}>
+          <a class="pc-link" href={`${proUrl}?fundador=1#beta`}>
             {pr.founder.cta}
             <Icon name="arrow" class="h-3.5 w-3.5" />
           </a>
@@ -366,7 +366,9 @@ const check = '<path d="m3.5 8.5 3 3 6-7"/>';
     </div>
   </section>
 
-  <Faq title={c.faq.title} items={c.faq.items} />
+  <div class="pb-faq">
+    <Faq title={c.faq.title} items={c.faq.items} />
+  </div>
 </main>
 <Footer t={t} locale={locale} />
 
