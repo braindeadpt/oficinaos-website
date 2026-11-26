@@ -1974,7 +1974,7 @@ export const t: Copy = {
       title: "Instálalo hoy y registra la primera reparación",
       lead: "Sin cuenta, sin tarjeta, sin cuotas. Si Windows muestra un aviso, la página de descarga explica qué hacer.",
       docker: "Instalación con Docker",
-      portable: "Versión portátil",
+      portable: "Versión portátil (Windows)",
       guide: "Guía de instalación",
       published: "publicada el",
     },

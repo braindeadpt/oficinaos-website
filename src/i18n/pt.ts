@@ -2000,7 +2000,7 @@ export const t = {
       title: "Instale hoje e registe a primeira reparação",
       lead: "Sem conta, sem cartão, sem mensalidades. Se o Windows mostrar um aviso, a página de download explica o que fazer.",
       docker: "Instalação com Docker",
-      portable: "Versão portátil",
+      portable: "Versão portátil (Windows)",
       guide: "Guia de instalação",
       published: "publicada a",
     },

@@ -1969,7 +1969,7 @@ export const t: Copy = {
       title: "Install today and log your first repair",
       lead: "No account, no card, no monthly fees. If Windows shows a warning, the download page explains what to do.",
       docker: "Install with Docker",
-      portable: "Portable version",
+      portable: "Portable version (Windows)",
       guide: "Installation guide",
       published: "released on",
     },
