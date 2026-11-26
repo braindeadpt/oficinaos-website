@@ -30,33 +30,25 @@ const {
 <figure
   data-product={product}
   class:list={[
-    "ui-frame overflow-hidden rounded-xl border border-border bg-surface text-left",
+    "ui-frame overflow-hidden rounded-2xl border border-border bg-surface text-left",
     elevated && "shadow-lg",
     vt,
     cls,
   ]}
 >
   <div
-    class="flex h-9 select-none items-center gap-2 border-b border-border bg-surface-2 pl-3 text-xs text-text-muted"
+    class="ui-frame-bar flex h-10 select-none items-center gap-3 px-3.5 text-xs text-text-muted"
     aria-hidden="true"
   >
-    <span class="grid h-4 w-4 shrink-0 place-items-center rounded-[4px] bg-product">
-      <span class="h-2 w-2 rounded-full bg-surface"></span>
+    <span class="flex shrink-0 items-center gap-1.5">
+      <span class="ui-frame-dot ui-frame-dot-close"></span>
+      <span class="ui-frame-dot ui-frame-dot-min"></span>
+      <span class="ui-frame-dot ui-frame-dot-max"></span>
     </span>
-    <span class="truncate">
+    <span class="mx-auto flex min-w-0 items-center gap-1.5 truncate pr-10">
+      <span class="h-2 w-2 shrink-0 rounded-full bg-product"></span>
       <span class="font-semibold text-text">{appName}</span>
-      {title && <span> — {title}</span>}
-    </span>
-    <span class="ml-auto flex h-full text-text-subtle">
-      <span class="grid w-10 place-items-center">
-        <svg class="h-3 w-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 6h8" /></svg>
-      </span>
-      <span class="grid w-10 place-items-center">
-        <svg class="h-3 w-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1"><rect x="2.5" y="2.5" width="7" height="7" rx="1" /></svg>
-      </span>
-      <span class="grid w-10 place-items-center">
-        <svg class="h-3 w-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1"><path d="M2.5 2.5l7 7M9.5 2.5l-7 7" /></svg>
-      </span>
+      {title && <span class="truncate text-text-muted">— {title}</span>}
     </span>
   </div>
   <div class="relative">

@@ -67,7 +67,7 @@ const ogImage = new URL(`${import.meta.env.BASE_URL}${ogPath}`, Astro.site);
 ---
 
 <!doctype html>
-<html lang={langAttr}>
+<html lang={langAttr} data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -75,10 +75,11 @@ const ogImage = new URL(`${import.meta.env.BASE_URL}${ogPath}`, Astro.site);
     <meta name="description" content={description} />
     {Astro.props.noindex && <meta name="robots" content="noindex" />}
     <script is:inline>
-      // Tema escolhido no botão do cabeçalho (Automático · Claro · Escuro); evita o «flash».
+      // Tema claro por omissão; respeita escolha guardada em localStorage "oos-theme" (dark | system) antes do primeiro paint.
       try {
         var t = localStorage.getItem("oos-theme");
-        if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+        if (t === "dark") document.documentElement.dataset.theme = "dark";
+        else if (t === "system") delete document.documentElement.dataset.theme;
       } catch (e) {}
     </script>
     <script is:inline>
@@ -102,8 +103,7 @@ const ogImage = new URL(`${import.meta.env.BASE_URL}${ogPath}`, Astro.site);
       })();
     </script>
     <meta name="color-scheme" content="light dark" />
-    <meta name="theme-color" content="#F5F7FB" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#0B1120" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f7f9fc" />
     <link
       rel="preload"
       href={`${import.meta.env.BASE_URL}fonts/inter-latin.woff2`}
