@@ -1825,6 +1825,10 @@ export const t = {
     ] as DocsSection[],
   },
   homeHero: {
+    smartscreen:
+      "O Windows pode mostrar «O Windows protegeu o seu PC»: é normal num programa novo, ainda sem assinatura digital. Clique em «Mais informações» → «Executar mesmo assim».",
+    smartscreenLink: "Ver passo a passo",
+    otherWays: "Outras formas de instalar:",
     eyebrow: "Programa grátis para lojas de reparação",
     shop: "Loja do Rui",
     track: "Acompanhar reparação",

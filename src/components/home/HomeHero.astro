@@ -71,6 +71,20 @@ const noticeText = h.toast.replace(/^[^:]*:\s*/, "");
         <span class="dl-v-desktop">{h.noteDesktop}</span>
         <span class="dl-v-mobile">{h.noteMobile}</span>
       </p>
+      <!-- Instalador ainda sem assinatura digital: avisar ANTES do clique (só para quem está em Windows). -->
+      <p class="hh-warn dl-v-win">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5 15 14H1z"></path><path d="M8 6v3.5M8 11.5v.5"></path></svg>
+        <span>
+          {hh.smartscreen}
+          <a href={`${localeUrl(locale, "/download/")}#dl-steps-title`}>{hh.smartscreenLink}</a>
+        </span>
+      </p>
+      <p class="hh-ways">
+        <span>{hh.otherWays}</span>
+        <a href={`${localeUrl(locale, "/download/")}#docker`}>{t.home.cta.docker}</a>
+        <a href={`${localeUrl(locale, "/download/")}#portable`}>{t.home.cta.portable}</a>
+        <a href={localeUrl(locale, "/docs/")}>{t.home.cta.guide}</a>
+      </p>
 
       <ul class="hh-trust" role="list">
         {

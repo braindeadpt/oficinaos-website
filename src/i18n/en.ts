@@ -1794,6 +1794,10 @@ export const t: Copy = {
     ],
   },
   homeHero: {
+    smartscreen:
+      "Windows may show «Windows protected your PC»: that's normal for a new program that isn't digitally signed yet. Click «More info» → «Run anyway».",
+    smartscreenLink: "See step by step",
+    otherWays: "Other ways to install:",
     eyebrow: "Free software for repair shops",
     shop: "Rui's Repairs",
     track: "Track your repair",
