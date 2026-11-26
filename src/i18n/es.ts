@@ -1799,6 +1799,10 @@ export const t: Copy = {
     ],
   },
   homeHero: {
+    smartscreen:
+      "Windows puede mostrar «Windows protegió su PC»: es normal en un programa nuevo, todavía sin firma digital. Haga clic en «Más información» → «Ejecutar de todas formas».",
+    smartscreenLink: "Ver paso a paso",
+    otherWays: "Otras formas de instalar:",
     eyebrow: "Programa gratis para talleres de reparación",
     shop: "Taller de Rui",
     track: "Seguir la reparación",
@@ -1970,7 +1974,7 @@ export const t: Copy = {
       title: "Instálalo hoy y registra la primera reparación",
       lead: "Sin cuenta, sin tarjeta, sin cuotas. Si Windows muestra un aviso, la página de descarga explica qué hacer.",
       docker: "Instalación con Docker",
-      portable: "Versión portátil",
+      portable: "Versión portátil (Windows)",
       guide: "Guía de instalación",
       published: "publicada el",
     },

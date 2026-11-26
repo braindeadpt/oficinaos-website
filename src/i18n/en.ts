@@ -1794,6 +1794,10 @@ export const t: Copy = {
     ],
   },
   homeHero: {
+    smartscreen:
+      "Windows may show «Windows protected your PC»: that's normal for a new program that isn't digitally signed yet. Click «More info» → «Run anyway».",
+    smartscreenLink: "See step by step",
+    otherWays: "Other ways to install:",
     eyebrow: "Free software for repair shops",
     shop: "Rui's Repairs",
     track: "Track your repair",
@@ -1965,7 +1969,7 @@ export const t: Copy = {
       title: "Install today and log your first repair",
       lead: "No account, no card, no monthly fees. If Windows shows a warning, the download page explains what to do.",
       docker: "Install with Docker",
-      portable: "Portable version",
+      portable: "Portable version (Windows)",
       guide: "Installation guide",
       published: "released on",
     },

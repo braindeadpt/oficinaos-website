@@ -1825,6 +1825,10 @@ export const t = {
     ] as DocsSection[],
   },
   homeHero: {
+    smartscreen:
+      "O Windows pode mostrar «O Windows protegeu o seu PC»: é normal num programa novo, ainda sem assinatura digital. Clique em «Mais informações» → «Executar mesmo assim».",
+    smartscreenLink: "Ver passo a passo",
+    otherWays: "Outras formas de instalar:",
     eyebrow: "Programa grátis para lojas de reparação",
     shop: "Loja do Rui",
     track: "Acompanhar reparação",
@@ -1996,7 +2000,7 @@ export const t = {
       title: "Instale hoje e registe a primeira reparação",
       lead: "Sem conta, sem cartão, sem mensalidades. Se o Windows mostrar um aviso, a página de download explica o que fazer.",
       docker: "Instalação com Docker",
-      portable: "Versão portátil",
+      portable: "Versão portátil (Windows)",
       guide: "Guia de instalação",
       published: "publicada a",
     },
