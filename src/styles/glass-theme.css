@@ -17,7 +17,7 @@
   --oos-color-surface-2: #eef2f7;
   --oos-color-surface-3: #e4eaf3;
   --oos-color-border: rgb(15 23 42 / 0.085);
-  --oos-color-border-strong: rgb(15 23 42 / 0.18);
+  --oos-color-border-strong: #7d899c;
   --oos-color-text: #0f172a;
   --oos-color-text-muted: #475569;
   --oos-color-text-subtle: #5a6678;
@@ -72,7 +72,7 @@
     --oos-color-surface-2: #182132;
     --oos-color-surface-3: #202b40;
     --oos-color-border: rgb(255 255 255 / 0.09);
-    --oos-color-border-strong: rgb(255 255 255 / 0.18);
+    --oos-color-border-strong: #7b889b;
     --oos-color-text: #eef2f7;
     --oos-color-text-muted: #9aa7b8;
     --oos-color-text-subtle: #8b98aa;
@@ -118,7 +118,7 @@
   --oos-color-surface-2: #182132;
   --oos-color-surface-3: #202b40;
   --oos-color-border: rgb(255 255 255 / 0.09);
-  --oos-color-border-strong: rgb(255 255 255 / 0.18);
+  --oos-color-border-strong: #7b889b;
   --oos-color-text: #eef2f7;
   --oos-color-text-muted: #9aa7b8;
   --oos-color-text-subtle: #8b98aa;
@@ -236,6 +236,11 @@
 .site-header {
   padding: 0.625rem 0.75rem 0;
   pointer-events: none;
+}
+
+.site-header > .nav-pop,
+.site-header > .nav-sheet {
+  pointer-events: auto;
 }
 
 @media (min-width: 64rem) {
@@ -432,6 +437,10 @@
   background: var(--glass-bg-strong);
   backdrop-filter: var(--glass-blur-sm);
   -webkit-backdrop-filter: var(--glass-blur-sm);
+  box-shadow: var(--glass-specular);
+}
+
+.ui-frame.shadow-lg {
   box-shadow: var(--glass-specular), var(--glass-shadow-lg);
 }
 
@@ -557,11 +566,12 @@
     animation: none;
   }
   .oos-popover:not(:popover-open),
-  .bento-cell:hover,
-  .hh-btn-primary:hover,
-  .hh-btn-ghost:hover,
-  .site-header .nav-cta:hover,
-  .site-header .nav-icon-btn:active {
+  :root .bento-cell:hover,
+  :root .hh-btn-primary:hover,
+  :root .hh-btn-ghost:hover,
+  :root .site-header .nav-cta:hover,
+  :root .site-header .nav-cta:active,
+  :root .site-header .nav-icon-btn:active {
     transform: none;
   }
   @starting-style {
