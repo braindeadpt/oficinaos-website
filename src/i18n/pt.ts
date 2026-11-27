@@ -1851,7 +1851,7 @@ export const t = {
     tryLabel: "Experimente o estado em direto",
     notice: "Mensagem enviada a Ana Marques",
     caption:
-      "Balcão de uma loja de reparações. No portátil, a lista de reparações da OficinaOS: o iPhone 13 da Ana passa a «Pronto». No telemóvel, a página que a cliente vê muda ao mesmo tempo, e ela recebe o aviso.",
+      "Demonstração da interface OficinaOS: na janela da aplicação, o iPhone 13 da Ana passa a «Pronto»; no telemóvel ao lado, a página de acompanhamento atualiza ao mesmo tempo e surge o aviso enviado à cliente.",
   },
   home: {
     fork: {
@@ -2318,7 +2318,7 @@ export const t = {
     readConversation: "Ler a conversa",
     noticeText: "Respondido às 22:41, com a loja fechada",
     caption:
-      "Balcão de uma loja de reparações ao fim do dia, já fechada. No telemóvel, uma cliente pergunta no WhatsApp se o iPhone 13 está pronto e o assistente do Pro responde com o estado verdadeiro. No portátil, a mesma conversa nas mensagens do WhatsApp da loja.",
+      "Demonstração do OficinaOS Pro com a loja fechada às 22:41: no telemóvel, uma cliente pergunta no WhatsApp se o iPhone 13 está pronto e o assistente responde com o estado verdadeiro; na janela Mensagens da loja aparece a mesma conversa.",
   },
   proPage: {
     metaTitle: "OficinaOS Pro — WhatsApp, SMS, portal e IA para oficinas, desde 39 €/mês",

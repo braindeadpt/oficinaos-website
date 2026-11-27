@@ -1825,7 +1825,7 @@ export const t: Copy = {
     tryLabel: "Prueba el estado en directo",
     notice: "Mensaje enviado a Ana Marques",
     caption:
-      "Mostrador de un taller de reparaciones. En el portátil, la lista de reparaciones de OficinaOS: el iPhone 13 de Ana pasa a «Listo». En el móvil, la página que ve la clienta cambia a la vez, y ella recibe el aviso.",
+      "Demostración de la interfaz de OficinaOS: en la ventana de la aplicación, el iPhone 13 de Ana pasa a «Listo»; en el móvil contiguo, la página de seguimiento se actualiza a la vez y aparece el aviso enviado a la clienta.",
   },
   home: {
     fork: {
@@ -2292,7 +2292,7 @@ export const t: Copy = {
     readConversation: "Leer la conversación",
     noticeText: "Respondido a las 22:41, con la tienda cerrada",
     caption:
-      "Mostrador de un taller de reparaciones al final del día, ya cerrado. En el móvil, una clienta pregunta por WhatsApp si su iPhone 13 está listo y el asistente de Pro responde con el estado real. En el portátil, la misma conversación en los mensajes de WhatsApp del taller.",
+      "Demostración de OficinaOS Pro con la tienda cerrada a las 22:41: en el móvil, una clienta pregunta por WhatsApp si su iPhone 13 está listo y el asistente responde con el estado real; en la ventana Mensajes del taller aparece la misma conversación.",
   },
   proPage: {
     metaTitle: "OficinaOS Pro — WhatsApp, SMS, portal e IA para talleres, desde 39 €/mes",
