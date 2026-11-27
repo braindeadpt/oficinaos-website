@@ -51,7 +51,7 @@ export const ENGINEERING: Record<Locale, EngineeringCopy> = {
     stats: [
       { value: "4", label: "Repositórios", detail: "App · Cloud · Diag · Website" },
       { value: "≥ 95", label: "Lighthouse CI", detail: "Performance, A11y, SEO e Boas práticas" },
-      { value: "MIT", label: "Código aberto", detail: "Self-hosted, zero vendor lock-in" },
+      { value: "MIT", label: "Código aberto", detail: "App, Diag e Website — a Cloud é um serviço gerido opcional" },
       { value: "0", label: "Frameworks JS no site", detail: "Astro estático + CSS nativo" },
     ],
     archTitle: "Quatro peças independentes, fronteiras claras",
@@ -164,7 +164,7 @@ export const ENGINEERING: Record<Locale, EngineeringCopy> = {
     stats: [
       { value: "4", label: "Repositories", detail: "App · Cloud · Diag · Website" },
       { value: "≥ 95", label: "Lighthouse CI", detail: "Performance, A11y, SEO & Best Practices" },
-      { value: "MIT", label: "Open source", detail: "Self-hosted, zero vendor lock-in" },
+      { value: "MIT", label: "Open source", detail: "App, Diag & Website — Cloud is an optional managed service" },
       { value: "0", label: "Site JS frameworks", detail: "Static Astro + native CSS" },
     ],
     archTitle: "Four independent pieces, clear boundaries",
@@ -277,7 +277,7 @@ export const ENGINEERING: Record<Locale, EngineeringCopy> = {
     stats: [
       { value: "4", label: "Repositorios", detail: "App · Cloud · Diag · Website" },
       { value: "≥ 95", label: "Lighthouse CI", detail: "Rendimiento, A11y, SEO y Buenas prácticas" },
-      { value: "MIT", label: "Código abierto", detail: "Autoalojado, sin dependencia de proveedor" },
+      { value: "MIT", label: "Código abierto", detail: "App, Diag y Website — Cloud es un servicio gestionado opcional" },
       { value: "0", label: "Frameworks JS en la web", detail: "Astro estático + CSS nativo" },
     ],
     archTitle: "Cuatro piezas independientes, fronteras claras",
