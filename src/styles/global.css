@@ -14,6 +14,8 @@
 @import "./limpa-tokens.css";
 /* Evolução «Vidro & Luz»: Liquid Glass, tema claro luminoso e navegação flutuante. */
 @import "./glass-theme.css";
+/* PR 5: auroras de produto, pesquisa Spotlight e rodapé translúcido. */
+@import "./products-glass.css";
 
 /* Cor do símbolo da marca: --oos-logo-mark, definida em limpa-tokens.css (grafite; claro no escuro). */
 
