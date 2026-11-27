@@ -11,6 +11,7 @@
   "docs-market-prices-05fc8d57d9.jpg": null,
   "docs-multi-shop-2481f7ef7e.jpg": null,
   "docs-ponto-a3f6ac481f.jpg": null,
+  "docs-ponto-act-05ecb3fec0.jpg": null,
   "docs-portal-85206866b3.jpg": null,
   "docs-remarketing-acf649d609.jpg": null,
   "docs-sms-3f395c80cb.jpg": null,
@@ -29,6 +30,7 @@
   "en-docs-market-prices-f081bd83c1.jpg": null,
   "en-docs-multi-shop-111a8b4913.jpg": null,
   "en-docs-ponto-799a8f570d.jpg": null,
+  "en-docs-ponto-act-ed1f06a1df.jpg": null,
   "en-docs-portal-5ff89eda2a.jpg": null,
   "en-docs-remarketing-d9f7f39d1a.jpg": null,
   "en-docs-sms-d53a453611.jpg": null,
@@ -62,6 +64,7 @@
   "es-docs-market-prices-088fe1d141.jpg": null,
   "es-docs-multi-shop-7def29b046.jpg": null,
   "es-docs-ponto-20ea6a9c2b.jpg": null,
+  "es-docs-ponto-act-e5e95ae187.jpg": null,
   "es-docs-portal-095708e9dc.jpg": null,
   "es-docs-remarketing-61a7ea8a08.jpg": null,
   "es-docs-sms-9e1c638e67.jpg": null,
@@ -153,8 +156,8 @@
   "title": "Livro de ponto"
  },
  "docs-ponto-act": {
-  "file": "docs-ponto-act-05ecb3fec0.jpg",
-  "hash": "05ecb3fec0",
+  "file": "docs-ponto-act-1e72e6cbea.jpg",
+  "hash": "1e72e6cbea",
   "title": "Exportar registos para a ACT"
  },
  "docs-portal": {
@@ -243,8 +246,8 @@
   "title": "Time clock"
  },
  "en-docs-ponto-act": {
-  "file": "en-docs-ponto-act-ed1f06a1df.jpg",
-  "hash": "ed1f06a1df",
+  "file": "en-docs-ponto-act-c680a8a751.jpg",
+  "hash": "c680a8a751",
   "title": "Export records for the ACT"
  },
  "en-docs-portal": {
@@ -403,8 +406,8 @@
   "title": "Libro de horas"
  },
  "es-docs-ponto-act": {
-  "file": "es-docs-ponto-act-e5e95ae187.jpg",
-  "hash": "e5e95ae187",
+  "file": "es-docs-ponto-act-4aa3a6fd1d.jpg",
+  "hash": "4aa3a6fd1d",
   "title": "Exportar registros para la ACT"
  },
  "es-docs-portal": {
