@@ -123,7 +123,6 @@ const check = '<path d="m3.5 8.5 3 3 6-7"/>';
             <div
               id={`hb-tour-panel-${i}`}
               data-tour-panel={i}
-              aria-labelledby={`hb-tour-tab-${i}`}
               class:list={["pb-step", i % 2 === 1 && "pb-step-rev"]}
             >
               <div class="pb-step-text">
@@ -565,6 +564,7 @@ const check = '<path d="m3.5 8.5 3 3 6-7"/>';
       });
       panels.forEach(function (panel, i) {
         panel.setAttribute("role", "tabpanel");
+        panel.setAttribute("aria-labelledby", "hb-tour-tab-" + i);
         panel.setAttribute("tabindex", "0");
         panel.hidden = i !== idx;
       });
