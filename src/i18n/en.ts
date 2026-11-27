@@ -751,6 +751,7 @@ export const t: Copy = {
         ],
         links: [
           { label: "Time clock guide", href: "/en/docs/ponto" },
+          { label: "Export records for the ACT", href: "/en/docs/ponto-act" },
         ],
       },
       {
@@ -1714,6 +1715,72 @@ export const t: Copy = {
           heading: "Settings — switch on, QR and workers",
           paragraphs: [
             "Everything is configured in Settings: enable the module, mark the shop's location on a map and the radius (100 m by default), print the QR as PDF, register workers' phone numbers and post the workers' information text.",
+          ],
+          links: [],
+        },
+      ],
+    },
+    pontoAct: {
+      title: "Export records for the ACT",
+      subtitle:
+        "PDF or Excel generated inside the shop with punches, corrections, validations and totals — helps comply with article 202 of the Portuguese Labour Code.",
+      sections: [
+        {
+          heading: "Where the button is",
+          paragraphs: [
+            "Everything happens in the «Relógio de ponto» menu, on the «Exportar» tab — the period fields are at the top and the «Exportação do registo de tempos de trabalho para a ACT» section further down:",
+          ],
+          list: [
+            "Choose the period — start and end dates, or the «Mês atual» and «Mês anterior» shortcuts;",
+            "If you like, filter by a single worker — by default «Todos os trabalhadores» is exported;",
+            "Press «Exportar PDF para a ACT» or «Exportar Excel para a ACT» — the act-ponto-YYYY-MM-DD_YYYY-MM-DD.pdf (or .xlsx) file is generated on the spot and downloaded to the computer.",
+          ],
+          links: [
+            { label: "Time clock guide", href: "/en/docs/ponto/" },
+          ],
+        },
+        {
+          heading: "What the PDF and Excel include",
+          paragraphs: [
+            "Both formats carry the same content, generated from a consistent read of the database — the punches, the validations and the totals all come from the same snapshot, with no mid-export mixing:",
+          ],
+          table: {
+            head: ["Block", "Contents"],
+            rows: [
+              ["Identification", "Company name, tax number (NIF), address and locality; exported period; export date and time, and who exported"],
+              ["Punches", "Per worker and day: time, type (clock-in, break, return or clock-out), channel (manual, SMS or WhatsApp) and state (approved, pending review or rejected)"],
+              ["Corrections", "The original punch is never replaced — the correction appears linked to it with author, date and reason, and each validation with its decision, author, date and note"],
+              ["Totals", "Total per day (with break minutes), total per working week (Monday to Sunday — weeks cut short by the period are marked as partial) and worker total"],
+              ["Schedule", "Each worker's schedule at export time, or the schedule-exempt mark"],
+              ["Integrity", "SHA-256 content digest — in the footer of every PDF page and in the Excel header"],
+            ],
+          },
+          links: [],
+        },
+        {
+          heading: "Works without internet",
+          paragraphs: [
+            "The export happens entirely inside the shop: the data is read only from the local database and the PDF or Excel is built in the browser itself. Nothing goes through OficinaOS Cloud — the export doesn't even check the plan.",
+            "That's why it works without internet and stays available after the Pro plan ends: in that case the menu is renamed to «Registos de ponto (ACT)» and opens straight on this tab, in read-only mode. The legal 5-year record retention outlives the module.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Handing over the information sheet and registering the delivery",
+          paragraphs: [
+            "Workers must be informed in writing about time tracking. On the «Equipa» tab, the «Informação sobre o registo de ponto» section lists each worker with their delivery status:",
+          ],
+          list: [
+            "«Imprimir folha» generates the individual A4 sheet with the worker's name already filled in; «Imprimir todas as folhas» prepares the sheets of every active worker with the time clock enabled at once. The sheet always prints in Portuguese, with the shop's name and the information text — a GDPR template you can customise in Settings — and carries name, signature and date lines;",
+            "After handing it over, press «Registar folha» and confirm the delivery date — pre-filled with the shop's day, and future dates are refused — and whether the sheet came back signed or not. The record also keeps who entered it;",
+            "Until the delivery is recorded, the worker shows «Folha não entregue» and the time clock panel warns how many active workers haven't received the sheet yet, with a shortcut straight to the «Equipa» tab.",
+          ],
+          links: [],
+        },
+        {
+          heading: "The legal framing",
+          paragraphs: [
+            "The export helps comply with article 202 of the Portuguese Labour Code — the decision and the legal responsibility always belong to the shop. Records are kept for 5 years and the document shows them as they are: pending and rejected records are not hidden, and every correction stays visible with author, date and reason.",
           ],
           links: [],
         },

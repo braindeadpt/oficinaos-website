@@ -21,6 +21,7 @@ export const DOC_MODULES: { slug: string; key: ModuleKey; product: ProductId }[]
   { slug: "multi-shop", key: "multiShop", product: "pro" },
   { slug: "remarketing", key: "remarketing", product: "pro" },
   { slug: "ponto", key: "ponto", product: "pro" },
+  { slug: "ponto-act", key: "pontoAct", product: "pro" },
 ];
 
 /** Quantas secções do guia completo cabem em cada grupo da side-nav (rótulos em t.docs.ui.groups).

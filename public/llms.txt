@@ -90,6 +90,9 @@
 - [WhatsApp remarketing (PT)](https://oficinaos.app/docs/remarketing/): automatic Meta-template message to idle, consenting customers
 - [WhatsApp remarketing (EN)](https://oficinaos.app/en/docs/remarketing/)
 - [WhatsApp remarketing (ES)](https://oficinaos.app/es/docs/remarketing/)
+- [ACT time-record export (PT)](https://oficinaos.app/docs/ponto-act/): PDF/Excel generated locally with punches, corrections, totals and SHA-256 digest — works offline, outlives the Pro plan; worker information sheet delivery tracking
+- [ACT time-record export (EN)](https://oficinaos.app/en/docs/ponto-act/)
+- [ACT time-record export (ES)](https://oficinaos.app/es/docs/ponto-act/)
 
 ## Customer-facing agent interfaces
 
