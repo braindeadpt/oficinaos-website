@@ -770,6 +770,7 @@ export const t = {
         ],
         links: [
           { label: "Guia do livro de ponto", href: "/docs/ponto/" },
+          { label: "Exportar registos para a ACT", href: "/docs/ponto-act/" },
         ],
       },
       {
@@ -1735,6 +1736,72 @@ export const t = {
           heading: "Definições — ativar, QR e funcionários",
           paragraphs: [
             "Tudo se configura em Definições: ativar o módulo, marcar a localização da loja num mapa e o raio (100 m por defeito), imprimir o QR em PDF, registar os telefones dos funcionários e afixar o texto de informação aos trabalhadores.",
+          ],
+          links: [],
+        },
+      ],
+    },
+    pontoAct: {
+      title: "Exportar registos para a ACT",
+      subtitle:
+        "PDF ou Excel gerado na loja com picagens, correções, validações e totais — ajuda a cumprir o art. 202.º do Código do Trabalho.",
+      sections: [
+        {
+          heading: "Onde está o botão",
+          paragraphs: [
+            "Tudo acontece no menu «Relógio de ponto», no separador «Exportar» — os campos de período estão no topo e a secção «Exportação do registo de tempos de trabalho para a ACT» mais abaixo:",
+          ],
+          list: [
+            "Escolha o período — datas de início e fim, ou os atalhos «Mês atual» e «Mês anterior»;",
+            "Se quiser, filtre por um trabalhador — por defeito saem «Todos os trabalhadores»;",
+            "Prima «Exportar PDF para a ACT» ou «Exportar Excel para a ACT» — o ficheiro act-ponto-AAAA-MM-DD_AAAA-MM-DD.pdf (ou .xlsx) é gerado na hora e descarregado para o computador.",
+          ],
+          links: [
+            { label: "Guia do livro de ponto", href: "/docs/ponto/" },
+          ],
+        },
+        {
+          heading: "O que o PDF e o Excel incluem",
+          paragraphs: [
+            "Os dois formatos trazem o mesmo conteúdo, gerado a partir de uma leitura consistente da base de dados — as picagens, as validações e os totais saem todos da mesma fotografia do momento, sem misturas a meio da exportação:",
+          ],
+          table: {
+            head: ["Bloco", "Conteúdo"],
+            rows: [
+              ["Identificação", "Nome da empresa, NIF, morada e localidade; período exportado; data e hora da exportação e quem exportou"],
+              ["Picagens", "Por trabalhador e dia: hora, tipo (entrada, pausa, regresso ou saída), meio (manual, SMS ou WhatsApp) e estado (aprovado, por validar ou recusado)"],
+              ["Correções", "A picagem original nunca é substituída — a correção aparece ligada a ela com autor, data e motivo, e cada validação com decisão, autor, data e nota"],
+              ["Totais", "Total por dia (com os minutos de pausa), total por semana de trabalho (segunda a domingo — as semanas cortadas pelo período vêm marcadas como parciais) e total do trabalhador"],
+              ["Horário", "O horário de cada trabalhador à data da exportação, ou a marca de isento de horário"],
+              ["Integridade", "Resumo SHA-256 do conteúdo — no rodapé de cada página do PDF e no cabeçalho do Excel"],
+            ],
+          },
+          links: [],
+        },
+        {
+          heading: "Funciona sem internet",
+          paragraphs: [
+            "A exportação é feita toda dentro da loja: os dados são lidos apenas da base de dados local e o PDF ou o Excel é construído no próprio browser. Nada passa pela OficinaOS Cloud — a exportação nem sequer verifica o plano.",
+            "Por isso funciona sem internet e continua disponível depois de o plano Pro terminar: nesse caso o menu passa a chamar-se «Registos de ponto (ACT)» e abre diretamente neste separador, em só leitura. A conservação legal dos registos durante 5 anos sobrevive ao fim do módulo.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Entregar a folha de informação e registar a entrega",
+          paragraphs: [
+            "Os trabalhadores têm de ser informados por escrito sobre o registo de ponto. No separador «Equipa», a secção «Informação sobre o registo de ponto» lista cada trabalhador com o estado da entrega:",
+          ],
+          list: [
+            "«Imprimir folha» gera a folha A4 individual, já com o nome do trabalhador preenchido; «Imprimir todas as folhas» prepara de uma vez as dos trabalhadores ativos com o ponto ativado. A folha sai sempre em português, com o nome da loja e o texto informativo — um modelo RGPD que pode personalizar nas Definições — e traz linhas para nome, assinatura e data;",
+            "Depois de a entregar, prima «Registar folha» e confirme a data de entrega — vem preenchida com o dia da loja e datas futuras são recusadas — e se a folha ficou assinada ou não. O registo guarda também quem o lançou;",
+            "Enquanto faltar a entrega, o trabalhador aparece com «Folha não entregue» e o painel do ponto avisa quantos trabalhadores ativos ainda não receberam a folha, com atalho direto para a Equipa.",
+          ],
+          links: [],
+        },
+        {
+          heading: "O enquadramento legal",
+          paragraphs: [
+            "A exportação ajuda a cumprir o art. 202.º do Código do Trabalho — a decisão e a responsabilidade legal são sempre da loja. Os registos ficam conservados durante 5 anos e o documento mostra-os como estão: os registos por validar e os recusados não são escondidos, e cada correção fica visível com autor, data e motivo.",
           ],
           links: [],
         },

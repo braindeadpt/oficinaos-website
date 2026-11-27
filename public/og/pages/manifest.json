@@ -62,6 +62,11 @@
   "hash": "a3f6ac481f",
   "title": "Livro de ponto"
  },
+ "docs-ponto-act": {
+  "file": "docs-ponto-act-05ecb3fec0.jpg",
+  "hash": "05ecb3fec0",
+  "title": "Exportar registos para a ACT"
+ },
  "docs-portal": {
   "file": "docs-portal-85206866b3.jpg",
   "hash": "85206866b3",
@@ -146,6 +151,11 @@
   "file": "en-docs-ponto-799a8f570d.jpg",
   "hash": "799a8f570d",
   "title": "Time clock"
+ },
+ "en-docs-ponto-act": {
+  "file": "en-docs-ponto-act-ed1f06a1df.jpg",
+  "hash": "ed1f06a1df",
+  "title": "Export records for the ACT"
  },
  "en-docs-portal": {
   "file": "en-docs-portal-5ff89eda2a.jpg",
@@ -301,6 +311,11 @@
   "file": "es-docs-ponto-20ea6a9c2b.jpg",
   "hash": "20ea6a9c2b",
   "title": "Libro de horas"
+ },
+ "es-docs-ponto-act": {
+  "file": "es-docs-ponto-act-0da658e2d3.jpg",
+  "hash": "0da658e2d3",
+  "title": "Exportar registos para la ACT"
  },
  "es-docs-portal": {
   "file": "es-docs-portal-095708e9dc.jpg",

@@ -1,0 +1,10 @@
+---
+import ModuleDoc from "../../components/ModuleDoc.astro";
+import { moduleDocJsonLd } from "../../i18n/schema";
+import Base from "../../layouts/Base.astro";
+import { lang, locale, ogLocale, t } from "../../i18n/pt";
+---
+
+<Base t={t} locale={locale} langAttr={lang} ogLocale={ogLocale} title={t.moduleDocs.pontoAct.title + " — OficinaOS"} jsonLd={moduleDocJsonLd(t, locale, "ponto-act", t.moduleDocs.pontoAct.title)} description={t.moduleDocs.pontoAct.subtitle}>
+  <ModuleDoc t={t} locale={locale} page={t.moduleDocs.pontoAct} />
+</Base>
