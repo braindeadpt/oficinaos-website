@@ -753,7 +753,7 @@ export const t: Copy = {
         ],
         links: [
           { label: "Guía del libro de horas", href: "/es/docs/ponto" },
-          { label: "Exportar registos para la ACT", href: "/es/docs/ponto-act" },
+          { label: "Exportar registros para la ACT", href: "/es/docs/ponto-act" },
         ],
       },
       {
@@ -1726,7 +1726,7 @@ export const t: Copy = {
       ],
     },
     pontoAct: {
-      title: "Exportar registos para la ACT",
+      title: "Exportar registros para la ACT",
       subtitle:
         "PDF o Excel generado en la tienda con los fichajes, correcciones, validaciones y totales — ayuda a cumplir el art. 202 del Código del Trabajo portugués.",
       sections: [
