@@ -1820,7 +1820,7 @@ export const t: Copy = {
     tryLabel: "Try the live status",
     notice: "Message sent to Ana Marques",
     caption:
-      "A repair shop counter. On the laptop, the OficinaOS repair list: Ana's iPhone 13 changes to «Ready». On the phone, the page the customer sees updates at the same time, and she gets notified.",
+      "OficinaOS interface demonstration: in the app window, Ana's iPhone 13 changes to «Ready»; on the customer's phone alongside it, the tracking page updates at the same time and a notification is sent.",
   },
   home: {
     fork: {
@@ -2287,7 +2287,7 @@ export const t: Copy = {
     readConversation: "Read the conversation",
     noticeText: "Answered at 22:41, with the shop closed",
     caption:
-      "A repair shop counter in the evening, already closed. On the phone, a customer asks on WhatsApp whether her iPhone 13 is ready and the Pro assistant replies with the real status. On the laptop, the same conversation in the shop's WhatsApp messages.",
+      "OficinaOS Pro demonstration with the shop closed at 22:41: on the phone, a customer asks on WhatsApp whether her iPhone 13 is ready and the assistant replies with the real status; the same conversation appears in the shop's Messages window.",
   },
   proPage: {
     metaTitle: "OficinaOS Pro — WhatsApp, SMS, portal and AI for repair shops, from €39/month",

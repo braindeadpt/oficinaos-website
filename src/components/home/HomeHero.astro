@@ -329,13 +329,13 @@ const shopIni = hh.shop
       });
     }
 
-    var target = s.querySelector(".st-mac");
+    var target = s.querySelector(".st-row-live") || s.querySelector(".st-mac");
     if (!target || !("IntersectionObserver" in window)) {
       startStorySync();
       return;
     }
     var r = target.getBoundingClientRect();
-    if (r.top >= 0 && r.bottom <= innerHeight) {
+    if (r.top < innerHeight && r.bottom > 0) {
       startStorySync();
       return;
     }
@@ -347,7 +347,7 @@ const shopIni = hh.shop
     s.classList.add("hh-wait");
     io = new IntersectionObserver(
       function (es) {
-        if (es[0].intersectionRatio >= 0.45) {
+        if (es[0].isIntersecting) {
           s.classList.remove("hh-wait");
           startStorySync();
           if (io) {
@@ -356,7 +356,7 @@ const shopIni = hh.shop
           }
         }
       },
-      { threshold: [0, 0.45, 1] },
+      { threshold: 0.1 },
     );
     io.observe(target);
   })();
