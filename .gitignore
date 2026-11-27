@@ -10,3 +10,6 @@ Thumbs.db
 .wrangler/
 .dev.vars
 .dev.vars.*
+
+# cache do Python (tools/*.py)
+__pycache__/
