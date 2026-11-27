@@ -153,19 +153,19 @@ const initials = (n: string) =>
 <script is:inline>
   (function () {
     var s = document.querySelector("[data-hh]");
-    var target = s && (s.querySelector(".pst-bar") || s.querySelector(".pst-mac"));
+    var target = s && (s.querySelector(".pst-msgs .pst-ask") || s.querySelector(".pst-mac"));
     if (!target || !("IntersectionObserver" in window)) return;
     var r = target.getBoundingClientRect();
     if (r.top < innerHeight && r.bottom > 0) return;
     s.classList.add("hh-wait");
     var io = new IntersectionObserver(
       function (es) {
-        if (es[0].isIntersecting) {
+        if (es[0].intersectionRatio >= 0.1) {
           s.classList.remove("hh-wait");
           io.disconnect();
         }
       },
-      { threshold: 0.1 },
+      { threshold: [0, 0.1] },
     );
     io.observe(target);
   })();
