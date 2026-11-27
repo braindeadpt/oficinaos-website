@@ -10,55 +10,63 @@
  * - prefers-reduced-motion respeitado em todas as transições e efeitos.
  */
 
-/* ───────────────────── 1 · Tokens Luminosos & Vidro ───────────────────── */
+/* ───────────────────── 1 · Tokens Luminosos Azul Safira & Menta ───────────────────── */
 :root {
-  --oos-color-bg: #f7f9fc;
+  --oos-color-bg: #f4f8ff;
   --oos-color-surface: #ffffff;
-  --oos-color-surface-2: #eef2f7;
-  --oos-color-surface-3: #e4eaf3;
+  --oos-color-surface-2: #eaf1ff;
+  --oos-color-surface-3: #dce7fd;
   --oos-color-border: rgb(15 23 42 / 0.085);
-  --oos-color-border-strong: #7d899c;
+  --oos-color-border-strong: #78869e;
   --oos-color-text: #0f172a;
   --oos-color-text-muted: #475569;
-  --oos-color-text-subtle: #5a6678;
-  --oos-color-primary: #0f172a;
-  --oos-color-primary-hover: #1e293b;
+  --oos-color-text-subtle: #55647a;
+  /* Azul Safira/iOS (#2563eb sobre branco = 5,17:1 WCAG AA) + Menta alegre */
+  --oos-color-primary: #2563eb;
+  --oos-color-primary-hover: #1d4ed8;
   --oos-color-on-primary: #ffffff;
-  --oos-color-primary-soft: #e8effa;
-  --oos-color-on-primary-soft: #0f172a;
+  --oos-color-primary-soft: #dbeafe;
+  --oos-color-on-primary-soft: #1e40af;
   --oos-color-accent: #047857;
+  --oos-mint: #10b981;
+  --oos-mint-soft: #d1fae5;
   --oos-color-focus: #2563eb;
-  --oos-color-link: #0f172a;
-  --oos-color-selection: rgb(37 99 235 / 0.16);
+  --oos-color-link: #1d4ed8;
+  --oos-color-selection: rgb(37 99 235 / 0.18);
   --oos-color-inverse: #0f172a;
-  --oos-color-on-inverse: #f7f9fc;
-  --oos-logo-mark: #0f172a;
+  --oos-color-on-inverse: #f4f8ff;
+  --oos-logo-mark: #2563eb;
+  --oos-product-os: #2563eb;
+  --oos-product-os-hover: #1d4ed8;
+  --oos-product-os-on: #ffffff;
+  --oos-product-os-soft: #dbeafe;
+  --oos-product-os-on-soft: #1e40af;
 
   /* Liquid Glass — claro */
-  --glass-bg: rgb(255 255 255 / 0.72);
-  --glass-bg-strong: rgb(255 255 255 / 0.86);
-  --glass-bg-subtle: rgb(255 255 255 / 0.56);
-  --glass-border: rgb(255 255 255 / 0.8);
-  --glass-rim: rgb(15 23 42 / 0.085);
+  --glass-bg: rgb(255 255 255 / 0.74);
+  --glass-bg-strong: rgb(255 255 255 / 0.88);
+  --glass-bg-subtle: rgb(255 255 255 / 0.58);
+  --glass-border: rgb(255 255 255 / 0.86);
+  --glass-rim: rgb(37 99 235 / 0.11);
   --glass-specular:
-    inset 0 1px 0 rgb(255 255 255 / 0.92),
+    inset 0 1px 0 rgb(255 255 255 / 0.95),
     inset 0 -1px 0 rgb(15 23 42 / 0.03);
   --glass-shadow:
     0 1px 2px rgb(15 23 42 / 0.04),
-    0 8px 24px -6px rgb(15 23 42 / 0.08),
-    0 24px 48px -18px rgb(37 99 235 / 0.08);
+    0 10px 26px -8px rgb(37 99 235 / 0.1),
+    0 24px 48px -18px rgb(16 185 129 / 0.08);
   --glass-shadow-lg:
     0 2px 4px rgb(15 23 42 / 0.05),
-    0 18px 42px -10px rgb(15 23 42 / 0.14),
-    0 36px 72px -22px rgb(37 99 235 / 0.12);
-  --glass-blur: blur(22px) saturate(180%);
-  --glass-blur-sm: blur(14px) saturate(160%);
+    0 18px 42px -10px rgb(37 99 235 / 0.16),
+    0 36px 72px -22px rgb(15 23 42 / 0.12);
+  --glass-blur: blur(22px) saturate(185%);
+  --glass-blur-sm: blur(14px) saturate(165%);
 
-  /* Luz ambiente (Mercury) + micro-pontos (Nothing) */
-  --aurora-a: rgb(59 130 246 / 0.13);
-  --aurora-b: rgb(16 185 129 / 0.11);
-  --aurora-c: rgb(99 102 241 / 0.09);
-  --dot-color: rgb(15 23 42 / 0.08);
+  /* Luz ambiente alegre (Azul Safira + Menta + Céu) + micro-pontos (Nothing) */
+  --aurora-a: rgb(37 99 235 / 0.16);
+  --aurora-b: rgb(16 185 129 / 0.15);
+  --aurora-c: rgb(56 189 248 / 0.14);
+  --dot-color: rgb(37 99 235 / 0.11);
 
   /* Curvas fluidas estilo Apple */
   --ease-fluid: cubic-bezier(0.16, 1, 0.3, 1);
@@ -67,93 +75,112 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]):not(.light) {
-    --oos-color-bg: #0a0e17;
+    --oos-color-bg: #090d16;
     --oos-color-surface: #111827;
-    --oos-color-surface-2: #182132;
-    --oos-color-surface-3: #202b40;
-    --oos-color-border: rgb(255 255 255 / 0.09);
+    --oos-color-surface-2: #182235;
+    --oos-color-surface-3: #202d45;
+    --oos-color-border: rgb(148 163 184 / 0.14);
     --oos-color-border-strong: #7b889b;
     --oos-color-text: #eef2f7;
     --oos-color-text-muted: #9aa7b8;
     --oos-color-text-subtle: #8b98aa;
-    --oos-color-primary: #eef2f7;
-    --oos-color-primary-hover: #ffffff;
-    --oos-color-on-primary: #0a0e17;
-    --oos-color-primary-soft: #1b263b;
-    --oos-color-on-primary-soft: #eef2f7;
+    --oos-color-primary: #3b82f6;
+    --oos-color-primary-hover: #60a5fa;
+    --oos-color-on-primary: #090d16;
+    --oos-color-primary-soft: #172554;
+    --oos-color-on-primary-soft: #bfdbfe;
     --oos-color-accent: #34d399;
+    --oos-mint: #34d399;
+    --oos-mint-soft: rgb(52 211 153 / 0.16);
     --oos-color-focus: #60a5fa;
-    --oos-color-link: #eef2f7;
-    --oos-color-selection: rgb(96 165 250 / 0.26);
-    --oos-logo-mark: #334155;
+    --oos-color-link: #60a5fa;
+    --oos-color-selection: rgb(96 165 250 / 0.28);
+    --oos-logo-mark: #3b82f6;
+    --oos-product-os: #60a5fa;
+    --oos-product-os-hover: #93c5fd;
+    --oos-product-os-on: #090d16;
+    --oos-product-os-soft: #172554;
+    --oos-product-os-on-soft: #bfdbfe;
 
-    --glass-bg: rgb(17 24 39 / 0.72);
+    --glass-bg: rgb(17 24 39 / 0.74);
     --glass-bg-strong: rgb(17 24 39 / 0.88);
     --glass-bg-subtle: rgb(17 24 39 / 0.56);
     --glass-border: rgb(255 255 255 / 0.12);
-    --glass-rim: rgb(255 255 255 / 0.09);
+    --glass-rim: rgb(96 165 250 / 0.16);
     --glass-specular:
       inset 0 1px 0 rgb(255 255 255 / 0.14),
       inset 0 -1px 0 rgb(0 0 0 / 0.25);
     --glass-shadow:
       0 1px 2px rgb(0 0 0 / 0.35),
       0 10px 28px -8px rgb(0 0 0 / 0.5),
-      0 24px 48px -18px rgb(59 130 246 / 0.12);
+      0 24px 48px -18px rgb(59 130 246 / 0.16);
     --glass-shadow-lg:
       0 2px 6px rgb(0 0 0 / 0.45),
       0 20px 46px -12px rgb(0 0 0 / 0.65),
-      0 36px 72px -20px rgb(59 130 246 / 0.16);
+      0 36px 72px -20px rgb(59 130 246 / 0.2);
 
-    --aurora-a: rgb(59 130 246 / 0.16);
-    --aurora-b: rgb(16 185 129 / 0.12);
-    --aurora-c: rgb(99 102 241 / 0.12);
-    --dot-color: rgb(255 255 255 / 0.065);
+    --aurora-a: rgb(59 130 246 / 0.18);
+    --aurora-b: rgb(16 185 129 / 0.14);
+    --aurora-c: rgb(56 189 248 / 0.12);
+    --dot-color: rgb(148 163 184 / 0.09);
   }
 }
 
 :root[data-theme="dark"],
 :root.dark {
-  --oos-color-bg: #0a0e17;
+  --oos-color-bg: #090d16;
   --oos-color-surface: #111827;
-  --oos-color-surface-2: #182132;
-  --oos-color-surface-3: #202b40;
-  --oos-color-border: rgb(255 255 255 / 0.09);
+  --oos-color-surface-2: #182235;
+  --oos-color-surface-3: #202d45;
+  --oos-color-border: rgb(148 163 184 / 0.14);
   --oos-color-border-strong: #7b889b;
   --oos-color-text: #eef2f7;
   --oos-color-text-muted: #9aa7b8;
   --oos-color-text-subtle: #8b98aa;
-  --oos-color-primary: #eef2f7;
-  --oos-color-primary-hover: #ffffff;
-  --oos-color-on-primary: #0a0e17;
-  --oos-color-primary-soft: #1b263b;
-  --oos-color-on-primary-soft: #eef2f7;
+  --oos-color-primary: #3b82f6;
+  --oos-color-primary-hover: #60a5fa;
+  --oos-color-on-primary: #090d16;
+  --oos-color-primary-soft: #172554;
+  --oos-color-on-primary-soft: #bfdbfe;
   --oos-color-accent: #34d399;
+  --oos-mint: #34d399;
+  --oos-mint-soft: rgb(52 211 153 / 0.16);
   --oos-color-focus: #60a5fa;
-  --oos-color-link: #eef2f7;
-  --oos-color-selection: rgb(96 165 250 / 0.26);
-  --oos-logo-mark: #334155;
+  --oos-color-link: #60a5fa;
+  --oos-color-selection: rgb(96 165 250 / 0.28);
+  --oos-logo-mark: #3b82f6;
+  --oos-product-os: #60a5fa;
+  --oos-product-os-hover: #93c5fd;
+  --oos-product-os-on: #090d16;
+  --oos-product-os-soft: #172554;
+  --oos-product-os-on-soft: #bfdbfe;
 
-  --glass-bg: rgb(17 24 39 / 0.72);
+  --glass-bg: rgb(17 24 39 / 0.74);
   --glass-bg-strong: rgb(17 24 39 / 0.88);
   --glass-bg-subtle: rgb(17 24 39 / 0.56);
   --glass-border: rgb(255 255 255 / 0.12);
-  --glass-rim: rgb(255 255 255 / 0.09);
+  --glass-rim: rgb(96 165 250 / 0.16);
   --glass-specular:
     inset 0 1px 0 rgb(255 255 255 / 0.14),
     inset 0 -1px 0 rgb(0 0 0 / 0.25);
   --glass-shadow:
     0 1px 2px rgb(0 0 0 / 0.35),
     0 10px 28px -8px rgb(0 0 0 / 0.5),
-    0 24px 48px -18px rgb(59 130 246 / 0.12);
+    0 24px 48px -18px rgb(59 130 246 / 0.16);
   --glass-shadow-lg:
     0 2px 6px rgb(0 0 0 / 0.45),
     0 20px 46px -12px rgb(0 0 0 / 0.65),
-    0 36px 72px -20px rgb(59 130 246 / 0.16);
+    0 36px 72px -20px rgb(59 130 246 / 0.2);
 
-  --aurora-a: rgb(59 130 246 / 0.16);
-  --aurora-b: rgb(16 185 129 / 0.12);
-  --aurora-c: rgb(99 102 241 / 0.12);
-  --dot-color: rgb(255 255 255 / 0.065);
+  --aurora-a: rgb(59 130 246 / 0.18);
+  --aurora-b: rgb(16 185 129 / 0.14);
+  --aurora-c: rgb(56 189 248 / 0.12);
+  --dot-color: rgb(148 163 184 / 0.09);
+}
+
+/* Cor do squircle do logótipo (Azul Safira). */
+.oos-logo-squircle {
+  fill: var(--oos-logo-mark);
 }
 
 /* Sincroniza os blocos «Oficina limpa» (.hh e .pb) com a nova paleta luminosa.
@@ -333,9 +360,11 @@
 
 .site-header .nav-cta {
   border-radius: 9999px;
+  background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%);
+  color: #ffffff;
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.22),
-    0 4px 14px -4px rgb(15 23 42 / 0.35);
+    inset 0 1px 0 rgb(255 255 255 / 0.32),
+    0 6px 18px -5px rgb(37 99 235 / 0.55);
   transition:
     background-color var(--dur-1) var(--ease-fluid),
     transform var(--dur-2) var(--ease-spring),
@@ -343,10 +372,23 @@
 }
 
 .site-header .nav-cta:hover {
+  background: linear-gradient(180deg, #2563eb 0%, #1d4ed8 100%);
   transform: translateY(-1px);
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.28),
-    0 8px 20px -6px rgb(15 23 42 / 0.42);
+    inset 0 1px 0 rgb(255 255 255 / 0.36),
+    0 10px 24px -6px rgb(37 99 235 / 0.62);
+}
+
+:root[data-theme="dark"] .site-header .nav-cta {
+  background: linear-gradient(180deg, #60a5fa 0%, #3b82f6 100%);
+  color: #090d16;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .site-header .nav-cta {
+    background: linear-gradient(180deg, #60a5fa 0%, #3b82f6 100%);
+    color: #090d16;
+  }
 }
 
 .site-header .nav-cta:active {
@@ -477,21 +519,40 @@
   box-shadow: var(--glass-specular), 0 0 0 1px var(--glass-rim), 0 4px 12px -4px rgb(15 23 42 / 0.08);
 }
 
-:root .hh-btn-primary {
+:root .hh-btn-primary,
+:root .hb-btn-ink {
+  background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%);
+  color: #ffffff;
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.22),
-    0 10px 24px -8px rgb(15 23 42 / 0.42);
+    inset 0 1px 0 rgb(255 255 255 / 0.34),
+    0 10px 26px -8px rgb(37 99 235 / 0.55);
   transition:
     transform var(--dur-2) var(--ease-spring),
     box-shadow var(--dur-2) var(--ease-fluid),
     background-color var(--dur-1) var(--ease-fluid);
 }
 
-:root .hh-btn-primary:hover {
+:root .hh-btn-primary:hover,
+:root .hb-btn-ink:hover {
+  background: linear-gradient(180deg, #2563eb 0%, #1d4ed8 100%);
   transform: translateY(-2px);
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.28),
-    0 14px 30px -8px rgb(15 23 42 / 0.48);
+    inset 0 1px 0 rgb(255 255 255 / 0.38),
+    0 14px 32px -8px rgb(37 99 235 / 0.65);
+}
+
+:root[data-theme="dark"] .hh-btn-primary,
+:root[data-theme="dark"] .hb-btn-ink {
+  background: linear-gradient(180deg, #60a5fa 0%, #3b82f6 100%);
+  color: #090d16;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .hh-btn-primary,
+  :root:not([data-theme="light"]) .hb-btn-ink {
+    background: linear-gradient(180deg, #60a5fa 0%, #3b82f6 100%);
+    color: #090d16;
+  }
 }
 
 :root .hh-btn-ghost {
@@ -568,6 +629,7 @@
   .oos-popover:not(:popover-open),
   :root .bento-cell:hover,
   :root .hh-btn-primary:hover,
+  :root .hb-btn-ink:hover,
   :root .hh-btn-ghost:hover,
   :root .site-header .nav-cta:hover,
   :root .site-header .nav-cta:active,

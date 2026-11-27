@@ -1,13 +1,7 @@
 ---
-// Herói da página inicial (redesenho 2026-11, direção «Oficina limpa»).
-// Fotografia gerada por IA (balcão de uma loja, ecrãs de frente e vazios) com a interface verdadeira
-// colada nos ecrãs. Os ecrãs da foto são retângulos quase perfeitos, por isso basta posicioná-los
-// em percentagem; o conteúdo escala com a caixa (container queries, unidades cqi).
-// A história corre UMA vez, em menos de 5 s, em animações CSS (sem botão de pausa — WCAG 2.2.2 não se
-// aplica abaixo de 5 s): a reparação do iPhone 13 passa a «Pronto» no portátil, a página da cliente
-// no telemóvel muda ao mesmo tempo e aparece o aviso. Um script pequeno (melhoria progressiva) põe as
-// animações em pausa até a fotografia estar à vista; sem JavaScript começam ao carregar a página.
-// Com «reduzir movimento» mostra logo o estado final. CSP: sem estilos inline; o script entra por hash.
+// Herói da página inicial — palco de produto nítido (Mercury + Linear + Apple macOS/iOS).
+// Janela macOS OficinaOS com ícones reais + iPhone 16 sobreposto cheio de ponta a ponta +
+// notificação iOS em Liquid Glass, tudo sincronizado com o dock interativo (Receção / Em reparação / Pronto).
 import type { Copy } from "../../i18n/pt";
 import type { Locale } from "../../i18n/utils";
 import { localeUrl } from "../../i18n/utils";
@@ -16,6 +10,7 @@ import type { ReleaseInfo } from "../../lib/release";
 import Icon from "../Icon.astro";
 import "../../styles/photo-hero.css";
 import "../../styles/hero-interactive.css";
+import "../../styles/hero-stage.css";
 
 interface Props {
   t: Copy;
@@ -28,27 +23,30 @@ const hh = t.homeHero;
 const rl = t.ui.repairList;
 const st = t.ui.status;
 const dl = downloadAttrs(locale);
-const base = import.meta.env.BASE_URL;
 const langTag = locale === "pt" ? "pt-PT" : locale === "es" ? "es-ES" : "en-IE";
 const money = new Intl.NumberFormat(langTag, { style: "currency", currency: "EUR" });
-// Título em dois tons: a parte depois da vírgula fica mais clara.
 const cut = h.title.indexOf(",");
 const titleA = cut > 0 ? h.title.slice(0, cut + 1) : h.title;
 const titleB = cut > 0 ? h.title.slice(cut + 1).trim() : "";
 const rows = rl.rows.slice(0, 5);
 const first = rows[0];
 const chipClass: Record<string, string> = {
-  intake: "hh-chip-info",
-  "waiting-for-parts": "hh-chip-warn",
-  "in-repair": "hh-chip-work",
-  done: "hh-chip-ok",
-  delivered: "hh-chip-mute",
+  intake: "st-chip-info",
+  "waiting-for-parts": "st-chip-warn",
+  "in-repair": "st-chip-work",
+  done: "st-chip-ok",
+  delivered: "st-chip-mute",
 };
-// Texto do aviso sem o prefixo («Cliente avisado: …»).
 const noticeText = h.toast.replace(/^[^:]*:\s*/, "");
 const announceIntake = `${st.intake} — ${hh.received}: ${hh.receivedSub}.`;
 const announceRepair = `${st["in-repair"]} — ${first.device}: ${hh.repairing}.`;
 const announceDone = `${st.done} — ${hh.ready} (${hh.readySub}). ${hh.notice}: ${noticeText}`;
+const shopIni = hh.shop
+  .split(" ")
+  .map((w) => w[0])
+  .slice(0, 2)
+  .join("")
+  .toUpperCase();
 ---
 
 <section class="hh hh-home" aria-labelledby="hero-title" data-hh>
@@ -136,100 +134,125 @@ const announceDone = `${st.done} — ${hh.ready} (${hh.readySub}). ${hh.notice}:
         <span class="sr-only" aria-live="polite" data-hh-live-announce></span>
       </div>
 
-      <div class="hh-photo">
-        <div class="hh-frame">
-        <img
-          class="hh-img"
-          src={`${base}images/home-hero.webp`}
-          srcset={`${base}images/home-hero-800.webp 800w, ${base}images/home-hero.webp 1264w`}
-          sizes="(max-width: 40rem) calc((100vw - 2rem) * 1.7), (max-width: 64rem) calc(100vw - 2rem), (min-width: 80rem) 76rem, calc(100vw - 4rem)"
-          width="1264"
-          height="848"
-          alt={hh.caption}
-          fetchpriority="high"
-          decoding="async"
-        />
+      <!-- Palco flutuante macOS + iPhone 16 -->
+      <div class="st-scene" aria-hidden="true">
+        <!-- Notificação iOS Liquid Glass -->
+        <div class="st-ios-notice">
+          <span class="st-ios-ico">
+            <svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"></path></svg>
+          </span>
+          <span class="st-ios-text">
+            <small>{hh.notice}</small>
+            <b>{noticeText}</b>
+          </span>
+        </div>
 
-        <!-- Ecrã do portátil: lista de reparações -->
-        <div class="hh-lap" aria-hidden="true">
-          <div class="hh-app">
-            <div class="hh-side">
-              <span class="hh-logo"></span>
-              <i class="is-on"></i><i></i><i></i><i></i><i></i>
+        <!-- Janela macOS da OficinaOS -->
+        <div class="st-mac">
+          <div class="st-mac-bar">
+            <span class="st-dots"><i></i><i></i><i></i></span>
+            <span class="st-mac-crumb"><b>OficinaOS</b> / {rl.title}</span>
+            <span class="st-mac-pill"><i></i>Local · LAN</span>
+          </div>
+          <div class="st-mac-body">
+            <div class="st-side">
+              <span class="st-side-ico is-active">
+                <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" /></svg>
+              </span>
+              <span class="st-side-ico">
+                <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>
+              </span>
+              <span class="st-side-ico">
+                <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><path d="M14 2v6h6" /><path d="M16 13H8" /><path d="M16 17H8" /></svg>
+              </span>
+              <span class="st-side-ico">
+                <svg viewBox="0 0 24 24"><path d="m7.5 4.27 9 5.15" /><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" /><path d="m3.3 7 8.7 5 8.7-5" /><path d="M12 22V12" /></svg>
+              </span>
+              <span class="st-side-ico">
+                <svg viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2" /><path d="M2 10h20" /></svg>
+              </span>
             </div>
-            <div class="hh-main">
-              <div class="hh-bar">
-                <b>{rl.title}</b>
-                <span class="hh-search">{rl.search}</span>
-                <span class="hh-new">+ {rl.newRepair}</span>
+            <div class="st-main">
+              <div class="st-toolbar">
+                <b class="st-toolbar-title">{rl.title}</b>
+                <span class="st-search">
+                  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
+                  {rl.search}
+                </span>
+                <span class="st-new-btn">+ {rl.newRepair}</span>
               </div>
-              <ul class="hh-rows" role="list">
+              <ul class="st-rows" role="list">
                 {
                   rows.map((r, i) => (
-                    <li class:list={["hh-row", i === 0 && "hh-row-live"]}>
-                      <span class="hh-id">{r.id}</span>
-                      <span class="hh-dev">
+                    <li class:list={["st-row", i === 0 && "st-row-live"]}>
+                      <span class="st-row-id">{r.id}</span>
+                      <span class="st-row-dev">
                         <b>{r.device}</b>
                         <small>{r.issue}</small>
                       </span>
-                      <span class="hh-cust">{r.customer}</span>
+                      <span class="st-row-cust">{r.customer}</span>
                       {i === 0 ? (
-                        <span class="hh-chips">
-                          <span class="hh-chip hh-chip-info hh-chip-intake">{st.intake}</span>
-                          <span class="hh-chip hh-chip-work hh-from">{st["in-repair"]}</span>
-                          <span class="hh-chip hh-chip-ok hh-to">{st.done}</span>
+                        <span class="st-chips">
+                          <span class="st-chip st-chip-info st-chip-intake">{st.intake}</span>
+                          <span class="st-chip st-chip-work st-from">{st["in-repair"]}</span>
+                          <span class="st-chip st-chip-ok st-to">{st.done}</span>
                         </span>
                       ) : (
-                        <span class={`hh-chip ${chipClass[r.status] ?? "hh-chip-mute"}`}>{st[r.status as keyof typeof st]}</span>
+                        <span class={`st-chip ${chipClass[r.status] ?? "st-chip-mute"}`}>{st[r.status as keyof typeof st]}</span>
                       )}
-                      <span class="hh-total">{money.format(r.total)}</span>
+                      <span class="st-row-total">{money.format(r.total)}</span>
                     </li>
                   ))
                 }
               </ul>
-              <p class="hh-toast">
-                <span class="hh-ok"><svg viewBox="0 0 16 16"><path d="m3.5 8.5 3 3 6-7"></path></svg></span>
+              <p class="st-mac-toast">
+                <span class="st-mac-toast-ok"><svg viewBox="0 0 16 16"><path d="m3.5 8.5 3 3 6-7"></path></svg></span>
                 {h.toast}
               </p>
             </div>
           </div>
         </div>
 
-        <!-- Ecrã do telemóvel: a página de acompanhamento que a cliente vê -->
-        <div class="hh-pho" aria-hidden="true">
-          <div class="hh-track">
-            <p class="hh-track-shop"><span></span>{hh.shop}</p>
-            <p class="hh-track-label">{hh.track}</p>
-            <p class="hh-track-dev">{first.device}</p>
-            <p class="hh-track-id">{first.id}</p>
-            <ol class="hh-steps">
-              {hh.steps.map((s, i) => <li class:list={[i < 2 && "is-done", i === 1 && "hh-step-mid", i === 2 && "hh-step-last"]}>{s}</li>)}
+        <!-- iPhone 16 sobreposto (portal do cliente cheio de ponta a ponta) -->
+        <div class="st-iphone">
+          <div class="st-iphone-screen">
+            <div class="st-ios-status">
+              <span>9:41</span>
+              <span class="st-island"></span>
+              <span class="st-ios-sig"><i></i></span>
+            </div>
+            <p class="st-pho-shop">
+              <span class="st-pho-avatar">{shopIni}</span>
+              {hh.shop}
+            </p>
+            <div class="st-pho-card">
+              <p class="st-pho-label">{hh.track}</p>
+              <p class="st-pho-dev">{first.device}</p>
+              <p class="st-pho-meta">{first.id} · {first.issue}</p>
+            </div>
+            <ol class="st-pho-steps">
+              {hh.steps.map((s, i) => <li class:list={[i < 2 && "is-done", i === 1 && "st-step-mid", i === 2 && "st-step-last"]}>{s}</li>)}
             </ol>
-            <div class="hh-state">
-              <p class="hh-state-intake">
+            <div class="st-pho-state">
+              <div class="st-pho-box st-pho-intake">
                 <b>{hh.received}</b>
                 <small>{hh.receivedSub}</small>
-              </p>
-              <p class="hh-state-from">{hh.repairing}</p>
-              <p class="hh-state-to">
+              </div>
+              <div class="st-pho-box st-pho-work">
+                <b>{hh.repairing}</b>
+                <small>{first.issue}</small>
+              </div>
+              <div class="st-pho-box st-pho-done">
                 <b>{hh.ready}</b>
                 <small>{hh.readySub}</small>
-              </p>
+              </div>
             </div>
+            <div class="st-pho-foot">
+              <span>{t.home.tour.ui.quote.total}</span>
+              <b>{money.format(first.total)}</b>
+            </div>
+            <span class="st-home-ind"></span>
           </div>
-        </div>
-
-        </div>
-
-        <!-- Aviso enviado à cliente -->
-        <div class="hh-notice" aria-hidden="true">
-          <span class="hh-notice-ico">
-            <svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"></path></svg>
-          </span>
-          <span class="hh-notice-text">
-            <small>{hh.notice}</small>
-            <b>{noticeText}</b>
-          </span>
         </div>
       </div>
       <figcaption class="hh-caption">{hh.caption}</figcaption>
@@ -238,8 +261,8 @@ const announceDone = `${st.done} — ${hh.ready} (${hh.readySub}). ${hh.notice}:
 </section>
 
 <script is:inline>
-  // 1) A história inicial só arranca quando o portátil está à vista (IntersectionObserver).
-  // 2) O dock Liquid Glass (e o clique na linha viva) permite alternar entre Receção, Em reparação e Pronto.
+  // 1) A história inicial só arranca quando o palco entra no ecrã (IntersectionObserver).
+  // 2) O dock Liquid Glass (e o clique na linha viva) alterna entre Receção, Em reparação e Pronto.
   (function () {
     var s = document.querySelector("[data-hh]");
     if (!s) return;
@@ -286,7 +309,6 @@ const announceDone = `${st.done} — ${hh.ready} (${hh.readySub}). ${hh.notice}:
       }
       setState("in-repair", false);
       clearSync();
-      // Sincroniza o botão ativo com o momento em que o chip passa a «Pronto» (1,45 s).
       syncTimer = setTimeout(function () {
         if (!s.classList.contains("hh-live")) setState("done", false);
       }, 1450);
@@ -299,7 +321,7 @@ const announceDone = `${st.done} — ${hh.ready} (${hh.readySub}). ${hh.notice}:
       });
     });
 
-    var liveRow = s.querySelector(".hh-row-live");
+    var liveRow = s.querySelector(".st-row-live");
     if (liveRow) {
       liveRow.addEventListener("click", function () {
         var next = order[(order.indexOf(current) + 1) % order.length];
@@ -307,7 +329,7 @@ const announceDone = `${st.done} — ${hh.ready} (${hh.readySub}). ${hh.notice}:
       });
     }
 
-    var target = s.querySelector(".hh-lap");
+    var target = s.querySelector(".st-mac");
     if (!target || !("IntersectionObserver" in window)) {
       startStorySync();
       return;
@@ -325,7 +347,7 @@ const announceDone = `${st.done} — ${hh.ready} (${hh.readySub}). ${hh.notice}:
     s.classList.add("hh-wait");
     io = new IntersectionObserver(
       function (es) {
-        if (es[0].intersectionRatio >= 0.6) {
+        if (es[0].intersectionRatio >= 0.45) {
           s.classList.remove("hh-wait");
           startStorySync();
           if (io) {
@@ -334,7 +356,7 @@ const announceDone = `${st.done} — ${hh.ready} (${hh.readySub}). ${hh.notice}:
           }
         }
       },
-      { threshold: [0, 0.6, 1] },
+      { threshold: [0, 0.45, 1] },
     );
     io.observe(target);
   })();
