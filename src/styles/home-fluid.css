@@ -84,9 +84,10 @@
 }
 
 /* ─────────────── 2 · «Como funciona» — Stepper Interativo Liquid Glass ─────────────── */
+/* Oculta por omissão: só aparece quando o script ativa .hb-tour-live (nunca mostra separadores mortos). */
 .hb-tour-nav {
+  display: none;
   margin-top: 2.25rem;
-  display: inline-flex;
   flex-wrap: wrap;
   gap: 0.375rem;
   padding: 0.375rem;
@@ -98,15 +99,13 @@
   box-shadow: var(--glass-specular), var(--glass-shadow);
 }
 
+.hb-tour-live .hb-tour-nav {
+  display: inline-flex;
+}
+
 @media (min-width: 64rem) {
   .hb-tour-nav {
     border-radius: 9999px;
-  }
-}
-
-@media (scripting: none) {
-  .hb-tour-nav {
-    display: none;
   }
 }
 
@@ -548,14 +547,18 @@
   .hb-mods a:hover,
   .hb-mods a:hover svg,
   .hb-tour-tab:active,
-  .hb-video a:hover .hb-play,
   .hb-cell a:hover,
   .hb-cell a:hover .hb-cell-arrow,
-  .hb-cell a:hover .hb-chips i,
+  .hb-cell a:hover .hb-chips i:nth-child(odd),
+  .hb-cell a:hover .hb-chips i:nth-child(even),
   .hb-cell a:hover .hb-meter i span,
   .hb-cell a:hover .hb-bubble,
   .hb-btn-ink:hover {
     transform: none;
     translate: none;
+  }
+  /* Preserva o translate: -50% -50% de centragem do botão play; remove só a escala de hover. */
+  .hb-video a:hover .hb-play {
+    transform: none;
   }
 }

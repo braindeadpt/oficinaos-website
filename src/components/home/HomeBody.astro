@@ -122,7 +122,6 @@ const check = '<path d="m3.5 8.5 3 3 6-7"/>';
           tour.steps.map((step, i) => (
             <div
               id={`hb-tour-panel-${i}`}
-              role="tabpanel"
               data-tour-panel={i}
               aria-labelledby={`hb-tour-tab-${i}`}
               class:list={["pb-step", i % 2 === 1 && "pb-step-rev"]}
@@ -565,6 +564,8 @@ const check = '<path d="m3.5 8.5 3 3 6-7"/>';
         if (active && focusTab) tab.focus();
       });
       panels.forEach(function (panel, i) {
+        panel.setAttribute("role", "tabpanel");
+        panel.setAttribute("tabindex", "0");
         panel.hidden = i !== idx;
       });
     }
