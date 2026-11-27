@@ -20,6 +20,111 @@ export interface UpdateEntry {
 
 export const UPDATES: UpdateEntry[] = [
   {
+    date: "2026-11-27",
+    tier: "free",
+    area: { pt: "Livro de Ponto", en: "Time Clock", es: "Registro de jornada" },
+    title: {
+      pt: "v1.0.23: exportação para a ACT",
+      en: "v1.0.23: ACT export",
+      es: "v1.0.23: exportación para la ACT",
+    },
+    desc: {
+      pt: "O livro de ponto exporta os registos no formato exigido pela Autoridade para as Condições do Trabalho — se a loja for inspecionada, o ficheiro sai pronto, sem montagens à mão.",
+      en: "The time clock exports records in the format required by the Portuguese labour authority — if the shop is inspected, the file comes out ready, no hand-built spreadsheets.",
+      es: "El registro de jornada exporta los registros en el formato exigido por la Autoridad para las Condiciones del Trabajo — si la tienda es inspeccionada, el archivo sale listo, sin montajes manuales.",
+    },
+  },
+  {
+    date: "2026-11-27",
+    tier: "free",
+    area: { pt: "Livro de Ponto", en: "Time Clock", es: "Registro de jornada" },
+    title: {
+      pt: "v1.0.23: folha de informação aos trabalhadores",
+      en: "v1.0.23: worker information sheet",
+      es: "v1.0.23: hoja de información a los trabajadores",
+    },
+    desc: {
+      pt: "A app gera a folha que explica a cada trabalhador que dados o livro de ponto recolhe e durante quanto tempo, com registo de entrega — a obrigação legal de informação fica documentada.",
+      en: "The app generates the sheet explaining to each worker what the time clock collects and for how long, with a delivery record — the legal information duty is documented.",
+      es: "La app genera la hoja que explica a cada trabajador qué datos recoge el registro de jornada y durante cuánto tiempo, con registro de entrega — la obligación legal de información queda documentada.",
+    },
+  },
+  {
+    date: "2026-11-27",
+    tier: "free",
+    area: { pt: "Livro de Ponto", en: "Time Clock", es: "Registro de jornada" },
+    title: {
+      pt: "v1.0.23: fotografias deixam de ser guardadas, localização só quando é preciso",
+      en: "v1.0.23: photos no longer stored, location only when needed",
+      es: "v1.0.23: las fotos dejan de guardarse, ubicación solo cuando hace falta",
+    },
+    desc: {
+      pt: "Os registos externos guardam apenas a nota «foto enviada às HH:MM» — a imagem nunca fica na base de dados. E quem regista com o QR do ecrã da loja, na rede da loja, já não partilha a localização: ela só é pedida quando não há outra prova de presença.",
+      en: "External check-ins keep only the note «photo sent at HH:MM» — the image never reaches the database. And staff checking in with the shop-screen QR on the shop network no longer share their location: it is only asked when there is no other proof of presence.",
+      es: "Los registros externos guardan solo la nota «foto enviada a las HH:MM» — la imagen nunca queda en la base de datos. Y quien registra con el QR de la pantalla de la tienda, en la red de la tienda, ya no comparte su ubicación: solo se pide cuando no hay otra prueba de presencia.",
+    },
+  },
+  {
+    date: "2026-11-27",
+    tier: "free",
+    area: { pt: "IA", en: "AI", es: "IA" },
+    title: {
+      pt: "v1.0.23: MCP só de leitura, grátis",
+      en: "v1.0.23: read-only MCP, free",
+      es: "v1.0.23: MCP de solo lectura, gratis",
+    },
+    desc: {
+      pt: "A loja pode ligar um assistente de IA aos dados da oficina — clientes, reparações, vendas — em modo só de leitura, sem custo. Os dados pessoais saem mascarados e cada pessoa tem o seu token revogável.",
+      en: "The shop can connect an AI assistant to its data — customers, repairs, sales — in read-only mode, at no cost. Personal data comes out masked and each person has their own revocable token.",
+      es: "La tienda puede conectar un asistente de IA a sus datos — clientes, reparaciones, ventas — en modo de solo lectura, sin coste. Los datos personales salen enmascarados y cada persona tiene su token revocable.",
+    },
+  },
+  {
+    date: "2026-11-27",
+    tier: "free",
+    area: { pt: "Assinaturas", en: "Signatures", es: "Firmas" },
+    title: {
+      pt: "v1.0.23: termos assinados ligados à versão exata",
+      en: "v1.0.23: signed terms bound to the exact version",
+      es: "v1.0.23: términos firmados ligados a la versión exacta",
+    },
+    desc: {
+      pt: "O texto que o cliente assina é o da loja no momento exato da assinatura e fica guardado com ela — ninguém o pode trocar depois. O recibo indica a versão dos termos e a data em que a loja a editou.",
+      en: "The text the customer signs is the shop's text at the exact moment of signature and is stored with it — nobody can swap it afterwards. The receipt shows the terms version and the date the shop last edited it.",
+      es: "El texto que el cliente firma es el de la tienda en el momento exacto de la firma y queda guardado con ella — nadie puede cambiarlo después. El ticket indica la versión de los términos y la fecha en que la tienda la editó.",
+    },
+  },
+  {
+    date: "2026-11-27",
+    tier: "free",
+    area: { pt: "Livro de Ponto", en: "Time Clock", es: "Registro de jornada" },
+    title: {
+      pt: "v1.0.23: modo só-ponto e backups verificados",
+      en: "v1.0.23: time-clock-only mode and verified backups",
+      es: "v1.0.23: modo solo-registro y copias verificadas",
+    },
+    desc: {
+      pt: "Um computador ou tablet pode ficar dedicado ao livro de ponto, sem acesso ao resto da gestão. E as cópias de segurança passam a ser verificadas automaticamente — a loja sabe que o backup abre antes de precisar dele.",
+      en: "A computer or tablet can be dedicated to the time clock, with no access to the rest of the system. And backups are now verified automatically — the shop knows the backup opens before it needs it.",
+      es: "Un ordenador o tablet puede quedar dedicado al registro de jornada, sin acceso al resto de la gestión. Y las copias de seguridad ahora se verifican automáticamente — la tienda sabe que la copia abre antes de necesitarla.",
+    },
+  },
+  {
+    date: "2026-11-27",
+    tier: "pro",
+    area: { pt: "WhatsApp", en: "WhatsApp", es: "WhatsApp" },
+    title: {
+      pt: "v1.0.23: credenciais Meta geridas na Cloud",
+      en: "v1.0.23: Meta credentials managed in the Cloud",
+      es: "v1.0.23: credenciales de Meta gestionadas en la Cloud",
+    },
+    desc: {
+      pt: "As credenciais do WhatsApp deixam o computador da loja e passam a ser geridas na Cloud, com consentimento explícito — menos um segredo guardado localmente.",
+      en: "WhatsApp credentials leave the shop computer and are now managed in the Cloud, with explicit consent — one less secret stored locally.",
+      es: "Las credenciales de WhatsApp dejan el ordenador de la tienda y pasan a gestionarse en la Cloud, con consentimiento explícito — un secreto menos guardado localmente.",
+    },
+  },
+  {
     date: "2026-10-27",
     tier: "free",
     area: { pt: "Impressão", en: "Printing", es: "Impresión" },
