@@ -753,6 +753,7 @@ export const t: Copy = {
         ],
         links: [
           { label: "Guía del libro de horas", href: "/es/docs/ponto" },
+          { label: "Exportar registros para la ACT", href: "/es/docs/ponto-act" },
         ],
       },
       {
@@ -1719,6 +1720,72 @@ export const t: Copy = {
           heading: "Ajustes — activar, QR y empleados",
           paragraphs: [
             "Todo se configura en Ajustes: activar el módulo, marcar la ubicación de la tienda en un mapa y el radio (100 m por defecto), imprimir el QR en PDF, registrar los teléfonos de los empleados y exponer el texto de información para ellos.",
+          ],
+          links: [],
+        },
+      ],
+    },
+    pontoAct: {
+      title: "Exportar registros para la ACT",
+      subtitle:
+        "PDF o Excel generado en la tienda con los fichajes, correcciones, validaciones y totales — ayuda a cumplir el art. 202 del Código del Trabajo portugués.",
+      sections: [
+        {
+          heading: "Dónde está el botón",
+          paragraphs: [
+            "Todo ocurre en el menú «Relógio de ponto», en la pestaña «Exportar» — los campos de período están arriba y la sección «Exportação do registo de tempos de trabalho para a ACT» más abajo:",
+          ],
+          list: [
+            "Elija el período — fechas de inicio y fin, o los atajos «Mês atual» y «Mês anterior»;",
+            "Si quiere, filtre por un trabajador — por defecto se exportan «Todos os trabalhadores»;",
+            "Pulse «Exportar PDF para a ACT» o «Exportar Excel para a ACT» — el archivo act-ponto-AAAA-MM-DD_AAAA-MM-DD.pdf (o .xlsx) se genera al momento y se descarga al ordenador.",
+          ],
+          links: [
+            { label: "Guía del libro de horas", href: "/es/docs/ponto/" },
+          ],
+        },
+        {
+          heading: "Qué incluyen el PDF y el Excel",
+          paragraphs: [
+            "Los dos formatos traen el mismo contenido, generado a partir de una lectura consistente de la base de datos — los fichajes, las validaciones y los totales salen todos de la misma instantánea, sin mezclas a mitad de la exportación:",
+          ],
+          table: {
+            head: ["Bloque", "Contenido"],
+            rows: [
+              ["Identificación", "Nombre de la empresa, NIF, dirección y localidad; período exportado; fecha y hora de la exportación y quién exportó"],
+              ["Fichajes", "Por trabajador y día: hora, tipo (entrada, pausa, regreso o salida), medio (manual, SMS o WhatsApp) y estado (aprobado, por validar o rechazado)"],
+              ["Correcciones", "El fichaje original nunca se sustituye — la corrección aparece ligada a él con autor, fecha y motivo, y cada validación con decisión, autor, fecha y nota"],
+              ["Totales", "Total por día (con los minutos de pausa), total por semana de trabajo (lunes a domingo — las semanas cortadas por el período vienen marcadas como parciales) y total del trabajador"],
+              ["Horario", "El horario de cada trabajador en la fecha de la exportación, o la marca de exento de horario"],
+              ["Integridad", "Resumen SHA-256 del contenido — en el pie de cada página del PDF y en la cabecera del Excel"],
+            ],
+          },
+          links: [],
+        },
+        {
+          heading: "Funciona sin internet",
+          paragraphs: [
+            "La exportación se hace toda dentro de la tienda: los datos se leen solo de la base de datos local y el PDF o el Excel se construye en el propio navegador. Nada pasa por OficinaOS Cloud — la exportación ni siquiera verifica el plan.",
+            "Por eso funciona sin internet y sigue disponible después de que termine el plan Pro: en ese caso el menú pasa a llamarse «Registos de ponto (ACT)» y abre directamente en esta pestaña, en solo lectura. La conservación legal de los registros durante 5 años sobrevive al fin del módulo.",
+          ],
+          links: [],
+        },
+        {
+          heading: "Entregar la hoja de información y registrar la entrega",
+          paragraphs: [
+            "Los trabajadores deben ser informados por escrito sobre el registro de jornada. En la pestaña «Equipa», la sección «Informação sobre o registo de ponto» lista cada trabajador con el estado de la entrega:",
+          ],
+          list: [
+            "«Imprimir folha» genera la hoja A4 individual, ya con el nombre del trabajador rellenado; «Imprimir todas as folhas» prepara de una vez las de los trabajadores activos con el registro activado. La hoja sale siempre en portugués, con el nombre de la tienda y el texto informativo — un modelo RGPD que puede personalizar en los Ajustes — y trae líneas para nombre, firma y fecha;",
+            "Después de entregarla, pulse «Registar folha» y confirme la fecha de entrega — viene rellenada con el día de la tienda y las fechas futuras son rechazadas — y si la hoja quedó firmada o no. El registro guarda también quién lo introdujo;",
+            "Mientras falte la entrega, el trabajador aparece con «Folha não entregue» y el panel del libro de horas avisa cuántos trabajadores activos aún no han recibido la hoja, con acceso directo a la pestaña «Equipa».",
+          ],
+          links: [],
+        },
+        {
+          heading: "El marco legal",
+          paragraphs: [
+            "La exportación ayuda a cumplir el art. 202 del Código del Trabajo portugués — la decisión y la responsabilidad legal son siempre de la tienda. Los registros se conservan durante 5 años y el documento los muestra como están: los registros por validar y los rechazados no se esconden, y cada corrección queda visible con autor, fecha y motivo.",
           ],
           links: [],
         },
