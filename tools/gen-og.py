@@ -55,6 +55,7 @@ EYEBROW = {
     "updates": {"pt": "Novidades", "en": "What's new", "es": "Novedades"},
     "privacy": {"pt": "Privacidade", "en": "Privacy", "es": "Privacidad"},
     "terms": {"pt": "Termos", "en": "Terms", "es": "Términos"},
+    "engineering": {"pt": "Engenharia", "en": "Engineering", "es": "Ingeniería"},
 }
 DEFAULT_EYEBROW = {
     "pt": "Programa para lojas de reparação",
