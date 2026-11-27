@@ -1,0 +1,223 @@
+---
+// Página /engineering/ (trilingue PT/EN/ES): arquitetura do ecossistema OficinaOS,
+// decisões de engenharia, stack técnico e cartão discreto de autoria no fim.
+// Zero JS adicional → coberta pela CSP base sem consumir regras em dist/_headers.
+import { ENGINEERING } from "../data/engineering";
+import type { Copy } from "../i18n/pt";
+import type { Locale } from "../i18n/utils";
+import {
+  AUTHOR_LINKEDIN_URL,
+  AUTHOR_NAME,
+  CONTACT_EMAIL,
+  DIAG_REPO_URL,
+  localeUrl,
+  REPO_URL,
+} from "../i18n/utils";
+import GithubMark from "./GithubMark.astro";
+import Icon from "./Icon.astro";
+import "../styles/engineering.css";
+
+interface Props {
+  t: Copy;
+  locale: Locale;
+}
+const { t, locale } = Astro.props;
+const eng = ENGINEERING[locale];
+const GITHUB_PROFILE_URL = "https://github.com/braindeadpt";
+const WEBSITE_REPO_URL = "https://github.com/braindeadpt/oficinaos-website";
+
+const repoHref = (kind: (typeof eng.repos)[number]["hrefKind"]) => {
+  switch (kind) {
+    case "app-repo":
+      return { href: REPO_URL, external: true };
+    case "diag-repo":
+      return { href: DIAG_REPO_URL, external: true };
+    case "site-repo":
+      return { href: WEBSITE_REPO_URL, external: true };
+    case "pro-page":
+      return { href: localeUrl(locale, "/pro/"), external: false };
+  }
+};
+---
+
+<div class="eng">
+  <!-- Hero -->
+  <section class="eng-hero" aria-labelledby="eng-title">
+    <div class="eng-wrap">
+      <p class="eng-eyebrow">
+        <span class="eng-eyebrow-dot" aria-hidden="true"></span>
+        {eng.eyebrow}
+      </p>
+      <h1 id="eng-title" class="eng-title">
+        <span>{eng.titleA}</span>
+        <span class="eng-title-b">{eng.titleB}</span>
+      </h1>
+      <p class="eng-lead">{eng.lead}</p>
+
+      <ul class="eng-stats" role="list">
+        {
+          eng.stats.map((s) => (
+            <li class="eng-stat">
+              <p class="eng-stat-val">{s.value}</p>
+              <p class="eng-stat-label">{s.label}</p>
+              <p class="eng-stat-detail">{s.detail}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- Arquitetura dos 4 repositórios -->
+  <section class="eng-sec eng-sec-tint" aria-labelledby="eng-arch">
+    <div class="eng-wrap">
+      <header class="eng-head">
+        <h2 id="eng-arch" class="eng-h2">{eng.archTitle}</h2>
+        <p class="eng-sub">{eng.archLead}</p>
+      </header>
+
+      <ul class="eng-repos" role="list">
+        {
+          eng.repos.map((r) => {
+            const link = repoHref(r.hrefKind);
+            return (
+              <li class="eng-repo reveal" data-product={r.id}>
+                <div class="eng-repo-top">
+                  <span class="eng-repo-role">
+                    <span class="eng-repo-dot" aria-hidden="true" />
+                    {r.role}
+                  </span>
+                </div>
+                <h3 class="eng-repo-title">{r.name}</h3>
+                <p class="eng-repo-stack">{r.stack}</p>
+                <p class="eng-repo-desc">{r.desc}</p>
+                <a
+                  href={link.href}
+                  class="eng-repo-link"
+                  {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                >
+                  {r.linkLabel}
+                  <Icon name={link.external ? "external" : "arrow"} class="h-3.5 w-3.5" />
+                  {link.external && <span class="sr-only">({t.footer.externalHint})</span>}
+                </a>
+              </li>
+            );
+          })
+        }
+      </ul>
+
+      <div class="eng-flow reveal">
+        <p class="eng-flow-label">{eng.flowLabel}</p>
+        <div class="eng-flow-grid">
+          {
+            eng.flowNodes.map((node, i) => (
+              <>
+                <div class="eng-flow-node">
+                  <b>{node.title}</b>
+                  <small>{node.sub}</small>
+                </div>
+                {i < eng.flowNodes.length - 1 && (
+                  <span class="eng-flow-arrow" aria-hidden="true">⇄</span>
+                )}
+              </>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Decisões de engenharia -->
+  <section class="eng-sec" aria-labelledby="eng-decisions">
+    <div class="eng-wrap">
+      <header class="eng-head">
+        <h2 id="eng-decisions" class="eng-h2">{eng.decisionsTitle}</h2>
+        <p class="eng-sub">{eng.decisionsLead}</p>
+      </header>
+
+      <ul class="eng-decisions" role="list">
+        {
+          eng.decisions.map((d) => (
+            <li class="eng-dec reveal">
+              <span class="eng-dec-tag">{d.tag}</span>
+              <h3>{d.title}</h3>
+              <p>{d.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- Stack por camada -->
+  <section class="eng-sec eng-sec-tint" aria-labelledby="eng-stack">
+    <div class="eng-wrap">
+      <header class="eng-head">
+        <h2 id="eng-stack" class="eng-h2">{eng.stackTitle}</h2>
+        <p class="eng-sub">{eng.stackLead}</p>
+      </header>
+
+      <ul class="eng-stacks" role="list">
+        {
+          eng.stackGroups.map((g) => (
+            <li class="eng-stack-card reveal">
+              <h3>{g.title}</h3>
+              <ul class="eng-stack-pills" role="list">
+                {g.items.map((item) => <li>{item}</li>)}
+              </ul>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- Cartão de Autor -->
+  <section class="eng-author-sec" aria-labelledby="eng-author">
+    <div class="eng-wrap">
+      <div class="eng-author reveal">
+        <div>
+          <p class="eng-author-eyebrow">{eng.authorEyebrow}</p>
+          <h2 id="eng-author" class="eng-author-name">{AUTHOR_NAME}</h2>
+          <p class="eng-author-role">{eng.authorRole}</p>
+          <p class="eng-author-note">{eng.authorNote}</p>
+        </div>
+        <div class="eng-author-actions">
+          <a
+            href={GITHUB_PROFILE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="eng-btn eng-btn-primary"
+          >
+            <GithubMark class="h-4 w-4" />
+            {eng.ctaGithub}
+            <span class="sr-only">({t.footer.externalHint})</span>
+          </a>
+          <a
+            href={AUTHOR_LINKEDIN_URL}
+            target="_blank"
+            rel="noopener noreferrer author"
+            class="eng-btn eng-btn-ghost"
+          >
+            {eng.ctaLinkedin}
+            <Icon name="external" class="h-3.5 w-3.5" />
+            <span class="sr-only">({t.footer.externalHint})</span>
+          </a>
+          <a
+            href={REPO_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="eng-btn eng-btn-ghost"
+          >
+            {eng.ctaSource}
+            <Icon name="external" class="h-3.5 w-3.5" />
+            <span class="sr-only">({t.footer.externalHint})</span>
+          </a>
+          <a href={`mailto:${CONTACT_EMAIL}`} class="eng-btn eng-btn-ghost">
+            {eng.ctaContact}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

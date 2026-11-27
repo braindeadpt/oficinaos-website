@@ -66,6 +66,7 @@ const columns: { id: string; title: string; links: FLink[] }[] = [
     id: "project",
     title: t.footer.columns.project,
     links: [
+      { label: t.footer.engineering, href: localeUrl(locale, "/engineering/") },
       { label: t.footer.privacy, href: localeUrl(locale, "/privacy/") },
       { label: t.footer.terms, href: localeUrl(locale, "/terms/") },
       { label: t.footer.license, href: `${REPO_URL}/blob/main/LICENSE`, external: true },
