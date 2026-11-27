@@ -18,20 +18,20 @@ const h = t.tradePage.hero;
 const x = '<path d="M18 6 6 18M6 6l12 12"/>';
 ---
 
-<section data-product="trade" class="relative isolate overflow-x-clip" aria-labelledby="trade-hero-title">
+<section data-product="trade" class="product-hero relative isolate overflow-x-clip" aria-labelledby="trade-hero-title">
   <div class="bg-tech-grid tech-grid-fade pointer-events-none absolute inset-0 -z-10" aria-hidden="true"></div>
   <div class="mx-auto grid max-w-7xl items-center gap-12 px-4 pt-10 pb-16 sm:px-6 sm:pt-16 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-14 lg:pt-20 lg:pb-24">
     <div class="min-w-0">
       <p class="flex flex-wrap items-center gap-3 text-sm font-semibold text-product">
-        <span class="inline-flex items-center gap-2">
-          <span class="h-2.5 w-2.5 rounded-[3px] bg-product" aria-hidden="true"></span>
+        <span class="product-eyebrow">
+          <span class="h-2.5 w-2.5 rounded-full bg-product" aria-hidden="true"></span>
           {h.label}
         </span>
         <span class="rounded-full bg-product-soft px-2.5 py-0.5 text-xs font-semibold text-on-product-soft">{h.badge}</span>
       </p>
       <h1
         id="trade-hero-title"
-        class="mt-3 text-[clamp(2.25rem,5.2vw,3.5rem)] leading-[1.05] font-extrabold tracking-[-0.03em] text-balance text-text"
+        class="mt-4 text-[clamp(2.25rem,5.2vw,3.5rem)] leading-[1.05] font-extrabold tracking-[-0.03em] text-balance text-text"
       >
         {h.title}
       </h1>
@@ -39,14 +39,14 @@ const x = '<path d="M18 6 6 18M6 6l12 12"/>';
       <div class="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:gap-5">
         <a
           href={TRADE_APPLY_URL}
-          class="inline-flex h-12 items-center justify-center gap-2 whitespace-nowrap rounded-md bg-product px-5 text-md font-semibold text-on-product shadow-sm transition-colors hover:bg-product-hover"
+          class="product-cta inline-flex h-12 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-product px-6 text-md font-semibold text-on-product hover:bg-product-hover"
         >
           {h.cta}
           <Icon name="arrow" class="h-4 w-4" />
         </a>
         <a
           href={TRADE_MARKET_URL}
-          class="inline-flex h-12 items-center justify-center gap-1.5 whitespace-nowrap rounded-md px-2 text-md font-semibold text-link underline decoration-border-strong underline-offset-4 transition-colors hover:text-primary-hover sm:justify-start"
+          class="inline-flex h-12 items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-3 text-md font-semibold text-link underline decoration-border-strong underline-offset-4 transition-colors hover:text-primary-hover sm:justify-start"
         >
           {h.ctaSecondary}
         </a>
@@ -54,7 +54,7 @@ const x = '<path d="M18 6 6 18M6 6l12 12"/>';
       <p class="mt-3 text-sm text-text-muted">{h.note}</p>
     </div>
 
-    <div class="min-w-0 xl:-mr-16">
+    <div class="product-stage min-w-0 xl:-mr-16">
       <UiFrame appName="OficinaOS Trade" title={h.frameTitle} product="trade" caption={h.frameCaption} vt="vt-product-trade">
         <div class="trd-search p-4 text-sm sm:p-5" aria-hidden="true">
           <div class="flex items-center gap-2 rounded-lg border border-border-strong bg-bg py-1.5 pr-1.5 pl-3">

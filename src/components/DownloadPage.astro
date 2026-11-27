@@ -40,7 +40,7 @@ const linkCls =
 
 <Nav t={t} locale={locale} />
 <main id="main" tabindex="-1">
-  <section class="relative isolate border-b border-border" aria-labelledby="dl-title">
+  <section class="product-hero relative isolate overflow-x-clip" aria-labelledby="dl-title">
     <div class="bg-tech-grid tech-grid-fade pointer-events-none absolute inset-0 -z-10" aria-hidden="true"></div>
     <div class="mx-auto max-w-6xl px-4 pt-10 pb-12 sm:px-6 sm:pt-16">
       <h1 id="dl-title" class="text-[clamp(2.25rem,5vw,3.25rem)] leading-[1.05] font-extrabold tracking-[-0.03em] text-balance text-text">
@@ -62,10 +62,10 @@ const linkCls =
           )
         }
       </p>
-      <p id="dl-status" role="status" class="mt-5 max-w-2xl rounded-md bg-success-soft px-4 py-3 text-sm font-medium text-on-success-soft" hidden>
+      <p id="dl-status" role="status" class="mt-5 max-w-2xl rounded-xl bg-success-soft px-4 py-3 text-sm font-medium text-on-success-soft" hidden>
         {d.starting}
       </p>
-      <aside id="mobile" class="os-mobile-only mt-5 max-w-2xl rounded-lg border border-border bg-surface p-4" aria-labelledby="dl-mobile-title">
+      <aside id="mobile" class="os-mobile-only dl-card mt-5 max-w-2xl p-4" aria-labelledby="dl-mobile-title">
         <h2 id="dl-mobile-title" class="font-display text-md font-bold text-text">{d.mobileTitle}</h2>
         <p class="mt-1 text-sm text-text-muted">{d.mobileText}</p>
       </aside>
@@ -74,14 +74,14 @@ const linkCls =
 
   <section aria-labelledby="dl-win-title">
     <div class="mx-auto grid max-w-6xl gap-6 px-4 py-12 sm:px-6 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
-      <div class="min-w-0 rounded-xl border border-border bg-surface p-5 shadow-sm sm:p-7">
+      <div class="dl-card min-w-0 p-5 sm:p-7">
         <h2 id="dl-win-title" class="font-display text-xl font-bold text-text">{d.winTitle}</h2>
         <p class="mt-2 text-text-muted">{d.winText}</p>
         <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
           <a
             id="dl-exe"
             href={exeUrl}
-            class="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-primary px-5 text-md font-semibold text-on-primary shadow-sm transition-colors hover:bg-primary-hover"
+            class="product-cta inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-6 text-md font-semibold text-on-primary hover:bg-primary-hover"
           >
             <Icon name="download" class="h-4 w-4" />
             {d.winButton}
