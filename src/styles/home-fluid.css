@@ -1,0 +1,564 @@
+/*
+ * PR 3 — Corpo da página inicial «Vidro & Luz» (fluidez, interatividade e ar).
+ * Referências: Mercury (luz clara) · Linear (hairlines e precisão) · Ramp (stepper tátil) · Nothing (micro-pontos).
+ * Zero estilos inline (CSP style-src 'self'); WCAG AA; prefers-reduced-motion respeitado.
+ */
+
+/* ─────────────── 1 · Secção «Para quem» ─────────────── */
+.hb .pb-sec.hb-fork-sec {
+  padding-block: 4rem 5rem;
+}
+
+:root .hb-fork-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  background: var(--glass-bg-strong);
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  box-shadow: var(--glass-specular), var(--glass-shadow), 0 0 0 1px var(--glass-rim);
+  transition:
+    transform var(--dur-2) var(--ease-spring),
+    box-shadow var(--dur-2) var(--ease-fluid);
+}
+
+:root .hb-fork-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--glass-specular), var(--glass-shadow-lg), 0 0 0 1px var(--glass-rim);
+}
+
+/* Destaque luminoso suave (em vez de borda preta grossa de 2px). */
+:root .hb-fork-yes {
+  background:
+    radial-gradient(ellipse 70% 55% at 0% 0%, rgb(16 185 129 / 0.1), transparent 70%),
+    var(--glass-bg-strong);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.92),
+    var(--glass-shadow),
+    0 0 0 1px color-mix(in oklab, var(--oos-color-accent) 34%, var(--glass-rim)) !important;
+}
+
+:root[data-theme="dark"] .hb-fork-yes {
+  background:
+    radial-gradient(ellipse 70% 55% at 0% 0%, rgb(52 211 153 / 0.12), transparent 70%),
+    var(--glass-bg-strong);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.16),
+    var(--glass-shadow),
+    0 0 0 1px color-mix(in oklab, var(--oos-color-accent) 42%, var(--glass-rim)) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .hb-fork-yes {
+    background:
+      radial-gradient(ellipse 70% 55% at 0% 0%, rgb(52 211 153 / 0.12), transparent 70%),
+      var(--glass-bg-strong);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.16),
+      var(--glass-shadow),
+      0 0 0 1px color-mix(in oklab, var(--oos-color-accent) 42%, var(--glass-rim)) !important;
+  }
+}
+
+.hb-mods a {
+  border-radius: 1rem;
+  background: color-mix(in oklab, var(--oos-color-bg) 82%, transparent);
+  transition:
+    transform var(--dur-2) var(--ease-spring),
+    box-shadow var(--dur-2) var(--ease-fluid),
+    background-color var(--dur-1) var(--ease-fluid);
+}
+
+.hb-mods a:hover {
+  transform: translateX(3px);
+  background: var(--oos-color-surface);
+  box-shadow: var(--glass-shadow), 0 0 0 1px var(--glass-rim);
+}
+
+.hb-mods a svg {
+  transition: transform var(--dur-2) var(--ease-spring);
+}
+
+.hb-mods a:hover svg {
+  transform: translateX(3px);
+}
+
+/* ─────────────── 2 · «Como funciona» — Stepper Interativo Liquid Glass ─────────────── */
+/* Oculta por omissão: só aparece quando o script ativa .hb-tour-live (nunca mostra separadores mortos). */
+.hb-tour-nav {
+  display: none;
+  margin-top: 2.25rem;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  padding: 0.375rem;
+  border-radius: 1.5rem;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-rim);
+  box-shadow: var(--glass-specular), var(--glass-shadow);
+}
+
+.hb-tour-live .hb-tour-nav {
+  display: inline-flex;
+}
+
+@media (min-width: 64rem) {
+  .hb-tour-nav {
+    border-radius: 9999px;
+  }
+}
+
+.hb-tour-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.375rem;
+  padding: 0.35rem 0.9rem 0.35rem 0.45rem;
+  border: 0;
+  border-radius: 9999px;
+  background: transparent;
+  color: var(--oos-color-text-muted);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  transition:
+    background-color var(--dur-2) var(--ease-fluid),
+    color var(--dur-2) var(--ease-fluid),
+    transform var(--dur-1) var(--ease-spring),
+    box-shadow var(--dur-2) var(--ease-fluid);
+}
+
+.hb-tour-tab:hover {
+  color: var(--oos-color-text);
+  background: color-mix(in oklab, var(--oos-color-text) 6%, transparent);
+}
+
+.hb-tour-tab:active {
+  transform: scale(0.98);
+}
+
+.hb-tour-tab:focus-visible {
+  outline: 2px solid var(--oos-color-focus);
+  outline-offset: 2px;
+}
+
+.hb-tour-tab-num {
+  display: grid;
+  place-items: center;
+  width: 1.625rem;
+  height: 1.625rem;
+  flex-shrink: 0;
+  border-radius: 9999px;
+  background: color-mix(in oklab, var(--oos-color-text) 8%, transparent);
+  color: var(--oos-color-text-muted);
+  font-family: var(--oos-font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  transition:
+    background-color var(--dur-2) var(--ease-fluid),
+    color var(--dur-2) var(--ease-fluid);
+}
+
+.hb-tour-tab[aria-selected="true"] {
+  background: var(--oos-color-primary);
+  color: var(--oos-color-on-primary);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.2),
+    0 6px 16px -6px rgb(15 23 42 / 0.35);
+}
+
+.hb-tour-tab[aria-selected="true"] .hb-tour-tab-num {
+  background: color-mix(in oklab, var(--oos-color-on-primary) 18%, transparent);
+  color: var(--oos-color-on-primary);
+}
+
+/* Palco único interativo quando JS está ativo (.hb-tour-live). */
+.hb-tour-live .pb-steps {
+  margin-top: 2rem;
+  gap: 0;
+}
+
+.hb-tour-live .pb-step {
+  padding: 1.75rem;
+  border-radius: 1.75rem;
+  background:
+    radial-gradient(ellipse 60% 55% at 88% 18%, var(--aurora-a), transparent 72%),
+    radial-gradient(ellipse 50% 45% at 15% 88%, var(--aurora-b), transparent 70%),
+    var(--oos-color-bg);
+  box-shadow: var(--glass-specular), var(--glass-shadow), 0 0 0 1px var(--glass-rim);
+}
+
+@media (min-width: 56rem) {
+  .hb-tour-live .pb-step {
+    padding: 3rem;
+    min-height: 25rem;
+  }
+  .hb-tour-live .pb-step-rev .pb-step-text {
+    order: 0;
+  }
+}
+
+.hb-tour-live .pb-step[hidden] {
+  display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hb-tour-live .pb-step:not([hidden]) {
+    animation: hb-panel-in 0.38s var(--ease-fluid) both;
+  }
+  .hb-tour-live .pb-step:not([hidden]) .hb-sign > svg path {
+    stroke-dasharray: 240;
+    stroke-dashoffset: 240;
+    animation: hb-draw-sign 1.1s var(--ease-fluid) 0.15s forwards;
+  }
+  .hb-tour-live .pb-step:not([hidden]) .hb-approved {
+    animation: hb-pop-in 0.42s var(--ease-spring) 0.18s both;
+  }
+  .hb-tour-live .pb-step:not([hidden]) .hb-timeline li.is-now .hb-tl-dot {
+    animation: hb-tl-pulse 1.4s ease-in-out 2;
+  }
+}
+
+@keyframes hb-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.992);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hb-draw-sign {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes hb-pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hb-tl-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 4px var(--pb-ok-soft);
+  }
+  50% {
+    box-shadow: 0 0 0 8px color-mix(in oklab, var(--pb-ok) 18%, transparent);
+  }
+}
+
+.hb-tour-live .pb-visual {
+  display: flex;
+  justify-content: center;
+}
+
+.hb-tour-live .pb-step .pb-num {
+  background: var(--oos-color-accent);
+  color: #ffffff;
+  box-shadow: 0 0 0 4px var(--pb-ok-soft);
+}
+
+:root[data-theme="dark"] .hb-tour-live .pb-step .pb-num {
+  color: #0a0e17;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .hb-tour-live .pb-step .pb-num {
+    color: #0a0e17;
+  }
+}
+
+/* ─────────────── 3 · Vídeo em moldura Liquid Glass ─────────────── */
+.hb-video {
+  border-radius: 1.75rem;
+  box-shadow: var(--glass-specular), var(--glass-shadow-lg), 0 0 0 1px var(--glass-rim);
+}
+
+.hb-play {
+  background: rgb(255 255 255 / 0.86);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.95),
+    0 18px 40px -10px rgb(0 0 0 / 0.45);
+  transition:
+    transform var(--dur-2) var(--ease-spring),
+    background-color var(--dur-1) var(--ease-fluid);
+}
+
+.hb-video a:hover .hb-play {
+  scale: none;
+  transform: scale(1.045);
+  background: #ffffff;
+}
+
+/* ─────────────── 4 · Bento do Ecossistema (Linear + Mercury + Nothing) ─────────────── */
+.hb-bento {
+  gap: 1.25rem;
+}
+
+.hb-cell a {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  background: var(--glass-bg-strong);
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  box-shadow: var(--glass-specular), var(--glass-shadow), 0 0 0 1px var(--glass-rim);
+  transition:
+    transform var(--dur-2) var(--ease-spring),
+    box-shadow var(--dur-2) var(--ease-fluid);
+}
+
+/* Brilho ambiente subtil da cor do produto no canto superior direito. */
+.hb-cell a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.6;
+  background: radial-gradient(ellipse 60% 55% at 96% 4%, color-mix(in oklab, var(--oos-product) 13%, transparent), transparent 70%);
+  transition: opacity var(--dur-2) var(--ease-fluid);
+}
+
+.hb-cell a:hover {
+  translate: none;
+  transform: translateY(-3px);
+  box-shadow:
+    var(--glass-specular),
+    var(--glass-shadow-lg),
+    0 0 0 1px color-mix(in oklab, var(--oos-product) 42%, var(--glass-rim));
+}
+
+.hb-cell a:hover::before {
+  opacity: 1;
+}
+
+.hb-cell-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.hb-cell-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--oos-product);
+}
+
+.hb-cell-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: var(--oos-product);
+}
+
+.hb-cell-arrow {
+  width: 1rem;
+  height: 1rem;
+  color: var(--oos-color-text-subtle);
+  transition:
+    transform var(--dur-2) var(--ease-spring),
+    color var(--dur-1) var(--ease-fluid);
+}
+
+.hb-cell a:hover .hb-cell-arrow {
+  transform: translateX(3px);
+  color: var(--oos-product);
+}
+
+/* Micro-animações dentro das células do Bento */
+.hb-chips i {
+  transition: transform var(--dur-2) var(--ease-spring);
+}
+
+.hb-cell a:hover .hb-chips i:nth-child(odd) {
+  transform: translateY(-2px);
+}
+
+.hb-cell a:hover .hb-chips i:nth-child(even) {
+  transform: translateY(-1px);
+}
+
+.hb-meter i span {
+  background: linear-gradient(90deg, var(--oos-product), var(--oos-color-accent));
+  transform-origin: left center;
+  transition: transform var(--dur-3) var(--ease-fluid);
+}
+
+.hb-cell a:hover .hb-meter i span {
+  transform: scaleX(1.03);
+}
+
+.hb-cell .hb-bubble {
+  border-radius: 1.125rem 1.125rem 1.125rem 0.35rem;
+  transition:
+    transform var(--dur-2) var(--ease-spring),
+    box-shadow var(--dur-2) var(--ease-fluid);
+}
+
+.hb-cell a:hover .hb-bubble {
+  transform: translateY(-2px);
+  box-shadow: var(--glass-shadow), 0 0 0 1px color-mix(in oklab, var(--oos-product) 30%, var(--glass-rim));
+}
+
+.hb-trade > span {
+  transition:
+    transform var(--dur-2) var(--ease-spring),
+    box-shadow var(--dur-2) var(--ease-fluid);
+}
+
+.hb-cell a:hover .hb-trade > span {
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--oos-product) 30%, var(--glass-rim));
+}
+
+/* ─────────────── 5 · Banda Pro (Linear Dark Glass) ─────────────── */
+.hb-pro {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 55% 60% at 85% 20%, rgb(16 185 129 / 0.14), transparent 72%),
+    radial-gradient(ellipse 45% 50% at 15% 85%, rgb(59 130 246 / 0.14), transparent 72%),
+    #0b0f18;
+}
+
+.hb-pro-visual {
+  border-radius: 1.75rem;
+  background:
+    radial-gradient(80% 70% at 50% 0%, rgb(52 211 153 / 0.18), transparent 70%),
+    rgb(255 255 255 / 0.04);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.14),
+    0 24px 60px -20px rgb(0 0 0 / 0.65),
+    0 0 0 1px rgb(255 255 255 / 0.1);
+}
+
+.hb-pro-groups li {
+  background: rgb(255 255 255 / 0.06);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.14), inset 0 0 0 1px rgb(255 255 255 / 0.14);
+}
+
+/* ─────────────── 6 · Privacidade, Novidades & CTA Final ─────────────── */
+:root .hb-data-card:not(.hb-data-opt) {
+  background:
+    radial-gradient(ellipse 65% 55% at 0% 0%, rgb(16 185 129 / 0.09), transparent 70%),
+    var(--glass-bg-strong);
+  box-shadow:
+    var(--glass-specular),
+    var(--glass-shadow),
+    0 0 0 1px color-mix(in oklab, var(--oos-color-accent) 28%, var(--glass-rim));
+}
+
+:root .hb-data-opt {
+  background: var(--glass-bg-subtle);
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  border: 1px dashed var(--oos-color-border-strong);
+  box-shadow: var(--glass-specular);
+}
+
+.hb-updates li {
+  border-radius: 1rem;
+  padding-inline: 1rem;
+  margin-inline: -1rem;
+  transition: background-color var(--dur-1) var(--ease-fluid);
+}
+
+.hb-updates li:hover {
+  background: color-mix(in oklab, var(--oos-color-text) 3.5%, transparent);
+}
+
+.hb-cta {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hb-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 52% 65% at 25% 50%, var(--aurora-a), transparent 72%),
+    radial-gradient(ellipse 48% 60% at 75% 45%, var(--aurora-b), transparent 72%);
+}
+
+.hb-cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 20%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 20%, transparent 80%);
+}
+
+.hb-btn-ink {
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.22),
+    0 10px 24px -8px rgb(15 23 42 / 0.42);
+  transition:
+    transform var(--dur-2) var(--ease-spring),
+    box-shadow var(--dur-2) var(--ease-fluid);
+}
+
+.hb-btn-ink:hover {
+  translate: none;
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.28),
+    0 14px 30px -8px rgb(15 23 42 / 0.5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hb-tour-live .pb-step:not([hidden]),
+  .hb-tour-live .pb-step:not([hidden]) .hb-sign > svg path,
+  .hb-tour-live .pb-step:not([hidden]) .hb-approved,
+  .hb-tour-live .pb-step:not([hidden]) .hb-timeline li.is-now .hb-tl-dot {
+    animation: none;
+  }
+  .hb-tour-live .pb-step:not([hidden]) .hb-sign > svg path {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+  }
+  :root .hb-fork-card:hover,
+  .hb-mods a:hover,
+  .hb-mods a:hover svg,
+  .hb-tour-tab:active,
+  .hb-cell a:hover,
+  .hb-cell a:hover .hb-cell-arrow,
+  .hb-cell a:hover .hb-chips i:nth-child(odd),
+  .hb-cell a:hover .hb-chips i:nth-child(even),
+  .hb-cell a:hover .hb-meter i span,
+  .hb-cell a:hover .hb-bubble,
+  .hb-btn-ink:hover {
+    transform: none;
+    translate: none;
+  }
+  /* Preserva o translate: -50% -50% de centragem do botão play; remove só a escala de hover. */
+  .hb-video a:hover .hb-play {
+    transform: none;
+  }
+}
