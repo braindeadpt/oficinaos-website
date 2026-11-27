@@ -177,6 +177,11 @@
   "hash": "b8f4385be4",
   "title": "Download OficinaOS"
  },
+ "en-engineering": {
+  "file": "en-engineering-179399bdfb.jpg",
+  "hash": "179399bdfb",
+  "title": "Built like a real product, from bench to edge."
+ },
  "en-orcamentos-aprovados-online": {
   "file": "en-orcamentos-aprovados-online-08f6a837a3.jpg",
   "hash": "08f6a837a3",
@@ -236,6 +241,11 @@
   "file": "en-updates-901d1183ae.jpg",
   "hash": "901d1183ae",
   "title": "What's new"
+ },
+ "engineering": {
+  "file": "engineering-1a15458c69.jpg",
+  "hash": "1a15458c69",
+  "title": "Construído como produto real, do balcão à edge."
  },
  "es-alternativas-software-oficina": {
   "file": "es-alternativas-software-oficina-49f0dc8f1b.jpg",
@@ -321,6 +331,11 @@
   "file": "es-download-f6311721bd.jpg",
   "hash": "f6311721bd",
   "title": "Descargar OficinaOS"
+ },
+ "es-engineering": {
+  "file": "es-engineering-8dd6c045df.jpg",
+  "hash": "8dd6c045df",
+  "title": "Construido como producto real, del mostrador al edge."
  },
  "es-orcamentos-aprovados-online": {
   "file": "es-orcamentos-aprovados-online-cf948e905b.jpg",

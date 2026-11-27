@@ -25,9 +25,10 @@ bun run preview    # preview the production build
 
 ## Editing copy
 
-Every string lives in `src/i18n/{pt,en,es}.ts`. Pages are thin wrappers that
-pass the copy object into `src/components/*` — edit the i18n files, not the
-markup.
+Every string lives in `src/i18n/{pt,en,es}.ts` (with structured trilingual data
+for `/updates/` and `/engineering/` in `src/data/updates.ts` and
+`src/data/engineering.ts`). Pages are thin wrappers that pass the copy object
+into `src/components/*` — edit the i18n/data files, not the markup.
 
 ## Pro beta sign-up form
 

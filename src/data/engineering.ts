@@ -98,7 +98,7 @@ export const ENGINEERING: Record<Locale, EngineeringCopy> = {
     flowLabel: "Fronteiras de confiança e fluxo de dados",
     flowNodes: [
       { title: "Rede local da loja", sub: "PostgreSQL + App + Diag USB (funciona offline)" },
-      { title: "Polling autenticado HTTPS", sub: "Ligação de saída iniciada pela loja — zero portas abertas" },
+      { title: "Polling autenticado HTTPS", sub: "Ligação de saída iniciada pela loja que envia e recebe dados — zero portas abertas" },
       { title: "Cloud Relay & Edge", sub: "Portal /t/:token · Assinatura · WhatsApp/SMS cifrado" },
     ],
     decisionsTitle: "Decisões de engenharia",
@@ -211,7 +211,7 @@ export const ENGINEERING: Record<Locale, EngineeringCopy> = {
     flowLabel: "Trust boundaries and data flow",
     flowNodes: [
       { title: "Shop LAN", sub: "PostgreSQL + App + USB Diag (works offline)" },
-      { title: "Authenticated HTTPS polling", sub: "Outbound-only from the shop — zero open ports" },
+      { title: "Authenticated HTTPS polling", sub: "Outbound-only connection initiated by the shop to send and receive data — zero open ports" },
       { title: "Cloud Relay & Edge", sub: "Portal /t/:token · Signatures · Encrypted WhatsApp/SMS" },
     ],
     decisionsTitle: "Engineering decisions",
@@ -324,7 +324,7 @@ export const ENGINEERING: Record<Locale, EngineeringCopy> = {
     flowLabel: "Fronteras de confianza y flujo de datos",
     flowNodes: [
       { title: "Red local del taller", sub: "PostgreSQL + App + Diag USB (funciona offline)" },
-      { title: "Polling autenticado HTTPS", sub: "Conexión solo de salida — cero puertos abiertos" },
+      { title: "Polling autenticado HTTPS", sub: "Conexión saliente iniciada por el taller que envía y recibe datos — cero puertos abiertos" },
       { title: "Cloud Relay y Edge", sub: "Portal /t/:token · Firmas · WhatsApp/SMS cifrado" },
     ],
     decisionsTitle: "Decisiones de ingeniería",
