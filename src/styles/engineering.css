@@ -106,6 +106,10 @@
 
 @supports (background-clip: text) or (-webkit-background-clip: text) {
   .eng-title-b {
+    padding-top: 0.04em;
+    margin-top: -0.04em;
+    padding-bottom: 0.16em;
+    margin-bottom: -0.16em;
     background: linear-gradient(110deg, #475569 0%, #334155 45%, #1d4ed8 100%);
     -webkit-background-clip: text;
     background-clip: text;
