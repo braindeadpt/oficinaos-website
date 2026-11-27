@@ -3233,6 +3233,7 @@ export const t: Copy = {
     community: "Comunidad",
     privacy: "Privacidad",
     terms: "Términos",
+    engineering: "Ingeniería y Arquitectura",
     madeBy: "Hecho por",
     madeIn: "en Portugal",
     tagline: "Software libre para quien repara, diagnostica y revende tecnología.",

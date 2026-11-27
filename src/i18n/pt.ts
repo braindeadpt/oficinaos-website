@@ -3259,6 +3259,7 @@ export const t = {
     community: "Comunidade",
     privacy: "Privacidade",
     terms: "Termos",
+    engineering: "Engenharia & Arquitetura",
     madeBy: "Feito por",
     madeIn: "em Portugal",
     tagline: "Software livre para quem repara, diagnostica e revende tecnologia.",

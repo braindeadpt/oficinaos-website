@@ -19,6 +19,7 @@
         "http://localhost/privacy/",
         "http://localhost/terms/",
         "http://localhost/updates/",
+        "http://localhost/engineering/",
         "http://localhost/software-reparacao-telemoveis/"
       ],
       "numberOfRuns": 3,
