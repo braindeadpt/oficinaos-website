@@ -1694,7 +1694,7 @@ export const t: Copy = {
           heading: "A record that can't be erased",
           paragraphs: [
             "Every record is a new line that is never edited or deleted — a correction is another line pointing at the original. The history is kept for 5 years (Portuguese Labour Code, art. 202), open to labour inspections, and the worker can request their own records.",
-            "External proof photos are deleted automatically after 90 days — the record stays, marked «photo expired».",
+            "External proof photos are no longer stored by the app — the record keeps only the note «photo sent at HH:MM». The image travels through the messaging channel (WhatsApp/SMS) and stays only in the conversation; the app never stores it. Photos that older versions had stored are securely shredded on upgrade.",
           ],
           links: [],
         },
@@ -1706,7 +1706,7 @@ export const t: Copy = {
           list: [
             "Inform workers in writing — Settings has a printable template for signature",
             "Location only at the moment of recording — never continuous; no biometrics",
-            "External photos are kept 90 days; records, 5 years",
+            "External photos are no longer stored (ones from older versions are shredded on upgrade); records, 5 years",
             "Consider a data protection impact assessment (DPIA) before switching on — tracking workers' location deserves extra care",
           ],
           links: [],
