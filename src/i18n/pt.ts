@@ -1704,7 +1704,7 @@ export const t = {
           heading: "Um registo que não se apaga",
           paragraphs: [
             "Cada registo é uma linha nova e nunca é alterado nem apagado — uma correção é outra linha que aponta para a original. O histórico fica guardado 5 anos (Código do Trabalho, art. 202.º), acessível e consultável pela ACT, e o trabalhador pode pedir os seus registos.",
-            "As fotos de prova de externos são apagadas automaticamente aos 90 dias — o registo fica, marcado como «foto expirada».",
+            "As fotografias de prova de externos deixaram de ser guardadas — o registo fica apenas com a nota «foto enviada às HH:MM» e a imagem nunca sai do telemóvel da empresa. As fotos que já estavam guardadas de versões antigas são apagadas de forma segura na atualização.",
           ],
           links: [],
         },
@@ -1716,7 +1716,7 @@ export const t = {
           list: [
             "Informar os trabalhadores por escrito — as Definições têm um modelo imprimível para assinatura",
             "Localização só no momento do registo — nunca contínua; sem biometria",
-            "As fotos de externos ficam 90 dias; os registos, 5 anos",
+            "As fotos de externos deixaram de ser guardadas (as de versões antigas são apagadas na atualização); os registos, 5 anos",
             "Avaliar a necessidade de uma avaliação de impacto (AIPD) antes de avançar — a localização de trabalhadores pede cuidado redobrado",
           ],
           links: [],

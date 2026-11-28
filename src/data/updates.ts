@@ -21,7 +21,7 @@ export interface UpdateEntry {
 export const UPDATES: UpdateEntry[] = [
   {
     date: "2026-11-27",
-    tier: "free",
+    tier: "pro",
     area: { pt: "Livro de Ponto", en: "Time Clock", es: "Registro de jornada" },
     title: {
       pt: "v1.0.23: exportação para a ACT",
@@ -36,7 +36,7 @@ export const UPDATES: UpdateEntry[] = [
   },
   {
     date: "2026-11-27",
-    tier: "free",
+    tier: "pro",
     area: { pt: "Livro de Ponto", en: "Time Clock", es: "Registro de jornada" },
     title: {
       pt: "v1.0.23: folha de informação aos trabalhadores",
@@ -51,7 +51,7 @@ export const UPDATES: UpdateEntry[] = [
   },
   {
     date: "2026-11-27",
-    tier: "free",
+    tier: "pro",
     area: { pt: "Livro de Ponto", en: "Time Clock", es: "Registro de jornada" },
     title: {
       pt: "v1.0.23: fotografias deixam de ser guardadas, localização só quando é preciso",
@@ -96,7 +96,7 @@ export const UPDATES: UpdateEntry[] = [
   },
   {
     date: "2026-11-27",
-    tier: "free",
+    tier: "pro",
     area: { pt: "Livro de Ponto", en: "Time Clock", es: "Registro de jornada" },
     title: {
       pt: "v1.0.23: modo só-ponto e backups verificados",

@@ -1688,7 +1688,7 @@ export const t: Copy = {
           heading: "Un registro que no se borra",
           paragraphs: [
             "Cada registro es una línea nueva que nunca se edita ni se borra — una corrección es otra línea que apunta a la original. El historial se guarda 5 años (Código del Trabajo portugués, art. 202), accesible y consultable por la inspección de trabajo, y el empleado puede pedir sus registros.",
-            "Las fotos de prueba de externos se borran automáticamente a los 90 días — el registro queda, marcado como «foto caducada».",
+            "Las fotos de prueba de externos dejan de guardarse — el registro queda solo con la nota «foto enviada a las HH:MM» y la imagen nunca sale del teléfono de la empresa. Las fotos ya guardadas por versiones antiguas se borran de forma segura al actualizar.",
           ],
           links: [],
         },
@@ -1700,7 +1700,7 @@ export const t: Copy = {
           list: [
             "Informar a los empleados por escrito — los Ajustes tienen una plantilla imprimible para firmar",
             "Localización solo en el momento del registro — nunca continua; sin biometría",
-            "Las fotos de externos se guardan 90 días; los registros, 5 años",
+            "Las fotos de externos dejan de guardarse (las de versiones antiguas se borran al actualizar); los registros, 5 años",
             "Valorar la necesidad de una evaluación de impacto (AIPD) antes de activarlo — el seguimiento de la ubicación de empleados pide cuidado extra",
           ],
           links: [],
