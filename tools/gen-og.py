@@ -34,13 +34,15 @@ DIST = ROOT / "dist"
 OUT = ROOT / "public" / "og" / "pages"
 W, H = 1200, 630
 
-INK = (20, 23, 26)
-INK2 = (91, 99, 107)
-INK3 = (138, 146, 154)
-BG = (246, 246, 243)
-OK = (11, 143, 99)
-OK_SOFT = (223, 245, 234)
-DOT = (215, 217, 212)
+# Paleta «Azul Safira + Menta» (rebrand #47) — tokens de src/styles/glass-theme.css
+INK = (15, 23, 42)  # --oos-color-text #0f172a
+INK2 = (71, 85, 105)  # --oos-color-text-muted #475569
+INK3 = (85, 100, 122)  # --oos-color-text-subtle #55647a
+BG = (244, 248, 255)  # --oos-color-bg #f4f8ff
+OK = (16, 185, 129)  # --oos-mint #10b981
+OK_SOFT = (209, 250, 229)  # --oos-mint-soft #d1fae5
+DOT = (221, 232, 253)  # --dot-color rgb(37 99 235 / 0.11) composto sobre o fundo
+LINE = (219, 228, 242)  # hairline clara derivada de --oos-color-surface-2/3
 
 # páginas com imagem própria (ogImage) — não gerar. "" = página inicial (de cada língua).
 SKIP = {"", "livro-de-ponto", "atendimento-ia", "pro"}
@@ -64,7 +66,7 @@ DEFAULT_EYEBROW = {
 }
 
 
-TEMPLATE_VERSION = "1"  # subir quando o desenho das imagens mudar (força URLs novos)
+TEMPLATE_VERSION = "2"  # subir quando o desenho das imagens mudar (força URLs novos)
 RETAIN_DAYS = 30  # imagens antigas ficam este tempo DEPOIS DA PUBLICAÇÃO: previsões em cache não dão 404
 RECOVER = "bun run og"  # escolhe o Python certo (tools/py.mjs) e faz build → gerar → build
 
@@ -130,9 +132,11 @@ def render(lang: str, eyebrow: str, title: str):
     for y in range(40, H, 28):
         for x in range(760, W, 28):
             d.ellipse((x - 1.2, y - 1.2, x + 1.2, y + 1.2), fill=DOT)
-    # marca
-    d.rounded_rectangle((64, 58, 106, 100), radius=11, fill=INK)
-    d.rounded_rectangle((77, 71, 93, 87), radius=4, outline=(255, 255, 255), width=3)
+    # marca — símbolo squircle do rebrand (tools/brandlogo.py, geometria de Logo.astro)
+    from brandlogo import draw_squircle
+
+    logo = draw_squircle(42)
+    img.paste(logo, (64, 58), logo)
     d.text((122, 79), "OficinaOS", font=load("inter-latin", 30, 650), fill=INK, anchor="lm")
     # etiqueta
     d.ellipse((64, 176, 78, 190), fill=OK)
@@ -150,7 +154,7 @@ def render(lang: str, eyebrow: str, title: str):
         d.text((62, y), ln, font=f, fill=INK)
         y += int(size * 1.08)
     # rodapé
-    d.line((64, 548, 1136, 548), fill=(226, 227, 222), width=2)
+    d.line((64, 548, 1136, 548), fill=LINE, width=2)
     d.text((64, 580), "oficinaos.app", font=load("inter-latin", 26, 600), fill=INK, anchor="lm")
     return img
 

@@ -47,7 +47,7 @@ const pagePath = currentPagePath(Astro.url.pathname, locale);
 const canonical = new URL(localeUrl(locale, pagePath), Astro.site);
 const favicon = `${import.meta.env.BASE_URL}favicon.svg`;
 // Versioned filename — X/Telegram/WhatsApp/Discord cache OG cards per image
-// URL, so a renamed file forces a fresh scrape. og-cover.png stays as a
+// URL, so a renamed file forces a fresh scrape. og-cover.png/og-cover-2026.png stay as
 // fallback for old links.
 // Imagem de partilha: a própria da página (ogImage) → a gerada por tools/gen-og.py para este caminho
 // (public/og/pages/<caminho-com-hífenes>.jpg, "home" na raiz) → a capa genérica.
@@ -62,7 +62,7 @@ const ogPath =
   Astro.props.ogImage ??
   (ogEntry && existsSync(join(process.cwd(), "public", "og", "pages", ogEntry.file))
     ? `og/pages/${ogEntry.file}`
-    : "og-cover-2026.png");
+    : "og-cover-safira.png");
 const ogImage = new URL(`${import.meta.env.BASE_URL}${ogPath}`, Astro.site);
 ---
 

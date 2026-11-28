@@ -1,475 +1,568 @@
 {
  "_retired": {
+  "alternativas-software-oficina-1097b6f7cb.jpg": null,
+  "deixar-excel-papel-34b8650977.jpg": null,
+  "diag-ad4f03631d.jpg": null,
+  "docs-926e0125cb.jpg": null,
+  "docs-ai-analyst-8d8c8fd71d.jpg": null,
+  "docs-diag-55c2fe8571.jpg": null,
+  "docs-invoicing-a1859d328f.jpg": null,
+  "docs-market-5a7fa3a39d.jpg": null,
+  "docs-market-prices-05fc8d57d9.jpg": null,
+  "docs-multi-shop-2481f7ef7e.jpg": null,
+  "docs-ponto-a3f6ac481f.jpg": null,
+  "docs-ponto-act-05ecb3fec0.jpg": null,
+  "docs-portal-85206866b3.jpg": null,
+  "docs-remarketing-acf649d609.jpg": null,
+  "docs-sms-3f395c80cb.jpg": null,
+  "docs-storefront-b7111a598f.jpg": null,
+  "docs-whatsapp-6fba189dc8.jpg": null,
+  "download-74b704c0eb.jpg": null,
   "en-7f5b508f31.jpg": null,
+  "en-alternativas-software-oficina-f9acb5b516.jpg": null,
+  "en-deixar-excel-papel-3e5de313b5.jpg": null,
+  "en-diag-e1b14dbae4.jpg": null,
+  "en-docs-31af874bca.jpg": null,
+  "en-docs-ai-analyst-4e386be851.jpg": null,
+  "en-docs-diag-2b4e7cc8c7.jpg": null,
+  "en-docs-invoicing-720ed4da87.jpg": null,
+  "en-docs-market-4978b70a2e.jpg": null,
+  "en-docs-market-prices-f081bd83c1.jpg": null,
+  "en-docs-multi-shop-111a8b4913.jpg": null,
+  "en-docs-ponto-799a8f570d.jpg": null,
+  "en-docs-ponto-act-ed1f06a1df.jpg": null,
+  "en-docs-portal-5ff89eda2a.jpg": null,
+  "en-docs-remarketing-d9f7f39d1a.jpg": null,
+  "en-docs-sms-d53a453611.jpg": null,
+  "en-docs-storefront-cb6c68bd6c.jpg": null,
+  "en-docs-whatsapp-030163088a.jpg": null,
+  "en-download-b8f4385be4.jpg": null,
+  "en-engineering-9f9b5f0d78.jpg": null,
+  "en-orcamentos-aprovados-online-08f6a837a3.jpg": null,
+  "en-para-tecnicos-independentes-cd8e1f890c.jpg": null,
+  "en-precos-99aa958e35.jpg": null,
+  "en-privacy-23398fe4b8.jpg": null,
   "en-pro-0a0fdccc33.jpg": null,
+  "en-rastrear-reparacao-cliente-1d5e9e2c54.jpg": null,
+  "en-software-assistencia-tecnica-ca1cff4616.jpg": null,
+  "en-software-de-gestao-para-oficina-10ce63ceb8.jpg": null,
+  "en-software-pago-vs-oficinaos-96972ebdbc.jpg": null,
+  "en-software-reparacao-telemoveis-92ff64920d.jpg": null,
+  "en-terms-16444f5084.jpg": null,
+  "en-trade-cd0dfb3002.jpg": null,
+  "en-updates-901d1183ae.jpg": null,
+  "engineering-956862d4cc.jpg": null,
   "es-99f21df2cc.jpg": null,
+  "es-alternativas-software-oficina-49f0dc8f1b.jpg": null,
+  "es-deixar-excel-papel-cdc930e065.jpg": null,
+  "es-diag-fd097267d3.jpg": null,
+  "es-docs-02f38bf67a.jpg": null,
+  "es-docs-ai-analyst-ef4015f216.jpg": null,
+  "es-docs-diag-dde3563fa3.jpg": null,
+  "es-docs-invoicing-2f21d3bedf.jpg": null,
+  "es-docs-market-bc04c05b9c.jpg": null,
+  "es-docs-market-prices-088fe1d141.jpg": null,
+  "es-docs-multi-shop-7def29b046.jpg": null,
+  "es-docs-ponto-20ea6a9c2b.jpg": null,
+  "es-docs-ponto-act-e5e95ae187.jpg": null,
+  "es-docs-portal-095708e9dc.jpg": null,
+  "es-docs-remarketing-61a7ea8a08.jpg": null,
+  "es-docs-sms-9e1c638e67.jpg": null,
+  "es-docs-storefront-96366c8e9b.jpg": null,
+  "es-docs-whatsapp-c48acd833b.jpg": null,
+  "es-download-f6311721bd.jpg": null,
+  "es-engineering-f7f7406d8e.jpg": null,
+  "es-orcamentos-aprovados-online-cf948e905b.jpg": null,
+  "es-para-tecnicos-independentes-6e4a41c0d0.jpg": null,
+  "es-precos-40ba097dcb.jpg": null,
+  "es-privacy-dd3087cec3.jpg": null,
   "es-pro-26aca3c395.jpg": null,
+  "es-rastrear-reparacao-cliente-447d3d3e6f.jpg": null,
+  "es-software-assistencia-tecnica-89763dab88.jpg": null,
+  "es-software-de-gestao-para-oficina-1fc075e25d.jpg": null,
+  "es-software-pago-vs-oficinaos-f15251e640.jpg": null,
+  "es-software-reparacao-telemoveis-2758dcb653.jpg": null,
+  "es-terms-ea103b771a.jpg": null,
+  "es-trade-18277bd6fe.jpg": null,
+  "es-updates-e7d7dc118d.jpg": null,
   "home-5ec677cf91.jpg": null,
-  "pro-a1315a7ccd.jpg": null
+  "orcamentos-aprovados-online-84e0c32a4c.jpg": null,
+  "para-tecnicos-independentes-431ecbb74d.jpg": null,
+  "precos-60f55326e3.jpg": null,
+  "privacy-916e2ff3c5.jpg": null,
+  "pro-a1315a7ccd.jpg": null,
+  "rastrear-reparacao-cliente-cd92ff2b70.jpg": null,
+  "software-assistencia-tecnica-344c0efe38.jpg": null,
+  "software-de-gestao-para-oficina-ce5f34f9c5.jpg": null,
+  "software-pago-vs-oficinaos-41084b91f5.jpg": null,
+  "software-reparacao-telemoveis-2f350619a4.jpg": null,
+  "terms-7cecfe5801.jpg": null,
+  "trade-a1657dbdf3.jpg": null,
+  "updates-df65cd1f66.jpg": null
  },
  "alternativas-software-oficina": {
-  "file": "alternativas-software-oficina-1097b6f7cb.jpg",
-  "hash": "1097b6f7cb",
+  "file": "alternativas-software-oficina-134dbcf8ca.jpg",
+  "hash": "134dbcf8ca",
   "title": "Antes de pagar uma mensalidade, compare"
  },
  "deixar-excel-papel": {
-  "file": "deixar-excel-papel-34b8650977.jpg",
-  "hash": "34b8650977",
+  "file": "deixar-excel-papel-e9e0c5b14f.jpg",
+  "hash": "e9e0c5b14f",
   "title": "Do papel e do Excel para um programa de gestão"
  },
  "diag": {
-  "file": "diag-ad4f03631d.jpg",
-  "hash": "ad4f03631d",
+  "file": "diag-01646a6af6.jpg",
+  "hash": "01646a6af6",
   "title": "Ligue o cabo. O relatório faz o resto."
  },
  "docs": {
-  "file": "docs-926e0125cb.jpg",
-  "hash": "926e0125cb",
+  "file": "docs-e768cf6509.jpg",
+  "hash": "e768cf6509",
   "title": "Guia completo"
  },
  "docs-ai-analyst": {
-  "file": "docs-ai-analyst-8d8c8fd71d.jpg",
-  "hash": "8d8c8fd71d",
+  "file": "docs-ai-analyst-259aaeb805.jpg",
+  "hash": "259aaeb805",
   "title": "Analista de IA"
  },
  "docs-diag": {
-  "file": "docs-diag-55c2fe8571.jpg",
-  "hash": "55c2fe8571",
+  "file": "docs-diag-f362d0c4c5.jpg",
+  "hash": "f362d0c4c5",
   "title": "OficinaOS Diag"
  },
  "docs-invoicing": {
-  "file": "docs-invoicing-a1859d328f.jpg",
-  "hash": "a1859d328f",
+  "file": "docs-invoicing-cc752688a9.jpg",
+  "hash": "cc752688a9",
   "title": "Faturação certificada"
  },
  "docs-market": {
-  "file": "docs-market-5a7fa3a39d.jpg",
-  "hash": "5a7fa3a39d",
+  "file": "docs-market-05a2aced30.jpg",
+  "hash": "05a2aced30",
   "title": "Procuro-peça"
  },
  "docs-market-prices": {
-  "file": "docs-market-prices-05fc8d57d9.jpg",
-  "hash": "05fc8d57d9",
+  "file": "docs-market-prices-588f76893b.jpg",
+  "hash": "588f76893b",
   "title": "Preços de mercado"
  },
  "docs-multi-shop": {
-  "file": "docs-multi-shop-2481f7ef7e.jpg",
-  "hash": "2481f7ef7e",
+  "file": "docs-multi-shop-fb4a05580d.jpg",
+  "hash": "fb4a05580d",
   "title": "Multi-loja"
  },
  "docs-ponto": {
-  "file": "docs-ponto-a3f6ac481f.jpg",
-  "hash": "a3f6ac481f",
+  "file": "docs-ponto-ef24fe93c7.jpg",
+  "hash": "ef24fe93c7",
   "title": "Livro de ponto"
  },
  "docs-ponto-act": {
-  "file": "docs-ponto-act-05ecb3fec0.jpg",
-  "hash": "05ecb3fec0",
+  "file": "docs-ponto-act-1e72e6cbea.jpg",
+  "hash": "1e72e6cbea",
   "title": "Exportar registos para a ACT"
  },
  "docs-portal": {
-  "file": "docs-portal-85206866b3.jpg",
-  "hash": "85206866b3",
+  "file": "docs-portal-d9b457fa0a.jpg",
+  "hash": "d9b457fa0a",
   "title": "Portal do cliente"
  },
  "docs-remarketing": {
-  "file": "docs-remarketing-acf649d609.jpg",
-  "hash": "acf649d609",
+  "file": "docs-remarketing-80c52bc3e8.jpg",
+  "hash": "80c52bc3e8",
   "title": "Remarketing WhatsApp"
  },
  "docs-sms": {
-  "file": "docs-sms-3f395c80cb.jpg",
-  "hash": "3f395c80cb",
+  "file": "docs-sms-a5e9aa6d64.jpg",
+  "hash": "a5e9aa6d64",
   "title": "Canal SMS"
  },
  "docs-storefront": {
-  "file": "docs-storefront-b7111a598f.jpg",
-  "hash": "b7111a598f",
+  "file": "docs-storefront-462642f955.jpg",
+  "hash": "462642f955",
   "title": "Montra online"
  },
  "docs-whatsapp": {
-  "file": "docs-whatsapp-6fba189dc8.jpg",
-  "hash": "6fba189dc8",
+  "file": "docs-whatsapp-f1dd6e1376.jpg",
+  "hash": "f1dd6e1376",
   "title": "Bot de WhatsApp"
  },
  "download": {
-  "file": "download-74b704c0eb.jpg",
-  "hash": "74b704c0eb",
+  "file": "download-98dc58a5e2.jpg",
+  "hash": "98dc58a5e2",
   "title": "Descarregar a OficinaOS"
  },
  "en-alternativas-software-oficina": {
-  "file": "en-alternativas-software-oficina-f9acb5b516.jpg",
-  "hash": "f9acb5b516",
+  "file": "en-alternativas-software-oficina-2e19f46101.jpg",
+  "hash": "2e19f46101",
   "title": "Before paying a monthly fee, compare"
  },
  "en-deixar-excel-papel": {
-  "file": "en-deixar-excel-papel-3e5de313b5.jpg",
-  "hash": "3e5de313b5",
+  "file": "en-deixar-excel-papel-bc9eb04240.jpg",
+  "hash": "bc9eb04240",
   "title": "From paper and Excel to management software"
  },
  "en-diag": {
-  "file": "en-diag-e1b14dbae4.jpg",
-  "hash": "e1b14dbae4",
+  "file": "en-diag-d2f93d1d79.jpg",
+  "hash": "d2f93d1d79",
   "title": "Plug in the cable. The report writes itself."
  },
  "en-docs": {
-  "file": "en-docs-31af874bca.jpg",
-  "hash": "31af874bca",
+  "file": "en-docs-4dd0ccd6ec.jpg",
+  "hash": "4dd0ccd6ec",
   "title": "Full guide"
  },
  "en-docs-ai-analyst": {
-  "file": "en-docs-ai-analyst-4e386be851.jpg",
-  "hash": "4e386be851",
+  "file": "en-docs-ai-analyst-ae411978c9.jpg",
+  "hash": "ae411978c9",
   "title": "AI Analyst"
  },
  "en-docs-diag": {
-  "file": "en-docs-diag-2b4e7cc8c7.jpg",
-  "hash": "2b4e7cc8c7",
+  "file": "en-docs-diag-246516d504.jpg",
+  "hash": "246516d504",
   "title": "OficinaOS Diag"
  },
  "en-docs-invoicing": {
-  "file": "en-docs-invoicing-720ed4da87.jpg",
-  "hash": "720ed4da87",
+  "file": "en-docs-invoicing-dce2a07d3d.jpg",
+  "hash": "dce2a07d3d",
   "title": "Certified invoicing"
  },
  "en-docs-market": {
-  "file": "en-docs-market-4978b70a2e.jpg",
-  "hash": "4978b70a2e",
+  "file": "en-docs-market-262b91d7cf.jpg",
+  "hash": "262b91d7cf",
   "title": "Parts wanted"
  },
  "en-docs-market-prices": {
-  "file": "en-docs-market-prices-f081bd83c1.jpg",
-  "hash": "f081bd83c1",
+  "file": "en-docs-market-prices-0da3351450.jpg",
+  "hash": "0da3351450",
   "title": "Market prices"
  },
  "en-docs-multi-shop": {
-  "file": "en-docs-multi-shop-111a8b4913.jpg",
-  "hash": "111a8b4913",
+  "file": "en-docs-multi-shop-1ee5b2b997.jpg",
+  "hash": "1ee5b2b997",
   "title": "Multi-shop"
  },
  "en-docs-ponto": {
-  "file": "en-docs-ponto-799a8f570d.jpg",
-  "hash": "799a8f570d",
+  "file": "en-docs-ponto-75416b17f7.jpg",
+  "hash": "75416b17f7",
   "title": "Time clock"
  },
  "en-docs-ponto-act": {
-  "file": "en-docs-ponto-act-ed1f06a1df.jpg",
-  "hash": "ed1f06a1df",
+  "file": "en-docs-ponto-act-c680a8a751.jpg",
+  "hash": "c680a8a751",
   "title": "Export records for the ACT"
  },
  "en-docs-portal": {
-  "file": "en-docs-portal-5ff89eda2a.jpg",
-  "hash": "5ff89eda2a",
+  "file": "en-docs-portal-77255fdd69.jpg",
+  "hash": "77255fdd69",
   "title": "Customer portal"
  },
  "en-docs-remarketing": {
-  "file": "en-docs-remarketing-d9f7f39d1a.jpg",
-  "hash": "d9f7f39d1a",
+  "file": "en-docs-remarketing-53dff4bb95.jpg",
+  "hash": "53dff4bb95",
   "title": "WhatsApp remarketing"
  },
  "en-docs-sms": {
-  "file": "en-docs-sms-d53a453611.jpg",
-  "hash": "d53a453611",
+  "file": "en-docs-sms-ced6f4fdb3.jpg",
+  "hash": "ced6f4fdb3",
   "title": "SMS channel"
  },
  "en-docs-storefront": {
-  "file": "en-docs-storefront-cb6c68bd6c.jpg",
-  "hash": "cb6c68bd6c",
+  "file": "en-docs-storefront-a2cc67063e.jpg",
+  "hash": "a2cc67063e",
   "title": "Online storefront"
  },
  "en-docs-whatsapp": {
-  "file": "en-docs-whatsapp-030163088a.jpg",
-  "hash": "030163088a",
+  "file": "en-docs-whatsapp-5d97e04500.jpg",
+  "hash": "5d97e04500",
   "title": "WhatsApp bot"
  },
  "en-download": {
-  "file": "en-download-b8f4385be4.jpg",
-  "hash": "b8f4385be4",
+  "file": "en-download-4be8b2eab2.jpg",
+  "hash": "4be8b2eab2",
   "title": "Download OficinaOS"
  },
  "en-engineering": {
-  "file": "en-engineering-9f9b5f0d78.jpg",
-  "hash": "9f9b5f0d78",
+  "file": "en-engineering-60fe87f870.jpg",
+  "hash": "60fe87f870",
   "title": "Built like a real product, from bench to edge."
  },
  "en-orcamentos-aprovados-online": {
-  "file": "en-orcamentos-aprovados-online-08f6a837a3.jpg",
-  "hash": "08f6a837a3",
+  "file": "en-orcamentos-aprovados-online-5d3c4c053d.jpg",
+  "hash": "5d3c4c053d",
   "title": "An approved quote is a logged quote"
  },
  "en-para-tecnicos-independentes": {
-  "file": "en-para-tecnicos-independentes-cd8e1f890c.jpg",
-  "hash": "cd8e1f890c",
+  "file": "en-para-tecnicos-independentes-a6fe30f5c1.jpg",
+  "hash": "a6fe30f5c1",
   "title": "Repairing alone doesn't mean managing alone"
  },
  "en-precos": {
-  "file": "en-precos-99aa958e35.jpg",
-  "hash": "99aa958e35",
+  "file": "en-precos-d622b948e7.jpg",
+  "hash": "d622b948e7",
   "title": "Simple pricing, no surprises"
  },
  "en-privacy": {
-  "file": "en-privacy-23398fe4b8.jpg",
-  "hash": "23398fe4b8",
+  "file": "en-privacy-e15d965f53.jpg",
+  "hash": "e15d965f53",
   "title": "Your data stays in the shop."
  },
  "en-rastrear-reparacao-cliente": {
-  "file": "en-rastrear-reparacao-cliente-1d5e9e2c54.jpg",
-  "hash": "1d5e9e2c54",
+  "file": "en-rastrear-reparacao-cliente-004d90a054.jpg",
+  "hash": "004d90a054",
   "title": "\"Is it ready yet?\" stops being your phone ringing"
  },
  "en-software-assistencia-tecnica": {
-  "file": "en-software-assistencia-tecnica-ca1cff4616.jpg",
-  "hash": "ca1cff4616",
+  "file": "en-software-assistencia-tecnica-72f125b6d3.jpg",
+  "hash": "72f125b6d3",
   "title": "Software for phone repair service centres"
  },
  "en-software-de-gestao-para-oficina": {
-  "file": "en-software-de-gestao-para-oficina-10ce63ceb8.jpg",
-  "hash": "10ce63ceb8",
+  "file": "en-software-de-gestao-para-oficina-88317d1e1e.jpg",
+  "hash": "88317d1e1e",
   "title": "Management software that doesn't charge for existing"
  },
  "en-software-pago-vs-oficinaos": {
-  "file": "en-software-pago-vs-oficinaos-96972ebdbc.jpg",
-  "hash": "96972ebdbc",
+  "file": "en-software-pago-vs-oficinaos-a24c93185d.jpg",
+  "hash": "a24c93185d",
   "title": "Monthly-fee software or free OficinaOS?"
  },
  "en-software-reparacao-telemoveis": {
-  "file": "en-software-reparacao-telemoveis-92ff64920d.jpg",
-  "hash": "92ff64920d",
+  "file": "en-software-reparacao-telemoveis-9b58999067.jpg",
+  "hash": "9b58999067",
   "title": "Management software for phone repair shops"
  },
  "en-terms": {
-  "file": "en-terms-16444f5084.jpg",
-  "hash": "16444f5084",
+  "file": "en-terms-1732402ee4.jpg",
+  "hash": "1732402ee4",
   "title": "Terms and conditions"
  },
  "en-trade": {
-  "file": "en-trade-cd0dfb3002.jpg",
-  "hash": "cd0dfb3002",
+  "file": "en-trade-390949d413.jpg",
+  "hash": "390949d413",
   "title": "Parts and devices, from pro to pro."
  },
  "en-updates": {
-  "file": "en-updates-901d1183ae.jpg",
-  "hash": "901d1183ae",
+  "file": "en-updates-14fb33600d.jpg",
+  "hash": "14fb33600d",
   "title": "What's new"
  },
  "engineering": {
-  "file": "engineering-956862d4cc.jpg",
-  "hash": "956862d4cc",
+  "file": "engineering-0d81ccdb69.jpg",
+  "hash": "0d81ccdb69",
   "title": "Construído como produto real, do balcão à edge."
  },
  "es-alternativas-software-oficina": {
-  "file": "es-alternativas-software-oficina-49f0dc8f1b.jpg",
-  "hash": "49f0dc8f1b",
+  "file": "es-alternativas-software-oficina-2d1b7c5156.jpg",
+  "hash": "2d1b7c5156",
   "title": "Antes de pagar una cuota mensual, compara"
  },
  "es-deixar-excel-papel": {
-  "file": "es-deixar-excel-papel-cdc930e065.jpg",
-  "hash": "cdc930e065",
+  "file": "es-deixar-excel-papel-e4673ecbaf.jpg",
+  "hash": "e4673ecbaf",
   "title": "Del papel y del Excel a un programa de gestión"
  },
  "es-diag": {
-  "file": "es-diag-fd097267d3.jpg",
-  "hash": "fd097267d3",
+  "file": "es-diag-2063304cca.jpg",
+  "hash": "2063304cca",
   "title": "Conecta el cable. El informe se escribe solo."
  },
  "es-docs": {
-  "file": "es-docs-02f38bf67a.jpg",
-  "hash": "02f38bf67a",
+  "file": "es-docs-885a69f83d.jpg",
+  "hash": "885a69f83d",
   "title": "Guía completa"
  },
  "es-docs-ai-analyst": {
-  "file": "es-docs-ai-analyst-ef4015f216.jpg",
-  "hash": "ef4015f216",
+  "file": "es-docs-ai-analyst-e5b53a154d.jpg",
+  "hash": "e5b53a154d",
   "title": "Analista de IA"
  },
  "es-docs-diag": {
-  "file": "es-docs-diag-dde3563fa3.jpg",
-  "hash": "dde3563fa3",
+  "file": "es-docs-diag-d77c71fd7b.jpg",
+  "hash": "d77c71fd7b",
   "title": "OficinaOS Diag"
  },
  "es-docs-invoicing": {
-  "file": "es-docs-invoicing-2f21d3bedf.jpg",
-  "hash": "2f21d3bedf",
+  "file": "es-docs-invoicing-8624903e51.jpg",
+  "hash": "8624903e51",
   "title": "Facturación certificada"
  },
  "es-docs-market": {
-  "file": "es-docs-market-bc04c05b9c.jpg",
-  "hash": "bc04c05b9c",
+  "file": "es-docs-market-c78ac8f8cb.jpg",
+  "hash": "c78ac8f8cb",
   "title": "Busco pieza"
  },
  "es-docs-market-prices": {
-  "file": "es-docs-market-prices-088fe1d141.jpg",
-  "hash": "088fe1d141",
+  "file": "es-docs-market-prices-7f5b66d997.jpg",
+  "hash": "7f5b66d997",
   "title": "Precios de mercado"
  },
  "es-docs-multi-shop": {
-  "file": "es-docs-multi-shop-7def29b046.jpg",
-  "hash": "7def29b046",
+  "file": "es-docs-multi-shop-68c451557f.jpg",
+  "hash": "68c451557f",
   "title": "Multitienda"
  },
  "es-docs-ponto": {
-  "file": "es-docs-ponto-20ea6a9c2b.jpg",
-  "hash": "20ea6a9c2b",
+  "file": "es-docs-ponto-c7293bd7d1.jpg",
+  "hash": "c7293bd7d1",
   "title": "Libro de horas"
  },
  "es-docs-ponto-act": {
-  "file": "es-docs-ponto-act-e5e95ae187.jpg",
-  "hash": "e5e95ae187",
+  "file": "es-docs-ponto-act-4aa3a6fd1d.jpg",
+  "hash": "4aa3a6fd1d",
   "title": "Exportar registros para la ACT"
  },
  "es-docs-portal": {
-  "file": "es-docs-portal-095708e9dc.jpg",
-  "hash": "095708e9dc",
+  "file": "es-docs-portal-c33ad6712d.jpg",
+  "hash": "c33ad6712d",
   "title": "Portal del cliente"
  },
  "es-docs-remarketing": {
-  "file": "es-docs-remarketing-61a7ea8a08.jpg",
-  "hash": "61a7ea8a08",
+  "file": "es-docs-remarketing-ab2941be7d.jpg",
+  "hash": "ab2941be7d",
   "title": "Remarketing por WhatsApp"
  },
  "es-docs-sms": {
-  "file": "es-docs-sms-9e1c638e67.jpg",
-  "hash": "9e1c638e67",
+  "file": "es-docs-sms-a99f5d15be.jpg",
+  "hash": "a99f5d15be",
   "title": "Canal SMS"
  },
  "es-docs-storefront": {
-  "file": "es-docs-storefront-96366c8e9b.jpg",
-  "hash": "96366c8e9b",
+  "file": "es-docs-storefront-ca1a50bbc2.jpg",
+  "hash": "ca1a50bbc2",
   "title": "Escaparate online"
  },
  "es-docs-whatsapp": {
-  "file": "es-docs-whatsapp-c48acd833b.jpg",
-  "hash": "c48acd833b",
+  "file": "es-docs-whatsapp-01b079bb83.jpg",
+  "hash": "01b079bb83",
   "title": "Bot de WhatsApp"
  },
  "es-download": {
-  "file": "es-download-f6311721bd.jpg",
-  "hash": "f6311721bd",
+  "file": "es-download-d870e2c553.jpg",
+  "hash": "d870e2c553",
   "title": "Descargar OficinaOS"
  },
  "es-engineering": {
-  "file": "es-engineering-f7f7406d8e.jpg",
-  "hash": "f7f7406d8e",
+  "file": "es-engineering-71b738325f.jpg",
+  "hash": "71b738325f",
   "title": "Construido como producto real, del mostrador al edge."
  },
  "es-orcamentos-aprovados-online": {
-  "file": "es-orcamentos-aprovados-online-cf948e905b.jpg",
-  "hash": "cf948e905b",
+  "file": "es-orcamentos-aprovados-online-df8e46863e.jpg",
+  "hash": "df8e46863e",
   "title": "Presupuesto aprobado es presupuesto registrado"
  },
  "es-para-tecnicos-independentes": {
-  "file": "es-para-tecnicos-independentes-6e4a41c0d0.jpg",
-  "hash": "6e4a41c0d0",
+  "file": "es-para-tecnicos-independentes-8cb1555c2b.jpg",
+  "hash": "8cb1555c2b",
   "title": "Reparar solo no significa gestionar solo"
  },
  "es-precos": {
-  "file": "es-precos-40ba097dcb.jpg",
-  "hash": "40ba097dcb",
+  "file": "es-precos-0d486c60c9.jpg",
+  "hash": "0d486c60c9",
   "title": "Precios sencillos, sin sorpresas"
  },
  "es-privacy": {
-  "file": "es-privacy-dd3087cec3.jpg",
-  "hash": "dd3087cec3",
+  "file": "es-privacy-d11a776bb1.jpg",
+  "hash": "d11a776bb1",
   "title": "Los datos se quedan en la tienda."
  },
  "es-rastrear-reparacao-cliente": {
-  "file": "es-rastrear-reparacao-cliente-447d3d3e6f.jpg",
-  "hash": "447d3d3e6f",
+  "file": "es-rastrear-reparacao-cliente-08522237f9.jpg",
+  "hash": "08522237f9",
   "title": "«¿Ya está listo?» deja de ser tu teléfono sonando"
  },
  "es-software-assistencia-tecnica": {
-  "file": "es-software-assistencia-tecnica-89763dab88.jpg",
-  "hash": "89763dab88",
+  "file": "es-software-assistencia-tecnica-270005129a.jpg",
+  "hash": "270005129a",
   "title": "Software para servicios técnicos de móviles"
  },
  "es-software-de-gestao-para-oficina": {
-  "file": "es-software-de-gestao-para-oficina-1fc075e25d.jpg",
-  "hash": "1fc075e25d",
+  "file": "es-software-de-gestao-para-oficina-db78495b1c.jpg",
+  "hash": "db78495b1c",
   "title": "Un programa de gestión que no cobra por existir"
  },
  "es-software-pago-vs-oficinaos": {
-  "file": "es-software-pago-vs-oficinaos-f15251e640.jpg",
-  "hash": "f15251e640",
+  "file": "es-software-pago-vs-oficinaos-9954f45526.jpg",
+  "hash": "9954f45526",
   "title": "¿Programa con cuota mensual u OficinaOS gratis?"
  },
  "es-software-reparacao-telemoveis": {
-  "file": "es-software-reparacao-telemoveis-2758dcb653.jpg",
-  "hash": "2758dcb653",
+  "file": "es-software-reparacao-telemoveis-6b81e0ea2f.jpg",
+  "hash": "6b81e0ea2f",
   "title": "Software de gestión para tiendas de reparación de móviles"
  },
  "es-terms": {
-  "file": "es-terms-ea103b771a.jpg",
-  "hash": "ea103b771a",
+  "file": "es-terms-3806d77a79.jpg",
+  "hash": "3806d77a79",
   "title": "Términos y condiciones"
  },
  "es-trade": {
-  "file": "es-trade-18277bd6fe.jpg",
-  "hash": "18277bd6fe",
+  "file": "es-trade-7715ccec66.jpg",
+  "hash": "7715ccec66",
   "title": "Piezas y equipos, de profesional a profesional."
  },
  "es-updates": {
-  "file": "es-updates-e7d7dc118d.jpg",
-  "hash": "e7d7dc118d",
+  "file": "es-updates-6d1ea8da5f.jpg",
+  "hash": "6d1ea8da5f",
   "title": "Novedades"
  },
  "orcamentos-aprovados-online": {
-  "file": "orcamentos-aprovados-online-84e0c32a4c.jpg",
-  "hash": "84e0c32a4c",
+  "file": "orcamentos-aprovados-online-b0fdfce713.jpg",
+  "hash": "b0fdfce713",
   "title": "Orçamento aprovado é orçamento registado"
  },
  "para-tecnicos-independentes": {
-  "file": "para-tecnicos-independentes-431ecbb74d.jpg",
-  "hash": "431ecbb74d",
+  "file": "para-tecnicos-independentes-ef562c25c3.jpg",
+  "hash": "ef562c25c3",
   "title": "Reparar sozinho não tem de ser gerir sozinho"
  },
  "precos": {
-  "file": "precos-60f55326e3.jpg",
-  "hash": "60f55326e3",
+  "file": "precos-fbd5a5c7da.jpg",
+  "hash": "fbd5a5c7da",
   "title": "Preços simples, sem surpresas"
  },
  "privacy": {
-  "file": "privacy-916e2ff3c5.jpg",
-  "hash": "916e2ff3c5",
+  "file": "privacy-8ddf38897b.jpg",
+  "hash": "8ddf38897b",
   "title": "Os dados ficam na loja."
  },
  "rastrear-reparacao-cliente": {
-  "file": "rastrear-reparacao-cliente-cd92ff2b70.jpg",
-  "hash": "cd92ff2b70",
+  "file": "rastrear-reparacao-cliente-6e2d7aa5bc.jpg",
+  "hash": "6e2d7aa5bc",
   "title": "«Já está pronto?» deixa de ser o seu telefone a tocar"
  },
  "software-assistencia-tecnica": {
-  "file": "software-assistencia-tecnica-344c0efe38.jpg",
-  "hash": "344c0efe38",
+  "file": "software-assistencia-tecnica-9e215232e8.jpg",
+  "hash": "9e215232e8",
   "title": "Software para assistência técnica de telemóveis"
  },
  "software-de-gestao-para-oficina": {
-  "file": "software-de-gestao-para-oficina-ce5f34f9c5.jpg",
-  "hash": "ce5f34f9c5",
+  "file": "software-de-gestao-para-oficina-52576c4fc8.jpg",
+  "hash": "52576c4fc8",
   "title": "Um programa de gestão que não cobra por existir"
  },
  "software-pago-vs-oficinaos": {
-  "file": "software-pago-vs-oficinaos-41084b91f5.jpg",
-  "hash": "41084b91f5",
+  "file": "software-pago-vs-oficinaos-59bc552b40.jpg",
+  "hash": "59bc552b40",
   "title": "Programa com mensalidade ou OficinaOS grátis?"
  },
  "software-reparacao-telemoveis": {
-  "file": "software-reparacao-telemoveis-2f350619a4.jpg",
-  "hash": "2f350619a4",
+  "file": "software-reparacao-telemoveis-768a3f403b.jpg",
+  "hash": "768a3f403b",
   "title": "Software de gestão para lojas de reparação de telemóveis"
  },
  "terms": {
-  "file": "terms-7cecfe5801.jpg",
-  "hash": "7cecfe5801",
+  "file": "terms-2c37172f5d.jpg",
+  "hash": "2c37172f5d",
   "title": "Termos e condições"
  },
  "trade": {
-  "file": "trade-a1657dbdf3.jpg",
-  "hash": "a1657dbdf3",
+  "file": "trade-b0e9235132.jpg",
+  "hash": "b0e9235132",
   "title": "Peças e equipamentos, de profissional para profissional."
  },
  "updates": {
-  "file": "updates-df65cd1f66.jpg",
-  "hash": "df65cd1f66",
+  "file": "updates-04e1c7f0fc.jpg",
+  "hash": "04e1c7f0fc",
   "title": "Novidades"
  }
 }
