@@ -1,7 +1,7 @@
 """Gera os recursos raster da marca reproduzíveis a partir de brandlogo.draw_squircle.
 
 Reproduzíveis (saem deste script, bit a bit determinístico):
-- public/brand/avatar.png — squircle 756 px centrado em 1080×1080 sobre o fundo
+- public/brand/avatar.png — squircle 760 px centrado em 1080×1080 sobre o fundo
   claro do site (#f4f8ff); é o avatar das redes sociais.
 - public/apple-touch-icon.png — squircle 180×180 full-bleed com cantos
   transparentes (o iOS aplica a sua própria máscara por cima).
@@ -62,10 +62,15 @@ def main() -> int:
         dst = ROOT / rel
         novo = render()
         if check and dst.exists():
-            from PIL import Image, ImageChops
+            from PIL import Image
 
-            atual = Image.open(dst).convert(novo.mode)
-            if atual.size == novo.size and ImageChops.difference(atual, novo).getbbox() is None:
+            # Comparação por bytes em RGBA: o getbbox() da diferença em RGBA só
+            # examina o canal alfa (mudanças de cor passavam), e converter para
+            # RGB deitava fora a transparência. Bytes cobrem todos os canais
+            # sem depender da compressão/metadados do PNG.
+            with Image.open(dst) as imagem:
+                atual = imagem.convert("RGBA")
+            if atual.size == novo.size and atual.tobytes() == novo.convert("RGBA").tobytes():
                 print(f"[ok] {rel}")
                 continue
             falhas.append(rel)
