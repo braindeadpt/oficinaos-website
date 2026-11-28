@@ -63,12 +63,17 @@ jobs:
       - name: Guardar relatórios HTML
         if: always()
         run: bunx @lhci/cli@0.15.1 upload
+      # Só em falha: os relatórios guardados em todas as execuções encheram
+      # a quota de artifacts da conta (partilhada por todos os repos). Num
+      # run verde fica apenas o resumo do passo (mediana por página) — o
+      # `lhci upload` escreve no disco do runner, que é descartado; os HTML
+      # detalhados só se consultam aqui quando algo falha.
       - uses: actions/upload-artifact@v7
-        if: always()
+        if: failure()
         with:
           name: lighthouse-reports
           path: .lighthouseci/
           # .lighthouseci é pasta hidden — sem isto o upload encontrava zero
           # ficheiros ("No files were found with the provided path").
           include-hidden-files: true
-          retention-days: 14
+          retention-days: 5
