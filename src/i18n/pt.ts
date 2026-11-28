@@ -1704,7 +1704,7 @@ export const t = {
           heading: "Um registo que não se apaga",
           paragraphs: [
             "Cada registo é uma linha nova e nunca é alterado nem apagado — uma correção é outra linha que aponta para a original. O histórico fica guardado 5 anos (Código do Trabalho, art. 202.º), acessível e consultável pela ACT, e o trabalhador pode pedir os seus registos.",
-            "As fotografias de prova de externos deixaram de ser guardadas — o registo fica apenas com a nota «foto enviada às HH:MM» e a imagem nunca sai do telemóvel da empresa. As fotos que já estavam guardadas de versões antigas são apagadas de forma segura na atualização.",
+            "As fotografias de prova de externos deixaram de ser guardadas pela aplicação — o registo fica apenas com a nota «foto enviada às HH:MM». A imagem transita pelo canal de mensagens (WhatsApp/SMS) e fica só na conversa; a app nunca a armazena. As fotos que versões antigas tinham guardado são apagadas de forma segura na atualização.",
           ],
           links: [],
         },

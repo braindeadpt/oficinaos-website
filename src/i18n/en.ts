@@ -1683,7 +1683,7 @@ export const t: Copy = {
           heading: "A record that can't be erased",
           paragraphs: [
             "Every record is a new line that is never edited or deleted — a correction is another line pointing at the original. The history is kept for 5 years (Portuguese Labour Code, art. 202), open to labour inspections, and the worker can request their own records.",
-            "External proof photos are no longer stored — the record keeps only the note «photo sent at HH:MM» and the image never leaves the company phone. Photos already stored by older versions are securely shredded on upgrade.",
+            "External proof photos are no longer stored by the app — the record keeps only the note «photo sent at HH:MM». The image travels through the messaging channel (WhatsApp/SMS) and stays only in the conversation; the app never stores it. Photos that older versions had stored are securely shredded on upgrade.",
           ],
           links: [],
         },

@@ -1688,7 +1688,7 @@ export const t: Copy = {
           heading: "Un registro que no se borra",
           paragraphs: [
             "Cada registro es una línea nueva que nunca se edita ni se borra — una corrección es otra línea que apunta a la original. El historial se guarda 5 años (Código del Trabajo portugués, art. 202), accesible y consultable por la inspección de trabajo, y el empleado puede pedir sus registros.",
-            "Las fotos de prueba de externos dejan de guardarse — el registro queda solo con la nota «foto enviada a las HH:MM» y la imagen nunca sale del teléfono de la empresa. Las fotos ya guardadas por versiones antiguas se borran de forma segura al actualizar.",
+            "Las fotos de prueba de externos dejan de guardarse en la aplicación — el registro queda solo con la nota «foto enviada a las HH:MM». La imagen transita por el canal de mensajes (WhatsApp/SMS) y queda solo en la conversación; la app nunca la almacena. Las fotos que versiones antiguas habían guardado se borran de forma segura al actualizar.",
           ],
           links: [],
         },

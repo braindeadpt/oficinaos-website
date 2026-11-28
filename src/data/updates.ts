@@ -104,9 +104,9 @@ export const UPDATES: UpdateEntry[] = [
       es: "v1.0.23: modo solo-registro y copias verificadas",
     },
     desc: {
-      pt: "Um computador ou tablet pode ficar dedicado ao livro de ponto, sem acesso ao resto da gestão. E as cópias de segurança passam a ser verificadas automaticamente — a loja sabe que o backup abre antes de precisar dele.",
-      en: "A computer or tablet can be dedicated to the time clock, with no access to the rest of the system. And backups are now verified automatically — the shop knows the backup opens before it needs it.",
-      es: "Un ordenador o tablet puede quedar dedicado al registro de jornada, sin acceso al resto de la gestión. Y las copias de seguridad ahora se verifican automáticamente — la tienda sabe que la copia abre antes de necesitarla.",
+      pt: "Um computador ou tablet pode ficar dedicado ao livro de ponto, sem acesso ao resto da gestão. Nas instâncias alojadas, as cópias de segurança passam a sair cifradas e assinadas, com teste de restauro automático — a loja sabe que o backup abre antes de precisar dele.",
+      en: "A computer or tablet can be dedicated to the time clock, with no access to the rest of the system. On hosted instances, backups are now encrypted and signed, with automated restore testing — the shop knows the backup opens before it needs it.",
+      es: "Un ordenador o tablet puede quedar dedicado al registro de jornada, sin acceso al resto de la gestión. En las instancias alojadas, las copias de seguridad pasan a salir cifradas y firmadas, con prueba de restauración automática — la tienda sabe que la copia abre antes de necesitarla.",
     },
   },
   {
